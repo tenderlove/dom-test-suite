@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>HTMLOptionElement05</title>
 <creator>NIST</creator>
 <description>
-    The index attribute indicates th index of this OPTION in ints parent      
+    The index attribute indicates the index of this OPTION in its parent      
     SELECT.
 
     Retrieve the index attribute from the seventh OPTION element
