@@ -46,12 +46,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <load var="aNewDoc" href="staff.xml" willBeModified="false"/>
 <createDocumentFragment obj="aNewDoc" var="docFrag"/>
-<createComment obj="aNewDoc" var="comment" data="&quot;descendant1&quot;"/>
+<createComment obj="aNewDoc" var="comment" data='"descendant1"'/>
 <appendChild obj="docFrag" var="aNode" newChild="comment"/>
 <importNode obj="doc" var="aNode" importedNode="docFrag" deep="true"/>
 <childNodes obj="aNode" var="children"/>
 <assertSize collection="children" size="1" id="throw_Size"/>
 <firstChild interface="Node" obj="aNode" var="child"/>
 <nodeValue obj="child" var="childValue"/>
-<assertEquals actual="childValue" expected="&quot;descendant1&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="childValue" expected='"descendant1"' id="descendant1" ignoreCase="false"/>
 </test>
