@@ -44,9 +44,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="name" type="DOMString"/>
 <var name="attr" type="Node"/>
 <var name="lname" type="DOMString"/>
+<var name="namespaceURI" type="DOMString" value='"http://www.nist.gov"'/>
+<var name="qualifiedName" type="DOMString" value='"emp:employee"'/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <load var="aNewDoc" href="staff" willBeModified="false"/>
-<createElement obj="aNewDoc" var="element" tagName='"emp:employee"'/>
+<createElementNS obj="aNewDoc" var="element" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
 <importNode obj="doc" var="aNode" importedNode="element" deep="false"/>
 <attributes obj="aNode" var="attributes"/>
 <assertSize collection="attributes" size="1" id="throw_Size"/>
