@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.128  2004-02-25 06:30:17  dom-ts-4
+Revision 1.129  2004-02-26 05:14:49  dom-ts-4
+Add datatype_normalization back to dom3-core-validate-files  (bug 568)
+
+Revision 1.128  2004/02/25 06:30:17  dom-ts-4
 Add support for java test framework use of DOM L3 LS (bug 571)
 
 Revision 1.127  2004/02/21 04:09:20  dom-ts-4
@@ -2041,7 +2044,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom3-core-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="no"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* datatype_normalization.*"/>  
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.*"/>  
 	</xmlvalidate>
 </target>
 
@@ -2294,6 +2297,7 @@ All implementation conditions combined into implementationAttribute element
         <param name="interfacesURL" expression="dom3-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom3-core-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Core Test Suite Matrix'/>
+        <param name="specVersion" expression="DOM Level 3"/>
 	</style>
 </target>
 
