@@ -389,6 +389,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="hc_elementretrievetagname.xml"/>
 <suite.member href="hc_elementsetattributenodenull.xml"/>
 <suite.member href="hc_elementwrongdocumenterr.xml"/>
+<suite.member href="hc_entitiesremovenameditem1.xml"/>
+<suite.member href="hc_entitiessetnameditem1.xml"/>
 <suite.member href="hc_namednodemapchildnoderange.xml"/>
 <suite.member href="hc_namednodemapgetnameditem.xml"/>
 <suite.member href="hc_namednodemapinuseattributeerr.xml"/>
@@ -493,6 +495,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="hc_nodevalue06.xml"/>
 <suite.member href="hc_nodevalue07.xml"/>
 <suite.member href="hc_nodevalue08.xml"/>
+<suite.member href="hc_notationsremovenameditem1.xml"/>
+<suite.member href="hc_notationssetnameditem1.xml"/>
 <suite.member href="hc_textindexsizeerrnegativeoffset.xml"/>
 <suite.member href="hc_textindexsizeerroffsetoutofbounds.xml"/>
 <suite.member href="hc_textparseintolistofelements.xml"/>
