@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -44,8 +44,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <firstChild interface="Node" var="entRef" obj="gender"/>
+<assertNotNull actual="entRef" id="entRefNotNull"/>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
+<assertNotNull actual="entElement" id="entElementNotNull"/>
 <firstChild interface="Node" var="entElementText" obj="entElement"/>
+<assertNotNull actual="entElementText" id="entElementTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <splitText var="splitNode" obj="entElementText" offset="2"/>

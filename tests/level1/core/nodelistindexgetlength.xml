@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -17,11 +17,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>NIST</creator>
 <description>
     The "getLength()" method returns the number of nodes
-   in the list.
-   
-   Create a list of all the children elements of the third
-   employee and invoke the "getLength()" method. 
-   It should contain the value 13.
+   in the list should be 6 (no whitespace) or 13.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -32,15 +28,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <var name="employeeList" type="NodeList"/>
+<var name="length" type="int"/>
+<var name="expectedCount" type="int" value="0"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertSize collection="employeeList" size="6" id="lengthNoWhitespace"/>
-<else>
-<assertSize collection="employeeList" size="13" id="lengthWhitespace"/>
-</else>
-</if>
+<length var="length" obj="employeeList" interface="NodeList"/>
+<assertTrue id="lengthIs6or13">
+	<or>
+		<equals actual="length" expected="6" ignoreCase="false"/>
+		<equals actual="length" expected="13" ignoreCase="false"/>
+	</or>
+</assertTrue>
 </test>

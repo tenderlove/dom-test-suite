@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,16 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelistReturnLastItem</title>
 <creator>NIST</creator>
 <description>
-    The "item(index)" method returns the indexth item in the
-   collection.
-   
-   Create a list of all the children elements of the third
-   employee and access its last child by invoking the 
-   "item(index)" method with an index=12.  This should
-   result in "#text" being returned.
-   Further we evaluate its content(by using
-   the "getNodeName()" method) to ensure the proper
-   element was accessed.
+Get this last child of the third employee using NodeList.item(NodeList.length - 1)
+and check that it is either a Text element (with whitespace) or an address element.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -37,19 +29,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeList" type="NodeList"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="length" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<item interface="NodeList" obj="employeeList" var="child" index="5"/>
-<nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected="&quot;address&quot;" id="nodeName1" ignoreCase="false"/>
+<length var="length" obj="employeeList" interface="NodeList"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<item interface="NodeList" obj="employeeList" var="child" index="5"/>
+	<nodeName obj="child" var="childName"/>
+	<assertEquals actual="childName" expected='"address"' id="nodeName1" ignoreCase="false"/>
 <else>
-<item interface="NodeList" obj="employeeList" var="child" index="12"/>
-<nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="nodeName2" ignoreCase="false"/>
+	<item interface="NodeList" obj="employeeList" var="child" index="12"/>
+	<nodeName obj="child" var="childName"/>
+	<assertEquals actual="childName" expected='"#text"' id="nodeName2" ignoreCase="false"/>
 </else>
 </if>
 </test>

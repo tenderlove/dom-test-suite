@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,36 +13,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeentityreferencenodeattributes">
 <metadata>
-<title>nodeEntityReferenceNodeAttributes</title>
+<title>nodeentityreferencenodeattributes</title>
 <creator>NIST</creator>
 <description>
     The "getAttributes()" method invoked on an EntityReference 
     Node returns null.
-    
-    Retrieve the first Entity Reference node from the last 
-    child of the second employee and invoke the
-    "getAttributes()" method on the EntityReference node. 
-    It should return null. 
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="entRefAddr" type="Element"/>
 <var name="entRefNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
-<load var="doc" href="staff" willBeModified="false"/>
-<if>
-<implementationAttribute name="expandEntityReferences" value="true"/>
-<createEntityReference var="entRefNode" obj="doc" name="&quot;ent2&quot;"/>
-<else>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<var name="nodeType" type="int"/>
+<load var="doc" href="staff" willBeModified="true"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"address"'/>
 <item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
 <firstChild interface="Node" obj="entRefAddr" var="entRefNode"/>
-</else>
+<nodeType var="nodeType" obj="entRefNode"/>
+<if><notEquals actual="nodeType" expected="5" ignoreCase="false"/>
+	<createEntityReference var="entRefNode" obj="doc" name='"ent2"'/>
 </if>
 <attributes obj="entRefNode" var="attrList"/>
 <assertNull actual="attrList" id="attrList"/>

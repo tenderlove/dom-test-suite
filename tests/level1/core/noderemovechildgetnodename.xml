@@ -16,13 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeRemoveChildGetNodeName</title>
 <creator>NIST</creator>
 <description>
-    The "removeChild(oldChild)" method returns 
-    the node being removed.
-    
     Remove the first child of the second employee 
     and check the NodeName returned by the 
     "removeChild(oldChild)" method.   The returned node
-    should have a NodeName equal to "#text".
+    should have a NodeName equal to "#text" or employeeId depending on whitespace.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -36,18 +33,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="oldChild" type="Node"/>
 <var name="removedChild" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="length" type="int"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
+<length var="length" obj="childList" interface="NodeList"/>
 <item interface="NodeList" obj="childList" index="0" var="oldChild"/>
 <removeChild obj="employeeNode" oldChild="oldChild" var="removedChild"/>
 <nodeName obj="removedChild" var="childName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="nowhitespace" ignoreCase="false"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="nowhitespace" ignoreCase="false"/>
 <else>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
+	<assertEquals actual="childName" expected='"text"' id="whitespace" ignoreCase="false"/>
 </else>
 </if>
 </test>

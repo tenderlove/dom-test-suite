@@ -34,5 +34,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="documentValue" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <nodeValue obj="doc" var="documentValue"/>
-<assertNull actual="documentValue" id="nodeDocumentNodeValueAssert1"/>
+<assertNull actual="documentValue" id="documentNodeValueNull"/>
 </test>

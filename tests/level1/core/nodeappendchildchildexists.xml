@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -38,22 +38,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="lchildName" type="DOMString"/>
 <var name="fchildName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
+<var name="initialName" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="childNode"/>
 <firstChild interface="Node" obj="childNode" var="newChild"/>
+<nodeName var="initialName" obj="newChild"/>
 <appendChild var="appendedChild" obj="childNode" newChild="newChild"/>
 <firstChild interface="Node" obj="childNode" var="fchild"/>
 <nodeName obj="fchild" var="fchildName"/>
 <lastChild interface="Node"  obj="childNode" var="lchild"/>
 <nodeName obj="lchild" var="lchildName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals id="assert1_nowhitespace" actual="fchildName" expected="&quot;name&quot;" ignoreCase="false"/>
-<assertEquals id="assert2_nowhitespace" actual="lchildName" expected="&quot;employeeId&quot;" ignoreCase="false"/>
+<if><equals actual="initialName" expected='"employeeId"' ignoreCase="false"/>
+	<assertEquals id="assert1_nowhitespace" actual="fchildName" expected='"name"' ignoreCase="false"/>
+	<assertEquals id="assert2_nowhitespace" actual="lchildName" expected='"employeeId"' ignoreCase="false"/>
 <else>
-<assertEquals id="assert1" actual="fchildName" expected="&quot;employeeId&quot;" ignoreCase="false"/>
-<assertEquals id="assert2" actual="lchildName" expected="&quot;#text&quot;" ignoreCase="false"/>
+	<assertEquals id="assert1" actual="fchildName" expected='"employeeId"' ignoreCase="false"/>
+	<assertEquals id="assert2" actual="lchildName" expected='"#text"' ignoreCase="false"/>
 </else>
 </if>
 </test>

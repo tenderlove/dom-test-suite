@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,17 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeGetOwnerDocumentNull</title>
 <creator>NIST</creator>
 <description>
-
     The "getOwnerDocument()" method returns null if the target
-
     node itself is a document.
-
-    
-
-    Invoke the "getOwnerDocument()" method on the master 
-
-    document.   The Document returned should be null.
-
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -36,5 +27,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="ownerDocument" type="Document"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <ownerDocument obj="doc" var="ownerDocument"/>
-<assertNull actual="ownerDocument" id="nodeGetOwnerDocumentNullAssert1"/>
+<assertNull actual="ownerDocument" id="documentOwnerDocumentNull"/>
 </test>

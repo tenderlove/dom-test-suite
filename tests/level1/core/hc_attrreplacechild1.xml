@@ -43,6 +43,7 @@ the attribute is changed.
 <getNamedItem obj="attributes" var="titleAttr" name='"title"'/>
 <createTextNode var="textNode" obj="doc" data='"terday"'/>
 <firstChild var="firstChild" obj="titleAttr" interface="Node"/>
+<assertNotNull actual="firstChild" id="attrChildNotNull"/>
 <replaceChild var="retval" obj="titleAttr" newChild="textNode" oldChild="firstChild"/>
 
 <!--  check that Attr.value gives expected result   -->

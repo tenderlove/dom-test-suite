@@ -33,7 +33,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-F68D080')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
@@ -45,11 +44,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item obj="genderList" index="2" var="genderNode" interface="NodeList"/>
 <firstChild interface="Node" var="entRef" obj="genderNode"/>
+<assertNotNull actual="entRef" id="entRefNotNull"/>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
+<assertNotNull actual="entElement" id="entElementNotNull"/>
 <firstChild interface="Node" var="entElementText" obj="entElement"/>
+<assertNotNull actual="entElementText" id="entElementTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<nodeValue obj="entElementText" value="&quot;newValue&quot;"/>
+<nodeValue obj="entElementText" value='"newValue"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

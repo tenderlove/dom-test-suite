@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -45,9 +45,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item obj="genderList" index="2" var="genderNode" interface="NodeList"/>
 <firstChild interface="Node" var="entRef" obj="genderNode"/>
+<assertNotNull actual="entRef" id="entRefNotNull"/>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
-<createElement obj="doc" tagName="&quot;text3&quot;" var="createdNode"/>
-<assertDOMException id="nodeInsertBeforeNoModificationAllowedErrAssert">
+<assertNotNull actual="entElement" id="entElementNotNull"/>
+<createElement obj="doc" tagName='"text3"' var="createdNode"/>
+<assertDOMException id="throw_NOT_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <insertBefore var="insertedNode" obj="entElement" newChild="createdNode" refChild="refChild"/>
 </NO_MODIFICATION_ALLOWED_ERR>

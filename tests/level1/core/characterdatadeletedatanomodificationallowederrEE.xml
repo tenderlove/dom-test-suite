@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781"/>
 <source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/characterdatadeletedatanomodificationallowederr.xml"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="genderNode" type="Node"/>
@@ -43,6 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createEntityReference obj="doc" var="entReference" name="&quot;ent3&quot;"/>
 <appendChild obj="genderNode" newChild="entReference" var="appendedChild"/>
 <firstChild var="entText" obj="entReference" interface="Node"/>
+<assertNotNull actual="entText" id="entTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <deleteData obj="entText" offset="1" count="3"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -18,10 +18,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 The "getAttributes()" method invoked on a Document
 Node returns null.
-
-Retrieve the DOM Document and invoke the
-"getAttributes()" method on the Document Node.
-It should return null.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -34,5 +30,5 @@ It should return null.
 <var name="attrList" type="NamedNodeMap"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <attributes obj="doc" var="attrList"/>
-<assertNull actual="attrList" id="nodeDocumentNodeAttributesAssert1"/>
+<assertNull actual="attrList" id="documentAttributesNull"/>
 </test>

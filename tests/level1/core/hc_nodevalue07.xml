@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -31,8 +31,11 @@ should still return null.
 <var name="docType" type="DocumentType"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype obj="doc" var="docType"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="nodeMap"/>
+<assertNotNull actual="nodeMap" id="entitiesNotNull"/>
 <getNamedItem obj="nodeMap" name='"alpha"' var="newNode"/>
+<assertNotNull actual="newNode" id="entityNotNull"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>
 <!--   attempt to change the value and make sure that it stays null  -->

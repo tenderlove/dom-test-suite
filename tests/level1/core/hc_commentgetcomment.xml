@@ -34,7 +34,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=509"/>
 </metadata>
-<implementationAttribute name="ignoringComments" value="false"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="child" type="Node"/>
@@ -55,8 +54,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="childValue" expected='" This is comment number 1."' id="nodeValue" ignoreCase="false"/>
 <attributes var="attributes" obj="child"/>
 <assertNull actual="attributes" id="attributes"/>
-<plus var="commentCount" op1="commentCount" op2="1"/>
+<increment var="commentCount" value="1"/>
 </if>
 </for-each>
-<assertEquals actual="commentCount" expected="1" ignoreCase="false" id="commentCount"/>
+<assertTrue id="atMostOneComment"><less actual="commentCount" expected="2"/></assertTrue>
 </test>

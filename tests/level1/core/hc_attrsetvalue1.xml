@@ -39,6 +39,7 @@ Sets Attr.value on an attribute that only has a simple value.
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="titleAttr" name='"title"'/>
 <firstChild var="firstChild" obj="titleAttr" interface="Node"/>
+<assertNotNull actual="firstChild" id="attrChildNotNull"/>
 
 <!--   set value which should totally replace child node list   -->
 <value obj="titleAttr" value='"Tomorrow"' interface="Attr"/>

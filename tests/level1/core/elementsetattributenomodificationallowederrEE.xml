@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,7 +13,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementsetattributenomodificationallowederrEE">
 <metadata>
-<title>elementSetAttributeNoModificationAllowedErr</title>
+<title>elementSetAttributeNoModificationAllowedErrEE</title>
 <creator>Curt Arnold</creator>
 <description>
     The "setAttribute(name,value)" method for an attribute causes the 
@@ -32,7 +32,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68F082"/>
 <source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/elementsetattributenomodificationallowederr.xml"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
@@ -45,6 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createEntityReference var="entRef" obj="doc" name="&quot;ent4&quot;"/>
 <appendChild obj="gender" newChild="entRef" var="appendedChild"/>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
+<assertNotNull actual="entElement" id="entElementNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <setAttribute obj="entElement" name="&quot;newAttr&quot;" value="&quot;newValue&quot;"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,12 +28,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!--name attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1844763134"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="name" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <name interface="DocumentType" obj="docType" var="name"/>
-<assertEquals actual="name" expected="&quot;staff&quot;" id="documenttypeGetDocTypeAssert" ignoreCase="false"/>
+<if><contentType type="image/svg+xml"/>
+<assertEquals actual="name" expected='"svg"' id="doctypeName" ignoreCase="false"/>
+<else>
+<assertEquals actual="name" expected='"staff"' id="documenttypeGetDocTypeAssert" ignoreCase="false"/>
+</else>
+</if>
 </test>

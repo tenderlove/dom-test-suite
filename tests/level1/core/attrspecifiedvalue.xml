@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="addressList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="addressList" var="testNode" index="0"/>
 <attributes obj="testNode" var="attributes"/>
-<getNamedItem obj="attributes" var="domesticAttr" name="&quot;domestic&quot;"/>
+<getNamedItem obj="attributes" var="domesticAttr" name='"domestic"'/>
 <specified obj="domesticAttr" var="state"/>
-<assertTrue actual="state" id="attrSpecifiedValueAssert"/>
+<assertTrue actual="state" id="domesticSpecified"/>
 </test>

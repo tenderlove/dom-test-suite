@@ -42,5 +42,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="childList" index="3" var="childNode"/>
 <cloneNode obj="childNode" deep="false" var="clonedNode"/>
 <lastChild interface="Node" obj="clonedNode" var="lastChildNode"/>
-<assertNull actual="lastChildNode" id="nodeCloneFalseNoCopyTextAssert1"/>
+<assertNull actual="lastChildNode" id="noTextNodes"/>
 </test>

@@ -31,7 +31,9 @@ An attempt to add remove an entity should result in a NO_MODIFICATION_ERR.
 <var name="retval" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities var="entities" obj="docType"/>
+<assertNotNull actual="entities" id="entitiesNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 	<NO_MODIFICATION_ALLOWED_ERR>
 		<removeNamedItem var="retval" obj="entities" name='"alpha"'/>

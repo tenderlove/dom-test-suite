@@ -52,6 +52,7 @@ the attribute is changed.
 <appendChild var="retval" obj="docFrag" newChild="dayNode"/>
 
 <firstChild var="firstChild" obj="titleAttr" interface="Node"/>
+<assertNotNull actual="firstChild" id="attrChildNotNull"/>
 <replaceChild var="retval" obj="titleAttr" newChild="docFrag" oldChild="firstChild"/>
 
 <!--  check that Attr.value gives expected result   -->

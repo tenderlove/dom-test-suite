@@ -24,7 +24,6 @@ Creating an entity reference with an empty name should cause an INVALID_CHARACTE
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-392B75AE')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=525"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="badEntityRef" type="EntityReference"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>

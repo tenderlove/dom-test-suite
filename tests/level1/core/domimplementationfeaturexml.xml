@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,16 +16,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>domimplementationFeaturexml</title>
 <creator>NIST</creator>
 <description>
-    The "feature" parameter in the
-   "hasFeature(feature,version)" method is the package name
-   of the feature.  Legal values are XML and HTML.
-   (Test for xml, lower case) 
-   
-   Retrieve the entire DOM document and invoke its 
-   "getImplementation()" method.  This should create a
-   DOMImplementation object whose "hasFeature(feature,
-   version)" method is invoked with "feature" equal to "xml".
-   The method should return a boolean "true".
+hasFeature("xml", "1.0") should return true for implementations that can read staff documents.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -36,6 +27,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="state" type="boolean"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <implementation obj="doc" var="domImpl"/>
-<hasFeature obj="domImpl" var="state" feature="&quot;xml&quot;" version="&quot;1.0&quot;"/>
-<assertTrue actual="state" id="domimplementationFeaturexmlAssert"/>
+<hasFeature obj="domImpl" var="state" feature='"xml"' version='"1.0"'/>
+<assertTrue actual="state" id="hasXML1"/>
 </test>

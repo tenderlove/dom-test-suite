@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,15 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodegetlastchild">
 <metadata>
-<title>nodeGetLastChild</title>
+<title>nodegetlastchild</title>
 <creator>NIST</creator>
 <description>
     The "getLastChild()" method returns the last child
     of this node. 
-    
-    Retrieve the second employee and invoke the
-    "getLastChild()" method.   The NodeName returned
-    should be "#text".
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -37,11 +33,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <lastChild interface="Node" obj="employeeNode" var="lchildNode"/>
 <nodeName obj="lchildNode" var="childName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="childName" expected="&quot;address&quot;" id="no_whitespace" ignoreCase="false"/>
-<else>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
-</else>
+<if><equals actual="childName" expected='"#text"' ignoreCase="false"/>
+<previousSibling interface="Node" obj="lchildNode" var="lchildNode"/>
+<nodeName obj="lchildNode" var="childName"/>
 </if>
+<assertEquals actual="childName" expected='"address"' id="nodeName" ignoreCase="false"/>
 </test>

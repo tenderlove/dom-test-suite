@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -27,22 +27,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="entRefAddr" type="Element"/>
 <var name="entRefNode" type="Node"/>
 <var name="nodeType" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
-<if>
-<implementationAttribute name="expandEntityReferences" value="true"/>
-<createEntityReference var="entRefNode" obj="doc" name="&quot;ent2&quot;"/>
-<else>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" 
+	var="elementList" tagname='"address"'/>
 <item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
 <firstChild interface="Node" obj="entRefAddr" var="entRefNode"/>
-</else>
-</if>
 <nodeType obj="entRefNode" var="nodeType"/>
-<assertEquals actual="nodeType" expected="5" id="nodeEntityReferenceNodeTypeAssert1" ignoreCase="false"/>
+<if><equals actual="nodeType" expected="3" ignoreCase="false"/>
+	<createEntityReference var="entRefNode" obj="doc" name='"ent2"'/>
+</if>
+<assertEquals actual="nodeType" expected="5" id="entityNodeType" ignoreCase="false"/>
 </test>

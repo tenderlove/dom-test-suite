@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,19 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_nodeElementNodeValue</title>
 <creator>Curt Arnold</creator>
 <description>
-
     The string returned by the "getNodeValue()" method for an 
-
     Element Node is null.
-
-    
-
-    Retrieve the root node of the DOM object and check the
-
-    string returned by the "getNodeValue()" method.    
-
-    It should be equal to null. 
-
 </description>
 
 <date qualifier="created">2002-06-09</date>
@@ -40,5 +29,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <documentElement obj="doc" var="elementNode"/>
 <nodeValue obj="elementNode" var="elementValue"/>
-<assertNull actual="elementValue" id="nodeElementNodeValueAssert1"/>
+<assertNull actual="elementValue" id="elementNodeValue"/>
 </test>

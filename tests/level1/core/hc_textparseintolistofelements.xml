@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,10 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_textParseIntoListOfElements</title>
 <creator>Curt Arnold</creator>
 <description>
-    If there is markup inside the Text element content
-    then the text is parsed into a list of elements and 
-    text that forms the list of children of the element.   
-    
     Retrieve the textual data from the last child of the 
     second employee.   That node is composed of two   
     EntityReference nodes and two Text nodes.   After
@@ -41,6 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child" type="Node"/>
 <var name="value" type="DOMString"/>
 <var name="grandChild" type="Node"/>
+<var name="length" type="int"/>
 <var name="result" type="List"/>
 <var name="expectedNormal" type="List">
 <member>"&#946;"</member>
@@ -55,23 +52,24 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="addressNode" index="1"/>
 <childNodes obj="addressNode" var="childList"/>
+<length var="length" obj="childList" interface="NodeList"/>
 <for-each collection="childList" member="child">
-<nodeValue obj="child" var="value"/>
-<if>
-<isNull obj="value"/>
-<firstChild interface="Node" obj="child" var="grandChild"/>
-<nodeValue obj="grandChild" var="value"/>
-<append collection="result" item="value"/>
-<else>
-<append collection="result" item="value"/>
-</else>
-</if>
+	<nodeValue obj="child" var="value"/>
+	<if>
+		<isNull obj="value"/>
+		<firstChild interface="Node" obj="child" var="grandChild"/>
+		<assertNotNull actual="grandChild" id="grandChildNotNull"/>
+		<nodeValue obj="grandChild" var="value"/>
+		<append collection="result" item="value"/>
+		<else>
+			<append collection="result" item="value"/>
+		</else>
+	</if>
 </for-each>
-<if>
-<implementationAttribute name="expandEntityReferences" value="true"/>
-<assertEquals actual="result" expected="expectedExpanded" ignoreCase="false" id="assertEqCoalescing"/>
-<else>
-<assertEquals actual="result" expected="expectedNormal" ignoreCase="false" id="assertEqNormal"/>
-</else>
+<if><equals actual="length" expected="1" ignoreCase="false"/>
+	<assertEquals actual="result" expected="expectedExpanded" ignoreCase="false" id="assertEqCoalescing"/>
+	<else>
+		<assertEquals actual="result" expected="expectedNormal" ignoreCase="false" id="assertEqNormal"/>
+	</else>
 </if>
 </test>

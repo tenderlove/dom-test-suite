@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,11 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeRemoveChildNode</title>
 <creator>NIST</creator>
 <description>
-    The "removeChild(oldChild)" method removes the node
-    indicated by "oldChild". 
-    
     Retrieve the second employee and remove its first child.
-    After the removal, the second employee should have twelve 
+    After the removal, the second employee should have five or twelve 
     children and the first child should now be the child
     that used to be at the second position in the list.
 </description>
@@ -48,15 +45,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="childList" index="0" var="child"/>
 <nodeName obj="child" var="childName"/>
 <length interface="NodeList" obj="childList" var="length"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="removedName" expected="&quot;employeeId&quot;" ignoreCase="false" id="removedNameNoWhitespace"/>
-<assertEquals actual="childName" expected="&quot;name&quot;" ignoreCase="false" id="childNameNoWhitespace"/>
-<assertEquals actual="length" expected="5" ignoreCase="false" id="lengthNoWhitespace"/>
+<if><equals actual="length" expected="5" ignoreCase="false"/>
+	<assertEquals actual="removedName" expected='"employeeId"' ignoreCase="false" id="removedNameNoWhitespace"/>
+	<assertEquals actual="childName" expected='"name"' ignoreCase="false" id="childNameNoWhitespace"/>
 <else>
-<assertEquals actual="removedName" expected="&quot;#text&quot;" ignoreCase="false" id="removedName"/>
-<assertEquals actual="childName" expected="&quot;employeeId&quot;" ignoreCase="false" id="childName"/>
-<assertEquals actual="length" expected="12" ignoreCase="false" id="length"/>
+	<assertEquals actual="removedName" expected='"#text"' ignoreCase="false" id="removedName"/>
+	<assertEquals actual="childName" expected='"employeeId"' ignoreCase="false" id="childName"/>
+	<assertEquals actual="length" expected="12" ignoreCase="false" id="length"/>
 </else>
 </if>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,20 +13,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodelistindexequalzero">
 <metadata>
-<title>nodelistIndexEqualZero</title>
+<title>nodelistindexequalzero</title>
 <creator>NIST</creator>
 <description>
-    The items in the list are accessible via an integral
-   index starting from zero.
-   (Index equal 0)
-   
    Create a list of all the children elements of the third
    employee and access its first child by using an index
-   of 0.  This should result in the whitspace before "employeeId" being
-   selected (employeeId when ignoring whitespace).  
-   Further we evaluate its content(by using
-   the "getNodeName()" method) to ensure the proper
-   element was accessed.
+   of 0.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -40,16 +32,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"employee"'/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" var="child" index="0"/>
 <nodeName obj="child" var="childName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="item0NoWhitespace" ignoreCase="false"/>
-<else>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="item0Whitespace" ignoreCase="false"/>
-</else>
+<if><notEquals actual="childName" expected='"#text"' ignoreCase="false"/>
+<assertEquals actual="childName" expected='"employeeId"' id="childName" ignoreCase="false"/>
 </if>
 </test>

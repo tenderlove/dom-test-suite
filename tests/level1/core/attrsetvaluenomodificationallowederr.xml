@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -45,12 +45,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
+<assertNotNull actual="gender" id="genderNotNull"/>
 <childNodes obj="gender" var="genList"/>
 <item interface="NodeList" obj="genList" var="gen" index="0"/>
+<assertNotNull actual="gen" id="genderFirstChildNotNull"/>
 <childNodes obj="gen" var="gList"/>
 <item interface="NodeList" obj="gList" var="g" index="0"/>
+<assertNotNull actual="g" id="genderFirstGrandchildNotNull"/>
 <attributes obj="g" var="attrList"/>
-<getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
+<assertNotNull actual="attrList" id="attributesNotNull"/>
+<getNamedItem obj="attrList" var="attrNode" name='"domestic"'/>
+<assertNotNull actual="attrNode" id="attrNotNull"/>
 <assertDOMException id="setValue_throws_NO_MODIFICATION">
     <NO_MODIFICATION_ALLOWED_ERR>
         <value interface="Attr" obj="attrNode" value='"newvalue"'/>

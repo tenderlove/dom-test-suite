@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1788794630"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="entityList" type="NamedNodeMap"/>
@@ -36,6 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityType" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="entityList"/>
 <for-each collection="entityList" member="entity">
 <nodeType obj="entity" var="entityType"/>

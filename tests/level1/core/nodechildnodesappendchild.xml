@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,19 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodechildnodesappendchild">
 <metadata>
-<title>nodeChildNodesAppendChild</title>
+<title>nodechildnodesappendchild</title>
 <creator>NIST</creator>
 <description>
-    The NodeList returned by the "getChildNodes()" method
-    is live.   Changes on the node's children are immediately
-    reflected on the nodes returned in the NodeList.
-    
-    Create a NodeList of the children of the second employee
-    and then add a newly created element that was created
-    by the "createElement()" method(Document Interface) to
-    the second employee by using the "appendChild()" method.
-    The length of the NodeList should reflect this new
-    addition to the child list.   It should return the value 14.
+Add an element and check that the previously retrieved childNodes NodeList
+is live.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -37,17 +29,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeNode" type="Node"/>
 <var name="childList" type="NodeList"/>
 <var name="createdNode" type="Node"/>
+<var name="expectedLength" type="int"/>
+<var name="length" type="int"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<createElement obj="doc" var="createdNode" tagName="&quot;text3&quot;"/>
+<length var="expectedLength" obj="childList" interface="NodeList"/>
+<increment var="expectedLength" value="1"/>
+<createElement obj="doc" var="createdNode" tagName='"text3"'/>
 <appendChild obj="employeeNode" newChild="createdNode" var="employeeNode"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertSize collection="childList" size="7" id="elementCountNoWhitespace"/>
-<else>
-<assertSize collection="childList" size="14" id="elementCountWhitespace"/>
-</else>
-</if>
+<length var="length" obj="childList" interface="NodeList"/>
+<assertEquals actual="length" expected="expectedLength" ignoreCase="false" id="childNodeLength"/>
 </test>

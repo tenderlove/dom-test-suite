@@ -42,6 +42,7 @@ the expected text node.
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="titleAttr" name='"title"'/>
 <firstChild var="textNode" obj="titleAttr" interface="Node"/>
+<assertNotNull actual="textNode" id="textNodeNotNull"/>
 <nodeValue var="value" obj="textNode"/>
 <assertEquals actual="value" expected='"Yes"' id="child1IsYes" ignoreCase="false"/>
 <nextSibling var="otherChild" obj="textNode" interface="Node"/>

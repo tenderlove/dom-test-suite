@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,28 +13,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeentitynodeattributes">
 <metadata>
-<title>nodeEntityNodeAttributes</title>
+<title>nodeentitynodeattributes</title>
 <creator>NIST</creator>
 <description>
-
     The "getAttributes()" method invoked on an Entity 
-
     Node returns null.
-
-    
-
-    Retrieve the first Entity declaration in the "DOCTYPE"
-
-    section of the XML file and invoke the "getAttributes()" 
-
-    method on the Entity Node.   It should return null. 
-
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="testName" type="NamedNodeMap"/>
@@ -42,8 +30,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrList" type="NamedNodeMap"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="testName"/>
-<getNamedItem obj="testName" name="&quot;ent1&quot;" var="entityNode"/>
+<getNamedItem obj="testName" name='"ent1"' var="entityNode"/>
 <attributes obj="entityNode" var="attrList"/>
-<assertNull actual="attrList" id="nodeEntityNodeAttributesAssert1"/>
+<assertNull actual="attrList" id="entityAttributesNull"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -39,9 +39,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testEmployee" type="Element"/>
 <var name="attrValue" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
-<removeAttribute obj="testEmployee" name="&quot;street&quot;"/>
-<getAttribute obj="testEmployee" var="attrValue" name="&quot;street&quot;"/>
-<assertEquals actual="attrValue" expected="&quot;Yes&quot;" id="elementRemoveAttributeAssert" ignoreCase="false"/>
+<removeAttribute obj="testEmployee" name='"street"'/>
+<getAttribute obj="testEmployee" var="attrValue" name='"street"'/>
+<assertEquals actual="attrValue" expected='"Yes"' id="streetYes" ignoreCase="false"/>
 </test>

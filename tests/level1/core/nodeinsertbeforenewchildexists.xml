@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -37,6 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="refChild" type="Node"/>
 <var name="newChild" type="Node"/>
 <var name="child" type="Node"/>
+<var name="length" type="int"/>
 <var name="childName" type="DOMString"/>
 <var name="insertedNode" type="Node"/>
 <var name="expectedWhitespace" type="List">
@@ -66,25 +67,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="result" type="List"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assign var="expected" value="expectedNoWhitespace"/>
-<item interface="NodeList" obj="elementList" index="0" var="employeeNode"/>
-<childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="5" var="refChild"/>
-<item interface="NodeList" obj="childList" index="0" var="newChild"/>
-<else>
-<assign var="expected" value="expectedWhitespace"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="11" var="refChild"/>
-<item interface="NodeList" obj="childList" index="1" var="newChild"/>
-</else>
+<length var="length" obj="childList" interface="NodeList"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<assign var="expected" value="expectedNoWhitespace"/>
+	<item interface="NodeList" obj="childList" index="5" var="refChild"/>
+	<item interface="NodeList" obj="childList" index="0" var="newChild"/>
+	<else>
+		<assign var="expected" value="expectedWhitespace"/>
+		<item interface="NodeList" obj="childList" index="11" var="refChild"/>
+		<item interface="NodeList" obj="childList" index="1" var="newChild"/>
+	</else>
 </if>
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 <for-each collection="childList" member="child">
-<nodeName obj="child" var="childName"/>
-<append collection="result" item="childName"/>
+	<nodeName obj="child" var="childName"/>
+	<append collection="result" item="childName"/>
 </for-each>
 <assertEquals id="childNames" actual="result" expected="expected" ignoreCase="false"/>
 </test>

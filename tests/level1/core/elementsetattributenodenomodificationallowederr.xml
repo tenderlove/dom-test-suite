@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -32,21 +32,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-887236154')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154"/>
 </metadata>
-<hasFeature feature='"XML"'/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
-<var name="entRef" type="EntityReference"/>
+<var name="entRef" type="Node"/>
 <var name="entElement" type="Element"/>
 <var name="newAttr" type="Attr"/>
+<var name="nodeType" type="int"/>
 <var name="badAttr" type="Attr"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <firstChild interface="Node" var="entRef" obj="gender"/>
+<assertNotNull actual="entRef" id="entRefNotNull"/>
+<nodeType var="nodeType" obj="entRef"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+</if>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
-<createAttribute obj="doc" var="newAttr" name="&quot;newAttr&quot;"/>
+<assertNotNull actual="entElement" id="entElementNotNull"/>
+<createAttribute obj="doc" var="newAttr" name='"newAttr"'/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <setAttributeNode var="badAttr" obj="entElement" newAttr="newAttr"/>

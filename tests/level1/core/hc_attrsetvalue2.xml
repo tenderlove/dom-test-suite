@@ -42,6 +42,7 @@ Sets Attr.value on an attribute that should contain multiple child nodes.
 <createTextNode var="textNode" obj="doc" data='"terday"'/>
 <appendChild var="retval" obj="titleAttr" newChild="textNode"/>
 <firstChild var="firstChild" obj="titleAttr" interface="Node"/>
+<assertNotNull actual="firstChild" id="attrChildNotNull"/>
 
 <!--   set value which should totally replace child node list   -->
 <value obj="titleAttr" value='"Tomorrow"' interface="Attr"/>

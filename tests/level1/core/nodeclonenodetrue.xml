@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -33,10 +33,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
+<var name="childList" type="NodeList"/>
 <var name="clonedNode" type="Node"/>
 <var name="clonedList" type="NodeList"/>
 <var name="clonedChild" type="Node"/>
 <var name="clonedChildName" type="DOMString"/>
+<var name="length" type="int"/>
 <var name="result" type="List"/>
 <var name="expectedWhitespace" type="List">
 <member>"#text"</member>
@@ -62,19 +64,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"address"</member>
 </var>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
+<childNodes var="childList" obj="employeeNode"/>
+<length var="length" obj="childList" interface="NodeList"/>
 <cloneNode obj="employeeNode" deep="true" var="clonedNode"/>
 <childNodes obj="clonedNode" var="clonedList"/>
 <for-each collection="clonedList" member="clonedChild">
 <nodeName obj="clonedChild" var="clonedChildName"/>
 <append collection="result" item="clonedChildName"/>
 </for-each>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="result" expected="expectedNoWhitespace" id="nowhitespace" ignoreCase="false"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<assertEquals actual="result" expected="expectedNoWhitespace" id="nowhitespace" ignoreCase="false"/>
 <else>
-<assertEquals actual="result" expected="expectedWhitespace" id="whitespace" ignoreCase="false"/>
+	<assertEquals actual="result" expected="expectedWhitespace" id="whitespace" ignoreCase="false"/>
 </else>
 </if>
 </test>

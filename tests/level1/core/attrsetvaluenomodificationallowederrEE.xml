@@ -33,7 +33,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
 <source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/attrsetvaluenomodificationallowederr.xml"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="entRef" type="EntityReference"/>
 <var name="entElement" type="Element"/>
@@ -45,9 +44,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
+<assertNotNull actual="gender" id="genderNotNull"/>
 <createEntityReference obj="doc" var="entRef" name="&quot;ent4&quot;"/>
 <appendChild obj="gender" newChild="entRef" var="appendedChild"/>
 <firstChild obj="entRef" var="entElement" interface="Node"/>
+<assertNotNull actual="entElement" id="entElementNotNull"/>
 <attributes obj="entElement" var="attrList"/>
 <getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
 <assertDOMException id="setValue_throws_NO_MODIFICATION">

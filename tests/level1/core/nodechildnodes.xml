@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,16 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodechildnodes">
 <metadata>
-<title>nodeChildNodes</title>
+<title>nodechildnodes</title>
 <creator>NIST</creator>
 <description>
-    
-    The "getChildNodes()" method returns a NodeList
-    that contains all children of this node. 
-    
-    Retrieve the second employee and check the NodeList
-    returned by the "getChildNodes()" method.   The
-    length of the list should be 13.
+Collect the element names from Node.childNodes and check against expectations.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -32,15 +26,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <var name="childNodes" type="NodeList"/>
+<var name="childNode" type="Node"/>
+<var name="childType" type="int"/>
+<var name="childName" type="DOMString"/>
+<var name="elementNames" type="List"/>
+<var name="expectedElementNames" type="List">
+  <member>"employeeId"</member>
+  <member>"name"</member>
+  <member>"position"</member>
+  <member>"salary"</member>
+  <member>"gender"</member>
+  <member>"address"</member>
+</var>
 <load var="doc" href="staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childNodes"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertSize collection="childNodes" size="6" id="childCountNoWhitespace"/>
-<else>
-<assertSize collection="childNodes" size="13" id="childCountWhitespace"/>
-</else>
-</if>
+<for-each collection="childNodes" member="childNode">
+	<nodeType var="childType" obj="childNode"/>
+	<if><equals actual="childType" expected="1" ignoreCase="false"/>
+		<nodeName var="childName" obj="childNode"/>
+		<append collection="elementNames" item="childName"/>
+	</if>
+</for-each>
+<assertEquals actual="elementNames" expected="expectedElementNames" id="elementNames" ignoreCase="false"/>
 </test>

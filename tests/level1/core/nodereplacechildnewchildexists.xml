@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,9 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeReplaceChildNewChildExists</title>
 <creator>NIST</creator>
 <description>
-    If the "newChild" is already in the tree, it is first
-    removed before the new one is added.
-    
     Retrieve the second employee and replace its TWELFTH 
     child(address) with its SECOND child(employeeId).   After the
     replacement the second child should now be the one that used   
@@ -37,6 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newChild" type="Node" isNull="true"/>
 <var name="childName" type="DOMString"/>
 <var name="childNode" type="Node"/>
+<var name="length" type="int"/>
 <var name="actual" type="List"/>
 <var name="expected" type="List"/>
 <var name="expectedWithoutWhitespace" type="List">
@@ -62,25 +60,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </var>
 <var name="replacedChild" type="Node"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="false"/>
-<item interface="NodeList" obj="childList" index="1" var="newChild"/>
-<item interface="NodeList" obj="childList" index="11" var="oldChild"/>
-<assign var="expected" value="expectedWithWhitespace"/>
+<length var="length" obj="childList" interface="NodeList"/>
+<if><equals actual="length" expected="13" ignoreCase="false"/>
+	<item interface="NodeList" obj="childList" index="1" var="newChild"/>
+	<item interface="NodeList" obj="childList" index="11" var="oldChild"/>
+	<assign var="expected" value="expectedWithWhitespace"/>
 <else>
-<item interface="NodeList" obj="childList" index="0" var="newChild"/>
-<item interface="NodeList" obj="childList" index="5" var="oldChild"/>
-<assign var="expected" value="expectedWithoutWhitespace"/>
+	<item interface="NodeList" obj="childList" index="0" var="newChild"/>
+	<item interface="NodeList" obj="childList" index="5" var="oldChild"/>
+	<assign var="expected" value="expectedWithoutWhitespace"/>
 </else>
 </if>
 <replaceChild var="replacedChild" obj="employeeNode" newChild="newChild" oldChild="oldChild"/>
 <assertSame actual="replacedChild" expected="oldChild" id="return_value_same"/>
 <for-each collection="childList" member="childNode">
-<nodeName var="childName" obj="childNode"/>
-<append collection="actual" item="childName"/>
+	<nodeName var="childName" obj="childNode"/>
+	<append collection="actual" item="childName"/>
 </for-each>
 <assertEquals actual="actual" expected="expected" id="childNames" ignoreCase="false"/>
 </test>

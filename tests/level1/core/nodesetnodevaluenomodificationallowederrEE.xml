@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -30,16 +30,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 <source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodesetnodevaluenomodificationallowederr.xml"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="entRef" type="EntityReference"/>
 <var name="entText" type="CharacterData"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
 <firstChild interface="Node" var="entText" obj="entRef"/>
+<assertNotNull actual="entText" id="entTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<nodeValue obj="entText" value="&quot;newValue&quot;"/>
+<nodeValue obj="entText" value='"newValue"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

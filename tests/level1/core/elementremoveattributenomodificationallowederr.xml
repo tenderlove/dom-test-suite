@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -32,24 +32,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-6D6AC0F9')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9"/>
 </metadata>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
 <var name="genList" type="NodeList"/>
 <var name="gen" type="Node"/>
 <var name="gList" type="NodeList"/>
+<var name="nodeType" type="int"/>
 <var name="genElement" type="Element"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <childNodes obj="gender" var="genList"/>
 <item interface="NodeList" obj="genList" var="gen" index="0"/>
+<assertNotNull actual="gen" id="genNotNull"/>
+<nodeType var="nodeType" obj="gen"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="gen" obj="doc" name='"ent4"'/>
+</if>
 <childNodes obj="gen" var="gList"/>
 <item interface="NodeList" obj="gList" var="genElement" index="0"/>
-<assertDOMException id="elementRemoveAttributeNoModificationAllowedErrAssert">
+<assertNotNull actual="genElement" id="genElementNotNull"/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<removeAttribute obj="genElement" name="&quot;domestic&quot;"/>
+<removeAttribute obj="genElement" name='"domestic"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

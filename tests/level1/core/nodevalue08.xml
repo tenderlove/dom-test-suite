@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -23,7 +23,6 @@ should still return null.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="newNode" type="Node"/>
@@ -31,8 +30,11 @@ should still return null.
 <var name="nodeMap" type="NamedNodeMap"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <doctype obj="doc" var="docType"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <notations obj="docType" var="nodeMap"/>
+<assertNotNull actual="nodeMap" id="notationsNotNull"/>
 <getNamedItem obj="nodeMap" name='"notation1"' var="newNode"/>
+<assertNotNull actual="newNode" id="notationNotNull"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>
 <!--   attempt to change the value and make sure that it stays null  -->

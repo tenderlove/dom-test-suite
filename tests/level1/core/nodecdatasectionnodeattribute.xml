@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -36,10 +36,15 @@ It should return null.
 <var name="cdataName" type="Element"/>
 <var name="cdataNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="elementList" index="1" var="cdataName"/>
 <lastChild interface="Node" obj="cdataName" var="cdataNode"/>
+<nodeType var="nodeType" obj="cdataNode"/>
+<if><notEquals actual="nodeType" expected="4" ignoreCase="false"/>
+	<createCDATASection var="cdataNode" obj="doc" data='""'/>
+</if>
 <attributes obj="cdataNode" var="attrList"/>
-<assertNull actual="attrList" id="nodeCDATASectionNodeAttributesAssert1"/>
+<assertNull actual="attrList" id="cdataSection"/>
 </test>

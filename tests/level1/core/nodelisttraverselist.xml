@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -36,6 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
 <var name="result" type="List"/>
+<var name="length" type="int"/>
 <var name="expectedWhitespace" type="List">
 <member>"#text"</member>
 <member>"employeeId"</member>
@@ -63,15 +64,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
+<length var="length" obj="employeeList" interface="NodeList"/>
 <for-each collection="employeeList" member="child">
-<nodeName obj="child" var="childName"/>
-<append collection="result" item="childName"/>
+	<nodeName obj="child" var="childName"/>
+	<append collection="result" item="childName"/>
 </for-each>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="result" expected="expectedNoWhitespace" id="nowhitespace" ignoreCase="false"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<assertEquals actual="result" expected="expectedNoWhitespace" id="nowhitespace" ignoreCase="false"/>
 <else>
-<assertEquals actual="result" expected="expectedWhitespace" id="whitespace" ignoreCase="false"/>
+	<assertEquals actual="result" expected="expectedWhitespace" id="whitespace" ignoreCase="false"/>
 </else>
 </if>
 </test>

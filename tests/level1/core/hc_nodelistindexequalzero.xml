@@ -16,10 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_nodelistIndexEqualZero</title>
 <creator>Curt Arnold</creator>
 <description>
-    The items in the list are accessible via an integral
-   index starting from zero.
-   (Index equal 0)
-   
    Create a list of all the children elements of the third
    employee and access its first child by using an index
    of 0.  This should result in the whitspace before "em" being
@@ -40,13 +36,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeList" type="NodeList"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="length" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"p"'/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
+<length var="length" obj="employeeList" interface="NodeList"/>
 <item interface="NodeList" obj="employeeList" var="child" index="0"/>
 <nodeName obj="child" var="childName"/>
-<if><equals expected='"#text"' actual="childName"/>
+<if><equals expected='13' actual="length" ignoreCase="false"/>
 <assertEquals actual="childName" expected='"#text"' ignoreCase="false" id="childName_w_whitespace"/>
 <else>
 <assertEquals actual="childName" expected='"em"' ignoreCase="auto" id="childName_wo_whitespace"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,10 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelistIndexNotZero</title>
 <creator>NIST</creator>
 <description>
-    The items in the list are accessible via an integral
-   index starting from zero.
-   (Index not equal 0)
-   
    Create a list of all the children elements of the third
    employee and access its fourth child by using an index
    of 3.  This should result in "name" being
@@ -37,18 +33,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeNode" type="Node"/>
 <var name="employeeList" type="NodeList"/>
 <var name="child" type="Node"/>
+<var name="length" type="int"/>
 <var name="childName" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
-<item interface="NodeList" obj="employeeList" var="child" index="3"/>
-<nodeName obj="child" var="childName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="childName" expected="&quot;salary&quot;" id="item3_Nowhitespace" ignoreCase="false"/>
+<length var="length" obj="employeeList" interface="NodeList"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<item interface="NodeList" obj="employeeList" var="child" index="1"/>	
 <else>
-<assertEquals actual="childName" expected="&quot;name&quot;" id="item3_Whitespace" ignoreCase="false"/>
+	<item interface="NodeList" obj="employeeList" var="child" index="3"/>
 </else>
 </if>
+<nodeName obj="child" var="childName"/>
+<assertEquals actual="childName" expected='"name"' 
+	id="nodeName" ignoreCase="false"/>
 </test>

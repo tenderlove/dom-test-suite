@@ -43,7 +43,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item obj="genderList" index="2" var="genderNode" interface="NodeList"/>
 <firstChild interface="Node" var="entRef" obj="genderNode"/>
+<assertNotNull actual="entRef" id="entRefNotNull"/>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
+<assertNotNull actual="entElement" id="entElementNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <removeChild var="removedNode" obj="entRef" oldChild="entElement"/>

@@ -41,6 +41,7 @@ Removes the child node of an attribute and checks that the value is empty.
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="titleAttr" name='"title"'/>
 <firstChild var="textNode" obj="titleAttr" interface="Node"/>
+<assertNotNull actual="textNode" id="attrChildNotNull"/>
 <removeChild var="retval" obj="titleAttr" oldChild="textNode"/>
 
 <!--  check that Attr.value gives expected result   -->

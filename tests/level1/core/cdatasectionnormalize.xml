@@ -27,8 +27,6 @@ by the "normalize()" method.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083"/>
 </metadata>
-<hasFeature feature='"XML"'/>
-<implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <var name="lChild" type="Element"/>
@@ -41,9 +39,11 @@ by the "normalize()" method.
 <normalize obj="lChild"/>
 <childNodes obj="lChild" var="childNodes"/>
 <item interface="NodeList" obj="childNodes" var="cdataN" index="1"/>
+<assertNotNull actual="cdataN" id="firstCDATASection"/>
 <data interface="CharacterData" obj="cdataN" var="data"/>
 <assertEquals actual="data" expected='"This is a CDATASection with EntityReference number 2 &amp;ent2;"' ignoreCase="false" id="data1"/>
 <item interface="NodeList" obj="childNodes" var="cdataN" index="3"/>
+<assertNotNull actual="cdataN" id="secondCDATASection"/>
 <data interface="CharacterData" obj="cdataN" var="data"/>
 <assertEquals actual="data" expected='"This is an adjacent CDATASection with a reference to a tab &amp;tab;"' ignoreCase="false" id="data3"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,16 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelistReturnFirstItem</title>
 <creator>NIST</creator>
 <description>
-    The "item(index)" method returns the indexth item in the
-   collection.
-   
-   Create a list of all the children elements of the third
-   employee and access its first child by invoking the 
-   "item(index)" method with an index=0.  This should
-   result in "#text" being returned.
-   Further we evaluate its content(by using
-   the "getNodeName()" method) to ensure the proper
-   element was accessed.
+Get the first child of the third employee using NodeList.item(0)
+which will either be a Text node (whitespace) or employeeId element.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -37,17 +29,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeList" type="NodeList"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="length" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"employee"'/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" var="child" index="0"/>
 <nodeName obj="child" var="childName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="item0_NoWhitespace" ignoreCase="false"/>
+<length var="length" obj="employeeList" interface="NodeList"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"employeeId"' ignoreCase="true" id="firstChildNoWhitespace"/>
 <else>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="item0_Whitespace" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"#text"' ignoreCase="true" id="firstChildWithWhitespace"/>
 </else>
 </if>
 </test>

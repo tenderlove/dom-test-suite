@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,13 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeclonetruecopytext">
 <metadata>
-<title>nodeCloneTrueCopyText</title>
+<title>nodeclonetruecopytext</title>
 <creator>NIST</creator>
 <description>
-    The "cloneNode(deep)" method does not copy text unless it
-    is deep cloned.(Test for deep=true)
-    
-    Retrieve the eighth child of the second employee and
+    Retrieve the second salary and
     the "cloneNode(deep)" method with deep=true.   The
     duplicate node returned by the method should copy
     any text data contained in this node.
@@ -30,25 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
-<var name="employeeNode" type="Node"/>
 <var name="childList" type="NodeList"/>
 <var name="childNode" type="Node"/>
 <var name="clonedNode" type="Node"/>
 <var name="lastChildNode" type="Node"/>
 <var name="childValue" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
-<item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<childNodes obj="employeeNode" var="childList"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<item interface="NodeList" obj="childList" index="3" var="childNode"/>
-<else>
-<item interface="NodeList" obj="childList" index="7" var="childNode"/>
-</else>
-</if>
+<getElementsByTagName interface="Document" obj="doc" tagname='"salary"' var="elementList"/>
+<item interface="NodeList" obj="elementList" index="1" var="childNode"/>
 <cloneNode obj="childNode" deep="true" var="clonedNode"/>
 <lastChild interface="Node" obj="clonedNode" var="lastChildNode"/>
 <nodeValue obj="lastChildNode" var="childValue"/>
-<assertEquals actual="childValue" expected="&quot;35,000&quot;" id="nodeCloneTrueCopyTextAssert1" ignoreCase="false"/>
+<assertEquals actual="childValue" expected='"35,000"' id="nodeCloneTrueCopyTextAssert1" ignoreCase="false"/>
 </test>

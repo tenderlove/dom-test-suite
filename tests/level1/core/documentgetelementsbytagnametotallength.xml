@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,14 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentGetElementsByTagNameTotalLength</title>
 <creator>NIST</creator>
 <description>
-    The "getElementsByTagName(tagName)" method returns a 
-   NodeList of all the Elements in the tree when the  
-   tagName is equal to " ".
-   
-   Retrieve the entire DOM document and invoke its 
-   "getElementsByTagName(tagName)" method with tagName
-   equal to " ".  The method should return a NodeList 
-   that contains all the elements of the document. 
+   Retrieve the entire DOM document, invoke
+   getElementsByTagName("*") and check the length of the NodeList. 
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -32,6 +26,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <load var="doc" href="staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nameList" tagname="&quot;*&quot;"/>
-<assertSize collection="nameList" size="37" id="documentGetElementsByTagNameTotalLengthAssert"/>
+<getElementsByTagName interface="Document" obj="doc" var="nameList" tagname='"*"'/>
+<if><contentType type="image/svg+xml"/>
+	<assertSize collection="nameList" size="39" id="elementCountSVG"/>
+<else>
+	<assertSize collection="nameList" size="37" id="documentGetElementsByTagNameTotalLengthAssert"/>
+</else>	
+</if>
 </test>

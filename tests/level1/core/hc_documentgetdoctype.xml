@@ -35,7 +35,12 @@ HTML implementations may return null.
 </if>
 <if><notNull obj="docType"/>
 		<name interface="DocumentType" obj="docType" var="docTypeName"/>
-		<assertEquals actual="docTypeName" expected='"html"' id="nodeName" ignoreCase="false"/>
+		<if><contentType type="image/svg+xml"/>
+			<assertEquals actual="docTypeName" expected='"svg"' id="nodeNameSVG" ignoreCase="false"/>
+			<else>
+				<assertEquals actual="docTypeName" expected='"html"' id="nodeName" ignoreCase="false"/>
+			</else>
+		</if>
 		<nodeValue obj="docType" var="nodeValue"/>
 		<assertNull actual="nodeValue" id="nodeValue"/>
 		<attributes var="attributes" obj="docType"/>

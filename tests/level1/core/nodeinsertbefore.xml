@@ -35,6 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newChild" type="Node"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="length" type="int"/>
 <var name="insertedNode" type="Node"/>
 <var name="actual" type="List"/>
 <var name="expectedWithWhitespace" type="List">
@@ -64,23 +65,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </var>
 <var name="expected" type="List"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<item interface="NodeList" obj="childList" index="3" var="refChild"/>
-<assign var="expected" value="expectedWithoutWhitespace"/>
-<else>
-<item interface="NodeList" obj="childList" index="7" var="refChild"/>
-<assign var="expected" value="expectedWithWhitespace"/>
-</else>
+<length var="length" obj="childList" interface="NodeList"/>
+<if><equals actual="length" expected="6" ignoreCase="false"/>
+	<item interface="NodeList" obj="childList" index="3" var="refChild"/>
+	<assign var="expected" value="expectedWithoutWhitespace"/>
+	<else>
+		<item interface="NodeList" obj="childList" index="7" var="refChild"/>
+		<assign var="expected" value="expectedWithWhitespace"/>
+	</else>
 </if>
-<createElement obj="doc" tagName="&quot;newChild&quot;" var="newChild"/>
+<createElement obj="doc" tagName='"newChild"' var="newChild"/>
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 <for-each collection="childList" member="child">
-<nodeName obj="child" var="childName"/>
-<append collection="actual" item="childName"/>
+	<nodeName obj="child" var="childName"/>
+	<append collection="actual" item="childName"/>
 </for-each>
 <assertEquals actual="actual" expected="expected" id="nodeNames" ignoreCase="false"/>
 </test>

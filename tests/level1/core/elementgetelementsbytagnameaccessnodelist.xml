@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,21 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementgetelementsbytagnameaccessnodelist">
 <metadata>
-<title>elementGetElementsByTagName</title>
+<title>elementgetelementsbytagnameaccessnodelist</title>
 <creator>NIST</creator>
 <description>
-The "getElementsByTagName(name)" method returns a list
-of all descendant Elements in the order the children
-were encountered in a pre order traversal of the element
-tree.
-
-Create a NodeList of all the descendant elements
-using the string "employee" as the tagName.
-The method should return a NodeList whose length is
+Element.getElementsByTagName("employee") should return a NodeList whose length is
 "5" in the order the children were encountered.
-Access the FOURTH element in the NodeList.  The FOURTH
-element also has children and the first child of this
-element should be "#text".
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -37,18 +27,22 @@ element should be "#text".
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Element"/>
-<var name="firstC" type="Node"/>
+<var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="childValue" type="DOMString"/>
+<var name="childType" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
-<firstChild interface="Node" obj="testEmployee" var="firstC"/>
-<nodeName obj="firstC" var="childName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="nodename_nowhitespace" ignoreCase="false"/>
-<else>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="nodename_whitespace" ignoreCase="false"/>
-</else>
+<!--  first element might be text  -->
+<firstChild interface="Node" obj="testEmployee" var="child"/>
+<nodeType var="childType" obj="child"/>
+<if><equals actual="childType" expected="3" ignoreCase="false"/>
+<nextSibling var="child" obj="child" interface="Node"/>
 </if>
+<nodeName var="childName" obj="child" interface="Node"/>
+<assertEquals actual="childName" expected='"employeeId"' id="nodename" ignoreCase="false"/>
+<firstChild var="child" obj="child" interface="Node"/>
+<nodeValue var="childValue" obj="child"/>
+<assertEquals actual="childValue" expected='"EMP0004"' ignoreCase="false" id="emp0004"/>
 </test>

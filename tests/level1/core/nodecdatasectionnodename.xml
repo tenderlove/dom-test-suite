@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -33,11 +33,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="cdataName" type="Element"/>
 <var name="cdataNode" type="Node"/>
+<var name="nodeType" type="int"/>
 <var name="cdataNodeName" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="elementList" index="1" var="cdataName"/>
 <lastChild interface="Node" obj="cdataName" var="cdataNode"/>
+<nodeType var="nodeType" obj="cdataNode"/>
+<if><notEquals actual="nodeType" expected="4" ignoreCase="false"/>
+	<createCDATASection var="cdataNode" obj="doc" data='""'/>
+</if>
 <nodeName obj="cdataNode" var="cdataNodeName"/>
-<assertEquals actual="cdataNodeName" expected="&quot;#cdata-section&quot;" id="nodeCDATASectionNodeNameAssert1" ignoreCase="false"/>
+<assertEquals actual="cdataNodeName" expected='"#cdata-section"' id="cdataNodeName" ignoreCase="false"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -34,14 +34,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="cdataName" type="Element"/>
-<var name="cdataNode" type="NodeList"/>
+<var name="childList" type="NodeList"/>
 <var name="child" type="Node"/>
 <var name="cdataNodeValue" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="elementList" index="1" var="cdataName"/>
-<childNodes obj="cdataName" var="cdataNode"/>
-<item interface="NodeList" obj="cdataNode" index="1" var="child"/>
+<childNodes obj="cdataName" var="childList"/>
+<item interface="NodeList" obj="childList" index="1" var="child"/>
+<!--  if coalescing, create a CDATASection  -->
+<if><isNull obj="child"/>
+	<createCDATASection var="child" obj="doc" data='"This is a CDATASection with EntityReference number 2 &amp;ent2;"'/>
+</if>
 <nodeValue obj="child" var="cdataNodeValue"/>
-<assertEquals actual="cdataNodeValue" expected="&quot;This is a CDATASection with EntityReference number 2 &amp;ent2;&quot;" id="value" ignoreCase="false"/>
+<assertEquals actual="cdataNodeValue" expected='"This is a CDATASection with EntityReference number 2 &amp;ent2;"' id="value" ignoreCase="false"/>
 </test>

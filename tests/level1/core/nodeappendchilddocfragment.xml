@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,9 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeAppendChildDocFragment</title>
 <creator>NIST</creator>
 <description>
-    If the "newChild" is a DocumentFragment object then
-    all its content is added to the child list of this node.
-    
     Create and populate a new DocumentFragment object and
     append it to the second employee.   After the 
     "appendChild(newChild)" method is invoked retrieve the
@@ -39,25 +36,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
 <var name="result" type="List"/>
+<var name="nodeType" type="int"/>
 <var name="appendedChild" type="Node"/>
-<var name="expectedWithWhitespace" type="List">
-<member>"#text"</member>
-<member>"employeeId"</member>
-<member>"#text"</member>
-<member>"name"</member>
-<member>"#text"</member>
-<member>"position"</member>
-<member>"#text"</member>
-<member>"salary"</member>
-<member>"#text"</member>
-<member>"gender"</member>
-<member>"#text"</member>
-<member>"address"</member>
-<member>"#text"</member>
-<member>"newChild1"</member>
-<member>"newChild2"</member>
-</var>
-<var name="expectedWithoutWhitespace" type="List">
+<var name="expected" type="List">
 <member>"employeeId"</member>
 <member>"name"</member>
 <member>"position"</member>
@@ -68,7 +49,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"newChild2"</member>
 </var>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" 
+	tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
 <createDocumentFragment obj="doc" var="newdocFragment"/>
@@ -78,14 +60,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild var="appendedChild" obj="newdocFragment" newChild="newChild2"/>
 <appendChild var="appendedChild" obj="employeeNode" newChild="newdocFragment"/>
 <for-each collection="childList" member="child">
-<nodeName var="childName" obj="child"/>
-<append collection="result" item="childName"/>
-</for-each>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="result" expected="expectedWithoutWhitespace" ignoreCase="false" id="nodeNamesNoWhitespace"/>
-<else>
-<assertEquals actual="result" expected="expectedWithWhitespace" ignoreCase="false" id="nodeNamesWithWhitespace"/>
-</else>
+<nodeType var="nodeType" obj="child"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<nodeName var="childName" obj="child"/>
+	<append collection="result" item="childName"/>
 </if>
+</for-each>
+<assertEquals actual="result" expected="expected" ignoreCase="false" id="elementNames"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,15 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodegetnextsibling">
 <metadata>
-<title>nodeGetNextSibling</title>
+<title>nodegetnextsibling</title>
 <creator>NIST</creator>
 <description>
     The "getNextSibling()" method returns the node immediately
     following this node. 
-    
-    Retrieve the first child of the second employee and
-    invoke the "getNextSibling()" method.   It should return
-    a node with the NodeName of "#text".
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -33,15 +29,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nsNode" type="Node"/>
 <var name="nsName" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employeeId&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employeeId"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeIdNode"/>
 <nextSibling interface="Node" obj="employeeIdNode" var="nsNode"/>
 <nodeName obj="nsNode" var="nsName"/>
-<if>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-<assertEquals actual="nsName" expected="&quot;name&quot;" id="nowhitespace" ignoreCase="false"/>
-<else>
-<assertEquals actual="nsName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
-</else>
+<if><equals actual="nsName" expected='"#text"' ignoreCase="false"/>
+<nextSibling interface="Node" obj="nsNode" var="nsNode"/>
+<nodeName obj="nsNode" var="nsName"/>
 </if>
+<assertEquals actual="nsName" expected='"name"' id="nodeName" ignoreCase="false"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -37,10 +37,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domesticAttr" type="Attr"/>
 <var name="specified" type="boolean"/>
 <load var="doc" href="staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <attributes obj="testEmployee" var="attributes"/>
-<getNamedItem obj="attributes" var="domesticAttr" name="&quot;domestic&quot;"/>
+<getNamedItem obj="attributes" var="domesticAttr" name='"domestic"'/>
 <specified obj="domesticAttr" var="specified"/>
-<assertTrue actual="specified" id="elementAssociatedAttributeAssert"/>
+<assertTrue actual="specified" id="domesticSpecified"/>
 </test>

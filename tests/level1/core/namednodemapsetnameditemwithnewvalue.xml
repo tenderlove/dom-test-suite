@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -46,5 +46,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createAttribute obj="doc" var="newAttribute" name="&quot;district&quot;"/>
 <attributes obj="testAddress" var="attributes"/>
 <setNamedItem interface="NamedNodeMap" obj="attributes" var="newNode" arg="newAttribute"/>
-<assertNull actual="newNode" id="namednodemapSetNamedItemWithNewValueAssert"/>
+<assertNull actual="newNode" id="returnedNodeNull"/>
 </test>
