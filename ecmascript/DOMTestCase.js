@@ -48,17 +48,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
   function assertEqualsList(descr, expected, actual) {
+	var minLength = expected.length;
+	if (actual.length < minLength) {
+	    minLength = actual.length;
+	}
     //
-    //  if they aren't the same size, they aren't equal
-    assertEquals(descr, expected.length, actual.length);
-    //
-    var actualLen = actual.length;
-    var i;
-    for(i = 0; i < actualLen; i++) {
+    for(var i = 0; i < minLength; i++) {
         if(expected[i] != actual[i]) {
 			assertEquals(descr, expected[i], actual[i]);
         }
     }
+    //
+    //  if they aren't the same size, they aren't equal
+    assertEquals(descr, expected.length, actual.length);
   }
 
   function assertInstanceOf(descr, type, obj) {
@@ -709,7 +711,7 @@ DOM3LSBuilder.prototype.toAutoCaseArray = function(s) {
 function createBuilder(implementation) {
   switch(implementation) {
     case "msxml3":
-    return new MSXMLBuilder("Msxml.DOMDocument.3.0");
+    return new MSXMLBuilder("Msxml2.DOMDocument.3.0");
     
     case "msxml4":
     return new MSXMLBuilder("Msxml2.DOMDocument.4.0");
