@@ -1,0 +1,20 @@
+<!ELEMENT em (#PCDATA)>
+<!ELEMENT strong (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
+<!ELEMENT sup (#PCDATA)>
+<!ELEMENT abbr (#PCDATA)>
+<!ELEMENT entElement ( #PCDATA ) >
+<!ELEMENT var ( #PCDATA | entElement )* >
+<!ELEMENT p (em, strong, code, sup, var, abbr) >
+<!ELEMENT svg (head, body)>
+<!ATTLIST svg xmlns CDATA #FIXED "http://www.w3.org/2000/svg">
+<!ATTLIST abbr
+          class CDATA #IMPLIED 
+          title CDATA "Yes">
+<!ELEMENT head (title)>
+<!ATTLIST head
+          xmlns CDATA #IMPLIED>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT body (p+)>
+<!ATTLIST body
+          xmlns CDATA #IMPLIED>

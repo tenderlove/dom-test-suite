@@ -9,9 +9,9 @@ hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
---><!DOCTYPE test SYSTEM "dom1.dtd">
+--><!DOCTYPE test SYSTEM "dom2.dtd">
 
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_attrname">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="hc_attrname">
 <metadata>
 <title>hc_attrName</title>
 <creator>Curt Arnold</creator>
@@ -21,9 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   child of of the second employee and examine its 
   NodeName.  This test uses the getNamedItem(name) method from the NamedNodeMap 
   interface.
+  
+  Unlike the DOM 1 Core equivalent, this test can expect the
+  attribute name to be upper case for HTML documents.
 </description>
 
-<date qualifier="created">2002-06-09</date>
+<date qualifier="created">2003-06-27</date>
 <!--   Node.nodeName  -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095"/>
 <!--   Attr.name      -->
@@ -45,15 +48,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getNamedItem obj="attributes" var="streetAttr" name='"class"'/>
 <nodeName obj="streetAttr" var="strong1"/>
 <name obj="streetAttr" var="strong2" interface="Attr"/>
-<!--  The case for attribute names in HTML documents 
-         were not explicitly addressed in L1
-         but were specified to be upper case in L2    -->
-<if><contentType type="text/html"/>
-<assertEquals actual="strong1" expected='"class"' id="nodeName_html" ignoreCase="true"/>
-<assertEquals actual="strong2" expected='"class"' id="name_html" ignoreCase="true"/>
-<else>
-<assertEquals actual="strong1" expected='"class"' id="nodeName" ignoreCase="false"/>
-<assertEquals actual="strong2" expected='"class"' id="name" ignoreCase="false"/>
-</else>
-</if>
+<assertEquals actual="strong1" expected='"class"' id="nodeName" ignoreCase="auto"/>
+<assertEquals actual="strong2" expected='"class"' id="name" ignoreCase="auto"/>
 </test>

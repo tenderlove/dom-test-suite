@@ -9,9 +9,9 @@ hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
---><!DOCTYPE test SYSTEM "dom1.dtd">
+--><!DOCTYPE test SYSTEM "dom2.dtd">
 
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_namednodemapgetnameditem">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="hc_namednodemapgetnameditem">
 <metadata>
 <title>hc_namednodemapGetNamedItem</title>
 <creator>Curt Arnold</creator>
@@ -24,9 +24,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    list is created an invocation of the "getNamedItem(name)"
    method is done with name="domestic".  This should result
    in the domestic Attr node being returned.
+
+  Unlike the DOM 1 Core equivalent, this test can expect the
+  attribute name to be upper case for HTML documents.   
 </description>
 
-<date qualifier="created">2002-06-09</date>
+<date qualifier="created">2003-06-27</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
@@ -44,10 +47,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="testEmployee" var="attributes"/>
 <getNamedItem obj="attributes" var="domesticAttr" name='"title"'/>
 <nodeName obj="domesticAttr" var="attrName"/>
-<if><contentType type="text/html"/>
-<assertEquals actual="attrName" expected='"title"' id="nodeName_html" ignoreCase="true"/>
-<else>
-<assertEquals actual="attrName" expected='"title"' id="nodeName" ignoreCase="false"/>
-</else>
-</if>
+<assertEquals actual="attrName" expected='"title"' id="nodeName" ignoreCase="auto"/>
 </test>
