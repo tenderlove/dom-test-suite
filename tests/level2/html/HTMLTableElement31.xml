@@ -40,12 +40,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newRow" type="HTMLElement"/>
 <var name="vrows" type="int"/>
 <var name="doc" type="Document"/>
+<var name="tbodiesLength" type="int"/>
 <load var="doc" href="table1" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;table&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize1"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
-<assertSize collection="tbodiesnodeList" size="0" id="Asize2"/>
+<length var="tbodiesLength" obj="tbodiesnodeList" interface="HTMLCollection"/>
+<assertEquals actual="tbodiesLength" expected="0" id="Asize2" ignoreCase="false"/>
 <item interface="NodeList" obj="tbodiesnodeList" var="bodyNode" index="0"/>
 <rows interface="HTMLTableSectionElement" obj="bodyNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
