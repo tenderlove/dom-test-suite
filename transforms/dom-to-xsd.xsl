@@ -63,6 +63,10 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<!--  attributes and methods keyed by name        -->
 	<xsl:key name="featureByName" match="//*[(name()='attribute' or name()='method') and @name]" use="@name"/>
 
+    <!--   list method names (such as EventHandler) that
+               are implemented by the caller, not by the DOM implementation
+               must provide leading and trailing space    -->              
+    <xsl:variable name="sink-interfaces"> EventHandler DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -198,7 +202,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<xsl:template name="produce-methods">
 
 			<!--  produce an element for all methods  -->
-			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'handleEvent']">
+			<xsl:for-each select="$methods[@name != 'hasFeature']">
 				<xsl:sort select="@name"/>
 				<xsl:variable name="current" select="."/>
 
@@ -552,6 +556,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<xs:element name="mult" type="binaryAssignment"/>
 			<xs:element name="divide" type="binaryAssignment"/>
 			<!--  can't be declare since that conflicts with HTMLObjectElement.declare --> 
+            <xs:complexType name="sinkMethod">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                    <xs:group maxOccurs="unbounded" ref="statement"/>
+                </xs:sequence>
+                <xs:attribute use="optional" type="variable" name="return"/>
+            </xs:complexType>
+
 			<xs:element name="var">
 				<xs:annotation>
 					<xs:documentation>Declare and optionally initialize a variable.  [Tenative] All variables must be declared.  Use instanceOf for type assertions.</xs:documentation>
@@ -559,8 +571,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:complexType>
 					<xs:choice minOccurs="0">
 						<xs:element ref="member" maxOccurs="unbounded"/>
-						<xs:element ref="handleEvent"/>
-					</xs:choice>
+                        <!--  define elements for every method in user implemented interfaces
+                                  used like anonymous inner class definitions  -->
+                        <xsl:for-each select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]">
+                            <xsl:for-each select="method">
+                                <xs:element name="{@name}" type="sinkMethod"/>
+                            </xsl:for-each>
+                        </xsl:for-each>
+                    </xs:choice>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 					<xs:attribute name="name" type="variable" use="required"/>
 					<xs:attribute name="type" type="variableType" use="required"/>
@@ -572,22 +590,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:annotation>
 					<xs:documentation>Member children are used to initialize List and Collection types.</xs:documentation>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="handleEvent">
-				<xs:annotation>
-					<xs:documentation>Defines the event handler for a EventMonitor with parameters "listener", "event", "currentTarget" and "userObj".</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:group ref="statement" maxOccurs="unbounded"/>
-					</xs:sequence>
-					<xs:attribute name="return" type="variable" use="optional">
-						<xs:annotation>
-							<xs:documentation>Declares and initializes to true a boolean variable that if false will prevent handleEvent being called on future events.</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="load">
 				<xs:annotation>
