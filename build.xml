@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.94  2003-05-21 05:00:32  dom-ts-4
+Revision 1.95  2003-06-11 03:20:17  dom-ts-4
+Updated for the 09 June 2003 L3 Core Working Draft
+
+Revision 1.94  2003/05/21 05:00:32  dom-ts-4
 Add skeletal DOM 3 Core test suite
 http://www.w3.org/Bugs/Public/show_bug.cgi?id=211
 
@@ -1708,7 +1711,7 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-dom3-core" depends="dom3-available"><!-- unless="dom3-core-available" -->
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030609/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1763,21 +1766,10 @@ All implementation conditions combined into implementationAttribute element
 
 	<unzip src="${specs.dir}/DOM3-XPath.zip"
 	       dest="${specs.dir}/Level-3/XPath"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/XPath/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/xpath"/>
-
 
 
 	<unzip src="${specs.dir}/DOM3-Events.zip"
 	       dest="${specs.dir}/Level-3/Events"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/Events/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/events"/>
 
 
 	<unzip src="${specs.dir}/DOM3-Core.zip"
@@ -1793,21 +1785,6 @@ All implementation conditions combined into implementationAttribute element
     <replace file="${specs.dir}/Level-3/Val/xml-source.xml"
         token='http://www.w3.org/2002/08/xmlspec-v22-dom.dtd'
             value='../../pubtext/xmlspec-v22-dom.dtd'/>
-
-
-    <!--   These files are missing   -->
-	<echo file="${specs.dir}/Level-3/xml/status.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
-
-	<echo file="${specs.dir}/Level-3/xml/toc.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
-
-	<echo file="${specs.dir}/Level-3/xml/events/definitions/textevent.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
-
-	<echo file="${specs.dir}/Level-3/xml/events/definitions/mutationnameevent.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
-
 
 
     <mkdir dir="${specs.dir}/Level-3/Core/java"/>

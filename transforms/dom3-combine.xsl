@@ -27,7 +27,10 @@ saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.7  2003-02-28 06:26:49  dom-ts-4
+Revision 1.8  2003-06-11 03:20:18  dom-ts-4
+Updated for the 09 June 2003 L3 Core Working Draft
+
+Revision 1.7  2003/02/28 06:26:49  dom-ts-4
 Update for 2003-02-26 Level 3 WD
 
 Revision 1.6  2003/01/28 06:08:15  dom-ts-4
@@ -54,7 +57,9 @@ Initial SVG support.  multiply renamed mult,
 All implementation conditions combined into implementationAttribute element
 
 -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" 
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
 	<xsl:output method="xml" indent="yes"/>
 	<xsl:variable name="specTitle" select="/spec/header/title"/>
 
@@ -83,10 +88,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     skipping it for now
 			<xsl:apply-templates select="document('../xml/views/dom-spec.xml',.)/spec/*"/>
             -->
-			<xsl:apply-templates select="document('../xml/events/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../Events/xml-source.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../LS/xml-source.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../Val/xml-source.xml',.)/spec/*"/>
-			<xsl:apply-templates select="document('../xml/xpath/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../XPath/xml-source.xml',.)/spec/*"/>
             <!--  traversal range from DOM 2   -->
 			<xsl:apply-templates select="document('../../Level-2/xml/traversal-range/dom-spec.xml',.)/spec/*"/>
 
