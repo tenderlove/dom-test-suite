@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.28  2003-01-16 06:38:44  dom-ts-4
+Revision 1.29  2003-01-17 06:46:20  dom-ts-4
+Fixed "undeclared" on declared variable problem
+
+Revision 1.28  2003/01/16 06:38:44  dom-ts-4
 Added cast to short when needed on number literal parameters
 
 Revision 1.27  2002/11/26 07:17:24  dom-ts-4
@@ -698,7 +701,7 @@ import java.util.*;
 		<xsl:when test="substring(@value,1,1) = '&quot;' or string(number(@value)) != 'NaN'">
 			<xsl:value-of select="@value"/>
 			<xsl:text>;
-</xsl:text>
+      </xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:variable name="var" select="@var"/>
@@ -711,7 +714,7 @@ import java.util.*;
 			<xsl:text> </xsl:text>
 			<xsl:value-of select="@value"/>
 			<xsl:text>;
-</xsl:text>
+      </xsl:text>
 		</xsl:otherwise>
 	</xsl:choose>	
 </xsl:template>
@@ -804,7 +807,7 @@ import java.util.*;
 		<xsl:text>.</xsl:text>
 	</xsl:if>
 	<xsl:text>getImplementation();
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertTrue']" mode="body">
@@ -1439,6 +1442,10 @@ import java.util.*;
 		<xsl:when test="$vartype = $reqtype">
 			<xsl:value-of select="$var"/>
 		</xsl:when>
+		<xsl:when test="contains($vartype,'short') and contains($reqtype,'short')">
+			<xsl:value-of select="$var"/>
+		</xsl:when>
+
 		<!--  if the vartype inherits from another interface, see if it matches the required type  -->
 		<xsl:when test="$domspec/library/interface[@name = $vartype and @inherits]">
 			<xsl:call-template name="cast">
@@ -1550,6 +1557,7 @@ import java.util.*;
     <xsl:param name="vardefs"/>
 	<xsl:param name="attribute"/>
 	<xsl:variable name="obj" select="@obj"/>
+    <xsl:variable name="value" select="@value"/>
 	<xsl:if test="@value">
 		<xsl:call-template name="cast">
 			<xsl:with-param name="var" select="$obj"/>
@@ -1563,7 +1571,8 @@ import java.util.*;
 		<xsl:text>(</xsl:text>
 			<xsl:call-template name="produce-param">
 				<xsl:with-param name="value" select="@value"/>
-				<xsl:with-param name="reqtype" select="$attribute/parent::interface/@name"/>
+                <xsl:with-param name="vartype" select="$vardefs[@name = $value]/@type"/>
+				<xsl:with-param name="reqtype" select="$attribute/@type"/>
                 <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		<xsl:text>);</xsl:text>
