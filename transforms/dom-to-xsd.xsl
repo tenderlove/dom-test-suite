@@ -121,10 +121,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<!--  if readonly, only the "var" attribute is produced.
 					  Otherwise both a "var" and "value" attribute are produced  -->
 				<xsl:choose>
-					<xsl:when test="@readonly='yes'">
-						<xs:attribute name="var" type="variable" use="required"/>
-					</xsl:when>
-					<xsl:otherwise>
+					<xsl:when test="key('featureByName',@name)[not(@readonly) or @readonly!='yes']">
 						<xs:attribute name="var" type="variable" use="optional"/>
 
 						<!--  produces a "value" attribute, 
@@ -134,6 +131,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xsl:with-param name="paramName">value</xsl:with-param>
 							<xsl:with-param name="use">optional</xsl:with-param>
 						</xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xs:attribute name="var" type="variable" use="required"/>
 					</xsl:otherwise>
 				</xsl:choose>
 
@@ -309,7 +309,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:documentation>A variable name</xs:documentation>
 				</xs:annotation>
 				<xs:restriction base="xs:string">
-					<xs:pattern value="[A-Za-z][A-Za-z0-9]*"/>
+					<xs:pattern value="[A-Za-z][A-Za-z0-9_]*"/>
 				</xs:restriction>
 			</xs:simpleType>
 
@@ -361,6 +361,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:annotation>
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="int"/>
+					<xs:enumeration value="short"/>
                     <xs:enumeration value="boolean"/>
 					<xs:enumeration value="DOMString"/>
 					<xs:enumeration value="List">

@@ -168,11 +168,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	obj CDATA #REQUIRED
 </xsl:text>
 					<xsl:choose>
-						<xsl:when test="@readonly='yes'">
-							<xsl:text>    var CDATA #REQUIRED
-</xsl:text>
-						</xsl:when>
-						<xsl:otherwise>
+						<xsl:when test="key('featureByName',@name)[not(@readonly) or @readonly!='yes']">
 							<xsl:text>    var CDATA #IMPLIED
 </xsl:text>
 							<!--  produces a "value" attribute, 
@@ -182,6 +178,10 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 								<xsl:with-param name="paramName">value</xsl:with-param>
 								<xsl:with-param name="use">#IMPLIED</xsl:with-param>
 							</xsl:call-template>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>    var CDATA #REQUIRED
+</xsl:text>
 						</xsl:otherwise>
 					</xsl:choose>
 
@@ -336,7 +336,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	       that are dependent on the source document.  Currently only
 		   the allowable types for variables    -->
 	<xsl:template name="dynamic-simpleTypes">
-		<xsl:text>&lt;!ENTITY % variable-type "int|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
+		<xsl:text>&lt;!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
 						<xsl:text>|</xsl:text>
