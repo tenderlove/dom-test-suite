@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.117  2003-12-15 18:07:04  dom-ts-4
+Revision 1.118  2003-12-19 06:25:24  dom-ts-4
+Force evaluation of metadata transform (bug 395)
+
+Revision 1.117  2003/12/15 18:07:04  dom-ts-4
 Fixed dependencies for dom3-*-metadata targets (bug 426)
 
 Revision 1.116  2003/12/10 10:30:35  dom-ts-4
@@ -845,7 +848,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level1/core/alltests.xml" 
 		   out="${build.dir}/dom1-core-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -930,7 +934,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level1/html/alltests.xml" 
 		   out="${build.dir}/dom1-html-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -1413,7 +1418,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level2/core/alltests.xml" 
 		   out="${build.dir}/dom2-core-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -1516,7 +1522,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level2/html/alltests.xml" 
 		   out="${build.dir}/dom2-html-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -1641,7 +1648,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level2/events/alltests.xml" 
 		   out="${build.dir}/dom2-events-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/events/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -2123,7 +2131,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/core/alltests.xml" 
 		   out="${build.dir}/dom3-core-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/core/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -2227,7 +2236,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/events/alltests.xml" 
 		   out="${build.dir}/dom3-events-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/events/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -2329,6 +2339,7 @@ All implementation conditions combined into implementationAttribute element
 	<replace dir="${java.build.dir}" includes="org/w3c/domts/level3/ls/alltests.java">
       <replacefilter token="sink.addTest(DOMBuilderTest5.class);" value="//sink.addTest(DOMBuilderTest5.class);"/>
       <replacefilter token="sink.addTest(DOMInputSourceTest3.class);" value="//sink.addTest(DOMInputSourceTest3.class);"/>
+      <replacefilter token="sink.addTest(DOMInputSourceTest6.class);" value="//sink.addTest(DOMInputSourceTest3.class);"/>
       <replacefilter token="sink.addTest(DOMWriterTest1.class);" value="//sink.addTest(DOMWriterTest1.class);"/>
       <replacefilter token="sink.addTest(SystemId1.class);" value="//sink.addTest(SystemId1.class);"/>
       <replacefilter token="sink.addTest(SystemId2.class);" value="//sink.addTest(SystemId2.class);"/>
@@ -2359,6 +2370,7 @@ All implementation conditions combined into implementationAttribute element
         <include name="org/w3c/domts/*"/>
         <exclude name="org/w3c/domts/level3/ls/DOMBuilderTest5.java"/>
         <exclude name="org/w3c/domts/level3/ls/DOMInputSourceTest3.java"/>
+        <exclude name="org/w3c/domts/level3/ls/DOMInputSourceTest6.java"/>
         <exclude name="org/w3c/domts/level3/ls/DOMWriterTest1.java"/>
         <exclude name="org/w3c/domts/level3/ls/SystemId*.java"/>
         <exclude name="org/w3c/domts/level3/ls/CertifiedText*.java"/>
@@ -2408,7 +2420,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/ls/alltests.xml" 
 		   out="${build.dir}/dom3-ls-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/ls/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -2511,7 +2524,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/xpath/alltests.xml" 
 		   out="${build.dir}/dom3-xpath-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/xpath/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
@@ -2622,7 +2636,8 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/validation/alltests.xml" 
 		   out="${build.dir}/dom3-val-metadata.rdf" 
-	       style="${transforms.dir}/combine-metadata.xsl">
+	       style="${transforms.dir}/combine-metadata.xsl"
+	       force="true">
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/validation/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
