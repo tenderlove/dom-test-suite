@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.32  2001-11-07 06:25:28  dom-ts-4
+Revision 1.33  2001-11-14 02:08:36  dom-ts-4
+Added pre-generated copy of documentcreatecdatasection.java
+to avoid lockups with some versions of Xalan-J
+
+Revision 1.32  2001/11/07 06:25:28  dom-ts-4
 DOM Level 3 DTD and Schema building
 
 Revision 1.31  2001/11/01 16:41:05  dom-ts-4
@@ -481,10 +485,19 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-core-gen-java" depends="dom1-interfaces, dom1-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
+
+
+    <!--  a prefabricated documentcreatecdatasection.java
+             is provided since some versions of Xalan-J
+                   will stall when processing it    -->
+    <copy file="${tests.dir}/level1/core/documentcreatecdatasection.java" 
+            todir="${java.build.dir}/org/w3c/domts/level1/core"/>
+
+
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
-           excludes="metadata.xml"
+           excludes="metadata.xml,documentcreatecdatasection.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -494,6 +507,8 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
+
+
 </target>
 
 <target name="jsunit-init" depends="init">
