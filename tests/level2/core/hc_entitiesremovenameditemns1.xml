@@ -25,20 +25,23 @@ a NO_MODIFICATION_ERR or a NOT_FOUND_ERR.
 <!--  NamedNodeMap.removeNamedItemNS   -->
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-removeNamedItemNS"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="entities" type="NamedNodeMap"/>
 <var name="docType" type="DocumentType"/>
 <var name="retval" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
-<entities var="entities" obj="docType"/>
-<try>
-	<removeNamedItemNS var="retval" obj="entities" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"alpha"'/>
-	<fail id="throw_NO_MOD_OR_NOT_FOUND_ERR"/>
-	<catch>
-		<DOMException code="NO_MODIFICATION_ALLOWED_ERR"/>
-		<DOMException code="NOT_FOUND_ERR"/>
-	</catch>
-</try>
+<if><not><contentType type="text/html"/></not>
+	<assertNotNull actual="docType" id="docTypeNotNull"/>
+	<entities var="entities" obj="docType"/>
+	<assertNotNull actual="entities" id="entitiesNotNull"/>
+	<try>
+		<removeNamedItemNS var="retval" obj="entities" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"alpha"'/>
+		<fail id="throw_NO_MOD_OR_NOT_FOUND_ERR"/>
+		<catch>
+			<DOMException code="NO_MODIFICATION_ALLOWED_ERR"/>
+			<DOMException code="NOT_FOUND_ERR"/>
+		</catch>
+	</try>
+</if>
 </test>
