@@ -28,6 +28,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="datatypenormalization04.xml"/>	
 	<suite.member href="datatypenormalization05.xml"/>	
 	<suite.member href="datatypenormalization06.xml"/>	
+	<suite.member href="datatypenormalization07.xml"/>	
+	<suite.member href="datatypenormalization08.xml"/>	
+	<suite.member href="datatypenormalization09.xml"/>	
+	<suite.member href="datatypenormalization10.xml"/>	
+	<suite.member href="datatypenormalization11.xml"/>	
+	<suite.member href="datatypenormalization12.xml"/>	
 
 
 	<!-- DOMImplementation tests -->

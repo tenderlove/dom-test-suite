@@ -13,13 +13,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 
-<!--
-
-This schema is attempts to use every construct that could
-be interrogated by DOM Level 3 and is no way intended to
-be a general purpose schema for XHTML  
-
--->
 
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	targetNamespace="http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization"
@@ -56,6 +49,8 @@ be a general purpose schema for XHTML
   	  	  	  <xsd:extension base="myDoubleList">
   	  	  	  		<xsd:attribute name="value" type="myDouble" use="required"/>
   	  	  	  		<xsd:attribute name="union" type="myDoubleUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="default" type="myDouble" 
+  	  	  	  			default="+0003.141592600E+0000" use="optional"/>
   	  	  	  </xsd:extension>
   	  	  </xsd:simpleContent>
   	  </xsd:complexType>
@@ -80,6 +75,8 @@ be a general purpose schema for XHTML
   	  	  	  <xsd:extension base="myBooleanList">
   	  	  	  		<xsd:attribute name="value" type="myBoolean" use="required"/>
   	  	  	  		<xsd:attribute name="union" type="myDoubleUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="default" type="myBoolean" 
+  	  	  	  			default="1" use="optional"/>
   	  	  	  </xsd:extension>
   	  	  </xsd:simpleContent>
   	  </xsd:complexType>
@@ -104,6 +101,8 @@ be a general purpose schema for XHTML
   	  	  	  <xsd:extension base="myDecimalList">
   	  	  	  		<xsd:attribute name="value" type="myDecimal" use="required"/>
   	  	  	  		<xsd:attribute name="union" type="myDecimalUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="default" type="myDecimal" 
+  	  	  	  			default="+0003.141592600" use="optional"/>
   	  	  	  </xsd:extension>
   	  	  </xsd:simpleContent>
   	  </xsd:complexType>
@@ -127,6 +126,8 @@ be a general purpose schema for XHTML
   	  	  	  <xsd:extension base="myFloatList">
   	  	  	  		<xsd:attribute name="value" type="myFloat" use="required"/>
   	  	  	  		<xsd:attribute name="union" type="myFloatUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="default" type="myDouble" 
+  	  	  	  			default="+0003.141592600E+0000" use="optional"/>
   	  	  	  </xsd:extension>
   	  	  </xsd:simpleContent>
   	  </xsd:complexType>
@@ -151,6 +152,8 @@ be a general purpose schema for XHTML
   	  	  	  <xsd:extension base="myDateTimeList">
   	  	  	  		<xsd:attribute name="value" type="myDateTime" use="required"/>
   	  	  	  		<xsd:attribute name="union" type="myDateTimeUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="default" type="myDateTime" 
+  	  	  	  			default="2004-01-21T15:30:00-05:00" use="optional"/>
   	  	  	  </xsd:extension>
   	  	  </xsd:simpleContent>
   	  </xsd:complexType>
@@ -175,6 +178,8 @@ be a general purpose schema for XHTML
   	  	  	  <xsd:extension base="myTimeList">
   	  	  	  		<xsd:attribute name="value" type="myTime" use="required"/>
   	  	  	  		<xsd:attribute name="union" type="myTimeUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="default" type="myTime" 
+  	  	  	  			default="15:30:00-05:00" use="optional"/>
   	  	  	  </xsd:extension>
   	  	  </xsd:simpleContent>
   	  </xsd:complexType>
