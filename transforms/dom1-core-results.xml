@@ -1,26 +1,80 @@
 <!DOCTYPE results [
-<!ENTITY dom1-core-xerces SYSTEM '../build/dom1-core-xerces.xml'>
-<!ENTITY dom1-core-xerces-alt SYSTEM '../build/dom1-core-xercesAltConfig.xml'>
-<!ENTITY dom1-core-oracle SYSTEM '../build/dom1-core-oracle.xml'>
-<!ENTITY dom1-core-oracle-alt SYSTEM '../build/dom1-core-oracleAltConfig.xml'>
-<!ENTITY dom1-core-crimson SYSTEM '../build/dom1-core-crimson.xml'>
-<!ENTITY dom1-core-crimson-alt SYSTEM '../build/dom1-core-crimsonAltConfig.xml'>
-<!ENTITY dom1-core-gnujaxp SYSTEM '../build/dom1-core-gnujaxp.xml'>
-<!ENTITY dom1-core-gnujaxp-alt SYSTEM '../build/dom1-core-gnujaxpAltConfig.xml'>
-<!ENTITY dom1-core-dom4j SYSTEM '../build/dom1-core-dom4j.xml'>
-<!ENTITY dom1-core-batik SYSTEM '../build/dom1-core-batik.xml'>
-<!ENTITY dom1-core-jtidy SYSTEM '../build/dom1-core-jtidy.xml'>
+<!ENTITY dom1-core-xerces1 SYSTEM 'dom1-core-xerces1.xml'>
+<!ENTITY dom1-core-xerces1-alt SYSTEM 'dom1-core-xerces1AltConfig.xml'>
+<!ENTITY dom1-core-xerces2 SYSTEM 'dom1-core-xerces2.xml'>
+<!ENTITY dom1-core-xerces2-alt SYSTEM 'dom1-core-xerces2AltConfig.xml'>
+<!ENTITY dom1-core-xerces2_svg SYSTEM 'dom1-core-xerces2_svg.xml'>
+<!ENTITY dom1-core-xerces2_svg-alt SYSTEM 'dom1-core-xerces2_svgAltConfig.xml'>
+<!ENTITY dom1-core-xerces2_xhtml SYSTEM 'dom1-core-xerces2_xhtml.xml'>
+<!ENTITY dom1-core-xerces2_xhtml-alt SYSTEM 'dom1-core-xerces2_xhtmlAltConfig.xml'>
+<!ENTITY dom1-core-xerces_dom3 SYSTEM 'dom1-core-xerces_dom3.xml'>
+<!ENTITY dom1-core-xerces_dom3-alt SYSTEM 'dom1-core-xerces_dom3AltConfig.xml'>
+<!ENTITY dom1-core-oracle SYSTEM 'dom1-core-oracle.xml'>
+<!ENTITY dom1-core-oracle-alt SYSTEM 'dom1-core-oracleAltConfig.xml'>
+<!ENTITY dom1-core-crimson SYSTEM 'dom1-core-crimson.xml'>
+<!ENTITY dom1-core-crimson-alt SYSTEM 'dom1-core-crimsonAltConfig.xml'>
+<!ENTITY dom1-core-gnujaxp SYSTEM 'dom1-core-gnujaxp.xml'>
+<!ENTITY dom1-core-gnujaxp-alt SYSTEM 'dom1-core-gnujaxpAltConfig.xml'>
+<!ENTITY dom1-core-dom4j SYSTEM 'dom1-core-dom4j.xml'>
+<!ENTITY dom1-core-batik SYSTEM 'dom1-core-batik.xml'>
+<!ENTITY dom1-core-jtidy SYSTEM 'dom1-core-jtidy.xml'>
 ]>
 <results>
-&dom1-core-xerces;
-&dom1-core-xerces-alt;
+<implementation name="Xerces-J 2.6.0">
+&dom1-core-xerces2;
+</implementation>
+<implementation name="Xerces-J 2.6.0 Alt">
+&dom1-core-xerces2-alt;
+</implementation>
+<implementation name="Oracle XDK 9.2.0.5.0">
 &dom1-core-oracle;
+</implementation>
+<implementation name="Oracle XDK 9.2.0.5.0 Alt">
 &dom1-core-oracle-alt;
+</implementation>
+<implementation name="Crimson 1.1.6">
 &dom1-core-crimson;
+</implementation>
+<implementation name="Crimson 1.1.6 Alt">
 &dom1-core-crimson-alt;
+</implementation>
+<implementation name="GNUJAXP 1.0beta1">
 &dom1-core-gnujaxp;
+</implementation>
+<implementation name="GNUJAXP 1.0beta1 alt">
 &dom1-core-gnujaxp-alt;
+</implementation>
+<implementation name="DOM4J 1.4">
 &dom1-core-dom4j;
+</implementation>
+<implementation name="DOM4J 1.4 Alt">
 &dom1-core-batik;
-<!-- &dom1-core-jtidy; -->
+</implementation>
+<implementation name="Xerces-J 2.6.0 SVG">
+&dom1-core-xerces2_svg;
+</implementation>
+<implementation name="Xerces-J 2.6.0 SVG Alt">
+&dom1-core-xerces2_svg-alt;
+</implementation>
+<implementation name="Xerces-J 2.6.0 XHTML">
+&dom1-core-xerces2_xhtml;
+</implementation>
+<implementation name="Xerces-J 2.6.0 XHTML Alt">
+&dom1-core-xerces2_xhtml-alt;
+</implementation>
+<implementation name="Xerces-J 1.4.4">
+&dom1-core-xerces1;
+</implementation>
+<implementation name="Xerces-J 1.4.4 Alt">
+&dom1-core-xerces1-alt;
+</implementation>
+<implementation name="Xerces-J CVS DOM3">
+&dom1-core-xerces_dom3;
+</implementation>
+<implementation name="Xerces-J CVS DOM3">
+&dom1-core-xerces_dom3-alt;
+</implementation>
+<implementation name="JTidy2 CVS">
+&dom1-core-jtidy;
+</implementation>
 </results>

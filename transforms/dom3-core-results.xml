@@ -3,10 +3,12 @@
 <!ENTITY dom3-core-xerces-alt SYSTEM '../build/dom3-core-xercesAltConfig.xml'>
 <!ENTITY dom3-core-oracle SYSTEM '../build/dom3-core-oracle.xml'>
 <!ENTITY dom3-core-oracle-alt SYSTEM '../build/dom3-core-oracleAltConfig.xml'>
+<!ENTITY dom3-core-batik SYSTEM '../build/dom3-core-batik.xml'>
 ]>
 <results>
 &dom3-core-xerces;
 &dom3-core-xerces-alt;
 &dom3-core-oracle;
 &dom3-core-oracle-alt;
+&dom3-core-batik;
 </results>

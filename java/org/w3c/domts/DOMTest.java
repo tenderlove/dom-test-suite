@@ -11,7 +11,10 @@
 
 /*
  * $Log: DOMTest.java,v $
- * Revision 1.12  2004-01-05 08:27:14  dom-ts-4
+ * Revision 1.13  2004-02-09 19:06:21  dom-ts-4
+ * Test results improvment (bug 446)
+ *
+ * Revision 1.12  2004/01/05 08:27:14  dom-ts-4
  * XHTML compatible L3 Core tests  (bug 455)
  *
  * Revision 1.11  2003/12/30 06:17:08  dom-ts-4
@@ -230,6 +233,15 @@ public abstract class DOMTest /* wBM: implements EventListener */ {
 		 * false); }
 		 */
 		return doc;
+	}
+	
+	public void preload(String contentType, String docURI, boolean willBeModified) 
+		throws DOMTestIncompatibleException {
+		if ("text/html".equals(contentType) || "application/xhtml+xml".equals(contentType)) {
+			if (docURI.startsWith("staff")) {
+				throw DOMTestIncompatibleException.incompatibleLoad(docURI, contentType);
+			}
+		}
 	}
 
 	public Object createXPathEvaluator(Document doc) {

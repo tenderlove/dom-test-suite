@@ -63,7 +63,7 @@ and combine-metadata.xsl
             	<th>Test</th>
             	<th>Description</th>
             	<xsl:for-each select="$results">
-            		<th><xsl:value-of select="substring-after(@name,'.Test')"/></th>
+            		<th><xsl:value-of select="ancestor::implementation/@name"/></th>
             	</xsl:for-each>
             </tr>
             <xsl:for-each select="$descriptions">

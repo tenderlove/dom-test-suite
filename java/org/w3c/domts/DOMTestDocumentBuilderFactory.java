@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestDocumentBuilderFactory.java,v $
- Revision 1.6  2003-06-27 05:36:05  dom-ts-4
+ Revision 1.7  2004-02-09 19:06:39  dom-ts-4
+ Test results improvment (bug 446)
+
+ Revision 1.6  2003/06/27 05:36:05  dom-ts-4
  contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
 
  Revision 1.5  2003/04/23 05:48:24  dom-ts-4
@@ -153,6 +156,16 @@ public abstract class DOMTestDocumentBuilderFactory {
 
 
     public String addExtension(String testFileName) {
+    	String contentType = getContentType();
+    	if ("text/html".equals(contentType)) {
+    		return testFileName + ".html";
+    	}
+    	if ("image/svg+xml".equals(contentType)) {
+    		return testFileName + ".svg";
+    	}
+    	if ("application/xhtml+xml".equals(contentType)) {
+    		return testFileName + ".xhtml";
+    	}
         return testFileName + ".xml";
     }
 
@@ -167,7 +180,7 @@ public abstract class DOMTestDocumentBuilderFactory {
     public abstract boolean isValidating();
     
     public String getContentType() {
-    	return "text/xml";
+    	return System.getProperty("org.w3c.domts.contentType", "text/xml");
     }
 
   /**

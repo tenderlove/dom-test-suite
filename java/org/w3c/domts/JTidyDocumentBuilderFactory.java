@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 World Wide Web Consortium,
+ * Copyright (c) 2002-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -76,10 +76,6 @@ public class JTidyDocumentBuilderFactory
     }
   }
 
-  public String addExtension(String testFileName) {
-    return testFileName + ".html";
-  }
-
   public DOMTestDocumentBuilderFactory newInstance(DocumentBuilderSetting[] newSettings)
     throws DOMTestIncompatibleException {
     if(newSettings == null) {
@@ -97,6 +93,9 @@ public class JTidyDocumentBuilderFactory
       doc = (Document) parseDOMMethod.invoke(tidyObj,
         new Object[] { stream, null});
     }
+    catch(InvocationTargetException ex) {
+        throw new DOMTestLoadException(ex.getTargetException());
+      }
     catch(Exception ex) {
       throw new DOMTestLoadException(ex);
     }
@@ -111,6 +110,9 @@ public class JTidyDocumentBuilderFactory
     return domImpl.hasFeature(feature,version);
   }
 
+  public String getContentType() {
+  	return "text/html";
+  }
 
     public boolean isCoalescing() {
       return false;

@@ -208,6 +208,9 @@ function suite() {
                                 <input type="submit" value="Load JSUnit"></input>
                             </td>
                         </tr>
+                     <tr>
+                     	<td>Test ID:</td><td><input type="text" name="testResultsID" value=""/></td><td>Submit results:</td><td><input type="text" name="submitresults" value="false"/></td><td></td>
+                     </tr>
                     </table>
                     </td>
                 </tr>
