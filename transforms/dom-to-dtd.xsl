@@ -90,7 +90,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 		<xsl:value-of select="$exceptions[1]/@name"/>
 		<xsl:for-each select="$exceptions[position() &gt; 1]">
 			<xsl:text>| assert</xsl:text>
-			<xsl:value-of select="."/>
+			<xsl:value-of select="@name"/>
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:text>" &gt;

@@ -168,7 +168,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<delete file="${build.dir}/_dom2.xsd"/>
 	</target>
 
-	<target name="dom2-dtd" depends="dom-interfaces">
+	<target name="dom2-dtd" depends="dom2-interfaces">
 		<style in="${build.dir}/dom2-interfaces.xml" out="${build.dir}/dom2.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
 			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
 		</style>
