@@ -12,7 +12,10 @@
 
   /*
  $Log: DOMTestFramework.java,v $
- Revision 1.4  2001-07-23 04:52:20  dom-ts-4
+ Revision 1.5  2001-08-22 22:12:49  dom-ts-4
+ Now passing all tests with default settings
+
+ Revision 1.4  2001/07/23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
@@ -33,8 +36,6 @@ public interface DOMTestFramework {
 	boolean hasFeature(DocumentBuilder docBuilder,
           String feature,
           String version);
-        boolean getImplementationAttribute(DocumentBuilderFactory factory,
-          String name) throws Exception;
 	void wait(int millisecond);
 	void assertTrue(DOMTestCase test, String assertID, boolean actual);
 	void assertFalse(DOMTestCase test, String assertID, boolean actual);

@@ -17,9 +17,9 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='WRONG_DOCUMENT_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-952280727')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-952280727')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='WRONG_DOCUMENT_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
 </metadata>
 	<var name="doc1" type="Document"/>
@@ -32,12 +32,12 @@
 	<load var="doc1" href="staff.xml" willBeModified="false"/>
 	<load var="doc2" href="staff.xml" willBeModified="true"/>
 	<createElement obj="doc1" tagName="&quot;newChild&quot;" var="newChild"/>
-	<createElement obj="doc2" tagName="&quot;refChild&quot;" var="refChild"/>
 	<getElementsByTagName interface="Document" obj="doc2" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
-	<assertDOMException id="nodeInsertBeforeNewChildDiffDocumentAssert1">
-		<NOT_FOUND_ERR>
+    <firstChild var="refChild" obj="elementNode" interface="Node"/>
+	<assertDOMException id="throw_WRONG_DOCUMENT_ERR">
+		<WRONG_DOCUMENT_ERR>
 			<insertBefore var="insertedNode" obj="elementNode" newChild="newChild" refChild="refChild"/>
-		</NOT_FOUND_ERR>
+		</WRONG_DOCUMENT_ERR>
 	</assertDOMException>
 </test>

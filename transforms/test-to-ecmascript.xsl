@@ -28,7 +28,10 @@ saxon -o someTest.js someTest.xml test-to-ecmascript.xsl
 
 <!--
 $Log: test-to-ecmascript.xsl,v $
-Revision 1.2  2001-08-15 04:44:03  dom-ts-4
+Revision 1.3  2001-08-22 22:12:50  dom-ts-4
+Now passing all tests with default settings
+
+Revision 1.2  2001/08/15 04:44:03  dom-ts-4
 Added dom1-gen-ecmascript target to build.xml
 Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
 
@@ -838,7 +841,7 @@ import java.util.*;
 	if(
 	<xsl:apply-templates select="*[1]" mode="condition"/>
 	) {
-	<xsl:apply-templates select="*[position() &gt; 1]" mode="body"/>
+	<xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body"/>
 	}
 	<xsl:for-each select="*[local-name()='else']">
 		else {

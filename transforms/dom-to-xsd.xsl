@@ -916,7 +916,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 								<xsd:enumeration value="coalescing"/>
 								<xsd:enumeration value="expandEntityReferences"/>
 								<xsd:enumeration value="namespaceAware"/>
-								<xsd:enumeration value="ignoreElementContentWhitespace"/>
+								<xsd:enumeration value="ignoringElementContentWhitespace"/>
 								<xsd:enumeration value="signed"/>
 								<xsd:enumeration value="hasNullString"/>
 							</xsd:restriction>

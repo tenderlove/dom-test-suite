@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.4  2001-08-22 06:22:46  dom-ts-4
+ Revision 1.5  2001-08-22 22:12:49  dom-ts-4
+ Now passing all tests with default settings
+
+ Revision 1.4  2001/08/22 06:22:46  dom-ts-4
  Updated resource path for IDE debugging
 
  Revision 1.3  2001/08/20 06:56:35  dom-ts-4
@@ -31,6 +34,7 @@ import org.w3c.domts.*;
 import org.xml.sax.*;
 import java.util.*;
 import java.net.*;
+import java.lang.reflect.*;
 
 /**
  *    This is an abstract base class for generated DOM tests
@@ -64,10 +68,30 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
      return framework.hasFeature(builder,feature,version);
   }
 
-  public boolean getImplementationAttribute(String name) throws Exception {
-    return framework.getImplementationAttribute(factory,name);
+  public boolean getImplementationAttribute(String property) throws Exception {
+    boolean retval = false;
+    String accessorName = "is" +
+      property.substring(0,1).toUpperCase() +
+      property.substring(1);
+    try {
+      Method accessor = factory.getClass().getMethod(accessorName,new Class[] {} );
+      retval = ((Boolean) accessor.invoke(factory,new Object[] {} )).booleanValue();
+    }
+    catch(Exception ex) {
+      if(property.equals("signed")) {
+        return true;
+      }
+      else {
+        if(property.equals("hasNullString")) {
+          return true;
+        }
+        else {
+          retval = ((Boolean) factory.getAttribute(property)).booleanValue();
+        }
+      }
+    }
+    return retval;
   }
-
 
   public void wait(int millisecond) {
     framework.wait(millisecond);

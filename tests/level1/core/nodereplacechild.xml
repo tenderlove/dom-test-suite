@@ -33,7 +33,7 @@
 	<item interface="NodeList" obj="childList" index="0" var="oldChild"/>
 	<createElement obj="doc" tagName="&quot;newChild&quot;" var="newChild"/>
 	<replaceChild var="replacedNode" obj="employeeNode" newChild="newChild" oldChild="oldChild"/>
-	<item interface="NodeList" obj="elementList" index="0" var="child"/>
+	<item interface="NodeList" obj="childList" index="0" var="child"/>
 	<nodeName obj="child" var="childName"/>
 	<assertEquals actual="childName" expected="&quot;newChild&quot;" id="nodeReplaceChildAssert1" ignoreCase="false"/>
 </test>

@@ -30,9 +30,9 @@
 	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 	<item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
 	<attributes obj="testEmployee" var="attributes"/>
-	<assertDOMException id="namednodemapNotFoundErrAssert">
+	<assertDOMException id="throw_NOT_FOUND_ERR">
 		<NOT_FOUND_ERR>
-			<removeNamedItem var="removedNode" interface="NamedNodeMap" obj="attributes" name="&quot;domestic&quot;"/>
+			<removeNamedItem var="removedNode" interface="NamedNodeMap" obj="attributes" name="&quot;district&quot;"/>
 		</NOT_FOUND_ERR>
 	</assertDOMException>
 </test>

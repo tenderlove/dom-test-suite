@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.9  2001-08-21 06:06:12  dom-ts-4
+Revision 1.10  2001-08-22 22:12:50  dom-ts-4
+Now passing all tests with default settings
+
+Revision 1.9  2001/08/21 06:06:12  dom-ts-4
 DOM 1 SE targets
 Fixed cases that locked Xalan
 org.w3c.domts.level1.core.alltests
@@ -877,12 +880,11 @@ import java.util.*;
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
-
 <xsl:template match="*[local-name()='if']" mode="body">
 	if(
 	<xsl:apply-templates select="*[1]" mode="condition"/>
 	) {
-	<xsl:apply-templates select="*[position() &gt; 1]" mode="body"/>
+	<xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body"/>
 	}
 	<xsl:for-each select="*[local-name()='else']">
 		else {

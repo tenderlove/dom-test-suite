@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestDocumentBuilderFactory.java,v $
- Revision 1.1  2001-07-23 04:52:20  dom-ts-4
+ Revision 1.2  2001-08-22 22:12:49  dom-ts-4
+ Now passing all tests with default settings
+
+ Revision 1.1  2001/07/23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
@@ -22,6 +25,7 @@ package org.w3c.domts;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.w3c.domts.*;
+import java.lang.reflect.*;
 
 /**
  *
@@ -74,37 +78,26 @@ public class DOMTestDocumentBuilderFactory {
       boolean value)
       throws IllegalArgumentException
   {
-    if(property.equals("coalescing")) {
-      factory.setCoalescing(value);
+    if(property.equals("signed") || property.equals("hasNullString")) {
+      if(!value) {
+        throw new IllegalArgumentException();
+      }
     }
     else {
-      if(property.equals("validating")) {
-        factory.setValidating(value);
+      try {
+        String mutatorName = "set" +
+          property.substring(0,1).toUpperCase() +
+          property.substring(1);
+        Method mutator = factory.getClass().getMethod(mutatorName,
+          new Class[] { boolean.class });
+        mutator.invoke(factory,new Object[] { new Boolean(value) } );
       }
-      else {
-        if(property.equals("expandEntityReferences")) {
-          factory.setExpandEntityReferences(value);
-        }
-        else {
-          if(property.equals("ignoringElementContentWhitespace")) {
-            factory.setIgnoringElementContentWhitespace(value);
-          }
-          else {
-            if(property.equals("ignoringComments")) {
-              factory.setIgnoringComments(value);
-            }
-            else {
-              if(property.equals("namespaceAware")) {
-                factory.setNamespaceAware(value);
-              }
-              else {
-                factory.setAttribute(property,new Boolean(value));
-              }
-            }
-          }
-        }
+      catch(Exception ex) {
+        factory.setAttribute(property,new Boolean(value));
       }
     }
   }
+
+
 }
 

@@ -32,12 +32,12 @@
 	<load var="doc1" href="staff.xml" willBeModified="false"/>
 	<load var="doc2" href="staff.xml" willBeModified="true"/>
 	<createElement obj="doc1" tagName="&quot;newChild&quot;" var="newChild"/>
-	<createElement obj="doc2" tagName="&quot;oldChild&quot;" var="oldChild"/>
 	<getElementsByTagName interface="Document" obj="doc2" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
-	<assertDOMException id="nodeReplaceChildNewChildDiffDocumentAssert1">
-		<NOT_FOUND_ERR>
+    <firstChild obj="elementNode" var="oldChild" interface="Node"/>
+	<assertDOMException id="throw_WRONG_DOCUMENT_ERR">
+		<WRONG_DOCUMENT_ERR>
 			<replaceChild var="replacedChild" obj="elementNode" newChild="newChild" oldChild="oldChild"/>
-		</NOT_FOUND_ERR>
+		</WRONG_DOCUMENT_ERR>
 	</assertDOMException>
 </test>

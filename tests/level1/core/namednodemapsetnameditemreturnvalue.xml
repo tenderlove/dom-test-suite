@@ -35,7 +35,7 @@
 <var name="attrValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-<item interface="NodeList" obj="elementList" var="testAddress" index="1"/>
+<item interface="NodeList" obj="elementList" var="testAddress" index="2"/>
 <createAttribute obj="doc" var="newAttribute" name="&quot;street&quot;"/>
 <attributes obj="testAddress" var="attributes"/>
 <setNamedItem interface="NamedNodeMap" obj="attributes" var="newNode" arg="newAttribute"/>

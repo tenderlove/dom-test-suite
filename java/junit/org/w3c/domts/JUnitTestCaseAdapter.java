@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.1  2001-07-23 04:52:20  dom-ts-4
+ Revision 1.2  2001-08-22 22:12:49  dom-ts-4
+ Now passing all tests with default settings
+
+ Revision 1.1  2001/07/23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
@@ -41,12 +44,6 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
 
   protected void runTest() throws Throwable {
     test.runTest();
-  }
-
-  public boolean getImplementationAttribute(DocumentBuilderFactory factory,
-    String name) throws Exception {
-    Object val = factory.getAttribute(name);
-    return ((Boolean) val).booleanValue();
   }
 
   public boolean hasFeature(DocumentBuilder docBuilder,

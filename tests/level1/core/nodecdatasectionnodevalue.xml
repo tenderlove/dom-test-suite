@@ -29,6 +29,6 @@
 <item interface="NodeList" obj="elementList" index="1" var="cdataName"/>
 <childNodes obj="cdataName" var="cdataNode"/>
 <item interface="NodeList" obj="cdataNode" index="1" var="child"/>
-<nodeName obj="child" var="cdataNodeValue"/>
-<assertEquals actual="cdataNodeValue" expected="&quot;This is a CDATASection with EntityReference number 2 &amp;ent2;&quot;" id="nodeCDATASectionNodeValueAssert1" ignoreCase="false"/>
+<nodeValue obj="child" var="cdataNodeValue"/>
+<assertEquals actual="cdataNodeValue" expected="&quot;This is a CDATASection with EntityReference number 2 &amp;ent2;&quot;" id="value" ignoreCase="false"/>
 </test>

@@ -24,6 +24,6 @@
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <childNodes obj="doc" var="testList"/>
 <item interface="NodeList" obj="testList" index="0" var="piNode"/>
-<nodeName obj="piNode" var="piValue"/>
-<assertEquals actual="piValue" expected="&quot;PIDATA&quot;" id="nodeProcessingInstructionNodeValueAssert1" ignoreCase="false"/>
+<nodeValue obj="piNode" var="piValue"/>
+<assertEquals actual="piValue" expected="&quot;PIDATA&quot;" id="value" ignoreCase="false"/>
 </test>

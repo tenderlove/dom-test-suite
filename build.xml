@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.15  2001-08-22 01:46:10  dom-ts-4
+Revision 1.16  2001-08-22 22:12:46  dom-ts-4
+Now passing all tests with default settings
+
+Revision 1.15  2001/08/22 01:46:10  dom-ts-4
 Updated subjects based on filename analysis
 
 Revision 1.14  2001/08/21 06:06:12  dom-ts-4
@@ -549,6 +552,7 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="clean" depends="init">
 	<delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
     <delete file="tests\level1\core\dom1.dtd"/>
     <delete file="tests\level1\core\dom1.xsd"/>
     <delete file="tests\level2\core\dom2.dtd"/>

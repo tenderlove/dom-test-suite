@@ -27,8 +27,8 @@
 <nodeName obj="commentNode" var="commentName"/>
 <if>
 <equals actual="commentName" expected="&quot;#comment&quot;" ignoreCase="false"/>
-<nodeName obj="commentNode" var="commentValue"/>
-<assertEquals actual="commentValue" expected="&quot; This is comment number 1.&quot;" id="nodeCommentNodeValueAssert1" ignoreCase="false"/>
+<nodeValue obj="commentNode" var="commentValue"/>
+<assertEquals actual="commentValue" expected="&quot; This is comment number 1.&quot;" id="value" ignoreCase="false"/>
 </if>
 </for-each>
 </test>

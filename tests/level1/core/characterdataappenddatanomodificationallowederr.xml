@@ -23,20 +23,18 @@
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="genderNode" type="Node"/>
-<var name="genList" type="NodeList"/>
-<var name="genNode" type="Node"/>
-<var name="gList" type="NodeList"/>
-<var name="gNode" type="Node"/>
+<var name="entElement" type="Node"/>
+<var name="entElementContent" type="Node"/>
+<var name="entReference" type="EntityReference"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
-<childNodes obj="genderNode" var="genList"/>
-<item interface="NodeList" obj="genList" index="0" var="genNode"/>
-<childNodes obj="genNode" var="gList"/>
-<item interface="NodeList" obj="gList" index="0" var="gNode"/>
-<assertDOMException id="characterdataAppendDataNoModificationAllowedErrAssert">
-<NO_MODIFICATION_ALLOWED_ERR>
-<appendData obj="gNode" arg="&quot;newString&quot;"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<firstChild var="entReference" obj="genderNode" interface="Node"/>
+<firstChild var="entElement" obj="entReference" interface="Node"/>
+<firstChild var="entElementContent" obj="entElement" interface="Node"/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
+    <NO_MODIFICATION_ALLOWED_ERR>
+        <appendData obj="entElementContent" arg="&quot;newString&quot;"/>
+    </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

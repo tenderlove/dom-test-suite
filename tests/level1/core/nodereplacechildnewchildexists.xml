@@ -22,15 +22,30 @@
 	<var name="elementList" type="NodeList"/>
 	<var name="employeeNode" type="Node"/>
 	<var name="childList" type="NodeList"/>
-	<var name="oldChild" type="Node"/>
-	<var name="newChild" type="Node"/>
+	<var name="oldChild" type="Node" isNull="true"/>
+	<var name="newChild" type="Node" isNull="true"/>
 	<var name="child" type="Node"/>
 	<var name="childName" type="DOMString"/>
-	<var name="result" type="List"/>
-	<var name="expectedResult" type="List">
+    <var name="childNode" type="Node"/>
+	<var name="actual" type="List"/>
+    <var name="expected" type="List"/>
+	<var name="expectedWithoutWhitespace" type="List">
+		<member>"name"</member>
+		<member>"position"</member>
+		<member>"salary"</member>
+		<member>"gender"</member>
+		<member>"employeeId"</member>
+	</var>
+	<var name="expectedWithWhitespace" type="List">
+		<member>"#text"</member>
 		<member>"#text"</member>
 		<member>"name"</member>
 		<member>"#text"</member>
+		<member>"position"</member>
+		<member>"#text"</member>
+		<member>"salary"</member>
+		<member>"#text"</member>
+		<member>"gender"</member>
 		<member>"#text"</member>
 		<member>"employeeId"</member>
 		<member>"#text"</member>
@@ -40,26 +55,22 @@
 	<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 	<childNodes obj="employeeNode" var="childList"/>
-	<item interface="NodeList" obj="childList" index="1" var="newChild"/>
-	<item interface="NodeList" obj="childList" index="11" var="oldChild"/>
+    <if>
+        <implementationAttribute name="ignoringElementContentWhitespace" value="false"/>
+	    <item interface="NodeList" obj="childList" index="1" var="newChild"/>
+	    <item interface="NodeList" obj="childList" index="11" var="oldChild"/>
+        <assign var="expected" value="expectedWithWhitespace"/>
+        <else>
+	        <item interface="NodeList" obj="childList" index="0" var="newChild"/>
+	        <item interface="NodeList" obj="childList" index="6" var="oldChild"/>
+            <assign var="expected" value="expectedWithoutWhitespace"/>
+        </else>
+    </if>
 	<replaceChild var="replacedChild" obj="employeeNode" newChild="newChild" oldChild="oldChild"/>
-	<item interface="NodeList" obj="elementList" index="0" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="elementList" index="1" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="elementList" index="2" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="elementList" index="9" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="elementList" index="10" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="elementList" index="11" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<assertEquals actual="result" expected="expectedResult" id="nodeReplaceChildNewChildExistsAssert1" ignoreCase="false"/>
+    <assertSame actual="replacedChild" expected="oldChild" id="return_value_same"/> 
+    <for-each collection="childList" member="childNode">
+        <nodeName var="childName" obj="childNode"/>
+        <append collection="actual" obj="childName"/>
+    </for-each>
+	<assertEquals actual="actual" expected="expected" id="childNames" ignoreCase="false"/>
 </test>

@@ -8,8 +8,8 @@
     The "getAttribute(name)" method returns an attribute
    value by name.
    
-   Retrieve the last child of the third employee, then
-   invoke the "getAttribute(name)" method.  This should
+   Retrieve the second address element, then
+   invoke the 'getAttribute("street")' method.  This should
    return the value of the attribute("No").
 </description>
 <contributor>Mary Brady</contributor>
@@ -17,11 +17,11 @@
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
-<var name="testEmployee" type="Element"/>
+<var name="testAddress" type="Element"/>
 <var name="attrValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;position&quot;" var="elementList"/>
-<item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
-<getAttribute obj="testEmployee" var="attrValue" name="&quot;street&quot;"/>
-<assertEquals actual="attrValue" expected="&quot;No&quot;" id="elementRetrieveAttrValueAssert" ignoreCase="false"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="elementList"/>
+<item interface="NodeList" obj="elementList" index="2" var="testAddress"/>
+<getAttribute obj="testAddress" var="attrValue" name='"street"'/>
+<assertEquals actual="attrValue" expected="&quot;No&quot;" id="attrValue" ignoreCase="false"/>
 </test>

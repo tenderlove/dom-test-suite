@@ -8,7 +8,7 @@
     The "setAttributeNode(newAttr)" method adds a new 
    attribute to the Element.  
    
-   Retrieve the last child of the first employee and add
+   Retrieve first address element and add
    a new attribute node to it by invoking its         
    "setAttributeNode(newAttr)" method.  This test makes use
    of the "createAttribute(name)" method from the Document
@@ -19,15 +19,19 @@
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
-<var name="testEmployee" type="Element"/>
+<var name="testAddress" type="Element"/>
 <var name="newAttribute" type="Attr"/>
-<var name="domesticAttr" type="Attr"/>
-<var name="name" type="DOMString"/>
+<var name="oldAttr" type="Attr"/>
+<var name="districtAttr" type="Attr"/>
+<var name="attrVal" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
-<item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
+<item interface="NodeList" obj="elementList" index="0" var="testAddress"/>
 <createAttribute obj="doc" var="newAttribute" name="&quot;district&quot;"/>
-<setAttributeNode obj="testEmployee" var="domesticAttr" newAttr="newAttribute"/>
-<nodeName obj="domesticAttr" var="name"/>
-<assertEquals actual="name" expected="&quot;&quot;" id="elementCreateNewAttributeAssert" ignoreCase="false"/>
+<setAttributeNode obj="testAddress" var="oldAttr" newAttr="newAttribute"/>
+<assertNull actual="oldAttr" id="old_attr_doesnt_exist"/>
+<getAttributeNode obj="testAddress" var="districtAttr" name='"district"'/>
+<assertNotNull actual="districtAttr" id="new_district_accessible"/>
+<getAttribute var="attrVal" obj="testAddress" name='"district"'/>
+<assertEquals actual="attrVal" expected='""' id="attr_value" ignoreCase="false"/>
 </test>

@@ -40,5 +40,5 @@
     <assertEquals id="childName1" actual="childName" expected="&quot;name&quot;" ignoreCase="false"/>
 	<item interface="NodeList" obj="childList" index="10" var="child"/>
 	<nodeName obj="child" var="childName"/>
-    <assertEquals id="childName2" actual="childName" expected="&quot;employeeId&gt;&quot;" ignoreCase="false"/>
+    <assertEquals id="childName2" actual="childName" expected="&quot;employeeId&quot;" ignoreCase="false"/>
 </test>
