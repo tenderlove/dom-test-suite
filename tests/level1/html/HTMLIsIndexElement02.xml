@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertNotNull id="notnull" actual="testNode"/>
 <!--  check contents of prompt  -->
 <prompt interface="HTMLIsIndexElement" var="prompt" obj="testNode"/>
-<assertEquals id="IsIndex.Prompt" actual="prompt" expected='"Old Employee: "'/>
+<assertEquals id="IsIndex.Prompt" actual="prompt" expected='"Old Employee: "' ignoreCase="false"/>
 <!--   check form == null since not in context of a form  -->
 <form interface="HTMLIsIndexElement" obj="testNode" var="vform"/>
 <assertNull actual="vform" id="formNullLink"/>
