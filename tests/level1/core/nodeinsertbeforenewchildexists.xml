@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-Copyright (c) 2001 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
-Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
-
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
-
--->
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeInsertBeforeNewChildExists">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeinsertbeforenewchildexists">
 	<metadata>
 		<title>nodeInsertBeforeNewChildExists</title>
 		<creator>NIST</creator>
@@ -41,11 +27,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<var name="newChild" type="Node"/>
 	<var name="child" type="Node"/>
 	<var name="childName" type="DOMString"/>
-	<var name="result" type="List"/>
-	<var name="expectedResults" type="List">
-		<member>"name"</member>
-		<member>"employeeId&gt;"</member>
-	</var>
 	<var name="insertedNode" type="Node"/>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
 	<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
@@ -56,9 +37,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 	<item interface="NodeList" obj="childList" index="2" var="child"/>
 	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
+    <assertEquals id="childName1" actual="childName" expected='"name"' ignoreCase="false"/>
 	<item interface="NodeList" obj="childList" index="10" var="child"/>
 	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<assertEquals actual="result" expected="expectedResult" id="nodeInsertBeforeNewChildExistsAssert1" ignoreCase="false"/>
+    <assertEquals id="childName2" actual="childName" expected='"employeeId&gt;"' ignoreCase="false"/>
 </test>

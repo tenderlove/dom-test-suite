@@ -209,6 +209,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <xsd:selector xpath="//*"/>
 <xsd:field xpath="@actual"/>
 </xsd:keyref>
+<xsd:keyref refer="var-name" name="collection-attrib">
+<xsd:selector xpath="//*"/>
+<xsd:field xpath="@collection"/>
+</xsd:keyref>
+<xsd:keyref refer="var-name" name="member-attrib">
+<xsd:selector xpath="//*"/>
+<xsd:field xpath="@member"/>
+</xsd:keyref>
 </xsd:element>
 <xsd:element name="suite.member">
 <xsd:annotation>
@@ -325,6 +333,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <xsd:attribute use="required" type="variable" name="name"/>
 <xsd:attribute use="required" type="variableType" name="type"/>
 <xsd:attribute use="optional" type="literal" name="value"/>
+<xsd:attribute use="optional" type="xsd:boolean" name="isNull"/>
 </xsd:complexType>
 </xsd:element>
 <xsd:element type="literal" name="member">
@@ -2416,6 +2425,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <xsd:enumeration value="HTMLCollection"/>
 <xsd:enumeration value="HTMLFormElement"/>
 <xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="DOMString"/>
 </xsd:restriction>
 </xsd:simpleType>
 </xsd:attribute>

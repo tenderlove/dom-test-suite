@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.12  2001-08-19 20:51:19  dom-ts-4
+Revision 1.13  2001-08-20 06:56:35  dom-ts-4
+Full compile (-2 files that lock up Xalan 2.1)
+
+Revision 1.12  2001/08/19 20:51:19  dom-ts-4
 Successful DTD validation
 
 Revision 1.11  2001/08/15 04:44:03  dom-ts-4
@@ -316,12 +319,24 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
+<!--  this lowercases the test names.  Should be a one shot deal  -->
+<target name="dom1-core-lcase-names" depends="dom1-init">
+	<style basedir="${tests.dir}/level1/core" 
+		   destdir="build/lcase/level1/core" 
+		   includes="*.xml" 
+	       style="${transforms.dir}/lcase-test-names.xsl"
+	       extension=".xml"/>
+</target>
+
+
 
 <target name="dom1-core-gen-java" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
+    <!-- TODO: explicitly excludes tests that Xalan 2.1 has problems with  -->
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
+           excludes="**/documentcreatecdatasection.xml,**/textsplittextnomodificationallowederr.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"

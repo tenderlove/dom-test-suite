@@ -151,6 +151,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 								<!--  choose whether interface is required based
 								         on number of interfaces method is introduced by  -->
 								<xsl:choose>
+									<xsl:when test="@name='length'">
+										<xsl:attribute name="use">required</xsl:attribute>
+									</xsl:when>
 									<xsl:when test="count($dups) &gt; 1">
 										<xsl:attribute name="use">required</xsl:attribute>
 									</xsl:when>
@@ -165,6 +168,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 										<xsl:for-each select="$dups">
 											<xsd:enumeration value="{parent::interface/@name}"/>
 										</xsl:for-each>
+                                        <xsl:if test="@name='length'">
+                                            <xsd:enumeration value="DOMString"/>
+                                        </xsl:if>
 									</xsd:restriction>
 								</xsd:simpleType>
 							</xsd:attribute>
@@ -393,6 +399,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     <xsd:selector xpath="//*"/>
                     <xsd:field xpath="@actual"/>
                 </xsd:keyref>
+                <!--  all collection attributes must correspond to a previously declared variable  -->
+                <xsd:keyref name="collection-attrib" refer="var-name">
+                    <xsd:selector xpath="//*"/>
+                    <xsd:field xpath="@collection"/>
+                </xsd:keyref>
+                <!--  all collection attributes must correspond to a previously declared variable  -->
+                <xsd:keyref name="member-attrib" refer="var-name">
+                    <xsd:selector xpath="//*"/>
+                    <xsd:field xpath="@member"/>
+                </xsd:keyref>
 			</xsd:element>
 
 			<xsd:element name="suite.member">
@@ -515,6 +531,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xsd:attribute name="name" type="variable" use="required"/>
 					<xsd:attribute name="type" type="variableType" use="required"/>
 					<xsd:attribute name="value" type="literal" use="optional"/>
+                    <xsd:attribute name="isNull" type="xsd:boolean" use="optional"/>
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="member" type="literal">

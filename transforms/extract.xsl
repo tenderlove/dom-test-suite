@@ -62,7 +62,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	
 	<!--   replicate attributes   -->
 	<xsl:template match="@*">
-		<xsl:attribute name="{local-name(.)}" namespace="{namespace-uri(.)}"><xsl:value-of select="."/></xsl:attribute>
+        <!--  intentionally dropping the namespace for xlink attributes  -->
+		<xsl:attribute name="{local-name(.)}"><xsl:value-of select="."/></xsl:attribute>
 	</xsl:template>
 	
 	<!--   if unrecognized element, apply templates to children  -->	       

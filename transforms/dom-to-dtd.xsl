@@ -176,10 +176,16 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 								<xsl:text> | </xsl:text>
 								<xsl:value-of select="parent::interface/@name"/>
 							</xsl:for-each>
+                            <xsl:if test="@name='length'">
+                                <xsl:text> | DOMString </xsl:text>
+                            </xsl:if>
 							<xsl:text> ) </xsl:text>
 						<!--  choose whether interface is required based
 						         on number of interfaces method is introduced by  -->
 						<xsl:choose>
+							<xsl:when test="@name='length'">
+								<xsl:text>#REQUIRED</xsl:text>
+							</xsl:when>
 							<xsl:when test="count($dups) &gt; 1">
 								<xsl:text>#REQUIRED</xsl:text>
 							</xsl:when>
@@ -402,6 +408,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	name CDATA #REQUIRED
 	type (%variable-type;) #REQUIRED
 	value CDATA #IMPLIED
+    isNull (true|false) #IMPLIED
 &gt;
 
 &lt;!ELEMENT member (#PCDATA)&gt;
@@ -530,6 +537,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	type (%variable-type;) #REQUIRED
 	id ID #REQUIRED
 &gt;
+
 
 &lt;!ELEMENT assertSize (metadata?, (%statement;)*)&gt;
 &lt;!ATTLIST assertSize

@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.2  2001-07-23 04:52:20  dom-ts-4
+ Revision 1.3  2001-08-20 06:56:35  dom-ts-4
+ Full compile (-2 files that lock up Xalan 2.1)
+
+ Revision 1.2  2001/07/23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
@@ -132,6 +135,7 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
   public void assertInstanceOf(String assertID, Object obj, Class cls) {
     framework.assertInstanceOf(this,assertID, obj,cls);
   }
+
 
   public void assertSize(String assertID, int expectedSize, NodeList collection) {
     framework.assertSize(this,assertID, expectedSize, collection);

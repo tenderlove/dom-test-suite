@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-
-Copyright (c) 2001 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
-Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
-
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
-
--->
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentCreateAttribute">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentcreateattribute">
 <metadata>
 <title>documentCreateAttribute</title>
 <creator>NIST</creator>
@@ -37,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newAttrNode" type="Attr"/>
 <var name="attrValue" type="DOMString"/>
 <var name="attrName" type="DOMString"/>
-<var name="attrType" type="DOMString"/>
+<var name="attrType" type="int"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"district"</member>

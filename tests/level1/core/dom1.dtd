@@ -723,7 +723,7 @@ This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-1998100
     id ID #IMPLIED
 	obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    interface ( NodeList | NamedNodeMap | CharacterData | HTMLCollection | HTMLFormElement | HTMLSelectElement ) #REQUIRED>
+    interface ( NodeList | NamedNodeMap | CharacterData | HTMLCollection | HTMLFormElement | HTMLSelectElement | DOMString  ) #REQUIRED>
 
 					
 <!ELEMENT link EMPTY>
@@ -1973,6 +1973,7 @@ This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-1998100
 	name CDATA #REQUIRED
 	type (%variable-type;) #REQUIRED
 	value CDATA #IMPLIED
+    isNull (true|false) #IMPLIED
 >
 
 <!ELEMENT member (#PCDATA)>
@@ -2101,6 +2102,7 @@ This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-1998100
 	type (%variable-type;) #REQUIRED
 	id ID #REQUIRED
 >
+
 
 <!ELEMENT assertSize (metadata?, (%statement;)*)>
 <!ATTLIST assertSize

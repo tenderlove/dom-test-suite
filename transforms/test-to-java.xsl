@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.7  2001-08-15 04:44:03  dom-ts-4
+Revision 1.8  2001-08-20 06:56:38  dom-ts-4
+Full compile (-2 files that lock up Xalan 2.1)
+
+Revision 1.7  2001/08/15 04:44:03  dom-ts-4
 Added dom1-gen-ecmascript target to build.xml
 Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
 
@@ -51,9 +54,9 @@ All implementation conditions combined into implementationAttribute element
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--  relative to transform   -->
-	<xsl:param name="interfaces-docname"/>
-    <xsl:param name="package"/>
-    <xsl:param name="target-uri-base"/>
+	<xsl:param name="interfaces-docname">../build/dom1-interfaces.xml</xsl:param>
+    <xsl:param name="package">org.w3.domts.level1.core</xsl:param>
+    <xsl:param name="target-uri-base">http://www.w3.org/2001/DOM-Test-Suite/tests/Level-1/</xsl:param>
 <xsl:output method="text"/>
 <xsl:variable name="domspec" select="document($interfaces-docname)"/>
 
@@ -158,30 +161,27 @@ The source document contained the following notice:
     <xsl:text>      DOMImplementation domImpl = builder.getDOMImplementation();
 </xsl:text>
     <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(!domImpl.hasFeature("</xsl:text>
+	    <xsl:text>      if(!domImpl.hasFeature(</xsl:text>
 	    <xsl:value-of select="@feature"/>
-	    <xsl:text>",</xsl:text>
+	    <xsl:text>,</xsl:text>
 	    <xsl:choose>
 		    <xsl:when test="@version">
-			    <xsl:text>"</xsl:text>
 			    <xsl:value-of select="@version"/>
-			    <xsl:text>"</xsl:text>
 		    </xsl:when>
 		    <xsl:otherwise>
 			    <xsl:text>null</xsl:text>
 		    </xsl:otherwise>
 	    </xsl:choose>
 	    <xsl:text>)) {
-         throw new DOMTestIncompatibleException("</xsl:text>
+         throw new DOMTestIncompatibleException(</xsl:text>
         <xsl:value-of select="@feature"/>
 	    <xsl:choose>
 		    <xsl:when test="@version">
-			    <xsl:text>","</xsl:text>
+			    <xsl:text>,</xsl:text>
 			    <xsl:value-of select="@version"/>
-			    <xsl:text>"</xsl:text>
 		    </xsl:when>
 		    <xsl:otherwise>
-			    <xsl:text>",null</xsl:text>
+			    <xsl:text>,null</xsl:text>
 		    </xsl:otherwise>
 	    </xsl:choose>
 	    <xsl:text>);
@@ -198,7 +198,7 @@ The source document contained the following notice:
 package <xsl:value-of select="$package"/>;
 
 import org.w3c.dom.*;
-<xsl:if test="*[local-name() = 'hasFeature' and @feature='Events']">
+<xsl:if test="*[local-name() = 'hasFeature' and @feature='&quot;Events&quot;']">
 import org.w3c.dom.events;
 </xsl:if>
 import org.w3c.domts.*;
@@ -240,7 +240,7 @@ import java.util.*;
 package <xsl:value-of select="$package"/>;
 
 import org.w3c.dom.*;
-<xsl:if test="*[local-name() = 'hasFeature' and @feature='Events']">
+<xsl:if test="*[local-name() = 'hasFeature' and @feature='&quot;Events&quot;']">
 import org.w3c.dom.events;
 </xsl:if>
 import org.w3c.domts.*;
@@ -304,6 +304,15 @@ import java.util.*;
 <xsl:template match="*[local-name()='not']" mode="body"/>
 
 
+<!--   this template generates code for the DOMString.length  -->
+<xsl:template match="*[local-name()='length' and @interface='DOMString']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = </xsl:text>
+    <xsl:value-of select="@obj"/>
+    <xsl:text>.length();
+      </xsl:text>
+</xsl:template>
+
 <!--   implementation attribute doesn't do anything in the body of the test  -->
 <xsl:template match="*[local-name()='implementationAttribute']" mode="body"/>
 
@@ -324,12 +333,12 @@ import java.util.*;
 			<xsl:value-of select="@obj"/>
 			<xsl:text>.</xsl:text>
 		</xsl:if>
-		<xsl:text>hasFeature("</xsl:text>
+		<xsl:text>hasFeature(</xsl:text>
 		<xsl:value-of select="@feature"/>
-		<xsl:text>",</xsl:text>
+		<xsl:text>,</xsl:text>
 		<xsl:choose>
 			<xsl:when test="@version">
-				<xsl:text>"</xsl:text><xsl:value-of select="@version"/><xsl:text>"</xsl:text>
+				<xsl:value-of select="@version"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>null</xsl:text>
@@ -350,6 +359,10 @@ import java.util.*;
 	<xsl:variable name="varname" select="@name"/>
 	<xsl:apply-templates select="@type"/><xsl:text> </xsl:text><xsl:value-of select="$varname"/>
 	<xsl:choose>
+        <xsl:when test="@isNull='true'">
+            <xsl:text> = null;
+</xsl:text>
+        </xsl:when>
 		<!--  explict value, just add it  -->
 		<xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 		<!--  member, allocate collection or list and populate it  -->
@@ -710,6 +723,8 @@ import java.util.*;
    }
 </xsl:if>
 </xsl:template>
+
+
 
 <xsl:template match="*[local-name()='assertEquals']" mode="body">
 	<xsl:choose>
