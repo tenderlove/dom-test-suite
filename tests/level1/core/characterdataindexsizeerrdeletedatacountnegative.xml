@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6531BCCF"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-6531BCCF')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INDEX_SIZE_ERR'])"/>
 </metadata>
+<implementationAttribute name="signed" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="nameNode" type="Node"/>
@@ -40,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
 <firstChild interface="Node" obj="nameNode" var="child"/>
-<assertDOMException id="characterdataIndexSizeErrDeleteDataCountNegativeAssert">
+<assertDOMException id="throws_INDEX_SIZE_ERR">
 <INDEX_SIZE_ERR>
 <substringData var="childSubstring" obj="child" offset="10" count="-3"/>
 </INDEX_SIZE_ERR>
