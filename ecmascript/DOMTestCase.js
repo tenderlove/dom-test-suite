@@ -175,8 +175,70 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
 
 
+  //
+  //    Browser detection logic patterned after 
+  //      http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
+  //
+  //
+  var agt = navigator.userAgent.toLowerCase();
+  var major = parseInt(navigator.appVersion);
+  var isNavigator6Up  = ((agt.indexOf('mozilla')!=-1) && (agt.indexOf('spoofer')==-1)
+                && (agt.indexOf('compatible') == -1) && (agt.indexOf('opera')==-1)
+                && (agt.indexOf('webtv')==-1) && (agt.indexOf('hotjava')==-1) 
+                && (major >= 5));
+
+  var isIE5Up = (agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1) &&
+        (major >= 4) && (agt.indexOf("msie 4") ==-1);
+
+       
   var factory = null;
   var defaultContentType = "text/xml";
+
+  //
+  //   used by both HTML and SVG loaders
+  //
+  function MozLoadBrowserDocument(sourceURL, willBeModified, extension) {
+    //
+    //   resolve full URL
+    //
+	var absURL = location.href;
+	absURL = absURL.substring(0,absURL.lastIndexOf("/")+1) + sourceURL + extension;
+	//
+	//      see if there is an available copy around
+	//
+	var newDoc = checkCache(willBeModified, this.cache, absURL);
+	//
+	//   if not create a new window
+	//
+	if(newDoc == null) {
+		var newWindow = window.open(absURL);
+		newDoc = newWindow.document;
+
+        //
+        //   maintain a list of windows so the right window can
+        //       be closed when the document is used in a modification
+        //       test and the test is finished
+       var added = false;
+       for(var i = 0; i < this.windows.length; i++) {
+            if(this.windows[i] == null) {
+                this.windows[i] = newWindow;
+                added = true;
+                break;
+            }
+        }
+        if(!added) {
+            this.windows[this.windows.length] = newWindow;
+        }
+        //
+        //  if it won't be modified, it can be used in a subsequent test
+        //
+		if(!willBeModified) {
+		   this.cache[this.cache.length] = new DocumentBuilderCacheEntry(absURL, newDoc);
+		}
+	}
+	return newDoc; 
+  }
+
 
 
   function MozHTMLApplyParserAttributes(parser, attrNames, attrValues) {
@@ -205,26 +267,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
   function MozHTMLDocumentBuilder_load(sourceURL, willBeModified) {
-    //
-    //   resolve full URL
-    //
-	var absURL = location.href;
-	absURL = absURL.substring(0,absURL.lastIndexOf("/")+1) + sourceURL + ".html";
-	//
-	//      see if there is an available copy around
-	//
-	var newDoc = checkCache(willBeModified, this.cache, absURL);
-	//
-	//   if not create a new window
-	//
-	if(newDoc == null) {
-		var newWindow = window.open(absURL);
-		newDoc = newWindow.document;
-		if(!willBeModified) {
-		   this.cache[this.cache.length] = new DocumentBuilderCacheEntry(absURL, newDoc);
-		}
-	}
-	return newDoc; 
+    return this.MozLoadBrowserDocument(sourceURL, willBeModified, ".html");
   }
 
    function MozHTMLDocumentBuilder_getDOMImplementation() {
@@ -240,16 +283,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //      to reduce the chance that an unrelated exception causes
   //      the test to pass.
   function MozHTMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return true;
+    return (ex.code == code);
   }
 
   function MozHTMLDocumentBuilder_getImplementationAttribute(attr) {
     return false;
   }
   
-  function MozHTMLDocumentBuilder_close(testdoc) {
-      testdoc.close();
-  }
+   function MozHTMLDocumentBuilder_close(doc) {
+        alert("closing");
+        for(var i = 0; i < this.windows.length; i++) {
+            if(this.windows[i] != null && this.windows[i].document == doc) {
+                this.windows[i].close();
+                this.windows[i] = null;
+            }
+        }
+   }
   
   function MozHTMLDocumentBuilder_checkAttributes(attrNames, attrValues) {
      //
@@ -280,6 +329,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.attrNames = attrNames;
     this.attrValues = attrValues;
     this.cache = new Array();
+    this.windows = new Array();
     this.load = MozHTMLDocumentBuilder_load;
     this.checkAvailability = MozHTMLDocumentBuilder_checkAvailability;
     this.isDOMExceptionCode = MozHTMLDocumentBuilder_isDOMExceptionCode;
@@ -289,8 +339,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.checkAttributes = MozHTMLDocumentBuilder_checkAttributes;
     this.hasFeature = MozHTMLDocumentBuilder_hasFeature;
     this.ignoreCase = true;
+    this.MozLoadBrowserDocument = MozLoadBrowserDocument;
   }
 
+  function MozSVGDocumentBuilder_load(sourceURL, willBeModified) {
+    return this.MozLoadBrowserDocument(sourceURL, willBeModified, ".svg");
+  }
+
+  function MozSVGDocumentBuilder(attrNames, attrValues) {
+    this.attrNames = attrNames;
+    this.attrValues = attrValues;
+    this.cache = new Array();
+    this.windows = new Array();
+    this.load = MozSVGDocumentBuilder_load;
+    this.close = MozHTMLDocumentBuilder_close;
+    this.checkAvailability = MozXMLDocumentBuilder_checkAvailability;
+    this.isDOMExceptionCode = MozXMLDocumentBuilder_isDOMExceptionCode;
+    this.getDOMImplementation = MozXMLDocumentBuilder_getDOMImplementation;
+    this.getImplementationAttribute = MozXMLDocumentBuilder_getImplementationAttribute;
+    this.checkAttributes = MozXMLDocumentBuilder_checkAttributes;
+    this.hasFeature = MozXMLDocumentBuilder_hasFeature;
+    this.ignoreCase = false;
+    this.MozLoadBrowserDocument = MozLoadBrowserDocument;
+  }
 
   function MozXMLApplyParserAttributes(parser, attrNames, attrValues) {
   }
@@ -301,40 +372,41 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //
   function MozXMLLoad(sourceURL) {
     var doc = document.implementation.createDocument("","temp",null);
-    doc.load(sourceURL + ".xml");
+    doc.load(sourceURL);
     return doc;
   }
 
   function MozXMLDocumentBuilder_load(sourceURL, willBeModified) {
+    var fullURL = sourceURL + this.extension;
 	for(i = 0; i < this.cache.length; i++) {
-		if(this.cache[i].url == sourceURL) {
+		if(this.cache[i].url == fullURL) {
 			var testdoc = this.cache[i].testdoc;
 			if(testdoc.documentElement.nodeName != "temp") {
 				//
 				//  if it will be modified, start loading its replacement
 				//
 				if(willBeModified) {
-					this.cache[i].testdoc = MozXMLLoad(sourceURL);
+					this.cache[i].testdoc = MozXMLLoad(fullURL);
 				}
 				return testdoc;
 			}
 		}
 	}
     doc = document.implementation.createDocument("","temp",null);
-    doc.load(sourceURL + ".xml");
+    doc.load(fullURL);
     alert("Loading test document: Press OK to proceed");
     
     if(willBeModified) {
 		//
 		//   if it will be modified, get another copy started
 		//
-		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL, MozXMLLoad(sourceURL));
+		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(fullURL, MozXMLLoad(fullURL));
 	}
 	//
 	//   if not going to be modified, then we can keep this around
 	//      for another iteration
 	else {
-		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL,doc);
+		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(fullURL,doc);
 	}
 
     return doc;
@@ -345,7 +417,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    }
 
   function MozXMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return true;
+    return (ex.code = code);
   }
 
   function MozXMLDocumentBuilder_getImplementationAttribute(attr) {
@@ -388,7 +460,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
   
 
-  function MozXMLDocumentBuilder(attrNames, attrValues) {
+  function MozXMLDocumentBuilder(attrNames, attrValues, extension) {
+    this.extension = extension;
     this.attrNames = attrNames;
     this.attrValues = attrValues;
     this.cache = new Array();
@@ -418,15 +491,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   var defaultMozXMLDocumentBuilder = null;
   var defaultMozSVGDocumentBuilder = null;
 
+  var displayedSVGSupportAlert = false;
+
+  var hasMozillaSVG = true;
+
   function MozDocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues,contentType) {
     if(contentType != null) {
 	    switch(contentType)
 	    {
 		    case "image/xml+svg":
+            //
+            //   see if feature org.w3c.svg is supported
+            //
+            if(!displayedSVGSupportAlert && !hasMozillaSVG) {
+                alert("This browser does not support SVG, testing SVG using XML DOM");
+                displayedSVGSupportAlert = true;
+            }
 		    if(defaultMozSVGDocumentBuilder.checkAttributes(attrNames, attrValues)) {
 			    return defaultMozSVGDocumentBuilder;
 		    }
-		    return new ASVDocumentBuilder(attrNames, attrValues);
+            if(hasMozillaSVG) {
+		        return new MozSVGDocumentBuilder(attrNames, attrValues);
+            }
+		    return new MozXMLDocumentBuilder(attrNames, attrValues, ".svg");
+            break;
 
 		    case "text/html":
 		    if(defaultMozHTMLDocumentBuilder.checkAttributes(attrNames, attrValues)) {
@@ -439,7 +527,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	if(defaultMozXMLDocumentBuilder.checkAttributes(attrNames, attrValues)) {
 		return defaultMozXMLDocumentBuilder;
 	}
-	return new MozXMLDocumentBuilder(attrNames, attrValues);
+	return new MozXMLDocumentBuilder(attrNames, attrValues, ".xml");
   }
 
   function MozDocumentBuilderFactory() {
@@ -450,11 +538,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //   If application name contains Netscape
   //       set up Mozilla factories
   //
-  if(navigator.appName.indexOf("Netscape") != -1) {
-	defaultMozXMLDocumentBuilder = new MozXMLDocumentBuilder(null,null);
+  if(isNavigator6Up) {
+	defaultMozXMLDocumentBuilder = new MozXMLDocumentBuilder(null,null, ".xml");
 	defaultMozHTMLDocumentBuilder = new MozHTMLDocumentBuilder(null, null);
-	defaultMozSVGDocumentBuilder = new ASVDocumentBuilder(null,null);
-	defaultContentType = "image/xml";
+    if(hasMozillaSVG) {
+        defaultMozSVGDocumentBuilder = new MozSVGDocumentBuilder(null,null);
+    }
+    else {
+        defaultMozSVGDocumentBuilder = new MozXMLDocumentBuilder(null,null, ".svg");
+    }
+	defaultContentType = "text/xml";
     factory = new MozDocumentBuilderFactory();
   }
 
@@ -885,7 +978,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //      to reduce the chance that an unrelated exception causes
   //      the test to pass.
   function MSHTMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return true;
+    return (ex.code == code);
   }
 
   function MSHTMLDocumentBuilder_getImplementationAttribute(attr) {
@@ -893,7 +986,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
   
   function MSHTMLDocumentBuilder_close(testdoc) {
-      testdoc.close();
+      testdoc.parentWindow.close();
   }
   
   function MSHTMLDocumentBuilder_checkAttributes(attrNames, attrValues) {
@@ -966,7 +1059,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.newDocumentBuilder = IE5DocumentBuilderFactory_newDocumentBuilder;
   }
 
-  if(factory == null && navigator.appName.indexOf("Microsoft") != -1) {
+  if(factory == null && isIE5Up) {
     factory = new IE5DocumentBuilderFactory();
     defaultContentType = "text/xml";
     defaultMSXMLDocumentBuilder = new MSXMLDocumentBuilder(null,null);
@@ -975,7 +1068,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
   
   if(factory == null) {
-	alert("Unrecognized browser: " + navigator.appName);
+	alert("Unrecognized browser: " + navigator.userAgent);
   }
 
 
