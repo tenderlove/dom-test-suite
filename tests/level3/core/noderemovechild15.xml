@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="eRef" type="EntityReference"/>
 <var name="elem" type="Element"/>
@@ -37,10 +36,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createEntityReference var="eRef" obj="doc" name='"ent4"'/>
 <firstChild obj="eRef" var="elem" interface="Node"/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_noderemovechild14">
-<NO_MODIFICATION_ALLOWED_ERR>
-<removeChild obj="eRef" var="removed" oldChild="elem" />
-</NO_MODIFICATION_ALLOWED_ERR>
+<assertNotNull actual="elem" id="elemNotNull"/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<removeChild obj="eRef" var="removed" oldChild="elem" />
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
-
 </test>

@@ -29,11 +29,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-20</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
-<var name="elemList" type="NodeList"/>
-<var name="gender2List" type="NodeList"/>
-<var name="elemName" type="Element"/>
+<var name="varList" type="NodeList"/>
+<var name="varElem" type="Element"/>
 <var name="entRef" type="EntityReference"/>
 <var name="entRefChild1" type="Element"/>
 <var name="entRefChild2" type="ProcessingInstruction"/>
@@ -41,17 +39,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefChild2Position" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <if>
-<implementationAttribute name="expandEntityReferences" value="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
-<item var="elemName" obj="elemList" index="2" interface="NodeList"/>
-<childNodes obj="elemName" var="gender2List"/>
-<item interface="NodeList" obj="gender2List" var="entRef" index="0"/>
-<else>
-<createEntityReference name='"ent4"' obj="doc" var="entRef"/>
-</else>
+	<implementationAttribute name="expandEntityReferences" value="false"/>
+	<getElementsByTagName var="varList" obj="doc" tagname='"var"' interface="Document"/>
+	<item var="varElem" obj="varList" index="2" interface="NodeList"/>
+	<assertNotNull actual="varElem" id="varElemNotNull"/>
+	<firstChild var="entRef" obj="varElem" interface="Node"/>
+	<assertNotNull actual="entRef" id="entRefNotNull"/>
+	<else>
+		<createEntityReference name='"ent4"' obj="doc" var="entRef"/>
+	</else>
 </if>
 <firstChild obj="entRef" var="entRefChild1" interface="Node"/>
+<assertNotNull actual="entRefChild1" id="entRefChild1NotNull"/>
 <lastChild obj="entRef" var="entRefChild2" interface="Node"/>
+<assertNotNull actual="entRefChild2" id="entRefChild2NotNull"/>
 <compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRefChild2"/>
 <assertEquals  actual="entRefChild1Position" expected="4" id="nodecomparedocumentpositionFollowing28" ignoreCase="false"/>
 <compareDocumentPosition var="entRefChild2Position" obj="entRefChild2" other="entRefChild1"/>

@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild31</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on an Element node that is the replacement Text of an EntityReference
 	node, attempt to replace its Text child node with a new Element node and verify if 
 	a NO_MODIFICATION_ALLOWED_ERR gets thrown.
@@ -32,28 +29,27 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
-<var name="oldchildList" type="NodeList"/>
 <var name="elem" type="Element"/>
-<var name="parent" type="Element"/>
-<var name="entRef" type="EntityReference"/>
-<var name="oldChild" type="Text"/>
+<var name="span" type="Element"/>
+<var name="ent4Ref" type="EntityReference"/>
+<var name="spanText" type="Text"/>
 <var name="newChild" type="Element"/>
 <var name="replaced" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"var"' interface="Document"/>
 <item var="elem" obj="childList" index="2" interface="NodeList"/>
-<firstChild var="entRef" obj="elem" interface="Node"/>
-<firstChild var="parent" obj="entRef" interface="Node"/>
-<childNodes var="oldchildList" obj="parent"/>
-<item var="oldChild" obj="oldchildList" index="0" interface="NodeList"/>
+<firstChild var="ent4Ref" obj="elem" interface="Node"/>
+<firstChild var="span" obj="ent4Ref" interface="Node"/>
+<assertNotNull actual="span" id="spanNotNull"/>
+<firstChild var="spanText" obj="span" interface="Node"/>
+<assertNotNull actual="spanText" id="spanTextNotNull"/>
 <createElementNS var="newChild" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:p"'/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_nodereplacechild31">
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="parent" var="replaced" oldChild="oldChild" newChild="newChild"/>
+<replaceChild obj="span" var="replaced" oldChild="spanText" newChild="newChild"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

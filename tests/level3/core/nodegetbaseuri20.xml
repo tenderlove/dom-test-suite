@@ -30,19 +30,16 @@ external entity if there is now xml:base attribute.
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
 <var name="pList" type="NodeList"/>
 <var name="pElem" type="Element"/>
-<var name="textNode" type="Text"/>
-<var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
 <load var="doc" href="external_barfoo" willBeModified="true"/>
-<getElementsByTagNameNS var="pList" obj="doc" 
-    namespaceURI='htmlNS'
-    localName='"p"' interface="Document"/>
+<getElementsByTagName var="pList" obj="doc" 
+    tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="2" interface="NodeList"/>
+<assertNotNull actual="pElem" id="pElemNotNull"/>
 <baseURI var="baseURI" obj="pElem" interface="Node"/>
 <assertURIEquals actual="baseURI" isAbsolute="true" name='"external_widget"' id="equalsExternalBarFoo"/>
 </test>

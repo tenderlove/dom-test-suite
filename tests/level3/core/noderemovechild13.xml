@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild13</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on a new EntityReference node attempt to remove the first child 
 	of this node and verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
 </description>
@@ -31,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="txt" type="Text"/>
 <var name="eRef" type="EntityReference"/>
@@ -39,9 +35,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createEntityReference var="eRef" obj="doc" name='"alpha"'/>
 <firstChild obj="eRef" var="txt" interface="Node"/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_noderemovechild13">
-<NO_MODIFICATION_ALLOWED_ERR>
-<removeChild obj="eRef" var="removed" oldChild="txt" />
-</NO_MODIFICATION_ALLOWED_ERR>
+<assertNotNull actual="txt" id="txtNotNull"/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<removeChild obj="eRef" var="removed" oldChild="txt" />
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

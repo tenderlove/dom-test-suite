@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild38</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on an Entity node attempt to replace its Text child with new Text,
 	Comment, ProcessingInstruction and CDATASection nodes and in each case verify if 
 	a NO_MODIFICATION_ALLOWED_ERR is raised.
@@ -32,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
@@ -50,41 +46,43 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <doctype var="docType" obj="doc" />
 <entities var="entitiesMap" obj="docType" />
 <getNamedItem var="ent" obj="entitiesMap" name='"alpha"'/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:p"'/>
-<createEntityReference var="entRef" obj="doc" name='"delta"'/>
-<createTextNode var="txt" obj="doc" data='"Text"'/>
-<createComment var="comment" obj="doc" data='"Comment"'/>
-<createCDATASection var="cdata" obj="doc" data='"CDATASection"'/>
-<createProcessingInstruction var="pi" obj="doc" target='"target"' data='"data"'/>
+<assertNotNull actual="ent" id="alphaEntity"/>
 <firstChild var="oldChild" obj="ent" interface="Node"/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR1_nodereplacechild38_1">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="cdata"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<assertNotNull actual="oldChild" id="alphaText"/>
+<createCDATASection var="cdata" obj="doc" data='"CDATASection"'/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR1">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="cdata"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR2_nodereplacechild38_2">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="pi"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<createProcessingInstruction var="pi" obj="doc" target='"target"' data='"data"'/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR2">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="pi"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR3_nodereplacechild38_3">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="comment"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<createComment var="comment" obj="doc" data='"Comment"'/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR3">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="comment"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR4_nodereplacechild38_4">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="txt"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<createTextNode var="txt" obj="doc" data='"Text"'/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR4">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="txt"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR5_nodereplacechild38_5">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="elem"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:p"'/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR5">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="elem"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR5_nodereplacechild38_6">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="entRef"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<createEntityReference var="entRef" obj="doc" name='"delta"'/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR5">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="entRef"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

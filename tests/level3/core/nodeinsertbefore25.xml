@@ -29,26 +29,27 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="eRef" type="EntityReference"/>
-<var name="parent" type="Element"/>
-<var name="refNode" type="Text"/>
+<var name="span" type="Element"/>
+<var name="spanText" type="Text"/>
 <var name="newNode" type="Element"/>
 <var name="childList" type="NodeList"/>
 <var name="inserted" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"var"' interface="Document"/>
 <item var="element" obj="childList" index="2" interface="NodeList"/>
 <firstChild var="eRef" obj="element" interface="Node"/>
-<firstChild var="parent" obj="eRef" interface="Node"/>
-<firstChild var="refNode" obj="parent" interface="Node"/>
+<firstChild var="span" obj="eRef" interface="Node"/>
+<assertNotNull actual="span" id="spanNotNull"/>
+<firstChild var="spanText" obj="span" interface="Node"/>
+<assertNotNull actual="spanText" id="spanTextNotNull"/>
 <createElementNS var="newNode" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"span"'/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_nodeinsertbefore25">
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<insertBefore obj="parent" var="inserted" refChild="refNode" newChild="newNode"/>
+<insertBefore obj="span" var="inserted" refChild="spanText" newChild="newNode"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

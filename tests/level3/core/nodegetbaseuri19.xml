@@ -31,7 +31,6 @@ or was created on entity expansion.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2DocumentType"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
@@ -41,18 +40,20 @@ or was created on entity expansion.
 <var name="pElem" type="Element"/>
 <var name="textNode" type="Text"/>
 <var name="docURI" type="DOMString"/>
-<var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
 <load var="doc" href="external_barfoo" willBeModified="true"/>
-<getElementsByTagNameNS var="pList" obj="doc" 
-    namespaceURI='htmlNS'
-    localName='"p"' interface="Document"/>
+<getElementsByTagName var="pList" obj="doc" 
+    tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
+<assertNotNull actual="pElem" id="pElemNotNull"/>
 <if>
     <implementationAttribute name="expandEntityReferences" value="true"/>
     <firstChild var="textNode" obj="pElem" interface="Node"/>
+    <assertNotNull actual="textNode" id="expansionNotNull"/>
     <else>
 		<lastChild var="entRef" obj="pElem" interface="Node"/>
+		<assertNotNull actual="entRef" id="entRefNotNull"/>
 		<firstChild var="textNode" obj="entRef" interface="Node"/>
+		<assertNotNull actual="textNode" id="entRefTextNotNull"/>
 	</else>
 </if>
 <baseURI var="baseURI" obj="textNode" interface="Node"/>

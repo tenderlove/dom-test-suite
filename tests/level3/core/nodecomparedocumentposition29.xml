@@ -45,7 +45,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="docElem" var="appendedChild" newChild="entRef1"/>
 <appendChild obj="docElem" var="appendedChild" newChild="entRef2"/>
 <firstChild obj="entRef1" var="entRefChild1" interface="Node"/>
+<assertNotNull actual="entRefChild1" id="entRefChild1NotNull"/>
 <lastChild obj="entRef2" var="entRefChild2" interface="Node"/>
+<assertNotNull actual="entRefChild2" id="entRefChild2NotNull"/>
 <compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRefChild2"/>
 <assertEquals  actual="entRefChild1Position" expected="4" id="nodecomparedocumentpositionFollowing29" ignoreCase="false"/>
 <compareDocumentPosition var="entRefChild2Position" obj="entRefChild2" other="entRefChild1"/>

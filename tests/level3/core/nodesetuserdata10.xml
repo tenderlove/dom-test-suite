@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodesetuserdata10</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Invoke setUserData on a CDATASection and EntityReference node to set their 
 	UserData to this Document and DocumentElement node.  Verify if the UserData 
 	object that was set for both nodes is different.
@@ -31,15 +29,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="entRef" type="EntityReference"/>
 <var name="cData" type="CDATASection"/>
-<var name="elemList" type="NodeList"/>
-<var name="elemName" type="Element"/>
-<var name="gender2List" type="Element"/>
+<var name="varList" type="NodeList"/>
+<var name="varElem" type="Element"/>
 <var name="userData" type="DOMUserData"/>
 <var name="returned1" type="DOMUserData"/>
 <var name="returned2" type="DOMUserData"/>
@@ -48,10 +44,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
-<item var="elemName" obj="elemList" index="2" interface="NodeList"/>
-<childNodes obj="elemName" var="gender2List"/>
-<item interface="NodeList" obj="gender2List" var="entRef" index="0"/>
+<getElementsByTagName var="varList" obj="doc" tagname='"var"' interface="Document"/>
+<item var="varElem" obj="varList" index="2" interface="NodeList"/>
+<firstChild var="entRef" obj="varElem" interface="Node"/>
 <createCDATASection var="cData" obj="doc" data='"CDATASection"' />
 <setUserData obj="entRef" var="retUserData" key='"Key1"' data="doc" handler="nullHandler"/>
 <setUserData  obj="cData" var="retUserData" key='"Key2"' data="docElem" handler="nullHandler"/>

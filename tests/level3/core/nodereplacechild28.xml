@@ -21,37 +21,36 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild28</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Using replaceChild on an Element node that is a child of a read-only EntityReference node
-	attempt to replace a new Element child node with another new Element node and verify if a 
-	NO_MODIFICATION_ALLOWED_ERR gets thrown.
+Attempt to replace a text node with a text node from an
+entity reference. Since the replacing text node should be removed
+from its current location first, a NO_MODIFICATION_ALLOWED_ERR should
+be thrown.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
-<var name="elem" type="Element"/>
-<var name="entRef" type="EntityReference"/>
-<var name="oldChild" type="Element"/>
-<var name="newChild" type="Node"/>
+<var name="acronym" type="Element"/>
+<var name="betaRef" type="EntityReference"/>
+<var name="dallas" type="Text"/>
+<var name="betaText" type="Node"/>
 <var name="appendedChild" type="Node"/>
 <var name="replacedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
-<item var="elem" obj="childList" index="1" interface="NodeList"/>
-<firstChild var="entRef" obj="elem" interface="Node"/>
-<createElementNS var="oldChild" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
-<appendChild obj="elem" var="appendedChild" newChild="oldChild"/>
-<firstChild var="newChild" obj="entRef" interface="Node"/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_nodereplacechild28">
-<NO_MODIFICATION_ALLOWED_ERR>
-<replaceChild obj="elem" var="replacedChild" oldChild="oldChild" newChild="newChild"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<getElementsByTagName var="childList" obj="doc" tagname='"acronym"' interface="Document"/>
+<item var="acronym" obj="childList" index="1" interface="NodeList"/>
+<firstChild var="betaRef" obj="acronym" interface="Node"/>
+<assertNotNull actual="betaRef" id="betaRefNotNull"/>
+<firstChild var="betaText" obj="betaRef" interface="Node"/>
+<assertNotNull actual="betaText" id="betaTextNotNull"/>
+<nextSibling var="dallas" obj="betaRef" interface="Node"/>
+<assertNotNull actual="dallas" id="dallasNotNull"/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
+	<NO_MODIFICATION_ALLOWED_ERR>
+		<replaceChild obj="acronym" var="replacedChild" oldChild="dallas" newChild="betaText"/>
+	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

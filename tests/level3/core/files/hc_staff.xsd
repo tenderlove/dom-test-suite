@@ -57,6 +57,7 @@ be a general purpose schema for XHTML
   	  	  <xsd:enumeration value="Yes"/>
   	  	  <xsd:enumeration value="No"/>
   	  	  <xsd:enumeration value="Y&#945;"/>
+  	  	  <xsd:enumeration value="Y"/>
   	  </xsd:restriction>
   </xsd:simpleType>
 
@@ -111,13 +112,15 @@ be a general purpose schema for XHTML
   	  	  <xsd:enumeration value="EMP0001"/>
   	  	  <xsd:enumeration value="EMP0002"/>
   	  	  <xsd:enumeration value="EMP0003"/>
+  	  	  <xsd:enumeration value="EMP0004"/>
+  	  	  <xsd:enumeration value="EMP0005"/>
   	  </xsd:restriction>
   </xsd:simpleType>
   
   <xsd:simpleType name="emp0004_5Type">
   	  <xsd:restriction base="xsd:ID">
-  	  	  <xsd:enumeration value="EMP0004"/>
-  	  	  <xsd:enumeration value="EMP0005"/>
+  	  	  <xsd:enumeration value="EMP0006"/>
+  	  	  <xsd:enumeration value="EMP0007"/>
   	  </xsd:restriction>
   </xsd:simpleType>
   
