@@ -27,7 +27,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    Retrieve entity "ent4" from staffNS.xml document.  
    Invoke method importNode(importedNode,deep) on this document with deep as false.
    Method should return a node of type Entity whose descendant is copied.
-   The returned node should belong to this document whose systemId is "staff.dtd"
+   The returned node should belong to this document whose systemId is "staffNS.dtd"
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -45,25 +45,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityName" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"ent4"</member>
-<member>"entElement1"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
 <doctype obj="aNewDoc" var="doc1Type"/>
 <entities obj="doc1Type" var="entityList"/>
-<getNamedItem obj="entityList" var="entity2" name="&quot;ent4&quot;"/>
+<getNamedItem obj="entityList" var="entity2" name='"ent4"'/>
 <importNode obj="doc" var="entity1" importedNode="entity2" deep="true"/>
 <ownerDocument obj="entity1" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="systemId" ignoreCase="false"/>
 <nodeName obj="entity1" var="entityName"/>
-<append collection="result" obj="entityName"/>
+<assertEquals actual="entityName" expected='"ent4"' id="entityName" ignoreCase="false"/>
 <firstChild interface="Node" obj="entity1" var="child"/>
+<assertNotNull actual="child" id="notnull"/>
 <nodeName obj="child" var="childName"/>
-<append collection="result" obj="childName"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"entElement1"' id="childName" ignoreCase="false"/>
 </test>

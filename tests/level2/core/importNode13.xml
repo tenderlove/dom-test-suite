@@ -44,24 +44,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="system" type="DOMString"/>
 <var name="publicVal" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"notation1File"</member>
-<member>"null"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
 <doctype obj="aNewDoc" var="doc1Type"/>
 <notations obj="doc1Type" var="notationList"/>
-<getNamedItem obj="notationList" var="notation" name="&quot;notation1&quot;"/>
+<getNamedItem obj="notationList" var="notation" name='"notation1"'/>
 <importNode obj="doc" var="aNode" importedNode="notation" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="systemId" ignoreCase="false"/>
 <publicId interface="Notation" obj="aNode" var="publicVal"/>
-<append collection="result" obj="publicVal"/>
+<assertEquals actual="publicVal" expected='"notation1File"' id="publicId" ignoreCase="false"/>
 <systemId interface="Notation" obj="aNode" var="system"/>
-<append collection="result" obj="system"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+<assertNull actual="system"  id="notationSystemId"/>
 </test>

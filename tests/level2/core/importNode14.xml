@@ -43,21 +43,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="target" type="DOMString"/>
 <var name="data" type="DOMString"/>
 <var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"target1"</member>
-<member>"data1"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
-<createProcessingInstruction obj="aNewDoc" var="pi" target="&quot;target1&quot;" data="&quot;data1&quot;"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<createProcessingInstruction obj="aNewDoc" var="pi" target='"target1"' data='"data1"'/>
 <importNode obj="doc" var="aNode" importedNode="pi" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="throw_Equals1" ignoreCase="false"/>
 <target interface="ProcessingInstruction" obj="aNode" var="target"/>
-<append collection="result" obj="target"/>
+<assertEquals actual="target" expected='"target1"' id="piTarget" ignoreCase="false"/>
 <data interface="ProcessingInstruction" obj="aNode" var="data"/>
-<append collection="result" obj="data"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+<assertEquals actual="data" expected='"data1"' id="piData" ignoreCase="false"/>
 </test>
