@@ -55,6 +55,10 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 	<!--  attributes and methods keyed by name        -->
 	<xsl:key name="featureByName" match="//*[(name()='attribute' or name()='method') and @name]" use="@name"/>
 
+    <!--   list method names (such as EventHandler) that
+               are implemented by the caller, not by the DOM implementation
+               must provide leading and trailing space    -->              
+    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -70,13 +74,13 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
  PURPOSE.
  See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
-This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:text> by dom-to-xsd.xsl.
+This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:text> by dom-to-dtd.xsl.
 
 --&gt;
 
 &lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
@@ -126,6 +130,24 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 			<xsl:for-each select="$attributes">
 				<xsl:sort select="@name"/>
 
+                <xsl:choose>
+                    <xsl:when test="contains($sink-interfaces, 
+                            concat(' ',concat(parent::interface/@name,' ')))">
+                        <xsl:call-template name="produce-property">
+                            <xsl:with-param name="required">#IMPLIED</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+
+                    <xsl:otherwise>
+                        <xsl:call-template name="produce-property"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+			</xsl:for-each>
+	</xsl:template>
+
+
+    <xsl:template name="produce-property">
+        <xsl:param name="required">#REQUIRED</xsl:param>
 			  <!--  suppress creation of title element since it is also used
 			          as metadata, hardcoded version that can do both appears
 					  elsewhere   -->
@@ -195,9 +217,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 					<xsl:text>&gt;</xsl:text>
 				</xsl:if>
               </xsl:if>
-			</xsl:for-each>
-	</xsl:template>
-
+    </xsl:template>
 
 	<!--   produce elements for all of the DOM methods.  Identically named
 	       methods, for example, Document.getElementsByTagName and 
@@ -208,10 +228,43 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 		   signature of the first instance is appropriate for all.
 	-->
 	<xsl:template name="produce-methods">
+        <xsl:param name="required">#REQUIRED</xsl:param>
+        <xsl:param name="content">EMPTY</xsl:param>
 
 			<!--  produce an element for all methods  -->
-			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'handleEvent']">
+			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'load']">
 				<xsl:sort select="@name"/>
+
+                <xsl:choose>
+                    <!--   if the interface is something like EventListener
+                             that might be defined using anonymous inner classes  
+                             which makes all the required attributes optional
+                             -->
+                    <xsl:when test="contains($sink-interfaces, concat(' ',concat(parent::interface/@name,' ')))">
+                        <xsl:call-template name="produce-method">
+                            <xsl:with-param name="required">#IMPLIED</xsl:with-param>
+                            <xsl:with-param name="content">(var*, (%statement;)* )</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+
+                    <xsl:otherwise>
+                        <!--  normal method, required is required, content is empty  -->
+                        <xsl:call-template name="produce-method">
+                            <xsl:with-param name="required">#REQUIRED</xsl:with-param>
+                            <xsl:with-param name="content">EMPTY</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+			</xsl:for-each>
+	</xsl:template>
+
+	<!--  this template contains simple types that are indepenent
+	      of the DOM recommendation.	
+	-->
+	<xsl:template name="produce-method">
+        <xsl:param name="required">#REQUIRED</xsl:param>
+        <xsl:param name="content">EMPTY</xsl:param>
+
 				<xsl:variable name="name" select="@name"/>
 				<xsl:variable name="current" select="."/>
 
@@ -221,16 +274,16 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				-->
 				<xsl:if test="not(preceding::method[@name=$name]) and not(@name = $attributes/@name)">					
 					<xsl:text>
-&lt;!ELEMENT </xsl:text><xsl:value-of select="$name"/><xsl:text> EMPTY &gt;
+&lt;!ELEMENT </xsl:text><xsl:value-of select="$name"/><xsl:text> </xsl:text><xsl:value-of select="$content"/><xsl:text> &gt;
 &lt;!ATTLIST </xsl:text><xsl:value-of select="$name"/><xsl:text>
     id ID #IMPLIED
-    obj CDATA #REQUIRED
+    obj CDATA </xsl:text><xsl:value-of select="$required"/><xsl:text>
 </xsl:text>
 
 					<!--  If the method has a (non-void) return value then
 					      the var attribute is required to receive the return value  -->
 					<xsl:if test="returns[@type!='void']">
-						<xsl:text>    var CDATA #REQUIRED
+						<xsl:text>    var CDATA </xsl:text><xsl:value-of select="$required"/><xsl:text>
 </xsl:text>
 					</xsl:if>
 
@@ -240,7 +293,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 						<xsl:call-template name="param-type">
 							<xsl:with-param name="type" select="@type"/>
 							<xsl:with-param name="paramName" select="@name"/>
-							<xsl:with-param name="use">#REQUIRED</xsl:with-param>
+							<xsl:with-param name="use" select="$required"/>
 						</xsl:call-template>
 					</xsl:for-each>
 
@@ -258,7 +311,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 					<xsl:choose>
 						<xsl:when test="count($dups) &gt; 1">
-							<xsl:text> #REQUIRED
+							<xsl:text> </xsl:text><xsl:value-of select="$required"/><xsl:text>
 </xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
@@ -270,7 +323,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 </xsl:text>
 				</xsl:if>
-			</xsl:for-each>
 	</xsl:template>
 
 	<!--  this template contains simple types that are indepenent
@@ -278,6 +330,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	-->
     <xsl:template name="static-simpleTypes">
    </xsl:template>
+
 
 	<!--   this template generates any simple types
 	       that are dependent on the source document.  Currently only
@@ -298,7 +351,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 		   elements are <test>, <var>, <assign>, etc.
 	-->
     <xsl:template name="static-elements">
-
 
 &lt;!ELEMENT test (metadata?,(%implementation-condition;)*,var*,(load|implementation),(%statement;)*) &gt;
 &lt;!ATTLIST test 
@@ -403,7 +455,26 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	op2 CDATA #REQUIRED
 &gt;
 
-&lt;!ELEMENT var (member+ | handleEvent)?&gt;
+&lt;!ELEMENT return EMPTY&gt;
+&lt;!ATTLIST return
+	id ID #IMPLIED
+	value CDATA #IMPLIED
+&gt;
+
+
+
+<xsl:text>&lt;!ELEMENT var (member+ </xsl:text>
+        <!--  define elements for every method in user implemented interfaces
+                  used like anonymous inner class definitions  -->
+    <xsl:for-each select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]">
+        <xsl:text> | ( </xsl:text>
+        <xsl:for-each select="method|attribute">
+            <xsl:if test="position() &gt; 1"> , </xsl:if>
+            <xsl:value-of select="@name"/>
+        </xsl:for-each>
+        <xsl:text> ) </xsl:text>
+    </xsl:for-each>
+<xsl:text>)?&gt;
 &lt;!ATTLIST var
 	id ID #IMPLIED
 	name CDATA #REQUIRED
@@ -411,18 +482,18 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	value CDATA #IMPLIED
     isNull (true|false) #IMPLIED
 &gt;
+</xsl:text>
 
 &lt;!ELEMENT member (#PCDATA)&gt;
 
-&lt;!ELEMENT handleEvent (var*, (%statement;)+)>
-&lt;!ATTLIST handleEvent
-	return CDATA #IMPLIED
-&gt;
 
 &lt;!ELEMENT load EMPTY&gt;
 &lt;!ATTLIST load
 	var CDATA #REQUIRED
-	href CDATA #REQUIRED
+	href CDATA #IMPLIED
+    uri CDATA #IMPLIED
+    obj CDATA #IMPLIED
+    interface (DocumentLS) #IMPLIED
 	willBeModified (true | false) #REQUIRED
 &gt;
 
