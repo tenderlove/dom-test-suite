@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <metadata>
     <title>LSParserConfig8</title>
     <creator>Curt Arnold</creator>
-    <description>Checks support of xml-declaration.</description>
+    <description>Checks support of well-formed.</description>
 	<date qualifier="created">2003-12-08</date>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-config"/>
   </metadata>
@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="state" type="boolean"/>
   <var name="canSet" type="boolean"/>
   <var name="NULL_SCHEMA_TYPE" type="DOMString" isNull="true"/>
-  <var name="propertyName" type="DOMString" value='"xml-declaration"'/>
+  <var name="propertyName" type="DOMString" value='"well-formed"'/>
   
   <implementation var="domImpl"/>
   <createLSParser var="parser" obj="domImpl" mode="1" schemaType="NULL_SCHEMA_TYPE"/>
