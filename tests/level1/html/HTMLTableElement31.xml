@@ -48,7 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
 <length var="tbodiesLength" obj="tbodiesnodeList" interface="HTMLCollection"/>
-<assertEquals actual="tbodiesLength" expected="0" id="Asize2" ignoreCase="false"/>
+<assertEquals actual="tbodiesLength" expected="1" id="Asize2" ignoreCase="false"/>
 <item interface="NodeList" obj="tbodiesnodeList" var="bodyNode" index="0"/>
 <rows interface="HTMLTableSectionElement" obj="bodyNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
