@@ -35,25 +35,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 </metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="genderNode" type="Node"/>
-<var name="genList" type="NodeList"/>
-<var name="genNode" type="Node"/>
-<var name="gList" type="NodeList"/>
-<var name="gNode" type="Node"/>
+<var name="entRef" type="Node"/>
+<var name="entElement" type="Node"/>
 <var name="createdNode" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
+<if>
+<implementationAttribute name="expandEntityReferences" value="false"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"gender"' var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
-<childNodes obj="genderNode" var="genList"/>
-<item interface="NodeList" obj="genList" index="0" var="genNode"/>
-<childNodes obj="genNode" var="gList"/>
-<item interface="NodeList" obj="gList" index="0" var="gNode"/>
-<createElement obj="doc" tagName="&quot;text3&quot;" var="createdNode"/>
+<firstChild interface="Node" obj="genderNode" var="entRef"/>
+<else>
+<createEntityReference var="entRef" name='"ent4"' obj="doc"/>
+</else>
+</if>
+<assertNotNull actual="entRef" id="entityRef"/>
+<firstChild interface="Node" obj="entRef" var="entElement"/>
+<assertNotNull actual="entElement" id="entElement"/>
+<createElement obj="doc" tagName='"text3"' var="createdNode"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<prefix obj="genNode" value="&quot;newPrefix&quot;"/>
+<prefix obj="entElement" value='"newPrefix"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>
