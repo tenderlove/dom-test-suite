@@ -33,7 +33,7 @@
       x CDATA #REQUIRED
       y CDATA #REQUIRED
       width CDATA #REQUIRED
-      height CDATA #REQUIRED
+      height CDATA #REQUIRED>
    <!ATTLIST body xmlns CDATA #IMPLIED>
 ]>
 <svg xmlns="http://www.w3.org/2000/svg"
