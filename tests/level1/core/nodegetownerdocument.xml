@@ -29,5 +29,5 @@
 <ownerDocument obj="docNode" var="ownerDocument"/>
 <documentElement obj="ownerDocument" var="docElement"/>
 <nodeName obj="docElement" var="elementName"/>
-<assertEquals actual="elementName" expected="&quot;staff.xml&quot;" id="nodeGetOwnerDocumentAssert1" ignoreCase="false"/>
+<assertEquals actual="elementName" expected="&quot;staff&quot;" id="nodeGetOwnerDocumentAssert1" ignoreCase="false"/><!-- was staff.xml -->
 </test>

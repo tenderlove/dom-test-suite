@@ -22,5 +22,5 @@
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <name interface="DocumentType" obj="docType" var="docTypeName"/>
-<assertEquals actual="docTypeName" expected="&quot;staff.xml&quot;" id="documentGetDocTypeAssert" ignoreCase="false"/>
+<assertEquals actual="docTypeName" expected="&quot;staff&quot;" id="documentGetDocTypeAssert" ignoreCase="false"/><!-- was staff.xml -->
 </test>

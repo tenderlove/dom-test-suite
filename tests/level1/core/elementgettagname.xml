@@ -21,5 +21,5 @@
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <tagName obj="root" var="tagname"/>
-<assertEquals actual="tagname" expected="&quot;staff.xml&quot;" id="elementGetTagNameAssert" ignoreCase="false"/>
+<assertEquals actual="tagname" expected="&quot;staff&quot;" id="elementGetTagNameAssert" ignoreCase="false"/><!-- was staff.xml -->
 </test>

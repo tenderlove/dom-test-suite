@@ -23,5 +23,5 @@
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <documentElement obj="doc" var="elementNode"/>
 <nodeName obj="elementNode" var="elementName"/>
-<assertEquals actual="elementName" expected="&quot;staff.xml&quot;" id="nodeElementNodeNameAssert1" ignoreCase="false"/>
+<assertEquals actual="elementName" expected="&quot;staff&quot;" id="nodeElementNodeNameAssert1" ignoreCase="false"/><!-- was staff.xml -->
 </test>

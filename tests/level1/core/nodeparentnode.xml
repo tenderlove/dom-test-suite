@@ -26,5 +26,5 @@
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <parentNode obj="employeeNode" var="parentNode"/>
 <nodeName obj="parentNode" var="parentName"/>
-<assertEquals actual="parentName" expected="&quot;staff.xml&quot;" id="nodeParentNodeAssert1" ignoreCase="false"/>
+<assertEquals actual="parentName" expected="&quot;staff&quot;" id="nodeParentNodeAssert1" ignoreCase="false"/><!-- was staff.xml -->
 </test>
