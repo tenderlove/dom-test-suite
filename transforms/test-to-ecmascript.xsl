@@ -224,6 +224,10 @@ The source document contained the following notice:
 	<xsl:text>var </xsl:text>
 	<xsl:value-of select="$varname"/>
 	<xsl:choose>
+                <xsl:when test="@isNull='true'">
+                  <xsl:text> = null;
+</xsl:text>
+                </xsl:when>
 		<!--  explict value, just add it  -->
 		<xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 		<!--  member, allocate collection or list and populate it  -->
