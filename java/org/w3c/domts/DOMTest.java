@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.3  2002-08-13 04:44:46  dom-ts-4
+ Revision 1.4  2003-04-03 07:18:23  dom-ts-4
+ Added openStream method
+
+ Revision 1.3  2002/08/13 04:44:46  dom-ts-4
  Added getImplementation()
 
  Revision 1.2  2002/02/03 04:22:35  dom-ts-4
@@ -82,13 +85,22 @@ public abstract class DOMTest {
     return factory.getDOMImplementation();
   }
 
-  public Document load(String docURI) throws DOMTestLoadException {
+  private URL resolveURI(String baseURI) throws DOMTestLoadException {
+    String docURI  = factory.addExtension(baseURI);
 
-    docURI = factory.addExtension(docURI);
+    URL resolvedURI = null;
+    try {
+        resolvedURI = new URL(docURI);
+        if (resolvedURI.getProtocol() != null) {
+            return resolvedURI;
+        }
+    } catch(MalformedURLException ex) {
+        throw new DOMTestLoadException(ex);
+    }
     //
     //   build a URL for a test file in the JAR
     //
-    URL resolvedURI = getClass().getResource("/" + docURI);
+    resolvedURI = getClass().getResource("/" + docURI);
     if(resolvedURI == null) {
         //
         //   see if it is an absolute URI
@@ -116,8 +128,16 @@ public abstract class DOMTest {
     if(resolvedURI == null) {
         throw new DOMTestLoadException(new java.io.FileNotFoundException(docURI));
     }
+    return resolvedURI;
+  }
 
-    return factory.load(resolvedURI);
+  public Document load(String docURI) throws DOMTestLoadException {
+
+    return factory.load(resolveURI(docURI));
+  }
+
+  public InputStream openStream(String docURI) throws DOMTestLoadException, IOException {
+    return resolveURI(docURI).openStream();
   }
 
 
