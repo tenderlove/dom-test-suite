@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.105  2003-11-14 16:11:15  dom-ts-4
+Revision 1.106  2003-11-18 08:36:32  dom-ts-4
+DOMUserData does not appear in L3 schemas (bug 378)
+
+Revision 1.105  2003/11/14 16:11:15  dom-ts-4
 Preparations for automated builds/schema validation targets (bug 377)Eliminated requirement for Ant 1.6 or later when not schema validating
 
 Revision 1.104  2003/11/12 06:59:02  dom-ts-4
@@ -1992,7 +1995,7 @@ All implementation conditions combined into implementationAttribute element
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
 		<param name="schema-location" expression="dom3.xsd"/>
-        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter"/>
+        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter|DOMUserData"/>
 	</style>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls" overwrite="true"/>
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls" overwrite="true"/>

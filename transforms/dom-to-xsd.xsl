@@ -404,6 +404,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xs:enumeration value="LSOutputStream"/>
                         <xs:enumeration value="LSReader"/>
                         <xs:enumeration value="LSWriter"/>
+                        <xs:enumeration value="DOMUserData"/>
                     </xsl:if>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
