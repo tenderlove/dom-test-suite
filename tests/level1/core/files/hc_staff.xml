@@ -10,7 +10,7 @@
    <!ENTITY alpha "&#950;">
    <!NOTATION notation1 PUBLIC "notation1File">
    <!NOTATION notation2 SYSTEM "notation2File">
-   <!ATTLIST acronym street CDATA "Yes">
+   <!ATTLIST acronym dir CDATA "ltr">
 ]>
 <!-- This is comment number 1.-->
 <html xmlns='http://www.w3.org/1999/xhtml'><head><title>hc_staff</title></head><body>
