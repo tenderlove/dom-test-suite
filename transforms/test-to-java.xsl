@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.50  2003-12-15 21:37:45  dom-ts-4
+Revision 1.51  2003-12-16 05:36:31  dom-ts-4
+Adds support for for-each member variables of value types (bug 429)
+
+Revision 1.50  2003/12/15 21:37:45  dom-ts-4
 test-matrix and test-to-jsunit transform, list member type (Bug 429)
 
 Revision 1.49  2003/12/09 08:22:27  dom-ts-4
@@ -829,7 +832,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
                 <xsl:choose>
                 	<!-- if explicitly declared a short -->
                     <xsl:when test="@type = 'short'">
-                    	<xsl:text>new Short(</xsl:text>
+                    	<xsl:text>new Short((short) </xsl:text>
                         <xsl:value-of select="text()"/>
                         <xsl:text>)</xsl:text>
                     </xsl:when>
@@ -1514,11 +1517,56 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text>++) {
           </xsl:text>
     <xsl:value-of select="$member"/>
-    <xsl:text> = (</xsl:text>
-    <xsl:call-template name="produce-type">
-        <xsl:with-param name="type" select="$vardefs[@name = $member]/@type"/>
-    </xsl:call-template>
-    <xsl:text>) </xsl:text>
+    <xsl:text> = </xsl:text>
+    <xsl:variable name="memberType" select="$vardefs[@name = $member]/@type"/>
+    <xsl:choose>
+    	<xsl:when test="$memberType = 'boolean'">
+    		<xsl:text>((Boolean) </xsl:text>
+    		<xsl:call-template name="produce-indexer">
+    			<xsl:with-param name="indexvar" select="$indexvar"/>
+    			<xsl:with-param name="vartype" select="$vartype"/>
+    		</xsl:call-template>
+    		<xsl:text>).booleanValue();
+     </xsl:text>    		
+    	</xsl:when>
+
+    	<xsl:when test="$memberType = 'int' or $memberType='short' or $memberType = 'double'">
+    		<xsl:text>((Number) </xsl:text>
+    		<xsl:call-template name="produce-indexer">
+    			<xsl:with-param name="indexvar" select="$indexvar"/>
+    			<xsl:with-param name="vartype" select="$vartype"/>
+    		</xsl:call-template>
+    		<xsl:text>).</xsl:text>
+    		<xsl:value-of select="$memberType"/>
+    		<xsl:text>Value();
+     </xsl:text>    		
+    	</xsl:when>
+
+
+    	<xsl:otherwise>
+    		<xsl:text>( </xsl:text>
+    		<xsl:call-template name="produce-type">
+        		<xsl:with-param name="type" select="$memberType"/>
+    		</xsl:call-template>
+    		<xsl:text>) </xsl:text>
+    		<xsl:call-template name="produce-indexer">
+    			<xsl:with-param name="indexvar" select="$indexvar"/>
+    			<xsl:with-param name="vartype" select="$vartype"/>
+    		</xsl:call-template>
+    		<xsl:text>;
+    </xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
+    <xsl:apply-templates select="*" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+    </xsl:apply-templates>
+    <xsl:text>  }
+      </xsl:text>
+</xsl:template>
+
+<xsl:template name="produce-indexer">
+	<xsl:param name="indexvar"/>
+	<xsl:param name="vartype"/>
     <xsl:value-of select="@collection"/>
     <xsl:choose>
         <xsl:when test="$vartype = 'Collection' or $vartype = 'List'">
@@ -1529,15 +1577,8 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         </xsl:otherwise>
     </xsl:choose>
     <xsl:value-of select="$indexvar"/>
-    <xsl:text>);
-          </xsl:text>
-    <xsl:apply-templates select="*" mode="body">
-        <xsl:with-param name="vardefs" select="$vardefs"/>
-    </xsl:apply-templates>
-    <xsl:text>  }
-      </xsl:text>
+    <xsl:text>)</xsl:text>
 </xsl:template>
-
 
 <xsl:template match="*[local-name()='atEvents']" mode="body">
     <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAtEvents();
