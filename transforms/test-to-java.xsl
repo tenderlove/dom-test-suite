@@ -28,8 +28,13 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.46  2003-11-19 03:55:52  dom-ts-4
-ECMAScript missing ) on assertEqualsCollectionexpected instead of @expected on less, lessOrEquals...Bug 364
+Revision 1.47  2003-12-02 04:01:19  dom-ts-4
+Load/save fixup (bug 396)
+
+Revision 1.46  2003/11/19 03:55:52  dom-ts-4
+ECMAScript missing ) on assertEqualsCollection
+expected instead of @expected on less, lessOrEquals...
+Bug 364
 
 Revision 1.45  2003/11/18 08:39:58  dom-ts-4
 Fix Java production for attributes that start with is (bug 379)
@@ -614,7 +619,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:message terminate="yes">Method <xsl:value-of select="local-name()"/> not found.</xsl:message>
+                <xsl:message terminate="yes">Method <xsl:value-of select="$method-name"/> not found for interface <xsl:value-of select="$interface/@name"/>.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
 </xsl:template>
@@ -778,11 +783,21 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         </xsl:when>
 
         <xsl:when test="@value and @type = 'LSInputStream'">
-            <xsl:text> = openStream(</xsl:text>
+            <xsl:text> = createStream("</xsl:text>
             <xsl:value-of select="@value"/>
-            <xsl:text>);</xsl:text>
+            <xsl:text>");</xsl:text>
         </xsl:when>
-
+        
+        <xsl:when test="@value and @type = 'LSReader'">
+        	<xsl:text> = new java.io.StringReader(</xsl:text>
+        	<xsl:value-of select="@value"/>
+        	<xsl:text>);</xsl:text>
+        </xsl:when>
+        
+        <xsl:when test="@type = 'LSOutputStream' and (not(@isNull) or @isNull='false')">
+           <xsl:text> = new java.io.ByteArrayOutputStream();</xsl:text>
+        </xsl:when>
+        
         <!--  explict value, just add it  -->
         <xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 
@@ -898,6 +913,15 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:text>;
       </xsl:text>
         </xsl:when>
+        
+        <!--  if the left hand side is LSInputStream and the right hand side is LSOutputStream  -->
+        <xsl:when test="$vardefs[@name = current()/@var]/@type = 'LSInputStream' and $vardefs[@name = current()/@value]/@type = 'LSOutputStream'">
+        	<xsl:text> new java.io.ByteArrayInputStream(((java.io.ByteArrayOutputStream) </xsl:text>
+        	<xsl:value-of select="@value"/>
+        	<xsl:text>).toByteArray());
+       </xsl:text>
+        </xsl:when>
+        
         <xsl:otherwise>
             <xsl:variable name="var" select="@var"/>
             <xsl:variable name="value" select="@value"/>
@@ -1517,6 +1541,17 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text>load("</xsl:text>
     <xsl:value-of select="@href"/>
     <xsl:text>");
+      </xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='getResourceURI']" mode="body">
+    <xsl:param name="vardefs"/>
+
+    <xsl:variable name="var" select="@var"/>
+    <xsl:value-of select="@var"/>
+    <xsl:text> = getResourceURI(</xsl:text>
+    <xsl:value-of select="@href"/>
+    <xsl:text>);
       </xsl:text>
 </xsl:template>
 

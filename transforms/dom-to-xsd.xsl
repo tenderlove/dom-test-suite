@@ -349,12 +349,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:pattern value='"([^"\\]|\\"|\\\\|\\n)*"'/>
 				</xs:restriction>
 			</xs:simpleType>
+			
+			<xs:simpleType name="hexBinaryLiteral">
+				<xs:annotation>
+					<xs:documentation>A binary literal.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:hexBinary"/>
+            </xs:simpleType>
 
 			<xs:simpleType name="literal">
 				<xs:annotation>
 					<xs:documentation>The union of accepted literal types</xs:documentation>
 				</xs:annotation>
-				<xs:union memberTypes="xs:integer xs:boolean stringLiteral"/>
+				<xs:union memberTypes="xs:integer xs:boolean stringLiteral hexBinaryLiteral"/>
 			</xs:simpleType>
 			<xs:simpleType name="variableOrLiteral">
 				<xs:union memberTypes="literal variable"/>
@@ -1023,6 +1030,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="allEvents"/>
 					<xs:element ref="createEventMonitor"/>
 					<xs:element ref="createXPathEvaluator"/>
+					<xs:element ref="getResourceURI"/>
 				</xs:choice>
 			</xs:group>
 
@@ -1292,7 +1300,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				    <xs:attribute name="document" type="variable" use="required"/>
 			    </xs:complexType>
             </xs:element>
-
+            <xs:element name="getResourceURI">
+            	<xs:complexType>
+            		<xs:attribute name="id" type="xs:ID" use="optional"/>
+            		<xs:attribute name="var" type="variable" use="required"/>
+            		<xs:attribute name="href" type="variableOrStringLiteral" use="required"/>
+            	</xs:complexType>
+            </xs:element>
 	</xsl:template>
 
 	<!--   This template produces assertion elements for each
