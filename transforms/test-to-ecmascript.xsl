@@ -1185,6 +1185,7 @@ function handleEvent(listener, event, userObj) {
 	<xsl:text>)</xsl:text>
 </xsl:template>
 
+
 <xsl:template match="*[local-name()='try']" mode="body">
     <xsl:param name="vardefs"/>
     <xsl:variable name="exceptions" select="$domspec//exception[@id]"/>
@@ -1199,38 +1200,59 @@ function handleEvent(listener, event, userObj) {
       </xsl:apply-templates>
       <xsl:text>
       } catch (ex) {
-      </xsl:text>
-      <xsl:for-each select="$exceptions">
-      	  <xsl:if test="$implException or $catches[local-name() = current()/@name]">
-      			<xsl:variable name="exception" select="."/>
-      			<xsl:for-each select="$catches[local-name() = $exception/@name]">
-      				<xsl:variable name="catchCode" select="@code"/>
-      				<xsl:text>if (ex.code == </xsl:text>
-      				<xsl:for-each select="$exception">
-      					<xsl:value-of select="following-sibling::group[1]/constant[@name = $catchCode]/@value"/>
-      				</xsl:for-each>
-      				<xsl:text>) {
-      </xsl:text>
-      				<xsl:apply-templates select="*" mode="body">
-      					<xsl:with-param name="vardefs" select="$vardefs"/>
-      				</xsl:apply-templates>
-      				<xsl:text>}
-      </xsl:text>
-      			</xsl:for-each>
-      		</xsl:if>
-      </xsl:for-each>
-      <xsl:for-each select="$implException">
-      	<xsl:apply-templates select="*" mode="body">
-      		<xsl:with-param name="vardefs" select="$vardefs"/>
-      	</xsl:apply-templates>
-      </xsl:for-each>
-      <xsl:if test="not($implException)">
-      		<xsl:text>    throw ex;
+		  if (ex.prototype.HasOwnProperty('code')) {      
        </xsl:text>
-      </xsl:if>
-      <xsl:text>
-      }
+      <xsl:if test="*[local-name() = 'catch']/*[local-name() != 'ImplementationException']">
+      	   <xsl:text>switch(ex.code) {
+       </xsl:text>
+      	   <xsl:for-each select="*[local-name() = 'catch']/*[local-name() != 'ImplementationException']">
+      	   		<xsl:text>case </xsl:text>
+      	   		<xsl:variable name="catchCode" select="@code"/>
+      	   		<xsl:text>/* </xsl:text><xsl:value-of select="$catchCode"/><xsl:text> */ </xsl:text>
+      	   		<xsl:for-each select="$exceptions">
+      				<xsl:value-of select="following-sibling::group[1]/constant[@name = $catchCode]/@value"/>
+      	   		</xsl:for-each>
+      	   		<xsl:text> :
+       </xsl:text> 
+      			<xsl:apply-templates select="*" mode="body">
+      				 <xsl:with-param name="vardefs" select="$vardefs"/>
+      			</xsl:apply-templates>
+				<!--  if there are no children, add a break -->
+      			<xsl:if test="count(*) = 0">
+      				 <xsl:text>break;
       </xsl:text>
+      			</xsl:if>
+      			<!--  if the last child is not a return, add a break  -->
+      			<xsl:for-each select="*">
+      				 <xsl:if test="not(following-sibling::*) and local-name() != 'return'">
+      					 <xsl:text>break;
+      </xsl:text>
+      				 </xsl:if>
+      			</xsl:for-each>
+      		</xsl:for-each>
+      			<xsl:text>    default:
+          throw ex;
+          }
+       </xsl:text>  
+      </xsl:if>
+      <xsl:text>} else { 
+       </xsl:text>
+      <xsl:choose>
+          <!--  if there is an ImplementationException clause,
+                     fill in any of its statements    -->
+      	  <xsl:when test="*[local-name() = 'catch']/*[local-name() = 'ImplementationException']">
+       		<xsl:apply-templates select="*[local-name() = 'catch']/*[local-name() = 'ImplementationException']/*" mode="body">
+      			<xsl:with-param name="vardefs" select="$vardefs"/>
+       		</xsl:apply-templates>
+           </xsl:when>
+           
+           <xsl:otherwise>
+           		<xsl:text>throw ex;
+        </xsl:text>
+           </xsl:otherwise>
+       </xsl:choose>
+       <xsl:text>}
+        </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='getResourceURI']" mode="body">

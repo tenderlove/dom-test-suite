@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.52  2003-12-17 19:29:15  dom-ts-4
+Revision 1.53  2003-12-18 05:25:41  dom-ts-4
+Refinement of try production (bug 439)
+
+Revision 1.52  2003/12/17 19:29:15  dom-ts-4
 Add try construct to test language (bug 439)
 
 Revision 1.51  2003/12/16 05:36:31  dom-ts-4
@@ -1506,23 +1509,37 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
       	  		at least one element for the current exception  -->
       	  <xsl:if test="$implException or $catches[local-name() = current()/@name]">
       	  <xsl:text>catch (</xsl:text><xsl:value-of select="@name"/><xsl:text> ex) {
+      	  	  switch (ex.code) {
       </xsl:text>
       			<xsl:variable name="exception" select="."/>
       			<xsl:for-each select="$catches[local-name() = $exception/@name]">
       				<xsl:variable name="catchCode" select="@code"/>
-      				<xsl:text>if (ex.code == </xsl:text>
+      				<!--  set the context to the one exception definition  -->
       				<xsl:for-each select="$exception">
+      					<xsl:text>case </xsl:text>
       					<xsl:value-of select="following-sibling::group[1]/constant[@name = $catchCode]/@value"/>
       				</xsl:for-each>
-      				<xsl:text>) {
+      					<xsl:text> : 
+       </xsl:text>
+      					<xsl:apply-templates select="*" mode="body">
+      						<xsl:with-param name="vardefs" select="$vardefs"/>
+      					</xsl:apply-templates>
+						<!--  if there are no children, add a break -->
+      					<xsl:if test="count(*) = 0">
+      							<xsl:text>break;
       </xsl:text>
-      				<xsl:apply-templates select="*" mode="body">
-      					<xsl:with-param name="vardefs" select="$vardefs"/>
-      				</xsl:apply-templates>
-      				<xsl:text>}
+      					</xsl:if>
+      					<!--  if the last child is not a return, add a break  -->
+      					<xsl:for-each select="*">
+      						<xsl:if test="not(following-sibling::*) and local-name() != 'return'">
+      							<xsl:text>break;
       </xsl:text>
+      						</xsl:if>
+      					</xsl:for-each>
       			</xsl:for-each>
-      			<xsl:text>    throw ex;
+      			<xsl:text>    default:
+          throw ex;
+          }
       }
       </xsl:text>
       		</xsl:if>
