@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.62  2002-06-10 04:24:01  dom-ts-4
+Revision 1.63  2002-06-25 06:59:26  dom-ts-4
+Added dom1-html-gen-jsunit, other cleanup
+
+Revision 1.62  2002/06/10 04:24:01  dom-ts-4
 Added XHTML DTD to dom1-core.jar
 
 Revision 1.61  2002/06/06 05:04:11  dom-ts-4
@@ -884,6 +887,28 @@ All implementation conditions combined into implementationAttribute element
 	</jar>
 </target>
 
+<target name="dom1-html-gen-jsunit" depends="dom1-interfaces,dom1-dtd">
+    <mkdir dir="${build.dir}/level1/html/ecmascript/tests"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/html/ecmascript/tests"/>
+    <copy todir="${build.dir}/level1/html/ecmascript/tests">
+		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
+    </copy>
+
+
+	<style basedir="${tests.dir}/level1/html" 
+		   destdir="${build.dir}/level1/html/ecmascript/tests" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-jsunit.xsl" 
+	       extension=".html">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
+	</style>
+</target>
+
+
 
 <target name="jsunit-get" depends="init" unless="jsunit-available">
 	<get src="http://www.edwardh.com/jsunit/jsunit.zip"
@@ -891,26 +916,8 @@ All implementation conditions combined into implementationAttribute element
 		usetimestamp="yes"/>
 </target>
 
-<target name="jsunit-init" depends="jsunit-get">
-	<unzip src="${lib.dir}/jsunit.zip" dest="${lib.dir}"/>
 
-    <!--   apply patches to JSUnit 1.2.6
-              to add code that "injects" jsUnitCore
-              into tests and does not require
-              the tests and test framework to 
-              have a constant relative position   -->
-	<patch patchfile="./patches/main.patch"
-	       originalfile="${lib.dir}/jsunit/app/main.html"/>
-
-	<patch patchfile="./patches/jsUnitRunner.patch"
-	       originalfile="${lib.dir}/jsunit/app/jsUnitRunner.js"/>
-
-	<patch patchfile="./patches/jsUnitCore.patch"
-	       originalfile="${lib.dir}/jsunit/app/jsUnitCore.js"/>
-
-</target>
-
-<target name="dom1-core-gen-jsunit" depends="jsunit-init,dom1-interfaces,dom1-dtd">
+<target name="dom1-core-gen-jsunit" depends="dom1-interfaces,dom1-dtd">
     <mkdir dir="${build.dir}/level1/core/ecmascript/tests"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/core/ecmascript/tests"/>
     <copy todir="${build.dir}/level1/core/ecmascript/tests">
@@ -920,14 +927,14 @@ All implementation conditions combined into implementationAttribute element
     <!--  a prefabricated documentcreatecdatasection.html
              is provided since some versions of Xalan-J
                    will stall when processing it    -->
-    <copy file="${tests.dir}/level1/core/documentcreatecdatasection.html" 
-            todir="${build.dir}/level1/core/ecmascript/tests"/>
+    <!-- copy file="${tests.dir}/level1/core/documentcreatecdatasection.html" 
+            todir="${build.dir}/level1/core/ecmascript/tests"/ -->
 
 
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${build.dir}/level1/core/ecmascript/tests" 
 		   includes="*.xml" 
-           excludes="metadata.xml,documentcreatecdatasection.xml"
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
 	       extension=".html">
 		<param name="interfaces-docname"
@@ -1106,7 +1113,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom2-core-gen-jsunit" depends="jsunit-init,dom2-interfaces,dom2-dtd">
+<target name="dom2-core-gen-jsunit" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/level2/core/ecmascript/tests"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/core/ecmascript/tests"/>
     <copy todir="${build.dir}/level2/core/tests">
@@ -1160,7 +1167,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom2-html-gen-jsunit" depends="jsunit-init,dom2-interfaces,dom2-dtd">
+<target name="dom2-html-gen-jsunit" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/level2/html/ecmascript/tests"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/html/ecmascript/tests"/>
     <copy todir="${build.dir}/level2/html/ecmascript/tests">
