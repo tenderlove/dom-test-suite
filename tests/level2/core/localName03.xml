@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     and for nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE
     and nodes created with a DOM Level 1 method, this is null.
     
-    Retrieve the first employee node and get the first child of this node.
+    Retrieve the first employeeId node and get the first child of this node.
     Since the first child is Text node invoking the "getLocalName()"   
     method will cause "null" to be returned. 
 </description>
@@ -39,9 +39,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="textNode" type="Node"/>
 <var name="localName" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employeeId"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <firstChild interface="Node" obj="testEmployee" var="textNode"/>
 <localName obj="textNode" var="localName"/>
-<assertNull actual="localName" id="throw_Null"/>
+<assertNull actual="localName" id="textNodeLocalName"/>
 </test>
