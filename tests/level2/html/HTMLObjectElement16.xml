@@ -32,12 +32,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vvspace" type="DOMString"/>
+<var name="vvspace" type="int"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="object" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;object&quot;"/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <vspace interface="HTMLObjectElement" obj="testNode" var="vvspace"/>
-<assertEquals actual="vvspace" expected="&quot;0&quot;" id="vspaceLink" ignoreCase="false"/>
+<assertEquals actual="vvspace" expected="0" id="vspaceLink" ignoreCase="false"/>
 </test>
