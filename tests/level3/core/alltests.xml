@@ -135,6 +135,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="documentnormalizedocument10.xml"/>
 <suite.member href="documentnormalizedocument11.xml"/>
 <suite.member href="documentnormalizedocument12.xml"/>
+<suite.member href="documentnormalizedocument13.xml"/>
 <suite.member href="documentrenamenode01.xml"/>
 <suite.member href="documentrenamenode02.xml"/>
 <suite.member href="documentrenamenode03.xml"/>
