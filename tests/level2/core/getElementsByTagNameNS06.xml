@@ -34,11 +34,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.nomatch.com&quot;"/>
-<var name="localName" type="DOMString" value="&quot;address&quot;"/>
+<!--  test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagNameNS interface="Document" obj="doc" namespaceURI="namespaceURI" localName="localName" var="elementList"/>
-<assertSize collection="elementList" size="0" id="throw_Size"/>
+<getElementsByTagNameNS interface="Document" obj="doc" namespaceURI='"http://www.nomatch.com"' localName='"address"' var="elementList"/>
+<assertSize collection="elementList" size="0" id="matchSize"/>
 </test>

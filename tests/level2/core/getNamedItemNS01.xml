@@ -33,8 +33,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.usa.com&quot;"/>
-<var name="localName" type="DOMString" value="&quot;domestic&quot;"/>
+<!--  this test requires the parser to be namespace aware  -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Node"/>
@@ -42,10 +42,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domesticAttr" type="Attr"/>
 <var name="attrName" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"address"'/>
 <item interface="NodeList" obj="elementList" var="testEmployee" index="1"/>
 <attributes obj="testEmployee" var="attributes"/>
-<getNamedItemNS obj="attributes" var="domesticAttr" namespaceURI="namespaceURI" localName="localName"/>
+<getNamedItemNS obj="attributes" var="domesticAttr" namespaceURI='"http://www.usa.com"' localName='"domestic"'/>
 <nodeName obj="domesticAttr" var="attrName"/>
-<assertEquals actual="attrName" expected="&quot;dmstc:domestic&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="attrName" expected='"dmstc:domestic"' id="attrName" ignoreCase="false"/>
 </test>

@@ -34,8 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;*&quot;"/>
-<var name="localName" type="DOMString" value="&quot;address&quot;"/>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="child" type="Node"/>
@@ -49,10 +48,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"address"</member>
 </var>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagNameNS interface="Document" obj="doc" namespaceURI="namespaceURI" localName="localName" var="elementList"/>
+<getElementsByTagNameNS interface="Document" obj="doc" namespaceURI='"*"' localName='"address"' var="elementList"/>
 <for-each collection="elementList" member="child">
 <nodeName obj="child" var="childName"/>
 <append collection="result" obj="childName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="result" expected="expectedResult" id="nodeNames" ignoreCase="false"/>
 </test>
