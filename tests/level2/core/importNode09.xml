@@ -46,30 +46,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityName" type="DOMString"/>
 <var name="publicVal" type="DOMString"/>
 <var name="notationName" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"ent6"</member>
-<member>"uri"</member>
-<member>"file"</member>
-<member>"notation2"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
 <doctype obj="aNewDoc" var="docType"/>
 <entities obj="docType" var="entityList"/>
-<getNamedItem obj="entityList" var="entity2" name="&quot;ent6&quot;"/>
+<getNamedItem obj="entityList" var="entity2" name='"ent6"'/>
 <importNode obj="doc" var="entity1" importedNode="entity2" deep="false"/>
 <ownerDocument obj="entity1" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="dtdSystemId" ignoreCase="false"/>
 <nodeName obj="entity1" var="entityName"/>
-<append collection="result" obj="entityName"/>
+<assertEquals actual="entityName" expected='"ent6"' ignoreCase="false" id="entityName"/>
 <publicId interface="Entity" obj="entity1" var="publicVal"/>
-<append collection="result" obj="publicVal"/>
+<assertEquals actual="publicVal" expected='"uri"' ignoreCase="false" id="entityPublicId"/>
 <systemId interface="Entity" obj="entity1" var="system"/>
-<append collection="result" obj="system"/>
+<assertEquals actual="system" expected='"file"' ignoreCase="false" id="entitySystemId"/>
 <notationName obj="entity1" var="notationName"/>
-<append collection="result" obj="notationName"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+<assertEquals actual="notationName" expected='"notation2"' ignoreCase="false" id="notationName"/>
 </test>
