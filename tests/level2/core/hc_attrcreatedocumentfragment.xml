@@ -9,7 +9,7 @@ hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
---><!DOCTYPE test SYSTEM "dom1.dtd">
+--><!DOCTYPE test SYSTEM "dom2.dtd">
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_attrcreatedocumentfragment">
 <metadata>
@@ -20,9 +20,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   Create a new DocumentFragment and add a newly created Element node(with one attribute).  
   Once the element is added, its attribute should be available as an attribute associated 
   with an Element within a DocumentFragment.
+
+  Unlike DOM L1 Core equivalent, this test can expect a specific case for HTML documents.
 </description>
 
-<date qualifier="created">2002-06-09</date>
+<date qualifier="created">2003-06-27</date>
 <!--  createDocumentFragment  -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-35CB04B5"/>
 <!--  setAttribute -->
@@ -49,10 +51,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="domesticNode" var="domesticAttr"/>
 <item interface="NamedNodeMap" obj="domesticAttr" var="attrs" index="0"/>
 <name interface="Attr" obj="attrs" var="attrName"/>
-<if><contentType type="text/html"/>
-<assertEquals actual="attrName" expected='"lang"' id="attrName_html" ignoreCase="true"/>
-<else>
-<assertEquals actual="attrName" expected='"lang"' id="attrName" ignoreCase="false"/>
-</else>
-</if>
+<assertEquals actual="attrName" expected='"lang"' id="attrName" ignoreCase="auto"/>
 </test>
