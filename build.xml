@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.81  2003-01-21 16:11:57  dom-ts-4
+Revision 1.82  2003-01-25 18:00:03  dom-ts-4
+Added checkstyle tasks
+Eliminated use of pregenerated tests
+
+Revision 1.81  2003/01/21 16:11:57  dom-ts-4
 Patched L2 HTML and L3 Val xml-source.xml to get xmlspec.dtd locally
 Fixed encoding declaration of L2 HTML
 
@@ -533,74 +537,6 @@ All implementation conditions combined into implementationAttribute element
         
 </target>
 
-<!--  determines if DOM 1 spec files are already available locally  -->
-<target name="dom1SE-check-spec" depends="init">
-    <available property="dom1SE-available" file="${specs.dir}/DOM1SE.zip"/>
-</target>
-
-<!--  gets DOM 1 specs unless they are available locally   -->
-<target name="get-dom1SE" depends="dom1SE-check-spec" unless="dom1SE-available">
-	<mkdir dir="${specs.dir}"/>
-	<mkdir dir="${specs.dir}/Level-1SE"/>
-	<!--   download DOM 1 SE spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/DOM.zip"
-	     dest="${specs.dir}/DOM1SE.zip"
-	     usetimestamp="yes"/>
-</target>
-
-<!--  this target downloads the DOM Level 1 Second Edition Working Draft  -->
-<target name="dom1SE-init" depends="get-dom1SE">
-
-	<unzip src="${specs.dir}/DOM1SE.zip" dest="${specs.dir}/Level-1SE"/>
-	<unzip src="${specs.dir}/Level-1SE/xml-source.zip" dest="${specs.dir}/Level-1SE"/>
-
-</target>
-
-
-<target name="dom1SE-schema" depends="dom1SE-init">
-	<style basedir="${specs.dir}/Level-1SE"
-	       in="${specs.dir}/Level-1SE/wd-dom.xml"
-	       out="${build.dir}/dom1SE.xsd"
-	       style="${transforms.dir}/dom-to-xsd.xsl">
-		<param name="schema-namespace"
-		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
-	</style>
-
-	<!--  remove leading underscore from _xmlns attribute    -->
-    <replace dir="${build.dir}" includes="dom1SE.xsd">
-        <replacefilter token="_xmlns" value="xmlns"/>
-        <replacefilter token="xmlns_test" value="xmlns:test"/>
-    </replace>
-
-	<copy file="${build.dir}/dom1SE.xsd" todir="${tests.dir}/level1/core"/>
-
-</target>
-
-
-<target name="dom1SE-dtd" depends="dom1SE-init">
-	<style basedir="${specs.dir}/Level-1SE"
-	       in="${specs.dir}/Level-1SE/wd-dom.xml"
-	       out="${build.dir}/dom1SE.dtd"
-	       style="${transforms.dir}/dom-to-dtd.xsl">
-		<param name="schema-namespace"
-		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
-	</style>
-	<copy file="${build.dir}/dom1SE.dtd" todir="${tests.dir}/level1/core"/>
-</target>
-
-<target name="dom1SE-subjects" depends="dom1SE-init">
-	<style basedir="${specs.dir}/Level-1SE"
-	       in="${specs.dir}/Level-1SE/wd-dom.xml"
-	       out="${build.dir}/dom1SE-subjects.xml"
-	       style="${transforms.dir}/subjects.xsl"/>
-</target>
-
-<target name="dom1SE-interfaces" depends="dom1SE-init">
-	<style basedir="${specs.dir}/Level-1SE"
-	       in="${specs.dir}/Level-1SE/wd-dom.xml"
-	       out="${build.dir}/dom1SE-interfaces.xml"
-	       style="${transforms.dir}/extract.xsl"/>
-</target>
 
 
 
@@ -853,8 +789,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom1-core-validate-tests" depends="dom1-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/core" includes="*.xml" 
-		    excludes="attrsetvaluenomodificationallowederr.xml,attrsetvaluenomodificationallowederrEE.xml"/>  
+		<fileset dir="${tests.dir}/level1/core" includes="*.xml"/>  
 	</xmlvalidate>
 </target>
 
@@ -873,17 +808,11 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
 
 
-    <!--  a prefabricated documentcreatecdatasection.java
-             is provided since some versions of Xalan-J
-                   will stall when processing it    -->
-    <copy file="${tests.dir}/level1/core/documentcreatecdatasection.java" 
-            todir="${java.build.dir}/org/w3c/domts/level1/core"/>
-
 
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
-           excludes="metadata.xml,documentcreatecdatasection.xml"
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -956,6 +885,32 @@ All implementation conditions combined into implementationAttribute element
         debug="on"
 		encoding="UTF8"/>
 </target>
+
+<target name="checkstyle-available">
+    <available property="checkstyle-task" resource="checkstyletask.properties"/>
+    <fail unless="checkstyle-task" message="Checkstyle targets require checkstyle-all-2.x.jar from http://checkstyle.sf.net to be in /ant/lib"/>        
+</target>
+
+<target name="dom1-html-checkstyle" depends="checkstyle-available, dom1-html-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level1/html" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
 
 <target name="dom1-html-jar" depends="dom1-html-javac">
 	<!--  will need to provide a manifest    -->
@@ -1089,12 +1044,42 @@ All implementation conditions combined into implementationAttribute element
 		   encoding="UTF8"/>
 </target>
 
+<target name="common-checkstyle" depends="checkstyle-available, common-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="java/org/w3c/domts" includes="*.java"/>
+    </checkstyle>
+
+</target>
+
+
 <target name="dom1-core-javac" depends="common-javac,dom1-core-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
 		encoding="UTF8"/>
+</target>
+
+<target name="dom1-core-checkstyle" depends="checkstyle-available, dom1-core-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level1/core" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
 </target>
 
 <target name="dom1-core-jar" depends="dom1-core-javac,get-xhtml1-dtd">
@@ -1165,19 +1150,24 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom2-core-gen-java" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level2/core"/>
 
+
     <!--  a prefabricated importNode02.java and others
              are provided since some versions of Xalan-J
                    will stall when processing it    -->
+
+<!--
     <copy file="${tests.dir}/level2/core/importNode02.java" 
             todir="${java.build.dir}/org/w3c/domts/level2/core"/>
 
     <copy file="${tests.dir}/level2/core/ownerDocument01.java" 
             todir="${java.build.dir}/org/w3c/domts/level2/core"/>
 
+-->
+
 	<style basedir="${tests.dir}/level2/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level2/core" 
 		   includes="*.xml" 
-           excludes="metadata.xml,importNode02.xml,ownerDocument01.xml"
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -1318,7 +1308,31 @@ All implementation conditions combined into implementationAttribute element
 		encoding="UTF8"/>
 </target>
 
-<target name="dom2-html-javac" depends="common-javac,dom2-html-gen-java">
+<target name="dom2-core-checkstyle" depends="checkstyle-available, dom2-core-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level2/core" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.pattern.localvar" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
+
+
+<target name="dom2-html-javac" depends="common-javac, dom2-html-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/html" 
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
@@ -1331,6 +1345,27 @@ All implementation conditions combined into implementationAttribute element
         <include name="org/w3c/dom/**"/>
     </javac>
 </target>
+
+<target name="dom2-html-checkstyle" depends="checkstyle-available, dom2-html-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level2/html" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
 
 <target name="dom2-html-jar" depends="dom2-html-javac">
 	<jar jarfile="${build.dir}/dom2-html.jar"  manifest="java/dom2-html.mf">
@@ -1434,6 +1469,27 @@ All implementation conditions combined into implementationAttribute element
         <include name="org/w3c/dom/**"/>
     </javac>
 </target>
+
+<target name="dom2-events-checkstyle" depends="checkstyle-available, dom2-events-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level2/events" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
 
 <target name="dom2-core-jar" depends="dom2-core-javac">
 	<!--  will need to provide a manifest    -->
@@ -1952,6 +2008,27 @@ it would compile all DOM 3 java code
         <include name="org/w3c/dom/**"/>
     </javac>
 </target>
+
+<target name="dom3-ls-checkstyle" depends="checkstyle-available, dom3-ls-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level3/ls" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
 
 <target name="dom3-ls-jar" depends="dom3-ls-javac">
 	<!--  will need to provide a manifest    -->
