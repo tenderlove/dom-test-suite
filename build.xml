@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.99  2003-09-23 03:44:21  dom-ts-4
+Revision 1.100  2003-10-24 17:09:38  dom-ts-4
+Support for working group drafts, bug 368
+
+Revision 1.99  2003/09/23 03:44:21  dom-ts-4
 Per http://www.w3.org/Bugs/Public/show_bug.cgi?id=345
 
 Revision 1.98  2003/07/18 03:20:52  dom-ts-4
@@ -1774,11 +1777,11 @@ All implementation conditions combined into implementationAttribute element
 		usetimestamp="yes"/>
 </target>
 
-
 <target name="get-dom3" depends="get-xmlspec-v22-dom-dtd,get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events,get-dom3-views">
 </target>
 
-<target name="dom3-init" depends="init,get-dom3">
+
+<target name="dom3-init-public" unless="member" depends="init,get-dom3">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-3"/>
 
@@ -1837,9 +1840,36 @@ All implementation conditions combined into implementationAttribute element
 	<unzip src="${specs.dir}/Level-3/XPath/java-binding.zip"
 	       dest="${specs.dir}/Level-3/XPath/java"/>
 
+    <property name="dom3-core-java-src" location="${specs.dir}/Level-3/Core/java"/>
+    <property name="dom3-ls-java-src" location="${specs.dir}/Level-3/LS/java"/>
+    <property name="dom3-xpath-java-src" location="${specs.dir}/Level-3/XPath/java"/>
+
 </target>
 
-<target name="dom3-interfaces" depends="dom3-init,dom2-init">
+<target name="dom3-init-member" if="member" depends="init">
+	<mkdir dir="${specs.dir}/Level-3/member"/>
+	<get src="http://www.w3.org/DOM/Group/drafts/level-3-src.zip"
+		dest="${specs.dir}/level-3-src.zip"
+		username="${member}" password="${password}"
+		usetimestamp="yes"/>
+	<!--  this operation may fail on JDKs prior to JDK 1.4.2
+	        see http://developer.java.sun.com/developer/bugParade/bugs/4635869.html   -->
+	<!-- unzip src="${specs.dir}/level-3-src.zip"
+	       dest="${specs.dir}/Level-3/member"/ -->
+	<exec executable="unzip">
+		<arg value="-o"/>
+		<arg value="${specs.dir}/level-3-src.zip"/>
+		<arg value="-d"/>
+		<arg value="${specs.dir}/Level-3/member"/>
+	</exec>
+
+    <property name="dom3-core-java-src" location="${specs.dir}/Level-3/member/level-3-src/core/java"/>
+    <property name="dom3-ls-java-src" location="${specs.dir}/Level-3/member/level-3-src/ls/java"/>
+    <property name="dom3-xpath-java-src" location="${specs.dir}/Level-3/member/level-3-src/xpath/java"/>
+	
+</target>
+
+<target name="dom3-interfaces-public" unless="member" depends="dom3-init-public,dom2-init">
     <delete file="${build.dir}/dom3-interfaces.xml"/>
 
 	<style in="${specs.dir}/Level-3/Core/xml-source.xml"
@@ -1849,6 +1879,20 @@ All implementation conditions combined into implementationAttribute element
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 </target>
+
+<target name="dom3-interfaces-member" if="member" depends="init, dom3-init-member, dom2-init">
+    <delete file="${build.dir}/dom3-interfaces.xml"/>
+
+	<style in="${specs.dir}/Level-3/member/level-3-src/xml/core/dom-spec.xml"
+	       out="${build.dir}/dom3-interfaces.xml"
+	       style="${transforms.dir}/dom3-combine-member.xsl"/>
+	<xmlvalidate file="${build.dir}/dom3-interfaces.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+</target>
+
+<target name="dom3-interfaces" depends="dom3-interfaces-public, dom3-interfaces-member"/>
 
 <target name="dom3-schema" depends="dom3-interfaces">
 	<style in="${build.dir}/dom3-interfaces.xml"
@@ -1911,7 +1955,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-subjects" depends="dom3-init">
+<target name="dom3-subjects" depends="dom3-init-public">
 	<!--  create a DOM 3 version of subjects.xsl  -->
     <copy file="${transforms.dir}/subjects.xsl" tofile="${build.dir}/dom3-subjects.xsl"/>
     <replace dir="${build.dir}" includes="dom3-subjects.xsl">
@@ -2100,14 +2144,15 @@ it would compile all DOM 3 java code
         debug="on"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
-        <src path="${specs.dir}/Level-3/Core/java"/>
-        <src path="${specs.dir}/Level-3/LS/java"/>
-        <src path="${specs.dir}/Level-3/XPath/java"/>
+        <src path="${dom3-core-java-src}"/>
+        <src path="${dom3-ls-java-src}"/>
+        <src path="${dom3-xpath-java-src}"/>
         <include name="org/w3c/domts/level3/core/*"/>
         <include name="org/w3c/domts/*"/>
         <include name="org/w3c/dom/**"/>
     </javac>
 </target>
+
 
 <target name="dom3-core-checkstyle" depends="checkstyle-available, dom3-core-javac">
     <taskdef resource="checkstyletask.properties"/>
@@ -2162,9 +2207,9 @@ it would compile all DOM 3 java code
         debug="on"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
-        <src path="${specs.dir}/Level-3/Core/java"/>
-        <src path="${specs.dir}/Level-3/LS/java"/>
-        <src path="${specs.dir}/Level-3/XPath/java"/>
+        <src path="${dom3-core-java-src}"/>
+        <src path="${dom3-ls-java-src}"/>
+        <src path="${dom3-xpath-java-src}"/>
         <include name="org/w3c/domts/level3/ls/*"/>
         <include name="org/w3c/domts/*"/>
         <include name="org/w3c/dom/**"/>
@@ -2222,8 +2267,8 @@ it would compile all DOM 3 java code
         debug="on"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
-        <src path="${specs.dir}/Level-3/Core/java"/>
-        <src path="${specs.dir}/Level-3/XPath/java"/>
+        <src path="${dom3-core-java-src}"/>
+        <src path="${dom3-xpath-java-src}"/>
         <include name="org/w3c/domts/level3/xpath/*"/>
         <include name="org/w3c/domts/*"/>
         <include name="org/w3c/dom/**"/>
