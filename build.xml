@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.124  2004-02-06 10:13:33  dom-ts-4
+Revision 1.125  2004-02-10 21:33:53  dom-ts-4
+Exclude datatype_normalization.xml from dom3-core-validate-files (bug 520)
+
+Revision 1.124  2004/02/06 10:13:33  dom-ts-4
 Proposed recommendation changes (bug 518)
 
 Revision 1.123  2004/01/28 23:22:31  dom-ts-4
@@ -2027,7 +2030,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="no"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="nodtdstaff.* datatype_normalization.*"/>  
 	</xmlvalidate>
 </target>
 
