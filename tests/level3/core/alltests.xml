@@ -579,6 +579,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="typeinfoisderivedfrom37.xml"/>
 	<suite.member href="typeinfoisderivedfrom38.xml"/>
 	<suite.member href="typeinfoisderivedfrom39.xml"/>
+	<suite.member href="typeinfoisderivedfrom40.xml"/>
+	<suite.member href="typeinfoisderivedfrom41.xml"/>
+	<suite.member href="typeinfoisderivedfrom42.xml"/>
+	<suite.member href="typeinfoisderivedfrom43.xml"/>
+	<suite.member href="typeinfoisderivedfrom44.xml"/>
+	<suite.member href="typeinfoisderivedfrom45.xml"/>
+	<suite.member href="typeinfoisderivedfrom46.xml"/>
+	<suite.member href="typeinfoisderivedfrom47.xml"/>
+	<suite.member href="typeinfoisderivedfrom48.xml"/>
 	
 	<!-- DOMConfiguration -->
 	<!-- canSetParameter -->

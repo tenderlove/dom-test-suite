@@ -121,15 +121,28 @@ be a general purpose schema for XHTML
   	  </xsd:restriction>
   </xsd:simpleType>
   
-  <xsd:simpleType name="emType">
+  <xsd:simpleType name="unboundedEmType">
   		<xsd:union memberTypes="emp0001_3Type emp0004_5Type"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="emType">
+  	    <xsd:restriction base="unboundedEmType">
+  	    	<xsd:maxLength value="7"/>
+  	    </xsd:restriction>
   </xsd:simpleType>
   		
   
   <xsd:element name="em" type="emType"/>
   
-  <xsd:simpleType name="strongType">
+  <xsd:simpleType name="unboundedStongType">
   		<xsd:list itemType="xsd:string"/>
+  </xsd:simpleType>
+  
+  
+  <xsd:simpleType name="strongType">
+  	  <xsd:restriction base="unboundedStrongType">
+  	  	  <xsl:maxLength value="100"/>
+  	  </xsd:restriction>
   </xsd:simpleType>
   
   <xsd:element name="strong" type="strongType"/>

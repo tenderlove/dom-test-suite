@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom20</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if emType is derived from anyType.
+Check if emType is derived from anyType by restriction.
 </description>
 <date qualifier="created">2004-01-13</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -39,6 +39,6 @@ Check if emType is derived from anyType.
 <!--  type should be emType  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="15"/>
+	typeNameArg='"anyType"' derivationMethod="1"/>
 <assertTrue actual="isDerived" id="derivedFromAnyType"/>
 </test>

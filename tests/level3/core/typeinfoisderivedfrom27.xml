@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom27</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if strongType is derived from anyType by any method other than restriction.
+Check if strongType is derived from anyType by union or extension.
 </description>
 <date qualifier="created">2004-01-13</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -39,6 +39,6 @@ Check if strongType is derived from anyType by any method other than restriction
 <!--  type should be strongType  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="14"/>
+	typeNameArg='"anyType"' derivationMethod="6"/>
 <assertFalse actual="isDerived" id="derivedFromAnyType"/>
 </test>

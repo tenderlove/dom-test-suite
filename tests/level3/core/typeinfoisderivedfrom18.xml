@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom18</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if emType is derived from xsd:ID.
+Check if emType is derived from xsd:ID by restriction.
 </description>
 <date qualifier="created">2004-01-13</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -38,8 +38,9 @@ Check if emType is derived from xsd:ID.
 <schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
 <!--  type should be emType  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
+<!--  emType is derived by restriction from xsd:ID since 
+		every memberType in the union is derived by restriction from xsd:ID   -->
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"ID"' derivationMethod="15"/>
-<!--  this could be debatable, both union members are restrictions of ID   -->	
-<assertFalse actual="isDerived" id="derivedFromID"/>
+	typeNameArg='"ID"' derivationMethod="1"/>
+<assertTrue actual="isDerived" id="derivedFromID"/>
 </test>
