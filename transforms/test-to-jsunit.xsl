@@ -90,9 +90,21 @@ function setUpPage() {
     <xsl:text>", </xsl:text><xsl:value-of select="@value"/><xsl:text>);
 </xsl:text>
 </xsl:for-each>
-       docsLoaded = 0;<xsl:for-each select="$loads">
-       <xsl:text>
-       docsLoaded += preload(this.</xsl:text><xsl:value-of select="@var"/>, "<xsl:value-of select="@var"/>", "<xsl:value-of select="@href"/>");</xsl:for-each>
+      <xsl:text>
+      docsLoaded = 0;
+      </xsl:text>
+      <xsl:for-each select="$loads">
+        <xsl:text>
+      var </xsl:text><xsl:value-of select="@var"/><xsl:text>Ref = null;
+      if (typeof(this.</xsl:text><xsl:value-of select="@var"/><xsl:text>) != 'undefined') {
+        </xsl:text>
+        <xsl:value-of select="@var"/><xsl:text>Ref = this.</xsl:text><xsl:value-of select="@var"/><xsl:text>;
+      }
+      </xsl:text>
+      <xsl:text>docsLoaded += preload(</xsl:text><xsl:value-of select="@var"/><xsl:text>Ref, "</xsl:text>
+          <xsl:value-of select="@var"/><xsl:text>", "</xsl:text><xsl:value-of select="@href"/><xsl:text>");
+        </xsl:text>
+       </xsl:for-each>
        if (docsLoaded == <xsl:value-of select="count($loads)"/>) {
           setUpPage = 'complete';
        }
@@ -221,12 +233,12 @@ function suite() {
                     <td valign="top">
                         <table>
                             <tr><th>Implementation</th></tr>
-                            <tr><td><input type="radio" name="implementation" value="iframe" checked="checked" onclick="onImplementationChange()">iframe</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="dom3ls" onclick="onImplementationChange()">DOM 3 Load/Save</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="mozillaXML" onclick="onImplementationChange()">Mozilla XML</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="msxml3" onclick="onImplementationChange()">MSXML 3.0</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="msxml4" onclick="onImplementationChange()">MSXML 4.0</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="svgplugin" onclick="onImplementationChange()">SVG Plugin</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" id="iframeImpl" value="iframe" checked="checked" onclick="onImplementationChange()">iframe</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" id="dom3lsImpl" value="dom3ls" onclick="onImplementationChange()">DOM 3 Load/Save</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" id="mozillaXMLImpl" value="mozillaXML" onclick="onImplementationChange()">Mozilla XML</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" id="msxml3Impl" value="msxml3" onclick="onImplementationChange()">MSXML 3.0</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" id="msxml4Impl" value="msxml4" onclick="onImplementationChange()">MSXML 4.0</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" id="svgpluginImpl" value="svgplugin" onclick="onImplementationChange()">SVG Plugin</input></td></tr>
                         </table>
                     </td>
                     <td valign="top">
@@ -275,10 +287,10 @@ function suite() {
                     <td valign="top">
                         <table>
                             <tr><th>Content Type</th></tr>
-                            <tr><td><input type="radio" name="contentType" value="text/xml" onclick="setContentType('text/xml')">XML</input></td></tr>
-                            <tr><td><input type="radio" name="contentType" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input></td></tr>
-                            <tr><td><input type="radio" name="contentType" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input></td></tr>
-                            <tr><td><input type="radio" name="contentType" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" id="contentTypeXML" value="text/xml" onclick="setContentType('text/xml')">XML</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" id="contentTypeXHTML" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" id="contentTypeSVG" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input></td></tr>
                         </table>
                     </td>
                 </tr>
@@ -298,6 +310,12 @@ function suite() {
                 </tr>
             </table>
             </form>
+            <script type="text/javascript"><![CDATA[
+              // place update call here to work around Konqueror issue?
+              // update incompatible tests select box and allowed mime types
+              update();
+              ]]>
+            </script>            
         </body>
     </html>
 </xsl:template>

@@ -100,6 +100,7 @@ The source document contained the following notice:
    <xsl:text>function </xsl:text>
    <xsl:value-of select="@name"/>
    <xsl:text>() {
+   var success;
     checkSetUp();
     </xsl:text>
 <xsl:apply-templates mode="body"/>
@@ -861,10 +862,17 @@ function handleEvent(listener, event, userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='load' and not(@interface)]" mode="body">
+        <xsl:text>
+      var </xsl:text><xsl:value-of select="@var"/><xsl:text>Ref = null;
+      if (typeof(this.</xsl:text><xsl:value-of select="@var"/><xsl:text>) != 'undefined') {
+        </xsl:text>
+        <xsl:value-of select="@var"/><xsl:text>Ref = this.</xsl:text><xsl:value-of select="@var"/><xsl:text>;
+      }
+      </xsl:text>
 	<xsl:value-of select="@var"/>
-	<xsl:text> = load(this.</xsl:text>
+	<xsl:text> = load(</xsl:text>
     <xsl:value-of select="@var"/>
-    <xsl:text>, "</xsl:text>
+    <xsl:text>Ref, "</xsl:text>
     <xsl:value-of select="@var"/>
     <xsl:text>", "</xsl:text>
 	<xsl:value-of select="@href"/>
@@ -875,13 +883,13 @@ function handleEvent(listener, event, userObj) {
 <xsl:template match="*[local-name()='assertDOMException']" mode="body">
     <xsl:text>
 	{
-		var success = false;
+		success = false;
 		try {
             </xsl:text>
 	<xsl:apply-templates select="*/*" mode="body"/>
     <xsl:text>  }
-		catch(ex) {            
-			success = (ex.code == </xsl:text>
+		catch(ex) {
+      success = (typeof(ex.code) != 'undefined' &amp;&amp; ex.code == </xsl:text>		            
     <xsl:variable name="excode" select="local-name(*)"/>
 	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
 	<xsl:text>);
@@ -897,13 +905,13 @@ function handleEvent(listener, event, userObj) {
 <xsl:template match="*[local-name()='assertLSException']" mode="body">
     <xsl:text>
 	{
-		var success = false;
+		success = false;
 		try {
             </xsl:text>
 	<xsl:apply-templates select="*/*" mode="body"/>
     <xsl:text>  }
 		catch(ex) {            
-			success = (ex.code == </xsl:text>
+      success = (typeof(ex.code) != 'undefined' &amp;&amp; ex.code == </xsl:text>		            
     <xsl:variable name="excode" select="local-name(*)"/>
 	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
 	<xsl:text>);
@@ -918,13 +926,13 @@ function handleEvent(listener, event, userObj) {
 <xsl:template match="*[local-name()='assertXPathException']" mode="body">
     <xsl:text>
 	{
-		var success = false;
+		success = false;
 		try {
             </xsl:text>
 	<xsl:apply-templates select="*/*" mode="body"/>
     <xsl:text>  }
 		catch(ex) {            
-			success = (ex.code == </xsl:text>
+      success = (typeof(ex.code) != 'undefined' &amp;&amp; ex.code == </xsl:text>		            
     <xsl:variable name="excode" select="local-name(*)"/>
 	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
 	<xsl:text>);
@@ -1260,7 +1268,7 @@ function handleEvent(listener, event, userObj) {
       </xsl:apply-templates>
       <xsl:text>
       } catch (ex) {
-		  if (ex.prototype.HasOwnProperty('code')) {      
+		  if (typeof(ex.code) != 'undefined')) {      
        </xsl:text>
       <xsl:if test="*[local-name() = 'catch']/*[local-name() != 'ImplementationException']">
       	   <xsl:text>switch(ex.code) {
@@ -1312,6 +1320,7 @@ function handleEvent(listener, event, userObj) {
            </xsl:otherwise>
        </xsl:choose>
        <xsl:text>}
+         }
         </xsl:text>
 </xsl:template>
 
