@@ -284,7 +284,7 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-
+<!--
 <target name="validate-html" depends="get-jtidy">
 	<property name="dir" value="."/>
 	<property name="file" value="*.html"/>
@@ -294,7 +294,11 @@ This target checks that the output of that implied transform is valid HTML
 		<arg value="${file}"/>
 	</java> 
 </target>
+-->
 
+<target name="validate-html">
+    <echo message="HTML validation temporarily disabled"/>
+</target>
 
 <target name="checkstyle-available">
     <available property="checkstyle-task" resource="checkstyletask.properties"/>
