@@ -34,9 +34,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
+<if>
+<implementationAttribute name="expandEntityReferences" value="true"/>
+<createEntityReference var="entRefNode" obj="doc" name="&quot;ent2&quot;"/>
+<else>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
 <firstChild interface="Node" obj="entRefAddr" var="entRefNode"/>
+</else>
+</if>
 <attributes obj="entRefNode" var="attrList"/>
-<assertNull actual="attrList" id="nodeEntityReferenceNodeAttributeseAssert1"/>
+<assertNull actual="attrList" id="attrList"/>
 </test>
