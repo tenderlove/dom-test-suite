@@ -436,7 +436,7 @@ This target checks that the output of that implied transform is valid HTML
 
 
 <target name="get-junit-license" depends="init" unless="junit-license-available">
-    <get src="http://oss.software.ibm.com/developerworks/opensource/license10.html"
+    <get src="http://www.opensource.org/licenses/cpl.php"
          dest="${lib.dir}/junit-license.html"
          usetimestamp="true"
          ignoreerrors="${no-network}"/>
