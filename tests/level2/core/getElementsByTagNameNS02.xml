@@ -43,6 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="lname" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
 <getElementsByTagNameNS interface="Document" obj="doc" var="newList" namespaceURI='"*"' localName='"employee"'/>
+<assertSize collection="newList" size="5" id="employeeCount"/>
 <item interface="NodeList" obj="newList" var="newElement" index="3"/>
 <prefix obj="newElement" var="prefix"/>
 <assertEquals actual="prefix" expected='"emp"' id="prefix" ignoreCase="false"/>
