@@ -58,6 +58,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
     <available property="jtidy-available" file="${lib.dir}/jtidy.zip"/>
+	<condition property="ant-15" value="true">
+		<contains string="${ant.version}" substring="1.5"/>
+	</condition>
 </target>
 
 
@@ -70,10 +73,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     </delete>
 </target>
 
-<target name="check-schema-support">
-	<condition property="ant-15" value="true">
-		<contains string="${ant.version}" substring="1.5"/>
-	</condition>
+<target name="check-schema-support" depends="init" if="ant-15">
 	<fail if="ant-15" message="Schema validation requires Ant 1.6 or later."/>
 </target>
 
@@ -1975,12 +1975,21 @@ This target checks that the output of that implied transform is valid HTML
 	</antcall>
 </target>
 
-<target name="dom3-core-validate-files" depends="get-xhtml1-dtd">
+<target name="dom3-core-schema-validate-files" unless="ant-15" depends="init">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level3/core/files"/>  
+    	<property name="includes" value="datatype_normalization*.xml datatype_normalization*.svg datatype_normalization*.xhtml typeinfo.xml typeinfo.svg typeinfo.xhtml"/>
+    </ant>
+
+</target>
+
+<target name="dom3-core-validate-files" depends="get-xhtml1-dtd, dom3-core-schema-validate-files">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.xhtml *.svg" excludes="hc_nodtdstaff.* canonicalform*.*"/>  
 	</xmlvalidate>
 </target>
+
 
 <target name="dom3-common" depends="dom3-init">
 

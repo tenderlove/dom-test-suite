@@ -9,6 +9,7 @@
 <!ELEMENT head (title)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT body (p*)>
+<!ATTLIST body onload CDATA #IMPLIED>
 <!ELEMENT p (#PCDATA|br)*>
 <!ATTLIST p xml:base CDATA #IMPLIED
             xmlns CDATA #IMPLIED>

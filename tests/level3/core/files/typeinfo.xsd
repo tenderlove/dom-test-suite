@@ -34,18 +34,27 @@ This schema provides supports misc_typeinfo.xml
   <xsd:element name="head">
   	<xsd:complexType>
   		<xsd:sequence>
+  			<xsd:element ref="meta"/>
   			<xsd:element ref="title"/>
   		</xsd:sequence>
   	</xsd:complexType>
   </xsd:element>
   
   <xsd:element name="title" type="xsd:string"/>
+  <xsd:element name="meta">
+  	<xsd:complexType>
+  		<xsd:attribute name="http-equiv" type="xsd:string" use="required"/>
+  		<xsd:attribute name="content" type="xsd:string" use="required"/>
+  	</xsd:complexType>
+  </xsd:element>
+  
   
   <xsd:element name="body">
   	<xsd:complexType>
   		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
   			<xsd:element ref="p"/>
   		</xsd:sequence>
+  		<xsd:attribute name="onload" type="xsd:string" use="optional"/>  		
   	</xsd:complexType>
   </xsd:element>
   
