@@ -277,8 +277,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLIFrameElement08.xml"/>
      <suite.member href="HTMLIFrameElement09.xml"/>
      <suite.member href="HTMLIFrameElement10.xml"/>
-     <suite.member href="HTMLIFrameElement11.xml"/>
-     <suite.member href="HTMLIFrameElement12.xml"/>
      <suite.member href="HTMLImageElement01.xml"/>
      <suite.member href="HTMLImageElement02.xml"/>
      <suite.member href="HTMLImageElement03.xml"/>
