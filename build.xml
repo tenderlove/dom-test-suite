@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.23  2001-09-06 02:00:04  dom-ts-4
+Revision 1.24  2001-09-06 02:35:19  dom-ts-4
+Now supporting Mozilla 0.9.3
+
+Revision 1.23  2001/09/06 02:00:04  dom-ts-4
 Now supporting Mozilla 0.9.3
 
 Revision 1.22  2001/09/05 17:33:42  dom-ts-4
@@ -484,6 +487,14 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
+</target>
+
+<target name="dom1-core-jsunit-zip" depends="init">
+    <zip zipfile="${dist.dir}/dom1-core-ecma.zip"
+         basedir="."
+         excludes="*.bak"
+         includes="lib/jsunit/*.*, lib/jsunit/app/*.*, lib/jsunit/images/*.*, build/ecmascript/level1/core/*.*"/>
+
 </target>
 
 
