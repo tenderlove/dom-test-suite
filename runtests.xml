@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.7  2004-02-15 02:53:29  dom-ts-4
+Revision 1.8  2004-02-17 05:22:01  dom-ts-4
+Add org.w3c...DOMImplRegList property to run-xerces (bug 530)
+
+Revision 1.7  2004/02/15 02:53:29  dom-ts-4
 Additional typeinfo tests, fix for schemaValidating implementation attribute (bug524)
 
 Revision 1.6  2004/02/09 19:02:51  dom-ts-4
@@ -159,6 +162,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 		</classpath>
 		<jvmarg value="-Djava.endorsed.dirs=${xerces_dom3.lib.dir}"/>
 		<jvmarg value="-Xmx900M"/>
+		<jvmarg value="-Dorg.w3c.dom.DOMImplementationSourceList=org.apache.xerces.dom.DOMImplementationSourceImpl"/>
 		<formatter type="xml"/>
 		<test name="org.w3c.domts.level${level}.${module}.TestXerces${config}" 
 			todir="${results.dir}" 
