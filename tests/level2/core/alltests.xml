@@ -51,6 +51,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="getElementsByTagNameNS05.xml"/>
      <suite.member href="getElementsByTagNameNS06.xml"/>
      <suite.member href="getElementsByTagNameNS07.xml"/>
+     <suite.member href="getElementsByTagNameNS08.xml"/>
+     <suite.member href="getElementsByTagNameNS09.xml"/>
+     <suite.member href="getElementsByTagNameNS10.xml"/>
+     <suite.member href="getElementsByTagNameNS11.xml"/>
+     <suite.member href="getElementsByTagNameNS12.xml"/>
+     <suite.member href="getElementsByTagNameNS13.xml"/>
+     <suite.member href="getElementsByTagNameNS14.xml"/>
      <suite.member href="getNamedItemNS01.xml"/>
      <suite.member href="getNamedItemNS02.xml"/>
      <suite.member href="hasAttribute01.xml"/>
