@@ -23,19 +23,12 @@
 <var name="attrValue" type="DOMString"/>
 <var name="attrName" type="DOMString"/>
 <var name="attrType" type="int"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"district"</member>
-<member>""</member>
-<member>"2"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createAttribute obj="doc" var="newAttrNode" name="&quot;district&quot;"/>
 <nodeValue obj="newAttrNode" var="attrValue"/>
+<assertEquals actual="attrValue" expected='""' ignoreCase="false" id="value"/>
 <nodeName obj="newAttrNode" var="attrName"/>
+<assertEquals actual="attrName" expected='"district"' ignoreCase="false" id="name"/>
 <nodeType obj="newAttrNode" var="attrType"/>
-<append collection="result" obj="attrName"/>
-<append collection="result" obj="attrValue"/>
-<append collection="result" obj="attrType"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateAttributeAssert" ignoreCase="false"/>
+<assertEquals actual="attrType" expected="2" ignoreCase="false" id="type"/>
 </test>

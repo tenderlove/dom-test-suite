@@ -26,19 +26,13 @@
 <var name="cloneName" type="DOMString"/>
 <var name="cloneChildren" type="NodeList"/>
 <var name="length" type="int"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"employee"</member>
-<member>"0"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <cloneNode obj="employeeNode" deep="false" var="clonedNode"/>
 <nodeName obj="clonedNode" var="cloneName"/>
-<append collection="result" obj="cloneName"/>
+<assertEquals actual="cloneName" expected='"employee"' ignoreCase="false" id="name"/>
 <childNodes obj="clonedNode" var="cloneChildren"/>
 <length interface="NodeList" obj="cloneChildren" var="length"/>
-<append collection="result" obj="length"/>
-<assertEquals actual="result" expected="expectedResult" id="nodeCloneNodeFalseAssert1" ignoreCase="false"/>
+<assertEquals actual="length" expected="0" ignoreCase="false" id="length"/>
 </test>

@@ -6,7 +6,7 @@
 <creator>NIST</creator>
 <description>
     The "createEntityReference(name)" method creates an 
-   EntityReferrence node.  In addition, if the referenced entity
+   EntityReference node.  In addition, if the referenced entity
    is known, the child list of the "EntityReference" node
    is the same as the corresponding "Entity" node.
    
@@ -22,24 +22,19 @@
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="newEntRefNode" type="Element"/>
+<var name="newEntRefNode" type="EntityReference"/>
 <var name="newEntRefList" type="NodeList"/>
 <var name="child" type="Node"/>
 <var name="name" type="DOMString"/>
 <var name="value" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"#text"</member>
-<member>"Texas"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createEntityReference obj="doc" var="newEntRefNode" name="&quot;ent3&quot;"/>
 <childNodes obj="newEntRefNode" var="newEntRefList"/>
+<assertSize collection="newEntRefList" size="1" id="size"/>
 <for-each collection="newEntRefList" member="child">
 <nodeName obj="child" var="name"/>
 <nodeValue obj="child" var="value"/>
-<append collection="result" obj="name"/>
-<append collection="result" obj="value"/>
+<assertEquals actual="name" expected='"#text"' ignoreCase="false" id="name"/>
+<assertEquals actual="value" expected='"Texas"' ignoreCase="false" id="value"/>
 </for-each>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateEntityReferenceKnownAssert" ignoreCase="false"/>
 </test>

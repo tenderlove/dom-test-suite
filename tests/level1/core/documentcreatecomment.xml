@@ -21,19 +21,12 @@
 <var name="newCommentValue" type="DOMString"/>
 <var name="newCommentName" type="DOMString"/>
 <var name="newCommentType" type="int"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"This is a new Comment node"</member>
-<member>"#comment"</member>
-<member>"8"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createComment obj="doc" var="newCommentNode" data="&quot;This is a new Comment node&quot;"/>
 <nodeValue obj="newCommentNode" var="newCommentValue"/>
+<assertEquals actual="newCommentValue" expected='"This is a new Comment node"' ignoreCase="false" id="value"/>
 <nodeName obj="newCommentNode" var="newCommentName"/>
+<assertEquals actual="newCommentName" expected='"#comment"' ignoreCase="false" id="name"/>
 <nodeType obj="newCommentNode" var="newCommentType"/>
-<append collection="result" obj="newCommentValue"/>
-<append collection="result" obj="newCommentName"/>
-<append collection="result" obj="newCommentType"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateCommentAssert" ignoreCase="false"/>
+<assertEquals actual="newCommentType" expected="8" ignoreCase="false" id="type"/>
 </test>

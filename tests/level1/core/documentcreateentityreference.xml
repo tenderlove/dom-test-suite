@@ -23,19 +23,12 @@
 <var name="entRefValue" type="DOMString"/>
 <var name="entRefName" type="DOMString"/>
 <var name="entRefType" type="int"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"ent1"</member>
-<member>"null"</member>
-<member>"5"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createEntityReference obj="doc" var="newEntRefNode" name="&quot;ent1&quot;"/>
 <nodeValue obj="newEntRefNode" var="entRefValue"/>
+<assertNull actual="entRefValue" id="value"/>
 <nodeName obj="newEntRefNode" var="entRefName"/>
+<assertEquals actual="entRefName" expected='"ent1"' ignoreCase="false" id="name"/>
 <nodeType obj="newEntRefNode" var="entRefType"/>
-<append collection="result" obj="entRefName"/>
-<append collection="result" obj="entRefValue"/>
-<append collection="result" obj="entRefType"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateEntityReferenceAssert" ignoreCase="false"/>
+<assertEquals actual="entRefType" expected="5" ignoreCase="false" id="type"/>
 </test>

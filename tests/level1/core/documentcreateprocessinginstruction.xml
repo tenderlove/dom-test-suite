@@ -16,27 +16,22 @@
    output.
 </description>
 <contributor>Mary Brady</contributor>
+<contributor>Curt Arnold</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2001Apr/0020.html"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newPINode" type="ProcessingInstruction"/>
 <var name="piValue" type="DOMString"/>
 <var name="piName" type="DOMString"/>
 <var name="piType" type="int"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"XML"</member>
-<member>"This is a new PI node"</member>
-<member>"7"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
-<createProcessingInstruction obj="doc" var="newPINode" target="&quot;XML&quot;" data="&quot;This is a new PI node&quot;"/>
-<nodeValue obj="newPINode" var="piName"/>
-<nodeName obj="newPINode" var="piValue"/>
+<createProcessingInstruction obj="doc" var="newPINode" target="&quot;TESTPI&quot;" data="&quot;This is a new PI node&quot;"/>
+<nodeName obj="newPINode" var="piName"/>
+<assertEquals actual="piName" expected='"TESTPI"' ignoreCase="false" id="name"/>
+<nodeValue obj="newPINode" var="piValue"/>
+<assertEquals actual="piValue" expected='"This is a new PI node"' ignoreCase="false" id="value"/>
 <nodeType obj="newPINode" var="piType"/>
-<append collection="result" obj="piName"/>
-<append collection="result" obj="piValue"/>
-<append collection="result" obj="piType"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateProcessingInstructionAssert" ignoreCase="false"/>
+<assertEquals actual="piType" expected="7" ignoreCase="false" id="type"/>
 </test>

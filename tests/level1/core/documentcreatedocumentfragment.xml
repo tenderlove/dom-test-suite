@@ -22,23 +22,15 @@
 <var name="newDocFragmentName" type="DOMString"/>
 <var name="newDocFragmentType" type="int"/>
 <var name="newDocFragmentValue" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"0"</member>
-<member>"#document-fragment"</member>
-<member>"11"</member>
-<member>"null"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createDocumentFragment obj="doc" var="newDocFragment"/>
 <childNodes obj="newDocFragment" var="children"/>
 <length interface="NodeList" obj="children" var="length"/>
-<append collection="result" obj="length"/>
+<assertEquals actual="length" expected="0" ignoreCase="false" id="length"/>
 <nodeName obj="newDocFragment" var="newDocFragmentName"/>
+<assertEquals actual="newDocFragmentName" expected='"#document-fragment"' ignoreCase="false" id="name"/>
 <nodeType obj="newDocFragment" var="newDocFragmentType"/>
+<assertEquals actual="newDocFragmentType" expected="11" ignoreCase="false" id="type"/>
 <nodeValue obj="newDocFragment" var="newDocFragmentValue"/>
-<append collection="result" obj="newDocFragmentName"/>
-<append collection="result" obj="newDocFragmentType"/>
-<append collection="result" obj="newDocFragmentValue"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateDocumentFragmentAssert" ignoreCase="false"/>
+<assertNull actual="newDocFragmentValue" id="value"/>
 </test>

@@ -21,19 +21,12 @@
 	<var name="newTextName" type="DOMString"/>
 	<var name="newTextValue" type="DOMString"/>
 	<var name="newTextType" type="int"/>
-	<var name="result" type="List"/>
-	<var name="expectedResult" type="List">
-		<member>"This is a new Text node"</member>
-		<member>"#text"</member>
-		<member>"3"</member>
-	</var>
 	<load var="doc" href="staff.xml" willBeModified="false"/>
 	<createTextNode obj="doc" var="newTextNode" data="&quot;This is a new Text node&quot;"/>
 	<nodeValue obj="newTextNode" var="newTextValue"/>
+    <assertEquals actual="newTextValue" expected='"This is a new Text node"' ignoreCase="false" id="value"/>
 	<nodeName obj="newTextNode" var="newTextName"/>
+    <assertEquals actual="newTextName" expected='"#text"' ignoreCase="false" id="name"/>
 	<nodeType obj="newTextNode" var="newTextType"/>
-	<append collection="result" obj="newTextValue"/>
-	<append collection="result" obj="newTextName"/>
-	<append collection="result" obj="newTextType"/>
-	<assertEquals actual="result" expected="expectedResult" id="documentCreateTextNodeAssert" ignoreCase="false"/>
+    <assertEquals actual="newTextType" expected="3" ignoreCase="false" id="type"/>
 </test>

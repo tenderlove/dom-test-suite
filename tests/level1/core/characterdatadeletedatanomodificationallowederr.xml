@@ -26,7 +26,7 @@
 <var name="gList" type="NodeList"/>
 <var name="gNode" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;geneder&quot;" var="genderList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
 <childNodes obj="genderNode" var="genList"/>
 <item interface="NodeList" obj="genList" index="0" var="genNode"/>

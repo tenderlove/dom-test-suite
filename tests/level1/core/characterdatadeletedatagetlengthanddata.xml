@@ -29,18 +29,13 @@
 <var name="childData" type="DOMString"/>
 <var name="childLength" type="int"/>
 <var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"1230 North Ave. Dallas, Texas "</member>
-<member>"30"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
 <firstChild obj="nameNode" var="child"/>
 <deleteData obj="child" offset="30" count="5"/>
 <data interface="CharacterData" obj="child" var="childData"/>
-<append collection="result" obj="childData"/>
+<assertEquals actual="childData" expected='"1230 North Ave. Dallas, Texas "' ignoreCase="false" id="data"/>
 <length interface="CharacterData" obj="child" var="childLength"/>
-<append collection="result" obj="childLength"/>
-<assertEquals actual="result" expected="expectedResult" id="characterdataDeleteDataGetLengthAndDataAssert" ignoreCase="false"/>
+<assertEquals actual="childLength" expected="30" ignoreCase="false" id="length"/>
 </test>

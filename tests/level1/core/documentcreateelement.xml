@@ -22,19 +22,12 @@
 <var name="newElementName" type="DOMString"/>
 <var name="newElementType" type="int"/>
 <var name="newElementValue" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"address"</member>
-<member>"1"</member>
-<member>"null"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
 <nodeName obj="newElement" var="newElementName"/>
+<assertEquals actual="newElementName" expected='"address"' ignoreCase="false" id="name"/>
 <nodeType obj="newElement" var="newElementType"/>
+<assertEquals actual="newElementType" expected="1" ignoreCase="false" id="type"/>
 <nodeValue obj="newElement" var="newElementValue"/>
-<append collection="result" obj="newElementName"/>
-<append collection="result" obj="newElementType"/>
-<append collection="result" obj="newElementValue"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateElementAssert" ignoreCase="false"/>
+<assertNull actual="newElementValue" id="value"/>
 </test>
