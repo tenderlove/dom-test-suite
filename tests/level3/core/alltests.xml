@@ -719,6 +719,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="typeinfoisderivedfrom64.xml"/>
 <suite.member href="typeinfoisderivedfrom65.xml"/>
 <suite.member href="typeinfoisderivedfrom66.xml"/>
+<suite.member href="typeinfoisderivedfrom67.xml"/>
+<suite.member href="typeinfoisderivedfrom68.xml"/>
+<suite.member href="typeinfoisderivedfrom69.xml"/>
+<suite.member href="typeinfoisderivedfrom70.xml"/>
+<suite.member href="typeinfoisderivedfrom71.xml"/>
+<suite.member href="typeinfoisderivedfrom72.xml"/>
+<suite.member href="typeinfoisderivedfrom73.xml"/>
 <suite.member href="userdatahandler01.xml"/>
 <suite.member href="userdatahandler02.xml"/>
 <suite.member href="userdatahandler03.xml"/>

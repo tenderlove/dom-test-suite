@@ -150,8 +150,52 @@ be a general purpose schema for XHTML
   
   <xsd:element name="strong" type="strongType"/>
   
-  <xsd:element name="sup" type="xsd:string"/>
-  <xsd:element name="code" type="xsd:string"/>
+  <!--  union of union and union of list   -->
+  <xsd:simpleType name="integers">
+  	 <xsd:list itemType="xsd:integer"/>
+  </xsd:simpleType>
+  
+  
+  <xsd:simpleType name="sup">
+  	<xsd:union memberTypes="emType integers xsd:string"/>
+  </xsd:simpleType>
+  <xsd:element name="sup" type="sup"/>
+  
+  <!--   list of union of union  -->
+  <xsd:simpleType name="supervisoryTitle">
+  	<xsd:restriction base="xsd:string">
+  	  <xsd:enumeration value="Specialist"/>
+  	  <xsd:enumeration value="Director"/>
+  	  <xsd:enumeration value="Manager"/>
+  	</xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="nonSupervisoryTitle">
+  	<xsd:restriction base="xsd:string">
+	  <xsd:enumeration value="Accountant"/>
+	  <xsd:enumeration value="Secretary"/>
+  	</xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="title">
+  	<xsd:union memberTypes="supervisoryTitle nonSupervisoryTitle"/>
+  </xsd:simpleType>
+	  
+  <xsd:simpleType name="field">
+  	<xsd:restriction base="xsd:string">
+	  <xsd:enumeration value="Department"/>
+	  <xsd:enumeration value="Personnel"/>
+	  <xsd:enumeration value="Computer"/>
+  	</xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="codeItem">
+  	<xsd:union memberTypes="field title"/>
+  </xsd:simpleType>
+  <xsd:simpleType name="code">
+  	<xsd:list itemType="codeItem"/>
+  </xsd:simpleType>
+  <xsd:element name="code" type="code"/>
   
   <xsd:element name="span" type="xsd:string"/>
   
