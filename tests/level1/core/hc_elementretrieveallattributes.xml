@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -53,7 +53,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="testAddress" var="attributes"/>
 <for-each collection="attributes" member="attribute">
     <nodeName var="attributeName" obj="attribute"/>
-    <append collection="actual" obj="attributeName"/>
+    <append collection="actual" item="attributeName"/>
 </for-each>
 <if><contentType type="text/html"/>
     <assertEquals id="htmlAttributeNames" actual="actual" expected="htmlExpected" ignoreCase="true"/>

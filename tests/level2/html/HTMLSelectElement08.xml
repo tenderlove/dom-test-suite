@@ -52,7 +52,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <options interface="HTMLSelectElement" obj="testNode" var="optionsnodeList"/>
 <for-each collection="optionsnodeList" member="voption">
 <nodeName obj="voption" var="optionName"/>
-<append collection="result" obj="optionName"/>
+<append collection="result" item="optionName"/>
 </for-each>
 <assertEquals actual="result" expected="expectedOptions" id="optionsLink" ignoreCase="auto"/>
 </test>

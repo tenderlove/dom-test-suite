@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -50,7 +50,7 @@ in the order the children were encountered.
 <getElementsByTagName interface="Element" obj="lastEmployee" var="lastempList" tagname='"*"'/>
 <for-each collection="lastempList" member="child">
 <nodeName obj="child" var="childName"/>
-<append collection="result" obj="childName"/>
+<append collection="result" item="childName"/>
 </for-each>
 <assertEquals actual="result" expected="expectedResult" id="elementGetElementsByTagNameSpecialValueAssert" ignoreCase="auto"/>
 </test>

@@ -79,7 +79,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild var="appendedChild" obj="employeeNode" newChild="newdocFragment"/>
 <for-each collection="childList" member="child">
 <nodeName var="childName" obj="child"/>
-<append collection="result" obj="childName"/>
+<append collection="result" item="childName"/>
 </for-each>
 <if>
 <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>

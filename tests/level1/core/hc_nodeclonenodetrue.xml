@@ -49,13 +49,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="origList"/>
 <for-each collection="origList" member="origChild">
 <nodeName obj="origChild" var="origChildName"/>
-<append collection="expected" obj="origChildName"/>
+<append collection="expected" item="origChildName"/>
 </for-each>
 <cloneNode obj="employeeNode" deep="true" var="clonedNode"/>
 <childNodes obj="clonedNode" var="clonedList"/>
 <for-each collection="clonedList" member="clonedChild">
 <nodeName obj="clonedChild" var="clonedChildName"/>
-<append collection="result" obj="clonedChildName"/>
+<append collection="result" item="clonedChildName"/>
 </for-each>
 <assertEquals actual="result" expected="expected" id="clone" ignoreCase="auto"/>
 </test>

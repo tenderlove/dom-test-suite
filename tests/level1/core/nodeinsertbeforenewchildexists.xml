@@ -84,7 +84,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 <for-each collection="childList" member="child">
 <nodeName obj="child" var="childName"/>
-<append collection="result" obj="childName"/>
+<append collection="result" item="childName"/>
 </for-each>
 <assertEquals id="childNames" actual="result" expected="expected" ignoreCase="false"/>
 </test>

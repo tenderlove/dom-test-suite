@@ -61,7 +61,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeType var="nodeType" obj="child"/>
 <if><equals actual="nodeType" expected="1"/>
 <nodeName obj="child" var="childName"/>
-<append collection="actual" obj="childName"/>
+<append collection="actual" item="childName"/>
 </if>
 </for-each>
 <assertEquals actual="actual" expected="expected" id="nodeNames" ignoreCase="auto"/>

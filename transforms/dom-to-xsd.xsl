@@ -614,7 +614,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:complexType>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 					<xs:attribute name="collection" type="variable" use="required"/>
-					<xs:attribute name="obj" type="variable" use="required"/>
+					<xs:attribute name="item" type="variableOrLiteral" use="required"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:complexType name="unaryAssignment">

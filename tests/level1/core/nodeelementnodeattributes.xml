@@ -46,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="testAddr" var="addrAttr"/>
 <for-each collection="addrAttr" member="attrNode">
 <nodeName obj="attrNode" var="attrName"/>
-<append collection="attrList" obj="attrName"/>
+<append collection="attrList" item="attrName"/>
 </for-each>
 <assertEquals actual="attrList" expected="expected" id="nodeElementNodeValueAssert1" ignoreCase="false"/>
 </test>

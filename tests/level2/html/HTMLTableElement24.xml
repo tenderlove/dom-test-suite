@@ -51,11 +51,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertNotNull actual="vsection1" id="vsection1Id"/>
 <rows interface="HTMLTableElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<append collection="result" obj="vrows"/>
+<append collection="result" item="vrows"/>
 <deleteTFoot obj="testNode" interface="HTMLTableElement"/>
 <tFoot interface="HTMLTableElement" obj="testNode" var="vsection2"/>
 <rows interface="HTMLTableElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<append collection="result" obj="vrows"/>
+<append collection="result" item="vrows"/>
 <assertEquals actual="result" expected="expectedResult" id="rowsLink" ignoreCase="false"/>
 </test>

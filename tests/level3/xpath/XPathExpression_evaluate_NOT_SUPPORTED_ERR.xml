@@ -54,7 +54,7 @@
       <evaluate interface="XPathExpression" 
                 obj='xpathExpression' 
 		expression='&quot;dummy&quot;'
-		resolver='&quot;dummy&quot;'
+		resolver='nullNSResolver'
                 var='result'
                 contextNode='contextNode' 
                 type='0' 

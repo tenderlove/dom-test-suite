@@ -121,7 +121,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="nameList" tagname='"*"'/>
 <for-each collection="nameList" member="thisElement">
     <tagName var="thisTag" obj="thisElement"/>
-    <append collection="actualNames" obj="thisTag"/>
+    <append collection="actualNames" item="thisTag"/>
 </for-each>
 <if><contentType type="image/svg+xml"/> 
 <assertEquals expected="svgExpectedNames" actual="actualNames" ignoreCase="auto" id="svgTagNames"/>

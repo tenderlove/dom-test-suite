@@ -50,7 +50,7 @@
                     obj='xpathExpression' 
                     var='xpathResult'
                     expression='&quot;dummy&quot;' 
-                    resolver='&quot;dummy&quot;' 
+                    resolver='nullNSResolver' 
                     contextNode='contextNode' 
                     type='0' 
                     result='nullResult'/>

@@ -65,7 +65,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="employeeList"/>
 <for-each collection="employeeList" member="child">
 <nodeName obj="child" var="childName"/>
-<append collection="result" obj="childName"/>
+<append collection="result" item="childName"/>
 </for-each>
 <if>
 <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>

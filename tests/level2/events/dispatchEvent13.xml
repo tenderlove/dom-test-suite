@@ -48,7 +48,7 @@ can never be invoked after being removed.
         <var name="target" type="EventTarget"/>
         <var name="listener" type="EventListener"/>
         <!--  add event to the collection   -->
-        <append collection="events" obj="evt"/>
+        <append collection="events" item="evt"/>
         <!--  remove this and the other listener    -->
         <currentTarget var="target" obj="evt"/>
         <for-each collection="listeners" member="listener">
@@ -64,7 +64,7 @@ can never be invoked after being removed.
         <var name="target" type="EventTarget"/>
         <var name="listener" type="EventListener"/>
         <!--  add event to the collection   -->
-        <append collection="events" obj="evt"/>
+        <append collection="events" item="evt"/>
         <!--  remove this and the other listener    -->
         <currentTarget var="target" obj="evt"/>
         <for-each collection="listeners" member="listener">
@@ -73,8 +73,8 @@ can never be invoked after being removed.
     </handleEvent>
 </var>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<append collection="listeners" obj="listener1"/>
-<append collection="listeners" obj="listener2"/>
+<append collection="listeners" item="listener1"/>
+<append collection="listeners" item="listener2"/>
 <addEventListener obj="doc" type='"foo"' listener="listener1" useCapture="false"/>
 <addEventListener obj="doc" type='"foo"' listener="listener2" useCapture="false"/>
 <createEvent var="evt" obj="doc" eventType='"Events"'/>

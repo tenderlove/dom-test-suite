@@ -52,7 +52,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="testAddress" var="attributes"/>
 <for-each collection="attributes" member="child">
 <nodeName obj="child" var="nodeName"/>
-<append collection="actual" obj="nodeName"/>
+<append collection="actual" item="nodeName"/>
 </for-each>
 <if><contentType type="text/html"/>
 <assertEquals id="attrName_html" actual="actual" expected="htmlExpected" ignoreCase="true"/>

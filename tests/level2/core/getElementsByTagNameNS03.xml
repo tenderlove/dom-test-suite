@@ -61,7 +61,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagNameNS interface="Document" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"*"' var="elementList"/>
 <for-each collection="elementList" member="child">
 <nodeName obj="child" var="childName"/>
-<append collection="result" obj="childName"/>
+<append collection="result" item="childName"/>
 </for-each>
 <assertEquals actual="result" expected="expectedResult" id="nodeNames" ignoreCase="false"/>
 </test>

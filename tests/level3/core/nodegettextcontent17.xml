@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="EntityReference"/>
 <var name="textContent" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified=""/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="elem" obj="doc"/>
 <createEntityReference var="entRef" obj="doc" name='"ent2"' />
 <appendChild obj="elem" var="appendedChild" newChild="entRef"/>

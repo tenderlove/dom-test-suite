@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.53  2003-12-18 05:25:41  dom-ts-4
+Revision 1.54  2003-12-19 07:50:01  dom-ts-4
+L3 XPath schema validation fixes (incl change of append element) (bug 430)
+
+Revision 1.53  2003/12/18 05:25:41  dom-ts-4
 Refinement of try production (bug 439)
 
 Revision 1.52  2003/12/17 19:29:15  dom-ts-4
@@ -928,21 +931,21 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:param name="vardefs"/>
     <xsl:value-of select="@collection"/>
     <xsl:text>.add(</xsl:text>
-    <xsl:variable name="obj" select="@obj"/>
-    <xsl:variable name="type" select="$vardefs[@name=$obj]/@type"/>
+    <xsl:variable name="item" select="@item"/>
+    <xsl:variable name="type" select="$vardefs[@name=$item]/@type"/>
     <xsl:choose>
         <xsl:when test="$type = 'int'">
             <xsl:text>new Integer(</xsl:text>
-            <xsl:value-of select="@obj"/>
+            <xsl:value-of select="@item"/>
             <xsl:text>));</xsl:text>
         </xsl:when>
         <xsl:when test="$type = 'double'">
             <xsl:text>new Double(</xsl:text>
-            <xsl:value-of select="@obj"/>
+            <xsl:value-of select="@item"/>
             <xsl:text>));</xsl:text>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:value-of select="@obj"/>
+            <xsl:value-of select="@item"/>
             <xsl:text>);</xsl:text>
         </xsl:otherwise>
     </xsl:choose>

@@ -55,7 +55,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="clonedNode" var="attributes"/>
 <for-each collection="attributes" member="attributeNode">
 <nodeName obj="attributeNode" var="attributeName"/>
-<append collection="result" obj="attributeName"/>
+<append collection="result" item="attributeName"/>
 </for-each>
 <if><contentType type="text/html"/>
 <assertEquals actual="result" expected="htmlExpected" id="nodeNames_html" ignoreCase="true"/>

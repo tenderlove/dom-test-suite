@@ -82,7 +82,7 @@
     <member type="short">9</member>
   </var>
 
-  <load var="doc" href="staff"/>
+  <load var="doc" href="staff" willBeModified="false"/>
 
   <createXPathEvaluator var="evaluator" document="doc"/>
 

@@ -62,7 +62,7 @@
 
   <!-- Load Test Document -->
 
-  <load var="doc" href="staff"/>
+  <load var="doc" href="staff" willBeModified="false"/>
 
   <!-- Get XPathResult -->
 

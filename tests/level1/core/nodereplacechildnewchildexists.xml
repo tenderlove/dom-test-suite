@@ -80,7 +80,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSame actual="replacedChild" expected="oldChild" id="return_value_same"/>
 <for-each collection="childList" member="childNode">
 <nodeName var="childName" obj="childNode"/>
-<append collection="actual" obj="childName"/>
+<append collection="actual" item="childName"/>
 </for-each>
 <assertEquals actual="actual" expected="expected" id="childNames" ignoreCase="false"/>
 </test>

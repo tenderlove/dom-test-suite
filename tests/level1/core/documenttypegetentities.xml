@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -48,7 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="entityList" size="5" id="entitySize"/>
 <for-each collection="entityList" member="entity">
 <nodeName obj="entity" var="name"/>
-<append collection="nameList" obj="name"/>
+<append collection="nameList" item="name"/>
 </for-each>
 <assertEquals actual="nameList" expected="expectedResult" id="entityNames" ignoreCase="false"/>
 </test>

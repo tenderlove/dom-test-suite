@@ -48,7 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
 <for-each collection="tbodiesnodeList" member="vtbodies">
 <nodeName obj="vtbodies" var="tbodiesName"/>
-<append collection="result" obj="tbodiesName"/>
+<append collection="result" item="tbodiesName"/>
 </for-each>
 <assertEquals actual="result" expected="expectedOptions" id="tbodiesLink" ignoreCase="auto"/>
 </test>

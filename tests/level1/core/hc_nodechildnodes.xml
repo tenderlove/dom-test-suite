@@ -53,7 +53,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <nodeType var="nodeType" obj="childNode"/>
     <nodeName var="childName" obj="childNode"/>
     <if><equals actual="nodeType" expected="1"/>
-        <append collection="actual" obj="childName"/>
+        <append collection="actual" item="childName"/>
         <else>
             <assertEquals actual="nodeType" expected="3" ignoreCase="false" id="textNodeType"/>
         </else>

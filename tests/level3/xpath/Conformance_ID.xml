@@ -65,7 +65,7 @@
 
   <!-- Load Test Document -->
 
-  <load var="doc" href="internaldtd"/>
+  <load var="doc" href="internaldtd" willBeModified="false"/>
 
   <!-- Get XPathResult -->
 

@@ -418,7 +418,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST append
 	id ID #IMPLIED
 	collection CDATA #REQUIRED
-	obj CDATA #REQUIRED
+	item CDATA #REQUIRED
 &gt;
 
 &lt;!ELEMENT assign ((%condition;)?)?&gt;

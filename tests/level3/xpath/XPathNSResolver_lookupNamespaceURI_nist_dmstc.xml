@@ -51,7 +51,7 @@
 
   <!-- Load Test Document -->
 
-  <load var="doc" href="staffNS"/>
+  <load var="doc" href="staffNS" willBeModified="false"/>
 
   <getElementsByTagNameNS obj="doc"
                           interface="Document"

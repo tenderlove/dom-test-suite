@@ -63,7 +63,7 @@
 
   <!-- Load Test Document -->
 
-  <load var="doc" href="staff"/>
+  <load var="doc" href="staff" willBeModified="false"/>
 
   <!-- Get XPathResult -->
 
@@ -87,9 +87,10 @@
                var="stringValue"
 	       />
 
-  <assertSame  id="same" 
+  <assertEquals id="same" 
                actual="stringValue"
                expected="&quot;35,000&quot;"
+               ignoreCase="false"
 	       />
 
 

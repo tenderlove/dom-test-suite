@@ -278,7 +278,7 @@ The source document contained the following notice:
 	<xsl:text>[</xsl:text>
     <xsl:value-of select="@collection"/>
     <xsl:text>.length] = </xsl:text>
-	<xsl:value-of select="@obj"/>
+	<xsl:value-of select="@item"/>
     <xsl:text>;
 </xsl:text>
 </xsl:template>

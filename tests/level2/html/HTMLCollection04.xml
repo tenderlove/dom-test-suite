@@ -50,9 +50,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <rows interface="HTMLTableElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="rowLength1"/>
-<append collection="result" obj="rowLength1"/>
+<append collection="result" item="rowLength1"/>
 <insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="4"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="rowLength2"/>
-<append collection="result" obj="rowLength2"/>
+<append collection="result" item="rowLength2"/>
 <assertEquals actual="result" expected="expectedResult" id="rowIndexLink" ignoreCase="false"/>
 </test>
