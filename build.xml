@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.18  2001-08-24 08:28:00  dom-ts-4
+Revision 1.19  2001-08-30 08:30:17  dom-ts-4
+Added metadata and Software licence (dropped in earlier processing) to test
+Enhanced test-matrix.xsl
+
+Revision 1.18  2001/08/24 08:28:00  dom-ts-4
 Test matrix generation.  Some Node.setValue() tests
 
 Revision 1.17  2001/08/23 08:01:49  dom-ts-4
@@ -186,7 +190,7 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
-	       style="${transforms.dir}/analyzename.xsl" 
+	       style="${transforms.dir}/check-subjects.xsl" 
 	       extension=".xml">
 		<param name="interfaces-docname"
 		       expression="../${build.dir}/dom1-interfaces.xml"/>

@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.11  2001-08-23 08:01:49  dom-ts-4
+Revision 1.12  2001-08-30 08:30:18  dom-ts-4
+Added metadata and Software licence (dropped in earlier processing) to test
+Enhanced test-matrix.xsl
+
+Revision 1.11  2001/08/23 08:01:49  dom-ts-4
 Test fixups for ignoring whitespace, et al
 
 Revision 1.10  2001/08/22 22:12:50  dom-ts-4
@@ -691,18 +695,18 @@ import java.util.*;
 	<xsl:value-of select="@id"/>
 	<xsl:text>",</xsl:text>
 	<xsl:call-template name="produce-type">
-		<xsl:with-param name="type" select="@expected"/>
+		<xsl:with-param name="type" select="@type"/>
 	</xsl:call-template>
-	<xsl:text>,</xsl:text>
-	<xsl:value-of select="@actual"/>
+	<xsl:text>.class,</xsl:text>
+	<xsl:value-of select="@obj"/>
 	<xsl:text>);
 </xsl:text>
 	<xsl:if test="*">
 		<xsl:text>if(</xsl:text>
-		<xsl:value-of select="@actual"/>
+		<xsl:value-of select="@obj"/>
 		<xsl:text> instanceof </xsl:text>
 		<xsl:call-template name="produce-type">
-			<xsl:with-param name="type" select="@expected"/>
+			<xsl:with-param name="type" select="@type"/>
 		</xsl:call-template>
 		<xsl:text>) {</xsl:text>
 		<xsl:apply-templates mode="body"/>

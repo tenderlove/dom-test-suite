@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.5  2001-08-22 22:12:49  dom-ts-4
+ Revision 1.6  2001-08-30 08:30:18  dom-ts-4
+ Added metadata and Software licence (dropped in earlier processing) to test
+ Enhanced test-matrix.xsl
+
+ Revision 1.5  2001/08/22 22:12:49  dom-ts-4
  Now passing all tests with default settings
 
  Revision 1.4  2001/08/22 06:22:46  dom-ts-4
@@ -159,7 +163,7 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
     framework.assertSame(this,assertID, expected, actual);
   }
 
-  public void assertInstanceOf(String assertID, Object obj, Class cls) {
+  public void assertInstanceOf(String assertID, Class cls, Object obj) {
     framework.assertInstanceOf(this,assertID, obj,cls);
   }
 

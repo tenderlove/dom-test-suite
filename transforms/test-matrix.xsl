@@ -52,12 +52,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:comment>
         <html>
             <body>
-                <p>Method count <xsl:value-of select="count($methods)"/>.</p>
-                <p>Attribute count <xsl:value-of select="count($attributes)"/>.</p>
-                <p>Description count <xsl:value-of select="count($descriptions)"/>.</p>
                 <xsl:variable name="untestedMethods" select="$methods[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource)]"/>
                 <xsl:if test="$untestedMethods">
-                    <table col="3">
+                    <table col="3" border="1">
                         <thead>Methods with no corresponding test metadata</thead>
                         <xsl:call-template name="rowmethods">
                             <xsl:with-param name="methods" select="$untestedMethods"/>
@@ -68,7 +65,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                 </xsl:if>
                 <xsl:variable name="untestedAttributes" select="$attributes[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource)]"/>
                 <xsl:if test="$untestedAttributes">
-                    <table col="3">
+                    <table col="3" border="1">
                         <thead>Attributes with no corresponding test metadata</thead>
                         <xsl:call-template name="rowmethods">
                             <xsl:with-param name="methods" select="$untestedAttributes"/>
@@ -81,68 +78,92 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
                 <xsl:for-each select="$interfaces">
                     <xsl:sort select="@name"/>
-                    <table>
+                    <table border="1" cols="2">
                         <thead>Interface <xsl:value-of select="@name"/></thead>
-                        <xsl:for-each select="attribute">
-                            <xsl:sort select="@name"/>
-                            <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
+
+                        <!-- tests which have the interface as a subject  -->
+                        <xsl:variable name="interfacetests" select="$descriptions[dc:subject/@rdf:resource= concat($specURI,current()/@id)]"/>
+                        <xsl:if test="$interfacetests">
                             <tr>
+                                <td width="25%"/>
                                 <td>
-                                    <a href="$featureURI" title="{descr}">
-                                        <xsl:value-of select="@name"/>
-                                    </a>
-                                </td>
-                                <td>
-                                    <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
-                                    <xsl:if test="$featuretests">
-                                        <table>
-                                            <xsl:call-template name="rowtests">
-                                                <xsl:with-param name="tests" select="$featuretests"/>
-                                                <xsl:with-param name="index">0</xsl:with-param>
-                                                <xsl:with-param name="columns">2</xsl:with-param>
-                                            </xsl:call-template>
-                                        </table>
-                                    </xsl:if>
+                                    <table>
+                                        <xsl:call-template name="rowtests">
+                                            <xsl:with-param name="tests" select="$interfacetests"/>
+                                            <xsl:with-param name="index">0</xsl:with-param>
+                                            <xsl:with-param name="columns">3</xsl:with-param>
+                                        </xsl:call-template>
+                                    </table>
                                 </td>
                             </tr>
-                        </xsl:for-each>
+                        </xsl:if>            
 
-                        <xsl:for-each select="method">
-                            <xsl:sort select="@name"/>
-                            <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
-                            <tr>
-                                <td>
-                                    <a href="$featureURI" title="{descr}">
-                                        <xsl:value-of select="@name"/>
-                                    </a>
-                                </td>
-                                <td>
-                                    <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
-                                    <xsl:if test="$featuretests">
-                                        <table>
-                                            <xsl:call-template name="rowtests">
-                                                <xsl:with-param name="tests" select="$featuretests"/>
-                                                <xsl:with-param name="index">0</xsl:with-param>
-                                                <xsl:with-param name="columns">2</xsl:with-param>
-                                            </xsl:call-template>
-                                        </table>
-                                    </xsl:if>
-                                </td>
-                            </tr>
-                        </xsl:for-each>
+                        <xsl:if test="attribute">
+                            <tr><th width="25%">Attribute</th><th>Tests</th></tr>
+                            <xsl:for-each select="attribute">
+                                <xsl:sort select="@name"/>
+                                <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
+                                <tr>
+                                    <td>
+                                        <a href="$featureURI" title="{descr}">
+                                            <xsl:value-of select="@name"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
+                                        <xsl:if test="$featuretests">
+                                            <table>
+                                                <xsl:call-template name="rowtests">
+                                                    <xsl:with-param name="tests" select="$featuretests"/>
+                                                    <xsl:with-param name="index">0</xsl:with-param>
+                                                    <xsl:with-param name="columns">2</xsl:with-param>
+                                                </xsl:call-template>
+                                            </table>
+                                        </xsl:if>
+                                    </td>
+                                </tr>
+                            </xsl:for-each>
+                        </xsl:if>
 
+                        <xsl:if test="method">
+                            <tr><th width="25%">Method</th><th>Tests</th></tr>
+                            <xsl:for-each select="method">
+                                <xsl:sort select="@name"/>
+                                <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
+                                <tr>
+                                    <td>
+                                        <a href="$featureURI" title="{descr}">
+                                            <xsl:value-of select="@name"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
+                                        <xsl:if test="$featuretests">
+                                            <table>
+                                                <xsl:call-template name="rowtests">
+                                                    <xsl:with-param name="tests" select="$featuretests"/>
+                                                    <xsl:with-param name="index">0</xsl:with-param>
+                                                    <xsl:with-param name="columns">2</xsl:with-param>
+                                                </xsl:call-template>
+                                            </table>
+                                        </xsl:if>
+                                    </td>
+                                </tr>
+                            </xsl:for-each>
+                        </xsl:if>
                     </table>
                 </xsl:for-each>
 
-                <table>
+                <table border="1" cols="2">
+                    <tr><th>Test</th><th>Subjects</th><th/><th/></tr>
                     <xsl:for-each select="$descriptions">
                         <xsl:sort select="dc:title"/>
 
                         <xsl:variable name="test" select="."/>
                         <tr>
-                            <td>
+                            <td width="25%">
                                 <a href="{@rdf:about}" title="{dc:description}">
-                                    <xsl:value-of select="dc:title"/>
+                                    <xsl:call-template name="emit-title"/>
                                 </a>
                             </td>
                             <td>
@@ -202,7 +223,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             <xsl:for-each select="$tests[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
                     <a href="{@rdf:about}" title="{dc:description}">
-                        <xsl:value-of select="dc:title"/>
+                          <xsl:call-template name="emit-title"/>
                     </a>
                 </td>
             </xsl:for-each>
@@ -226,7 +247,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             <xsl:for-each select="$subjects[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
                     <a href="{@rdf:about}" title="{dc:description}">
-                        <xsl:value-of select="dc:title"/>
+                        <xsl:call-template name="emit-title"/>
                     </a>
                 </td>
             </xsl:for-each>
@@ -239,6 +260,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
+
+
+<xsl:template name="emit-title">
+    <xsl:choose>
+        <xsl:when test="dc:title">
+            <xsl:value-of select="dc:title"/>
+        </xsl:when>
+	<xsl:when test="dc:description">
+		<xsl:value-of select="dc:description"/>
+	</xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="@rdf:about"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
 
 </xsl:stylesheet>
 
