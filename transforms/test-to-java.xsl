@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.29  2003-01-17 06:46:20  dom-ts-4
+Revision 1.30  2003-01-20 06:11:17  dom-ts-4
+Fixed inner class production to change DOMString to String.
+
+Revision 1.29  2003/01/17 06:46:20  dom-ts-4
 Fixed "undeclared" on declared variable problem
 
 Revision 1.28  2003/01/16 06:38:44  dom-ts-4
@@ -342,7 +345,9 @@ import java.util.ArrayList;
    <xsl:text> {
        </xsl:text>
    <xsl:for-each select="*[local-name() = 'var']">
-        <xsl:value-of select="@type"/>
+        <xsl:call-template name="produce-type">
+            <xsl:with-param name="type" select="@type"/>
+        </xsl:call-template>
         <xsl:text> </xsl:text>
         <xsl:value-of select="@name"/>
         <xsl:text>;
@@ -1270,14 +1275,9 @@ import java.util.*;
     <xsl:value-of select="$member"/>
     <xsl:text> = ( </xsl:text>
     <xsl:variable name="memberType" select="$vardefs[@name = $member]/@type"/>
-    <xsl:choose>
-        <xsl:when test="$memberType = 'DOMString'">
-            <xsl:text>String</xsl:text>
-        </xsl:when>
-        <xsl:otherwise>
-            <xsl:value-of select="$memberType"/>
-        </xsl:otherwise>
-    </xsl:choose>
+    <xsl:call-template name="produce-type">
+        <xsl:with-param name="type" select="$memberType"/>
+    </xsl:call-template>
     <xsl:text> ) </xsl:text>
 	<xsl:value-of select="@collection"/>
     <xsl:choose>
@@ -1321,6 +1321,7 @@ import java.util.*;
 	<xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="contains($type,'DOMString')">String</xsl:when>
+		<xsl:when test="contains($type,'DOMObject')">Object</xsl:when>
         <xsl:when test="$type = 'unsigned long'">int</xsl:when>
         <xsl:when test="$type = 'long'">int</xsl:when>
         <xsl:when test="substring($type, 1, 9) = 'unsigned '">
@@ -1457,23 +1458,11 @@ import java.util.*;
 
 		<!--  cast and hope for the best  -->		
 		<xsl:otherwise>
-            <xsl:choose>
-                <xsl:when test="$reqtype = 'DOMString'">
-                    <xsl:text>((String)</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-			        <xsl:text>((</xsl:text>
-                    <xsl:choose>
-                        <xsl:when test="substring($reqtype,1,9) = 'unsigned '">
-			                <xsl:value-of select="substring($reqtype, 10)"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-			                <xsl:value-of select="$reqtype"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-			        <xsl:text>)</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:text>((</xsl:text>
+            <xsl:call-template name="produce-type">
+                <xsl:with-param name="type" select="$reqtype"/>
+            </xsl:call-template>
+			<xsl:text>)</xsl:text>
             <xsl:text>/*</xsl:text><xsl:value-of select="$vartype"/><xsl:text>*/</xsl:text>
 			<xsl:value-of select="$var"/>
 			<xsl:text>)</xsl:text>
