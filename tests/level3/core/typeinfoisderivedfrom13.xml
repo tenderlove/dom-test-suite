@@ -16,12 +16,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom05">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom13">
 <metadata>
-<title>typeinfoisderviedfrom05</title>
+<title>typeinfoisderviedfrom13</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if xsd:string is derived from xsd:anyType by restriction.
+Check if classType is derived from xsd:anyType by any method other than restriction.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -37,12 +37,12 @@ Check if xsd:string is derived from xsd:anyType by restriction.
 <var name="isDerived" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
-<item var="acronymElem" obj="elemList" index="0" interface="NodeList"/>
-<getAttributeNode var="attr" obj="acronymElem" name='"title"'/>
+<item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
+<getAttributeNode var="attr" obj="acronymElem" name='"class"'/>
 <schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
-<!--  type info should be xsd:string  -->
+<!--  type info should be xhtml:classType  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromAnyTypeRestrictionOnly"/>
+	typeNameArg='"anyType"' derivationMethod="14"/>
+<assertFalse actual="isDerived" id="derivedFromAnyTypeExceptRestriction"/>
 </test>

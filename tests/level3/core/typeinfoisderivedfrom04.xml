@@ -18,46 +18,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!DOCTYPE test SYSTEM "dom3.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom04">
 <metadata>
-<title>typeinfoisderivedfrom04</title>
+<title>typeinfoisderviedfrom04</title>
 <creator>Curt Arnold</creator>
 <description>
-Check isDerivedFrom for "emType" simple type.
+Check if xsd:string is derived from xsd:anyType by any method.
 </description>
-<date qualifier="created">2004-01-13</date>
+<date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
+<var name="acronymElem" type="Element"/>
+<var name="attr" type="Attr"/>
 <var name="elem" type="Element"/>
+<var name="elemName" type="DOMString"/>
 <var name="typeInfo" type="TypeInfo"/>
 <var name="isDerived" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName var="elemList" obj="doc" tagname='"em"' interface="Document"/>
-<item var="elem" obj="elemList" index="0" interface="NodeList"/>
-<schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
-<!--  type should be emType  -->
+<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
+<item var="acronymElem" obj="elemList" index="0" interface="NodeList"/>
+<getAttributeNode var="attr" obj="acronymElem" name='"title"'/>
+<schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
+<!--  type info should be xsd:string  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
-	typeNameArg='"emp0001_3Type"' derivationMethod="15"/>
-<assertTrue actual="isDerived" id="derivedFromEmp13AnyMethod"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
-	typeNameArg='"emp0001_3Type"' derivationMethod="4"/>
-<assertTrue actual="isDerived" id="derivedFromEmp13Union"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
-	typeNameArg='"emp0001_3Type"' derivationMethod="11"/>
-<assertFalse actual="isDerived" id="derivedFromEmp13NotUnion"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"ID"' derivationMethod="15"/>
-<!--  this could be debatable, both union members are restrictions of ID   -->	
-<assertFalse actual="isDerived" id="derivedFromID"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anySimpleType"' derivationMethod="15"/>
-<assertTrue actual="isDerived" id="derivedFromAnySimpleType"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anyType"' derivationMethod="15"/>
 <assertTrue actual="isDerived" id="derivedFromAnyType"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
-	typeNameArg='"emType"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="notDerivedFromSelf"/>
 </test>

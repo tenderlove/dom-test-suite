@@ -16,12 +16,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom05">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom07">
 <metadata>
-<title>typeinfoisderviedfrom05</title>
+<title>typeinfoisderviedfrom07</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if xsd:string is derived from xsd:anyType by restriction.
+Check if xsd:string is derived from xsd:anyType using 0 as derivation method.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -43,6 +43,6 @@ Check if xsd:string is derived from xsd:anyType by restriction.
 <!--  type info should be xsd:string  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromAnyTypeRestrictionOnly"/>
+	typeNameArg='"anyType"' derivationMethod="0"/>
+<assertTrue actual="isDerived" id="derivedFromAnyType0"/>
 </test>

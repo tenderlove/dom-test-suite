@@ -540,6 +540,40 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="typeinfoisderivedfrom03.xml"/>
 	<suite.member href="typeinfoisderivedfrom04.xml"/>
 	<suite.member href="typeinfoisderivedfrom05.xml"/>
+	<suite.member href="typeinfoisderivedfrom06.xml"/>
+	<suite.member href="typeinfoisderivedfrom07.xml"/>
+	<suite.member href="typeinfoisderivedfrom08.xml"/>
+	<suite.member href="typeinfoisderivedfrom09.xml"/>
+	<suite.member href="typeinfoisderivedfrom10.xml"/>
+	<suite.member href="typeinfoisderivedfrom11.xml"/>
+	<suite.member href="typeinfoisderivedfrom12.xml"/>
+	<suite.member href="typeinfoisderivedfrom13.xml"/>
+	<suite.member href="typeinfoisderivedfrom14.xml"/>
+	<suite.member href="typeinfoisderivedfrom15.xml"/>
+	<suite.member href="typeinfoisderivedfrom16.xml"/>
+	<suite.member href="typeinfoisderivedfrom17.xml"/>
+	<suite.member href="typeinfoisderivedfrom18.xml"/>
+	<suite.member href="typeinfoisderivedfrom19.xml"/>
+	<suite.member href="typeinfoisderivedfrom20.xml"/>
+	<suite.member href="typeinfoisderivedfrom21.xml"/>
+	<suite.member href="typeinfoisderivedfrom22.xml"/>
+	<suite.member href="typeinfoisderivedfrom23.xml"/>
+	<suite.member href="typeinfoisderivedfrom24.xml"/>
+	<suite.member href="typeinfoisderivedfrom25.xml"/>
+	<suite.member href="typeinfoisderivedfrom26.xml"/>
+	<suite.member href="typeinfoisderivedfrom27.xml"/>
+	<suite.member href="typeinfoisderivedfrom28.xml"/>
+	<suite.member href="typeinfoisderivedfrom29.xml"/>
+	<suite.member href="typeinfoisderivedfrom30.xml"/>
+	<suite.member href="typeinfoisderivedfrom31.xml"/>
+	<suite.member href="typeinfoisderivedfrom32.xml"/>
+	<suite.member href="typeinfoisderivedfrom33.xml"/>
+	<suite.member href="typeinfoisderivedfrom34.xml"/>
+	<suite.member href="typeinfoisderivedfrom35.xml"/>
+	<suite.member href="typeinfoisderivedfrom36.xml"/>
+	<suite.member href="typeinfoisderivedfrom37.xml"/>
+	<suite.member href="typeinfoisderivedfrom38.xml"/>
+	<suite.member href="typeinfoisderivedfrom39.xml"/>
 	
 	<!-- DOMConfiguration -->
 	<!-- canSetParameter -->

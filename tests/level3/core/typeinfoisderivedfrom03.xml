@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderviedfrom03</title>
 <creator>Curt Arnold</creator>
 <description>
-Check isDerivedFrom for classType simple type.
+Check that isDerivedFrom does considers xsd:string to be derived from anySimpleType.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -37,30 +37,12 @@ Check isDerivedFrom for classType simple type.
 <var name="isDerived" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
-<item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
-<getAttributeNode var="attr" obj="acronymElem" name='"class"'/>
+<item var="acronymElem" obj="elemList" index="0" interface="NodeList"/>
+<getAttributeNode var="attr" obj="acronymElem" name='"title"'/>
 <schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
-<!--  type info should be xhtml:classType  -->
+<!--  type info should be xsd:string  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"string"' derivationMethod="15"/>
-<assertTrue actual="isDerived" id="derivedFromString"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anySimpleType"' derivationMethod="15"/>
 <assertTrue actual="isDerived" id="derivedFromAnySimpleType"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="15"/>
-<assertTrue actual="isDerived" id="derivedFromAnyType"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromAnyTypeRestrictionOnly"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="0"/>
-<assertTrue actual="isDerived" id="derivedFromAnyType0"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="14"/>
-<assertFalse actual="isDerived" id="derivedFromAnyTypeExceptRestriction"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
-	typeNameArg='"classType"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="notDerivedFromSelf"/>
 </test>

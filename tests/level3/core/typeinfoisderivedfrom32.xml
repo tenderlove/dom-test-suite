@@ -16,33 +16,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom05">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="typeinfoisderivedfrom32">
 <metadata>
-<title>typeinfoisderviedfrom05</title>
+<title>typeinfoisderivedfrom32</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if xsd:string is derived from xsd:anyType by restriction.
+Check if anonymous type of p element is derived from part1.
 </description>
-<date qualifier="created">2004-01-11</date>
+<date qualifier="created">2004-01-13</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
-<var name="acronymElem" type="Element"/>
-<var name="attr" type="Attr"/>
 <var name="elem" type="Element"/>
-<var name="elemName" type="DOMString"/>
 <var name="typeInfo" type="TypeInfo"/>
 <var name="isDerived" type="boolean"/>
+<var name="typeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
-<item var="acronymElem" obj="elemList" index="0" interface="NodeList"/>
-<getAttributeNode var="attr" obj="acronymElem" name='"title"'/>
-<schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
-<!--  type info should be xsd:string  -->
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="elemList" index="0" interface="NodeList"/>
+<schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
+<!--  type should be anonymous type defined within p element  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
-<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromAnyTypeRestrictionOnly"/>
+<!--  check its relationship with part1 -->
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"part1"' derivationMethod="15"/>
+<assertTrue actual="isDerived" id="derivedFromPart1AnyMethod"/>
 </test>
