@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.102  2003-11-10 21:39:11  dom-ts-4
+Revision 1.103  2003-11-10 21:47:15  dom-ts-4
+Missing book.xml, book.xsd (Bug 376)
+
+Revision 1.102  2003/11/10 21:39:11  dom-ts-4
 Bug 230, update to 2003-06-19 LS draft (second iteration)
 
 Revision 1.101  2003/11/10 07:34:13  dom-ts-4
@@ -2393,8 +2396,7 @@ it would compile all DOM 3 java code
 		         includes="org/w3c/dom/validation/*"
 		         excludes="*.bak"/>
 
-        <!--   book.xml is missing from CVS -->
-		<!-- fileset dir="tests/level3/validation/files" excludes="*.bak"/ -->
+		<fileset dir="tests/level3/validation/files" excludes="*.bak"/>
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
