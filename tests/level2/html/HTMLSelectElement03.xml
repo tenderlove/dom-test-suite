@@ -25,6 +25,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     Retrieve the selectedIndex attribute from the second SELECT element and 
     examine it's value.  
+
+    Per http://www.w3.org/TR/html401/interact/forms.html#h-17.6.1,
+    without an explicit selected attribute, user agent behavior is
+    undefined.  There is no way to coerce no option to be selected.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-07</date>
@@ -39,5 +43,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <selectedIndex interface="HTMLSelectElement" obj="testNode" var="vselectedindex"/>
-<assertEquals actual="vselectedindex" expected="-1" id="selectedIndexLink" ignoreCase="false"/>
+<!-- Commented assertion per section 17.6.3   -->
+<!-- assertEquals actual="vselectedindex" expected="-1" id="selectedIndexLink" ignoreCase="false"/ -->
 </test>
