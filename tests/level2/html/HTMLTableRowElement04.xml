@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="vsectionrowindex" type="int"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="tablerow" willBeModified="false"/>
-<getElementsById interface="Document" obj="doc" var="testNode" elementId="&quot;tbody_2nd&quot;"/>
+<getElementById interface="Document" obj="doc" var="testNode" elementId='"tbody_2nd"'/>
 <sectionRowIndex interface="HTMLTableRowElement" obj="testNode" var="vsectionrowindex"/>
 <assertEquals actual="vsectionrowindex" expected="1" id="sectionRowIndexLink" ignoreCase="false"/>
 </test>
