@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.132  2004-02-27 05:40:42  dom-ts-4
+Revision 1.133  2004-03-09 03:03:42  dom-ts-4
+Elimination of duplicate L2 HTML test definitions (bug 587)
+
+Revision 1.132  2004/02/27 05:40:42  dom-ts-4
 Test matrix improvements (bug 575)
 
 Revision 1.131  2004/02/26 22:53:16  dom-ts-4
@@ -1055,12 +1058,17 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml"/>  
+		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml *.xhtml"/>  
 	</xmlvalidate>
 </target>
 
 
 <target name="dom1-html-gen-java" depends="dom1-interfaces,dom1-dtd">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level2/html"/>
+
+
+
+
 	<antcall target="gen-java">
 		<param name="level" value="1"/>
 		<param name="module" value="html"/>
@@ -1553,32 +1561,64 @@ All implementation conditions combined into implementationAttribute element
 
 <!--  DOM Level 2 HTML  -->
 
-<target name="dom2-html-validate-tests" depends="dom2-dtd">
+<target name="dom2-html-validate-tests" depends="dom1-html-validate-tests, dom2-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/html" includes="*.xml"/>  
 	</xmlvalidate>
 </target>
 
-<target name="dom2-html-schema-validate-tests" depends="check-schema-support, dom2-dtd, dom2-schema">
+<target name="dom2-html-schema-validate-tests" depends="check-schema-support, dom1-html-validate-tests, dom2-dtd, dom2-schema">
     <ant antfile="schemavalidate.ant">
     	<property name="validate.dir" location="${tests.dir}/level2/html"/>  
     </ant>
 </target>
 
-<target name="dom2-html-validate-files" depends="get-xhtml1-dtd">
+<target name="dom2-html-validate-files" depends="get-xhtml1-dtd, dom1-html-validate-files">
     <copy todir="${tests.dir}/level2/html/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
 
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/html/files" includes="*.xml"/>  
+		<fileset dir="${tests.dir}/level2/html/files" includes="*.xml *.xhtml"/>  
 	</xmlvalidate>
 </target>
 
 
 <target name="dom2-html-gen-java" depends="dom2-interfaces,dom2-dtd">
+	<style basedir="${tests.dir}/level1/html" 
+		   destdir="${java.build.dir}/org/w3c/domts/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml 
+                     HTMLAppletElement07.xml 
+                     HTMLAppletElement09.xml
+                     HTMLBaseFontElement03.xml
+                     HTMLImageElement05.xml
+                     HTMLImageElement06.xml
+                     HTMLImageElement11.xml
+                     HTMLImageElement12.xml
+                     HTMLInputElement13.xml
+                     HTMLIsIndexElement03.xml
+                     HTMLObjectElement11.xml
+                     HTMLObjectElement16.xml
+                     HTMLObjectElement19.xml
+                     HTMLTableElement31.xml
+                     HTMLTableRowElement04.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level2.html"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+		<param name="import-html"
+		       expression="import org.w3c.dom.html2.*;"/>
+	</style>
+
+
+
 	<antcall target="gen-java">
 		<param name="level" value="2"/>
 		<param name="module" value="html"/>
@@ -1588,6 +1628,38 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="dom2-html-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level2/html/files"/>
+    <copy todir="${build.dir}/ecmascript/level2/html/files">
+		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
+    </copy>
+	<style basedir="${tests.dir}/level1/html" 
+		   destdir="${build.dir}/ecmascript/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml 
+                     HTMLAppletElement07.xml 
+                     HTMLAppletElement09.xml
+                     HTMLBaseFontElement03.xml
+                     HTMLImageElement05.xml
+                     HTMLImageElement06.xml
+                     HTMLImageElement11.xml
+                     HTMLImageElement12.xml
+                     HTMLInputElement13.xml
+                     HTMLIsIndexElement03.xml
+                     HTMLObjectElement11.xml
+                     HTMLObjectElement16.xml
+                     HTMLObjectElement19.xml
+                     HTMLTableElement31.xml
+                     HTMLTableRowElement04.xml"
+	       style="${transforms.dir}/test-to-jsunit.xsl" 
+	       extension=".html">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+        <param name="testpath" expression="../level2/html/"/>
+	</style>
+
+
     <antcall target="gen-jsunit">
     	<param name="level" value="2"/>
     	<param name="module" value="html"/>
@@ -1626,10 +1698,16 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="dom2-html-jar" depends="dom2-html-javac,dom2-html-validate-files">
-	<antcall target="html-jar">
-		<param name="level" value="2"/>
-		<param name="module" value="html"/>
-	</antcall>
+	<jar jarfile="${build.dir}/dom2-html.jar"  
+		 manifest="java/dom2-html.mf"
+		 basedir="${java.build.dir}"
+		 includes="org/w3c/domts/* org/w3c/domts/level2/html/* org/w3c/dom/* org/w3c/dom/html/*"
+		 excludes="*.bak">
+		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
+		<fileset dir="tests/level2/html/files" excludes="*.bak"/>
+		<fileset dir="java" includes="org/w3c/domts/*.java"/>
+        <fileset dir="${lib.dir}/xhtml1-dtd"/>
+	</jar>
 </target>
 
 
