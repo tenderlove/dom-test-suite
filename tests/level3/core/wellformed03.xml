@@ -51,7 +51,7 @@ normalize document with well-formed set to true.
 <assertDOMException id="xml10InvalidName">
 	<INVALID_CHARACTER_ERR>
 		<createAttribute var="attr" obj="doc" 
-			name='"LegalName&#218F;"'/>
+			name='"LegalName&#2190;"'/>
 	</INVALID_CHARACTER_ERR>
 </assertDOMException>
 <try>
@@ -62,8 +62,8 @@ normalize document with well-formed set to true.
 		</DOMException>
 	</catch>
 </try> 
-<setAttribute obj="docElem" name='"LegalName&#218F;"' value='"foo"'/>
-<getAttributeNode var="attr" obj="docElem" name='"LegalName&#218F;"'/>
+<setAttribute obj="docElem" name='"LegalName&#2190;"' value='"foo"'/>
+<getAttributeNode var="attr" obj="docElem" name='"LegalName&#2190;"'/>
 <xmlVersion obj="doc" value='"1.0"' interface="Document"/>
 <domConfig var="domConfig" obj="doc" interface="Document"/>
 <setParameter obj="domConfig" name='"well-formed"' value="true"/>
