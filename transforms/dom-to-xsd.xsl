@@ -1120,8 +1120,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:annotation>
 				<xs:complexType>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
-					<xs:attribute name="feature" type="stringLiteral" use="required"/>
-					<xs:attribute name="version" type="stringLiteral" use="optional"/>
+					<xs:attribute name="feature" type="variableOrStringLiteral" use="required"/>
+					<xs:attribute name="version" type="variableOrStringLiteral" use="optional"/>
                     <xs:attribute name="value" type="xs:boolean" use="optional"/>
 					<xs:attribute name="var" type="variable" use="optional"/>
 					<xs:attribute name="obj" type="variable" use="optional"/>

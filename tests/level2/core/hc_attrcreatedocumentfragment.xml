@@ -11,7 +11,7 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE test SYSTEM "dom2.dtd">
 
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_attrcreatedocumentfragment">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="hc_attrcreatedocumentfragment">
 <metadata>
 <title>hc_attrCreateDocumentFragment</title>
 <creator>Curt Arnold</creator>
@@ -20,11 +20,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   Create a new DocumentFragment and add a newly created Element node(with one attribute).  
   Once the element is added, its attribute should be available as an attribute associated 
   with an Element within a DocumentFragment.
-
-  Unlike DOM L1 Core equivalent, this test can expect a specific case for HTML documents.
 </description>
 
-<date qualifier="created">2003-06-27</date>
+<date qualifier="created">2002-06-09</date>
 <!--  createDocumentFragment  -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-35CB04B5"/>
 <!--  setAttribute -->
@@ -33,23 +31,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=184"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docFragment" type="DocumentFragment"/>
 <var name="newOne" type="Element"/>
 <var name="domesticNode" type="Node"/>
-<var name="domesticAttr" type="NamedNodeMap"/>
-<var name="attrs" type="Attr"/>
+<var name="attributes" type="NamedNodeMap"/>
+<var name="attribute" type="Attr"/>
 <var name="attrName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
+<var name="langAttrCount" type="int" value="0"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="docFragment"/>
 <createElement obj="doc" var="newOne" tagName='"html"'/>
 <setAttribute obj="newOne" name='"lang"' value='"EN"'/>
 <appendChild var="appendedChild" obj="docFragment" newChild="newOne"/>
 <firstChild interface="Node" obj="docFragment" var="domesticNode"/>
-<attributes obj="domesticNode" var="domesticAttr"/>
-<item interface="NamedNodeMap" obj="domesticAttr" var="attrs" index="0"/>
-<name interface="Attr" obj="attrs" var="attrName"/>
-<assertEquals actual="attrName" expected='"lang"' id="attrName" ignoreCase="auto"/>
+<attributes obj="domesticNode" var="attributes"/>
+<for-each collection="attributes" member="attribute">
+    <nodeName var="attrName" obj="attribute"/>
+    <if><equals expected='"lang"' actual="attrName" ignoreCase="auto"/>
+        <increment var="langAttrCount" value="1"/>
+    </if>
+</for-each>
+<assertEquals expected="1" actual="langAttrCount" id="hasLangAttr" ignoreCase="false"/> 
 </test>

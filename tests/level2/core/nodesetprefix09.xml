@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="value" type="DOMString" value='"\&quot;#$%&amp;\&apos;()@"' />
+<var name="value" type="DOMString" value='"#$%&amp;&apos;()@"' />
 <var name="element" type="Element"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test/L2"' qualifiedName='"dom:elem"'/>

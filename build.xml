@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.96  2003-06-28 19:35:59  dom-ts-4
+Revision 1.97  2003-06-30 03:49:43  dom-ts-4
+L2 Core schema invalid tests: http://www.w3.org/Bugs/Public/show_bug.cgi?id=260
+
+Revision 1.96  2003/06/28 19:35:59  dom-ts-4
 SAXON fails to build dom1-interfaces.xml: http://www.w3.org/Bugs/Public/show_bug.cgi?id=252
 
 Revision 1.95  2003/06/11 03:20:17  dom-ts-4
@@ -1709,9 +1712,9 @@ All implementation conditions combined into implementationAttribute element
 <target name="clean" depends="init">
 	<delete dir="${build.dir}"/>
     <delete dir="${dist.dir}"/>
-    <delete file="tests\level1\**\dom1.*"/>
-    <delete file="tests\level2\**\dom2.*"/>
-    <delete file="tests\level3\**\dom3.*"/>
+    <delete>
+    	<fileset dir="tests" includes="**/dom?.dtd **/dom?.xsd **/test-to-html.xsl"/>
+    </delete>
 </target>
 
 <target name="dom3-available" depends="init">
