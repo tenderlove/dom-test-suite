@@ -20,38 +20,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>domconfigurationcansetparameter02</title>
 <creator>IBM</creator>
 <description>
-	The canSetParameter method checks if setting a parameter to a specific value is supported.
-	
-	The parameter cdata-section is turned on by default.  Check to see if this feature can be set
-	to false by invoking canSetParameter method.  Also check that this method does not change the
-	value of parameter by checking if the two cdata-section nodes still exist in the document.
+Check that canSetParameter('cdata-sections') returns true for both true and false
+and that calls to the method do not actually change the parameter value.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-11-06</date>
-<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-canSetParameter"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
-<var name="strongList" type="NodeList"/>
-<var name="childList" type="NodeList"/>
-<var name="strongElem" type="Node"/>
-<var name="cdata1" type="Node"/>
-<var name="cdata2" type="Node"/>
-<var name="nodeType" type="int"/>
 <var name="canSet" type="boolean"/>
+<var name="paramVal" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <canSetParameter obj="domConfig" var="canSet" name='"cdata-sections"' value="false"/>
-<assertTrue actual="canSet" id="domconfigurationcansetparameter02_1"/>
-<normalizeDocument obj="doc"/>
-<getElementsByTagNameNS var="strongList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
-<item var="strongElem" obj="strongList" index="1" interface="NodeList"/>
-<childNodes var="childList" obj="strongElem" interface="Node"/>
-<item var="cdata1" obj="childList" index="1" interface="NodeList"/>
-<nodeType var="nodeType" obj="cdata1"/>
-<assertEquals actual="nodeType" expected="4" id="domconfigurationcansetparameter02_2" ignoreCase="false"/>
-<item var="cdata2" obj="childList" index="3" interface="NodeList"/>
-<nodeType var="nodeType" obj="cdata2"/>
-<assertEquals actual="nodeType" expected="4" id="domconfigurationcansetparameter02_3" ignoreCase="false"/>
+<assertTrue actual="canSet" id="canSetFalse"/>
+<getParameter var="paramVal" obj="domConfig" name='"cdata-sections"'/>
+<assertTrue actual="paramVal" id="valueStillTrue"/>
+<canSetParameter obj="domConfig" var="canSet" name='"cdata-sections"' value="true"/>
+<assertTrue actual="canSet" id="canSetTrue"/>
+<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<canSetParameter obj="domConfig" var="canSet" name='"cdata-sections"' value="true"/>
+<assertTrue actual="canSet" id="canSetTrueFromFalse"/>
+<getParameter var="paramVal" obj="domConfig" name='"cdata-sections"'/>
+<assertFalse actual="paramVal" id="valueStillFalse"/>
+<canSetParameter obj="domConfig" var="canSet" name='"cdata-sections"' value="false"/>
+<assertTrue actual="canSet" id="canSetFalseFromFalse"/>
 </test>

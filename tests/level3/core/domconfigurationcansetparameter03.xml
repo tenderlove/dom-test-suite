@@ -28,8 +28,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-11-06</date>
-<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-canSetParameter"/>
 </metadata>
+<!--  required for normalizeDocument  -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="docType" type="DocumentType"/>
@@ -38,14 +40,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entity" type="Entity"/>
 <var name="entityName" type="DOMString"/>
 <var name="canSet" type="boolean"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <canSetParameter obj="domConfig" var="canSet" name='"entities"' value="false"/>
-<assertTrue actual="canSet" id="domconfigurationcansetparameter03_1"/>
+<assertTrue actual="canSet" id="canSetFalse"/>
 <normalizeDocument obj="doc"/>
 <doctype obj="doc" var="docType" interface="Document"/> 
 <entities obj="docType" var="entitiesMap" interface="DocumentType"/>
-<getNamedItemNS var="entity" obj="entitiesMap" namespaceURI="nullNS" localName='"epsilon"'/>
+<getNamedItem var="entity" obj="entitiesMap" name='"epsilon"'/>
+<assertNotNull actual="entity" id="entityNotNull"/>
 <nodeName obj="entity" var="entityName" interface="Node"/>
-<assertEquals actual="entityName" expected='"epsilon"' id="domconfigurationcansetparameter03_2" ignoreCase="false"/>
+<assertEquals actual="entityName" expected='"epsilon"' id="entityName" ignoreCase="false"/>
 </test>
