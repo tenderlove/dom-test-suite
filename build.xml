@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.95  2003-06-11 03:20:17  dom-ts-4
+Revision 1.96  2003-06-28 19:35:59  dom-ts-4
+SAXON fails to build dom1-interfaces.xml: http://www.w3.org/Bugs/Public/show_bug.cgi?id=252
+
+Revision 1.95  2003/06/11 03:20:17  dom-ts-4
 Updated for the 09 June 2003 L3 Core Working Draft
 
 Revision 1.94  2003/05/21 05:00:32  dom-ts-4
@@ -524,13 +527,25 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
+<!--  Saxon 6.5.2 has a problem with relative URL's in entity references
+         and fails to produce this document, so if available
+         a copy from the lib is used     -->
+<target name="dom1-interfaces-init" depends="dom1-init">
+    <available file="patches/dom1-interfaces.xml" property="dom1-interfaces-available"/>
+</target>
 
-<target name="dom1-interfaces" depends="dom1-init">
+<target name="dom1-interfaces-gen" depends="dom1-interfaces-init" unless="dom1-interfaces-available">
 	<style basedir="${specs.dir}/Level-1/xml"
 	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
 	       out="${build.dir}/dom1-interfaces.xml"
-	       style="${transforms.dir}/dom1-errata.xsl"
-	       processor="trax"/>
+	       style="${transforms.dir}/dom1-errata.xsl"/>
+</target>
+
+<target name="dom1-interfaces-copy" depends="dom1-interfaces-init" if="dom1-interfaces-available">
+    <copy todir="${build.dir}" file="patches/dom1-interfaces.xml"/>
+</target>
+
+<target name="dom1-interfaces" depends="dom1-interfaces-gen, dom1-interfaces-copy">
 </target>
 
 <target name="dom1-core-dist" depends="dom1-core-jar,dom1-core-gen-jsunit,dom1-core-matrix,dom1-core-doxygen,junit-run,get-junit-license,dom1-schema">
@@ -1694,10 +1709,9 @@ All implementation conditions combined into implementationAttribute element
 <target name="clean" depends="init">
 	<delete dir="${build.dir}"/>
     <delete dir="${dist.dir}"/>
-    <delete file="tests\level1\core\dom1.dtd"/>
-    <delete file="tests\level1\core\dom1.xsd"/>
-    <delete file="tests\level2\core\dom2.dtd"/>
-    <delete file="tests\level2\core\dom2.xsd"/>
+    <delete file="tests\level1\**\dom1.*"/>
+    <delete file="tests\level2\**\dom2.*"/>
+    <delete file="tests\level3\**\dom3.*"/>
 </target>
 
 <target name="dom3-available" depends="init">
