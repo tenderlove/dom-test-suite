@@ -133,10 +133,21 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
                 <xsl:choose>
                     <xsl:when test="contains($sink-interfaces, 
                             concat(' ',concat(parent::interface/@name,' ')))">
-                        <xsl:call-template name="produce-property">
-                            <xsl:with-param name="required">#IMPLIED</xsl:with-param>
-                            <xsl:with-param name="content">(var*, (%statement;)* )</xsl:with-param>
-                        </xsl:call-template>
+                        <xsl:choose>
+                            <!--    some form of the attribute name is not readonly   -->
+                            <xsl:when test="key('featureByName',@name)[not(@readonly) or @readonly!='yes']">
+                                <xsl:call-template name="produce-property">
+                                    <xsl:with-param name="required">#IMPLIED</xsl:with-param>
+                                    <xsl:with-param name="content">(get?, set?)</xsl:with-param>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:call-template name="produce-property">
+                                    <xsl:with-param name="required">#IMPLIED</xsl:with-param>
+                                    <xsl:with-param name="content">(get?)</xsl:with-param>
+                                </xsl:call-template>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
 
                     <xsl:otherwise>
@@ -463,6 +474,8 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	value CDATA #IMPLIED
 &gt;
 
+&lt;!ELEMENT get (var*, (%statement;)* )&gt;
+&lt;!ELEMENT set (var*, (%statement;)* )&gt;
 
 
 <xsl:text>&lt;!ELEMENT var </xsl:text>
@@ -892,18 +905,24 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 			<xsl:text> id ID #REQUIRED&gt;
 </xsl:text>
 
-			<!--  produce elements for each of the defined codes for
-			        the exception.  The content model of these
-					elements are the methods and attributes that
-					raise that specific code.
-			-->
-			<xsl:for-each select="following-sibling::group[1]/constant">
+		</xsl:for-each>
+
+
+		<!--  produce elements for each of the defined codes for
+			    the exception.  The content model of these
+				elements are the methods and attributes that
+				raise that specific code.
+		-->
+		<xsl:for-each select="//constant[contains(@name, '_ERR') or contains(@name, 'NO_GRAMMAR_AVAILABLE')]">
+            <xsl:variable name="current" select="."/>
+            <!--   only produce an element for the first occurance   -->
+            <xsl:if test="not(preceding::constant[@name = $current/@name])">
 				<xsl:text>&lt;!ELEMENT </xsl:text>
 				<xsl:value-of select="@name"/>
 				<xsl:variable name="code" select="@name"/>
 				<xsl:variable name="code-colon"><xsl:value-of select="@name"/>:</xsl:variable>
-				<xsl:variable name="attrraises" select="$attributes/*[name() = 'getraises' or name() = 'setraises']/exception[@name=$exception and contains(string(.),$code-colon)]"/>
-				<xsl:variable name="methodraises" select="$methods/raises/exception[@name=$exception and contains(string(.),$code-colon)]"/>
+				<xsl:variable name="attrraises" select="$attributes/*[name() = 'getraises' or name() = 'setraises']/exception[contains(string(.),$code-colon)]"/>
+				<xsl:variable name="methodraises" select="$methods/raises/exception[contains(string(.),$code-colon)]"/>
 				<xsl:variable name="total" select="count($attrraises) + count($methodraises)"/>
 				<xsl:choose>
 					<xsl:when test="$total = 0">
@@ -918,8 +937,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 						<xsl:for-each select="$methodraises">
 							<xsl:value-of select="ancestor::method/@name"/>
 						</xsl:for-each>
-						<xsl:text> )
-</xsl:text>
+						<xsl:text> ) </xsl:text>
 					</xsl:when>
 
 					<xsl:when test="count($attrraises) = 0">
@@ -953,7 +971,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				</xsl:choose>
 				<xsl:text> &gt;
 </xsl:text>
-			</xsl:for-each>
+            </xsl:if>
 		</xsl:for-each>
 
 	</xsl:template>
