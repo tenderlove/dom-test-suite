@@ -14,7 +14,7 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1334481328"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newCommentNode" type="Comment"/>
@@ -24,9 +24,9 @@
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createComment obj="doc" var="newCommentNode" data="&quot;This is a new Comment node&quot;"/>
 <nodeValue obj="newCommentNode" var="newCommentValue"/>
-<assertEquals actual="newCommentValue" expected='"This is a new Comment node"' ignoreCase="false" id="value"/>
+<assertEquals actual="newCommentValue" expected="&quot;This is a new Comment node&quot;" ignoreCase="false" id="value"/>
 <nodeName obj="newCommentNode" var="newCommentName"/>
-<assertEquals actual="newCommentName" expected='"#comment"' ignoreCase="false" id="name"/>
+<assertEquals actual="newCommentName" expected="&quot;#comment&quot;" ignoreCase="false" id="name"/>
 <nodeType obj="newCommentNode" var="newCommentType"/>
 <assertEquals actual="newCommentType" expected="8" ignoreCase="false" id="type"/>
 </test>

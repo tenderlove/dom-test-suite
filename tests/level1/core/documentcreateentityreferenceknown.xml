@@ -19,7 +19,7 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newEntRefNode" type="EntityReference"/>
@@ -34,7 +34,7 @@
 <for-each collection="newEntRefList" member="child">
 <nodeName obj="child" var="name"/>
 <nodeValue obj="child" var="value"/>
-<assertEquals actual="name" expected='"#text"' ignoreCase="false" id="name"/>
-<assertEquals actual="value" expected='"Texas"' ignoreCase="false" id="value"/>
+<assertEquals actual="name" expected="&quot;#text&quot;" ignoreCase="false" id="name"/>
+<assertEquals actual="value" expected="&quot;Texas&quot;" ignoreCase="false" id="value"/>
 </for-each>
 </test>

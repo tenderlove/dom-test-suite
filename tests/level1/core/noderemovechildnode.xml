@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="noderemovechildnode">
 	<metadata>
-		<title>nodeRemoveChildNode</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeRemoveChildNode</title>
+<creator>NIST</creator>
+<description>
     The "removeChild(oldChild)" method removes the node
     indicated by "oldChild". 
     
@@ -13,10 +13,10 @@
     children and the first child should now be the child
     that used to be at the second position in the list.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="employeeNode" type="Node"/>
@@ -34,7 +34,7 @@
 	<removeChild var="removedChild" obj="employeeNode" oldChild="oldChild"/>
 	<item interface="NodeList" obj="childList" index="0" var="child"/>
 	<nodeName obj="child" var="childName"/>
-    <assertEquals actual="childName" expected='"employeeId"' ignoreCase="false" id="childName"/>
+    <assertEquals actual="childName" expected="&quot;employeeId&quot;" ignoreCase="false" id="childName"/>
 	<length interface="NodeList" obj="childList" var="length"/>
     <assertEquals actual="length" expected="12" ignoreCase="false" id="length"/>
 </test>

@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementretrieveallattributes">
 	<metadata>
-		<title>elementRetrieveAllAttributes</title>
-		<creator>NIST</creator>
-		<description>
+<title>elementRetrieveAllAttributes</title>
+<creator>NIST</creator>
+<description>
     The "getAttributes()" method(Node Interface) may
    be used to retrieve the set of all attributes of an
    element. 
@@ -15,10 +15,9 @@
    This test uses the "getLength()" method from the        
    NameNodeMap interface.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="testEmployee" type="Node"/>

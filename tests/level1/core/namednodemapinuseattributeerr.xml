@@ -13,7 +13,7 @@
 	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 	<item interface="NodeList" obj="elementList" var="firstNode" index="0"/>
 	<createAttribute obj="doc" var="domesticAttr" name="&quot;domestic&quot;"/>
-	<value interface="Attr" obj="domesticAttr" value='"Yes"'/>
+	<value interface="Attr" obj="domesticAttr" value="&quot;Yes&quot;"/>
 	<setAttributeNode var="setAttr" obj="firstNode" newAttr="domesticAttr"/>
 	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 	<item interface="NodeList" obj="elementList" var="testNode" index="2"/>

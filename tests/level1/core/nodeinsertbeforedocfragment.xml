@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeinsertbeforedocfragment">
 	<metadata>
-		<title>nodeInsertBeforeDocFragment</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeInsertBeforeDocFragment</title>
+<creator>NIST</creator>
+<description>
     If the "newChild" is a DocumentFragment object then all
     its children are inserted in the same order before the
     the "refChild". 
@@ -16,10 +16,10 @@
     extra children("newChild1" and "newChild2") at 
     positions fourth and fifth respectively.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="employeeNode" type="Node"/>

@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodereplacechildnodeancestor">
 	<metadata>
-		<title>nodeReplaceChildNodeAncestor</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeReplaceChildNodeAncestor</title>
+<creator>NIST</creator>
+<description>
     The "replaceChild(newChild,oldChild)" method raises a 
     HIERARCHY_REQUEST_ERR DOMException if the node to put
     in is one of this node's ancestors.
@@ -14,12 +14,13 @@
     An attempt to make such a replacement should raise the 
     desired exception.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='HIERARCHY_REQUEST_ERR'])"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='HIERARCHY_REQUEST_ERR'])"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='HIERARCHY_REQUEST_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='HIERARCHY_REQUEST_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="newChild" type="Node"/>
 	<var name="elementList" type="NodeList"/>

@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="namednodemapnotfounderr">
 	<metadata>
-		<title>namednodemapNotFoundErr</title>
-		<creator>NIST</creator>
-		<description>
+<title>namednodemapNotFoundErr</title>
+<creator>NIST</creator>
+<description>
     The "removeNamedItem(name)" method raises a 
    NOT_FOUND_ERR DOMException if there is not a node
    named "name" in the map.
@@ -15,12 +15,12 @@
    "district" in the list and therefore the desired   
    exception should be raised.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INUSE_ATTRIBUTE_ERR'])"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D58B193"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-D58B193')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INUSE_ATTRIBUTE_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D58B193"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-D58B193')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="testEmployee" type="Element"/>

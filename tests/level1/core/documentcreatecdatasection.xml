@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentcreatecdatasection">
 	<metadata>
-		<title>documentCreateCDATASection</title>
-		<creator>NIST</creator>
-		<description>
+<title>documentCreateCDATASection</title>
+<creator>NIST</creator>
+<description>
     The "createCDATASection(data)" method creates a new 
    CDATASection node whose value is the specified string.
    Retrieve the entire DOM document and invoke its 
@@ -13,10 +13,10 @@
    string.  The content, name and type are retrieved and
    output.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D26C0AF8"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="newCDATASectionNode" type="CDATASection"/>
 	<var name="newCDATASectionValue" type="DOMString"/>

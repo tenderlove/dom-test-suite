@@ -20,7 +20,9 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7D61178C"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -35,7 +37,7 @@
 <firstChild obj="nameNode" var="child"/>
 <deleteData obj="child" offset="30" count="5"/>
 <data interface="CharacterData" obj="child" var="childData"/>
-<assertEquals actual="childData" expected='"1230 North Ave. Dallas, Texas "' ignoreCase="false" id="data"/>
+<assertEquals actual="childData" expected="&quot;1230 North Ave. Dallas, Texas &quot;" ignoreCase="false" id="data"/>
 <length interface="CharacterData" obj="child" var="childLength"/>
 <assertEquals actual="childLength" expected="30" ignoreCase="false" id="length"/>
 </test>

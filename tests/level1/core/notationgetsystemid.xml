@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="notationgetsystemid">
 	<metadata>
-		<title>notationGetSystemId</title>
-		<creator>NIST</creator>
-		<description>
+<title>notationGetSystemId</title>
+<creator>NIST</creator>
+<description>
     The "getSystemId()" method of a Notation node contains
    the system identifier associated with the notation, if
    one was specified.
@@ -13,10 +13,10 @@
    system identifier.  The string "notation2File" should be
    returned.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E8AAB1D0"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="docType" type="DocumentType"/>
 	<var name="notations" type="NamedNodeMap"/>

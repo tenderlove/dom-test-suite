@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="noderemovechildoldchildnonexistent">
 	<metadata>
-		<title>nodeRemoveChildOldChildNonexistent</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeRemoveChildOldChildNonexistent</title>
+<creator>NIST</creator>
+<description>
     The "removeChild(oldChild)" method raises a 
     NOT_FOUND_ERR DOMException if the old child is
     not a child of this node.
@@ -13,19 +13,20 @@
     node that is not one of its children.   An attempt to
     remove such a node should raise the desired exception.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-1734834066')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-1734834066')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="oldChild" type="Node"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="elementNode" type="Node"/>
 	<var name="removedChild" type="Node"/>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
-	<createElement obj="doc" tagName='"oldChild"' var="oldChild"/>
+	<createElement obj="doc" tagName="&quot;oldChild&quot;" var="oldChild"/>
 	<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
 	<assertDOMException id="nodeRemoveChildOldChildNonexistentAssert1">

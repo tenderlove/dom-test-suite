@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-
-Copyright (c) 2001 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
-Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
-
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
-
--->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="attrsetvaluenomodificationallowederr">
 <metadata>
@@ -34,6 +19,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#ID-221662474"/>
 <subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#xpointer(id('ID-221662474')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/DOM/updates/REC-DOM-Level-1-19981001-errata.html"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
@@ -53,16 +39,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="gList" var="g" index="0"/>
 <attributes obj="g" var="attrList"/>
 <getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
-<!--  
-    This exception was not originally present in DOM Level 1
-          but was added in the errata and appears in DOM Level 1 Second Edition
 
-    This will cause this test to fail validation against schemas and DTD's
-    generated from the original DOM Level 1 specification
--->
 <assertDOMException id="attrSetValueNoModificationAllowedErrAssert">
 <NO_MODIFICATION_ALLOWED_ERR>
-<value interface="Attr"  obj="attrNode" value="&quot;newvalue&quot;"/>
+<value interface="Attr" obj="attrNode" value="&quot;newvalue&quot;"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

@@ -16,7 +16,7 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1084891198"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newAttrNode" type="Attr"/>
@@ -26,9 +26,9 @@
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <createAttribute obj="doc" var="newAttrNode" name="&quot;district&quot;"/>
 <nodeValue obj="newAttrNode" var="attrValue"/>
-<assertEquals actual="attrValue" expected='""' ignoreCase="false" id="value"/>
+<assertEquals actual="attrValue" expected="&quot;&quot;" ignoreCase="false" id="value"/>
 <nodeName obj="newAttrNode" var="attrName"/>
-<assertEquals actual="attrName" expected='"district"' ignoreCase="false" id="name"/>
+<assertEquals actual="attrName" expected="&quot;district&quot;" ignoreCase="false" id="name"/>
 <nodeType obj="newAttrNode" var="attrType"/>
 <assertEquals actual="attrType" expected="2" ignoreCase="false" id="type"/>
 </test>

@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeappendchilddocfragment">
 	<metadata>
-		<title>nodeAppendChildDocFragment</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeAppendChildDocFragment</title>
+<creator>NIST</creator>
+<description>
     If the "newChild" is a DocumentFragment object then
     all its content is added to the child list of this node.
     
@@ -14,10 +14,10 @@
     new nodes at the end of the list, they should be the
     two Element nodes from the DocumentFragment.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="employeeNode" type="Node"/>

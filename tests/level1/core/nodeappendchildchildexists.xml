@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeappendchildchildexists">
 	<metadata>
-		<title>nodeAppendChildChildExists</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeAppendChildChildExists</title>
+<creator>NIST</creator>
+<description>
     If the "newChild" is already in the tree, it is first
     removed before the new one is appended.
     
@@ -14,10 +14,10 @@
     child should be the one that was second and the last
     child should be the one that was first.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="childNode" type="Node"/>

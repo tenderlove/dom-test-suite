@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentcreateelementdefaultattr">
 	<metadata>
-		<title>documentCreateElementDefaultAttr</title>
-		<creator>NIST</creator>
-		<description>
+<title>documentCreateElementDefaultAttr</title>
+<creator>NIST</creator>
+<description>
     The "createElement(tagName)" method creates an Element 
    of the type specified.  In addition, if there are known attributes
    with default values, Attr nodes representing them are automatically
@@ -16,10 +16,10 @@
    attribute with default values, therefore the newly created element
    will have them.  
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="newElement" type="Element"/>
 	<var name="defaultAttr" type="NamedNodeMap"/>

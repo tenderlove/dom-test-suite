@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeinsertbeforenewchildexists">
 	<metadata>
-		<title>nodeInsertBeforeNewChildExists</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeInsertBeforeNewChildExists</title>
+<creator>NIST</creator>
+<description>
     If the "newChild" is already in the tree, the
     "insertBefore(newChild,refChild)" method must first
     remove it before the insertion takes place.
@@ -15,10 +15,10 @@
     inserted at a different position in the tree to assure
     that it was indeed inserted.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="employeeNode" type="Node"/>
@@ -37,8 +37,8 @@
 	<insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 	<item interface="NodeList" obj="childList" index="2" var="child"/>
 	<nodeName obj="child" var="childName"/>
-    <assertEquals id="childName1" actual="childName" expected='"name"' ignoreCase="false"/>
+    <assertEquals id="childName1" actual="childName" expected="&quot;name&quot;" ignoreCase="false"/>
 	<item interface="NodeList" obj="childList" index="10" var="child"/>
 	<nodeName obj="child" var="childName"/>
-    <assertEquals id="childName2" actual="childName" expected='"employeeId&gt;"' ignoreCase="false"/>
+    <assertEquals id="childName2" actual="childName" expected="&quot;employeeId&gt;&quot;" ignoreCase="false"/>
 </test>

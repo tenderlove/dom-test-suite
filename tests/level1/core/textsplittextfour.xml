@@ -17,7 +17,7 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-38853C1D"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>

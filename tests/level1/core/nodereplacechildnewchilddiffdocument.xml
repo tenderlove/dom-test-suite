@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodereplacechildnewchilddiffdocument">
 	<metadata>
-		<title>nodeReplaceChildNewChildDiffDocument</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeReplaceChildNewChildDiffDocument</title>
+<creator>NIST</creator>
+<description>
     The "replaceChild(newChild,oldChild)" method raises a 
     WRONG_DOCUMENT_ERR DOMException if the "newChild" was
     created from a different document than the one that 
@@ -15,12 +15,13 @@
     document.   An attempt to make such a replacement 
     should raise the desired exception.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
+</metadata>
 	<var name="doc1" type="Document"/>
 	<var name="doc2" type="Document"/>
 	<var name="oldChild" type="Node"/>
@@ -30,8 +31,8 @@
 	<var name="replacedChild" type="Node"/>
 	<load var="doc1" href="staff.xml" willBeModified="false"/>
 	<load var="doc2" href="staff.xml" willBeModified="true"/>
-	<createElement obj="doc1" tagName='"newChild"' var="newChild"/>
-	<createElement obj="doc2" tagName='"oldChild"' var="oldChild"/>
+	<createElement obj="doc1" tagName="&quot;newChild&quot;" var="newChild"/>
+	<createElement obj="doc2" tagName="&quot;oldChild&quot;" var="oldChild"/>
 	<getElementsByTagName interface="Document" obj="doc2" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
 	<assertDOMException id="nodeReplaceChildNewChildDiffDocumentAssert1">

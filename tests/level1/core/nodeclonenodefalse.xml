@@ -17,7 +17,7 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -31,7 +31,7 @@
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <cloneNode obj="employeeNode" deep="false" var="clonedNode"/>
 <nodeName obj="clonedNode" var="cloneName"/>
-<assertEquals actual="cloneName" expected='"employee"' ignoreCase="false" id="name"/>
+<assertEquals actual="cloneName" expected="&quot;employee&quot;" ignoreCase="false" id="name"/>
 <childNodes obj="clonedNode" var="cloneChildren"/>
 <length interface="NodeList" obj="cloneChildren" var="length"/>
 <assertEquals actual="length" expected="0" ignoreCase="false" id="length"/>

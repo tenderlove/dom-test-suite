@@ -2,9 +2,9 @@
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeinsertbefore">
 	<metadata>
-		<title>nodeInsertBefore</title>
-		<creator>NIST</creator>
-		<description>
+<title>nodeInsertBefore</title>
+<creator>NIST</creator>
+<description>
     The "insertBefore(newChild,refChild)" method inserts the
     node "newChild" before the node "refChild". 
     
@@ -12,10 +12,10 @@
     child of the second employee and check the "newChild"
     and "refChild" after insertion for correct placement.
 </description>
-		<contributor>Mary Brady</contributor>
-		<date qualifier="created">2001-08-17</date>
-		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-	</metadata>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+</metadata>
 	<var name="doc" type="Document"/>
 	<var name="elementList" type="NodeList"/>
 	<var name="employeeNode" type="Node"/>
