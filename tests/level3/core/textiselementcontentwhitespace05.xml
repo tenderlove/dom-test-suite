@@ -55,7 +55,7 @@ isElementContentWhitespace should be false since the node is not whitespace.
 	<createTextNode var="nonBlankNode" obj="doc" data='"not blank"'/>
 	<insertBefore var="returnedNode" obj="bodyElem" newChild="nonBlankNode" refChild="refChild"/>
 	<normalizeDocument obj="doc"/>
-	<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR"/>
+	<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR" id="noErrors"/>
 	<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 	<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
 	<!--  non-blank between body and p  -->

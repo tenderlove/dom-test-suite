@@ -57,7 +57,7 @@ isElementContentWhitespace should be true since the node is whitespace and in el
 	<createTextNode var="blankNode" obj="doc" data='"     "'/>
 	<insertBefore var="replacedNode" obj="bodyElem" newChild="blankNode" refChild="refChild"/>
 	<normalizeDocument obj="doc"/>
-	<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR"/>
+	<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR" id="noErrors"/>
 	<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 	<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
 	<!--  previously inserted whitespace between body and p  -->
