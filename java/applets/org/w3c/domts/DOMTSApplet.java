@@ -14,6 +14,10 @@ package org.w3c.domts;
 
 import java.applet.Applet;
 import java.awt.Graphics;
+import java.io.Serializable;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
 
 /**
  *
@@ -22,14 +26,38 @@ import java.awt.Graphics;
  *    earlier for widest compatibility.  
  *
  */
-public class DOMTSApplet extends Applet {
+public class DOMTSApplet extends Applet implements Serializable {
 
+    /**
+     *   Paints DOMTS sample applet at top level of rectangle
+     *
+     */
     public void paint(Graphics g) {
 	    //Draw a Rectangle around the applet's display area.
         g.drawRect(0, 0, size().width - 1, size().height - 1);
 
 	    //Draw the current string inside the rectangle.
         g.drawString("DOMTS sample applet", 5, 15);
+    }
+
+    /**
+     *   Serializes instance of object as pattern for <applet object=".."> parameter
+     *
+     */
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.print("Usage: java org.w3c.domts.DOMTSApplet outfile");
+            System.exit(1);
+        }
+        try {
+            FileOutputStream file = new FileOutputStream(args[0]);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(new DOMTSApplet());
+            out.flush();
+            out.close();
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
 
