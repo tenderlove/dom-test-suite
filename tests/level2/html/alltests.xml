@@ -378,6 +378,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLOptionElement07.xml"/>
      <suite.member href="HTMLOptionElement08.xml"/>
      <suite.member href="HTMLOptionElement09.xml"/>
+     <suite.member href="HTMLOptionsCollection01.xml"/>
+     <suite.member href="HTMLOptionsCollection02.xml"/>
+     <suite.member href="HTMLOptionsCollection03.xml"/>
+     <suite.member href="HTMLOptionsCollection04.xml"/>
+     <suite.member href="HTMLOptionsCollection05.xml"/>
+     <suite.member href="HTMLOptionsCollection06.xml"/>
+     <suite.member href="HTMLOptionsCollection07.xml"/>
      <suite.member href="HTMLParagraphElement01.xml"/>
      <suite.member href="HTMLParamElement01.xml"/>
      <suite.member href="HTMLParamElement02.xml"/>
