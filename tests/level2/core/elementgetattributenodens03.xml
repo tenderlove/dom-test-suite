@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
   </metadata>
   <implementationAttribute name="namespaceAware" value="true"/>
+  <implementationAttribute name="validating" value="true"/>
   <var name="doc" type="Document"/>
   <var name="element" type="Element"/>
   <var name="attribute" type="Attr"/>

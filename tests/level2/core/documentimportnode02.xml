@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -44,18 +44,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <var name="nodeValue" type="DOMString"/>
+<var name="addresses" type="NodeList"/>
+<var name="attrsParent" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
 <load var="docImported" href="staff" willBeModified="true"/>
-<getElementById var="element" obj="doc" elementId='"CANADA"'/>
+<getElementsByTagNameNS var="addresses" obj="doc" interface="Document" namespaceURI='"http://www.nist.gov"' localName='"address"'/>
+<item var="element" obj="addresses" interface="NodeList" index="1"/>
 <getAttributeNodeNS var="attr" obj="element" namespaceURI='"http://www.nist.gov"' localName='"zone"'/>
 <importNode var="importedAttr" obj="docImported" importedNode="attr" deep="false"/>
 <nodeName var="nodeName" obj="importedAttr"/>
 <nodeType var="nodeType" obj="importedAttr"/>
 <nodeValue var="nodeValue" obj="importedAttr"/>
-<!-- Seems like this causes an xslt problem
-<parentNode var="attrsParent" obj="importedAttr"/>
+<parentNode var="attrsParent" obj="importedAttr" interface="Node"/>
 <assertNull actual="attrsParent" id="documentimportnode02_parentNull"/>
--->
 <assertEquals expected='"emp:zone"' actual="nodeName"  id="documentimportnode02_nodeName"  ignoreCase="false"/>
 <assertEquals expected="2" actual="nodeType"  id="documentimportnode02_nodeType"  ignoreCase="false"/>
 <assertEquals expected='"CANADA"' actual="nodeValue"  id="documentimportnode02_nodeValue"  ignoreCase="false"/>

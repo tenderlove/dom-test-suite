@@ -44,9 +44,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="system" type="DOMString"/>
 <var name="name" type="DOMString"/>
+<var name="addresses" type="NodeList"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
 <load var="aNewDoc" href="staffNS" willBeModified="true"/>
-<getElementById interface="Document" obj="aNewDoc" var="element" elementId='"CANADA"'/>
+<getElementsByTagName var="addresses" obj="aNewDoc" interface="Document" tagname='"emp:address"'/>
+<item var="element" obj="addresses" interface="NodeList" index="0"/>
+<assertNotNull actual="element" id="empAddressNotNull"/>
 <importNode obj="doc" var="aNode" importedNode="element" deep="false"/>
 <hasChildNodes obj="aNode" var="hasChild"/>
 <assertFalse actual="hasChild" id="hasChild"/>

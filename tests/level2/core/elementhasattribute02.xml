@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -29,15 +29,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <date qualifier="created">2002-04-28</date>
     <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs"/>
   </metadata>
-  <implementationAttribute name="namespaceAware" value="false"/>
+  <implementationAttribute name="validating" value="true"/>
   <var name="doc" type="Document"/>
   <var name="element" type="Element"/>
   <var name="state" type="boolean"/>
   <var name="elementList" type="NodeList"/>
   <load var="doc" href="staffNS" willBeModified="false"/>
-  <getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:employee&quot;" 
+  <getElementsByTagName interface="Document" obj="doc" tagname='"emp:employee"' 
 			var="elementList"/>
   <item var="element" obj="elementList" index="0" interface="NodeList"/>
+  <assertNotNull actual="element" id="empEmployeeNotNull"/>
   <hasAttribute var="state" obj="element" name='"defaultAttr"'/>
   <assertTrue actual="state" id="elementhasattribute02"/>
 </test>

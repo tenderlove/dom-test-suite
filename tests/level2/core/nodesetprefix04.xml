@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="attribute" type="Attr"/>
@@ -39,6 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagName var="elementList" obj="doc" tagname='"emp:employee"' interface="Document"/>
 <item var="element" obj="elementList" index="0" interface="NodeList"/>
+<assertNotNull actual="element" id="empEmployeeNotNull"/>
 <getAttributeNodeNS var="attribute" obj="element" namespaceURI="nullNS" localName='"defaultAttr"'/>
 <assertDOMException id="nodesetprefix04">
 <NAMESPACE_ERR>
