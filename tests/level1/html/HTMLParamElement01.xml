@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -38,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <name interface="HTMLParamElement" obj="testNode" var="vname"/>
-<assertEquals actual="vname" expected='"image1"' id="nameLink" ignoreCase="false"/>
+<assertEquals actual="vname" expected='"image3"' id="nameLink" ignoreCase="false"/>
 </test>
