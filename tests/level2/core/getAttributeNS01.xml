@@ -31,6 +31,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS"/>
 </metadata>
+<!--  test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="namespaceURI" type="DOMString" value="&quot;http://www.nist.gov&quot;"/>
 <var name="localName" type="DOMString" value="&quot;district&quot;"/>
 <var name="qualifiedName" type="DOMString" value="&quot;emp:district&quot;"/>
@@ -42,5 +44,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <getAttributeNS obj="testAddr" var="attrValue" namespaceURI="namespaceURI" localName="localName"/>
-<assertEquals actual="attrValue" expected="&quot;DISTRICT&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="attrValue" expected='"DISTRICT"' id="attrValue" ignoreCase="false"/>
 </test>
