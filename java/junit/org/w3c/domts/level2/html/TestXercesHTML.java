@@ -29,8 +29,8 @@ public class TestXercesHTML extends TestSuite {
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
     DOMTestDocumentBuilderFactory factory =
-        new XercesHTMLDocumentBuilderFactory(
-          XercesHTMLDocumentBuilderFactory.getConfiguration1());
+        new XercesHTML2DocumentBuilderFactory(
+          XercesHTML2DocumentBuilderFactory.getConfiguration1());
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 
