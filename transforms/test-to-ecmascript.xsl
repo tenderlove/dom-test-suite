@@ -377,12 +377,17 @@ The source document contained the following notice:
 <xsl:template match="*[local-name()='implementation']" mode="body">
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
-	<xsl:if test="@obj">
-		<xsl:value-of select="@obj"/>
-		<xsl:text>.</xsl:text>
-	</xsl:if>
-	<xsl:text>implementation;
+	<xsl:choose>
+		<xsl:when test="@obj">
+			<xsl:value-of select="@obj"/>
+			<xsl:text>.implementation;
 </xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>getImplementation();
+</xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 <xsl:template match="*[local-name()='createXPathEvaluator']" mode="body">
