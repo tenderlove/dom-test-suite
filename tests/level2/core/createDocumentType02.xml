@@ -31,7 +31,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType"/>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocType')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
 </metadata>
 <var name="publicId" type="DOMString" value="&quot;http://www.localhost.com/&quot;"/>
 <var name="systemId" type="DOMString" value="&quot;myDoc.dtd&quot;"/>

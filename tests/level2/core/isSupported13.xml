@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 Calls isSupported("Core","") should return true for all implementations (by extension of core-14).
 </description>
 <date qualifier="created">2001-11-27</date>
-<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports"/>
 <subject resource="http://www.w3.org/2000/11/DOM-Level-2-errata#core-14"/>
 </metadata>
 <var name="doc" type="Document"/>
