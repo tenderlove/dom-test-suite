@@ -64,7 +64,7 @@
                       <createLSSerializer       var='writer'      obj='lsImplementation'/>
                       <createLSInput  var='inputSource' obj='lsImplementation'/>">
 
-<!ENTITY builder.setFilter_myfilter "<filter obj='parser' value='myfilter' interface='LSParser'/>">
+<!ENTITY parser.setFilter_myfilter "<filter obj='parser' value='myfilter' interface='LSParser'/>">
 
 <!ENTITY SHOW_ELEMENT  "1">
 <!ENTITY SHOW_TEXT '4'>
