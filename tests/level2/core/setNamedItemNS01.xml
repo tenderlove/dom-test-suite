@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-setNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.netzero.com&quot;"/>
-<var name="localName" type="DOMString" value="&quot;domestic&quot;"/>
+<!--  this test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="anotherElement" type="Node"/>
@@ -47,10 +47,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="map" type="NamedNodeMap"/>
 <var name="setNode" type="Node"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"address"'/>
 <item interface="NodeList" obj="elementList" var="anotherElement" index="2"/>
 <attributes obj="anotherElement" var="anotherMap"/>
-<getNamedItemNS obj="anotherMap" var="arg" namespaceURI="namespaceURI" localName="localName"/>
+<getNamedItemNS obj="anotherMap" var="arg" namespaceURI='"http://www.netzero.com"' localName='"domestic"'/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="0"/>
 <attributes obj="testAddress" var="map"/>
 <assertDOMException id="throw_INUSE_ATTRIBUTE_ERR">
