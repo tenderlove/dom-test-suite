@@ -12,7 +12,10 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.7  2002-02-03 04:22:35  dom-ts-4
+Revision 1.8  2002-03-14 05:00:12  dom-ts-4
+Add return code of 1 if there were any errors or failures, 0 if all tests passed
+
+Revision 1.7  2002/02/03 04:22:35  dom-ts-4
 DOM4J and Batik support added.
 Rework of parser settings
 
@@ -47,6 +50,7 @@ import java.util.*;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 import org.w3c.domts.*;
+import junit.textui.*;
 
 public class JUnitRunner {
 
@@ -75,21 +79,32 @@ public class JUnitRunner {
     printPrologue();
     printImplementation(factory1);
     printAttributes(factory1);
-    runTest(testConstructor, factory1);
+    int result1 = runTest(testConstructor, factory1);
 
     DOMTestDocumentBuilderFactory factory2 =
       new JAXPDOMTestDocumentBuilderFactory(null,
       JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
     printAttributes(factory2);
-    runTest(testConstructor, factory2);
+    int result2 = runTest(testConstructor, factory2);
+    if(result1 != 0) {
+        System.exit(result1);
+    }
+    System.exit(result2);
   }
 
-  private void runTest(Constructor testConstructor,
+  private int runTest(Constructor testConstructor,
     DOMTestDocumentBuilderFactory factory) throws Exception {
+
     TestSuite suite = new TestSuite();
     addTest(suite,factory, testConstructor);
-    junit.textui.TestRunner.run (suite);
+
+    TestRunner runner = new TestRunner();
+    TestResult result = runner.doRun(suite,false);
+    if(!result.wasSuccessful()) {    
+        return 1;
+    }
+    return 0;
   }
 
   private void addTest(TestSuite suite,
