@@ -8,12 +8,14 @@
 </head>
 <body> 
 <table align="center" summary="Table 1">
+<tbody>
 <tr>
 <th>Id</th>
 <th>Name</th>
 <th>Position</th>
 <th>Salary</th>
 </tr>
+</tbody>
 </table>
 <table id="table-1" align="center" border="4" bgcolor="#ff0000" frame="border" cellpadding="2" cellspacing="2" summary="HTML Control Table" rules="all" width="680">
 <caption align="top">Table Caption</caption>
