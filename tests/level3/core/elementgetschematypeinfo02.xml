@@ -16,34 +16,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="attrgetschematypeinfo04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="elementgetschematypeinfo02">
 <metadata>
-<title>attrgetschematypeinfo04</title>
+<title>elementgetschematypeinfo02</title>
 <creator>Curt Arnold</creator>
 <description>
-Call getSchemaTypeInfo on id attribute for the third acronym element.
+Call getSchemaTypeInfo on title attribute for the first "em" element from schema-validated document.
 </description>
 <date qualifier="created">2004-01-11</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
-<var name="acronymElem" type="Element"/>
-<var name="attr" type="Attr"/>
 <var name="elem" type="Element"/>
-<var name="elemName" type="DOMString"/>
 <var name="typeInfo" type="TypeInfo"/>
 <var name="typeNS" type="DOMString"/>
 <var name="typeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
-<item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
-<getAttributeNode var="attr" obj="acronymElem" name='"id"'/>
-<schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"em"' interface="Document"/>
+<item var="elem" obj="elemList" index="0" interface="NodeList"/>
+<schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <typeName var="typeName" obj="typeInfo"/>
-<assertEquals actual="typeName" expected='"ID"' ignoreCase="false" id="nameIsID"/>
+<assertEquals actual="typeName" expected='"emType"' ignoreCase="false" id="nameIsEmType"/>
 <typeNamespace var="typeNS" obj="typeInfo"/>
-<assertEquals actual="typeNS" expected='"http://www.w3.org/2001/XMLSchema"' ignoreCase="false" id="nsIsXmlSchema"/>
+<assertEquals actual="typeNS" expected='"http://www.w3.org/1999/xhtml"' ignoreCase="false" id="nsIsXML"/>
 </test>

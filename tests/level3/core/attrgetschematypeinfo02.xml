@@ -36,7 +36,6 @@ Call getSchemaTypeInfo on id attribute for the third acronym element.
 <var name="typeInfo" type="TypeInfo"/>
 <var name="typeNS" type="DOMString"/>
 <var name="typeName" type="DOMString"/>
-<var name="isDerived" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>

@@ -16,12 +16,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="attrgetschematypeinfo04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="attrgetschematypeinfo05">
 <metadata>
-<title>attrgetschematypeinfo04</title>
+<title>attrgetschematypeinfo05</title>
 <creator>Curt Arnold</creator>
 <description>
-Call getSchemaTypeInfo on id attribute for the third acronym element.
+Call getSchemaTypeInfo on class attribute for the third acronym element.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo"/>
@@ -39,11 +39,11 @@ Call getSchemaTypeInfo on id attribute for the third acronym element.
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
-<getAttributeNode var="attr" obj="acronymElem" name='"id"'/>
+<getAttributeNode var="attr" obj="acronymElem" name='"class"'/>
 <schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <typeName var="typeName" obj="typeInfo"/>
-<assertEquals actual="typeName" expected='"ID"' ignoreCase="false" id="nameIsID"/>
+<assertEquals actual="typeName" expected='"classType"' ignoreCase="false" id="nameIsClassType"/>
 <typeNamespace var="typeNS" obj="typeInfo"/>
-<assertEquals actual="typeNS" expected='"http://www.w3.org/2001/XMLSchema"' ignoreCase="false" id="nsIsXmlSchema"/>
+<assertEquals actual="typeNS" expected='"http://www.w3.org/1999/xhtml"' ignoreCase="false" id="nsIsXHTML"/>
 </test>

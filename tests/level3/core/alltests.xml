@@ -19,6 +19,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="attrgetschematypeinfo02.xml"/>
     <suite.member href="attrgetschematypeinfo03.xml"/>
     <suite.member href="attrgetschematypeinfo04.xml"/>
+    <suite.member href="attrgetschematypeinfo05.xml"/>
 
 	<!-- DOMImplementation tests -->
     <suite.member href="domimplementationgetfeature01.xml"/>
@@ -160,6 +161,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="domconfigvalidate1.xml"/>
     <suite.member href="domconfigvalidateifschema1.xml"/>
     <suite.member href="domconfigwellformed1.xml"/>
+
+
+    <suite.member href="elementgetschematypeinfo01.xml"/>
+    <suite.member href="elementgetschematypeinfo02.xml"/>
  	
 	<!-- Node Tests -->	
 	<!-- insertBefore -->
@@ -530,6 +535,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 	
 	<!-- TypeInfo -->
+	<suite.member href="typeinfoisderivedfrom01.xml"/>
+	<suite.member href="typeinfoisderivedfrom02.xml"/>
+	<suite.member href="typeinfoisderivedfrom03.xml"/>
+	<suite.member href="typeinfoisderivedfrom04.xml"/>
+	<suite.member href="typeinfoisderivedfrom05.xml"/>
 	
 	<!-- DOMConfiguration -->
 	<!-- canSetParameter -->
