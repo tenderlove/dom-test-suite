@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <cells interface="HTMLTableRowElement" obj="testNode" var="cellsnodeList"/>
 <length interface="HTMLCollection" obj="cellsnodeList" var="vcells"/>
 <assertEquals actual="vcells" expected="6" id="cellsLink1" ignoreCase="false"/>
-<item interface="NodeList" obj="cellsnodeList" var="trNode" index="2"/>
+<item interface="HTMLCollection" obj="cellsnodeList" var="trNode" index="2"/>
 <firstChild interface="Node" obj="trNode" var="cellNode"/>
 <nodeValue obj="cellNode" var="value"/>
 <assertEquals actual="value" expected="&quot;Accountant&quot;" id="value1Link" ignoreCase="false"/>
@@ -58,7 +58,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <cells interface="HTMLTableRowElement" obj="testNode" var="cellsnodeList"/>
 <length interface="HTMLCollection" obj="cellsnodeList" var="vcells"/>
 <assertEquals actual="vcells" expected="5" id="cellsLink2" ignoreCase="false"/>
-<item interface="NodeList" obj="cellsnodeList" var="trNode" index="2"/>
+<item interface="HTMLCollection" obj="cellsnodeList" var="trNode" index="2"/>
 <firstChild interface="Node" obj="trNode" var="cellNode"/>
 <nodeValue obj="cellNode" var="value"/>
 <assertEquals actual="value" expected="&quot;56,000&quot;" id="value2Link" ignoreCase="false"/>

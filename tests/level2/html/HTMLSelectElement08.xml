@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-30606413"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
-<var name="optionsnodeList" type="NodeList"/>
+<var name="optionsnodeList" type="HTMLCollection"/>
 <var name="testNode" type="Node"/>
 <var name="vareas" type="int"/>
 <var name="doc" type="Node"/>
