@@ -1,3 +1,8 @@
+This document is out of date, please consult the relevant Build 
+instructions at http://www.w3.org/DOM/Test/Documents/DOMTSBuild.html
+
+----
+
 This is preliminary (21/11/2001) documentation on how to build the DOM 
 Test Suite. A complete version will be published at the DOM TS pages at 
 www.w3.org/DOM/Test in the next few days.
