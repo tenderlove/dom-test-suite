@@ -80,7 +80,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 <createEntityReference var="entRef" obj="doc" name='"delta"'/>
-<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR5">
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR6">
 	<NO_MODIFICATION_ALLOWED_ERR>
 		<replaceChild obj="ent" var="replaced" oldChild="oldChild" newChild="entRef"/>
 	</NO_MODIFICATION_ALLOWED_ERR>
