@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri15</title>
 <creator>Curt Arnold</creator>
 <description>
-Node.getBaseURI for an Attr is the same as baseURI for the parent element.
+Node.getBaseURI for an Attr is null.
 </description>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2004-01-07</date>
@@ -29,20 +29,17 @@ Node.getBaseURI for an Attr is the same as baseURI for the parent element.
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Attr"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
 <var name="attrNode" type="Attr"/>
 <var name="bodyList" type="NodeList"/>
 <var name="bodyElem" type="Element"/>
-<var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
 <load var="doc" href="barfoo_base" willBeModified="true"/>
-<getElementsByTagNameNS var="bodyList" obj="doc" 
-    namespaceURI='htmlNS'
-    localName='"body"' interface="Document"/>
+<getElementsByTagName var="bodyList" obj="doc" 
+    tagname='"body"' interface="Document"/>
 <item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
 <getAttributeNode var="attrNode" obj="bodyElem" name='"id"'/>
 <baseURI var="baseURI" obj="attrNode" interface="Node"/>
-<assertEquals  actual="baseURI" expected='"http://www.w3.org/DOM/EmployeeID"' id="baseURIFromParent" ignoreCase="false"/>
+<assertNull  actual="baseURI" id="baseURI"/>
 </test>
  

@@ -21,8 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri19</title>
 <creator>Curt Arnold</creator>
 <description>
-Checks baseURI for a text node that either is contained in an external entity reference
-or was created on entity expansion.
+Checks baseURI for a text node is null.
 </description>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2004-01-07</date>
@@ -39,7 +38,6 @@ or was created on entity expansion.
 <var name="pList" type="NodeList"/>
 <var name="pElem" type="Element"/>
 <var name="textNode" type="Text"/>
-<var name="docURI" type="DOMString"/>
 <load var="doc" href="external_barfoo" willBeModified="true"/>
 <getElementsByTagName var="pList" obj="doc" 
     tagname='"p"' interface="Document"/>
@@ -57,7 +55,6 @@ or was created on entity expansion.
 	</else>
 </if>
 <baseURI var="baseURI" obj="textNode" interface="Node"/>
-<documentURI var="docURI" obj="doc"/>
-<assertEquals actual="baseURI" expected="docURI" ignoreCase="false" id="baseURIEqualsDocURI"/>
+<assertNull actual="baseURI" id="baseURI"/>
 </test>
  
