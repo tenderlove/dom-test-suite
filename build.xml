@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.52  2002-03-02 08:27:27  dom-ts-4
+Revision 1.53  2002-03-02 22:55:09  dom-ts-4
+Added dom1-html-matrix
+
+Revision 1.52  2002/03/02 08:27:27  dom-ts-4
 Added dom1-html-jar to build DOM1 HTML jar, more DOM L1 HTML to come
 
 Revision 1.51  2002/03/01 08:12:34  dom-ts-4
@@ -313,6 +316,30 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
+<target name="dom1-html-metadata" depends="dom1-init">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level1/html/alltests.xml" 
+		   out="${build.dir}/dom1-html-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
+
+<target name="dom1-html-matrix" depends="dom1-html-metadata,dom1-subjects,dom1-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom1-html-metadata.rdf" 
+		   out="${build.dir}/dom1-html-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#"/>
+        <param name="interfacesURL" expression="dom1-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom1-subjects.xml"/>
+        <param name="title" expression="DOM Level 1 HTML Test Suite Matrix"/>
+	</style>
+</target>
 
 <target name="analyze-names" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
