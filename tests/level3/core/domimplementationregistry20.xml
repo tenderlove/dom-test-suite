@@ -43,7 +43,7 @@ where hasFeature("HTML", null) returns true.
 	interface="DOMImplementationRegistry"/>
 <length var="length" obj="domImplList" interface="DOMImplementationList"/>
 <if>
-	<equals actual="length" expected="0" ignoreCase="0"/>
+	<equals actual="length" expected="0" ignoreCase="false"/>
 	<implementation var="baseImpl"/>
 	<hasFeature var="hasFeature" feature='"HTML"' version="nullVersion"/>
 	<assertFalse actual="hasFeature" id="baseImplSupportsHTML"/>

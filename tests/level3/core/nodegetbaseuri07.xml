@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri07</title>
 <creator>IBM</creator>
 <description>
-	Append as a child of this documentElement a new Element.  Using getBaseURI check if 
-	the baseURI attribute of the new Element node is "'http://www.w3.org/DOM/L3Test".
+	Append a created element to a document and check that its baseURI
+	is inherited from its parent.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>

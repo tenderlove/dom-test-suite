@@ -143,6 +143,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="documentnormalizedocument02.xml"/>
 	<suite.member href="documentnormalizedocument03.xml"/>	
 	<suite.member href="documentnormalizedocument04.xml"/>	
+	<suite.member href="documentnormalizedocument05.xml"/>	
+	<suite.member href="documentnormalizedocument06.xml"/>	
+	<suite.member href="documentnormalizedocument07.xml"/>	
 	<!-- need to add more tests here -->
 	
 	<!-- rename Node -->
@@ -639,5 +642,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="entitygetxmlencoding02.xml"/>
 	<suite.member href="entitygetxmlencoding03.xml"/>
 	<suite.member href="entitygetxmlencoding04.xml"/>
+	
+	
+	<suite.member href="userdatahandler01.xml"/>
+	<suite.member href="userdatahandler02.xml"/>
+	<suite.member href="userdatahandler03.xml"/>
+	<suite.member href="userdatahandler04.xml"/>
 		
 </suite>

@@ -1187,6 +1187,10 @@ function handleEvent(listener, event, userObj) {
 	(builder.contentType == "<xsl:value-of select="@type"/>")
 </xsl:template>
 
+<xsl:template match="*[local-name()='contains' and @interface='DOMString']" mode="condition">
+    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.indexOf(<xsl:value-of select="@str"/><xsl:text>) >= 0)</xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">
 	<xsl:text>(getImplementationAttribute("</xsl:text>

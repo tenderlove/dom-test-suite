@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>							  
 <!--                                                                 
- * Copyright (c) 2001-2003 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -153,7 +153,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<!--  choose whether interface is required based
 							 on number of interfaces method is introduced by  -->
 					<xsl:choose>
-						<xsl:when test="@name='length'">
+						<xsl:when test="@name='length' or @name='data'">
 							<xsl:attribute name="use">required</xsl:attribute>
 						</xsl:when>
 						<xsl:when test="@name = 'contentType'">
@@ -176,6 +176,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							</xsl:for-each>
                             <xsl:if test="@name='length'">
                                 <xs:enumeration value="DOMString"/>
+                            </xsl:if>
+                            <xsl:if test="@name='data'">
+                            	<xs:enumeration value="UserDataNotification"/>
                             </xsl:if>
 						</xs:restriction>
 					</xs:simpleType>
@@ -263,7 +266,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                 <xsl:when test="@name = 'contains'">
 									<xs:attribute name="var" type="variable" use="optional"/>
                        				<xs:attribute name="obj" type="variable" use="required"/>
-                       				<xs:attribute name="substring" type="variableOrStringLiteral" use="optional"/>
                                     <xs:attribute name="str" type="variableOrStringLiteral" use="optional"/>
                                 </xsl:when>
                                 
@@ -326,11 +328,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 												<xsl:for-each select="$dups">
 													<xs:enumeration value="{parent::interface/@name}"/>
 												</xsl:for-each>
+												<xsl:if test="@name = 'contains'">
+													<xs:enumeration value="DOMString"/>
+												</xsl:if>
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
 								</xsl:otherwise>
-							</xsl:when>
+							</xsl:choose>
 						</xs:complexType>
 					</xs:element>
 				</xsl:if>
@@ -449,7 +454,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xs:enumeration value="LSReader"/>
                         <xs:enumeration value="LSWriter"/>
                         <xs:enumeration value="DOMUserData"/>
+                        <xs:enumeration value="DOMObject"/>
                         <xs:enumeration value="DOMImplementationRegistry"/>
+                        <xs:enumeration value="DOMErrorMonitor"/>
+                        <xs:enumeration value="UserDataMonitor"/>
+                        <xs:enumeration value="UserDataNotification"/>
                     </xsl:if>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
@@ -1098,7 +1107,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="capturedEvents"/>
 					<xs:element ref="bubbledEvents"/>
 					<xs:element ref="allEvents"/>
-					<xs:element ref="createEventMonitor"/>
+					<xs:element ref="allNotifications"/>
+					<xs:element ref="allErrors"/>
+					<xs:element ref="operation"/>
+					<xs:element ref="key"/>
+					<xs:element ref="src"/>
+					<xs:element ref="dst"/>
 					<xs:element ref="createXPathEvaluator"/>
 					<xs:element ref="getResourceURI"/>
 					<xs:element ref="substring"/>
@@ -1307,7 +1321,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
              	    <xs:complexType>
                  	   <xs:attribute name="id" type="xs:ID" use="optional"/>
                        <xs:attribute name="obj" type="variable" use="required"/>
-                       <xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
+                       <xs:attribute name="str" type="variableOrStringLiteral" use="required"/>
+                	   <xs:attribute name="interface" use="required">
+                    		<xs:simpleType>
+                        		<xs:restriction base="xs:string">
+                            		<xs:enumeration value="DOMString"/>
+                        		</xs:restriction>
+                    		</xs:simpleType>
+                		</xs:attribute>
                      </xs:complexType>
                 </xs:element>
              </xsl:if>
@@ -1402,12 +1423,52 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<xs:element name="capturedEvents" type="EventMonitorAccessor"/>
 			<xs:element name="bubbledEvents" type="EventMonitorAccessor"/>
 			<xs:element name="allEvents" type="EventMonitorAccessor"/>
-            <xs:element name="createEventMonitor">
-                <xs:complexType>
+			<xs:element name="allNotifications">
+				<xs:complexType>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
-				    <xs:attribute name="var" type="variable" use="required"/>
-			    </xs:complexType>
-            </xs:element>
+					<xs:attribute name="obj" type="variable" use="required"/>
+                	<xs:attribute name="interface" use="optional">
+                    	<xs:simpleType>
+                        	<xs:restriction base="xs:string">
+                            	<xs:enumeration value="UserDataMonitor"/>
+                        	</xs:restriction>
+                    	</xs:simpleType>
+                	</xs:attribute>
+					<xs:attribute name="var" type="variable" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="allErrors">
+				<xs:complexType>
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+					<xs:attribute name="obj" type="variable" use="required"/>
+                	<xs:attribute name="interface" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="DOMErrorMonitor"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                	</xs:attribute>
+					<xs:attribute name="var" type="variable" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="UserDataNotificationAccessor">
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+					<xs:attribute name="obj" type="variable" use="required"/>
+                	<xs:attribute name="interface" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="UserDataNotification"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                	</xs:attribute>
+					<xs:attribute name="var" type="variable" use="required"/>
+			</xs:complexType>
+			<xs:element name="operation" type="UserDataNotificationAccessor"/>
+			<xs:element name="key" type="UserDataNotificationAccessor"/>
+			<xs:element name="src" type="UserDataNotificationAccessor"/>
+			<xs:element name="dst" type="UserDataNotificationAccessor"/>
+				
+			
             <xs:element name="createXPathEvaluator">
                 <xs:complexType>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>

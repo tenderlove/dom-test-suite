@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.121  2004-01-16 06:50:32  dom-ts-4
+Revision 1.122  2004-01-21 17:46:03  dom-ts-4
+Add UserDataHandler and DOMErrorHandler tests (bug 477)
+
+Revision 1.121  2004/01/16 06:50:32  dom-ts-4
 DOMImplementationRegistry tests (bug 463)
 
 Revision 1.120  2004/01/06 08:07:48  dom-ts-4
@@ -633,13 +636,15 @@ All implementation conditions combined into implementationAttribute element
 <target name="common-javac" depends="init">
 	<mkdir dir="${java.build.dir}"/>
 	<javac srcdir="java"
-		   includes="org/w3c/domts/*.java" 
+		   includes="org/w3c/domts/*.java"
+		   excludes="org/w3c/domts/UserData*.java org/w3c/domts/DOMError*.java org/w3c/domts/DOMLocator*.java"
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"
 		   target="1.1"
            debug="on"
 		   encoding="UTF8"/>
 </target>
+
 
 <target name="common-checkstyle" depends="checkstyle-available, common-javac">
     <taskdef resource="checkstyletask.properties"/>
@@ -1944,7 +1949,7 @@ All implementation conditions combined into implementationAttribute element
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
 		<param name="schema-location" expression="dom3.xsd"/>
-        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter|DOMUserData|DOMImplementationRegistry"/>
+        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter|DOMUserData|DOMObject|DOMImplementationRegistry"/>        
 	</style>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls" overwrite="true"/>
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls" overwrite="true"/>
@@ -2020,7 +2025,23 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom3-core-javac" depends="common-javac,dom3-core-gen-java">
+<target name="dom3-common" depends="dom3-init">
+
+	<mkdir dir="${java.build.dir}"/>
+	<javac 
+		   destdir="${java.build.dir}" 
+		   classpath="${java.build.dir}"
+		   target="1.1"
+           debug="on"
+		   encoding="UTF8">
+		<src path="java"/>
+        <src path="${dom3-core-java-src}"/>
+		<include name="org/w3c/domts/*.java"/>
+    </javac>
+		
+</target>
+
+<target name="dom3-core-javac" depends="dom3-common,dom3-core-gen-java">
 
 	<javac 
 		destdir="${java.build.dir}" 

@@ -32,8 +32,11 @@ Node.baseURI for a document element without an xml:base attribute should be same
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="baseURI" type="DOMString"/>
+<var name="documentURI" type="DOMString"/>
 <load var="doc" href="barfoo" willBeModified="false"/>
 <documentElement var="docElem" obj="doc"/>
 <baseURI var="baseURI" obj="docElem" interface="Node"/>
 <assertURIEquals actual="baseURI" isAbsolute="true" name='"barfoo"' id="baseURI"/>
+<documentURI var="documentURI" obj="doc"/>
+<assertEquals actual="baseURI" expected="documentURI" ignoreCase="false" id="baseURIEqualsDocURI"/>
 </test>

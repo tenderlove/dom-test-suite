@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * Copyright (c) 2001-2003 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de               
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -78,7 +78,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "fail|assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance|allErrors|allNotifications|operation|key|src|dst"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
@@ -212,11 +212,14 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
                             <xsl:if test="@name='length'">
                                 <xsl:text> | DOMString </xsl:text>
                             </xsl:if>
+                            <xsl:if test="@name='data'">
+                            	<xsl:text> | UserDataNotification </xsl:text>
+                            </xsl:if>
 							<xsl:text> ) </xsl:text>
 						<!--  choose whether interface is required based
 						         on number of interfaces method is introduced by  -->
 						<xsl:choose>
-							<xsl:when test="@name='length'">
+							<xsl:when test="@name='length' or @name='data'">
 								<xsl:value-of select="$required"/>
 							</xsl:when>
 							<xsl:when test="count($dups) &gt; 1">
@@ -381,7 +384,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	       that are dependent on the source document.  Currently only
 		   the allowable types for variables    -->
 	<xsl:template name="dynamic-simpleTypes">
-		<xsl:text>&lt;!ENTITY % variable-type "int|short|double|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
+		<xsl:text>&lt;!ENTITY % variable-type "int|short|double|boolean|DOMString|List|Collection|EventMonitor|DOMErrorMonitor|UserDataMonitor|UserDataNotification</xsl:text>
         <xsl:value-of select="$additional-types"/>
 		<xsl:for-each select="$interfaces">
 			<xsl:sort select="@name"/>
@@ -832,10 +835,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST contains
 	id ID #IMPLIED
 	obj CDATA #REQUIRED
-	substring CDATA #IMPLIED
+	str CDATA #REQUIRED
 	var CDATA #IMPLIED
-	str CDATA #IMPLIED
-	interface (DOMStringList|NameList) #IMPLIED
+	interface (DOMStringList|NameList|DOMString) #REQUIRED
 	 
 &gt;
 
@@ -984,9 +986,51 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	var CDATA #REQUIRED
 &gt;
 
-&lt;!ELEMENT createEventMonitor EMPTY&gt;
-&lt;!ATTLIST createEventMonitor
+&lt;!ELEMENT allNotifications EMPTY&gt;
+&lt;!ATTLIST allNotifications
 	id ID #IMPLIED
+	obj CDATA #REQUIRED
+    interface (UserDataMonitor) #IMPLIED
+	var CDATA #REQUIRED
+&gt;
+
+&lt;!ELEMENT operation EMPTY&gt;
+&lt;!ATTLIST operation
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	obj CDATA #REQUIRED
+	interface (UserDataNotification) #IMPLIED
+&gt;
+
+&lt;!ELEMENT key EMPTY&gt;
+&lt;!ATTLIST key
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	obj CDATA #REQUIRED
+	interface (UserDataNotification) #IMPLIED
+&gt;
+
+&lt;!ELEMENT src EMPTY&gt;
+&lt;!ATTLIST src
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	obj CDATA #REQUIRED
+	interface (UserDataNotification) #IMPLIED
+&gt;
+
+&lt;!ELEMENT dst EMPTY&gt;
+&lt;!ATTLIST dst
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	obj CDATA #REQUIRED
+	interface (UserDataNotification) #IMPLIED
+&gt;
+
+&lt;!ELEMENT allErrors EMPTY&gt;
+&lt;!ATTLIST allErrors
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+    interface (DOMErrorMonitor) #IMPLIED
 	var CDATA #REQUIRED
 &gt;
 

@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentnormalizedocument03</title>
 <creator>IBM</creator>
 <description>
-	Appends a CDATASection to an ekenent.  Invoke the setNormalizationFeature method on this document to set the 
-	"cdata-sections" feature to false.  Invoke the normalizeDocume method and verify if 
+	Appends a CDATASection to an element.  Invoke the setNormalizationFeature method on this document to set the 
+	"cdata-sections" feature to false.  Invoke the normalizeDocument method and verify if 
 	the CDATASection node has been transformed to a Text node.
 </description>
 <contributor>Neil Delima</contributor>

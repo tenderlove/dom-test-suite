@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.59  2004-01-16 06:50:32  dom-ts-4
+Revision 1.60  2004-01-21 17:46:03  dom-ts-4
+Add UserDataHandler and DOMErrorHandler tests (bug 477)
+
+Revision 1.59  2004/01/16 06:50:32  dom-ts-4
 DOMImplementationRegistry tests (bug 463)
 
 Revision 1.58  2004/01/05 08:27:15  dom-ts-4
@@ -866,6 +869,20 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
       </xsl:text>
         </xsl:when>
 
+
+        <!--  DOMErrorMonitor type implies constructor    -->
+        <xsl:when test="@type='DOMErrorMonitor'">
+            <xsl:text> = new org.w3c.domts.DOMErrorMonitor();
+      </xsl:text>
+        </xsl:when>
+
+
+        <!--  UserDataMonitor type implies constructor    -->
+        <xsl:when test="@type='UserDataMonitor'">
+            <xsl:text> = new org.w3c.domts.UserDataMonitor();
+      </xsl:text>
+        </xsl:when>
+
         <!--  member, allocate collection or list and populate it  -->
         <xsl:when test="@type='List' or @type='Collection'">
             <xsl:text> = new java.util.ArrayList();
@@ -1673,6 +1690,44 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllEvents();
 </xsl:template>
 
+<xsl:template match="*[local-name()='allNotifications']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllNotifications();
+</xsl:template>
+
+<xsl:template match="*[local-name()='operation']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getOperation();
+</xsl:template>
+
+<xsl:template match="*[local-name()='key']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getKey();
+</xsl:template>
+
+<xsl:template match="*[local-name()='src']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getSrc();
+</xsl:template>
+
+<xsl:template match="*[local-name()='dst']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getDst();
+</xsl:template>
+
+<xsl:template match="*[local-name()='allErrors']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllErrors();
+</xsl:template>
+
+
+<xsl:template match="*[local-name()='data' and @interface='UserDataNotification']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:value-of select="@var"/>
+    <xsl:text> = </xsl:text>
+    <xsl:call-template name="retval-cast">
+        <xsl:with-param name="variable" select="@var"/>
+        <xsl:with-param name="vartype" select="$vardefs[@name = current()/@var]/@type"/>
+        <xsl:with-param name="rettype" select="'DOMUserData'"/>
+    </xsl:call-template>
+    <xsl:value-of select="@obj"/>.getData();
+</xsl:template>
+
+
 <xsl:template name="produce-type">
     <xsl:param name="type"/>
     <xsl:choose>
@@ -1687,6 +1742,9 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:when test="$type='Collection'">java.util.Collection</xsl:when>
         <xsl:when test="$type='List'">java.util.List</xsl:when>
         <xsl:when test="$type='EventMonitor'">org.w3c.domts.EventMonitor</xsl:when>
+        <xsl:when test="$type='UserDataMonitor'">org.w3c.domts.UserDataMonitor</xsl:when>
+        <xsl:when test="$type='UserDataNotification'">org.w3c.domts.UserDataNotification</xsl:when>
+        <xsl:when test="$type='DOMErrorMonitor'">org.w3c.domts.DOMErrorMonitor</xsl:when>
         <xsl:when test="$type = 'unsigned long'">int</xsl:when>
         <xsl:when test="$type = 'long'">int</xsl:when>
         <xsl:when test="substring($type, 1, 9) = 'unsigned '">
@@ -1967,7 +2025,9 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <!--  cast and hope for the best  -->       
         <xsl:otherwise>
             <xsl:text>(</xsl:text>
-            <xsl:value-of select="$vartype"/>
+            <xsl:call-template name="produce-type">
+            	<xsl:with-param name="type" select="$vartype"/>
+            </xsl:call-template>
             <xsl:text>) </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
@@ -2319,8 +2379,8 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='contains']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.indexOf(<xsl:value-of select="@substring"/><xsl:text>) >= 0)</xsl:text>
+<xsl:template match="*[local-name()='contains' and @interface='DOMString']" mode="condition">
+    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.indexOf(<xsl:value-of select="@str"/><xsl:text>) >= 0)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">
