@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="state" type="boolean"/>
   <var name="canSet" type="boolean"/>
   <var name="NULL_SCHEMA_TYPE" type="DOMString" isNull="true"/>  
-  <var name="propertyName" type="DOMString" value='"charset-overrides-xml-encoding"'/>
+  <var name="propertyName" type="DOMString" value='"cHarset-overrides-xml-encoding"'/>
   
   <implementation var="domImpl"/>
   <createLSParser var="parser" obj="domImpl" schemaType="NULL_SCHEMA_TYPE" mode="1"/>

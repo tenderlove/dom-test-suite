@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="nullDocType" type="DocumentType" isNull="true"/>
   <var name="canSet" type="boolean"/>
   <var name="state" type="DOMString"/>
-  <var name="parameter" type="DOMString" value='"schema-type"'/>
+  <var name="parameter" type="DOMString" value='"sChEma-type"'/>
   <var name="xmlSchemaType" type="DOMString" value='"http://www.w3.org/2001/XMLSchema"'/>
   <var name="dtdType" type="DOMString" value='"http://www.w3.org/TR/REC-xml"'/>
   <implementation var="domImpl"/>

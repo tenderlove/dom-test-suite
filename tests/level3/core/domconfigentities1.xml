@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="nullDocType" type="DocumentType" isNull="true"/>
   <var name="canSet" type="boolean"/>
   <var name="state" type="boolean"/>
-  <var name="parameter" type="DOMString" value='"entities"'/>
+  <var name="parameter" type="DOMString" value='"eNtIties"'/>
   <implementation var="domImpl"/>
   <createDocument var="doc" obj="domImpl" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"html"' doctype="nullDocType"/>
   <domConfig var="domConfig" obj="doc" interface="Document"/>

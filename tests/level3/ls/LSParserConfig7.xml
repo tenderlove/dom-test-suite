@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="config" type="DOMConfiguration"/>
   <var name="state" type="boolean"/>
   <var name="canSet" type="boolean"/>
-  <var name="propertyName" type="DOMString" value='"namespaces"'/>
+  <var name="propertyName" type="DOMString" value='"nAmespaces"'/>
   <var name="NULL_SCHEMA_TYPE" type="DOMString" isNull="true"/>
   
   <implementation var="domImpl"/>

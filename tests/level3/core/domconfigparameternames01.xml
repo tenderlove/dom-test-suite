@@ -66,22 +66,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   		<setParameter obj="config" name="parameterName" value="paramValue"/>
   		<if>
   			<or>
-  				<equals actual="parameterName" expected='"canonical-form"'/>
-  				<equals actual="parameterName" expected='"cdata-sections"'/>
-  				<equals actual="parameterName" expected='"check-character-normalization"'/>
-  				<equals actual="parameterName" expected='"comments"'/>
-  				<equals actual="parameterName" expected='"datatype-normalization"'/>
-  				<equals actual="parameterName" expected='"entities"'/>
-  				<equals actual="parameterName" expected='"error-handler"'/>
-  				<equals actual="parameterName" expected='"infoset"'/>
-  				<equals actual="parameterName" expected='"namespaces"'/>
-  				<equals actual="parameterName" expected='"namespace-declarations"'/>
-  				<equals actual="parameterName" expected='"normalize-characters"'/>
-  				<equals actual="parameterName" expected='"split-cdata-sections"'/>
-  				<equals actual="parameterName" expected='"validate"'/>
-  				<equals actual="parameterName" expected='"validate-if-schema"'/>
-  				<equals actual="parameterName" expected='"well-formed"'/>
-  				<equals actual="parameterName" expected='"element-content-whitespace"'/>
+  				<equals actual="parameterName" expected='"canonical-form"' ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"cdata-sections"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"check-character-normalization"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"comments"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"datatype-normalization"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"entities"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"error-handler"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"infoset"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"namespaces"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"namespace-declarations"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"normalize-characters"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"split-cdata-sections"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"validate"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"validate-if-schema"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"well-formed"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"element-content-whitespace"' ignoreCase="true"/>
   			</or>
   			<increment var="matchCount" value="1"/>
   		</if>

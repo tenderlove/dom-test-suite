@@ -52,29 +52,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   		<setParameter obj="config" name="parameterName" value="paramValue"/>
   		<if>
   			<or>
-  				<equals actual="parameterName" expected='"canonical-form"'/>
-  				<equals actual="parameterName" expected='"cdata-sections"'/>
-  				<equals actual="parameterName" expected='"check-character-normalization"'/>
-  				<equals actual="parameterName" expected='"comments"'/>
-  				<equals actual="parameterName" expected='"datatype-normalization"'/>
-  				<equals actual="parameterName" expected='"entities"'/>
-  				<equals actual="parameterName" expected='"error-handler"'/>
-  				<equals actual="parameterName" expected='"infoset"'/>
-  				<equals actual="parameterName" expected='"namespaces"'/>
-  				<equals actual="parameterName" expected='"namespace-declarations"'/>
-  				<equals actual="parameterName" expected='"normalize-characters"'/>
-  				<equals actual="parameterName" expected='"schema-location"'/>
-  				<equals actual="parameterName" expected='"schema-type"'/>
-  				<equals actual="parameterName" expected='"split-cdata-sections"'/>
-  				<equals actual="parameterName" expected='"validate"'/>
-  				<equals actual="parameterName" expected='"validate-if-schema"'/>
-  				<equals actual="parameterName" expected='"well-formed"'/>
-  				<equals actual="parameterName" expected='"element-content-whitespace"'/>
-  				<equals actual="parameterName" expected='"charset-overrides-xml-encoding"'/>
-  				<equals actual="parameterName" expected='"disallow-doctype"'/>
-  				<equals actual="parameterName" expected='"ignore-unknown-character-denormalizations"'/>
-  				<equals actual="parameterName" expected='"resource-resolver"'/>
-  				<equals actual="parameterName" expected='"supported-media-types-only"'/>
+  				<equals actual="parameterName" expected='"canonical-form"' ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"cdata-sections"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"check-character-normalization"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"comments"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"datatype-normalization"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"entities"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"error-handler"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"infoset"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"namespaces"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"namespace-declarations"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"normalize-characters"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"schema-location"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"schema-type"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"split-cdata-sections"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"validate"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"validate-if-schema"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"well-formed"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"element-content-whitespace"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"charset-overrides-xml-encoding"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"disallow-doctype"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"ignore-unknown-character-denormalizations"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"resource-resolver"'  ignoreCase="true"/>
+  				<equals actual="parameterName" expected='"supported-media-types-only"'  ignoreCase="true"/>
   			</or>
   			<increment var="matchCount" value="1"/>
   		</if>

@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="nullDocType" type="DocumentType" isNull="true"/>
   <var name="canSet" type="boolean"/>
   <var name="state" type="DOMString"/>
-  <var name="parameter" type="DOMString" value='"schema-location"'/>
+  <var name="parameter" type="DOMString" value='"sChEma-location"'/>
   <var name="nullSchemaLocation" type="DOMString" isNull="true"/>
   <var name="sampleSchemaLocation" type="DOMString" value='"http://www.example.com/schemas/sampleschema.xsd"'/>
   <implementation var="domImpl"/>
