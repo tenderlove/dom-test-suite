@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.68  2002-08-13 04:51:34  dom-ts-4
+Revision 1.69  2002-08-13 05:20:37  dom-ts-4
+Commented out inclusion of tests/level3/ls/files in dom3-ls.jar until there are some l3 test files
+
+Revision 1.68  2002/08/13 04:51:34  dom-ts-4
 Added dom3-ls-jar
 
 Revision 1.67  2002/08/12 07:57:40  dom-ts-4
@@ -1785,7 +1788,8 @@ All implementation conditions combined into implementationAttribute element
 		         includes="org/w3c/dom/ls/*"
 		         excludes="*.bak"/>
 
-		<fileset dir="tests/level3/ls/files" excludes="*.bak"/>
+        <!--  leave commented until we have some associated files  -->
+		<!-- fileset dir="tests/level3/ls/files" excludes="*.bak"/ -->
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
