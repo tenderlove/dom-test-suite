@@ -113,4 +113,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		</group>
 	</xsl:template>
 
+    <!--  change parameter 'name' to 'tagname' on Elements.getElementByTagName'   -->
+    <xsl:template match="param[@name='name' and ancestor::method/@name='getElementsByTagName']" mode="interface">
+        <param> 
+            <!--  element all existing attributes    -->
+			<xsl:apply-templates select="@*"/>
+            <!--  overwrite the name attribute  -->
+            <xsl:attribute name="name">tagname</xsl:attribute>
+            <!--  produce the element content   -->
+			<xsl:apply-templates select="*|text()" mode="interface"/>
+		</param>
+    </xsl:template>
+
 </xsl:stylesheet>

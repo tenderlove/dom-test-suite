@@ -27,7 +27,10 @@ saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.4  2003-01-16 06:40:47  dom-ts-4
+Revision 1.5  2003-01-20 06:14:46  dom-ts-4
+Move change of Element.getElementByTagName from patch file to here.
+
+Revision 1.4  2003/01/16 06:40:47  dom-ts-4
 Change for 27 Nov 2002 DOM 3 Validation WD
 
 Revision 1.3  2002/07/31 04:58:27  dom-ts-4
@@ -133,4 +136,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<xsl:template match="loc" mode="interface">
 		<xsl:apply-templates select="*" mode="interface"/>
 	</xsl:template>
+
+    <!--  change parameter 'name' to 'tagname' on Elements.getElementByTagName'   -->
+    <xsl:template match="param[@name='name' and ancestor::method/@name='getElementsByTagName']" mode="interface">
+        <param> 
+            <!--  element all existing attributes    -->
+			<xsl:apply-templates select="@*"/>
+            <!--  overwrite the name attribute  -->
+            <xsl:attribute name="name">tagname</xsl:attribute>
+            <!--  produce the element content   -->
+			<xsl:apply-templates select="*|text()" mode="interface"/>
+		</param>
+    </xsl:template>
 </xsl:stylesheet>

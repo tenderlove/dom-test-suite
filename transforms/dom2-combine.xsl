@@ -27,7 +27,10 @@ saxon -o dom2-interfaces.xml core/dom-spec.xml combine-dom2.xsl
 
 <!--
 $Log: dom2-combine.xsl,v $
-Revision 1.2  2001-07-20 05:44:32  dom-ts-4
+Revision 1.3  2003-01-20 06:14:36  dom-ts-4
+Move change of Element.getElementByTagName from patch file to here.
+
+Revision 1.2  2001/07/20 05:44:32  dom-ts-4
 Initial SVG support.  multiply renamed mult,
 All implementation conditions combined into implementationAttribute element
 
@@ -117,4 +120,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<xsl:template match="loc" mode="interface">
 		<xsl:apply-templates select="*" mode="interface"/>
 	</xsl:template>
+
+
+    <!--  change parameter 'name' to 'tagname' on Elements.getElementByTagName'   -->
+    <xsl:template match="param[@name='name' and ancestor::method/@name='getElementsByTagName']" mode="interface">
+        <param> 
+            <!--  element all existing attributes    -->
+			<xsl:apply-templates select="@*"/>
+            <!--  overwrite the name attribute  -->
+            <xsl:attribute name="name">tagname</xsl:attribute>
+            <!--  produce the element content   -->
+			<xsl:apply-templates select="*|text()" mode="interface"/>
+		</param>
+    </xsl:template>
+
 </xsl:stylesheet>
