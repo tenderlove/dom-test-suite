@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.27  2002-11-26 07:17:24  dom-ts-4
+Revision 1.28  2003-01-16 06:38:44  dom-ts-4
+Added cast to short when needed on number literal parameters
+
+Revision 1.27  2002/11/26 07:17:24  dom-ts-4
 Fixed improper placement of a few xsl:param elements.
 
 Revision 1.26  2002/08/13 04:46:44  dom-ts-4
@@ -1524,6 +1527,9 @@ import java.util.*;
 		</xsl:when>
 		<!--  if numeric literal  -->
 		<xsl:when test="string(number($value)) != 'NaN'">
+            <xsl:if test="contains($reqtype,'short')">
+                <xsl:text> (short) </xsl:text>
+            </xsl:if>
 			<xsl:value-of select="$value"/>
 		</xsl:when>
 		<!--  is a declared variable, make sure that it is cast correctly  -->
