@@ -42,7 +42,8 @@ and check that the attribute node has eliminated the empty text.
 <getAttributeNode var="attrNode" obj="element" name='"title"'/>
 <appendChild var="retval" obj="attrNode" newChild="emptyText"/>
 <normalize obj="element"/>
-<firstChild interface="Node" obj="element" var="firstChild"/>
+<getAttributeNode var="attrNode" obj="element" name='"title"'/>
+<firstChild interface="Node" obj="attrNode" var="firstChild"/>
 <nodeValue obj="firstChild" var="childValue"/>
 <assertEquals actual="childValue" expected='"Yes"' id="firstChild" ignoreCase="false"/>
 <nextSibling var="secondChild" obj="firstChild" interface="Node"/>
