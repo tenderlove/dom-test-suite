@@ -378,9 +378,9 @@ function IFrameBuilder() {
     this.async = true;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
-        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments"];
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments", "schemaValidating"];
 
-    this.fixedAttributeValues = [false,  true, false, true, true , false, false, true ];
+    this.fixedAttributeValues = [false,  true, false, true, true , false, false, true, false ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.initializationError = null;
@@ -482,9 +482,9 @@ function SVGPluginBuilder() {
     this.async = true;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
-        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments"];
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments" , "schemaValidating"];
 
-    this.fixedAttributeValues = [false,  true, false, true, true , false, true, false ];
+    this.fixedAttributeValues = [false,  true, false, true, true , false, true, false, false ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.initializationError = null;
@@ -620,8 +620,8 @@ function MSXMLBuilder(progID) {
         "validating", "ignoringElementContentWhitespace"];
     this.configurableAttributeValues = [ false, false ];
     this.fixedAttributeNames = [ "signed", "hasNullString", 
-        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
-    this.fixedAttributeValues = [ true, true, false, false, false, false ];
+        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments", "schemaValidating" ];
+    this.fixedAttributeValues = [ true, true, false, false, false, false, false ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -782,8 +782,8 @@ function MozillaXMLBuilder() {
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.fixedAttributeNames = [ "validating", "ignoringElementContentWhitespace", "signed", 
-        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
-    this.fixedAttributeValues = [ false, false, true, true, false, false, false, false ];
+        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments", "schemaValidating" ];
+    this.fixedAttributeValues = [ false, false, true, true, false, false, false, false, false ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -866,11 +866,11 @@ function DOM3LSBuilder() {
     this.fixedAttributeNames = [ signed, "hasNullString" ];
     this.fixedAttributeValues = [ true, true ];
     this.configurableAttributeNames = [ "validating", "ignoringElementContentWhitespace", 
-        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
-    this.configurableAttributeValues = [ false, false, true, true, false, false, true, false ];
+        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments", "schemaValidating" ];
+    this.configurableAttributeValues = [ false, false, true, true, false, false, true, false, false ];
     this.domConfigNames = [ "validate", "element-content-whitespace", 
-        "entities", "cdata-sections", "namespaces", "comments" ];
-    this.domConfigSense = [ true, false, false, false, true, false ];
+        "entities", "cdata-sections", "namespaces", "comments", "validate" ];
+    this.domConfigSense = [ true, false, false, false, true, false, true ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -929,6 +929,11 @@ DOM3LSBuilder.prototype.load = function(frame, varname, url) {
 
 
 DOM3LSBuilder.prototype.getImplementationAttribute = function(attr) {
+    if (attr == "schemaValidating") {
+        return (this.lsparser.domConfig.getParameter("validate") &&
+            this.lsparser.domConfig.getParameter("schema-type") ==
+               "http://www.w3.org/2001/XMLSchema"); 
+    }
     var i;
     for (i = 0; i < this.fixedAttributeNames.length; i++) {
        if (this.fixedAttributeNames[i] == attr) {
@@ -949,6 +954,36 @@ DOM3LSBuilder.prototype.getImplementationAttribute = function(attr) {
 
 DOM3LSBuilder.prototype.hasFeature = function(feature, version) {
     return document.implementation.hasFeature(feature, version);
+}
+
+
+DOM3LSBuilder.prototype.setImplementationAttribute = function(attr, value) {
+    if (attr == "schemaValidating") {
+        this.lsparser.domConfig.setParameter("validate", true);
+        this.lsparser.domConfig.setParameter("schema-type",
+               "http://www.w3.org/2001/XMLSchema"); 
+        return;
+    }
+    var i;
+    for (i = 0; i < this.fixedAttributeNames.length; i++) {
+       if (this.fixedAttributeNames[i] == attr) {
+           if (value != this.fixedAttributeValue) {
+               this.initializationError = "DOM3LS does not support " + attribute + " = " + value;
+               return;
+           }
+        }
+    }
+    for (i = 0; i < this.configurableAttributeNames.length; i++) {
+        if (this.configurableAttributeNames[i] == attr) {
+            if (this.domConfigSense[i]) {
+                this.lsparser.domConfig.setParameter(this.domConfigNames[i], value);
+            } else {
+                this.lsparser.domConfig.setParameter(this.domConfigNames[i], !value);
+            }
+            return;
+        }
+    }
+    throw "Unrecognized configuration attribute " + attr;
 }
 
 
