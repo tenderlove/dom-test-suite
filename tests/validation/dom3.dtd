@@ -1,0 +1,2138 @@
+
+<!--
+ Copyright (c) 2001 World Wide Web Consortium,
+ (Massachusetts Institute of Technology, Institut National de
+ Recherche en Informatique et en Automatique, Keio University). All
+ Rights Reserved. This program is distributed under the W3C's Software
+ Intellectual Property License. This program is distributed in the
+ hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.
+ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+This schema was generated from  by dom-to-dtd.xsl.
+
+-->
+
+<!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException">
+
+<!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator">
+
+<!ENTITY % implementation-condition "hasFeature | implementationAttribute">
+
+<!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;">
+
+<!ENTITY % assertion "%framework-assertion;| assertDOMException| assertExceptionVAL" >
+<!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor|Attr|CDATASection|CharacterData|CharacterDataEditVAL|Comment|Document|DocumentEditVAL|DocumentFragment|DocumentType|DOMConfiguration|DOMError|DOMErrorHandler|DOMImplementation|DOMImplementationList|DOMImplementationSource|DOMLocator|DOMStringList|Element|ElementEditVAL|Entity|EntityReference|NamedNodeMap|NameList|Node|NodeEditVAL|NodeList|Notation|ProcessingInstruction|StringExtend|Text|TypeInfo|UserDataHandler">
+<!ENTITY % statement "%framework-statement;|%assertion; | actualEncoding | allowedAttributes | allowedChildren | allowedFirstChildElements | allowedNextSiblings | allowedParents | allowedPreviousSiblings | attributes | baseURI | childNodes | columnNumber | config | contentType | continuousValidityChecking | data | defaultValue | doctype | documentElement | documentURI | encoding | entities | enumeratedValues | firstChild | implementation | internalSubset | lastChild | length | lineNumber | localName | location | message | name | namespaceURI | nextSibling | nodeName | nodeType | nodeValue | notationName | notations | offset | ownerDocument | ownerElement | parentNode | prefix | previousSibling | publicId | relatedData | relatedException | relatedNode | requiredAttributes | schemaTypeInfo | severity | specified | standalone | strictErrorChecking | systemId | tagName | target | textContent | type | typeName | typeNamespace | uri | value | version | wholeText | adoptNode | appendChild | appendData | canAppendChild | canAppendData | canDeleteData | canInsertBefore | canInsertData | canRemoveAttribute | canRemoveAttributeNode | canRemoveAttributeNS | canRemoveChild | canReplaceChild | canReplaceData | canSetAttribute | canSetAttributeNode | canSetAttributeNS | canSetData | canSetParameter | canSetTextContent | cloneNode | compareDocumentPosition | createAttribute | createAttributeNS | createCDATASection | createComment | createDocument | createDocumentFragment | createDocumentType | createElement | createElementNS | createEntityReference | createProcessingInstruction | createTextNode | deleteData | findOffset16 | findOffset32 | getAttribute | getAttributeNode | getAttributeNodeNS | getAttributeNS | getDefinedElements | getDOMImplementation | getDOMImplementations | getElementById | getElementsByTagName | getElementsByTagNameNS | getFeature | getName | getNamedItem | getNamedItemNS | getNamespaceURI | getParameter | getUserData | handle | handleError | hasAttribute | hasAttributeNS | hasAttributes | hasChildNodes | hasFeature | importNode | insertBefore | insertData | isDefaultNamespace | isElementDefined | isElementDefinedNS | isEqualNode | isId | isSameNode | isSupported | isWhitespaceInElementContent | isWhitespaceOnly | item | lookupNamespaceURI | lookupPrefix | nodeValidity | normalize | normalizeDocument | removeAttribute | removeAttributeNode | removeAttributeNS | removeChild | removeNamedItem | removeNamedItemNS | renameNode | replaceChild | replaceData | replaceWholeText | setAttribute | setAttributeNode | setAttributeNodeNS | setAttributeNS | setIdAttribute | setIdAttributeNode | setIdAttributeNS | setNamedItem | setNamedItemNS | setParameter | setUserData | splitText | substringData | validateDocument ">
+<!ELEMENT assertDOMException (metadata?,(INDEX_SIZE_ERR|DOMSTRING_SIZE_ERR|HIERARCHY_REQUEST_ERR|WRONG_DOCUMENT_ERR|INVALID_CHARACTER_ERR|NO_DATA_ALLOWED_ERR|NO_MODIFICATION_ALLOWED_ERR|NOT_FOUND_ERR|NOT_SUPPORTED_ERR|INUSE_ATTRIBUTE_ERR|INVALID_STATE_ERR|SYNTAX_ERR|INVALID_MODIFICATION_ERR|NAMESPACE_ERR|INVALID_ACCESS_ERR|VALIDATION_ERR))>
+<!ATTLIST assertDOMException id ID #REQUIRED>
+<!ELEMENT assertExceptionVAL (metadata?,(NO_SCHEMA_AVAILABLE_ERR))>
+<!ATTLIST assertExceptionVAL id ID #REQUIRED>
+<!ELEMENT INDEX_SIZE_ERR ( getName | getNamespaceURI | substringData | insertData | deleteData | replaceData | splitText | canReplaceData | canInsertData | canDeleteData )  >
+<!ELEMENT DOMSTRING_SIZE_ERR ( nodeValue | textContent | data | substringData )  >
+<!ELEMENT HIERARCHY_REQUEST_ERR ( insertBefore | replaceChild | appendChild | setNamedItem | setNamedItemNS )  >
+<!ELEMENT WRONG_DOCUMENT_ERR ( createDocument | renameNode | insertBefore | replaceChild | appendChild | setNamedItem | setNamedItemNS | setAttributeNode | setAttributeNodeNS )  >
+<!ELEMENT INVALID_CHARACTER_ERR ( prefix | createDocumentType | createDocument | createElement | createProcessingInstruction | createAttribute | createEntityReference | importNode | createElementNS | createAttributeNS | setAttribute | setAttributeNS )  >
+<!ELEMENT NO_DATA_ALLOWED_ERR EMPTY  >
+<!ELEMENT NO_MODIFICATION_ALLOWED_ERR ( nodeValue | prefix | textContent | data | value | data | adoptNode | insertBefore | replaceChild | removeChild | appendChild | setNamedItem | removeNamedItem | setNamedItemNS | removeNamedItemNS | appendData | insertData | deleteData | replaceData | setAttribute | removeAttribute | setAttributeNode | removeAttributeNode | setAttributeNS | removeAttributeNS | setAttributeNodeNS | setIdAttribute | setIdAttributeNS | setIdAttributeNode | splitText | replaceWholeText )  >
+<!ELEMENT NOT_FOUND_ERR ( insertBefore | replaceChild | removeChild | removeNamedItem | removeNamedItemNS | removeAttributeNode | setIdAttribute | setIdAttributeNS | setIdAttributeNode | setParameter | getParameter )  >
+<!ELEMENT NOT_SUPPORTED_ERR ( version | continuousValidityChecking | createDocumentType | createDocument | createCDATASection | createProcessingInstruction | createEntityReference | importNode | createElementNS | createAttributeNS | adoptNode | renameNode | insertBefore | replaceChild | removeChild | compareDocumentPosition | getNamedItemNS | setNamedItemNS | removeNamedItemNS | getAttributeNS | setAttributeNS | removeAttributeNS | getAttributeNodeNS | setAttributeNodeNS | getElementsByTagNameNS | hasAttributeNS | setParameter )  >
+<!ELEMENT INUSE_ATTRIBUTE_ERR ( setNamedItem | setNamedItemNS | setAttributeNode | setAttributeNodeNS )  >
+<!ELEMENT INVALID_STATE_ERR EMPTY  >
+<!ELEMENT SYNTAX_ERR EMPTY  >
+<!ELEMENT INVALID_MODIFICATION_ERR EMPTY  >
+<!ELEMENT NAMESPACE_ERR ( prefix | createDocumentType | createDocument | createElementNS | createAttributeNS | renameNode | setAttributeNS )  >
+<!ELEMENT INVALID_ACCESS_ERR EMPTY  >
+<!ELEMENT VALIDATION_ERR ( continuousValidityChecking )  >
+<!ELEMENT SEVERITY_ERROR EMPTY  >
+<!ELEMENT SEVERITY_FATAL_ERROR EMPTY  >
+<!ELEMENT NO_SCHEMA_AVAILABLE_ERR ( continuousValidityChecking )  >
+
+
+					
+<!ELEMENT actualEncoding EMPTY>
+<!ATTLIST actualEncoding
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Document | Entity ) #REQUIRED>
+
+					
+<!ELEMENT allowedAttributes EMPTY>
+<!ATTLIST allowedAttributes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedChildren EMPTY>
+<!ATTLIST allowedChildren
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedFirstChildElements EMPTY>
+<!ATTLIST allowedFirstChildElements
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedNextSiblings EMPTY>
+<!ATTLIST allowedNextSiblings
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedParents EMPTY>
+<!ATTLIST allowedParents
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedPreviousSiblings EMPTY>
+<!ATTLIST allowedPreviousSiblings
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT attributes EMPTY>
+<!ATTLIST attributes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT baseURI EMPTY>
+<!ATTLIST baseURI
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT childNodes EMPTY>
+<!ATTLIST childNodes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT columnNumber EMPTY>
+<!ATTLIST columnNumber
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMLocator ) #IMPLIED>
+
+					
+<!ELEMENT config EMPTY>
+<!ATTLIST config
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Document | DocumentEditVAL ) #REQUIRED>
+
+					
+<!ELEMENT contentType EMPTY>
+<!ATTLIST contentType
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT continuousValidityChecking EMPTY>
+<!ATTLIST continuousValidityChecking
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( DocumentEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT data EMPTY>
+<!ATTLIST data
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( CharacterData | ProcessingInstruction ) #REQUIRED>
+
+					
+<!ELEMENT defaultValue EMPTY>
+<!ATTLIST defaultValue
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( NodeEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT doctype EMPTY>
+<!ATTLIST doctype
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT documentElement EMPTY>
+<!ATTLIST documentElement
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT documentURI EMPTY>
+<!ATTLIST documentURI
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT encoding EMPTY>
+<!ATTLIST encoding
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Document | Entity ) #REQUIRED>
+
+					
+<!ELEMENT entities EMPTY>
+<!ATTLIST entities
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType ) #IMPLIED>
+
+					
+<!ELEMENT enumeratedValues EMPTY>
+<!ATTLIST enumeratedValues
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( NodeEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT firstChild EMPTY>
+<!ATTLIST firstChild
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT internalSubset EMPTY>
+<!ATTLIST internalSubset
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType ) #IMPLIED>
+
+					
+<!ELEMENT lastChild EMPTY>
+<!ATTLIST lastChild
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT length EMPTY>
+<!ATTLIST length
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMStringList | NameList | DOMImplementationList | NodeList | NamedNodeMap | CharacterData | DOMString  ) #REQUIRED>
+
+					
+<!ELEMENT lineNumber EMPTY>
+<!ATTLIST lineNumber
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMLocator ) #IMPLIED>
+
+					
+<!ELEMENT localName EMPTY>
+<!ATTLIST localName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT location EMPTY>
+<!ATTLIST location
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMError ) #IMPLIED>
+
+					
+<!ELEMENT message EMPTY>
+<!ATTLIST message
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMError ) #IMPLIED>
+
+					
+<!ELEMENT name EMPTY>
+<!ATTLIST name
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Attr | DocumentType ) #REQUIRED>
+
+					
+<!ELEMENT namespaceURI EMPTY>
+<!ATTLIST namespaceURI
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nextSibling EMPTY>
+<!ATTLIST nextSibling
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nodeName EMPTY>
+<!ATTLIST nodeName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nodeType EMPTY>
+<!ATTLIST nodeType
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nodeValue EMPTY>
+<!ATTLIST nodeValue
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT notationName EMPTY>
+<!ATTLIST notationName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Entity ) #IMPLIED>
+
+					
+<!ELEMENT notations EMPTY>
+<!ATTLIST notations
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType ) #IMPLIED>
+
+					
+<!ELEMENT offset EMPTY>
+<!ATTLIST offset
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMLocator ) #IMPLIED>
+
+					
+<!ELEMENT ownerDocument EMPTY>
+<!ATTLIST ownerDocument
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT ownerElement EMPTY>
+<!ATTLIST ownerElement
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Attr ) #IMPLIED>
+
+					
+<!ELEMENT parentNode EMPTY>
+<!ATTLIST parentNode
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT prefix EMPTY>
+<!ATTLIST prefix
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT previousSibling EMPTY>
+<!ATTLIST previousSibling
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT publicId EMPTY>
+<!ATTLIST publicId
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType | Notation | Entity ) #REQUIRED>
+
+					
+<!ELEMENT relatedData EMPTY>
+<!ATTLIST relatedData
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMError ) #IMPLIED>
+
+					
+<!ELEMENT relatedException EMPTY>
+<!ATTLIST relatedException
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMError ) #IMPLIED>
+
+					
+<!ELEMENT relatedNode EMPTY>
+<!ATTLIST relatedNode
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMLocator ) #IMPLIED>
+
+					
+<!ELEMENT requiredAttributes EMPTY>
+<!ATTLIST requiredAttributes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT schemaTypeInfo EMPTY>
+<!ATTLIST schemaTypeInfo
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Attr | Element ) #REQUIRED>
+
+					
+<!ELEMENT severity EMPTY>
+<!ATTLIST severity
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMError ) #IMPLIED>
+
+					
+<!ELEMENT specified EMPTY>
+<!ATTLIST specified
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Attr ) #IMPLIED>
+
+					
+<!ELEMENT standalone EMPTY>
+<!ATTLIST standalone
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT strictErrorChecking EMPTY>
+<!ATTLIST strictErrorChecking
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT systemId EMPTY>
+<!ATTLIST systemId
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType | Notation | Entity ) #REQUIRED>
+
+					
+<!ELEMENT tagName EMPTY>
+<!ATTLIST tagName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Element ) #IMPLIED>
+
+					
+<!ELEMENT target EMPTY>
+<!ATTLIST target
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ProcessingInstruction ) #IMPLIED>
+
+					
+<!ELEMENT textContent EMPTY>
+<!ATTLIST textContent
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT type EMPTY>
+<!ATTLIST type
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMError ) #IMPLIED>
+
+					
+<!ELEMENT typeName EMPTY>
+<!ATTLIST typeName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( TypeInfo ) #IMPLIED>
+
+					
+<!ELEMENT typeNamespace EMPTY>
+<!ATTLIST typeNamespace
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( TypeInfo ) #IMPLIED>
+
+					
+<!ELEMENT uri EMPTY>
+<!ATTLIST uri
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DOMLocator ) #IMPLIED>
+
+					
+<!ELEMENT value EMPTY>
+<!ATTLIST value
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Attr ) #IMPLIED>
+
+					
+<!ELEMENT version EMPTY>
+<!ATTLIST version
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Document | Entity ) #REQUIRED>
+
+					
+<!ELEMENT wholeText EMPTY>
+<!ATTLIST wholeText
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Text ) #IMPLIED>
+<!ELEMENT adoptNode EMPTY >
+<!ATTLIST adoptNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    source CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT appendChild EMPTY >
+<!ATTLIST appendChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT appendData EMPTY >
+<!ATTLIST appendData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT canAppendChild EMPTY >
+<!ATTLIST canAppendChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    interface (NodeEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canAppendData EMPTY >
+<!ATTLIST canAppendData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterDataEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canDeleteData EMPTY >
+<!ATTLIST canDeleteData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    interface (CharacterDataEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canInsertBefore EMPTY >
+<!ATTLIST canInsertBefore
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    refChild CDATA #REQUIRED
+    interface (NodeEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canInsertData EMPTY >
+<!ATTLIST canInsertData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterDataEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canRemoveAttribute EMPTY >
+<!ATTLIST canRemoveAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    attrname CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canRemoveAttributeNode EMPTY >
+<!ATTLIST canRemoveAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    attrNode CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canRemoveAttributeNS EMPTY >
+<!ATTLIST canRemoveAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canRemoveChild EMPTY >
+<!ATTLIST canRemoveChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    oldChild CDATA #REQUIRED
+    interface (NodeEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canReplaceChild EMPTY >
+<!ATTLIST canReplaceChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    oldChild CDATA #REQUIRED
+    interface (NodeEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canReplaceData EMPTY >
+<!ATTLIST canReplaceData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterDataEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canSetAttribute EMPTY >
+<!ATTLIST canSetAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    attrname CDATA #REQUIRED
+    attrval CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canSetAttributeNode EMPTY >
+<!ATTLIST canSetAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    attrNode CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canSetAttributeNS EMPTY >
+<!ATTLIST canSetAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    value CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canSetData EMPTY >
+<!ATTLIST canSetData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterDataEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT canSetParameter EMPTY >
+<!ATTLIST canSetParameter
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+    interface (DOMConfiguration) #IMPLIED
+>
+
+
+<!ELEMENT canSetTextContent EMPTY >
+<!ATTLIST canSetTextContent
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    possibleTextContent CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT cloneNode EMPTY >
+<!ATTLIST cloneNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    deep CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT compareDocumentPosition EMPTY >
+<!ATTLIST compareDocumentPosition
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    other CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT createAttribute EMPTY >
+<!ATTLIST createAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createAttributeNS EMPTY >
+<!ATTLIST createAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createCDATASection EMPTY >
+<!ATTLIST createCDATASection
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createComment EMPTY >
+<!ATTLIST createComment
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createDocument EMPTY >
+<!ATTLIST createDocument
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    doctype CDATA #REQUIRED
+    interface (DOMImplementation) #IMPLIED
+>
+
+
+<!ELEMENT createDocumentFragment EMPTY >
+<!ATTLIST createDocumentFragment
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createDocumentType EMPTY >
+<!ATTLIST createDocumentType
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    publicId CDATA #REQUIRED
+    systemId CDATA #REQUIRED
+    interface (DOMImplementation) #IMPLIED
+>
+
+
+<!ELEMENT createElement EMPTY >
+<!ATTLIST createElement
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    tagName CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createElementNS EMPTY >
+<!ATTLIST createElementNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createEntityReference EMPTY >
+<!ATTLIST createEntityReference
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createProcessingInstruction EMPTY >
+<!ATTLIST createProcessingInstruction
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    target CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createTextNode EMPTY >
+<!ATTLIST createTextNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT deleteData EMPTY >
+<!ATTLIST deleteData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT findOffset16 EMPTY >
+<!ATTLIST findOffset16
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset32 CDATA #REQUIRED
+    interface (StringExtend) #IMPLIED
+>
+
+
+<!ELEMENT findOffset32 EMPTY >
+<!ATTLIST findOffset32
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset16 CDATA #REQUIRED
+    interface (StringExtend) #IMPLIED
+>
+
+
+<!ELEMENT getAttribute EMPTY >
+<!ATTLIST getAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT getAttributeNode EMPTY >
+<!ATTLIST getAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT getAttributeNodeNS EMPTY >
+<!ATTLIST getAttributeNodeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT getAttributeNS EMPTY >
+<!ATTLIST getAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT getDefinedElements EMPTY >
+<!ATTLIST getDefinedElements
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    interface (DocumentEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT getDOMImplementation EMPTY >
+<!ATTLIST getDOMImplementation
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    features CDATA #REQUIRED
+    interface (DOMImplementationSource) #IMPLIED
+>
+
+
+<!ELEMENT getDOMImplementations EMPTY >
+<!ATTLIST getDOMImplementations
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    features CDATA #REQUIRED
+    interface (DOMImplementationSource) #IMPLIED
+>
+
+
+<!ELEMENT getElementById EMPTY >
+<!ATTLIST getElementById
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    elementId CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT getElementsByTagName EMPTY >
+<!ATTLIST getElementsByTagName
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    tagname CDATA #REQUIRED
+    interface (Document|Element) #REQUIRED
+>
+
+
+<!ELEMENT getElementsByTagNameNS EMPTY >
+<!ATTLIST getElementsByTagNameNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (Document|Element) #REQUIRED
+>
+
+
+<!ELEMENT getFeature EMPTY >
+<!ATTLIST getFeature
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    feature CDATA #REQUIRED
+    version CDATA #REQUIRED
+    interface (DOMImplementation|Node) #REQUIRED
+>
+
+
+<!ELEMENT getName EMPTY >
+<!ATTLIST getName
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (NameList) #IMPLIED
+>
+
+
+<!ELEMENT getNamedItem EMPTY >
+<!ATTLIST getNamedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT getNamedItemNS EMPTY >
+<!ATTLIST getNamedItemNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT getNamespaceURI EMPTY >
+<!ATTLIST getNamespaceURI
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (NameList) #IMPLIED
+>
+
+
+<!ELEMENT getParameter EMPTY >
+<!ATTLIST getParameter
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (DOMConfiguration) #IMPLIED
+>
+
+
+<!ELEMENT getUserData EMPTY >
+<!ATTLIST getUserData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    key CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT handle EMPTY >
+<!ATTLIST handle
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    operation CDATA #REQUIRED
+    key CDATA #REQUIRED
+    data CDATA #REQUIRED
+    src CDATA #REQUIRED
+    dst CDATA #REQUIRED
+    interface (UserDataHandler) #IMPLIED
+>
+
+
+<!ELEMENT handleError (var*, (%statement;)* ) >
+<!ATTLIST handleError
+    id ID #IMPLIED
+    obj CDATA #IMPLIED
+    var CDATA #IMPLIED
+    error CDATA #IMPLIED
+    interface (DOMErrorHandler) #IMPLIED
+>
+
+
+<!ELEMENT hasAttribute EMPTY >
+<!ATTLIST hasAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT hasAttributeNS EMPTY >
+<!ATTLIST hasAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT hasAttributes EMPTY >
+<!ATTLIST hasAttributes
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT hasChildNodes EMPTY >
+<!ATTLIST hasChildNodes
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT importNode EMPTY >
+<!ATTLIST importNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    importedNode CDATA #REQUIRED
+    deep CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT insertBefore EMPTY >
+<!ATTLIST insertBefore
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    refChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT insertData EMPTY >
+<!ATTLIST insertData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT isDefaultNamespace EMPTY >
+<!ATTLIST isDefaultNamespace
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT isElementDefined EMPTY >
+<!ATTLIST isElementDefined
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT isElementDefinedNS EMPTY >
+<!ATTLIST isElementDefinedNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (ElementEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT isEqualNode EMPTY >
+<!ATTLIST isEqualNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT isId EMPTY >
+<!ATTLIST isId
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Attr) #IMPLIED
+>
+
+
+<!ELEMENT isSameNode EMPTY >
+<!ATTLIST isSameNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    other CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT isSupported EMPTY >
+<!ATTLIST isSupported
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    feature CDATA #REQUIRED
+    version CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT isWhitespaceInElementContent EMPTY >
+<!ATTLIST isWhitespaceInElementContent
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Text) #IMPLIED
+>
+
+
+<!ELEMENT isWhitespaceOnly EMPTY >
+<!ATTLIST isWhitespaceOnly
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (CharacterDataEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT item EMPTY >
+<!ATTLIST item
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (DOMStringList|DOMImplementationList|NodeList|NamedNodeMap) #REQUIRED
+>
+
+
+<!ELEMENT lookupNamespaceURI EMPTY >
+<!ATTLIST lookupNamespaceURI
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    prefix CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT lookupPrefix EMPTY >
+<!ATTLIST lookupPrefix
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT nodeValidity EMPTY >
+<!ATTLIST nodeValidity
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    valType CDATA #REQUIRED
+    interface (NodeEditVAL) #IMPLIED
+>
+
+
+<!ELEMENT normalize EMPTY >
+<!ATTLIST normalize
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT normalizeDocument EMPTY >
+<!ATTLIST normalizeDocument
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT removeAttribute EMPTY >
+<!ATTLIST removeAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT removeAttributeNode EMPTY >
+<!ATTLIST removeAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    oldAttr CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT removeAttributeNS EMPTY >
+<!ATTLIST removeAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT removeChild EMPTY >
+<!ATTLIST removeChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    oldChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT removeNamedItem EMPTY >
+<!ATTLIST removeNamedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT removeNamedItemNS EMPTY >
+<!ATTLIST removeNamedItemNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT renameNode EMPTY >
+<!ATTLIST renameNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    n CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT replaceChild EMPTY >
+<!ATTLIST replaceChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    oldChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT replaceData EMPTY >
+<!ATTLIST replaceData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT replaceWholeText EMPTY >
+<!ATTLIST replaceWholeText
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    content CDATA #REQUIRED
+    interface (Text) #IMPLIED
+>
+
+
+<!ELEMENT setAttribute EMPTY >
+<!ATTLIST setAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setAttributeNode EMPTY >
+<!ATTLIST setAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newAttr CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setAttributeNodeNS EMPTY >
+<!ATTLIST setAttributeNodeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newAttr CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setAttributeNS EMPTY >
+<!ATTLIST setAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    value CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setIdAttribute EMPTY >
+<!ATTLIST setIdAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    name CDATA #REQUIRED
+    isId CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setIdAttributeNode EMPTY >
+<!ATTLIST setIdAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    idAttr CDATA #REQUIRED
+    isId CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setIdAttributeNS EMPTY >
+<!ATTLIST setIdAttributeNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
+    isId CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setNamedItem EMPTY >
+<!ATTLIST setNamedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT setNamedItemNS EMPTY >
+<!ATTLIST setNamedItemNS
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT setParameter EMPTY >
+<!ATTLIST setParameter
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+    interface (DOMConfiguration) #IMPLIED
+>
+
+
+<!ELEMENT setUserData EMPTY >
+<!ATTLIST setUserData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    key CDATA #REQUIRED
+    data CDATA #REQUIRED
+    handler CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT splitText EMPTY >
+<!ATTLIST splitText
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    interface (Text) #IMPLIED
+>
+
+
+<!ELEMENT substringData EMPTY >
+<!ATTLIST substringData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT validateDocument EMPTY >
+<!ATTLIST validateDocument
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (DocumentEditVAL) #IMPLIED
+>
+
+
+
+<!ELEMENT test (metadata?,(%implementation-condition;)*,var*,(load|implementation),(%statement;)*) >
+<!ATTLIST test 
+   xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-3"
+   id ID #IMPLIED
+   name CDATA #REQUIRED
+   xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation CDATA #IMPLIED
+   contentType CDATA #IMPLIED
+>
+
+<!ELEMENT package (metadata?, (test|suite)*)>
+<!ATTLIST package
+   xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-3"
+	id ID #IMPLIED
+>
+
+<!ELEMENT suite (metadata?,(%implementation-condition;)*,(suite.member)*)>
+<!ATTLIST suite
+   xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-3"
+   id ID #IMPLIED
+   name CDATA #REQUIRED
+   xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation CDATA #IMPLIED
+   contentType CDATA #IMPLIED
+>
+
+<!ELEMENT suite.member EMPTY>
+<!ATTLIST suite.member
+   href CDATA #REQUIRED
+>
+
+
+<!ELEMENT comment (#PCDATA)>
+<!ATTLIST comment
+	id ID #IMPLIED
+>
+
+<!ELEMENT wait EMPTY>
+<!ATTLIST wait
+	id ID #IMPLIED
+	milliseconds CDATA #REQUIRED
+>
+
+<!ELEMENT append EMPTY>
+<!ATTLIST append
+	id ID #IMPLIED
+	collection CDATA #REQUIRED
+	obj CDATA #REQUIRED
+>
+
+<!ELEMENT assign ((%condition;)?)?>
+<!ATTLIST assign
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	value CDATA #IMPLIED
+>
+
+<!ELEMENT increment EMPTY>
+<!ATTLIST increment
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT decrement EMPTY>
+<!ATTLIST decrement
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT plus EMPTY>
+<!ATTLIST plus
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT subtract EMPTY>
+<!ATTLIST subtract
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT mult EMPTY>
+<!ATTLIST mult
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT divide EMPTY>
+<!ATTLIST divide
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT return EMPTY>
+<!ATTLIST return
+	id ID #IMPLIED
+	value CDATA #IMPLIED
+>
+
+<!ELEMENT get (var*, (%statement;)* )>
+<!ELEMENT set (var*, (%statement;)* )>
+
+
+<!ELEMENT var  (member+ | ( var* , ( ( handleError )  ) ) )? >
+<!ATTLIST var
+	id ID #IMPLIED
+	name CDATA #REQUIRED
+	type (%variable-type;) #REQUIRED
+	value CDATA #IMPLIED
+    isNull (true|false) #IMPLIED
+>
+
+
+<!ELEMENT member (#PCDATA)>
+
+
+<!ELEMENT load EMPTY>
+<!ATTLIST load
+	var CDATA #REQUIRED
+	href CDATA #IMPLIED
+    uri CDATA #IMPLIED
+    obj CDATA #IMPLIED
+    interface (DocumentLS) #IMPLIED
+	willBeModified (true | false) #IMPLIED
+>
+
+<!ELEMENT implementation EMPTY>
+<!ATTLIST implementation
+	var CDATA #REQUIRED
+	obj CDATA #IMPLIED
+>
+
+
+<!--  since title is used both as a metadata element and
+            a read-write attribute, it is hard coded here   -->
+<!ELEMENT title (#PCDATA)>
+<!ATTLIST title
+    id ID #IMPLIED
+	obj CDATA #IMPLIED					
+    var CDATA #IMPLIED
+	value CDATA #IMPLIED
+    interface CDATA #IMPLIED
+>
+
+
+<!ELEMENT metadata (metadata | title | creator | subject | description | contributor | date | source | relation)*>
+<!ATTLIST metadata
+        xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-3"
+	id ID #IMPLIED
+	about CDATA #IMPLIED
+>
+
+<!ELEMENT creator (#PCDATA)>
+<!ATTLIST creator
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT subject (#PCDATA)>
+<!ATTLIST subject
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT description (#PCDATA)>
+<!ATTLIST description
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT contributor (#PCDATA)>
+<!ATTLIST contributor
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT date (#PCDATA)>
+<!ATTLIST date
+	id ID #IMPLIED
+	qualifier (created | valid | available | issued | modified) #REQUIRED
+>
+
+<!ELEMENT source (#PCDATA)>
+<!ATTLIST source
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT relation (#PCDATA)>
+<!ATTLIST relation
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+	qualifier (isVersionOf | hasVersion | isReplacedBy | isRequiredBy | requires | isPartOf | hasPart | isReferenceBy | references) #REQUIRED
+>
+					
+<!ELEMENT assertTrue ((%condition;)?)>
+<!ATTLIST assertTrue
+	id ID #REQUIRED
+	actual CDATA #IMPLIED
+>
+							
+<!ELEMENT assertFalse ((%condition;)?)>
+<!ATTLIST assertFalse
+	id ID #REQUIRED
+	actual CDATA #IMPLIED
+>
+
+<!ELEMENT assertNull (metadata?, (%statement;)*)>
+<!ATTLIST assertNull
+	actual CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertNotNull (metadata?, (%statement;)*)>
+<!ATTLIST assertNotNull
+	actual CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertSame (metadata?, (%statement;)*)>
+<!ATTLIST assertSame
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertInstanceOf (metadata?, (%statement;)*)>
+<!ATTLIST assertInstanceOf
+	obj CDATA #REQUIRED
+	type (%variable-type;) #REQUIRED
+	id ID #REQUIRED
+>
+
+
+<!ELEMENT assertSize (metadata?, (%statement;)*)>
+<!ATTLIST assertSize
+	collection CDATA #REQUIRED
+	size CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertEquals (metadata?, (%statement;)*)>
+<!ATTLIST assertEquals
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	id ID #REQUIRED
+	ignoreCase (true|false|auto) #REQUIRED
+>
+
+<!ELEMENT assertNotEquals (metadata?, (%statement;)*)>
+<!ATTLIST assertNotEquals
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	id ID #REQUIRED
+	ignoreCase (true|false|auto) #REQUIRED
+>
+
+<!ELEMENT assertEventCount (metadata?, (%statement;)*)>
+<!ATTLIST assertEventCount
+	atCount CDATA #IMPLIED
+	captureCount CDATA #IMPLIED
+	bubbleCount CDATA #IMPLIED
+	totalCount CDATA #IMPLIED
+	monitor CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertURIEquals (metadata?)>
+<!ATTLIST assertURIEquals
+	actual CDATA #REQUIRED
+    scheme CDATA #IMPLIED
+    path CDATA #IMPLIED
+    host CDATA #IMPLIED
+    file CDATA #IMPLIED
+    name CDATA #IMPLIED
+    query CDATA #IMPLIED
+    fragment CDATA #IMPLIED
+    isAbsolute CDATA #IMPLIED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertImplementationException (metadata?, (%statement;))>
+<!ATTLIST assertImplementationException
+	id ID #REQUIRED
+>
+
+
+<!ELEMENT same EMPTY>
+<!ATTLIST same
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT equals EMPTY>
+<!ATTLIST equals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	ignoreCase (true|false|auto) "false"
+>
+
+<!ELEMENT notEquals EMPTY>
+<!ATTLIST notEquals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	ignoreCase (true|false|auto) "false"
+>
+
+<!ELEMENT less EMPTY>
+<!ATTLIST less
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT lessOrEquals EMPTY>
+<!ATTLIST lessOrEquals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT greater EMPTY>
+<!ATTLIST greater
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT greaterOrEquals EMPTY>
+<!ATTLIST greaterOrEquals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT isNull EMPTY>
+<!ATTLIST isNull
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+>
+
+<!ELEMENT notNull EMPTY>
+<!ATTLIST notNull
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+>
+
+<!ELEMENT instanceOf EMPTY>
+<!ATTLIST instanceOf
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	type (%variable-type;) #REQUIRED
+>
+
+<!ELEMENT hasSize EMPTY>
+<!ATTLIST hasSize
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT contains EMPTY>
+<!ATTLIST contains
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	substring CDATA #REQUIRED
+>
+
+<!ELEMENT implementationAttribute EMPTY>
+<!ATTLIST implementationAttribute
+	id ID #IMPLIED
+	value (true|false) #REQUIRED
+	name (validating|coalescing|expandEntityReferences|namespaceAware|ignoringElementContentWhitespace|signed|hasNullString) #REQUIRED
+>
+
+
+<!ELEMENT hasFeature EMPTY>
+<!ATTLIST hasFeature
+	id ID #IMPLIED
+	feature CDATA #REQUIRED
+	version CDATA #IMPLIED
+    value (true | false) #IMPLIED
+	var CDATA #IMPLIED
+	obj CDATA #IMPLIED
+>
+
+<!ELEMENT not ((%condition;))>
+<!ATTLIST not
+	id ID #IMPLIED
+>
+
+<!ELEMENT isTrue EMPTY>
+<!ATTLIST isTrue
+	id ID #IMPLIED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT isFalse EMPTY>
+<!ATTLIST isFalse
+	id ID #IMPLIED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT or ((%condition;),(%condition;)+)>
+<!ATTLIST or
+	id ID #IMPLIED
+>
+
+<!ELEMENT and ((%condition;),(%condition;)+)>
+<!ATTLIST and
+	id ID #IMPLIED
+>
+
+<!ELEMENT xor ((%condition;),(%condition;))>
+<!ATTLIST xor
+	id ID #IMPLIED
+>
+
+<!ELEMENT else ((%statement;)+)>
+<!ATTLIST else
+	id ID #IMPLIED
+>
+
+<!ELEMENT if ((%condition;), (%statement;)+, else?)>
+<!ATTLIST if
+	id ID #IMPLIED
+>
+
+<!ELEMENT while ((%condition;),(%statement;)+)>
+<!ATTLIST while
+	id ID #IMPLIED
+>
+
+<!ELEMENT for-each ((%statement;)*)>
+<!ATTLIST for-each
+	collection CDATA #REQUIRED
+	member CDATA #REQUIRED
+	id ID #IMPLIED
+>
+
+<!ELEMENT atEvents EMPTY>
+<!ATTLIST atEvents
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
+	var CDATA #REQUIRED
+>
+
+<!ELEMENT bubbledEvents EMPTY>
+<!ATTLIST bubbledEvents
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
+	var CDATA #REQUIRED
+>
+
+<!ELEMENT capturedEvents EMPTY>
+<!ATTLIST capturedEvents
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
+	var CDATA #REQUIRED
+>
+
+
+<!ELEMENT allEvents EMPTY>
+<!ATTLIST allEvents
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
+	var CDATA #REQUIRED
+>
+
+<!ELEMENT createEventMonitor EMPTY>
+<!ATTLIST createEventMonitor
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+>
+
+<!ELEMENT createXPathEvaluator EMPTY>
+<!ATTLIST createXPathEvaluator
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+    document CDATA #REQUIRED
+>
+
+	
