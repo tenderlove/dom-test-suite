@@ -44,5 +44,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <elements interface="HTMLFormElement" obj="testNode" var="formsnodeList"/>
 <namedItem obj="formsnodeList" var="formNode" name="&quot;select1&quot;"/>
 <nodeName obj="formNode" var="vname"/>
-<assertEquals actual="vname" expected="&quot;SELECT&quot;" id="nameIndexLink" ignoreCase="false"/>
+<assertEquals actual="vname" expected="&quot;SELECT&quot;" id="nameIndexLink" ignoreCase="auto"/>
 </test>
