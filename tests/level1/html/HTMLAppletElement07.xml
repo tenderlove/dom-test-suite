@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The hspace attribute specifies the horizontal space to the left
     and right of this image, applet, or object. 
 
-    Retrieve the hspace attribute and examine it's value.  
+    Retrieve the hspace attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vhspace" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="applet" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"applet"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <hspace interface="HTMLAppletElement" obj="testNode" var="vhspace"/>
-<assertEquals actual="vhspace" expected='"0"' id="hspaceLink" ignoreCase="auto"/>
+<assertEquals actual="vhspace" expected='"0"' id="hspaceLink" ignoreCase="false"/>
 </test>

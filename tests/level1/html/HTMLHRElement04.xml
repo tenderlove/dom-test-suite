@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The width attribute specifies the width of the rule. 
 
-    Retrieve the width attribute and examine it's value.  
+    Retrieve the width attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -31,11 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vwidth" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="hr" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"hr"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <width interface="HTMLHRElement" obj="testNode" var="vwidth"/>
-<assertEquals actual="vwidth" expected='"400"' id="widthLink" ignoreCase="auto"/>
+<assertEquals actual="vwidth" expected='"400"' id="widthLink" ignoreCase="false"/>
 </test>

@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vdisabled" type="boolean" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="textarea" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"textarea"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>

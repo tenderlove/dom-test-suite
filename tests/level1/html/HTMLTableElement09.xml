@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="tbodiesnodeList" type="HTMLCollection"/>
 <var name="testNode" type="Node"/>
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <var name="tbodiesName" type="DOMString"/>
 <var name="vtbodies" type="Node"/>
 <var name="result" type="List"/>
@@ -52,5 +52,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName obj="vtbodies" var="tbodiesName"/>
 <append collection="result" obj="tbodiesName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedOptions" id="tbodiesLink" ignoreCase="auto"/>
+<assertEquals actual="result" expected="expectedOptions" id="tbodiesLink" ignoreCase="false"/>
 </test>

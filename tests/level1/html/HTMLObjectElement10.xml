@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     object.
 
     Retrieve the height attribute of the first OBJECT element and examine
-    it's value.  
+    its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -33,11 +33,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vheight" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="object" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"object"'/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <height interface="HTMLObjectElement" obj="testNode" var="vheight"/>
-<assertEquals actual="vheight" expected='"60"' id="heightLink" ignoreCase="auto"/>
+<assertEquals actual="vheight" expected='"60"' id="heightLink" ignoreCase="false"/>
 </test>

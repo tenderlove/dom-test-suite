@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The accessKey attribute returns a single character access key to
     give access to the form control. 
 
-    Retrieve the accessKey attribute and examine it's value.  
+    Retrieve the accessKey attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vaccesskey" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="button" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"button"'/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <accessKey interface="HTMLButtonElement" obj="testNode" var="vaccesskey"/>
-<assertEquals actual="vaccesskey" expected='"f"' id="accessKeyLink" ignoreCase="auto"/>
+<assertEquals actual="vaccesskey" expected='"f"' id="accessKeyLink" ignoreCase="false"/>
 </test>

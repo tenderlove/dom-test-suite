@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The type attribute is a list item bullet style. 
 
-    Retrieve the type attribute and examine it's value.  
+    Retrieve the type attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -31,11 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vtype" type="DOMString"/>
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="li" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"li"'/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <type interface="HTMLLIElement" obj="testNode" var="vtype"/>
-<assertEquals actual="vtype" expected='"square"' id="typeLink" ignoreCase="auto"/>
+<assertEquals actual="vtype" expected='"square"' id="typeLink" ignoreCase="false"/>
 </test>

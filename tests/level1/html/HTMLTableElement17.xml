@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     of a table.    
 
     Retrieve the summary attribute of the first TABLE element and examine
-    it's value.  
+    its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -33,11 +33,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vsummary" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="table" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <summary interface="HTMLTableElement" obj="testNode" var="vsummary"/>
-<assertEquals actual="vsummary" expected='"HTML Control Table"' id="summaryLink" ignoreCase="auto"/>
+<assertEquals actual="vsummary" expected='"HTML Control Table"' id="summaryLink" ignoreCase="false"/>
 </test>

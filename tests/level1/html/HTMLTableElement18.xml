@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The width attribute specifies the desired table width.
 
     Retrieve the width attribute of the first TABLE element and examine
-    it's value.  
+    its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vwidth" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="table" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <width interface="HTMLTableElement" obj="testNode" var="vwidth"/>
-<assertEquals actual="vwidth" expected='"680"' id="widthLink" ignoreCase="auto"/>
+<assertEquals actual="vwidth" expected='"680"' id="widthLink" ignoreCase="false"/>
 </test>

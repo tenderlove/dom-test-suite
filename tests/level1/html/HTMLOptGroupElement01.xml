@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The disabled attribute indicates that the control is unavailable in
     this context.
 
-    Retrieve the disabled attribute and examine it's value.  
+    Retrieve the disabled attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vdisabled" type="boolean" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="optgroup" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"optgroup"'/>
 <assertSize collection="nodeList" size="2" id="Asize"/>

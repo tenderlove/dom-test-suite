@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The vspace attribute specifies the vertical space above and below
     this image, applet or object.
 
-    Retrieve the vspace attribute and examine it's value.  
+    Retrieve the vspace attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vvspace" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="applet" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"applet"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <vspace interface="HTMLAppletElement" obj="testNode" var="vvspace"/>
-<assertEquals actual="vvspace" expected='"0"' id="vspaceLink" ignoreCase="auto"/>
+<assertEquals actual="vvspace" expected='"0"' id="vspaceLink" ignoreCase="false"/>
 </test>

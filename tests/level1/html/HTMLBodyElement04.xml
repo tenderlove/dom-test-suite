@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The link attribute specifies the color of links that are not active
     and unvisited. 
 
-    Retrieve the link attribute and examine it's value.  
+    Retrieve the link attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vlink" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="body" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"body"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <link interface="HTMLBodyElement" obj="testNode" var="vlink"/>
-<assertEquals actual="vlink" expected='"#ff0000"' id="linkLink" ignoreCase="auto"/>
+<assertEquals actual="vlink" expected='"#ff0000"' id="linkLink" ignoreCase="false"/>
 </test>

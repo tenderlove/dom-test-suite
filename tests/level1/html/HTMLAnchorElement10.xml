@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The tabIndex attribute contains an index that represents the elements
     position in the tabbing order. 
 
-    Retrieve the tabIndex attribute and examine it's value.  
+    Retrieve the tabIndex attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>

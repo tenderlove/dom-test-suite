@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The type attribute specifies the content type for the value attribute
     when valuetype has the value ref.
 
-    Retrieve the type attribute and examine it's value.
+    Retrieve the type attribute and examine its value.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vtype" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="param" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"param"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <type interface="HTMLParamElement" obj="testNode" var="vtype"/>
-<assertEquals actual="vtype" expected='"image/gif"' id="typeLink" ignoreCase="auto"/>
+<assertEquals actual="vtype" expected='"image/gif"' id="typeLink" ignoreCase="false"/>
 </test>

@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The charset attribute indicates the character encoding of the linked
     resource.
 
-    Retrieve the charset attribute and examine it's value.  
+    Retrieve the charset attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -39,5 +39,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <charset interface="HTMLAnchorElement" obj="testNode" var="vcharset"/>
-<assertEquals actual="vcharset" expected='"US-ASCII"' id="charsetLink" ignoreCase="auto"/>
+<assertEquals actual="vcharset" expected='"US-ASCII"' id="charsetLink" ignoreCase="false"/>
 </test>

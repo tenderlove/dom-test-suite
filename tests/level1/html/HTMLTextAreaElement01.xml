@@ -33,11 +33,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vdefaultvalue" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="textarea" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"textarea"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <defaultValue interface="HTMLTextAreaElement" obj="testNode" var="vdefaultvalue"/>
-<assertEquals actual="vdefaultvalue" expected='"TEXTAREA2"' id="defaultValueLink" ignoreCase="auto"/>
+<assertEquals actual="vdefaultvalue" expected='"TEXTAREA2"' id="defaultValueLink" ignoreCase="false"/>
 </test>

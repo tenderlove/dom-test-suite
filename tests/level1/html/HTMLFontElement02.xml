@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The face attribute specifies the font's face identifier. 
 
-    Retrieve the face attribute and examine it's value.  
+    Retrieve the face attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -31,11 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vface" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="font" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"font"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <face interface="HTMLFontElement" obj="testNode" var="vface"/>
-<assertEquals actual="vface" expected='"arial,helvitica"' id="faceLink" ignoreCase="auto"/>
+<assertEquals actual="vface" expected='"arial,helvitica"' id="faceLink" ignoreCase="false"/>
 </test>

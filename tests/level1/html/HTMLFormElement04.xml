@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The acceptCharset attribute specifies the list of character sets
     supported by the server. 
 
-    Retrieve the acceptCharset attribute and examine it's value.  
+    Retrieve the acceptCharset attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vacceptcharset" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="form" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"form"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <acceptCharset interface="HTMLFormElement" obj="testNode" var="vacceptcharset"/>
-<assertEquals actual="vacceptcharset" expected='"US-ASCII"' id="acceptCharsetLink" ignoreCase="auto"/>
+<assertEquals actual="vacceptcharset" expected='"US-ASCII"' id="acceptCharsetLink" ignoreCase="false"/>
 </test>

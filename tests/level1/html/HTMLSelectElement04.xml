@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The value attribute specifies the current form control value.    
 
     Retrieve the value attribute from the first SELECT element and 
-    examine it's value.  
+    examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vvalue" type="DOMString"/>
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="select" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"select"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <value interface="HTMLSelectElement" obj="testNode" var="vvalue"/>
-<assertEquals actual="vvalue" expected='"EMP1"' id="valueLink" ignoreCase="auto"/>
+<assertEquals actual="vvalue" expected='"EMP1"' id="valueLink" ignoreCase="false"/>
 </test>

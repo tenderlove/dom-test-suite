@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The content attribute specifies associated information. 
 
-    Retrieve the content attribute and examine it's value.  
+    Retrieve the content attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -31,11 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vcontent" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="meta" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"meta"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <content interface="HTMLMetaElement" obj="testNode" var="vcontent"/>
-<assertEquals actual="vcontent" expected='"text/html; CHARSET=utf-8"' id="contentLink" ignoreCase="auto"/>
+<assertEquals actual="vcontent" expected='"text/html; CHARSET=utf-8"' id="contentLink" ignoreCase="false"/>
 </test>

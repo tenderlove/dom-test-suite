@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="optionsnodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vareas" type="int" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <var name="optionName" type="DOMString"/>
 <var name="voption" type="Node"/>
 <var name="result" type="List"/>
@@ -54,5 +54,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName obj="voption" var="optionName"/>
 <append collection="result" obj="optionName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedOptions" id="optionsLink" ignoreCase="auto"/>
+<assertEquals actual="result" expected="expectedOptions" id="optionsLink" ignoreCase="false"/>
 </test>

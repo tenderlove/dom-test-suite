@@ -33,12 +33,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testNode" type="Node"/>
 <var name="vcaption" type="HTMLTableCaptionElement" />
 <var name="valign" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="table" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <caption interface="HTMLTableElement" obj="testNode" var="vcaption"/>
 <align interface="HTMLTableCaptionElement" obj="vcaption" var="valign"/>
-<assertEquals actual="valign" expected='"top"' id="alignLink" ignoreCase="auto"/>
+<assertEquals actual="valign" expected='"top"' id="alignLink" ignoreCase="false"/>
 </test>

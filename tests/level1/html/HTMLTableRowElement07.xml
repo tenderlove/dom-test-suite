@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The bgColor attribute specifies the background color of rows. 
 
     Retrieve the bgColor attribute of the second TR element and examine
-    it's value.  
+    its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vbgcolor" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="tablerow" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"tr"'/>
 <assertSize collection="nodeList" size="5" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <bgColor interface="HTMLTableRowElement" obj="testNode" var="vbgcolor"/>
-<assertEquals actual="vbgcolor" expected='"#00FFFF"' id="bgColorLink" ignoreCase="auto"/>
+<assertEquals actual="vbgcolor" expected='"#00FFFF"' id="bgColorLink" ignoreCase="false"/>
 </test>

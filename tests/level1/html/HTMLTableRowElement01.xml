@@ -27,7 +27,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     (THEAD, TFOOT, or TBODY) within the table.
 
     Retrieve the third TR element within the document and examine 
-    it's rowIndex value.  
+    its rowIndex value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -35,11 +35,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vrowindex" type="int" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="tablerow" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"tr"'/>
 <assertSize collection="nodeList" size="5" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="3"/>
 <rowIndex interface="HTMLTableRowElement" obj="testNode" var="vrowindex"/>
-<assertEquals actual="vrowindex" expected="1" id="rowIndexLink" ignoreCase="auto"/>
+<assertEquals actual="vrowindex" expected="1" id="rowIndexLink" ignoreCase="false"/>
 </test>

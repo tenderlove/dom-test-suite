@@ -33,12 +33,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="cellsnodeList" type="HTMLCollection"/>
 <var name="testNode" type="Node"/>
 <var name="vcells" type="int" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="tablerow" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"tr"'/>
 <assertSize collection="nodeList" size="5" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="3"/>
 <cells interface="HTMLTableRowElement" obj="testNode" var="cellsnodeList"/>
 <length interface="HTMLCollection" obj="cellsnodeList" var="vcells"/>
-<assertEquals actual="vcells" expected="6" id="cellsLink" ignoreCase="auto"/>
+<assertEquals actual="vcells" expected="6" id="cellsLink" ignoreCase="false"/>
 </test>

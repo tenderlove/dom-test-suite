@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     column. 
 
     Retrieve the vAlign attribute of the first THEAD element and examine
-    it's value.  
+    its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -33,11 +33,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vvalign" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="tablesection" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"thead"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <vAlign interface="HTMLTableSectionElement" obj="testNode" var="vvalign"/>
-<assertEquals actual="vvalign" expected='"middle"' id="vAlignLink" ignoreCase="auto"/>
+<assertEquals actual="vvalign" expected='"middle"' id="vAlignLink" ignoreCase="false"/>
 </test>

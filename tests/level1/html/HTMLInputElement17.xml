@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vusemap" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="input" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"input"'/>
 <assertSize collection="nodeList" size="9" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="7"/>
 <useMap interface="HTMLInputElement" obj="testNode" var="vusemap"/>
-<assertEquals actual="vusemap" expected='"#submit-map"' id="usemapLink" ignoreCase="auto"/>
+<assertEquals actual="vusemap" expected='"#submit-map"' id="usemapLink" ignoreCase="false"/>
 </test>

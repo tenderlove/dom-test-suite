@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The dir attribute specifies the base direction of directionally neutral text and the directionality of tables. 
 
-    Retrieve the dir attribute of the STRIKE element and examine it's value.  
+    Retrieve the dir attribute of the STRIKE element and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -31,11 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vdir" type="DOMString"/>
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="element" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"strike"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <dir interface="HTMLElement" obj="testNode" var="vdir"/>
-<assertEquals actual="vdir" expected='"ltr"' id="dirLink" ignoreCase="auto"/>
+<assertEquals actual="vdir" expected='"ltr"' id="dirLink" ignoreCase="false"/>
 </test>

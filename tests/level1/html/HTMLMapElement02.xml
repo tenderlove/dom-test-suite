@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The name attribute names the map(for use with usemap). 
 
-    Retrieve the name attribute and examine it's value.  
+    Retrieve the name attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -31,11 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vname" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="map" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"map"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <name interface="HTMLMapElement" obj="testNode" var="vname"/>
-<assertEquals actual="vname" expected='"html-map"' id="mapLink" ignoreCase="auto"/>
+<assertEquals actual="vname" expected='"html-map"' id="mapLink" ignoreCase="false"/>
 </test>

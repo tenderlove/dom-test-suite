@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The coords attribute is a comma-seperated list of lengths, defining
     an active region geometry.
 
-    Retrieve the coords attribute and examine it's value.  
+    Retrieve the coords attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -39,5 +39,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <coords interface="HTMLAnchorElement" obj="testNode" var="vcoords"/>
-<assertEquals actual="vcoords" expected='"0,0,100,100"' id="coordsLink" ignoreCase="auto"/>
+<assertEquals actual="vcoords" expected='"0,0,100,100"' id="coordsLink" ignoreCase="false"/>
 </test>

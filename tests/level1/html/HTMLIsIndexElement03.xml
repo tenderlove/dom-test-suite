@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vprompt" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="isindex" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"isindex"'/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <prompt interface="HTMLIsIndexElement" obj="testNode" var="vprompt"/>
-<assertEquals actual="vprompt" expected='"New Employee: "' id="promptLink" ignoreCase="auto"/>
+<assertEquals actual="vprompt" expected='"New Employee: "' id="promptLink" ignoreCase="false"/>
 </test>

@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vwidth" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="tablecell" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"th"'/>
 <assertSize collection="nodeList" size="4" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <width interface="HTMLTableCellElement" obj="testNode" var="vwidth"/>
-<assertEquals actual="vwidth" expected='"170"' id="widthLink" ignoreCase="auto"/>
+<assertEquals actual="vwidth" expected='"170"' id="widthLink" ignoreCase="false"/>
 </test>

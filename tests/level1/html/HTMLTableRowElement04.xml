@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     to the current section(THEAD, TFOOT, or TBODY),starting from 0. 
 
     Retrieve the fifth TR(2nd In TBODY) element within the document and 
-    examine it's sectionRowIndex value.  
+    examine its sectionRowIndex value.  
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-02-22</date>
@@ -33,11 +33,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vsectionrowindex" type="int" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="tablerow" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"tr"'/>
 <assertSize collection="nodeList" size="5" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="4"/>
 <sectionRowIndex interface="HTMLTableRowElement" obj="testNode" var="vsectionrowindex"/>
-<assertEquals actual="vsectionrowindex" expected="1" id="sectionRowIndexLink" ignoreCase="auto"/>
+<assertEquals actual="vsectionrowindex" expected="1" id="sectionRowIndexLink" ignoreCase="false"/>
 </test>
