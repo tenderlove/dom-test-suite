@@ -16,9 +16,9 @@
   <!ENTITY % entities SYSTEM "dom3xpathents.ent">
   %entities;
 ]>
-<test xmlns="&level3;" name="createExpression01">
+<test xmlns="&level3;" name="XPathEvaluator_createExpression_no_NS">
   <metadata>
-    <title>createExpression01</title>
+    <title>XPathEvaluator_createExpression_no_NS</title>
     <creator>Philippe Le Hégaret</creator>
     <description>
       The XPathEvaluator can create a "XPathExpression" using the method

@@ -16,29 +16,36 @@
   <!ENTITY % entities SYSTEM "dom3xpathents.ent">
   %entities;
 ]>
-<test xmlns="&level3;" name="createExpression01">
+<test xmlns="&level3;" name="XPathEvaluator_createExpression_NS">
   <metadata>
-    <title>createExpression01</title>
+    <title>XPathEvaluator_createExpression_NS</title>
     <creator>Philippe Le Hégaret</creator>
     <description>
       The XPathEvaluator can create a "XPathExpression" using the method
       "createExpression(expression, resolver)".
       
       Retrieve the DOM document on which the
-      "createExpression("/", null)" method is invoked with the document
-      element. The method should return a pre-compiled expression.
+      'createExpression("/staff/nist:employee", resolver)' method is
+      invoked with the document element.  The method should return a
+      pre-compiled expression.
     </description>
     <date qualifier="created">2002-04-26</date>
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
   </metadata>
   &vars;
-  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>
   <var name="exp" type="XPathExpression"/>
+  <var name="root" type='Element'/>
+  <var name="resolver" type="XPathNSResolver"/>
 
-  &findXPathEvaluator;  
+  &findXPathEvaluator;
+  
+  <documentElement obj='doc' var='root'/>
+
+  <createNSResolver obj="xpEvaluator" nodeResolver="root"
+     var="resolver"/>
 
   <createExpression obj='xpEvaluator' var='exp'
-    expression='&quot;/&quot;' resolver='nullNSResolver' />
+    expression='&quot;/staff/nist:employee&quot;' resolver='resolver' />
 
   <assertNotNull actual="exp" id="notnull"/>
   

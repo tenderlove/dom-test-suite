@@ -16,31 +16,34 @@
   <!ENTITY % entities SYSTEM "dom3xpathents.ent">
   %entities;
 ]>
-<test xmlns="&level3;" name="createExpression01">
+<test xmlns="&level3;" name="XPathEvaluator_createExpression_NAMESPACE_ERR_01">
   <metadata>
-    <title>createExpression01</title>
+    <title>XPathEvaluator_createExpression_NAMESPACE_ERR_01</title>
     <creator>Philippe Le Hégaret</creator>
     <description>
       The XPathEvaluator can create a "XPathExpression" using the method
       "createExpression(expression, resolver)".
       
       Retrieve the DOM document on which the
-      "createExpression("/", null)" method is invoked with the document
-      element. The method should return a pre-compiled expression.
+      'createExpression("/jfouffa:employee", null)' method is
+      invoked with the document element.  The method should fail to create
+      pre-compiled expression and throws DOMException.NAMESPACE_ERR
+      since the prefix jfouffa is not mapped.
     </description>
     <date qualifier="created">2002-04-26</date>
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
   </metadata>
   &vars;
-  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>
+  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/> 
   <var name="exp" type="XPathExpression"/>
 
-  &findXPathEvaluator;  
-
-  <createExpression obj='xpEvaluator' var='exp'
-    expression='&quot;/&quot;' resolver='nullNSResolver' />
-
-  <assertNotNull actual="exp" id="notnull"/>
+  &findXPathEvaluator;
   
+  <assertDOMException id="throw_NAMESPACE_ERR">
+    <NAMESPACE_ERR>
+      <createExpression obj='xpEvaluator' var='exp'
+	expression='&quot;/jfouffa:employee&quot;' resolver='nullNSResolver' />
+    </NAMESPACE_ERR>
+  </assertDOMException>
 
 </test>

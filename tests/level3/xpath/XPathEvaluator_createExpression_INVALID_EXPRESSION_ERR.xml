@@ -16,31 +16,35 @@
   <!ENTITY % entities SYSTEM "dom3xpathents.ent">
   %entities;
 ]>
-<test xmlns="&level3;" name="createExpression01">
+<test xmlns="&level3;" name="XPathEvaluator_createExpression_INVALID_EXPRESSION_ERR">
   <metadata>
-    <title>createExpression01</title>
+    <title>XPathEvaluator_createExpression_INVALID_EXPRESSION_ERR</title>
     <creator>Philippe Le Hégaret</creator>
     <description>
       The XPathEvaluator can create a "XPathExpression" using the method
       "createExpression(expression, resolver)".
       
       Retrieve the DOM document on which the
-      "createExpression("/", null)" method is invoked with the document
-      element. The method should return a pre-compiled expression.
+      'createExpression("12a", null)' method is
+      invoked with the document element.  The method should fail to create
+      pre-compiled expression and throws
+      XPathException.INVALID_EXPRESSION_ERR
+      since "12a" is not an XPath expression.
     </description>
     <date qualifier="created">2002-04-26</date>
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
   </metadata>
+  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>  
   &vars;
-  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>
   <var name="exp" type="XPathExpression"/>
 
-  &findXPathEvaluator;  
-
-  <createExpression obj='xpEvaluator' var='exp'
-    expression='&quot;/&quot;' resolver='nullNSResolver' />
-
-  <assertNotNull actual="exp" id="notnull"/>
+  &findXPathEvaluator;
   
+  <assertXPathException id="throw_INVALID_EXPRESSION_ERR">
+    <INVALID_EXPRESSION_ERR>
+      <createExpression obj='xpEvaluator' var='exp'
+	expression='&quot;12a&quot;' resolver='nullNSResolver' />
+    </INVALID_EXPRESSION_ERR>
+  </assertXPathException>
 
 </test>
