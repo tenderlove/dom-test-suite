@@ -319,7 +319,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLInputElement18.xml"/>
 <suite.member href="../../level1/html/HTMLIsIndexElement01.xml"/>
 <suite.member href="../../level1/html/HTMLIsIndexElement02.xml"/>
-<suite.member href="HTMLIsIndexElement03.xml"/>
+<suite.member href="../../level1/html/HTMLIsIndexElement03.xml"/>
 <suite.member href="../../level1/html/HTMLLIElement01.xml"/>
 <suite.member href="../../level1/html/HTMLLIElement02.xml"/>
 <suite.member href="../../level1/html/HTMLLabelElement01.xml"/>
@@ -505,7 +505,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLTableRowElement01.xml"/>
 <suite.member href="../../level1/html/HTMLTableRowElement02.xml"/>
 <suite.member href="../../level1/html/HTMLTableRowElement03.xml"/>
-<suite.member href="HTMLTableRowElement04.xml"/>
+<suite.member href="../../level1/html/HTMLTableRowElement04.xml"/>
 <suite.member href="../../level1/html/HTMLTableRowElement05.xml"/>
 <suite.member href="../../level1/html/HTMLTableRowElement06.xml"/>
 <suite.member href="../../level1/html/HTMLTableRowElement07.xml"/>

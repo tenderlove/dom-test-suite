@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.139  2004-03-10 09:46:29  dom-ts-4
+Revision 1.140  2004-03-10 18:42:00  dom-ts-4
+Remove broken L2 HTMLTableRowElement04 and unnecessary HTMLIsIndex03 (bug 590)
+
+Revision 1.139  2004/03/10 09:46:29  dom-ts-4
 Rename and fix multiply broken L2 HTMLObjectElement19 (bug 589)
 
 Revision 1.138  2004/03/10 00:41:01  dom-ts-4
@@ -1597,10 +1600,8 @@ All implementation conditions combined into implementationAttribute element
                      HTMLImageElement12.xml
                      HTMLImageElement14.xml
                      HTMLInputElement13.xml
-                     HTMLIsIndexElement03.xml
                      HTMLObjectElement11.xml
                      HTMLObjectElement16.xml
-                     HTMLTableRowElement04.xml
                      object08.xml
                      object13.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
@@ -1644,10 +1645,8 @@ All implementation conditions combined into implementationAttribute element
                      HTMLImageElement12.xml
                      HTMLImageElement14.xml
                      HTMLInputElement13.xml
-                     HTMLIsIndexElement03.xml
                      HTMLObjectElement11.xml
                      HTMLObjectElement16.xml
-                     HTMLTableRowElement04.xml
                      object08.xml
                      object13.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
