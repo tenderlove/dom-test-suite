@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.80  2003-01-20 06:19:15  dom-ts-4
+Revision 1.81  2003-01-21 16:11:57  dom-ts-4
+Patched L2 HTML and L3 Val xml-source.xml to get xmlspec.dtd locally
+Fixed encoding declaration of L2 HTML
+
+Revision 1.80  2003/01/20 06:19:15  dom-ts-4
 Removed Element.getElementsByTagName patch tasks (now done by XSLT)
 
 Revision 1.79  2003/01/17 06:48:58  dom-ts-4
@@ -724,13 +728,15 @@ All implementation conditions combined into implementationAttribute element
 
 	<unzip src="${specs.dir}/DOM2-HTML.zip"
 	       dest="${specs.dir}/Level-2/HTML"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-        <!-- xml-source.zip file no longer exists xml-source.xml included in DOM2-HTML.zip  
-	<unzip src="${specs.dir}/Level-2/HTML/xml-source.zip"
-	       dest="${specs.dir}/Level-2/xml/html"/>
-        -->
+    <!--  xml-source.xml had bad encoding declaration
+              and unresolved DTD     -->
+    <replace file="${specs.dir}/Level-2/HTML/xml-source.xml">
+        <replacefilter token='encoding="us-ascii"'
+        value='encoding="ISO-8859-1"'/>
+        <replacefilter token='http://www.w3.org/2002/08/xmlspec-v22-dom.dtd'
+            value='../../../pubtext/xmlspec-v22-dom.dtd'/>
+    </replace>
+
 	<copy file="${specs.dir}/Level-2/HTML/xml-source.xml" tofile="${specs.dir}/Level-2/xml/html/dom-spec.xml"/>
 
 	<!--  zip file is missing two support files   -->
@@ -1739,6 +1745,10 @@ All implementation conditions combined into implementationAttribute element
 
 	<unzip src="${specs.dir}/DOM3-Val.zip"
 	       dest="${specs.dir}/Level-3/Val"/>
+
+    <replace file="${specs.dir}/Level-3/Val/xml-source.xml"
+        token='http://www.w3.org/2002/08/xmlspec-v22-dom.dtd'
+            value='../../pubtext/xmlspec-v22-dom.dtd'/>
 
 
     <!--   These files are missing   -->
