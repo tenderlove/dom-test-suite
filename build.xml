@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.71  2002-08-23 05:10:07  dom-ts-4
+Revision 1.72  2002-09-18 05:22:52  dom-ts-4
+Added dom2-html-dist task, matrix and other supporting tasks
+
+Revision 1.71  2002/08/23 05:10:07  dom-ts-4
 HTMLApplet11 fixes
 
 Revision 1.70  2002/08/23 04:00:56  dom-ts-4
@@ -1310,6 +1313,78 @@ All implementation conditions combined into implementationAttribute element
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
+</target>
+
+
+<target name="dom2-html-metadata" depends="dom2-dtd">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level2/html/alltests.xml" 
+		   out="${build.dir}/dom2-html-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
+
+
+<target name="dom2-html-matrix" depends="dom2-html-metadata,dom2-subjects,dom2-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom2-html-metadata.rdf" 
+		   out="${build.dir}/dom2-html-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20020605#"/>
+        <param name="interfacesURL" expression="dom2-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom2-subjects.xml"/>
+	</style>
+</target>
+
+
+<target name="dom2-html-doxygen" depends="dom2-html-gen-java">
+    <mkdir dir="${build.dir}/doxygen/level2"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="doxygen/dom2-html.doxygen"/>
+    </exec>
+
+</target>
+
+
+<target name="dom2-html-dist" depends="dom2-html-jar,dom2-html-gen-jsunit,dom2-html-matrix,dom2-html-doxygen,junit-run,get-junit-license,dom2-schema">
+    <mkdir dir="${build.dir}/level2/html/resources"/>
+    <mkdir dir="${build.dir}/level2/html/java"/>
+    <copy file="docs/level2/html/index.htm" todir="${build.dir}/level2/html"/>
+    <copy todir="${build.dir}/level2/html/resources">
+        <fileset dir="docs/level2/html/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom2-html.jar" todir="${build.dir}/level2/html/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level2/html/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level2/html/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level2/html/java"/>
+    <copy file="${build.dir}/dom2-html-matrix.html" todir="${build.dir}/level2/html"/>
+
+
+    <mkdir dir="${build.dir}/level2/html/tests/files"/>
+    <copy todir="${build.dir}/level2/html/tests">
+        <fileset dir="${tests.dir}/level2/html" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom2.dtd"/>
+        <fileset dir="${build.dir}" includes="dom2.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level2/html/tests/files">
+        <fileset dir="${tests.dir}/level2/html/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom2-html.zip" basedir="${build.dir}/level2/html"/>
+    <tar tarfile="${dist.dir}/dom2-html.tar" basedir="${build.dir}/level2/html"/>
+    <gzip src="${dist.dir}/dom2-html.tar" zipfile="${dist.dir}/dom2-html.tar.gz"/>
+        
+        
 </target>
 
 
