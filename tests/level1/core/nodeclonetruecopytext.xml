@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE test SYSTEM "dom1.dtd">
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+--><!DOCTYPE test SYSTEM "dom1.dtd">
+
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeclonetruecopytext">
 <metadata>
 <title>nodeCloneTrueCopyText</title>
@@ -15,6 +26,7 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -29,11 +41,11 @@
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
 <if>
-    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
-    <item interface="NodeList" obj="childList" index="3" var="childNode"/>
-    <else>
-        <item interface="NodeList" obj="childList" index="7" var="childNode"/>
-    </else>
+<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+<item interface="NodeList" obj="childList" index="3" var="childNode"/>
+<else>
+<item interface="NodeList" obj="childList" index="7" var="childNode"/>
+</else>
 </if>
 <cloneNode obj="childNode" deep="true" var="clonedNode"/>
 <lastChild obj="clonedNode" var="lastChildNode"/>

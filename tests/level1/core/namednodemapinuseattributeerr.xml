@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE test SYSTEM "dom1.dtd">
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+--><!DOCTYPE test SYSTEM "dom1.dtd">
+
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="namednodemapinuseattributeerr">
-	<var name="doc" type="Document"/>
-	<var name="elementList" type="NodeList"/>
-	<var name="firstNode" type="Element"/>
-	<var name="testNode" type="Node"/>
-	<var name="attributes" type="NamedNodeMap"/>
-	<var name="domesticAttr" type="Attr"/>
-	<var name="setAttr" type="Attr"/>
-	<var name="setNode" type="Node"/>
-	<load var="doc" href="staff.xml" willBeModified="true"/>
-	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-	<item interface="NodeList" obj="elementList" var="firstNode" index="0"/>
-	<createAttribute obj="doc" var="domesticAttr" name="&quot;domestic&quot;"/>
-	<value interface="Attr" obj="domesticAttr" value="&quot;Yes&quot;"/>
-	<setAttributeNode var="setAttr" obj="firstNode" newAttr="domesticAttr"/>
-	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-	<item interface="NodeList" obj="elementList" var="testNode" index="2"/>
-	<attributes obj="testNode" var="attributes"/>
-	<assertDOMException id="namednodemapInUseAttributeErrAssert">
-		<INUSE_ATTRIBUTE_ERR>
-			<setNamedItem var="setNode" interface="NamedNodeMap" obj="attributes" arg="domesticAttr"/>
-		</INUSE_ATTRIBUTE_ERR>
-	</assertDOMException>
+<var name="doc" type="Document"/>
+<var name="elementList" type="NodeList"/>
+<var name="firstNode" type="Element"/>
+<var name="testNode" type="Node"/>
+<var name="attributes" type="NamedNodeMap"/>
+<var name="domesticAttr" type="Attr"/>
+<var name="setAttr" type="Attr"/>
+<var name="setNode" type="Node"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<item interface="NodeList" obj="elementList" var="firstNode" index="0"/>
+<createAttribute obj="doc" var="domesticAttr" name="&quot;domestic&quot;"/>
+<value interface="Attr" obj="domesticAttr" value="&quot;Yes&quot;"/>
+<setAttributeNode var="setAttr" obj="firstNode" newAttr="domesticAttr"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<item interface="NodeList" obj="elementList" var="testNode" index="2"/>
+<attributes obj="testNode" var="attributes"/>
+<assertDOMException id="namednodemapInUseAttributeErrAssert">
+<INUSE_ATTRIBUTE_ERR>
+<setNamedItem var="setNode" interface="NamedNodeMap" obj="attributes" arg="domesticAttr"/>
+</INUSE_ATTRIBUTE_ERR>
+</assertDOMException>
 </test>

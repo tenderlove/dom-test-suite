@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE test SYSTEM "dom1.dtd">
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+--><!DOCTYPE test SYSTEM "dom1.dtd">
+
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentcreateelementdefaultattr">
-	<metadata>
+<metadata>
 <title>documentCreateElementDefaultAttr</title>
 <creator>NIST</creator>
 <description>
@@ -20,19 +31,19 @@
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547"/>
 </metadata>
-	<var name="doc" type="Document"/>
-	<var name="newElement" type="Element"/>
-	<var name="defaultAttr" type="NamedNodeMap"/>
-	<var name="child" type="Node"/>
-	<var name="name" type="DOMString"/>
-	<var name="value" type="DOMString"/>
-	<load var="doc" href="staff.xml" willBeModified="false"/>
-	<createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
-	<attributes obj="newElement" var="defaultAttr"/>
-    <item obj="defaultAttr" var="child" index="0" interface="NamedNodeMap"/>
-	<nodeName obj="child" var="name"/>
-    <assertEquals actual="name" expected='"street"' id="attrName" ignoreCase="false"/>
-	<nodeValue obj="child" var="value"/>
-    <assertEquals actual="value" expected='"Yes"' id="attrValue" ignoreCase="false"/>
-    <assertSize collection="defaultAttr" size="1" id="attrCount"/>
+<var name="doc" type="Document"/>
+<var name="newElement" type="Element"/>
+<var name="defaultAttr" type="NamedNodeMap"/>
+<var name="child" type="Node"/>
+<var name="name" type="DOMString"/>
+<var name="value" type="DOMString"/>
+<load var="doc" href="staff.xml" willBeModified="false"/>
+<createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
+<attributes obj="newElement" var="defaultAttr"/>
+<item obj="defaultAttr" var="child" index="0" interface="NamedNodeMap"/>
+<nodeName obj="child" var="name"/>
+<assertEquals actual="name" expected="&quot;street&quot;" id="attrName" ignoreCase="false"/>
+<nodeValue obj="child" var="value"/>
+<assertEquals actual="value" expected="&quot;Yes&quot;" id="attrValue" ignoreCase="false"/>
+<assertSize collection="defaultAttr" size="1" id="attrCount"/>
 </test>

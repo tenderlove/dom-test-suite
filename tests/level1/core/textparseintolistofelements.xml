@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE test SYSTEM "dom1.dtd">
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+--><!DOCTYPE test SYSTEM "dom1.dtd">
+
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="textparseintolistofelements">
 <metadata>
 <title>textParseIntoListOfElements</title>
@@ -18,6 +29,10 @@
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
+<!--childNodes attribute -->
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-11C98490"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-745549614"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -28,37 +43,35 @@
 <var name="grandChild" type="Node"/>
 <var name="result" type="List"/>
 <var name="expectedNormal" type="List">
-    <member>"1900 Dallas Road"</member>
-    <member>" Dallas, "</member>
-    <member>"Texas"</member>
-    <member>"\n 98554"</member>
+<member>"1900 Dallas Road"</member>
+<member>" Dallas, "</member>
+<member>"Texas"</member>
+<member>"\n 98554"</member>
 </var>
 <var name="expectedExpanded" type="List">
-    <member>"1900 Dallas Road Dallas, Texas\n 98554"</member>
+<member>"1900 Dallas Road Dallas, Texas\n 98554"</member>
 </var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="addressNode" index="1"/>
 <childNodes obj="addressNode" var="childList"/>
 <for-each collection="childList" member="child">
-    <nodeValue obj="child" var="value"/>
-    <if>
-        <isNull obj="value"/>
-        <!--  this branch should get hit for entity references  -->
-        <firstChild obj="child" var="grandChild"/>
-        <nodeValue obj="grandChild" var="value"/>
-        <append collection="result" obj="value"/>
-        <!--  this branch for text nodes   -->
-        <else>
-            <append collection="result" obj="value"/>
-        </else>
-    </if>
+<nodeValue obj="child" var="value"/>
+<if>
+<isNull obj="value"/>
+<firstChild obj="child" var="grandChild"/>
+<nodeValue obj="grandChild" var="value"/>
+<append collection="result" obj="value"/>
+<else>
+<append collection="result" obj="value"/>
+</else>
+</if>
 </for-each>
 <if>
-    <implementationAttribute name="expandEntityReferences" value="true"/>
-    <assertEquals actual="result" expected="expectedExpanded" ignoreCase="false" id="assertEqCoalescing"/>
-    <else>
-        <assertEquals actual="result" expected="expectedNormal" ignoreCase="false" id="assertEqNormal"/>
-    </else>
+<implementationAttribute name="expandEntityReferences" value="true"/>
+<assertEquals actual="result" expected="expectedExpanded" ignoreCase="false" id="assertEqCoalescing"/>
+<else>
+<assertEquals actual="result" expected="expectedNormal" ignoreCase="false" id="assertEqNormal"/>
+</else>
 </if>
 </test>

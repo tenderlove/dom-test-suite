@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE test SYSTEM "dom1.dtd">
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+--><!DOCTYPE test SYSTEM "dom1.dtd">
+
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="attrsetvaluenomodificationallowederrEE">
 <metadata>
 <title>attrSetValueNoModificationAllowedErrEE</title>
@@ -20,7 +31,7 @@
 <subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#xpointer(id('ID-221662474')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/DOM/updates/REC-DOM-Level-1-19981001-errata.html"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
-<source  resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/attrsetvaluenomodificationallowederr.xml"/>
+<source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/attrsetvaluenomodificationallowederr.xml"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="entRef" type="EntityReference"/>
@@ -33,8 +44,8 @@
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
-<createEntityReference obj="doc" var="entRef" name='"ent4"'/>
-<appendChild obj="gender" newChild="entRef" var="appendedChild"/> 
+<createEntityReference obj="doc" var="entRef" name="&quot;ent4&quot;"/>
+<appendChild obj="gender" newChild="entRef" var="appendedChild"/>
 <firstChild obj="entRef" var="entElement" interface="Node"/>
 <attributes obj="entElement" var="attrList"/>
 <getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
