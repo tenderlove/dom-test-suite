@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <codeBase interface="HTMLAppletElement" obj="testNode" var="vcodebase"/>
-<assertURIEquals actual="vcodebase" path='"xw2k.sdct.itl.nist.gov/brady/dom/files/"' id="codeBaseLink"/>
+<assertURIEquals actual="vcodebase" path='"//xw2k.sdct.itl.nist.gov/brady/dom/files/"' id="codeBaseLink"/>
 </test>
