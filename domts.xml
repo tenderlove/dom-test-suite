@@ -72,7 +72,7 @@ DOM Test Suite
     <home nested="build"/>
     <jar name="dom3-core.jar" />
     <jar name="dom3-ls.jar" />
-    <jar name="dom3-evants.jar" />
+    <jar name="dom3-events.jar" />
     <jar name="dom3-validation.jar" />
     <jar name="dom3-xpath.jar" />
     <license name="docs/resources/COPYRIGHT.html"/>
