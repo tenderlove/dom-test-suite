@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.4  2003-04-03 07:18:23  dom-ts-4
+ Revision 1.5  2003-04-23 05:48:24  dom-ts-4
+ DOMTSML and framework support for createXPathEvaluator
+ http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
+
+ Revision 1.4  2003/04/03 07:18:23  dom-ts-4
  Added openStream method
 
  Revision 1.3  2002/08/13 04:44:46  dom-ts-4
@@ -135,6 +139,11 @@ public abstract class DOMTest {
 
     return factory.load(resolveURI(docURI));
   }
+
+  public Object createXPathEvaluator(Document doc) {
+    return factory.createXPathEvaluator(doc);
+  }
+
 
   public InputStream openStream(String docURI) throws DOMTestLoadException, IOException {
     return resolveURI(docURI).openStream();

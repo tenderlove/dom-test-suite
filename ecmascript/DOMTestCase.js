@@ -685,6 +685,15 @@ function setImplementationAttribute(attribute, value) {
     builder.setImplementationAttribute(attribute, value);
 }
 
+function createXPathEvaluator(doc) {
+    try {
+        return doc.getFeature("XPath", null);
+    }
+    catch(ex) {
+    }
+    return doc;
+}
+
 
 function MSXMLBuilder_onreadystatechange() {
     if (builder.parser.readyState == 4) {

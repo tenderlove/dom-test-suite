@@ -385,6 +385,15 @@ The source document contained the following notice:
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='createXPathEvaluator']" mode="body">
+	<xsl:value-of select="@var"/>
+	<xsl:text> = createXPathEvaluator(</xsl:text>
+    <xsl:value-of select="@document"/>
+    <xsl:text>);
+</xsl:text>
+</xsl:template>
+
+
 <xsl:template match="*[local-name()='assertTrue']" mode="body">
 	<xsl:param name="type"/>
 	<xsl:choose>

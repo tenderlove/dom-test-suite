@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTestDocumentBuilderFactory.java,v $
- Revision 1.4  2002-02-03 04:22:35  dom-ts-4
+ Revision 1.5  2003-04-23 05:48:24  dom-ts-4
+ DOMTSML and framework support for createXPathEvaluator
+ http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
+
+ Revision 1.4  2002/02/03 04:22:35  dom-ts-4
  DOM4J and Batik support added.
  Rework of parser settings
 
@@ -35,6 +39,8 @@ import org.w3c.domts.*;
 import java.lang.reflect.*;
 import java.util.*;
 import org.xml.sax.*;
+
+
 /**
  * This class represents a particular parser and configuration
  * (such as entity-expanding, non-validating, whitespace ignoring)
@@ -79,6 +85,24 @@ public abstract class DOMTestDocumentBuilderFactory {
   public abstract boolean hasFeature(String feature,String version);
 
   public abstract Document load(java.net.URL url) throws DOMTestLoadException;
+
+  /**
+   *  Creates XPath evaluator
+   *  @param doc DOM document, may not be null
+   */
+  public Object createXPathEvaluator(Document doc)  {
+      try {
+          Method getFeatureMethod = doc.getClass().getMethod("getFeature",
+            new Class[] { String.class, String.class });
+          if (getFeatureMethod != null) {
+              return getFeatureMethod.invoke(doc, new Object[] { "XPath", null });
+          }
+      }
+      catch(Exception ex) {
+      }
+      return doc;
+   }
+        
 
     /**
      *   Merges the settings from the specific test case or suite

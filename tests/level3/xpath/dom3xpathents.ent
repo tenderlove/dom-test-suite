@@ -1,34 +1,16 @@
 <!ENTITY level3      "http://www.w3.org/2001/DOM-Test-Suite/Level-3">
-<!ENTITY spec        "http://www.w3.org/TR/DOM-Level-3-XPath/xpath.html">
+<!ENTITY spec        "http://www.w3.org/TR/DOM-Level-3-XPath/xpath">
 
 <!ENTITY vars
  "
   <!-- common variables -->
   <var name='doc' type='Document'/>
   <var name='xpEvaluator' type='XPathEvaluator'/>
-  <var name='state' type='boolean'/>
  ">
 
 <!-- the following entity requires the entity vars as well -->
 <!ENTITY findXPathEvaluator
   "
   <load var='doc' href='staffNS' willBeModified='false'/>
-
-  <!-- The following code is to create the evaluator using
-       either the getFeature method defined in DOM3 or
-       the cast mechanism. Implementation are not required
-       to support both but at least one of them -->
-  <assign var='xpEvaluator' value='null'/>  
-  <isSupported obj='doc' feature='&quot;core&quot;'
-    version='&quot;3.0&quot;' var='state'/>
-  <if>
-    <isTrue value='state' />
-    <getFeature interface='Node' var='xpEvaluator' obj='doc'
-      feature='&quot;XPath&quot;'
-      version='&quot;3.0&quot;'/>
-  </if>
-  <if>
-    <isNull obj='xpEvaluator' />
-    <assign var='xpEvaluator' value='doc'/>
-  </if>
+  <createXPathEvaluator var='xpEvaluator' document='doc'/>
 ">

@@ -1000,6 +1000,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="bubbledEvents"/>
 					<xs:element ref="allEvents"/>
 					<xs:element ref="createEventMonitor"/>
+					<xs:element ref="createXPathEvaluator"/>
 				</xs:choice>
 			</xs:group>
 
@@ -1250,6 +1251,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                 <xs:complexType>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 				    <xs:attribute name="var" type="variable" use="required"/>
+			    </xs:complexType>
+            </xs:element>
+            <xs:element name="createXPathEvaluator">
+                <xs:complexType>
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+				    <xs:attribute name="var" type="variable" use="required"/>
+				    <xs:attribute name="document" type="variable" use="required"/>
 			    </xs:complexType>
             </xs:element>
 

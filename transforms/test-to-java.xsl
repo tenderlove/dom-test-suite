@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.39  2003-04-09 21:16:53  plehegar
+Revision 1.40  2003-04-23 05:48:24  dom-ts-4
+DOMTSML and framework support for createXPathEvaluator
+http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
+
+Revision 1.39  2003/04/09 21:16:53  plehegar
 Added handling for assertXPathException
 Modified import statements to differenciate DOM Level 3 XPath and LS
 
@@ -979,6 +983,16 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text>getImplementation();
       </xsl:text>
 </xsl:template>
+
+<xsl:template match="*[local-name()='createXPathEvaluator']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:value-of select="@var"/>
+    <xsl:text> = (XPathEvaluator) createXPathEvaluator(</xsl:text>
+    <xsl:value-of select="@document"/>
+    <xsl:text>);
+      </xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='assertTrue']" mode="body">
     <xsl:param name="vardefs"/>
