@@ -681,6 +681,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	expected CDATA #REQUIRED
 	id ID #REQUIRED
 	ignoreCase (true|false|auto) #REQUIRED
+	bitmask CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT assertNotEquals (metadata?, (%statement;)*)&gt;
@@ -689,6 +690,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	expected CDATA #REQUIRED
 	id ID #REQUIRED
 	ignoreCase (true|false|auto) #REQUIRED
+	bitmask CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT assertEventCount (metadata?, (%statement;)*)&gt;

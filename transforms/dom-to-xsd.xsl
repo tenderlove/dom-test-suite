@@ -988,6 +988,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:attribute name="expected" type="variableOrLiteral" use="required"/>
 				<xs:attribute name="id" type="xs:ID" use="required"/>
 				<xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
+				<xs:attribute name="bitmask" use="optional" type="xs:integer"/>
 			</xs:complexType>
 			<xs:element name="assertEquals" type="comparisonAssertionWithCase"/>
 			<xs:element name="assertNotEquals" type="comparisonAssertionWithCase"/>
