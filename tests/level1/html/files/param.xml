@@ -9,7 +9,7 @@
 <body> 
 <p>
 <object>
-<param name="image1" type="image/gif" value="image/file1.gif" valuetype="ref"/>
+<param name="image3" type="image/gif" value="image/file.gif" valuetype="ref"/>
 </object>
 </p>
 </body>
