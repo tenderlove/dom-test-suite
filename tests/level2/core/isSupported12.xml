@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -64,8 +64,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!---   All XML implementations must support core   -->
 <isSupported obj="rootNode" feature='"Core"' version='"2.0"' var="state"/>
 <assertTrue actual="state" id="Core2"/>
-<isSupported obj="rootNode" feature='"Core"' version='"1.0"' var="state"/>
-<assertTrue actual="state" id="Core1"/>
 <for-each collection="features" member="featureElement">
 <isSupported obj="rootNode" feature="featureElement" version='"1.0"' var="state"/>
 </for-each>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -91,12 +91,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="internalSubset01.xml"/>
      <suite.member href="isSupported01.xml"/>
      <suite.member href="isSupported02.xml"/>
-     <suite.member href="isSupported03.xml"/>
      <suite.member href="isSupported04.xml"/>
      <suite.member href="isSupported05.xml"/>
      <suite.member href="isSupported06.xml"/>
      <suite.member href="isSupported07.xml"/>
-     <suite.member href="isSupported08.xml"/>
      <suite.member href="isSupported09.xml"/>
      <suite.member href="isSupported10.xml"/>
      <suite.member href="isSupported11.xml"/>
