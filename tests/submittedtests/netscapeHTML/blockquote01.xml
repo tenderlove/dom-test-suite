@@ -34,7 +34,7 @@ The value of attribute cite of the blockquote element is read and checked agains
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"blockquote"'/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
-<cite interface="HTMLBlockquoteElement" obj="testNode" var="vcite"/>
+<cite interface="HTMLQuoteElement" obj="testNode" var="vcite"/>
 <assertEquals actual="vcite" expected='"http://www.w3.org/TR/REC-html40/struct/text.html#edef-CITE"' id="citeLink" ignoreCase="false"/> 
 </test>
 
