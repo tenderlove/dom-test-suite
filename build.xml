@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.28  2001-10-25 09:29:27  dom-ts-4
+Revision 1.29  2001-10-30 06:03:39  dom-ts-4
+Updated build.xml to use 26 Oct 2001 DOM Level 2 HTML Working Draft
+
+Revision 1.28  2001/10/25 09:29:27  dom-ts-4
 test-to-java updates for DOM L2
 
 Revision 1.27  2001/10/18 14:21:59  dom-ts-4
@@ -365,7 +368,7 @@ All implementation conditions combined into implementationAttribute element
 	       dest="${specs.dir}/Level-2/xml/traversal-range"/>
 
 
-	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-2-HTML-20001113/DOM2-HTML.zip"
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-2-HTML-20011025/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
 		usetimestamp="yes"/>
 
