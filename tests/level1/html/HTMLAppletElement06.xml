@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <height interface="HTMLAppletElement" obj="testNode" var="vheight"/>
-<assertEquals actual="vheight" expected='"6"' id="heightLink" ignoreCase="false"/>
+<assertEquals actual="vheight" expected='"306"' id="heightLink" ignoreCase="false"/>
 </test>
