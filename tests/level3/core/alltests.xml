@@ -37,7 +37,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="documentsetxmlversion01.xml"/>
 	<suite.member href="documentsetxmlversion02.xml"/>
 	<suite.member href="documentsetxmlversion03.xml"/>	
-	<suite.member href="documentsetxmlversion04.xml"/>	
 	<suite.member href="documentsetxmlversion05.xml"/>	
 			
 	<suite.member href="documentgetxmlstandalone01.xml"/>
