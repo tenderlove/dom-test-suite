@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.54  2003-12-19 07:50:01  dom-ts-4
+Revision 1.55  2003-12-19 22:20:49  dom-ts-4
+willBeModified violation detection support (bug 412)
+
+Revision 1.54  2003/12/19 07:50:01  dom-ts-4
 L3 XPath schema validation fixes (incl change of append element) (bug 430)
 
 Revision 1.53  2003/12/18 05:25:41  dom-ts-4
@@ -1722,8 +1725,16 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     </xsl:call-template>
     <xsl:text>load("</xsl:text>
     <xsl:value-of select="@href"/>
-    <xsl:text>");
+    <xsl:choose>
+    	<xsl:when test="@willBeModified = 'true'">
+    		<xsl:text>", true);
       </xsl:text>
+      	</xsl:when>
+      	<xsl:otherwise> 
+    		<xsl:text>", false);
+      </xsl:text>
+         </xsl:otherwise>
+     </xsl:choose>
 </xsl:template>
 
 <xsl:template match="*[local-name()='getResourceURI']" mode="body">

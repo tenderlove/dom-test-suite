@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2003 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.8  2003-12-15 19:05:55  dom-ts-4
+ Revision 1.9  2003-12-19 22:21:04  dom-ts-4
+ willBeModified violation detection support (bug 412)
+
+ Revision 1.8  2003/12/15 19:05:55  dom-ts-4
  Changed implementation of assertEquals(double) (Bug 428)
 
  Revision 1.7  2003/12/06 06:50:30  dom-ts-4
@@ -63,6 +66,10 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
 
   protected void runTest() throws Throwable {
     test.runTest();
+    int mutationCount = test.getMutationCount();
+    if (mutationCount != 0) {
+    	fail("Document loaded with willBeModified='false' was modified in course of test.");
+    }
   }
 
   public boolean hasFeature(DocumentBuilder docBuilder,
