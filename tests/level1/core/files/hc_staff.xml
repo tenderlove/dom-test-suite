@@ -24,8 +24,8 @@
  </p>
  <p>
   <em>EMP0002</em>
-  <strong>Martha Raynolds<![CDATA[This is a CDATASection with EntityReference number 2 &beta;]]>
-<![CDATA[This is an adjacent CDATASection with a reference to a tab &tab;]]></strong>
+  <strong>Martha RaynoldsThis is a CDATASection with EntityReference number 2 &amp;ent2;
+This is an adjacent CDATASection with a reference to a tab &amp;tab;</strong>
   <code>Secretary</code>
   <sup>35,000</sup>
   <var>Female</var>
