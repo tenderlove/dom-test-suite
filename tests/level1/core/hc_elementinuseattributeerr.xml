@@ -47,9 +47,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="addressElementList"/>
 <item interface="NodeList" obj="addressElementList" index="1" var="testAddress"/>
-<createElement obj="doc" var="newElement" tagName='"newElement"'/>
+<createElement obj="doc" var="newElement" tagName='"p"'/>
 <appendChild var="appendedChild" obj="testAddress" newChild="newElement"/>
-<createAttribute obj="doc" var="newAttribute" name='"newAttribute"'/>
+<createAttribute obj="doc" var="newAttribute" name='"title"'/>
 <setAttributeNode var="setAttr1" obj="newElement" newAttr="newAttribute"/>
 <assertDOMException id="throw_INUSE_ATTRIBUTE_ERR">
     <INUSE_ATTRIBUTE_ERR>
