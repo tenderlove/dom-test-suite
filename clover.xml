@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: clover.xml,v $
-Revision 1.3  2003-12-06 06:50:29  dom-ts-4
+Revision 1.4  2003-12-22 17:39:46  dom-ts-4
+Modified to use Xalan's XPath implementation (bug 397)
+
+Revision 1.3  2003/12/06 06:50:29  dom-ts-4
 More fixes for L&S (Bug 396)
 
 Revision 1.2  2003/12/05 07:09:12  dom-ts-4
@@ -77,6 +80,8 @@ generates a coverage report
 	</ant>
 </target>
 
+<target name="instrument" depends="instrument-xerces, instrument-xalan"/>
+
 <target name="run-suite">
 	<java fork="true" 
 		classname="${testclass}">
@@ -92,21 +97,21 @@ generates a coverage report
 	</java>
 </target>
 
-<target name="dom1-core" depends="instrument-xerces">
+<target name="dom1-core" depends="instrument">
 	<antcall target="run-suite">
 		<param name="testclass" value="org.w3c.domts.level1.core.alltests"/>
 		<param name="testjar" value="dom1-core.jar"/>
 	</antcall>
 </target>
 
-<target name="dom2-core" depends="instrument-xerces">
+<target name="dom2-core" depends="instrument">
 	<antcall target="run-suite">
 		<param name="testclass" value="org.w3c.domts.level2.core.alltests"/>
 		<param name="testjar" value="dom2-core.jar"/>
 	</antcall>
 </target>
 
-<target name="dom2-events" depends="instrument-xerces">
+<target name="dom2-events" depends="instrument">
 	<antcall target="run-suite">
 		<param name="testclass" value="org.w3c.domts.level2.events.alltests"/>
 		<param name="testjar" value="dom2-events.jar"/>
@@ -114,7 +119,7 @@ generates a coverage report
 </target>
 
 
-<target name="dom3-core" depends="instrument-xerces">
+<target name="dom3-core" depends="instrument">
 	<antcall target="run-suite">
 		<param name="testclass" value="org.w3c.domts.level3.core.alltests"/>
 		<param name="testjar" value="dom3-core.jar"/>
@@ -122,7 +127,7 @@ generates a coverage report
 </target>
 
 
-<target name="dom3-ls" depends="instrument-xerces">
+<target name="dom3-ls" depends="instrument">
 	<antcall target="run-suite">
 		<param name="testclass" value="org.w3c.domts.level3.ls.alltests"/>
 		<param name="testjar" value="dom3-ls.jar"/>
@@ -130,12 +135,22 @@ generates a coverage report
 </target>
 
 
-<target name="dom3-xpath" depends="instrument-xerces,instrument-xalan">
-	<antcall target="run-suite">
-		<param name="testclass" value="org.w3c.domts.level3.xpath.alltests"/>
-		<param name="testjar" value="dom3-xpath.jar"/>
-	</antcall>
+<target name="dom3-xpath" depends="instrument">
+	<java fork="true" classname="junit.textui.TestRunner">
+		<arg value="org.w3c.domts.level3.xpath.TestXalan"/>
+		<classpath>
+			<pathelement location="${clover.build.dir}/xerces/dom3-xercesImpl.jar"/>
+			<pathelement location="${clover.build.dir}/xerces/dom3-xml-apis.jar"/>
+			<pathelement location="${clover.build.dir}/xalan/xalan.jar"/>
+			<pathelement location="${domts.build.dir}/junit-run.jar"/>
+			<pathelement location="${domts.build.dir}/dom3-xpath.jar"/>
+			<pathelement location="${junit.jar}"/>
+			<pathelement location="${clover.jar}"/>
+		</classpath>
+	</java>
 </target>
+
+
 
 <target name="all-tests" depends="dom1-core, dom2-core, dom2-events, dom3-core, dom3-ls, dom3-xpath"/>
 
