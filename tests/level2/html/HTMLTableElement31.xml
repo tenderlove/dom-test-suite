@@ -20,42 +20,47 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>HTMLTableElement31</title>
 <creator>NIST</creator>
 <description>
-    The insertRow() method inserts a new empty table row.
+    The insertRow() method inserts a new empty table row.  In addition, when
+    the table is empty the row is inserted into a TBODY which is created
+    and inserted into the table.
     
-    Retrieve the second TABLE element and invoke the insertRow() method
-    with an index of 0. Currently the zero indexed row is in the THEAD
-    section of the TABLE.  The number of rows in the THEAD section before
-    insertion of the new row is one.  After the new row is inserted the number 
-    of rows in the THEAD section is two.
+    Load the table1 file which has a non-empty table element.
+    Create an empty TABLE element and append to the document.
+    Check to make sure that the empty TABLE element doesn't
+    have a TBODY element.  Insert a new row into the empty
+    TABLE element.  Check for existence of the a TBODY element
+    in the table.
 </description>
 <contributor>Rick Rivello</contributor>
 <date qualifier="created">2002-05-02</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-39872903"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
+<var name="tableList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="bodyNode" type="Node"/>
-<var name="rowsnodeList" type="HTMLCollection"/>
+<var name="tableNode" type="Node"/>
 <var name="tbodiesnodeList" type="HTMLCollection"/>
 <var name="newRow" type="HTMLElement"/>
-<var name="vrows" type="int"/>
 <var name="doc" type="Document"/>
+<var name="table" type="Element"/>
 <var name="tbodiesLength" type="int"/>
 <load var="doc" href="table1" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;table&quot;"/>
-<assertSize collection="nodeList" size="1" id="Asize1"/>
-<item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
+<assertSize collection="nodeList" size="1" id="tableSize1"/>
+<item interface="NodeList" obj="nodeList" index="0" var="testNode"/>
 <tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
 <length var="tbodiesLength" obj="tbodiesnodeList" interface="HTMLCollection"/>
-<assertEquals actual="tbodiesLength" expected="0" id="Asize2" ignoreCase="false"/>
-<item interface="NodeList" obj="tbodiesnodeList" var="bodyNode" index="0"/>
-<rows interface="HTMLTableSectionElement" obj="bodyNode" var="rowsnodeList"/>
-<length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="0" id="rowsLink1" ignoreCase="false"/>
-<insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="0"/>
-<tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
-<item interface="NodeList" obj="tbodiesnodeList" var="bodyNode" index="0"/>
-<rows interface="HTMLTableSectionElement" obj="bodyNode" var="rowsnodeList"/>
-<length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="1" id="rowsLink2" ignoreCase="false"/>
+<assertEquals actual="tbodiesLength" expected="1" id="Asize2" ignoreCase="false"/>
+<childNodes obj="testNode" var="tableList"/>
+<createElement obj="doc" var="table" tagName='"table"'/>
+<appendChild obj="testNode" newChild="table" var="tableNode"/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
+<assertSize collection="nodeList" size="2" id="tableSize2"/>
+<tBodies interface="HTMLTableElement" obj="tableNode" var="tbodiesnodeList"/>
+<length var="tbodiesLength" obj="tbodiesnodeList" interface="HTMLCollection"/>
+<assertEquals actual="tbodiesLength" expected="0" id="Asize3" ignoreCase="false"/>
+<insertRow interface="HTMLTableElement" obj="tableNode" var="newRow" index="0"/>
+<tBodies interface="HTMLTableElement" obj="tableNode" var="tbodiesnodeList"/>
+<length var="tbodiesLength" obj="tbodiesnodeList" interface="HTMLCollection"/>
+<assertEquals actual="tbodiesLength" expected="1" id="Asize4" ignoreCase="false"/>
 </test>
