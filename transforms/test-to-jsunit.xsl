@@ -51,7 +51,6 @@ function exposeTestFunctionNames()
 return ['<xsl:value-of select="@name"/>'];
 }
 
-var fileBase = "<xsl:value-of select="$testpath"/>files/";
 var docsLoaded = -1000000;
 var setUpException = null;
 
@@ -209,7 +208,7 @@ function suite() {
                             <tr><td><input type="radio" name="implementation" value="mozillaXML" onclick="onImplementationChange()">Mozilla XML</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="msxml3" onclick="onImplementationChange()">MSXML 3.0</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="msxml4" onclick="onImplementationChange()">MSXML 4.0</input></td></tr>
-                            <tr><td><input disabled="disabled" type="radio" name="implementation" value="adobeSVG" onclick="onImplementationChange()">Adobe SVG</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" value="svgplugin" onclick="onImplementationChange()">SVG Plugin</input></td></tr>
                         </table>
                     </td>
                     <td valign="top">

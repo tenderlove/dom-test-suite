@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.91  2003-04-17 04:22:01  dom-ts-4
+Revision 1.92  2003-04-23 04:49:19  dom-ts-4
+Restore SVG plugin support
+http://www.w3.org/Bugs/Public/show_bug.cgi?id=205
+
+Revision 1.91  2003/04/17 04:22:01  dom-ts-4
 Fixing schema validation problems with initial XPath submission
 Bug #186: http://www.w3.org/Bugs/Public/show_bug.cgi?id=186
 
@@ -1010,6 +1014,9 @@ All implementation conditions combined into implementationAttribute element
     <fail unless="jsunit-available" 
         message="download jsunit.zip from http://www.jsunit.net and place in lib directory"/>
     <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit.zip"/>
+    <replace file="${build.dir}/ecmascript/jsunit/app/jsUnitCore.js" 
+        token="top.xbDEBUG.on &amp;&amp; top.testManager"
+        value="top != null &amp;&amp; top.xbDEBUG != null &amp;&amp; top.xbDEBUG.on &amp;&amp; top.testManager"/>
 </target>
 
 
@@ -1021,7 +1028,7 @@ All implementation conditions combined into implementationAttribute element
     <copy todir="${build.dir}/ecmascript/level1/core/files">
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
     </copy>
-    <copy todir="${build.dir}/ecmascript/level1/core">
+    <copy todir="${build.dir}/ecmascript/level1/core/files">
         <fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
 

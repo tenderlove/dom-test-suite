@@ -234,11 +234,17 @@ IFrameBuilder.prototype.getImplementationAttribute = function(attr) {
 
 
 IFrameBuilder.prototype.toAutoCase = function(s) {
-    return s.toUpperCase();
+    if (this.contentType == "text/html") {
+        return s.toUpperCase();
+    }
+    return s;
 }
 
 IFrameBuilder.prototype.toAutoCaseArray = function(s) {
-    return toUpperCaseArray(s);
+    if (this.contentType == "text/html") {
+        return toUpperCaseArray(s);
+    }
+    return s;
 }
 
 IFrameBuilder.prototype.setImplementationAttribute = function(attribute, value) {
@@ -247,6 +253,123 @@ IFrameBuilder.prototype.setImplementationAttribute = function(attribute, value) 
         throw "IFrame loader does not support " + attribute + "=" + value;
     }
 }
+
+
+function SVGPluginBuilder() {
+    this.contentType = "image/svg+xml";
+    this.supportedContentTypes = [ "image/svg+xml" ];
+
+    this.supportsAsyncChange = false;
+    this.async = true;
+    this.fixedAttributeNames = [
+        "validating",  "expandEntityReferences", "coalescing", 
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware" ];
+
+    this.fixedAttributeValues = [false,  true, false, true, true , false, false ];
+    this.configurableAttributeNames = [ ];
+    this.configurableAttributeValues = [ ];
+    this.exception = null;
+}
+
+SVGPluginBuilder.prototype.hasFeature = function(feature, version) {
+    if (feature == "XML") {
+        if (version == null || version == "1.0" || version == "2.0") {
+            return true;
+        }
+    }
+}
+
+var svgloadcount = 0;
+function SVGPluginBuilder_pollreadystate() {
+  var newCount = 0;
+  var child = document.documentElement.firstChild;
+  while(child != null) {
+      if (child.nodeName != null && child.nodeName.toUpperCase() == "BODY") {
+          var grand = child.firstChild;
+          while (grand != null) {
+             if (grand.nodeName.toUpperCase() == 'EMBED' && grand.readystate == 4) {
+                newCount++;
+             }
+             grand = grand.nextSibling;
+          }
+          break;
+      }
+      child = child.nextSibling;
+  }
+  if (newCount > svgloadcount) {
+    svgloadcount++;
+    loadComplete();
+    if (setUpPageStatus == 'complete') {
+        return;
+    }
+  }
+  setTimeout(SVGPluginBuilder_pollreadystate, 100);
+}
+
+SVGPluginBuilder.prototype.preload = function(frame, varname, url) {
+  var embed = document.createElement("embed");
+  embed.src = fileBase + url + getSuffix(this.contentType);
+  embed.height = 100;
+  embed.width = 100;
+  embed.type = "image/svg+xml";
+  embed.id = varname;
+  var child = document.documentElement.firstChild;
+  while(child != null) {
+      if (child.nodeName != null && child.nodeName.toUpperCase() == "BODY") {
+          child.appendChild(embed);
+          break;
+      }
+      child = child.nextSibling;
+  }
+  //
+  //   if unable to monitor ready state change then
+  //     check if load is complete every in 0.1 second
+  setTimeout(SVGPluginBuilder_pollreadystate , 100);
+  return 0;
+}
+
+SVGPluginBuilder.prototype.load = function(frame, varname, url) {
+  var child = document.documentElement.firstChild;
+  while(child != null) {
+      if (child.nodeName != null && child.nodeName.toUpperCase() == "BODY") {
+		  var grand = child.firstChild;
+		  while (grand != null) {
+			if (grand.id == varname) {
+				return grand.getSVGDocument();
+			}
+			grand = grand.nextSibling;
+		  }
+	  }
+      child = child.nextSibling;
+   }
+   return null;
+}
+
+SVGPluginBuilder.prototype.getImplementationAttribute = function(attr) {
+    for (var i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attr) {
+            return this.fixedAttributeValues[i];
+        }
+    }
+    throw "Unrecognized implementation attribute: " + attr;
+}
+
+
+SVGPluginBuilder.prototype.toAutoCase = function(s) {
+    return s;
+}
+
+SVGPluginBuilder.prototype.toAutoCaseArray = function(s) {
+    return s;
+}
+
+SVGPluginBuilder.prototype.setImplementationAttribute = function(attribute, value) {
+    var supported = this.getImplementationAttribute(attribute);
+    if (supported != value) {
+        throw "SVG Plugin loader does not support " + attribute + "=" + value;
+    }
+}
+
 
 
 function MSXMLBuilder(progID) {
@@ -460,9 +583,8 @@ function createBuilder(implementation) {
     case "mozilla":
     return new MozillaXMLBuilder();
 
-    case "adobeSVG":
-//    return new AdobeSVGBuilder();
-    return new IFrameBuilder();
+    case "svgplugin":
+    return new SVGPluginBuilder();
 
     case "dom3ls":
 //    return new DOM3LSBuilder();
@@ -575,5 +697,7 @@ var fileBase = location.href;
 if (fileBase.indexOf('?') != -1) {
    fileBase = fileBase.substring(0, fileBase.indexOf('?'));
 }
-var fileBase = fileBase.substring(0, fileBase.lastIndexOf('/') + 1) + "files/";
+fileBase = fileBase.substring(0, fileBase.lastIndexOf('/') + 1) + "files/";
+
+
 
