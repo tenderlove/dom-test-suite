@@ -322,10 +322,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	}
     doc = document.implementation.createDocument("","temp",null);
     doc.load(sourceURL + ".xml");
-    for(var i = 0; i < 5; i++) {
-        if(doc.documentElement != null && doc.documentElement.nodeName != "temp") break;
-        alert("Load attempt " + i.toString() + ": Press OK continue.");
-    }
+    alert("Loading test document: Press OK to proceed");
     
     if(willBeModified) {
 		//
