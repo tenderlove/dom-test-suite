@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1084891198"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newAttrNode" type="Attr"/>
@@ -37,14 +38,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrName" type="DOMString"/>
 <var name="attrType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createAttribute obj="doc" var="newAttrNode" name='"style"'/>
+<createAttribute obj="doc" var="newAttrNode" name='"lang"'/>
 <nodeValue obj="newAttrNode" var="attrValue"/>
 <assertEquals actual="attrValue" expected='""' ignoreCase="false" id="value"/>
 <nodeName obj="newAttrNode" var="attrName"/>
 <if><contentType type='text/html'/>
-<assertEquals actual="attrName" expected='"style"' ignoreCase="true" id="name_html"/>
+<assertEquals actual="attrName" expected='"lang"' ignoreCase="true" id="name_html"/>
 <else>
-<assertEquals actual="attrName" expected='"style"' ignoreCase="false" id="name"/>
+<assertEquals actual="attrName" expected='"lang"' ignoreCase="false" id="name"/>
 </else>
 </if>
 <nodeType obj="newAttrNode" var="attrType"/>

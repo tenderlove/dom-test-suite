@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -35,6 +35,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -47,10 +50,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="1"/>
-<createAttribute obj="doc" var="newAttribute" name='"style"'/>
+<createAttribute obj="doc" var="newAttribute" name='"lang"'/>
 <attributes obj="testAddress" var="attributes"/>
 <setNamedItem var="setNode" obj="attributes" arg="newAttribute"/>
-<getNamedItem obj="attributes" var="districtNode" name='"style"'/>
+<getNamedItem obj="attributes" var="districtNode" name='"lang"'/>
 <nodeName obj="districtNode" var="attrName"/>
-<assertEquals actual="attrName" expected='"style"' id="namednodemapSetNamedItemAssert" ignoreCase="false"/>
+<if><contentType type="text/html"/>
+<assertEquals actual="attrName" expected='"lang"' id="nodeName_html" ignoreCase="true"/>
+<else>
+<assertEquals actual="attrName" expected='"lang"' id="nodeName" ignoreCase="false"/>
+</else>
+</if>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    Retrieve the second employee and create a NamedNodeMap 
    listing of the attributes of the last child.  Once the
    list is created an invocation of the "getNamedItem(name)"
-   method is done with name="district".  This name does not 
+   method is done with name="lang".  This name does not 
    match any names in the list therefore the method should
    return null.
 </description>
@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <!--getNamedItem-->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -40,6 +41,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testEmployee" index="1"/>
 <attributes obj="testEmployee" var="attributes"/>
-<getNamedItem obj="attributes" var="districtNode" name='"style"'/>
+<getNamedItem obj="attributes" var="districtNode" name='"lang"'/>
 <assertNull actual="districtNode" id="namednodemapReturnNullAssert"/>
 </test>
