@@ -15,9 +15,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLTableElement19">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLTableRowElement19">
 <metadata>
-<title>HTMLTableElement19</title>
+<title>HTMLTableRowElement19</title>
 <creator>NIST</creator>
 <description>
     The deleteCell() method throws a INDEX_SIZE_ERR DOMException
