@@ -109,6 +109,68 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		</xs:schema>
 	</xsl:template>
 
+    <!--  
+             produces a element definition for a property of an interface  
+    -->
+    <xsl:template name="produce-property">
+		<!--  create an element whose tag name is the same as the attribute  -->
+		<xs:element name="{@name}">
+			<xs:complexType>
+				<xs:attribute name="id" type="xs:ID" use="optional"/>
+				<xs:attribute name="obj" type="variable" use="required"/>
+				<!--  if readonly, only the "var" attribute is produced.
+					  Otherwise both a "var" and "value" attribute are produced  -->
+				<xsl:choose>
+					<xsl:when test="@readonly='yes'">
+						<xs:attribute name="var" type="variable" use="required"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xs:attribute name="var" type="variable" use="optional"/>
+
+						<!--  produces a "value" attribute, 
+							  the schema type is selected based on the attribute type   -->
+						<xsl:call-template name="param-type">
+							<xsl:with-param name="type" select="@type"/>
+							<xsl:with-param name="paramName">value</xsl:with-param>
+							<xsl:with-param name="use">optional</xsl:with-param>
+						</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+
+				<!--  collect all attributes with this name   -->
+				<xsl:variable name="dups" select="key('featureByName',@name)"/>
+
+				<!--  produce the "interface" attribute       -->
+				<xs:attribute name="interface">
+					<!--  choose whether interface is required based
+							 on number of interfaces method is introduced by  -->
+					<xsl:choose>
+						<xsl:when test="@name='length'">
+							<xsl:attribute name="use">required</xsl:attribute>
+						</xsl:when>
+						<xsl:when test="count($dups) &gt; 1">
+							<xsl:attribute name="use">required</xsl:attribute>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:attribute name="use">optional</xsl:attribute>
+						</xsl:otherwise>
+					</xsl:choose>
+
+					<!--   create the enumeration of appropriate interface values  -->
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xsl:for-each select="$dups">
+								<xs:enumeration value="{parent::interface/@name}"/>
+							</xsl:for-each>
+                            <xsl:if test="@name='length'">
+                                <xs:enumeration value="DOMString"/>
+                            </xsl:if>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:complexType>
+		</xs:element>
+    </xsl:template>
 
 	<!--    produce elements that correspond to DOM attributes    
 			If the same attribute name is used in multiple contexts,
@@ -128,64 +190,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 				<!--  only the first entry creates an entry  -->
 				<xsl:if test="not(preceding::attribute[@name=$current/@name]) and @name != 'implementation'">
-
-					<!--  create an element whose tag name is the same as the attribute  -->
-					<xs:element name="{@name}">
-						<xs:complexType>
-							<xs:attribute name="id" type="xs:ID" use="optional"/>
-							<xs:attribute name="obj" type="variable" use="required"/>
-							<!--  if readonly, only the "var" attribute is produced.
-							      Otherwise both a "var" and "value" attribute are produced  -->
-							<xsl:choose>
-								<xsl:when test="@readonly='yes'">
-									<xs:attribute name="var" type="variable" use="required"/>
-								</xsl:when>
-								<xsl:otherwise>
-									<xs:attribute name="var" type="variable" use="optional"/>
-
-									<!--  produces a "value" attribute, 
-									      the schema type is selected based on the attribute type   -->
-									<xsl:call-template name="param-type">
-										<xsl:with-param name="type" select="@type"/>
-										<xsl:with-param name="paramName">value</xsl:with-param>
-										<xsl:with-param name="use">optional</xsl:with-param>
-									</xsl:call-template>
-								</xsl:otherwise>
-							</xsl:choose>
-
-							<!--  collect all attributes with this name   -->
-							<xsl:variable name="dups" select="key('featureByName',@name)"/>
-
-							<!--  produce the "interface" attribute       -->
-							<xs:attribute name="interface">
-								<!--  choose whether interface is required based
-								         on number of interfaces method is introduced by  -->
-								<xsl:choose>
-									<xsl:when test="@name='length'">
-										<xsl:attribute name="use">required</xsl:attribute>
-									</xsl:when>
-									<xsl:when test="count($dups) &gt; 1">
-										<xsl:attribute name="use">required</xsl:attribute>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:attribute name="use">optional</xsl:attribute>
-									</xsl:otherwise>
-								</xsl:choose>
-
-								<!--   create the enumeration of appropriate interface values  -->
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-										<xsl:for-each select="$dups">
-											<xs:enumeration value="{parent::interface/@name}"/>
-										</xsl:for-each>
-                                        <xsl:if test="@name='length'">
-                                            <xs:enumeration value="DOMString"/>
-                                        </xsl:if>
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:attribute>
-						</xs:complexType>
-					</xs:element>
+                    <xsl:call-template name="produce-property"/>
 				</xsl:if>
 			</xsl:for-each>
 	</xsl:template>
@@ -213,8 +218,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element name="{@name}">
 						<xs:complexType>
 							<xs:attribute name="id" type="xs:ID" use="optional"/>
-							<!--  the invocation target attribute is required   -->
-							<xs:attribute name="obj" type="variable" use="required"/>
 
 							<!--  If the method has a (non-void) return value then
 							      the var attribute is required to receive the return value  -->
@@ -222,21 +225,54 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 								<xs:attribute name="var" type="variable" use="required"/>
 							</xsl:if>
 
-							<!--  for each parameter    -->
-							<xsl:for-each select="parameters/param">
-								<!--  need to check that all the types are consistent  -->
-								<xsl:call-template name="param-type">
-									<xsl:with-param name="type" select="@type"/>
-									<xsl:with-param name="paramName" select="@name"/>
-									<xsl:with-param name="use">required</xsl:with-param>
-								</xsl:call-template>
-							</xsl:for-each>
+                            <xsl:choose>
+                                <!--  if the method name is load,
+                                      create a special element that is compatible
+                                      with the DOM method and the framework method 
+                                -->
+                                <xsl:when test="@name = 'load'">
+							        <!--  the invocation target attribute is required   -->
+							        <xs:attribute name="obj" type="variable" use="optional"/>
+                                    <!--  all framework parameters are optional    -->
+					                <xs:attribute name="href" type="xs:anyURI" use="optional"/>
+					                <xs:attribute name="willBeModified" type="xs:boolean" use="optional">
+						                <xs:annotation>
+							                <xs:documentation>If true then this test may modify the document, so a fresh copy should be loaded instead of a cached copy.</xs:documentation>
+						                </xs:annotation>
+					                </xs:attribute>
+
+							        <!--  all DOM method parameters are optional  -->
+							        <xsl:for-each select="parameters/param">
+								        <!--  need to check that all the types are consistent  -->
+								        <xsl:call-template name="param-type">
+									        <xsl:with-param name="type" select="@type"/>
+									        <xsl:with-param name="paramName" select="@name"/>
+									        <xsl:with-param name="use">optional</xsl:with-param>
+								        </xsl:call-template>
+							        </xsl:for-each>
+                                </xsl:when>
+
+                                <xsl:otherwise>
+							        <!--  the invocation target attribute is required   -->
+							        <xs:attribute name="obj" type="variable" use="required"/>
+							        <!--  for each parameter    -->
+							        <xsl:for-each select="parameters/param">
+								        <!--  need to check that all the types are consistent  -->
+								        <xsl:call-template name="param-type">
+									        <xsl:with-param name="type" select="@type"/>
+									        <xsl:with-param name="paramName" select="@name"/>
+									        <xsl:with-param name="use">required</xsl:with-param>
+								        </xsl:call-template>
+							        </xsl:for-each>
+                                </xsl:otherwise>
+                            </xsl:choose>
+
 
 							<!--  produce interface attribute   -->
 							<xsl:variable name="dups" select="key('methodByName',@name)"/>
 							<xs:attribute name="interface">
 								<xsl:choose>
-									<xsl:when test="count($dups) &gt; 1">
+									<xsl:when test="count($dups) &gt; 1 and @name != 'load'">
 										<xsl:attribute name="use">required</xsl:attribute>
 									</xsl:when>
 									<xsl:otherwise>
@@ -610,20 +646,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:documentation>Member children are used to initialize List and Collection types.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="load">
-				<xs:annotation>
-					<xs:documentation>Loads the document declared in the corresponding document element.</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:attribute name="var" type="variable" use="required"/>
-					<xs:attribute name="href" type="xs:anyURI" use="required"/>
-					<xs:attribute name="willBeModified" type="xs:boolean" use="required">
-						<xs:annotation>
-							<xs:documentation>If true then this test may modify the document, so a fresh copy should be loaded instead of a cached copy.</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-				</xs:complexType>
-			</xs:element>
+            <!--   
+                if there is not a load method in the spec
+                   then produce a load element that uses the
+                   test framework loader    -->
+            <xsl:if test="not(key('methodByName','load'))">
+			    <xs:element name="load">
+				    <xs:annotation>
+					    <xs:documentation>Loads the document declared in the corresponding document element.</xs:documentation>
+				    </xs:annotation>
+				    <xs:complexType>
+					    <xs:attribute name="var" type="variable" use="required"/>
+					    <xs:attribute name="href" type="xs:anyURI" use="required"/>
+					    <xs:attribute name="willBeModified" type="xs:boolean" use="required">
+						    <xs:annotation>
+							    <xs:documentation>If true then this test may modify the document, so a fresh copy should be loaded instead of a cached copy.</xs:documentation>
+						    </xs:annotation>
+					    </xs:attribute>
+				    </xs:complexType>
+			    </xs:element>
+            </xsl:if>
 			<xs:element name="implementation">
 				<xs:annotation>
 					<xs:documentation>Gets a DOMImplementation.  If the obj attribute is not specified, it creates a default implementation as determined by the test framework.</xs:documentation>
@@ -987,16 +1029,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:complexType>
 			</xs:element>
 
-			<xs:element name="contentType">
-                <xs:annotation>
-                    <xs:documentation>This condition will evaluate to true if the default
-                    content type for this test matches the specified type.</xs:documentation>
-                </xs:annotation>
-				<xs:complexType>
-					<xs:attribute name="id" type="xs:ID" use="optional"/>
-					<xs:attribute name="type" type="loadContentType" use="required"/>
-				</xs:complexType>
-			</xs:element>
 
 
 			<xs:element name="implementationAttribute">
@@ -1088,7 +1120,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="hasSize"/>
 					<xs:element ref="hasFeature"/>
 					<xs:element ref="implementationAttribute"/>
-                    <xs:element ref="contentType"/>
+                    <!--  defined locally since there is a contentType method in
+                                 ElementEditAs    -->
+	                <xs:element name="contentType">
+                        <xs:annotation>
+                            <xs:documentation>This condition will evaluate to true if the default
+                            content type for this test matches the specified type.</xs:documentation>
+                        </xs:annotation>
+		                <xs:complexType>
+			                <xs:attribute name="id" type="xs:ID" use="optional"/>
+			                <xs:attribute name="type" type="loadContentType" use="required"/>
+		                </xs:complexType>
+	                </xs:element>
 				</xs:choice>
 			</xs:group>
 			<xs:element name="else">
@@ -1161,7 +1204,42 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xs:choice>
 							<!--  the immediately following group defines the codes  -->
 							<xsl:for-each select="following-sibling::group[1]/constant">
-								<xs:element ref="{@name}"/>
+				                <xsl:variable name="constant" select="."/>
+			                    <xs:element name="{@name}">
+				                    <xs:complexType>
+					                    <xs:choice>
+                                            <!--  must suppress duplicates 
+                                                (like ProcessingInstruction.data and CharacterData.data)  -->
+                                            <xsl:for-each select="$attributes">
+                                                <!--  only do it for the first attribute with that name   -->
+                                                <xsl:if test="not(preceding::attribute[@name = current()/@name])">
+                                                    <!--  but check all attributes with the same name for
+                                                            a getraises or setraises clause with the constant name appearing
+                                                            in the description   -->
+                                                    <xsl:variable name="throwingAttrs" select="$attributes[@name = current()/@name and *[contains(name(),'raises')]/exception[@name=$exception]]"/>
+                                                    <!-- if any of the attributes with this name, throw the exception  -->
+                                                    <xsl:if test="contains(string($throwingAttrs),concat($constant/@name,':'))">
+                                                        <xs:element ref="{@name}"/>
+                                                    </xsl:if>
+                                                </xsl:if>
+                                            </xsl:for-each>
+                                            <xsl:for-each select="$methods">
+                                                <xsl:if test="not(preceding::method[@name = current()/@name])">
+                                                    <!--  but check all attributes with the same name for
+                                                            a getraises or setraises clause with the constant name appearing
+                                                            in the description   -->
+                                                    <xsl:variable name="throwingMeths" select="$methods[@name = current()/@name and raises/exception[@name=$exception]]"/>
+                                                    <!-- if any of the attributes with this name, throw the exception  -->
+                                                    <xsl:if test="contains(string($throwingMeths),concat($constant/@name,':'))">
+                                                        <xs:element ref="{@name}"/>
+                                                    </xsl:if>
+                                                </xsl:if>
+                                            </xsl:for-each>
+
+					                    </xs:choice>
+					                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+				                    </xs:complexType>
+			                    </xs:element>
 							</xsl:for-each>
 						</xs:choice>
 					</xs:sequence>
@@ -1169,49 +1247,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:complexType>
 			</xs:element>
 
-			<!--  produce elements for each of the defined codes for
-			        the exception.  The content model of these
-					elements are the methods and attributes that
-					raise that specific code.
-			-->
-			<xsl:for-each select="following-sibling::group[1]/constant">
-				<xsl:variable name="constant" select="."/>
-				<xs:element name="{@name}">
-					<xs:complexType>
-						<xs:choice>
-                            <!--  must suppress duplicates 
-                                (like ProcessingInstruction.data and CharacterData.data)  -->
-                            <xsl:for-each select="$attributes">
-                                <!--  only do it for the first attribute with that name   -->
-                                <xsl:if test="not(preceding::attribute[@name = current()/@name])">
-                                    <!--  but check all attributes with the same name for
-                                            a getraises or setraises clause with the constant name appearing
-                                            in the description   -->
-                                    <xsl:variable name="throwingAttrs" select="$attributes[@name = current()/@name and *[contains(name(),'raises')]/exception[@name=$exception]]"/>
-                                    <!-- if any of the attributes with this name, throw the exception  -->
-                                    <xsl:if test="contains(string($throwingAttrs),concat($constant/@name,':'))">
-                                        <xs:element ref="{@name}"/>
-                                    </xsl:if>
-                                </xsl:if>
-                            </xsl:for-each>
-                            <xsl:for-each select="$methods">
-                                <xsl:if test="not(preceding::method[@name = current()/@name])">
-                                    <!--  but check all attributes with the same name for
-                                            a getraises or setraises clause with the constant name appearing
-                                            in the description   -->
-                                    <xsl:variable name="throwingMeths" select="$methods[@name = current()/@name and raises/exception[@name=$exception]]"/>
-                                    <!-- if any of the attributes with this name, throw the exception  -->
-                                    <xsl:if test="contains(string($throwingMeths),concat($constant/@name,':'))">
-                                        <xs:element ref="{@name}"/>
-                                    </xsl:if>
-                                </xsl:if>
-                            </xsl:for-each>
-
-						</xs:choice>
-						<xs:attribute name="id" type="xs:ID" use="optional"/>
-					</xs:complexType>
-				</xs:element>
-			</xsl:for-each>
 		</xsl:for-each>
 		<!--  generate assertion group  -->
 		<xs:group name="assertion">
@@ -1235,9 +1270,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xsl:sort select="@name"/>
 						<xsl:variable name="current" select="."/>
 						<xsl:if test="not(preceding::attribute[@name=$current/@name])">
-							<xsl:if test="@name != 'implementation'">
-								<xs:element ref="{@name}"/>
-							</xsl:if>
+                            <xsl:choose>
+                                <!--  if the attribute is named implementation
+                                           suppress it   -->
+                                <xsl:when test="@name = 'implementation'"/>
+
+                                <!--  when the attribute name is "test"
+                                       create a locally defined element
+                                       to avoid conflict with the test definition
+                                       element   -->
+                                <xsl:when test="@name = 'test'">
+                                    <xsl:call-template name="produce-property"/>
+                                </xsl:when>
+
+                                <!--   any other attribute,
+                                          reference the global element   -->
+                                <xsl:otherwise>
+								    <xs:element ref="{@name}"/>
+                                </xsl:otherwise>
+							</xsl:choose>
 						</xsl:if>
 					</xsl:for-each>
 					<xsl:for-each select="$methods">

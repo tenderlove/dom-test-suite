@@ -27,7 +27,10 @@ saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.1  2002-03-27 07:41:21  dom-ts-4
+Revision 1.2  2002-04-21 23:11:36  dom-ts-4
+Updated for DOM L3
+
+Revision 1.1  2002/03/27 07:41:21  dom-ts-4
 Combines dom-spec.xml from the DOM 3 parts into dom3-interfaces.xml
 
 Revision 1.2  2001/07/20 05:44:32  dom-ts-4
@@ -59,9 +62,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<library>
 			<!--   walk through all child elements  -->
 			<xsl:apply-templates select="*"/>
+            <!--   
+                views seems to be stagnant and is missing an entity reference
+                    skipping it for now
 			<xsl:apply-templates select="document('../views/dom-spec.xml',.)/spec/*"/>
+            -->
 			<xsl:apply-templates select="document('../events/dom-spec.xml',.)/spec/*"/>
-			<xsl:apply-templates select="document('../asls/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../as-ls/dom-spec.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../xpath/dom-spec.xml',.)/spec/*"/>
 		</library>
 	</xsl:template>
