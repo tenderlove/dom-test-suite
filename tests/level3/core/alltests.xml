@@ -190,6 +190,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="documentnormalizedocument05.xml"/>	
 	<suite.member href="documentnormalizedocument06.xml"/>	
 	<suite.member href="documentnormalizedocument07.xml"/>	
+	<suite.member href="documentnormalizedocument08.xml"/>	
 
 
 	<!-- need to add more tests here -->
@@ -252,6 +253,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="entities03.xml"/>
     <suite.member href="entities04.xml"/>
 
+    <suite.member href="handleerror01.xml"/>
+    <suite.member href="handleerror02.xml"/>
     
     <suite.member href="hasFeature01.xml"/>
     <suite.member href="hasFeature02.xml"/>
