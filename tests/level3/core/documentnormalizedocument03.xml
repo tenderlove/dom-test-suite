@@ -62,6 +62,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName var="nodeName" obj="text"/>
 <assertEquals actual="nodeName" expected='"#text"' id="documentnormalizedocument03_false" ignoreCase="false"/>
 <nodeValue var="nodeValue" obj="text"/>
-<assertEquals actual="nodeValue" expected='"barCDATA"' id="normalizedValue"/>
+<assertEquals actual="nodeValue" expected='"barCDATA"' id="normalizedValue" ignoreCase="false"/>
 </test> 
  

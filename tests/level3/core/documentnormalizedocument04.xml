@@ -56,6 +56,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item var="elem" obj="pList" index="0" interface="NodeList"/>
 <lastChild var="lastChild" obj="elem" interface="Node"/>
 <nodeName var="nodeName" obj="lastChild"/>
-<assertEquals actual="nodeName" expected='"#text"' id="documentnormalizedocument04_true" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"#text"' id="hasChildText" ignoreCase="false"/>
 </test> 
  

@@ -45,9 +45,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <replaceChild obj="doc" var="replacedNode" oldChild="pi" newChild="comment"/>
 <assertNotNull actual="replacedNode" id="returnValueNotNull"/>
 <nodeName var="nodeName" obj="replacedNode"/>
-<assertEquals actual="nodeName" expected='"PITarget"' id="returnValueIsPI"/>
+<assertEquals actual="nodeName" expected='"PITarget"' id="returnValueIsPI" ignoreCase="false"/>
 <lastChild var="lastChild" obj="doc" interface="Node"/>
 <assertNotNull actual="lastChild" id="lastChildNotNull"/>
 <nodeName var="nodeName" obj="lastChild"/>
-<assertEquals actual="nodeName" expected='"#comment"' id="lastChildIsComment"/>
+<assertEquals actual="nodeName" expected='"#comment"' id="lastChildIsComment" ignoreCase="false"/>
 </test>
