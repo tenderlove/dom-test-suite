@@ -275,33 +275,12 @@ This target checks that the output of that implied transform is valid HTML
 	</jar>
 </target>
 
-<target name="get-jtidy" depends="init" unless="jtidy-available">
-	<!--  get JTidy  3.7 into lib directory  -->
-	<get src="http://unc.dl.sourceforge.net/sourceforge/jtidy/jtidy-04aug2000r7-dev.zip"
-		dest="${lib.dir}/jtidy.zip"
-        ignoreerrors="yes"
-		usetimestamp="yes"/>
-	<unzip src="${lib.dir}/jtidy.zip" dest="${lib.dir}/jtidy"/>
-</target>
 
-
-<!--
-<target name="validate-html" depends="get-jtidy">
-	<property name="dir" value="."/>
-	<property name="file" value="*.html"/>
-	<java classname="org.w3c.tidy.Tidy" classpath="${lib.dir}\jtidy\jtidy-04aug2000r7-dev\build\Tidy.jar" failonerror="yes" dir="${dir}" fork="yes">
-		<arg value="-e"/>
-		<arg value="-q"/>
-		<arg value="${file}"/>
-	</java> 
-</target>
--->
-
-<target name="check-jtidy" unless="jtidy-available">
+<target name="warn-jtidy" depends="init" unless="jtidy-available">
     <echo message="JTidy is not available, no HTML validation performed."/>
 </target>
 
-<target name="validate-html" depends="check-jtidy">
+<target name="validate-html" depends="warn-jtidy" if="jtidy-available">
 	<property name="dir" value="."/>
 	<property name="file" value="*.html"/>
 	<property name="filespec" location="${dir}/${file}"/>
@@ -317,9 +296,6 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<!-- target name="validate-html">
-    <echo message="HTML validation temporarily disabled"/>
-</target -->
 
 <target name="checkstyle-available">
     <available property="checkstyle-task" resource="checkstyletask.properties"/>
@@ -419,8 +395,11 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 <target name="jsunit-get" depends="init">
-    <fail unless="jsunit-available" 
-        message="download jsunit.zip from http://www.jsunit.net and place in lib directory"/>
+	<!-- temporary download from Curt's personal branch   -->
+    <get src="http://home.houston.rr.com/curta/jsunit.zip"
+         dest="${lib.dir}/jsunit.zip"
+         usetimestamp="true"
+         ignoreerrors="${no-network}"/>
     <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit.zip"/>
 </target>
 
@@ -699,7 +678,7 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="dom1-core-validate-html-files" depends="init" if="jtidy-available">
+<target name="dom1-core-validate-html-files" depends="init">
     <antcall target="validate-html">
     	<param name="dir" value="${tests.dir}/level1/core/files"/>
     </antcall>	
@@ -859,7 +838,7 @@ This target checks that the output of that implied transform is valid HTML
     </ant>
 </target>
 
-<target name="dom1-html-validate-html-files" depends="init" if="jtidy-available">
+<target name="dom1-html-validate-html-files" depends="warn-jtidy" if="jtidy-available">
 	<!--  JTidy complains about these files that the W3C validator accepts   -->
 	<delete dir="${build.dir}/files"/>
 	<mkdir dir="${build.dir}/files/level1/html"/>
@@ -880,7 +859,7 @@ This target checks that the output of that implied transform is valid HTML
 </target>	
 
 
-<target name="dom1-html-validate-files" depends="get-xhtml1-dtd, dom1-html-validate-html-files">
+<target name="dom1-html-validate-files" depends="dom1-html-validate-html-files, get-xhtml1-dtd">
     <copy todir="${tests.dir}/level1/html/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
@@ -1267,7 +1246,7 @@ This target checks that the output of that implied transform is valid HTML
     </style>
 </target>
 
-<target name="dom2-core-validate-html-files" depends="init" if="jtidy-available">
+<target name="dom2-core-validate-html-files" depends="init">
     <antcall target="validate-html">
     	<param name="dir" value="${tests.dir}/level2/core/files"/>
     </antcall>	
@@ -1444,14 +1423,14 @@ This target checks that the output of that implied transform is valid HTML
     </ant>
 </target>
 
-<target name="dom2-html-validate-html-files" depends="init" if="jtidy-available">
+<target name="dom2-html-validate-html-files" depends="init">
     <antcall target="validate-html">
     	<param name="dir" value="${tests.dir}/level2/html/files"/>
     </antcall>	
 	
 </target>
 
-<target name="dom2-html-validate-files" depends="get-xhtml1-dtd, dom1-html-validate-files, dom2-html-validate-html-files">
+<target name="dom2-html-validate-files" depends="dom1-html-validate-files, dom2-html-validate-html-files, get-xhtml1-dtd">
     <copy todir="${tests.dir}/level2/html/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
@@ -1672,7 +1651,7 @@ This target checks that the output of that implied transform is valid HTML
 
 <!--   DOM Level 2 Events   -->
 
-<target name="dom2-events-validate-html-files" depends="init" if="jtidy-available">
+<target name="dom2-events-validate-html-files" depends="init">
     <antcall target="validate-html">
     	<param name="dir" value="${tests.dir}/level2/events/files"/>
     </antcall>	
