@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.22  2002-06-04 05:03:22  dom-ts-4
+Revision 1.23  2002-06-06 05:09:33  dom-ts-4
+Parameterized 'import org.w3c.dom.html.*' so that L2 tests can import org.w3c.dom.html2.*
+
+Revision 1.22  2002/06/04 05:03:22  dom-ts-4
 Added support for [return], automatic constructor of EventMonitor
 
 Revision 1.21  2002/06/03 23:45:22  dom-ts-4
@@ -108,6 +111,7 @@ All implementation conditions combined into implementationAttribute element
 	<xsl:param name="interfaces-docname">../build/dom1-interfaces.xml</xsl:param>
     <xsl:param name="package">org.w3.domts.level1.core</xsl:param>
     <xsl:param name="target-uri-base">http://www.w3.org/2001/DOM-Test-Suite/tests/Level-1/</xsl:param>
+    <xsl:param name="import-html">import org.w3c.dom.html.*;</xsl:param>
 <xsl:output method="text" encoding="UTF-8"/>
 <xsl:variable name="domspec" select="document($interfaces-docname)"/>
 
@@ -251,7 +255,7 @@ The source document contained the following notice:
 package <xsl:value-of select="$package"/>;
 
 import org.w3c.dom.*;
-import org.w3c.dom.html.*;
+<xsl:value-of select="$import-html"/>
 import org.w3c.dom.events.*;
 import org.w3c.domts.*;
 import javax.xml.parsers.*;
