@@ -8,7 +8,7 @@
 // PURPOSE.
 // See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 //
-// $Id: toc.js,v 1.1 2002-02-13 07:59:27 dom-ts-4 Exp $
+// $Id: toc.js,v 1.2 2002-08-22 03:08:40 dom-ts-4 Exp $
 
 // This is a demo of DOM Level 1
 
@@ -61,10 +61,10 @@ function getChildsTOC(level, current) {
     if (level > MAX_LEVEL) {
 	return null;
     }
-    var childs = current.getElementsByTagName("H" + level);
+    var childs = current.getElementsByTagName("h" + level);
 
     if (childs.length != 0) {
-	var newlist = document.createElement("OL");
+	var newlist = document.createElement("ol");
 	var i = 0;
 
 	while (i < childs.length) {
@@ -75,8 +75,8 @@ function getChildsTOC(level, current) {
 	    }
 	    countDiv ++;
 	    if (div != null) {
-		var li = document.createElement("LI");
-		var a = document.createElement("A");
+		var li = document.createElement("li");
+		var a = document.createElement("a");
 		a.setAttribute("href", "#" + div.getAttribute("id"));		
 		a.appendChild(document.createTextNode(getTextContent(child)));
 		li.appendChild(a);
@@ -100,11 +100,11 @@ function init() {
 
 	var olist = getChildsTOC(2, document.documentElement);
 
-	var firstDiv = document.getElementsByTagName("DIV").item(0);
+	var firstDiv = document.getElementsByTagName("div").item(0);
 	var body = firstDiv.parentNode;
-	var newDiv = document.createElement("DIV");
+	var newDiv = document.createElement("div");
 	newDiv.setAttribute("id", "TableOfContents");
-	var title = document.createElement("H2");
+	var title = document.createElement("h2");
 	title.appendChild(document.createTextNode("Table of contents"));
 	newDiv.appendChild(title);
 	newDiv.appendChild(olist);
