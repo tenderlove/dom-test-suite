@@ -14,6 +14,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="alltests">
 <suite.member href="attrcreatedocumentfragment.xml"/>
 <suite.member href="attrcreatetextnode.xml"/>
+<suite.member href="attrcreatetextnode2.xml"/>
 <suite.member href="attrdefaultvalue.xml"/>
 <suite.member href="attreffectivevalue.xml"/>
 <suite.member href="attrentityreplacement.xml"/>
@@ -74,6 +75,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="documentcreateattribute.xml"/>
 <suite.member href="documentcreatecdatasection.xml"/>
 <suite.member href="documentcreatecomment.xml"/>
+<suite.member href="documentcreatecomment2.xml"/>
 <suite.member href="documentcreatedocumentfragment.xml"/>
 <suite.member href="documentcreateelement.xml"/>
 <suite.member href="documentcreateelementcasesensitive.xml"/>
@@ -206,6 +208,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="nodeentitynodename.xml"/>
 <suite.member href="nodeentitynodetype.xml"/>
 <suite.member href="nodeentitynodevalue.xml"/>
+<suite.member href="nodeentitysetnodevalue.xml"/>
 <suite.member href="nodeentityreferencenodeattributes.xml"/>
 <suite.member href="nodeentityreferencenodename.xml"/>
 <suite.member href="nodeentityreferencenodetype.xml"/>
@@ -244,12 +247,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="nodenotationnodename.xml"/>
 <suite.member href="nodenotationnodetype.xml"/>
 <suite.member href="nodenotationnodevalue.xml"/>
+<suite.member href="nodenotationsetnodevalue.xml"/>
 <suite.member href="nodeparentnode.xml"/>
 <suite.member href="nodeparentnodenull.xml"/>
 <suite.member href="nodeprocessinginstructionnodeattributes.xml"/>
 <suite.member href="nodeprocessinginstructionnodename.xml"/>
 <suite.member href="nodeprocessinginstructionnodetype.xml"/>
 <suite.member href="nodeprocessinginstructionnodevalue.xml"/>
+<suite.member href="nodeprocessinginstructionsetnodevalue.xml"/>
 <suite.member href="noderemovechild.xml"/>
 <suite.member href="noderemovechildgetnodename.xml"/>
 <suite.member href="noderemovechildnode.xml"/>

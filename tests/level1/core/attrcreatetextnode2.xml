@@ -11,12 +11,12 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE test SYSTEM "dom1.dtd">
 
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="attrcreatetextnode">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="attrcreatetextnode2">
 <metadata>
-<title>attrCreateTextNode</title>
+<title>attrCreateTextNode2</title>
 <creator>NIST</creator>
 <description>
-    The "setValue()" method for an attribute creates a 
+    The "setNodeValue()" method for an attribute creates a 
   Text node with the unparsed content of the string.
   Retrieve the attribute named "street" from the last 
   child of of the fourth employee and assign the "Y%ent1;" 
@@ -27,8 +27,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<!--  Attr.value  -->
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
+<!--  Node.nodeValue  -->
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="addressList" type="NodeList"/>
@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="addressList" var="testNode" index="3"/>
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="streetAttr" name="&quot;street&quot;"/>
-<value interface="Attr" obj="streetAttr" value="&quot;Y%ent1&quot;"/>
+<nodeValue obj="streetAttr" value='"Y%ent1"'/>
 <value interface="Attr" obj="streetAttr" var="value"/>
 <assertEquals actual="value" expected='"Y%ent1"' id="value" ignoreCase="false"/>
 <nodeValue obj="streetAttr" var="value"/>

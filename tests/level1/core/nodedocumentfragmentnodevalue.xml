@@ -25,16 +25,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     equal to null.
 </description>
 <contributor>Mary Brady</contributor>
+<contributor>Curt Arnold</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3"/>
 <!--nodeValue attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+<!-- Node.attributes   -->
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docFragment" type="DocumentFragment"/>
 <var name="attrList" type="NamedNodeMap"/>
+<var name="value" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="docFragment"/>
+<!--  despite the name, this was the only assertion in the original test  -->
 <attributes obj="docFragment" var="attrList"/>
-<assertNull actual="attrList" id="nodeDocumentFragmentNodeAttributesAssert1"/>
+<assertNull actual="attrList" id="attributesNull"/>
+<!--  now actually test the initial value of nodeValue   -->
+<nodeValue obj="docFragment" var="value"/>
+<assertNull actual="value" id="initiallyNull"/>
+<!--  now check that changing it doesn't affect the return value  -->
+<nodeValue obj="docFragment" value='"This should have no effect"'/>
+<nodeValue obj="docFragment" var="value"/>
+<assertNull actual="value" id="nullAfterAttemptedChange"/>
 </test>

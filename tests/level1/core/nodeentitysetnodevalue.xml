@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+--><!DOCTYPE test SYSTEM "dom1.dtd">
+
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeentitysetnodevalue">
+<metadata>
+<title>nodeEntitySetNodeValue</title>
+<creator>Curt Arnold</creator>
+<description>
+    The string returned by the "getNodeValue()" method for an 
+    Entity Node is always null and "setNodeValue" should have no effect.
+
+    Retrieve the first Entity declaration in the "DOCTYPE"
+    section of the XML file, call setNodeValue with a non-null
+    value and check the string 
+    returned by the "getNodeValue()" method.   It should be 
+    equal to null. 
+
+</description>
+<date qualifier="created">2001-10-21</date>
+<!--  Node.nodeValue   -->
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+<!--  Entity interface   -->
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-527DCFF2"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="docType" type="DocumentType"/>
+<var name="testName" type="NamedNodeMap"/>
+<var name="entityNode" type="Node"/>
+<var name="entityValue" type="DOMString"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
+<doctype obj="doc" var="docType"/>
+<entities obj="docType" var="testName"/>
+<getNamedItem obj="testName" name="&quot;ent1&quot;" var="entityNode"/>
+<nodeValue obj="entityNode" value='"This should have no effect"'/>
+<nodeValue obj="entityNode" var="entityValue"/>
+<assertNull actual="entityValue" id="nodeValueNull"/>
+</test>

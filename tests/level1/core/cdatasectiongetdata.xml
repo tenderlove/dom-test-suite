@@ -40,5 +40,5 @@ CDATA content.
 <item interface="NodeList" obj="nameList" var="child" index="1"/>
 <lastChild interface="Node" obj="child" var="lastChild"/>
 <data interface="CharacterData" obj="lastChild" var="data"/>
-<assertEquals actual="data" expected="&quot;This is an adjacent CDATASection with a reference to a tab &amp;tab;&quot;" id="cdatasectionGetDataAssert" ignoreCase="false"/>
+<assertEquals actual="data" expected='"This is an adjacent CDATASection with a reference to a tab &amp;tab;"' id="data" ignoreCase="false"/>
 </test>

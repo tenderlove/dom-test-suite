@@ -26,8 +26,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    output.
 </description>
 <contributor>Mary Brady</contributor>
+<contributor>Curt Arnold</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newEntRefNode" type="EntityReference"/>
@@ -43,4 +45,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="entRefName" expected="&quot;ent1&quot;" ignoreCase="false" id="name"/>
 <nodeType obj="newEntRefNode" var="entRefType"/>
 <assertEquals actual="entRefType" expected="5" ignoreCase="false" id="type"/>
+<!--   setNodeValue should have no effect   -->
+<nodeValue obj="newEntRefNode" value='"This should have no effect"'/>
+<nodeValue obj="newEntRefNode" var="entRefValue"/>
+<assertNull actual="entRefValue" id="valueStillNull"/>
 </test>

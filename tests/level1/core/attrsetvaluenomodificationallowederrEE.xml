@@ -49,9 +49,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <firstChild obj="entRef" var="entElement" interface="Node"/>
 <attributes obj="entElement" var="attrList"/>
 <getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
-<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
-<NO_MODIFICATION_ALLOWED_ERR>
-<value interface="Attr" obj="attrNode" value="&quot;newvalue&quot;"/>
-</NO_MODIFICATION_ALLOWED_ERR>
+<assertDOMException id="setValue_throws_NO_MODIFICATION">
+    <NO_MODIFICATION_ALLOWED_ERR>
+        <value interface="Attr" obj="attrNode" value='"newvalue"'/>
+    </NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+<assertDOMException id="setNodeValue_throws_NO_MODIFICATION">
+    <NO_MODIFICATION_ALLOWED_ERR>
+        <nodeValue interface="Node" obj="attrNode" value='"newvalue2"'/>
+    </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>
