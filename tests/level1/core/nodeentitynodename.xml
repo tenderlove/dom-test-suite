@@ -24,14 +24,15 @@ Check the nodeName of the entity returned by DocumentType.entities.getNamedItem(
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
-<var name="testName" type="NamedNodeMap"/>
+<var name="entities" type="NamedNodeMap"/>
 <var name="entityNode" type="Node"/>
 <var name="entityName" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
-<entities obj="docType" var="testName"/>
-<getNamedItem obj="testName" name='"ent1"' var="entityNode"/>
+<entities obj="docType" var="entities"/>
+<assertNotNull actual="entities" id="entitiesNotNull"/>
+<getNamedItem obj="entities" name='"ent1"' var="entityNode"/>
 <assertNotNull actual="entityNode" id="entityNodeNotNull"/>
 <nodeName obj="entityNode" var="entityName"/>
 <assertEquals actual="entityName" expected='"ent1"' id="entityNodeName" ignoreCase="false"/>

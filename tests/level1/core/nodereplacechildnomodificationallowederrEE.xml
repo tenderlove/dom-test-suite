@@ -36,7 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="createdNode" type="Node"/>
 <var name="replacedChild" type="Node"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
+<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+<assertNotNull actual="entRef" id="createdEntRefNotNull"/>
 <firstChild interface="Node" var="entText" obj="entRef"/>
 <createElement obj="doc" tagName="&quot;newChild&quot;" var="createdNode"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

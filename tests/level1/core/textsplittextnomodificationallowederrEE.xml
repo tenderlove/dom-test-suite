@@ -16,10 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textSplitTextNoModificationAllowedErrEE</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "splitText(offset)" method raises a 
-    NO_MODIFICATION_ALLOWED_ERR DOMException if the
-    node is readonly.
-     
     Create an ent3 reference and execute the "splitText(offset)" method.
     This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
@@ -35,7 +31,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entText" type="Node"/>
 <var name="splitNode" type="Text"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
+<createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+<assertNotNull actual="entRef" id="createdEntRefNotNull"/>
 <firstChild interface="Node" var="entText" obj="entRef"/>
 <assertNotNull actual="entText" id="entTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

@@ -16,12 +16,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>characterdataReplaceDataNoModificationAllowedErrEE</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "replaceData(offset,count,arg)" method raises a NO_MODIFICATION_ALLOWED_ERR 
-   DOMException if the node is readonly.
-   
-   Add an entity reference tp  the THIRD "gender" element.  Get the FIRST item 
-   from the entity reference and execute the "replaceData(offset,count,arg)" method.
-   This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
+Create an ent3 entity reference and call replaceData on a text child, should thrown a NO_MODIFICATION_ALLOWED_ERR. 
 </description>
 <date qualifier="created">2001-08-21</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
@@ -30,7 +25,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB"/>
 <source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/characterdatareplacedatanomodificationallowederr.xml"/>
 </metadata>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="genderNode" type="Node"/>
@@ -40,13 +34,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
-<createEntityReference var="entReference" obj="doc" name="&quot;ent3&quot;"/>
+<createEntityReference var="entReference" obj="doc" name='"ent3"'/>
+<assertNotNull actual="entReference" id="createdEntRefNotNull"/>
 <appendChild obj="genderNode" newChild="entReference" var="appendedNode"/>
 <firstChild var="entText" obj="entReference" interface="Node"/>
 <assertNotNull actual="entText" id="entTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<replaceData obj="entText" offset="1" count="3" arg="&quot;newArg&quot;"/>
+<replaceData obj="entText" offset="1" count="3" arg='"newArg"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

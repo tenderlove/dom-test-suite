@@ -40,6 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="value" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <createEntityReference obj="doc" var="newEntRefNode" name="&quot;ent3&quot;"/>
+<assertNotNull actual="newEntRefNode" id="createdEntRefNotNull"/>
 <childNodes obj="newEntRefNode" var="newEntRefList"/>
 <assertSize collection="newEntRefList" size="1" id="size"/>
 <firstChild interface="Node" obj="newEntRefNode" var="child"/>

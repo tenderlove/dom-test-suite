@@ -45,6 +45,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeType var="nodeType" obj="entReference"/>
 <if><equals actual="nodeType" expected="1" ignoreCase="false"/>
 	<createEntityReference var="entReference" obj="doc" name='"ent4"'/>
+	<assertNotNull actual="entReference" id="createdEntRefNotNull"/>
 </if>
 <firstChild var="entElement" obj="entReference" interface="Node"/>
 <assertNotNull actual="entElement" id="entElementNotNull"/>

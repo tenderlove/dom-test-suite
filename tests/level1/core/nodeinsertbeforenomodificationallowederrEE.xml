@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
     if the node is readonly.
     
-    Create an ent3 element and and execute the "insertBefore(newChild,refChild)" method.
+    Create an ent4 entity reference and and execute the "insertBefore(newChild,refChild)" method.
     This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
 <date qualifier="created">2001-08-21</date>
@@ -36,7 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="insertedNode" type="Node"/>
 <var name="refChild" type="Node" isNull="true"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+<assertNotNull actual="entRef" id="createdEntRefNotNull"/>
 <createElement obj="doc" tagName='"text3"' var="createdNode"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>

@@ -32,18 +32,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-1734834066')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="genderNode" type="Node"/>
 <var name="entRef" type="Node"/>
 <var name="entElement" type="Node"/>
 <var name="removedNode" type="Node"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item obj="genderList" index="2" var="genderNode" interface="NodeList"/>
 <firstChild interface="Node" var="entRef" obj="genderNode"/>
 <assertNotNull actual="entRef" id="entRefNotNull"/>
+<nodeType var="nodeType" obj="entRef"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+	<assertNotNull actual="entRef" id="createdEntRefNotNull"/>	
+</if>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
 <assertNotNull actual="entElement" id="entElementNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

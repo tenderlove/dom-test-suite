@@ -32,6 +32,7 @@ should result in an NO_MODIFICATION_ALLOWED_ERR DOMException.
 <var name="newChild" type="Node"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <createEntityReference obj="doc" var="entRef" name='"ent4"'/>
+<assertNotNull actual="entRef" id="createdEntRefNotNull"/>	
 <firstChild var="entElement" obj="entRef" interface="Node"/>
 <assertNotNull actual="entElement" id="entElementNotNull"/>
 <getAttributeNode var="attrNode" obj="entElement" name='"domestic"'/>

@@ -35,7 +35,7 @@ should still return null.
 	</assertDOMException>
 <else>
 <createEntityReference obj="doc" var="newNode" name='"ent1"'/>
-<assertNotNull actual="newNode" id="entRefNotNull"/>
+<assertNotNull actual="newNode" id="createdEntRefNotNull"/>	
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>
 <!--   attempt to change the value and make sure that it stays null  -->

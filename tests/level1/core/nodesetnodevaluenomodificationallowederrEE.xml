@@ -16,10 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeSetNodeValueNoModificationAllowedErrEE</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "setNodeValue(nodeValue)" method causes the 
-    DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
-    if the node is readonly.
-    
     Create an entity reference and execute the "setNodeValue(nodeValue)" method.
     This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
@@ -34,7 +30,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="EntityReference"/>
 <var name="entText" type="CharacterData"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
+<createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+<assertNotNull actual="entRef" id="createdEntRefNotNull"/>
 <firstChild interface="Node" var="entText" obj="entRef"/>
 <assertNotNull actual="entText" id="entTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

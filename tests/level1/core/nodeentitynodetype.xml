@@ -25,14 +25,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
-<var name="testName" type="NamedNodeMap"/>
+<var name="entities" type="NamedNodeMap"/>
 <var name="entityNode" type="Node"/>
 <var name="nodeType" type="int"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
-<entities obj="docType" var="testName"/>
-<getNamedItem obj="testName" var="entityNode" name='"ent1"'/>
+<entities obj="docType" var="entities"/>
+<assertNotNull actual="entities" id="entitiesNotNull"/>
+<getNamedItem obj="entities" var="entityNode" name='"ent1"'/>
+<assertNotNull actual="entityNode" id="ent1NotNull"/>
 <nodeType obj="entityNode" var="nodeType"/>
 <assertEquals actual="nodeType" expected="6" id="entityNodeType" ignoreCase="false"/>
 </test>

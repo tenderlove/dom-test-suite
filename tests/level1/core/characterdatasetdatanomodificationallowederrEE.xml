@@ -16,12 +16,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>characterdataSetDataNoModificationAllowedErrEE</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "setData(data)" method raises a NO_MODIFICATION_ALLOWED_ERR 
-   DOMException if the node is readonly.
-   Obtain the children of the THIRD "gender" element.  The elements
-   content is an entity reference.  Get the FIRST item 
-   from the entity reference and execute the "setData(data)" method.
-   This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
+Create an ent3 entity reference and call setData on a text child, should thrown a NO_MODIFICATION_ALLOWED_ERR. 
 </description>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
@@ -37,7 +32,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="4" var="genderNode"/>
-<createEntityReference var="entReference" obj="doc" name="&quot;ent3&quot;"/>
+<createEntityReference var="entReference" obj="doc" name='"ent3"'/>
+<assertNotNull actual="entReference" id="createdEntRefNotNull"/>
 <firstChild var="entText" obj="entReference" interface="Node"/>
 <assertNotNull actual="entText" id="entTextNotNull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

@@ -32,7 +32,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-38853C1D')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-38853C1D"/>
 </metadata>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
@@ -40,11 +39,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entElement" type="Node"/>
 <var name="entElementText" type="Node"/>
 <var name="splitNode" type="Text"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="genderList" tagname='"gender"'/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <firstChild interface="Node" var="entRef" obj="gender"/>
 <assertNotNull actual="entRef" id="entRefNotNull"/>
+<nodeType var="nodeType" obj="entRef"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+	<assertNotNull actual="entRef" id="createdEntRefNotNull"/>	
+</if>
 <firstChild interface="Node" var="entElement" obj="entRef"/>
 <assertNotNull actual="entElement" id="entElementNotNull"/>
 <firstChild interface="Node" var="entElementText" obj="entElement"/>

@@ -16,12 +16,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>characterdataDeleteDataNoModificationAllowedErrEE</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "deleteData(offset,count)" method raises a NO_MODIFICATION_ALLOWED_ERR 
-   DOMException if the node is readonly.   
-   Obtain the children of the THIRD "gender" element.  Add an reference to ent4.  
-   Get the FIRST item  from the entity reference and execute the 
-   "deleteData(offset,count)" method.
-   This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
+Create an ent3 entity reference and call deleteData on a text child, should thrown a NO_MODIFICATION_ALLOWED_ERR. 
 </description>
 <date qualifier="created">2001-08-20</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
@@ -39,7 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
-<createEntityReference obj="doc" var="entReference" name="&quot;ent3&quot;"/>
+<createEntityReference obj="doc" var="entReference" name='"ent3"'/>
+<assertNotNull actual="entReference" id="createdEntRefNotNull"/>	
 <appendChild obj="genderNode" newChild="entReference" var="appendedChild"/>
 <firstChild var="entText" obj="entReference" interface="Node"/>
 <assertNotNull actual="entText" id="entTextNotNull"/>

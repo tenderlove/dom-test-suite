@@ -38,6 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <doctype obj="doc" var="docType"/>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="entityList"/>
+<assertNotNull actual="entityList" id="entitiesNotNull"/>
 <getNamedItem obj="entityList" var="entityNode" name='"ent1"'/>
 <publicId interface="Entity" obj="entityNode" var="publicId"/>
 <assertNull actual="publicId" id="entityGetPublicIdNullAssert"/>
