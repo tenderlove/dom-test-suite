@@ -28,16 +28,16 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#ElementEditVAL-allowedChildren"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="nlist" type="NameList"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <var name="allowedChildrenLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
-<assign var="elemVAL" value="root"/>
-<allowedChildren obj="elemVAL" var="nlist"/>
+<allowedChildren obj="root" var="nlist"/>
+<assertNotNull actual="nlist" id="allowedChildrenNotNull"/>
 <length var="allowedChildrenLength" obj="nlist" interface="NameList"/>
 <assertEquals actual="allowedChildrenLength" expected="7" id="allowedChildren" ignoreCase="false"/>
 </test>

@@ -26,15 +26,14 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#NodeEditVAL-nodeValidity"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="elemVAL" type="ElementEditVAL"/>
-<var name="elem" type="Element"/>
+<var name="elem" type="ElementEditVAL"/>
 <var name="result" type="short"/>
 <var name="checkLevel" type="short" value="4"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc" var="elem"/>
-<assign var="elemVAL" value="elem"/>
-<nodeValidity obj="elemVAL" valType="checkLevel" var="result"/>
+<nodeValidity obj="elem" valType="checkLevel" var="result"/>
 <assertEquals actual="result" expected="5" ignoreCase="false" id="nodevalidity"/>
 </test>

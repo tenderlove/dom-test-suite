@@ -27,18 +27,18 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#NodeEditVAL-enumeratedValues"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="elem" type="Element"/>
+<var name="elem" type="NodeEditVAL"/>
 <var name="elemList" type="NodeList"/>
-<var name="nodeVAL" type="NodeEditVAL"/>
 <var name="strlist" type="DOMStringList"/>
 <var name="enumeratedValuesLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elemList" tagname='"edition"'/>
 <item interface="NodeList" obj="elemList" index="0" var="elem"/>
-<assign var="nodeVAL" value="elem"/>
-<enumeratedValues interface="NodeEditVAL" obj="nodeVAL" var="strlist"/>
+<enumeratedValues interface="NodeEditVAL" obj="elem" var="strlist"/>
+<assertNotNull actual="strlist" id="enumeratedValuesNotNull"/>
 <length var="enumeratedValuesLength" obj="strlist" interface="DOMStringList"/>
 <assertEquals actual="enumeratedValuesLength" expected="5" id="enumeratedValues" ignoreCase="false"/>
 </test>

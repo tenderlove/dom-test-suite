@@ -27,16 +27,16 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#ElementEditVAL-requiredAttributes"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
-<var name="elemVAL" type="ElementEditVAL"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="attrlist" type="NameList"/>
 <var name="attname" type="DOMString"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
-<assign var="elemVAL" value="root"/>
-<requiredAttributes interface="ElementEditVAL" obj="elemVAL" var="attrlist"/>
+<requiredAttributes interface="ElementEditVAL" obj="root" var="attrlist"/>
+<assertNotNull actual="attrlist" id="requiredAttributesNotNull"/>
 <getName interface="NameList" obj="attrlist" index="0" var="attname"/>
 <assertEquals actual="attname" expected='"inStock"' ignoreCase="false" id="requiredAttributes"/>
 </test>

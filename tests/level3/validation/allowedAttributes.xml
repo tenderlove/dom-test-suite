@@ -29,17 +29,16 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#ElementEditVAL-allowedAttributes"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
-<var name="elemVAL" type="ElementEditVAL"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="attrlist" type="NameList"/>
 <var name="attname" type="DOMString"/>
 <var name="allowedAttributesLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
-<assign var="elemVAL" value="root"/>
-<allowedAttributes obj="elemVAL" var="attrlist"/>
+<allowedAttributes obj="root" var="attrlist"/>
 <assertNotNull actual="attrlist" id="allowedAttributesNotNull"/>
 <length var="allowedAttributesLength" obj="attrlist" interface="NameList"/>
 <assertEquals actual="allowedAttributesLength" expected="2" id="allowedAttributes" ignoreCase="false"/>

@@ -27,17 +27,16 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-NodeEditVAL-canAppendChild"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="valboolean" type="short"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <var name="newchild" type="Element"/>
 <var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
 <createElementNS obj="doc" interface="Document" namespaceURI="nullNS" qualifiedName='"editor"' var="newchild"/>
-<assign var="elemVAL" value="root"/>
-<canAppendChild obj="elemVAL" newChild="newchild" var="valboolean"/>
+<canAppendChild obj="root" newChild="newchild" var="valboolean"/>
 <assertEquals actual="valboolean" expected="6" ignoreCase="false" id="canAppendChildFalse"/>
 </test>

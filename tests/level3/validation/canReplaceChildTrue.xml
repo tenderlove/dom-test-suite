@@ -28,11 +28,11 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-NodeEditVAL-canReplaceChild"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="valboolean" type="short"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <var name="oldchild" type="Node"/>
 <var name="nlist" type="NodeList"/>
 <var name="newchild" type="Element"/>
@@ -42,7 +42,6 @@ PURPOSE.
 <item obj="nlist" index="0" var="oldchild" interface="NodeList"/>
 <documentElement obj="doc"  var="root"/>
 <createElementNS obj="doc" namespaceURI="nullNS" qualifiedName='"editor"' var="newchild"/>
-<assign var="elemVAL" value="root"/>
-<canReplaceChild obj="elemVAL" newChild="newchild" oldChild="oldchild" var="valboolean"/>
+<canReplaceChild obj="root" newChild="newchild" oldChild="oldchild" var="valboolean"/>
 <assertEquals actual="valboolean" expected="5" ignoreCase="false" id="canReplaceChildTrue"/>
 </test>

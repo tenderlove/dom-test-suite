@@ -26,12 +26,11 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-DocumentEditVAL-validateDocument"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
-<var name="doc" type="Document"/>
-<var name="docVAL" type="DocumentEditVAL"/>
+<var name="doc" type="DocumentEditVAL"/>
 <var name="result" type="short"/>
 <load var="doc" href="book" willBeModified="false"/>
-<assign var="docVAL" value="doc"/>
-<validateDocument obj="docVAL" var="result"/>
+<validateDocument obj="doc" var="result"/>
 <assertEquals actual="result" expected="5" ignoreCase="false" id="validateDocument"/>
 </test>

@@ -54,4 +54,12 @@ PURPOSE.
    <suite.member href="nodeValidity.xml"/>
    <suite.member href="requiredAttributes.xml"/>
    <suite.member href="validateDocument.xml"/>
+
+   <suite.member href="hasFeature01.xml"/>
+   <suite.member href="hasFeature02.xml"/>
+   <suite.member href="hasFeature03.xml"/>
+   <suite.member href="hasFeature04.xml"/>
+   <suite.member href="getFeature01.xml"/>
+   <suite.member href="getFeature02.xml"/>
+
 </suite>

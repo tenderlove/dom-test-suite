@@ -28,11 +28,11 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-NodeEditVAL-canInsertBefore"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="valboolean" type="short"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <var name="oldchild" type="Node"/>
 <var name="refchild" type="Node"/>
 <var name="nlist" type="NodeList"/>
@@ -46,7 +46,6 @@ PURPOSE.
 <getElementsByTagName interface="Document" obj="doc" tagname='"author"' var="nlist"/>
 <item obj="nlist" index="0" var="oldchild" interface="NodeList"/>
 <removeChild obj="root" oldChild="oldchild" var="oldchild"/>
-<assign var="elemVAL" value="root"/>
-<canInsertBefore obj="elemVAL" newChild="newchild" refChild="refchild" var="valboolean"/>
+<canInsertBefore obj="root" newChild="newchild" refChild="refchild" var="valboolean"/>
 <assertEquals actual="valboolean" expected="5" ignoreCase="false" id="canInsertBeforeTrue"/>
 </test>

@@ -27,15 +27,15 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#DocumentEditVAL-getDefinedElements"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
-<var name="doc" type="Document"/>
-<var name="docVAL" type="DocumentEditVAL"/>
+<var name="doc" type="DocumentEditVAL"/>
 <var name="nameList" type="NameList"/>
 <var name="nullNS" type="DOMString" isNull="true"/>
 <var name="definedElementsLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
-<assign var="docVAL" value="doc"/>
-<getDefinedElements obj="docVAL" interface="DocumentEditVAL" namespaceURI="nullNS" var="nameList"/>
+<getDefinedElements obj="doc" interface="DocumentEditVAL" namespaceURI="nullNS" var="nameList"/>
+<assertNotNull actual="nameList" id="definedElementsNotNull"/>
 <length var="definedElementsLength" obj="nameList" interface="NameList"/>
 <assertEquals expected="8" actual="definedElementsLength" id="definedElements" ignoreCase="false"/>
 </test>

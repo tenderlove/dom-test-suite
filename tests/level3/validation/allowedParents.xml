@@ -28,18 +28,18 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#ElementEditVAL-allowedParents"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="elem" type="Node"/>
+<var name="elem" type="ElementEditVAL"/>
 <var name="nlist" type="NameList"/>
 <var name="elemList" type="NodeList"/>
 <var name="childname" type="DOMString"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName obj="doc" interface="Document" var="elemList" tagname='"author"'/>
 <item interface="NodeList" obj="elemList" index="0" var="elem"/>
-<assign var="elemVAL" value="elem"/>
-<allowedParents obj="elemVAL" var="nlist"/>
+<allowedParents obj="elem" var="nlist"/>
+<assertNotNull actual="nlist" id="allowedParentsNotNull"/>
 <getName interface="NameList" obj="nlist" index="0" var="childname"/>
 <assertEquals actual="childname" expected='"book"' ignoreCase="false" id="allowedParents"/>
 </test>

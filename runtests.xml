@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.3  2003-12-23 03:25:31  dom-ts-4
+Revision 1.4  2004-01-06 06:57:00  dom-ts-4
+Adding schemaValidating precondition (bug 456)
+
+Revision 1.3  2003/12/23 03:25:31  dom-ts-4
 Extends results matrix to L2 Core (bug 446)
 
 Revision 1.2  2003/12/10 10:30:35  dom-ts-4
@@ -64,7 +67,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	<property name="config" value=""/>
 	<junit fork="true">
 		<classpath>
-			<fileset dir="${xdk.lib.dir}" includes="xmlparserv2.jar"/>
+			<fileset dir="${xdk.lib.dir}" includes="*.jar"/>
 			<fileset dir="${build.dir}" includes="${jarname} junit-run.jar"/>
 		</classpath> 
 		<formatter type="xml"/>
@@ -193,6 +196,35 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
         <param name="specMetadataURL" expression="dom3-ls-subjects.xml"/>
         <param name="resultsURL" expression="../transforms/dom3-ls-results.xml"/>
         <param name="title" expression='DOM Level 3 Load and Save Test Suite Results Matrix'/>
+	</style>
+</target>
+
+<target name="dom3-val-oracle">
+	<antcall target="run-oracle">
+		<param name="level" value="3"/>
+		<param name="module" value="validation"/>
+	</antcall>
+</target>
+
+<target name="dom3-val-oracle-alt">
+	<antcall target="run-oracle">
+		<param name="level" value="3"/>
+		<param name="module" value="validation"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+<target name="dom3-val-results" depends="dom3-val-oracle,dom3-val-oracle-alt">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom3-val-metadata.rdf" 
+		   out="${build.dir}/dom3-validation-results.html" 
+	       style="transforms/results-matrix.xsl" force="true">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#"/>
+        <param name="interfacesURL" expression="dom3-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom3-val-subjects.xml"/>
+        <param name="resultsURL" expression="../transforms/dom3-val-results.xml"/>
+        <param name="title" expression='DOM Level 3 Validation Test Suite Results Matrix'/>
 	</style>
 </target>
 

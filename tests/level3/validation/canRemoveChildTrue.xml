@@ -29,17 +29,15 @@ PURPOSE.
 </metadata>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="valboolean" type="short"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <var name="oldchild" type="Node"/>
 <var name="nlist" type="NodeList"/>
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"edition"' var="nlist"/>
 <item obj="nlist" index="0" var="oldchild" interface="NodeList"/>
 <documentElement obj="doc"  var="root"/>
-<assign var="elemVAL" value="root"/>
-<canRemoveChild obj="elemVAL" oldChild="oldchild" var="valboolean"/>
+<canRemoveChild obj="root" oldChild="oldchild" var="valboolean"/>
 <assertEquals actual="valboolean" expected="5" ignoreCase="false" id="canRemoveChildTrue"/>
 </test>
 

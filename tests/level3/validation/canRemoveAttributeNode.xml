@@ -27,16 +27,15 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-ElementEditVAL-canRemoveAttributeNode"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="valboolean" type="short"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 <var name="attr" type="Attr"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
 <getAttributeNode obj="root" name='"inStock"' var="attr"/>
-<assign var="elemVAL" value="root"/>
-<canRemoveAttributeNode obj="elemVAL" attrNode="attr" var="valboolean"/>
+<canRemoveAttributeNode obj="root" attrNode="attr" var="valboolean"/>
 <assertEquals actual="valboolean" expected="6" ignoreCase="false" id="canRemoveAttributeNode"/>
 </test>

@@ -27,16 +27,15 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-ElementEditVAL-isElementDefined"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
-<var name="root" type="Element"/>
+<var name="root" type="ElementEditVAL"/>
 <var name="valboolean" type="short"/>
-<var name="elemVAL" type="ElementEditVAL"/>
 
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
-<assign var="elemVAL" value="root"/>
-<isElementDefinedNS obj="elemVAL" namespaceURI='"http://dom3.validation.examples"' name='"editor"' var="valboolean"/>
+<isElementDefinedNS obj="root" namespaceURI='"http://dom3.validation.examples"' name='"editor"' var="valboolean"/>
 <assertEquals actual="valboolean" expected="6" ignoreCase="false" id="isElementDefinedNS"/>
 </test>
 

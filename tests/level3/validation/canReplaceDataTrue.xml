@@ -27,18 +27,17 @@ PURPOSE.
 <date qualifier="created">2003-03-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#VAL-Interfaces-CharacterDataEditVAL-canReplaceData"/>
 </metadata>
+<implementationAttribute name="schemaValidating" value="true"/>
 
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
 <var name="valboolean" type="short"/>
-<var name="valchar" type="CharacterDataEditVAL"/>
-<var name="chars" type="CharacterData"/>
+<var name="chars" type="CharacterDataEditVAL"/>
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elemList" tagname='"edition"'/>
 <item interface="NodeList" obj="elemList" index="0" var="elem"/>
 <firstChild interface="Node" obj="elem" var="chars"/>
-<assign var="valchar" value="chars"/>
-<canReplaceData obj="valchar"  offset="0" count="6" arg='"First"' var="valboolean"/>
+<canReplaceData obj="chars"  offset="0" count="6" arg='"First"' var="valboolean"/>
 <assertEquals actual="valboolean" expected="5" ignoreCase="false" id="canReplaceDataTrue"/>
 </test>
