@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -15,16 +15,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLObjectElement19">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLObjectElement20">
 <metadata>
-<title>HTMLObjectElement19</title>
+<title>HTMLObjectElement20</title>
 <creator>NIST</creator>
 <description>
     The contentDocument attribute specifies the document this object contains,
     if there is any and it is available, or null otherwise.
-
-    Retrieve the contentDocument attribute of the first OBJECT element
-    and examine it's TITLE value.  
 </description>
 <contributor>Rick Rivello</contributor>
 <date qualifier="created">2002-07-03</date>
@@ -34,9 +31,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="cd" type="Document" />
 <var name="vtitle" type="DOMString"/>
 <var name="doc" type="Document"/>
+<var name="nodeList" type="NodeList"/>
 <load var="doc" href="object2" willBeModified="false"/>
-<getElementById interface="Document" obj="doc" var="testNode" elementId='"Object1"'/>
+<getElementsByTagName var="nodeList" obj="doc" interface="Document" tagname='"object"'/>
+<item var="testNode" obj="nodeList" index="1" interface="NodeList"/>
 <contentDocument interface="HTMLObjectElement" obj="testNode" var="cd"/>
-<title interface="HTMLDocument" obj="cd" var="vtitle"/>
-<assertEquals actual="vtitle" expected='"NIST DOM HTML Test - FRAMESET"' id="titleLink" ignoreCase="false" />
+<assertNull actual="cd" id="noContentDocument"/>
 </test>

@@ -371,7 +371,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="HTMLObjectElement16.xml"/>
 <suite.member href="../../level1/html/HTMLObjectElement17.xml"/>
 <suite.member href="../../level1/html/HTMLObjectElement18.xml"/>
-<suite.member href="HTMLObjectElement19.xml"/>
+<suite.member href="../../level1/html/HTMLObjectElement19.xml"/>
+<suite.member href="HTMLObjectElement20.xml"/>
 <suite.member href="../../level1/html/HTMLOptGroupElement01.xml"/>
 <suite.member href="../../level1/html/HTMLOptGroupElement02.xml"/>
 <suite.member href="../../level1/html/HTMLOptionElement01.xml"/>
