@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.106  2003-11-18 08:36:32  dom-ts-4
+Revision 1.107  2003-11-19 06:43:40  dom-ts-4
+JSUnit 1.3.3 copied from wrong place (bug 350)
+
+Revision 1.106  2003/11/18 08:36:32  dom-ts-4
 DOMUserData does not appear in L3 schemas (bug 378)
 
 Revision 1.105  2003/11/14 16:11:15  dom-ts-4
@@ -585,22 +588,22 @@ All implementation conditions combined into implementationAttribute element
     <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level1/core/java"/>
     <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level1/core/java"/>
     <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level1/core/java"/>
-    <copy file="${lib.dir}/jsunit/testRunner.html" todir="${build.dir}/level1/core/ecmascript"/>
+    <copy file="${build.dir}/ecmascript/jsunit/testRunner.html" todir="${build.dir}/level1/core/ecmascript"/>
     <mkdir dir="${build.dir}/level1/core/ecmascript/app"/>
     <copy todir="${build.dir}/level1/core/ecmascript/app">
         <fileset dir="${lib.dir}/jsunit/app" excludes="*.bak"/>
     </copy>
     <mkdir dir="${build.dir}/level1/core/ecmascript/images"/>
     <copy todir="${build.dir}/level1/core/ecmascript/images">
-        <fileset dir="${lib.dir}/jsunit/images" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/images" excludes="*.bak"/>
     </copy>
     <mkdir dir="${build.dir}/level1/core/ecmascript/docs"/>
     <copy todir="${build.dir}/level1/core/ecmascript/docs">
-        <fileset dir="${lib.dir}/jsunit/docs" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/docs" excludes="*.bak"/>
     </copy>
     <mkdir dir="${build.dir}/level1/core/ecmascript/jsunit-self-tests"/>
     <copy todir="${build.dir}/level1/core/ecmascript/jsunit-self-tests">
-        <fileset dir="${lib.dir}/jsunit/tests" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/tests" excludes="*.bak"/>
     </copy>
     <copy file="${build.dir}/dom1-core-matrix.html" todir="${build.dir}/level1/core"/>
 
@@ -1747,22 +1750,22 @@ All implementation conditions combined into implementationAttribute element
     <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level2/core/java"/>
     <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level2/core/java"/>
     <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level2/core/java"/>
-    <copy file="${lib.dir}/jsunit/testRunner.html" todir="${build.dir}/level2/core/ecmascript"/>
+    <copy file="${build.dir}/ecmascript/jsunit/testRunner.html" todir="${build.dir}/level2/core/ecmascript"/>
     <mkdir dir="${build.dir}/level2/core/ecmascript/app"/>
     <copy todir="${build.dir}/level2/core/ecmascript/app">
-        <fileset dir="${lib.dir}/jsunit/app" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/app" excludes="*.bak"/>
     </copy>
     <mkdir dir="${build.dir}/level2/core/ecmascript/images"/>
     <copy todir="${build.dir}/level2/core/ecmascript/images">
-        <fileset dir="${lib.dir}/jsunit/images" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/images" excludes="*.bak"/>
     </copy>
     <mkdir dir="${build.dir}/level2/core/ecmascript/docs"/>
     <copy todir="${build.dir}/level2/core/ecmascript/docs">
-        <fileset dir="${lib.dir}/jsunit/docs" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/docs" excludes="*.bak"/>
     </copy>
     <mkdir dir="${build.dir}/level2/core/ecmascript/jsunit-self-tests"/>
     <copy todir="${build.dir}/level2/core/ecmascript/jsunit-self-tests">
-        <fileset dir="${lib.dir}/jsunit/tests" excludes="*.bak"/>
+        <fileset dir="${build.dir}/ecmascript/jsunit/tests" excludes="*.bak"/>
     </copy>
     <copy file="${build.dir}/dom2-core-matrix.html" todir="${build.dir}/level2/core"/>
 
