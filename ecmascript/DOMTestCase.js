@@ -280,7 +280,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //   This code attempts to determine the reason for the exception
   //      to reduce the chance that an unrelated exception causes
   //      the test to pass.
-  function MozHTMLDocumentBuilder_isDOMExceptionCode(ex, code) {
+  function isDOMExceptionCode(ex, code) {
     return (ex.code == code);
   }
 
@@ -330,7 +330,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.windows = new Array();
     this.load = MozHTMLDocumentBuilder_load;
     this.checkAvailability = MozHTMLDocumentBuilder_checkAvailability;
-    this.isDOMExceptionCode = MozHTMLDocumentBuilder_isDOMExceptionCode;
+    this.isDOMExceptionCode = isDOMExceptionCode;
     this.getDOMImplementation = MozHTMLDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = MozHTMLDocumentBuilder_getImplementationAttribute;
     this.close = MozHTMLDocumentBuilder_close;
@@ -353,7 +353,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.load = MozSVGDocumentBuilder_load;
     this.close = MozHTMLDocumentBuilder_close;
     this.checkAvailability = MozXMLDocumentBuilder_checkAvailability;
-    this.isDOMExceptionCode = MozXMLDocumentBuilder_isDOMExceptionCode;
+    this.isDOMExceptionCode = isDOMExceptionCode;
     this.getDOMImplementation = MozXMLDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = MozXMLDocumentBuilder_getImplementationAttribute;
     this.checkAttributes = MozXMLDocumentBuilder_checkAttributes;
@@ -416,10 +416,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         return document.implementation;
    }
 
-  function MozXMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return (ex.code == code);
-  }
-
   function MozXMLDocumentBuilder_getImplementationAttribute(attr) {
     if(attr == "expandEntityReferences") {
         return true;
@@ -466,7 +462,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.attrValues = attrValues;
     this.cache = new Array();
     this.load = MozXMLDocumentBuilder_load;
-    this.isDOMExceptionCode = MozXMLDocumentBuilder_isDOMExceptionCode;
+    this.isDOMExceptionCode = isDOMExceptionCode;
     this.getDOMImplementation = MozXMLDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = MozXMLDocumentBuilder_getImplementationAttribute;
     this.checkAttributes = MozXMLDocumentBuilder_checkAttributes;
@@ -638,10 +634,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		return testdoc.implementation;
 	}
 
-  function ASVDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return true;
-  }
-
   function ASVDocumentBuilder_getImplementationAttribute(attr) {
     if(attr == "expandEntityReferences") {
         return true;
@@ -700,7 +692,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.cache = new Array();
     this.dirty = new Array();
     this.load = ASVDocumentBuilder_load;
-    this.isDOMExceptionCode = ASVDocumentBuilder_isDOMExceptionCode;
+    this.isDOMExceptionCode = isDOMExceptionCode;
     this.getDOMImplementation = ASVDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = ASVDocumentBuilder_getImplementationAttribute;
     this.checkAttributes = ASVDocumentBuilder_checkAttributes;
@@ -793,57 +785,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         return this.parser.domImplementation;
    }
 
-  //
-  //   This function checks the exception raised in the test
-  //   If this function returns true, then the exception is 
-  //      consistent with the exception code parameter
-  //
-  //   This code attempts to determine the reason for the exception
-  //      to reduce the chance that an unrelated exception causes
-  //      the test to pass.
-  function MSXMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-	var retval;
-    switch(code) {
-        //
-        //  INDEX_SIZE_ERR
-        case 1:
-        retval = (ex.number == -2147024809);
-        break;
-
-        //
-        //  HIERARCHY_REQUEST_ERR
-        case 3:
-        retval = (ex.number == -2147467259);
-        break;
-
-
-        //
-        //  INVALID_CHARACTER_ERR
-        case 5:
-        retval = (ex.description.search(".*may not contain.*") >= 0);
-        break;
-
-        //
-        //   NO_MODIFICATION_ALLOWED_ERR
-        case 7:
-		retval = (ex.description.search(".*read.*only.*") >= 0);
-        break;
-
-        //
-        //   NOT_FOUND_ERR
-        //
-        case 8:
-        retval = (ex.number == -2147024809 || ex.number == -2147467259);
-        break;
-
-        //
-        //   INUSE_ATTRIBUTE_ERR
-        case 10:
-        retval = (ex.description.search(".*must be removed.*") >= 0);
-        break;
-	}
-	return retval;
-  }
 
   function MSXMLDocumentBuilder_getImplementationAttribute(attr) {
     if(attr == "ignoringElementContentWhitespace") {
@@ -898,7 +839,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     
     this.load = MSXMLDocumentBuilder_load;
     this.checkAvailability = MSXMLDocumentBuilder_checkAvailability;
-    this.isDOMExceptionCode = MSXMLDocumentBuilder_isDOMExceptionCode;
+    this.isDOMExceptionCode = isDOMExceptionCode;
     this.getDOMImplementation = MSXMLDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = MSXMLDocumentBuilder_getImplementationAttribute;
     this.close = MSXMLDocumentBuilder_close;
@@ -972,17 +913,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		return document.implementation;
    }
 
-  //
-  //   This function checks the exception raised in the test
-  //   If this function returns true, then the exception is 
-  //      consistent with the exception code parameter
-  //
-  //   This code attempts to determine the reason for the exception
-  //      to reduce the chance that an unrelated exception causes
-  //      the test to pass.
-  function MSHTMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return (ex.code == code);
-  }
 
   function MSHTMLDocumentBuilder_getImplementationAttribute(attr) {
     return false;
@@ -1022,7 +952,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.cache = new Array();
     this.load = MSHTMLDocumentBuilder_load;
     this.checkAvailability = MSHTMLDocumentBuilder_checkAvailability;
-    this.isDOMExceptionCode = MSHTMLDocumentBuilder_isDOMExceptionCode;
+    this.isDOMExceptionCode = isDOMExceptionCode;
     this.getDOMImplementation = MSHTMLDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = MSHTMLDocumentBuilder_getImplementationAttribute;
     this.close = MSHTMLDocumentBuilder_close;
