@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.41  2002-01-04 07:59:14  dom-ts-4
+Revision 1.42  2002-01-29 06:21:44  dom-ts-4
+Moved patch files
+
+Revision 1.41  2002/01/04 07:59:14  dom-ts-4
 Added dom2-html-gen-java, dom2-html-javac targets
 
 Revision 1.40  2001/12/10 17:15:20  dom-ts-4
@@ -206,9 +209,9 @@ All implementation conditions combined into implementationAttribute element
 	<unzip src="${specs.dir}/Level-1/xml-source.zip" dest="${specs.dir}/Level-1"/>
 
 	<!--  patch wd-dom file to add missing xmlns:xlink attribute  -->
-	<patch patchfile="./wd-dom.patch"
+	<patch patchfile="./patches/wd-dom.patch"
 	       originalfile="${specs.dir}/Level-1/xml/wd-dom.xml"/>
-	<patch patchfile="./level-1-element.patch"
+	<patch patchfile="./patches/level-1-element.patch"
 	       originalfile="${specs.dir}/Level-1/xml/definitions/level-one-core/element.xml"/>
 </target>
 
@@ -496,7 +499,7 @@ All implementation conditions combined into implementationAttribute element
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
     <!--  change name parameter of Element.getElementsByTagName to tagname   -->
-	<patch patchfile="./level-2-element.patch"
+	<patch patchfile="./patches/level-2-element.patch"
 	       originalfile="${specs.dir}/Level-2/xml/core/definitions/element.xml"/>
 
 </target>
@@ -919,7 +922,7 @@ All implementation conditions combined into implementationAttribute element
     <jar jarfile="${dist.dir}/junit-run.jar"
         manifest="java/junit/junit-run.mf">
         <fileset dir="${java.build.dir}/junit"
-	         includes="org/w3c/domts/*" excludes="*.bak"/>
+	         includes="org/w3c/domts/**" excludes="*.bak"/>
     </jar>
 </target>
 
@@ -990,13 +993,13 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-dom3-core" depends="dom3-available" unless="dom3-core-available">
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010913/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20020114/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 </target>
 
 <target name="get-dom3-asls" depends="dom3-available" unless="dom3-asls-available">
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20011025/DOM3-ASLS.zip"
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20020114/DOM3-ASLS.zip"
 		dest="${specs.dir}/DOM3-ASLS.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1089,13 +1092,13 @@ All implementation conditions combined into implementationAttribute element
 	<echo file="${specs.dir}/Level-3/xml/toc.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
-	<patch patchfile="./level-3-element.patch"
+	<patch patchfile="./patches/level-3-element.patch"
 	       originalfile="${specs.dir}/Level-3/xml/core/definitions/element.xml"/>
 
-	<patch patchfile="./level-3-version.patch"
+	<patch patchfile="./patches/level-3-version.patch"
 	       originalfile="${specs.dir}/Level-3/xml/version.xml"/>
 
-	<patch patchfile="./level-3-part-entities.patch"
+	<patch patchfile="./patches/level-3-part-entities.patch"
 	       originalfile="${specs.dir}/Level-3/xml/part-entities.xml"/>
 
     <!--  text.xml is missing   -->
