@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.66  2002-07-31 04:58:38  dom-ts-4
+Revision 1.67  2002-08-12 07:57:40  dom-ts-4
+Sample LS test from Jeroen
+
+Revision 1.66  2002/07/31 04:58:38  dom-ts-4
 Update for July DOM 3 drafts
 
 Revision 1.65  2002/06/29 19:13:33  dom-ts-4
@@ -1638,6 +1641,30 @@ All implementation conditions combined into implementationAttribute element
 	<patch patchfile="./patches/level-3-element.patch"
 	       originalfile="${specs.dir}/Level-3/xml/core/definitions/element.xml"/>
 
+    <mkdir dir="${specs.dir}/Level-3/Core/java"/>
+	<unzip src="${specs.dir}/Level-3/Core/java-binding.zip"
+	       dest="${specs.dir}/Level-3/Core/java"/>
+
+    <mkdir dir="${specs.dir}/Level-3/Events/java"/>
+	<unzip src="${specs.dir}/Level-3/Events/java-binding.zip"
+	       dest="${specs.dir}/Level-3/Events/java"/>
+
+    <mkdir dir="${specs.dir}/Level-3/LS/java"/>
+	<unzip src="${specs.dir}/Level-3/LS/java-binding.zip"
+	       dest="${specs.dir}/Level-3/LS/java"/>
+
+    <mkdir dir="${specs.dir}/Level-3/Val/java"/>
+	<unzip src="${specs.dir}/Level-3/Val/java-binding.zip"
+	       dest="${specs.dir}/Level-3/Val/java"/>
+
+    <mkdir dir="${specs.dir}/Level-3/Views/java"/>
+	<unzip src="${specs.dir}/Level-3/Views/java-binding.zip"
+	       dest="${specs.dir}/Level-3/Views/java"/>
+
+    <mkdir dir="${specs.dir}/Level-3/XPath/java"/>
+	<unzip src="${specs.dir}/Level-3/XPath/java-binding.zip"
+	       dest="${specs.dir}/Level-3/XPath/java"/>
+
 </target>
 
 <target name="dom3-interfaces" depends="dom3-init">
@@ -1704,6 +1731,43 @@ All implementation conditions combined into implementationAttribute element
 	<!--  remove DOM 3 version of subjects.xsl  -->
 	<delete file="{build.dir}/dom3-subjects.xsl"/>
 </target>
+
+<target name="dom3-ls-gen-java" depends="dom3-interfaces,dom3-schema">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level3/ls"/>
+
+	<style basedir="${tests.dir}/level3/ls" 
+		   destdir="${java.build.dir}/org/w3c/domts/level3/ls" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom3-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level3.ls"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/ls/"/>
+	</style>
+</target>
+
+<target name="dom3-ls-javac" depends="common-javac,dom3-ls-gen-java">
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <src path="${specs.dir}/Level-3/Core/java"/>
+        <src path="${specs.dir}/Level-3/LS/java"/>
+        <include name="org/w3c/domts/*"/>
+        <include name="org/w3c/domts/level3/Core/*"/>
+        <include name="org/w3c/domts/level3/LS/*"/>
+        <include name="org/w3c/dom/**"/>
+    </javac>
+</target>
+
+
 
 <target name="svg-available" depends="init">
     <available property="svg-available" file="${specs.dir}/SVG.zip"/>

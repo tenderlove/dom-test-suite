@@ -1,0 +1,21 @@
+<!ENTITY level3      "http://www.w3.org/2001/DOM-Test-Suite/Level-3">
+<!ENTITY spec        "http://www.w3.org/TR/DOM-Level-3-ASLS/load-save.html">
+<!ENTITY date        "<date qualifier='created'>2002-03-23</date>">
+<!ENTITY contributor "<contributor>X-Hive Corporation</contributor>">
+<!ENTITY creator     "<creator>X-Hive Corporation</creator>">
+
+<!ENTITY vars        "<var name='implementation'   type='DOMImplementation'/>   
+                      <var name='lsImplementation' type='DOMImplementationLS'/> 
+                      <var name='inputSource'      type='DOMInputSource'/> 
+                      <var name='document'         type='Document'/>            
+                      <var name='writer'           type='DOMWriter'/>            
+                      <var name='builder'          type='DOMBuilder'/>
+                      <var name='testfile1'        type='DOMString' value='&quot;test1.xml&quot;'/>
+                      <var name='mode'             type='short'     value='MODE_SYNCHRONOUS'/>
+                      <var name='schemaType'       type='DOMString' value='null'/>">
+
+<!ENTITY init        "<createDOMBuilder      var='builder'     obj='lsImplementation' mode='mode' schemaType='schemaType'/>
+                      <createDOMWriter       var='writer'      obj='lsImplementation'/>
+                      <createDOMInputSource  var='inputSource' obj='lsImplementation'/>">
+
+<!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='DOMBuilder'/>">

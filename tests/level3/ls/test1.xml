@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE test [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="builderfilter">
+  <metadata>
+    <title>attrSpecifiedValue</title>
+    &creator; 
+    <description>DOM Builder Filter test</description> 
+    &contributor; &date;
+    <subject spec="&spec;#LS-Interfaces-DOMBuilderFilter"/>
+  </metadata>
+  &vars;
+
+  <var name="myfilter"         type="DOMBuilderFilter"> 
+
+     <var name='show_element'    type='long'     value='SHOW_ELEMENT'/>
+     <var name='filter_reject'   type='short'    value='FILTER_REJECT'/>
+     <var name='filter_accept'   type='short'    value='FILTER_ACCEPT'/>
+     <var name="name"            type="String"/>
+
+     <startElement elt="element">
+        <nodeName var="name" obj="element"/>
+        <if>
+            <equals actual="name" expected="&quot;elt2&quot;" ignoreCase="false"/>
+            <return value="filter_reject"/>            
+          <else>
+            <return value="filter_accept"/>            
+          </else>
+        </if>
+     </startElement>
+
+
+     <acceptNode/>
+     <whatToShow obj="xxx" var="show_element" interface="DOMBuilderFilter"/>            
+
+  </var>
+
+  &init;
+  &builder.setFilter_myfilter;
+
+  <parseURI  var="document" obj="builder" uri="testfile1"/>
+
+</test>
+
+
+
+
+
