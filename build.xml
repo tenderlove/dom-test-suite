@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.108  2003-11-19 16:24:08  dom-ts-4
+Revision 1.109  2003-11-24 19:49:28  dom-ts-4
+DOXYGEN for L3 suites and other build issues (bug 390)
+
+Revision 1.108  2003/11/19 16:24:08  dom-ts-4
 Copied JSUnit from wrong location (try 2, bug 350)
 
 Revision 1.107  2003/11/19 06:43:40  dom-ts-4
@@ -593,24 +596,17 @@ All implementation conditions combined into implementationAttribute element
     <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level1/core/java"/>
     <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level1/core/java"/>
     <copy file="${build.dir}/ecmascript/jsunit/testRunner.html" todir="${build.dir}/level1/core/ecmascript"/>
-    <mkdir dir="${build.dir}/level1/core/ecmascript/app"/>
-    <copy todir="${build.dir}/level1/core/ecmascript/app">
-        <fileset dir="${build.dir}/ecmascript/jsunit/app" excludes="*.bak"/>
+
+    <copy todir="${build.dir}/level1/core/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
     </copy>
-    <mkdir dir="${build.dir}/level1/core/ecmascript/images"/>
-    <copy todir="${build.dir}/level1/core/ecmascript/images">
-        <fileset dir="${build.dir}/ecmascript/jsunit/images" excludes="*.bak"/>
-    </copy>
-    <mkdir dir="${build.dir}/level1/core/ecmascript/docs"/>
-    <copy todir="${build.dir}/level1/core/ecmascript/docs">
-        <fileset dir="${build.dir}/ecmascript/jsunit/docs" excludes="*.bak"/>
-    </copy>
-    <mkdir dir="${build.dir}/level1/core/ecmascript/jsunit-self-tests"/>
-    <copy todir="${build.dir}/level1/core/ecmascript/jsunit-self-tests">
-        <fileset dir="${build.dir}/ecmascript/jsunit/tests" excludes="*.bak"/>
-    </copy>
+
     <copy file="${build.dir}/dom1-core-matrix.html" todir="${build.dir}/level1/core"/>
 
+    <mkdir dir="${build.dir}/level1/core/ecmascript/level1/core"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/level1/core">
+        <fileset dir="${build.dir}/ecmascript/level1/core"/>
+    </copy>
 
     <mkdir dir="${build.dir}/level1/core/tests/files"/>
     <copy todir="${build.dir}/level1/core/tests">
@@ -637,6 +633,48 @@ All implementation conditions combined into implementationAttribute element
 								  dom1-html-schema-validate-tests,								   
 								  dom1-core-jar,
 								  dom1-html-jar"/>
+
+<target name="dom1-html-dist" depends="dom1-html-jar,dom1-html-gen-jsunit,dom1-html-matrix,dom1-html-doxygen,junit-run,get-junit-license,dom1-schema">
+    <mkdir dir="${build.dir}/level1/html/resources"/>
+    <mkdir dir="${build.dir}/level1/html/java"/>
+    <copy file="docs/level1/html/index.htm" todir="${build.dir}/level1/html"/>
+    <copy todir="${build.dir}/level1/html/resources">
+        <fileset dir="docs/level1/html/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom1-html.jar" todir="${build.dir}/level1/html/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level1/html/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level1/html/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level1/html/java"/>
+
+    <copy todir="${build.dir}/level1/html/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom1-html-matrix.html" todir="${build.dir}/level1/html"/>
+
+    <mkdir dir="${build.dir}/level1/html/ecmascript/level1/html"/>
+    <copy todir="${build.dir}/level1/html/ecmascript/level1/html">
+        <fileset dir="${build.dir}/ecmascript/level1/html"/>
+    </copy>
+
+    <mkdir dir="${build.dir}/level1/html/tests/files"/>
+    <copy todir="${build.dir}/level1/html/tests">
+        <fileset dir="${tests.dir}/level1/html" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom1.dtd"/>
+        <fileset dir="${build.dir}" includes="dom1.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level1/html/tests/files">
+        <fileset dir="${tests.dir}/level1/html/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom1-html.zip" basedir="${build.dir}/level1/html"/>
+    <tar tarfile="${dist.dir}/dom1-html.tar" basedir="${build.dir}/level1/html"/>
+    <gzip src="${dist.dir}/dom1-html.tar" zipfile="${dist.dir}/dom1-html.tar.gz"/>
+        
+        
+</target>
+
 
 
 
@@ -1230,6 +1268,17 @@ All implementation conditions combined into implementationAttribute element
 
 </target>
 
+<target name="dom1-html-doxygen" depends="dom1-html-gen-java">
+    <mkdir dir="${build.dir}/level1/html/doxygen"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="doxygen/dom1-html.doxygen"/>
+    </exec>
+
+</target>
+
 
 <target name="dom2-core-validate-tests" depends="dom2-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
@@ -1535,8 +1584,16 @@ All implementation conditions combined into implementationAttribute element
     <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level2/html/java"/>
     <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level2/html/java"/>
     <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level2/html/java"/>
+
+    <copy todir="${build.dir}/level2/html/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
+    </copy>
     <copy file="${build.dir}/dom2-html-matrix.html" todir="${build.dir}/level2/html"/>
 
+    <mkdir dir="${build.dir}/level2/html/ecmascript/level2/html"/>
+    <copy todir="${build.dir}/level2/html/ecmascript/level2/html">
+        <fileset dir="${build.dir}/ecmascript/level2/html"/>
+    </copy>
 
     <mkdir dir="${build.dir}/level2/html/tests/files"/>
     <copy todir="${build.dir}/level2/html/tests">
@@ -1743,7 +1800,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema,dom2-core-matrix">
+<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-matrix,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema">
     <mkdir dir="${build.dir}/level2/core/resources"/>
     <mkdir dir="${build.dir}/level2/core/java"/>
     <copy file="docs/level2/core/index.htm" todir="${build.dir}/level2/core"/>
@@ -1754,25 +1811,17 @@ All implementation conditions combined into implementationAttribute element
     <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level2/core/java"/>
     <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level2/core/java"/>
     <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level2/core/java"/>
-    <copy file="${build.dir}/ecmascript/jsunit/testRunner.html" todir="${build.dir}/level2/core/ecmascript"/>
-    <mkdir dir="${build.dir}/level2/core/ecmascript/app"/>
-    <copy todir="${build.dir}/level2/core/ecmascript/app">
-        <fileset dir="${build.dir}/ecmascript/jsunit/app" excludes="*.bak"/>
+
+    <copy todir="${build.dir}/level2/core/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
     </copy>
-    <mkdir dir="${build.dir}/level2/core/ecmascript/images"/>
-    <copy todir="${build.dir}/level2/core/ecmascript/images">
-        <fileset dir="${build.dir}/ecmascript/jsunit/images" excludes="*.bak"/>
-    </copy>
-    <mkdir dir="${build.dir}/level2/core/ecmascript/docs"/>
-    <copy todir="${build.dir}/level2/core/ecmascript/docs">
-        <fileset dir="${build.dir}/ecmascript/jsunit/docs" excludes="*.bak"/>
-    </copy>
-    <mkdir dir="${build.dir}/level2/core/ecmascript/jsunit-self-tests"/>
-    <copy todir="${build.dir}/level2/core/ecmascript/jsunit-self-tests">
-        <fileset dir="${build.dir}/ecmascript/jsunit/tests" excludes="*.bak"/>
-    </copy>
+
     <copy file="${build.dir}/dom2-core-matrix.html" todir="${build.dir}/level2/core"/>
 
+    <mkdir dir="${build.dir}/level2/core/ecmascript/level2/core"/>
+    <copy todir="${build.dir}/level2/core/ecmascript/level2/core">
+        <fileset dir="${build.dir}/ecmascript/level2/core"/>
+    </copy>
 
     <mkdir dir="${build.dir}/level2/core/tests/files"/>
     <copy todir="${build.dir}/level2/core/tests">
@@ -2077,22 +2126,24 @@ All implementation conditions combined into implementationAttribute element
         <replacefilter token="Level-1" value="Level-3"/>
     </replace>
 
-	<style in="${specs.dir}/Level-3/xml/core/dom-spec.xml"
+	<style in="${specs.dir}/Level-3/Core/xml-source.xml"
 	       out="${build.dir}/dom3-core-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
+       <!-- bc temporarily remove due to problems 
 	<style in="${specs.dir}/Level-3/xml/views/dom-spec.xml"
 	       out="${build.dir}/dom3-views-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
-	<style in="${specs.dir}/Level-3/xml/events/dom-spec.xml"
+        bc -->
+	<style in="${specs.dir}/Level-3/Events/xml-source.xml"
 	       out="${build.dir}/dom3-events-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
-	<style in="${specs.dir}/Level-3/xml/xpath/dom-spec.xml"
+	<style in="${specs.dir}/Level-3/XPath/xml-source.xml"
 	       out="${build.dir}/dom3-xpath-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
-	<style in="${specs.dir}/Level-3/xml/ls/dom-spec.xml"
+	<style in="${specs.dir}/Level-3/LS/xml-source.xml"
 	       out="${build.dir}/dom3-ls-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
-	<style in="${specs.dir}/Level-3/xml/val/dom-spec.xml"
+	<style in="${specs.dir}/Level-3/Val/xml-source.xml"
 	       out="${build.dir}/dom3-val-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
 	<!--  remove DOM 3 version of subjects.xsl  -->
@@ -2217,6 +2268,29 @@ All implementation conditions combined into implementationAttribute element
       <param name="target-uri-base"
 	expression="http://www.w3.org/2001/DOM-Test-Suite/level3/xpath/"/>
       <param name="testpath" expression="../level3/xpath/"/>
+    </style>
+</target>
+
+<target name="dom3-ls-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level3/ls/files"/>
+    <copy todir="${build.dir}/ecmascript/level3/ls">
+      <fileset dir="ecmascript" includes="*.js"/>
+    </copy>
+    <copy todir="${build.dir}/ecmascript/level3/ls/files">
+      <fileset dir="tests/level3/ls/files" excludes="*.bak"/>
+    </copy>
+    
+    <style basedir="${tests.dir}/level3/ls" 
+      destdir="${build.dir}/ecmascript/level3/ls" 
+      includes="*.xml" 
+      excludes="metadata.xml"
+      style="${transforms.dir}/test-to-jsunit.xsl" 
+      extension=".html">
+      <param name="interfaces-docname"
+	expression="../${build.dir}/dom3-interfaces.xml"/>
+      <param name="target-uri-base"
+	expression="http://www.w3.org/2001/DOM-Test-Suite/level3/ls/"/>
+      <param name="testpath" expression="../level3/ls/"/>
     </style>
 </target>
 
@@ -2522,6 +2596,28 @@ it would compile all DOM 3 java code
 	</style>
 </target>
 
+<target name="dom3-core-metadata" depends="dom3-schema">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level3/core/alltests.xml" 
+		   out="${build.dir}/dom3-core-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/core/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
+<target name="dom3-ls-metadata" depends="dom3-schema">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level3/ls/alltests.xml" 
+		   out="${build.dir}/dom3-ls-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/ls/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
 
 
 <target name="dom3-xpath-matrix" depends="dom3-xpath-metadata,dom3-subjects,dom3-interfaces">
@@ -2537,6 +2633,31 @@ it would compile all DOM 3 java code
 	</style>
 </target>
 
+<target name="dom3-core-matrix" depends="dom3-core-metadata,dom3-subjects,dom3-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom3-core-metadata.rdf" 
+		   out="${build.dir}/dom3-core-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/DOM-Level-3-core/core#"/>
+        <param name="interfacesURL" expression="dom3-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom3-core-subjects.xml"/>
+        <param name="title" expression='DOM Level 3 Core Test Suite Matrix'/>
+	</style>
+</target>
+
+<target name="dom3-ls-matrix" depends="dom3-ls-metadata,dom3-subjects,dom3-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom3-ls-metadata.rdf" 
+		   out="${build.dir}/dom3-ls-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/DOM-Level-3-ls/ls#"/>
+        <param name="interfacesURL" expression="dom3-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom3-ls-subjects.xml"/>
+        <param name="title" expression='DOM Level 3 LS Test Suite Matrix'/>
+	</style>
+</target>
 
 <target name="dom3-gump" depends="dom3-core-validate-tests, 
                                   dom3-ls-validate-tests, 
@@ -2735,5 +2856,171 @@ it would compile all DOM 3 java code
 	<!-- copy file="${build.dir}/svg.dtd" todir="${tests.dir}/svg"/ -->
 </target>
 
+<target name="dom3-core-doxygen" depends="dom3-core-gen-java">
+    <mkdir dir="${build.dir}/level3/core/doxygen"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="doxygen/dom3-core.doxygen"/>
+    </exec>
+
+</target>
+
+<target name="dom3-ls-doxygen" depends="dom3-ls-gen-java">
+    <mkdir dir="${build.dir}/level3/ls/doxygen"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="doxygen/dom3-ls.doxygen"/>
+    </exec>
+
+</target>
+
+<target name="dom3-xpath-doxygen" depends="dom3-xpath-gen-java">
+    <mkdir dir="${build.dir}/level3/xpath/doxygen"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="doxygen/dom3-xpath.doxygen"/>
+    </exec>
+
+</target>
+
+<target name="dom3-core-dist" depends="dom3-core-jar,dom3-core-gen-jsunit,dom3-core-matrix,dom3-core-doxygen,junit-run,get-junit-license,dom3-schema">
+    <mkdir dir="${build.dir}/level3/core/resources"/>
+    <mkdir dir="${build.dir}/level3/core/java"/>
+    <copy file="docs/level3/core/index.htm" todir="${build.dir}/level3/core"/>
+    <copy todir="${build.dir}/level3/core/resources">
+        <fileset dir="docs/level3/core/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-core.jar" todir="${build.dir}/level3/core/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level3/core/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level3/core/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level3/core/java"/>
+
+    <copy todir="${build.dir}/level3/core/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-core-matrix.html" todir="${build.dir}/level3/core"/>
+
+    <mkdir dir="${build.dir}/level3/core/ecmascript/level3/core"/>
+    <copy todir="${build.dir}/level3/core/ecmascript/level3/core">
+        <fileset dir="${build.dir}/ecmascript/level3/core"/>
+    </copy>
+
+    <mkdir dir="${build.dir}/level3/core/tests/files"/>
+    <copy todir="${build.dir}/level3/core/tests">
+        <fileset dir="${tests.dir}/level3/core" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom3.dtd"/>
+        <fileset dir="${build.dir}" includes="dom3.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level3/core/tests/files">
+        <fileset dir="${tests.dir}/level3/core/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom3-core.zip" basedir="${build.dir}/level3/core"/>
+    <tar tarfile="${dist.dir}/dom3-core.tar" basedir="${build.dir}/level3/core"/>
+    <gzip src="${dist.dir}/dom3-core.tar" zipfile="${dist.dir}/dom3-core.tar.gz"/>
+        
+        
+</target>
+
+<target name="dom3-ls-dist" depends="dom3-ls-jar,dom3-ls-gen-jsunit,dom3-ls-matrix,dom3-ls-doxygen,junit-run,get-junit-license,dom3-schema">
+    <mkdir dir="${build.dir}/level3/ls/resources"/>
+    <mkdir dir="${build.dir}/level3/ls/java"/>
+    <copy file="docs/level3/ls/index.htm" todir="${build.dir}/level3/ls"/>
+    <copy todir="${build.dir}/level3/ls/resources">
+        <fileset dir="docs/level3/ls/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-ls.jar" todir="${build.dir}/level3/ls/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level3/ls/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level3/ls/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level3/ls/java"/>
+
+    <copy todir="${build.dir}/level3/ls/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-ls-matrix.html" todir="${build.dir}/level3/ls"/>
+
+    <mkdir dir="${build.dir}/level3/ls/ecmascript/level3/ls"/>
+    <copy todir="${build.dir}/level3/ls/ecmascript/level3/ls">
+        <fileset dir="${build.dir}/ecmascript/level3/ls"/>
+    </copy>
+
+    <mkdir dir="${build.dir}/level3/ls/tests/files"/>
+    <copy todir="${build.dir}/level3/ls/tests">
+        <fileset dir="${tests.dir}/level3/ls" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom3.dtd"/>
+        <fileset dir="${build.dir}" includes="dom3.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level3/ls/tests/files">
+        <fileset dir="${tests.dir}/level3/ls/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom3-ls.zip" basedir="${build.dir}/level3/ls"/>
+    <tar tarfile="${dist.dir}/dom3-ls.tar" basedir="${build.dir}/level3/ls"/>
+    <gzip src="${dist.dir}/dom3-ls.tar" zipfile="${dist.dir}/dom3-ls.tar.gz"/>
+        
+        
+</target>
+
+<target name="dom3-xpath-dist" depends="dom3-xpath-jar,dom3-xpath-gen-jsunit,dom3-xpath-matrix,dom3-xpath-doxygen,junit-run,get-junit-license,dom3-schema">
+    <mkdir dir="${build.dir}/level3/xpath/resources"/>
+    <mkdir dir="${build.dir}/level3/xpath/java"/>
+    <copy file="docs/level3/xpath/index.htm" todir="${build.dir}/level3/xpath"/>
+    <copy todir="${build.dir}/level3/xpath/resources">
+        <fileset dir="docs/level3/xpath/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-xpath.jar" todir="${build.dir}/level3/xpath/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level3/xpath/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level3/xpath/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level3/xpath/java"/>
+
+    <copy todir="${build.dir}/level3/xpath/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-xpath-matrix.html" todir="${build.dir}/level3/xpath"/>
+
+    <mkdir dir="${build.dir}/level3/xpath/ecmascript/level3/xpath"/>
+    <copy todir="${build.dir}/level3/xpath/ecmascript/level3/xpath">
+        <fileset dir="${build.dir}/ecmascript/level3/xpath"/>
+    </copy>
+
+    <mkdir dir="${build.dir}/level3/xpath/tests/files"/>
+    <copy todir="${build.dir}/level3/xpath/tests">
+        <fileset dir="${tests.dir}/level3/xpath" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom3.dtd"/>
+        <fileset dir="${build.dir}" includes="dom3.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level3/xpath/tests/files">
+        <fileset dir="${tests.dir}/level3/xpath/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom3-xpath.zip" basedir="${build.dir}/level3/xpath"/>
+    <tar tarfile="${dist.dir}/dom3-xpath.tar" basedir="${build.dir}/level3/xpath"/>
+    <gzip src="${dist.dir}/dom3-xpath.tar" zipfile="${dist.dir}/dom3-xpath.tar.gz"/>
+        
+        
+</target>
+
+<target name="dom1-dist" depends="dom1-core-dist,dom1-html-dist">
+</target>
+<target name="dom2-dist" depends="dom2-core-dist,dom2-html-dist">
+</target>
+<target name="dom3-dist" depends="dom3-core-dist,dom3-xpath-dist">
+</target>
+<target name="all-dist" depends="dom1-dist,dom2-dist,dom3-dist">
+</target>
+<target name="all-validate" depends="dom1-core-validate-tests,dom1-core-validate-files,dom1-html-validate-tests,dom1-html-validate-files,dom2-core-validate-tests,dom2-html-validate-tests,dom2-events-validate-tests,dom3-core-validate-tests,dom3-xpath-validate-tests,dom3-ls-validate-tests,dom3-val-validate-tests">
+</target>
 
 </project> 
