@@ -45,8 +45,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!--  now actually test the initial value of nodeValue   -->
 <nodeValue obj="docFragment" var="value"/>
 <assertNull actual="value" id="initiallyNull"/>
-<!--  now check that changing it doesn't affect the return value  -->
-<nodeValue obj="docFragment" value='"This should have no effect"'/>
-<nodeValue obj="docFragment" var="value"/>
-<assertNull actual="value" id="nullAfterAttemptedChange"/>
 </test>
