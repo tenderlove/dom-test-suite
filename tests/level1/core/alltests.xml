@@ -75,7 +75,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="documentcreateattribute.xml"/>
 <suite.member href="documentcreatecdatasection.xml"/>
 <suite.member href="documentcreatecomment.xml"/>
-<suite.member href="documentcreatecomment2.xml"/>
 <suite.member href="documentcreatedocumentfragment.xml"/>
 <suite.member href="documentcreateelement.xml"/>
 <suite.member href="documentcreateelementcasesensitive.xml"/>
@@ -196,7 +195,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="nodedocumentnodename.xml"/>
 <suite.member href="nodedocumentnodetype.xml"/>
 <suite.member href="nodedocumentnodevalue.xml"/>
-<suite.member href="nodedocumentsetnodevalue.xml"/>
 <suite.member href="nodedocumenttypenodename.xml"/>
 <suite.member href="nodedocumenttypenodetype.xml"/>
 <suite.member href="nodedocumenttypenodevalue.xml"/>
@@ -247,7 +245,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="nodenotationnodename.xml"/>
 <suite.member href="nodenotationnodetype.xml"/>
 <suite.member href="nodenotationnodevalue.xml"/>
-<suite.member href="nodenotationsetnodevalue.xml"/>
 <suite.member href="nodeparentnode.xml"/>
 <suite.member href="nodeparentnodenull.xml"/>
 <suite.member href="nodeprocessinginstructionnodeattributes.xml"/>
@@ -295,4 +292,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="textsplittextthree.xml"/>
 <suite.member href="textsplittexttwo.xml"/>
 <suite.member href="textwithnomarkup.xml"/>
+<suite.member href="nodevalue01.xml"/>
+<suite.member href="nodevalue02.xml"/>
+<suite.member href="nodevalue03.xml"/>
+<suite.member href="nodevalue04.xml"/>
+<suite.member href="nodevalue05.xml"/>
+<suite.member href="nodevalue06.xml"/>
+<suite.member href="nodevalue07.xml"/>
+<suite.member href="nodevalue08.xml"/>
+<suite.member href="nodevalue09.xml"/>
 </suite>

@@ -194,7 +194,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="nodedocumentnodename.xml"/>
 <suite.member href="nodedocumentnodetype.xml"/>
 <suite.member href="nodedocumentnodevalue.xml"/>
-<suite.member href="nodedocumentsetnodevalue.xml"/>
 <suite.member href="nodedocumenttypenodename.xml"/>
 <suite.member href="nodedocumenttypenodetype.xml"/>
 <suite.member href="nodedocumenttypenodevalue.xml"/>

@@ -39,8 +39,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="newType" type="DocumentType" isNull="true"/>
+<var name="nodeName" type="DOMString"/>
+<var name="nodeValue" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
 <implementation obj="doc" var="domImpl"/>
 <createDocumentType obj="domImpl" var="newType" qualifiedName="qualifiedName" publicId="publicId" systemId="systemId"/>
-<assertEquals actual="newType" expected="&quot;[prefix:myDoc: null]&quot;" id="throw_Equals" ignoreCase="false"/>
+<nodeName var="nodeName" obj="newType"/>
+<assertEquals actual="nodeName" expected='"prefix:myDoc"' ignoreCase="false" id="nodeName"/>
+<nodeValue var="nodeValue" obj="newType"/>
+<assertNull actual="nodeValue" id="nodeValue"/>
 </test>

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.27  2001-10-18 14:21:59  dom-ts-4
+Revision 1.28  2001-10-25 09:29:27  dom-ts-4
+test-to-java updates for DOM L2
+
+Revision 1.27  2001/10/18 14:21:59  dom-ts-4
 Fixed regexp pattern for stringLiteral
 Explicitly specified UTF-8 encoding for test-to-java.xsl, etc
 Specified UTF8 encoding for javac
@@ -379,6 +382,11 @@ All implementation conditions combined into implementationAttribute element
 	      message="&lt;?xml version='1.0' encoding='UTF-8'?&gt;"/>
 	<echo file="${specs.dir}/Level-2/xml/status.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+
+    <!--  change name parameter of Element.getElementsByTagName to tagname   -->
+	<patch patchfile="./level-2-element.patch"
+	       originalfile="${specs.dir}/Level-2/xml/core/definitions/element.xml"/>
+
 </target>
 
 <target name="dom2-schema" depends="dom2-interfaces">
@@ -574,7 +582,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-core-gen-java" depends="dom1-interfaces">
+<target name="dom2-core-gen-java" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level2/core"/>
     <!-- TODO: explicitly excludes tests that Xalan 2.1 has problems with  -->
 	<style basedir="${tests.dir}/level2/core" 
@@ -592,7 +600,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom2-core-gen-ecmascript" depends="dom2-interfaces">
+<target name="dom2-core-gen-ecmascript" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/ecmascript/level2/core"/>
 	<style basedir="${tests.dir}/level2/core" 
 		   destdir="${build.dir}/ecmascript/level2/core" 
@@ -616,7 +624,7 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-core-jar" depends="dom2-core-javac">
 	<!--  will need to provide a manifest    -->
-	<jar jarfile="${dist.dir}/dom2-core.jar">
+	<jar jarfile="${dist.dir}/dom2-core.jar"  manifest="java/dom2-core.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 		<fileset dir="${java.build.dir}"

@@ -36,46 +36,42 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="namespaceURI" type="DOMString" value="&quot;http://www.ecommerce.org/schema&quot;"/>
 <var name="qualifiedName" type="DOMString"/>
-<var name="prefix" type="DOMString" value="&quot;namespaceURI:&quot;"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType" isNull="true"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="aNewDoc" type="Document"/>
 <var name="charact" type="DOMString"/>
-<var name="illegalCharacters" type="List">
-<member>"{"</member>
-<member>"}"</member>
-<member>"~"</member>
-<member>"'"</member>
-<member>"!"</member>
-<member>"@"</member>
-<member>"#"</member>
-<member>"$"</member>
-<member>"%"</member>
-<member>"^"</member>
-<member>"&amp;"</member>
-<member>"*"</member>
-<member>"("</member>
-<member>")"</member>
-<member>"+"</member>
-<member>"="</member>
-<member>"["</member>
-<member>"]"</member>
-<member>"\\"</member>
-<member>"/"</member>
-<member>";"</member>
-<member>"`"</member>
-<member>"&lt;"</member>
-<member>"&gt;"</member>
-<member>","</member>
-<member>"a "</member>
-<member>"\""</member>
+<var name="illegalQNames" type="List">
+<member>"namespaceURI:{"</member>
+<member>"namespaceURI:}"</member>
+<member>"namespaceURI:~"</member>
+<member>"namespaceURI:'"</member>
+<member>"namespaceURI:!"</member>
+<member>"namespaceURI:@"</member>
+<member>"namespaceURI:#"</member>
+<member>"namespaceURI:$"</member>
+<member>"namespaceURI:%"</member>
+<member>"namespaceURI:^"</member>
+<member>"namespaceURI:&amp;"</member>
+<member>"namespaceURI:*"</member>
+<member>"namespaceURI:("</member>
+<member>"namespaceURI:)"</member>
+<member>"namespaceURI:+"</member>
+<member>"namespaceURI:="</member>
+<member>"namespaceURI:["</member>
+<member>"namespaceURI:]"</member>
+<member>"namespaceURI:\\"</member>
+<member>"namespaceURI:/"</member>
+<member>"namespaceURI:;"</member>
+<member>"namespaceURI:`"</member>
+<member>"namespaceURI:&lt;"</member>
+<member>"namespaceURI:&gt;"</member>
+<member>"namespaceURI:,"</member>
+<member>"namespaceURI:a "</member>
+<member>"namespaceURI:\""</member>
 </var>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<while>
-<equals actual="done" expected="false" ignoreCase="false"/>
-<for-each collection="illegalCharacters" member="charact">
-<plus var="qualifiedName" op1="prefix" op2="charact"/>
+<for-each collection="illegalQNames" member="qualifiedName">
 <implementation obj="doc" var="domImpl"/>
 <assertDOMException id="throw_INVALID_CHARACTER_ERR">
 <INVALID_CHARACTER_ERR>
@@ -83,5 +79,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </INVALID_CHARACTER_ERR>
 </assertDOMException>
 </for-each>
-</while>
 </test>

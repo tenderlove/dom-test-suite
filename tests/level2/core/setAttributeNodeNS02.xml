@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="setAttributeNodeNS01">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="setAttributeNodeNS02">
 <metadata>
 <title>setAttributeNodeNS01</title>
 <creator>NIST</creator>

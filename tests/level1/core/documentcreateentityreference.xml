@@ -45,8 +45,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="entRefName" expected="&quot;ent1&quot;" ignoreCase="false" id="name"/>
 <nodeType obj="newEntRefNode" var="entRefType"/>
 <assertEquals actual="entRefType" expected="5" ignoreCase="false" id="type"/>
-<!--   setNodeValue should have no effect   -->
-<nodeValue obj="newEntRefNode" value='"This should have no effect"'/>
-<nodeValue obj="newEntRefNode" var="entRefValue"/>
-<assertNull actual="entRefValue" id="valueStillNull"/>
 </test>

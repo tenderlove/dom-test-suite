@@ -39,7 +39,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="docTypeName" expected="&quot;staff&quot;" id="documentGetDocTypeAssert" ignoreCase="false"/>
 <nodeValue obj="docType" var="nodeValue"/>
 <assertNull actual="nodeValue" id="initiallyNull"/>
-<nodeValue obj="docType" value='"This should have no effect"'/>
-<nodeValue obj="docType" var="nodeValue"/>
-<assertNull actual="nodeValue" id="nullAfterAttemptedChange"/>
 </test>

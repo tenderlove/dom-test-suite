@@ -35,50 +35,45 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="namespaceURI" type="DOMString" value="&quot;http://www.wedding.com/&quot;"/>
 <var name="qualifiedName" type="DOMString"/>
-<var name="prefix" type="DOMString" value="&quot;person:&quot;"/>
 <var name="doc" type="Document"/>
 <var name="done" type="boolean"/>
 <var name="newElement" type="Element"/>
 <var name="charact" type="DOMString"/>
-<var name="illegalCharacters" type="List">
-<member>"{"</member>
-<member>"}"</member>
-<member>"~"</member>
-<member>"'"</member>
-<member>"!"</member>
-<member>"@"</member>
-<member>"#"</member>
-<member>"$"</member>
-<member>"%"</member>
-<member>"^"</member>
-<member>"&amp;"</member>
-<member>"*"</member>
-<member>"("</member>
-<member>")"</member>
-<member>"+"</member>
-<member>"="</member>
-<member>"["</member>
-<member>"]"</member>
-<member>"\\"</member>
-<member>"/"</member>
-<member>";"</member>
-<member>"`"</member>
-<member>"&lt;"</member>
-<member>"&gt;"</member>
-<member>","</member>
-<member>"a "</member>
-<member>"\""</member>
+<var name="illegalQNames" type="List">
+<member>"person:{"</member>
+<member>"person:}"</member>
+<member>"person:~"</member>
+<member>"person:'"</member>
+<member>"person:!"</member>
+<member>"person:@"</member>
+<member>"person:#"</member>
+<member>"person:$"</member>
+<member>"person:%"</member>
+<member>"person:^"</member>
+<member>"person:&amp;"</member>
+<member>"person:*"</member>
+<member>"person:("</member>
+<member>"person:)"</member>
+<member>"person:+"</member>
+<member>"person:="</member>
+<member>"person:["</member>
+<member>"person:]"</member>
+<member>"person:\\"</member>
+<member>"person:/"</member>
+<member>"person:;"</member>
+<member>"person:`"</member>
+<member>"person:&lt;"</member>
+<member>"person:&gt;"</member>
+<member>"person:,"</member>
+<member>"person:a "</member>
+<member>"person:\""</member>
 </var>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<while>
-<equals actual="done" expected="false" ignoreCase="false"/>
-<for-each collection="illegalCharacters" member="charact">
-<plus var="qualifiedName" op1="prefix" op2="charact"/>
+<for-each collection="illegalQNames" member="qualifiedName">
 <assertDOMException id="throw_INVALID_CHARACTER_ERR">
 <INVALID_CHARACTER_ERR>
 <createElementNS obj="doc" var="newElement" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
 </INVALID_CHARACTER_ERR>
 </assertDOMException>
 </for-each>
-</while>
 </test>

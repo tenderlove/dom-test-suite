@@ -54,10 +54,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"Range"</member>
 <member>"Traversal"</member>
 </var>
-<var name="version" type="List">
-<member>"1.0"</member>
-<member>"3.0"</member>
-</var>
 <var name="doc" type="Document"/>
 <var name="rootNode" type="Node"/>
 <var name="featureElement" type="DOMString"/>
@@ -65,10 +61,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="state" type="boolean"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <documentElement obj="doc" var="rootNode"/>
-<for-each collection="version" member="versionElement">
+<assign var="versionElement" value='"1.0"'/>
 <for-each collection="features" member="featureElement">
 <isSupported obj="rootNode" feature="&quot;featureElement&quot;" version="&quot;versionElement&quot;" var="state"/>
 <assertTrue actual="state" id="throw_True"/>
 </for-each>
+<assign var="versionElement" value='"3.0"'/>
+<for-each collection="features" member="featureElement">
+<isSupported obj="rootNode" feature="&quot;featureElement&quot;" version="&quot;versionElement&quot;" var="state"/>
+<assertTrue actual="state" id="throw_True"/>
 </for-each>
 </test>
