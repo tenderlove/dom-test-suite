@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -35,9 +35,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElRemAtNS"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=238"/>
 </metadata>
-<!--  this test requires namespace awareness   -->
+<!--  this test requires namespace awareness and validation   -->
 <implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Node"/>

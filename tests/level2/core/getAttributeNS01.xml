@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -30,9 +30,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=238"/>
 </metadata>
-<!--  test requires namespace awareness   -->
+<!--  test requires namespace awareness and validation   -->
 <implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="validating" value="true"/>
 <var name="namespaceURI" type="DOMString" value="&quot;http://www.nist.gov&quot;"/>
 <var name="localName" type="DOMString" value="&quot;district&quot;"/>
 <var name="qualifiedName" type="DOMString" value="&quot;emp:district&quot;"/>
