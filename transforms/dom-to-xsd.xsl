@@ -66,7 +66,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
