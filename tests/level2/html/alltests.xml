@@ -495,6 +495,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLTableElement36.xml"/>
      <suite.member href="HTMLTableElement37.xml"/>
      <suite.member href="HTMLTableElement38.xml"/>
+     <suite.member href="HTMLTableElement39.xml"/>
+     <suite.member href="HTMLTableElement40.xml"/>
      <suite.member href="HTMLTableRowElement01.xml"/>
      <suite.member href="HTMLTableRowElement02.xml"/>
      <suite.member href="HTMLTableRowElement03.xml"/>
@@ -514,6 +516,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLTableRowElement17.xml"/>
      <suite.member href="HTMLTableRowElement18.xml"/>
      <suite.member href="HTMLTableRowElement19.xml"/>
+     <suite.member href="HTMLTableRowElement20.xml"/>
+     <suite.member href="HTMLTableRowElement21.xml"/>
      <suite.member href="HTMLTableSectionElement01.xml"/>
      <suite.member href="HTMLTableSectionElement02.xml"/>
      <suite.member href="HTMLTableSectionElement03.xml"/>
@@ -543,6 +547,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLTableSectionElement27.xml"/>
      <suite.member href="HTMLTableSectionElement28.xml"/>
      <suite.member href="HTMLTableSectionElement29.xml"/>
+     <suite.member href="HTMLTableSectionElement30.xml"/>
+     <suite.member href="HTMLTableSectionElement31.xml"/>
      <suite.member href="HTMLTextAreaElement01.xml"/>
      <suite.member href="HTMLTextAreaElement02.xml"/>
      <suite.member href="HTMLTextAreaElement03.xml"/>
