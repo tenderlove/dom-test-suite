@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -212,8 +212,8 @@ IFrameBuilder.prototype.hasFeature = function(feature, version) {
 
 
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
-  if (url == "staff" && !(this.contentType == "text/xml" || this.contentType == 'image/svg+xml')) {
-    throw "Tests using staff document are only supported for XML or SVG processors";
+  if (url == "staff" && this.contentType == "text/html") {
+    throw "Tests using staff document are not supported by HTML processors";
   }
   frame.document.location.href = fileBase + url + getSuffix(this.contentType);
   return 0;
@@ -253,6 +253,8 @@ IFrameBuilder.prototype.setImplementationAttribute = function(attribute, value) 
         throw "IFrame loader does not support " + attribute + "=" + value;
     }
 }
+
+
 
 
 function SVGPluginBuilder() {
@@ -369,6 +371,8 @@ SVGPluginBuilder.prototype.setImplementationAttribute = function(attribute, valu
         throw "SVG Plugin loader does not support " + attribute + "=" + value;
     }
 }
+
+
 
 
 
@@ -560,6 +564,11 @@ MozillaXMLBuilder.prototype.load = function(frame, varname, url) {
 
 
 MozillaXMLBuilder.prototype.getImplementationAttribute = function(attr) {
+    for (var i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attr) {
+            return this.fixedAttributeValues[i];
+        }
+    }
     return false;
 }
 
@@ -569,6 +578,77 @@ MozillaXMLBuilder.prototype.toAutoCase = function(s) {
 }
 
 MozillaXMLBuilder.prototype.toAutoCaseArray = function(s) {
+    return s;
+}
+
+
+function DOM3LSBuilder() {
+    this.contentType = "text/xml";
+
+    this.configurableAttributeNames = [ ];
+    this.configurableAttributeValues = [ ];
+    this.fixedAttributeNames = [ "validating", "ignoringElementContentWhitespace", "signed", 
+        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware" ];
+    this.fixedAttributeValues = [ false, false, true, true, false, false, true ];
+
+    this.contentType = "text/xml";
+    this.supportedContentTypes = [ 
+        "text/xml", 
+        "image/svg+xml", 
+        "application/xhtml+xml",
+        "text/mathml" ];
+
+    this.async = true;
+    this.supportsAsyncChange = true;
+
+    this.docs = new Array();
+    this.docnames = new Array();
+    this.exception = null;
+}
+
+DOM3LSBuilder.prototype.preload = function(frame, varname, url) {
+  if (this.async) {
+      var domimpl = document.implementation;
+      var dombuilder = domimpl.createDOMBuilder(2, null);
+      dombuilder.addEventListener("load", loadComplete, false);
+      var uri = fileBase + url + getSuffix(this.contentType);
+      var doc = dombuilder.parseURI(uri);
+      this.docs[this.docs.length] = doc;
+      this.docnames[this.docnames.length] = varname;
+      return 0;
+   }
+   return 1;
+}
+
+DOM3LSBuilder.prototype.load = function(frame, varname, url) {
+    if (this.async) {
+        for(i = 0; i < this.docnames.length; i++) {
+            if (this.docnames[i] == varname) {
+                return this.docs[i];
+            }
+        }
+        return null;
+    }
+    var dombuilder = document.implementation.createDOMBuilder(1, null);
+    var uri = fileBase + url + getSuffix(this.contentType);
+    return dombuilder.parseURI(uri);
+}
+
+
+DOM3LSBuilder.prototype.getImplementationAttribute = function(attr) {
+    for (var i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attr) {
+            return this.fixedAttributeValues[i];
+        }
+    }
+}
+
+
+DOM3LSBuilder.prototype.toAutoCase = function(s) {
+    return s;
+}
+
+DOM3LSBuilder.prototype.toAutoCaseArray = function(s) {
     return s;
 }
 
@@ -587,8 +667,7 @@ function createBuilder(implementation) {
     return new SVGPluginBuilder();
 
     case "dom3ls":
-//    return new DOM3LSBuilder();
-    return new IFrameBuilder();
+    return new DOM3LSBuilder();
   }
   return new IFrameBuilder();
 }

@@ -204,7 +204,7 @@ function suite() {
                         <table>
                             <tr><th>Implementation</th></tr>
                             <tr><td><input type="radio" name="implementation" value="iframe" checked="checked" onclick="onImplementationChange()">iframe</input></td></tr>
-                            <tr><td><input disabled="true" type="radio" name="implementation" value="dom3" onclick="onImplementationChange()">DOM 3 Load/Save</input></td></tr>
+                            <tr><td><input type="radio" name="implementation" value="dom3ls" onclick="onImplementationChange()">DOM 3 Load/Save</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="mozillaXML" onclick="onImplementationChange()">Mozilla XML</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="msxml3" onclick="onImplementationChange()">MSXML 3.0</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="msxml4" onclick="onImplementationChange()">MSXML 4.0</input></td></tr>
@@ -256,7 +256,6 @@ function suite() {
                             <tr><td><input type="radio" name="contentType" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input></td></tr>
                             <tr><td><input type="radio" name="contentType" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input></td></tr>
                             <tr><td><input type="radio" name="contentType" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input></td></tr>
-                            <tr><td><input disabled="disabled" type="radio" name="contentType" value="text/mathml" onclick="setContentType('text/mathml')">MathML</input></td></tr>
                         </table>
                     </td>
                 </tr>
