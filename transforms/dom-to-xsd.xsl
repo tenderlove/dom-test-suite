@@ -286,7 +286,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.</xs:documentation>
 				</xs:annotation>
 				<xs:restriction base="xs:string">
-					<xs:pattern value='"([^"]|\")*"'/>
+					<xs:pattern value='"([^"]|\\")*"'/>
 				</xs:restriction>
 			</xs:simpleType>
 
