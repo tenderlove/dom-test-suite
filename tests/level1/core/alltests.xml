@@ -127,6 +127,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="elementremoveattributenomodificationallowederr.xml"/>
 <suite.member href="elementremoveattributenomodificationallowederrEE.xml"/>
 <suite.member href="elementremoveattributerestoredefaultvalue.xml"/>
+<suite.member href="elementreplaceattributewithself.xml"/>
 <suite.member href="elementreplaceexistingattribute.xml"/>
 <suite.member href="elementreplaceexistingattributegevalue.xml"/>
 <suite.member href="elementretrieveallattributes.xml"/>

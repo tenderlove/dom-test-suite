@@ -12,8 +12,8 @@
 
 /*
 $Log: AvalonRunner.java,v $
-Revision 1.1  2001-11-01 05:12:43  dom-ts-4
-Avalon testlet support
+Revision 1.2  2001-11-01 15:02:50  dom-ts-4
+Doxygen and Avalon support
 
 Revision 1.1  2001/08/02 04:45:16  dom-ts-4
 Adapter for Avalon test framework.
@@ -34,15 +34,30 @@ import org.xml.sax.*;
 public class AvalonRunner extends TextTestEngine {
 
   private DOMTestDocumentBuilderFactory factory;
+  private Class testClass = null;
 
-  public AvalonRunner() throws Exception {
-//    super(args);
-/*
+  public AvalonRunner(Class testClass) {
+    this.testClass = testClass;
+  }
+
+  public AvalonRunner(String[] args) throws Exception {
+    testClass = AvalonRunner.class.getClassLoader().loadClass(args[0]);
+  }
+  
+  
+  public void execute(String[] args) throws Exception {
     Constructor testConstructor = null;
-    Class testClass = AvalonRunner.class.getClassLoader().loadClass(args[0]);
     testConstructor = testClass.getConstructor(
-        new Class[] { DOMTestDocumentBuilderFactory.class});
+         new Class[] { DOMTestDocumentBuilderFactory.class});
 
+      String[] attrNames = {
+        "coalescing",
+        "expandEntityReferences",
+        "ignoringElementContentWhitespace",
+        "namespaceAware",
+        "validating" };
+      boolean[] attrValues1 = { false, false, false, false, false };
+      boolean[] attrValues2 = { false, true, true, true, true };
 
     DOMTestDocumentBuilderFactory factory1 =
       new DOMTestDocumentBuilderFactory(attrNames, attrValues1);
@@ -50,34 +65,40 @@ public class AvalonRunner extends TextTestEngine {
     DOMTestDocumentBuilderFactory factory2 =
       new DOMTestDocumentBuilderFactory(attrNames, attrValues2);
 
-//    printPrologue();
-//    printImplementation(factory1);
-//    printAttributes(factory1);
-//    runTest(testConstructor, factory1);
+    printPrologue();
+    printImplementation(factory1);
+    printAttributes(factory1);
+    factory = factory1;
+    String[] classNames = new String[] { testClass.getName() };
+    runEngine(classNames);
 
-//    printAttributes(factory2);
-//    runTest(testConstructor, factory2);
+    printAttributes(factory2);
+    factory = factory2;
+    runEngine(classNames);
 
-*/
+
+  }
+
+  private static void printPrologue() {
+    System.out.println("DOM Test Adapter for Avalon Testlet\n");
+    System.out.println("Copyright (c) 2001 World Wide Web Consortium,");
+    System.out.println("Massachusetts Institute of Technology, Institut National de");
+    System.out.println("Recherche en Informatique et en Automatique, Keio University). All");
+    System.out.println("Rights Reserved. This program is distributed under the W3C's Software");
+    System.out.println("Intellectual Property License. This program is distributed in the");
+    System.out.println("hope that it will be useful, but WITHOUT ANY WARRANTY; without even");
+    System.out.println("the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR");
+    System.out.println("PURPOSE.");
+    System.out.println("See W3C License http://www.w3.org/Consortium/Legal/ for more details.\n");
+  }
+
+  private static void printHelp() {
+    System.out.println("Usage:\n");
+    System.out.println("java org.w3c.domts.JUnitRunner classname");
   }
 
 
-  protected void initialize() {
-    if(m_showBanner) {
-      System.out.println("DOM Test Adapter for Avalon\n");
-      System.out.println("Copyright (c) 2001 World Wide Web Consortium,");
-      System.out.println("Massachusetts Institute of Technology, Institut National de");
-      System.out.println("Recherche en Informatique et en Automatique, Keio University). All");
-      System.out.println("Rights Reserved. This program is distributed under the W3C's Software");
-      System.out.println("Intellectual Property License. This program is distributed in the");
-      System.out.println("hope that it will be useful, but WITHOUT ANY WARRANTY; without even");
-      System.out.println("the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR");
-      System.out.println("PURPOSE.");
-      System.out.println("See W3C License http://www.w3.org/Consortium/Legal/ for more details.\n");
-      System.out.println("This product includes software developed by the");
-      System.out.println("Apache Software Foundation (http://www.apache.org/).\n\n");
-    }
-
+  private static void printImplementation(DOMTestDocumentBuilderFactory factory) {
     DocumentBuilderFactory docfactory = factory.newInstance();
     try {
       DocumentBuilder builder = docfactory.newDocumentBuilder();
@@ -120,24 +141,17 @@ public class AvalonRunner extends TextTestEngine {
       ex.printStackTrace();
     }
     System.out.println("\n");
-
   }
 
-  protected void usage() {
-    System.out.println("Usage:\n");
-    System.out.println("java org.w3c.domts.AvalonRunner classname");
+  private void printAttributes(DOMTestDocumentBuilderFactory dsFactory) {
+    DocumentBuilderFactory factory = dsFactory.newInstance();
+    System.out.println("isCoalescing() == " + String.valueOf(factory.isCoalescing()));
+    System.out.println("isExpandEntityReferences() == " + String.valueOf(factory.isExpandEntityReferences()));
+    System.out.println("isIgnoringComments() == " + String.valueOf(factory.isIgnoringComments()));
+    System.out.println("isIgnoringElementContentWhitespace() == " + String.valueOf(factory.isIgnoringElementContentWhitespace()));
+    System.out.println("isNamespaceAware() == " + String.valueOf(factory.isNamespaceAware()));
+    System.out.println("isValidating() == " + String.valueOf(factory.isValidating()));
   }
-
-  protected void testletPreamble( final Testlet testlet, final TestletContext context ) {
-    DocumentBuilderFactory docfactory = factory.newInstance();
-    System.out.println("isCoalescing() == " + String.valueOf(docfactory.isCoalescing()));
-    System.out.println("isExpandEntityReferences() == " + String.valueOf(docfactory.isExpandEntityReferences()));
-    System.out.println("isIgnoringComments() == " + String.valueOf(docfactory.isIgnoringComments()));
-    System.out.println("isIgnoringElementContentWhitespace() == " + String.valueOf(docfactory.isIgnoringElementContentWhitespace()));
-    System.out.println("isNamespaceAware() == " + String.valueOf(docfactory.isNamespaceAware()));
-    System.out.println("isValidating() == " + String.valueOf(docfactory.isValidating()));
-  }
-
 
   private static void printFeature(DOMImplementation impl,String desc, String upperFeature, String lowerFeature, String version) {
     try {
@@ -158,6 +172,15 @@ public class AvalonRunner extends TextTestEngine {
     }
   }
 
+  protected void initialize() {
+  }
+
+  protected void usage() {
+    System.out.println("Usage:\n");
+    System.out.println("java org.w3c.domts.AvalonRunner classname");
+  }
+
+
 
   public void runEngine(DOMTestDocumentBuilderFactory factory, String[] args) {
     this.factory = factory;
@@ -165,23 +188,14 @@ public class AvalonRunner extends TextTestEngine {
   }
 
   public static void main (String[] args) {
+    if(args.length != 1) {
+      printPrologue();
+      printHelp();
+      return;
+    }
     try {
-      AvalonRunner runner = new AvalonRunner();
-
-      String[] attrNames = {
-        "coalescing",
-        "expandEntityReferences",
-        "ignoringElementContentWhitespace",
-        "namespaceAware",
-        "validating" };
-      boolean[] attrValues1 = { false, false, false, false, false };
-      boolean[] attrValues2 = { false, true, true, true, true };
-
-      DOMTestDocumentBuilderFactory factory1 = new DOMTestDocumentBuilderFactory(attrNames, attrValues1);
-      runner.runEngine(factory1,args);
-
-      DOMTestDocumentBuilderFactory factory2 = new DOMTestDocumentBuilderFactory(attrNames, attrValues2);
-      runner.runEngine(factory2,args);
+      AvalonRunner runner = new AvalonRunner(args);
+      runner.execute(args);
     }
     catch(Exception ex) {
       ex.printStackTrace();

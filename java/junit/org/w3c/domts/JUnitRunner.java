@@ -12,7 +12,10 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.3  2001-10-18 07:58:17  dom-ts-4
+Revision 1.4  2001-11-01 15:02:50  dom-ts-4
+Doxygen and Avalon support
+
+Revision 1.3  2001/10/18 07:58:17  dom-ts-4
 assertURIEquals added
 Can now run from dom1-core.jar
 
@@ -32,6 +35,7 @@ import javax.xml.parsers.*;
 import java.util.*;
 import org.w3c.dom.*;
 import org.xml.sax.*;
+import org.w3c.domts.*;
 
 public class JUnitRunner {
 

@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.7  2001-10-18 07:58:17  dom-ts-4
+ Revision 1.8  2001-11-01 15:02:50  dom-ts-4
+ Doxygen and Avalon support
+
+ Revision 1.7  2001/10/18 07:58:17  dom-ts-4
  assertURIEquals added
  Can now run from dom1-core.jar
 
@@ -65,24 +68,47 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
     //
     //   Attempt to load JUnitRunner
     //
+    Class runnerClass = null;
+    ClassLoader loader = testClass.getClassLoader();
+    Exception classException = null;
+    Constructor runnerFactory = null;
     try {
-        ClassLoader loader = testClass.getClassLoader();
-        Class junitRunnerClass = loader.loadClass("org.w3c.domts.JUnitRunner");
-        Constructor junitRunnerFactory = junitRunnerClass.getConstructor(new Class[] { Class.class });
-        //
-        //   create the JUnitRunner
-        //
-        Object junitRun = junitRunnerFactory.newInstance(new Object[] { testClass });
-        //
-        //   find and call its execute method
-        //
-        Class argsClass = loader.loadClass("[Ljava.lang.String;");
-        Method execMethod = junitRunnerClass.getMethod("execute", new Class[] { argsClass });
-        execMethod.invoke(junitRun, new Object[] { args });
+        runnerClass = loader.loadClass("org.w3c.domts.JUnitRunner");
+        runnerFactory = runnerClass.getConstructor(new Class[] { Class.class });
     }
     catch(Exception ex) {
-        System.out.println("Error bootstrapping junit-run.jar, check classpath");
-        ex.printStackTrace();
+        classException = ex;
+        try {
+            runnerClass = loader.loadClass("org.w3c.domts.AvalonRunner");
+            runnerFactory = runnerClass.getConstructor(new Class[] { Class.class });
+        }
+        catch(Exception ex2) {
+            classException = ex2;
+        }
+    }
+    if(runnerClass == null || runnerFactory == null) {
+        System.out.println("junit-run.jar amd junit.jar or avalon-run.jar and testlet.jar\n must be in same directory or on classpath.");
+        if(classException != null) {
+            classException.printStackTrace();
+        }
+    }
+    else {
+        try 
+        {
+            //
+            //   create the JUnitRunner
+            //
+            Object junitRun = runnerFactory.newInstance(new Object[] { testClass });
+            //
+            //   find and call its execute method
+            //
+            Class argsClass = loader.loadClass("[Ljava.lang.String;");
+            Method execMethod = runnerClass.getMethod("execute", new Class[] { argsClass });
+            execMethod.invoke(junitRun, new Object[] { args });
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
   }
 

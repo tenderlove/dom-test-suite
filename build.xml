@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.29  2001-10-30 06:03:39  dom-ts-4
+Revision 1.30  2001-11-01 15:02:50  dom-ts-4
+Doxygen and Avalon support
+
+Revision 1.29  2001/10/30 06:03:39  dom-ts-4
 Updated build.xml to use 26 Oct 2001 DOM Level 2 HTML Working Draft
 
 Revision 1.28  2001/10/25 09:29:27  dom-ts-4
@@ -108,15 +111,10 @@ All implementation conditions combined into implementationAttribute element
 <target name="usage">
 	<echo message="domconftest build"/>
 	<echo message=""/>
-	<echo message="available targets:"/>
+	<echo message="common targets:"/>
+    <echo message="usage - shows this message"/>
+    <echo message="clean - deletes all generated files"/>
 	<echo message=""/>
-	<echo message="init"/>
-	<echo message="dom1-init, -schema, -dtd, -subjects, -interfaces"/>
-	<echo message="dom2-init, -schema, -dtd, -subjects, -interfaces"/>
-	<echo message="dom3-init, -schema, -dtd, -subjects, -interfaces"/>
-	<echo message="transform"/>
-	<echo message="compile"/>
-	<echo message="dist"/>
 </target>
 
 <target name="init">
@@ -549,7 +547,6 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-core-jar" depends="dom1-core-javac">
-	<!--  will need to provide a manifest    -->
 	<jar jarfile="${dist.dir}/dom1-core.jar" manifest="java/dom1-core.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
@@ -565,7 +562,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom1-core-javadoc" depends="dom1-core-gen-java">
     <mkdir dir="${build.dir}/javadoc"/>
     <javadoc packagenames="org.w3c.domts.*"
-             sourcepath="java;java/junit;${java.build.dir}"
+             sourcepath="java/org/w3c/domts/level1/core;java/junit;${lib.dir}/junit3.7/junit.jar;${lib.dir}/testlet.dir"
              destdir="${build.dir}/javadoc"
              author="true"
              version="true"
@@ -574,8 +571,32 @@ All implementation conditions combined into implementationAttribute element
              bottom="Copyright &#169; 2001 World Wide Web Consortium.">
              <group title="Test Suite Framework" packages="org.w3c.domts"/>
              <group title="DOM Level 1 Core" packages="org.w3c.domts.level1.core"/>
+             <group title="DOM Level 2 Core" packages="org.w3c.domts.level2.core"/>
     </javadoc>
 </target>
+
+<target name="dom1-core-doxygen" depends="dom1-core-gen-java">
+    <mkdir dir="${build.dir}/doxygen"/>
+
+    <!--   These next steps tend to time out   -->
+
+    <!--
+	<get src="ftp://ftp.stack.nl/pub/users/dimitri/doxygen-1.2.11.windows.bin.zip"
+	     dest="${lib.dir}/doxygen.zip"
+	     usetimestamp="yes"/>
+
+	<unzip src="${lib.dir}/doxygen.zip" dest="${lib.dir}"/>
+    -->
+
+    <exec executable="${lib.dir}/doxygen-1.2.11/bin/doxygen">
+        <arg line="dom1-core.doxygen"/>
+    </exec>
+
+    <zip zipfile="${dist.dir}/dom1-core-doxygen.zip"
+         basedir="${build.dir}/doxygen/html"/>
+
+</target>
+
 
 <target name="dom2-core-validate-tests" depends="init">
 	<xmlvalidate lenient="no" failonerror="yes"
@@ -649,6 +670,8 @@ All implementation conditions combined into implementationAttribute element
 		usetimestamp="yes"/>
 	<unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
 
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${dist.dir}"/>
+
     <mkdir dir="${java.build.dir}/junit"/>
 
     <javac srcdir="java/junit/org/w3c/domts"
@@ -668,6 +691,34 @@ All implementation conditions combined into implementationAttribute element
 <target name="avalon-run" depends="common-javac">
 	<!--  get Avalon into lib directory  -->
 	<mkdir dir="${java.build.dir}/avalon"/>
+
+    <!--  Download a nightly build of Avalon testlet source
+              No binaries available since project was suspended  -->
+    <!--
+	<get src="http://jakarta.apache.org/builds/jakarta-avalon/nightly/2001-10-31/jakarta-avalon-testlet-src.zip"
+	     dest="${lib.dir}/jakarta-avalon-testlet-src.zip"
+	     usetimestamp="yes"/>
+    -->
+
+    <!--    unzip source   -->
+	<unzip src="${lib.dir}/jakarta-avalon-testlet-src.zip" dest="${lib.dir}"/>
+
+    
+
+    <!--    compile java files   -->
+    <ant antfile="build.xml" 
+         dir="${lib.dir}/jakarta-avalon-testlet/"         
+         target="compile"/>
+
+    <!--   build jar file (done here since task build.xml is not compatible with current Ant) -->
+	<jar jarfile="${lib.dir}/testlet.jar">
+        <fileset dir="${lib.dir}/jakarta-avalon-testlet/build/classes"
+                 includes="org/apache/testlet/**" />
+        <zipfileset src="${lib.dir}/jakarta-avalon-testlet/lib/clutil.jar" includes="**/*.class"/>
+	</jar>
+
+    <copy file="${lib.dir}/testlet.jar" todir="${dist.dir}"/>
+
 
 	<javac srcdir="java/avalon/org/w3c/domts"
 	       destdir="${java.build.dir}/avalon"
