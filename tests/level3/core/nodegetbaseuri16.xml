@@ -29,19 +29,19 @@ Node.getBaseURI for an EntityReference to should be the baseURI where the entity
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference"/>
 </metadata>
+<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
-<var name="node" type="Node"/>
+<var name="entRef" type="EntityReference"/>
 <var name="pList" type="NodeList"/>
 <var name="pElem" type="Element"/>
-<var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
-<load var="doc" href="external_barfoo" willBeModified="true"/>
+<load var="doc" href="external_barfoo" willBeModified="false"/>
 <getElementsByTagName var="pList" obj="doc" 
     tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
-<!--  either a entity reference to ent1 or a text node    -->
-<lastChild var="node" obj="pElem" interface="Node"/>
-<baseURI var="baseURI" obj="node" interface="Node"/>
+<!--  the last child should be a entity reference to ent1 ref    -->
+<lastChild var="entRef" obj="pElem" interface="Node"/>
+<baseURI var="baseURI" obj="entRef" interface="Node"/>
 <assertURIEquals actual="baseURI" isAbsolute="true" name='"external_barfoo"' id="baseURI"/>
 </test>
  
