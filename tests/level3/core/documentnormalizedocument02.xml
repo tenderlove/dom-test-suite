@@ -48,7 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <lastChild var="cdata" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="cdata"/>
 <assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument02" ignoreCase="false"/>
-<domConfig obj="doc" var="domConfig" interface="Document"/>
+<domConfig interface="Document" obj="doc" var="domConfig"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
 <normalizeDocument obj="doc"/>
 <getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>

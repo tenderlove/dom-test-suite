@@ -50,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <firstChild var="comment" obj="elem" interface="Node"/>
 <nodeName var="nodeName" obj="comment"/>
 <assertEquals actual="nodeName" expected='"#comment"' id="documentnormalizedocument04" ignoreCase="false"/>
-<domConfig obj="doc" var="domConfig" />
+<domConfig interface="Document" obj="doc" var="domConfig" />
 <setParameter obj="domConfig" name='"comments"' value="true"/>
 <normalizeDocument obj="doc"/>
 <firstChild var="comment" obj="elem" interface="Node"/>
