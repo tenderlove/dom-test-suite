@@ -159,9 +159,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="hc_attrname.xml"/>
      <suite.member href="hc_documentcreateattribute.xml"/>
      <suite.member href="hc_elementgetattributenode.xml"/>
+     <suite.member href="hc_entitiesremovenameditemns1.xml"/>
+     <suite.member href="hc_entitiessetnameditemns1.xml"/>
      <suite.member href="hc_namednodemapgetnameditem.xml"/>
      <suite.member href="hc_nodedocumentfragmentnormalize1.xml"/>
      <suite.member href="hc_nodedocumentfragmentnormalize2.xml"/>
+     <suite.member href="hc_notationsremovenameditemns1.xml"/>
+     <suite.member href="hc_notationssetnameditemns1.xml"/>
      <suite.member href="ibmtests.xml"/>
      <suite.member href="importNode01.xml"/>
      <suite.member href="importNode02.xml"/>
