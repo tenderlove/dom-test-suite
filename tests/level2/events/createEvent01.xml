@@ -26,14 +26,9 @@ DocumentEvent.createEvent method with eventType equals "Events".
 <date qualifier="created">2002-04-21</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Events/events#Events-DocumentEvent-createEvent"/>
 </metadata>
-<var name="impl" type="DOMImplementation"/>
-<var name="docEvent" type="DocumentEvent"/>
-<var name="doctype" type="DocumentType" isNull="true"/>
+<var name="doc" type="Document"/>
 <var name="event" type="Event"/>
-<implementation var="impl"/>
-<createDocument var="docEvent" obj="impl" 
-    namespaceURI='"http://www.w3.org/1999/xhtml"'
-    qualifiedName='"html"' doctype="doctype"/>
-<createEvent var="event" obj="docEvent" eventType='"Events"'/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<createEvent var="event" obj="doc" eventType='"Events"'/>
 <assertNotNull actual="event" id="notnull"/>
 </test>

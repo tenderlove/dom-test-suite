@@ -14,9 +14,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="alltests">
      <suite.member href="DocumentEventCast01.xml"/>
+     <suite.member href="EventTargetCast01.xml"/>
      <suite.member href="createEvent01.xml"/>
      <suite.member href="createEvent02.xml"/>
      <suite.member href="createEvent03.xml"/>
      <suite.member href="createEvent04.xml"/>
      <suite.member href="createEvent05.xml"/>
+     <suite.member href="dispatchEvent01.xml"/>
+     <suite.member href="dispatchEvent02.xml"/>
+     <suite.member href="dispatchEvent03.xml"/>
+     <suite.member href="dispatchEvent04.xml"/>
+     <suite.member href="dispatchEvent05.xml"/>
+     <suite.member href="dispatchEvent06.xml"/>
+     <suite.member href="dispatchEvent07.xml"/>
+     <suite.member href="dispatchEvent08.xml"/>
+     <suite.member href="dispatchEvent09.xml"/>
+     <suite.member href="dispatchEvent10.xml"/>
+     <suite.member href="dispatchEvent11.xml"/>
+     <suite.member href="dispatchEvent12.xml"/>
+     <suite.member href="dispatchEvent13.xml"/>
+     <suite.member href="DocumentEventCast01.xml"/>
+     <suite.member href="EventTargetCast01.xml"/>
+     <suite.member href="initEvent01.xml"/>
+     <suite.member href="initEvent02.xml"/>
+     <suite.member href="initEvent03.xml"/>
+     <suite.member href="initEvent04.xml"/>
+     <suite.member href="initEvent05.xml"/>
+     <suite.member href="initEvent06.xml"/>
 </suite>

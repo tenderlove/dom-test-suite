@@ -26,13 +26,8 @@ cast to a DocumentEvent interface.
 <date qualifier="created">2002-04-21</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Events/events#Events-DocumentEvent"/>
 </metadata>
-<var name="impl" type="DOMImplementation"/>
 <var name="doc" type="Document"/>
 <var name="docEvent" type="DocumentEvent"/>
-<var name="doctype" type="DocumentType" isNull="true"/>
-<implementation var="impl"/>
-<createDocument var="doc" obj="impl" 
-    namespaceURI='"http://www.w3.org/1999/xhtml"'
-    qualifiedName='"html"' doctype="doctype"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <assign var="docEvent" value="doc"/>
 </test>
