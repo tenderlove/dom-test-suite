@@ -12,7 +12,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE suite SYSTEM "dom1.dtd">
 
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="alltests">
-<<<<<<< alltests.xml
      <suite.member href="HTMLAnchorElement01.xml"/>
      <suite.member href="HTMLAnchorElement02.xml"/>
      <suite.member href="HTMLAnchorElement03.xml"/>
