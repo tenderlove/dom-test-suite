@@ -188,10 +188,14 @@ function getSuffix(contentType) {
 
 function IFrameBuilder() {
     this.contentType = "text/html";
-    this.supportedContentTypes = [ "text/html" ];
+    this.supportedContentTypes = [ "text/html", 
+        "text/xml", 
+        "image/svg+xml", 
+        "application/xhtml+xml",
+        "text/mathml" ];    
 
     this.supportsAsyncChange = false;
-    this.async = false;
+    this.async = true;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
         "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware" ];
@@ -212,14 +216,33 @@ IFrameBuilder.prototype.getImplementation = function() {
 
 
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
-  if (url == "staff" && this.contentType == "text/html") {
-    throw "Tests using staff document are not supported by HTML processors";
+  if (this.contentType == "text/html") {
+  	if (url == "staff" || url == "nodtdstaff") {
+    	throw "Tests using staff or nodtdstaff are not supported by HTML processors";
+  	}  
+  	return 1;
   }
-  return 1;
+  var iframe = document.createElement("iframe");
+  var srcname = url + getSuffix(this.contentType);
+  iframe.setAttribute("name", srcname);
+  iframe.setAttribute("src", fileBase + srcname);
+  iframe.addEventListener("load", loadComplete, false);  
+  document.getElementsByTagName("body").item(0).appendChild(iframe);
+  return 0; 
 }
 
 IFrameBuilder.prototype.load = function(frame, varname, url) {
-    return frame.document;
+	if (this.contentType == "text/html") {
+    	return frame.document;
+    }
+    var name = url + getSuffix(this.contentType);
+    var iframes = document.getElementsByTagName("iframe");
+    for(var i = 0; i < iframes.length; i++) {
+       if (iframes.item(i).getAttribute("name") == name) {
+           return iframes.item(i).contentDocument;
+       }
+    }
+    return null;
 }
 
 IFrameBuilder.prototype.getImplementationAttribute = function(attr) {

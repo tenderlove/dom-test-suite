@@ -267,10 +267,10 @@ function suite() {
                     <td valign="top">
                         <table>
                             <tr><th>Content Type</th></tr>
-                            <tr><td><input type="radio" name="contentType" value="text/xml" disabled="disabled" onclick="setContentType('text/xml')">XML</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" value="text/xml" onclick="setContentType('text/xml')">XML</input></td></tr>
                             <tr><td><input type="radio" name="contentType" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input></td></tr>
-                            <tr><td><input type="radio" name="contentType" value="application/xhtml+xml" disabled="disabled" onclick="setContentType('application/xhtml+xml')">XHTML</input></td></tr>
-                            <tr><td><input type="radio" name="contentType" value="image/svg+xml" disabled="disabled" onclick="setContentType('image/svg+xml')">SVG</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input></td></tr>
+                            <tr><td><input type="radio" name="contentType" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input></td></tr>
                         </table>
                     </td>
                 </tr>
