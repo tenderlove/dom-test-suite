@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+<!DOCTYPE test SYSTEM "dom2.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="importNode14">
+<metadata>
+<title>importNode14</title>
+<creator>NIST</creator>
+<description>
+    The "importNode(importedNode,deep)" method for a 
+   Document should import the given importedNode into that Document.
+   The importedNode is of type Processing Instruction.
+   
+   Create a processing instruction with target as "target1" and data as "data1" 
+   in a different document. Invoke method importNode(importedNode,deep) on this document.
+   Method should return a processing instruction whose target and data match the given 
+   parameters. The returned PI should belong to this document whose systemId is "staff.dtd".
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="aNewDoc" type="Document"/>
+<var name="pi" type="ProcessingInstruction"/>
+<var name="aNode" type="ProcessingInstruction"/>
+<var name="ownerDocument" type="Document"/>
+<var name="docType" type="DocumentType"/>
+<var name="system" type="DOMString"/>
+<var name="target" type="DOMString"/>
+<var name="data" type="DOMString"/>
+<var name="result" type="List"/>
+<var name="expectedResult" type="List">
+<member>"target1"</member>
+<member>"data1"</member>
+</var>
+<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<createProcessingInstruction obj="aNewDoc" var="pi" target="&quot;target1&quot;" data="&quot;data1&quot;"/>
+<importNode obj="doc" var="aNode" importedNode="pi" deep="false"/>
+<ownerDocument obj="aNode" var="ownerDocument"/>
+<doctype obj="ownerDocument" var="docType"/>
+<systemId interface="DocumentType" obj="docType" var="system"/>
+<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<target interface="ProcessingInstruction" obj="aNode" var="target"/>
+<append collection="result" obj="target"/>
+<data interface="ProcessingInstruction" obj="aNode" var="data"/>
+<append collection="result" obj="data"/>
+<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+</test>

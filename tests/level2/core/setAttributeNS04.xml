@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+<!DOCTYPE test SYSTEM "dom2.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="setAttributeNS04">
+<metadata>
+<title>setAttributeNS04</title>
+<creator>NIST</creator>
+<description>
+    The "setAttributeNS(namespaceURI,qualifiedName,value)" method adds a new attribute.
+   If an attribute with the same local name and namespace URI is already present
+   on the element, its prefix is changed to be the prefix part of the "qualifiedName",
+   and its vale is changed to be the "value" paramter.
+   null value if no previously existing Attr node with the
+   same name was replaced.
+   
+   Add a new attribute to the "emp:address" element.
+   Check to see if the new attribute has been successfully added to the document
+   by getting the attributes value, namespace URI, local Name and prefix.
+   The prefix will be changed to the prefix part of the "qualifiedName" 
+   and its value changed to the "value" parameter.    
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+</metadata>
+<var name="localName" type="DOMString" value="&quot;zone&quot;"/>
+<var name="namespaceURI" type="DOMString" value="&quot;http://www.nist.gov&quot;"/>
+<var name="qualifiedName" type="DOMString" value="&quot;newprefix:zone&quot;"/>
+<var name="doc" type="Document"/>
+<var name="elementList" type="NodeList"/>
+<var name="testAddr" type="Node"/>
+<var name="addrAttr" type="Attr"/>
+<var name="resultAttr" type="DOMString"/>
+<var name="resultNamespaceURI" type="DOMString"/>
+<var name="resultLocalName" type="DOMString"/>
+<var name="resultPrefix" type="DOMString"/>
+<var name="result" type="List"/>
+<var name="expectedResult" type="List">
+<member>"newValue"</member>
+<member>"http://www.nist.gov"</member>
+<member>"zone"</member>
+<member>"newprefix"</member>
+</var>
+<load var="doc" href="staffNS.xml" willBeModified="true"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;emp:address&quot;"/>
+<item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
+<setAttributeNS obj="testAddr" namespaceURI="namespaceURI" qualifiedName="qualifiedName" value="&quot;newValue&quot;"/>
+<getAttributeNodeNS obj="testAddr" var="addrAttr" namespaceURI="namespaceURI" localName="localName"/>
+<getAttributeNS obj="testAddr" var="resultAttr" namespaceURI="namespaceURI" localName="localName"/>
+<namespaceURI obj="addrAttr" var="resultNamespaceURI"/>
+<localName obj="addrAttr" var="resultLocalName"/>
+<prefix obj="addrAttr" var="resultPrefix"/>
+<append collection="result" obj="resultAttr"/>
+<append collection="result" obj="resultNamespaceURI"/>
+<append collection="result" obj="resultLocalName"/>
+<append collection="result" obj="resultPrefix"/>
+<assertEquals actual="result" expected="expectedResult" id="throw_Equals" ignoreCase="false"/>
+</test>

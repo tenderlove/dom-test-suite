@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+<!DOCTYPE test SYSTEM "dom2.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="importNode12">
+<metadata>
+<title>importNode12</title>
+<creator>NIST</creator>
+<description>
+    The "importNode(importedNode,deep)" method for a 
+   Document should import the given importedNode into that Document.
+   The importedNode is of type Entity.
+   
+   Retrieve entity "ent4" from staffNS.xml document.  
+   Invoke method importNode(importedNode,deep) on this document with deep as false.
+   Method should return a node of type Entity whose descendant is copied.
+   The returned node should belong to this document whose systemId is "staff.dtd"
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="aNewDoc" type="Document"/>
+<var name="doc1Type" type="DocumentType"/>
+<var name="entityList" type="NamedNodeMap"/>
+<var name="entity2" type="Entity"/>
+<var name="entity1" type="Entity"/>
+<var name="ownerDocument" type="Document"/>
+<var name="docType" type="DocumentType"/>
+<var name="system" type="DOMString"/>
+<var name="entityName" type="DOMString"/>
+<var name="child" type="Node"/>
+<var name="childName" type="DOMString"/>
+<var name="result" type="List"/>
+<var name="expectedResult" type="List">
+<member>"ent4"</member>
+<member>"entElement1"</member>
+</var>
+<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<doctype obj="aNewDoc" var="doc1Type"/>
+<entities obj="doc1Type" var="entityList"/>
+<getNamedItem obj="entityList" var="entity2" name="&quot;ent4&quot;"/>
+<importNode obj="doc" var="entity1" importedNode="entity2" deep="true"/>
+<ownerDocument obj="entity1" var="ownerDocument"/>
+<doctype obj="ownerDocument" var="docType"/>
+<systemId interface="DocumentType" obj="docType" var="system"/>
+<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<nodeName obj="entity1" var="entityName"/>
+<append collection="result" obj="entityName"/>
+<firstChild interface="Node" obj="entity1" var="child"/>
+<nodeName obj="child" var="childName"/>
+<append collection="result" obj="childName"/>
+<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+</test>
