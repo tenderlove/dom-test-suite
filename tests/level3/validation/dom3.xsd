@@ -1,0 +1,3862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w3.org/2001/DOM-Test-Suite/Level-3" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" xmlns:test="http://www.w3.org/2001/DOM-Test-Suite/Level-3" elementFormDefault="qualified"><!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+-->
+
+<!--This schema was generated from  by dom-to-xsd.xsl.-->
+
+
+   <xs:simpleType name="absoluteURI">
+      <xs:restriction base="xs:anyURI">
+         <xs:pattern value="[a-zA-Z]*:.*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="variable">
+      <xs:annotation>
+         <xs:documentation>A variable name</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[A-Za-z][A-Za-z0-9_]*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="className">
+      <xs:annotation>
+         <xs:documentation>A class name</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[A-Za-z_][A-Za-z0-9_]*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="stringLiteral">
+      <xs:annotation>
+         <xs:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.  The following subset of Java escape sequences are supported, \", \\, \n</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:pattern value="&#34;([^&#34;\\]|\\&#34;|\\\\|\\n)*&#34;"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="literal">
+      <xs:annotation>
+         <xs:documentation>The union of accepted literal types</xs:documentation>
+      </xs:annotation>
+      <xs:union memberTypes="xs:integer xs:boolean stringLiteral"/>
+   </xs:simpleType>
+   <xs:simpleType name="variableOrLiteral">
+      <xs:union memberTypes="literal variable"/>
+   </xs:simpleType>
+   <xs:simpleType name="variableOrStringLiteral">
+      <xs:union memberTypes="stringLiteral variable"/>
+   </xs:simpleType>
+   <xs:simpleType name="variableOrIntLiteral">
+      <xs:union memberTypes="xs:integer variable"/>
+   </xs:simpleType>
+   <xs:simpleType name="variableOrBoolLiteral">
+      <xs:union memberTypes="xs:boolean variable"/>
+   </xs:simpleType>
+   <xs:simpleType name="variableType">
+      <xs:annotation>
+         <xs:documentation>All known DOM interfaces plus int, DOMString maybe some others.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="int"/>
+         <xs:enumeration value="short"/>
+         <xs:enumeration value="boolean"/>
+         <xs:enumeration value="DOMString"/>
+         <xs:enumeration value="List">
+            <xs:annotation>
+               <xs:documentation>A List variable is used to compare two ordered collections, such as the expected and actual child element names.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Collection">
+            <xs:annotation>
+               <xs:documentation>A collection variable is used to compare two unordered collections, such as the expected and actual attribute names.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="EventMonitor">
+            <xs:annotation>
+               <xs:documentation>An implementation of EventListener that will capture and store all events encountered.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Attr"/>
+         <xs:enumeration value="CDATASection"/>
+         <xs:enumeration value="CharacterData"/>
+         <xs:enumeration value="CharacterDataEditVAL"/>
+         <xs:enumeration value="Comment"/>
+         <xs:enumeration value="Document"/>
+         <xs:enumeration value="DocumentEditVAL"/>
+         <xs:enumeration value="DocumentFragment"/>
+         <xs:enumeration value="DocumentType"/>
+         <xs:enumeration value="DOMConfiguration"/>
+         <xs:enumeration value="DOMError"/>
+         <xs:enumeration value="DOMErrorHandler"/>
+         <xs:enumeration value="DOMImplementation"/>
+         <xs:enumeration value="DOMImplementationList"/>
+         <xs:enumeration value="DOMImplementationSource"/>
+         <xs:enumeration value="DOMLocator"/>
+         <xs:enumeration value="DOMStringList"/>
+         <xs:enumeration value="Element"/>
+         <xs:enumeration value="ElementEditVAL"/>
+         <xs:enumeration value="Entity"/>
+         <xs:enumeration value="EntityReference"/>
+         <xs:enumeration value="NamedNodeMap"/>
+         <xs:enumeration value="NameList"/>
+         <xs:enumeration value="Node"/>
+         <xs:enumeration value="NodeEditVAL"/>
+         <xs:enumeration value="NodeList"/>
+         <xs:enumeration value="Notation"/>
+         <xs:enumeration value="ProcessingInstruction"/>
+         <xs:enumeration value="StringExtend"/>
+         <xs:enumeration value="Text"/>
+         <xs:enumeration value="TypeInfo"/>
+         <xs:enumeration value="UserDataHandler"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="loadContentType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="text/xml">
+            <xs:annotation>
+               <xs:documentation>Generic XML</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="image/svg+xml">
+            <xs:annotation>
+               <xs:documentation>SVG</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="text/html">
+            <xs:annotation>
+               <xs:documentation>HTML</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:element name="test">
+      <xs:annotation>
+         <xs:documentation>A test.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+               <xs:element ref="hasFeature"/>
+               <xs:element ref="implementationAttribute"/>
+            </xs:choice>
+            <xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:choice>
+               <xs:element ref="load"/>
+               <xs:element ref="implementation"/>
+            </xs:choice>
+            <xs:group ref="statement" maxOccurs="unbounded"/>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="name" type="className" use="required">
+            <xs:annotation>
+               <xs:documentation>Used in method name in generated code.</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+         <xs:attribute name="contentType" type="loadContentType" use="optional">
+            <xs:annotation>
+               <xs:documentation>Content type used to select the appropriate test documents.  Value propagates from enclosing suites.
+                            For example, loading "file1" when contextType="text/xml" should load "staff.xml".  If contentType="image/xsl+svg", file1.svg would be loaded.
+                         </xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+      </xs:complexType>
+      <xs:key name="var-name">
+         <xs:selector xpath="./test:var"/>
+         <xs:field xpath="@name"/>
+      </xs:key>
+      <xs:keyref name="var-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@var"/>
+      </xs:keyref>
+      <xs:keyref name="obj-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@obj"/>
+      </xs:keyref>
+      <xs:keyref name="actual-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@actual"/>
+      </xs:keyref>
+      <xs:keyref name="collection-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@collection"/>
+      </xs:keyref>
+      <xs:keyref name="member-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@member"/>
+      </xs:keyref>
+      <xs:keyref name="refChild-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@refChild"/>
+      </xs:keyref>
+      <xs:keyref name="doctype-attrib" refer="var-name">
+         <xs:selector xpath="./*"/>
+         <xs:field xpath="@doctype"/>
+      </xs:keyref>
+   </xs:element>
+   <xs:element name="suite.member">
+      <xs:annotation>
+         <xs:documentation>A member of a test suite, either a individual test or another suite.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:attribute name="href" type="xs:anyURI" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="suite">
+      <xs:annotation>
+         <xs:documentation>A suite of tests</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+               <xs:element ref="hasFeature"/>
+               <xs:element ref="implementationAttribute"/>
+            </xs:choice>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+               <xs:element ref="suite.member"/>
+            </xs:choice>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="name" type="className" use="required">
+            <xs:annotation>
+               <xs:documentation>Used in method name in generated code.</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+        <!-- <xs:attribute name="contentType" type="loadContentType" use="optional">
+            <xs:annotation>
+               <xs:documentation>Content type used to select the appropriate test documents.  Value propagates from enclosing suites.
+                            For example, loading "file1" when contextType="text/xml" should load "staff.xml".  If contentType="image/xsl+svg", file1.svg would be loaded.
+                         </xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+        -->   
+   </xs:complexType>
+   </xs:element>
+   <xs:element name="package">
+      <xs:annotation>
+         <xs:documentation>A package of tests in one resource</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+               <xs:element ref="test"/>
+               <xs:element ref="suite"/>
+            </xs:choice>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="comment">
+      <xs:annotation>
+         <xs:documentation>Injects comment into generated code.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="id" type="xs:ID" use="optional"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="wait">
+      <xs:annotation>
+         <xs:documentation>Attempts to pause for a specified period</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="milliseconds" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="append">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="collection" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="unaryAssignment">
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+      <xs:attribute name="var" type="variable" use="required"/>
+      <xs:attribute name="value" type="variableOrLiteral" use="required"/>
+   </xs:complexType>
+   <xs:element name="assign">
+      <xs:annotation>
+         <xs:documentation>Assigns the specified value or condition to the a variable.  If both are specified, the value will be AND'd with the condition.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:group ref="condition" minOccurs="0"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="value" type="variableOrLiteral" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="increment" type="unaryAssignment"/>
+   <xs:element name="decrement" type="unaryAssignment"/>
+   <xs:complexType name="binaryAssignment">
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+      <xs:attribute name="var" type="variable" use="required"/>
+      <xs:attribute name="op1" type="variableOrLiteral" use="required"/>
+      <xs:attribute name="op2" type="variableOrLiteral" use="required"/>
+   </xs:complexType>
+   <xs:element name="plus" type="binaryAssignment"/>
+   <xs:element name="subtract" type="binaryAssignment"/>
+   <xs:element name="mult" type="binaryAssignment"/>
+   <xs:element name="divide" type="binaryAssignment"/>
+   <xs:complexType name="sinkMethod">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+         <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="sinkAttribute">
+      <xs:sequence>
+         <xs:element name="get">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                  <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+                  <xs:element ref="return"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="set">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                  <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="sinkReadOnlyAttribute">
+      <xs:sequence>
+         <xs:element name="get">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                  <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+                  <xs:element ref="return"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="return">
+      <xs:complexType>
+         <xs:sequence/>
+         <xs:attribute name="value" type="variableOrLiteral" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="var">
+      <xs:annotation>
+         <xs:documentation>Declare and optionally initialize a variable.  [Tenative] All variables must be declared.  Use instanceOf for type assertions.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:choice minOccurs="0">
+            <xs:element ref="member" maxOccurs="unbounded"/>
+            <xs:sequence>
+               <xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:choice>
+                  <xs:sequence>
+                     <xs:element name="handleError" type="sinkMethod"/>
+                  </xs:sequence>
+               </xs:choice>
+            </xs:sequence>
+         </xs:choice>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="name" type="variable" use="required"/>
+         <xs:attribute name="type" type="variableType" use="required"/>
+         <xs:attribute name="value" type="variableOrLiteral" use="optional"/>
+         <xs:attribute name="isNull" type="xs:boolean" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="member" type="literal">
+      <xs:annotation>
+         <xs:documentation>Member children are used to initialize List and Collection types.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="load">
+      <xs:annotation>
+         <xs:documentation>Loads the document declared in the corresponding document element.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="href" type="xs:anyURI" use="required"/>
+         <xs:attribute name="willBeModified" type="xs:boolean" use="required">
+            <xs:annotation>
+               <xs:documentation>If true then this test may modify the document, so a fresh copy should be loaded instead of a cached copy.</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="implementation">
+      <xs:annotation>
+         <xs:documentation>Gets a DOMImplementation.  If the obj attribute is not specified, it creates a default implementation as determined by the test framework.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="metadata">
+      <xs:complexType>
+         <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="metadata"/>
+            <xs:element name="title" type="rdf-statement">
+               <xs:annotation>
+                  <xs:documentation>Name given to the test.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element ref="creator"/>
+            <xs:element ref="subject"/>
+            <xs:element ref="description"/>
+            <xs:element ref="contributor"/>
+            <xs:element ref="date"/>
+            <xs:element ref="source"/>
+            <xs:element ref="relation"/>
+         </xs:choice>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="about" type="xs:anyURI" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="rdf-statement">
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="resource" type="absoluteURI" use="optional"/>
+            <xs:attribute name="type" type="absoluteURI" use="optional"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:element name="creator" type="rdf-statement">
+      <xs:annotation>
+         <xs:documentation>Entity primarily responsible for making the test definition.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="subject" type="rdf-statement">
+      <xs:annotation>
+         <xs:documentation>One topic of the test.  May be repeated.  Preferably, a URI identifing a particular section of the DOM specification.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="description" type="rdf-statement">
+      <xs:annotation>
+         <xs:documentation>A free-text account of the test.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="contributor" type="rdf-statement">
+      <xs:annotation>
+         <xs:documentation>An entity responsible for making contributions to the test.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:simpleType name="dateQualifier">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="created"/>
+         <xs:enumeration value="valid"/>
+         <xs:enumeration value="available"/>
+         <xs:enumeration value="issued"/>
+         <xs:enumeration value="modified"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:element name="date">
+      <xs:annotation>
+         <xs:documentation>A reference to a rest from which the current test is derived.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:date">
+               <xs:attribute name="id" type="xs:ID" use="optional"/>
+               <xs:attribute name="qualifier" use="required" type="dateQualifier"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="source" type="rdf-statement">
+      <xs:annotation>
+         <xs:documentation>A reference to a rest from which the current test is derived.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:simpleType name="relationQualifier">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="isVersionOf"/>
+         <xs:enumeration value="hasVersion"/>
+         <xs:enumeration value="isReplacedBy"/>
+         <xs:enumeration value="isRequiredBy"/>
+         <xs:enumeration value="requires"/>
+         <xs:enumeration value="isPartOf"/>
+         <xs:enumeration value="hasPart"/>
+         <xs:enumeration value="isReferenceBy"/>
+         <xs:enumeration value="references"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:element name="relation">
+      <xs:annotation>
+         <xs:documentation>A reference to a rest from which the current test is derived.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="id" type="xs:ID" use="optional"/>
+               <xs:attribute name="resource" type="absoluteURI" use="optional"/>
+               <xs:attribute name="type" type="absoluteURI" use="optional"/>
+               <xs:attribute name="qualifier" use="required" type="relationQualifier"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="assertTrueFalse">
+      <xs:sequence>
+         <xs:group ref="condition" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+      <xs:attribute name="actual" type="variable" use="optional"/>
+   </xs:complexType>
+   <xs:element name="assertTrue" type="assertTrueFalse">
+      <xs:annotation>
+         <xs:documentation>Will result in the test failing unless the condition expression content and  the value of the variable specified in the "actual" attribute are either absent or true.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="assertFalse" type="assertTrueFalse">
+      <xs:annotation>
+         <xs:documentation>Will result in the test failing unless the condition expression content or the value of the variable specified in the "actual" attribute is false.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="unaryAssertion">
+      <xs:sequence>
+         <xs:element ref="metadata" minOccurs="0"/>
+         <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="actual" type="variable" use="required"/>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:element name="assertNull" type="unaryAssertion"/>
+   <xs:element name="assertNotNull" type="unaryAssertion"/>
+   <xs:complexType name="comparisonAssertion">
+      <xs:sequence>
+         <xs:element ref="metadata" minOccurs="0"/>
+         <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="actual" type="variable" use="required"/>
+      <xs:attribute name="expected" type="variableOrLiteral" use="required"/>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:element name="assertSame">
+      <xs:annotation>
+         <xs:documentation>This asserts that the parameters reference the same object.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+         <xs:attribute name="actual" type="variable" use="required"/>
+         <xs:attribute name="expected" type="variable" use="required"/>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="assertInstanceOf">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="type" type="variableType" use="required"/>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="assertSize">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+         <xs:attribute name="collection" type="variable" use="required"/>
+         <xs:attribute name="size" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="comparisonAssertionWithCase">
+      <xs:attribute name="actual" type="variable" use="required"/>
+      <xs:attribute name="expected" type="variableOrLiteral" use="required"/>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+      <xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
+   </xs:complexType>
+   <xs:element name="assertEquals" type="comparisonAssertionWithCase"/>
+   <xs:element name="assertNotEquals" type="comparisonAssertionWithCase"/>
+   <xs:element name="assertEventCount">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+         <xs:attribute name="atCount" type="variableOrIntLiteral" use="optional"/>
+         <xs:attribute name="captureCount" type="variableOrIntLiteral" use="optional"/>
+         <xs:attribute name="bubbleCount" type="variableOrIntLiteral" use="optional"/>
+         <xs:attribute name="totalCount" type="variableOrIntLiteral" use="optional"/>
+         <xs:attribute name="monitor" type="variable" use="required"/>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="assertURIEquals">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+         </xs:sequence>
+         <xs:attribute name="actual" type="variable" use="required"/>
+         <xs:attribute name="scheme" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="path" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="host" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="file" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="query" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="fragment" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="isAbsolute" type="variableOrBoolLiteral" use="optional"/>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="assertImplementationException">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:group ref="statement" minOccurs="1" maxOccurs="1"/>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:group name="framework-assertion">
+      <xs:choice>
+         <xs:element ref="assertTrue"/>
+         <xs:element ref="assertFalse"/>
+         <xs:element ref="assertNull"/>
+         <xs:element ref="assertNotNull"/>
+         <xs:element ref="assertEquals"/>
+         <xs:element ref="assertNotEquals"/>
+         <xs:element ref="assertSame"/>
+         <xs:element ref="assertInstanceOf"/>
+         <xs:element ref="assertSize"/>
+         <xs:element ref="assertEventCount"/>
+         <xs:element ref="assertURIEquals"/>
+         <xs:element ref="assertImplementationException"/>
+      </xs:choice>
+   </xs:group>
+   <xs:group name="framework-statement">
+      <xs:choice>
+         <xs:element ref="assign"/>
+         <xs:element ref="increment"/>
+         <xs:element ref="decrement"/>
+         <xs:element ref="append"/>
+         <xs:element ref="plus"/>
+         <xs:element ref="subtract"/>
+         <xs:element ref="mult"/>
+         <xs:element ref="divide"/>
+         <xs:element ref="load"/>
+         <xs:element ref="implementation"/>
+         <xs:element ref="hasFeature"/>
+         <xs:element ref="if"/>
+         <xs:element ref="while"/>
+         <xs:element ref="for-each"/>
+         <xs:element ref="comment"/>
+         <xs:element ref="return"/>
+         <xs:element ref="atEvents"/>
+         <xs:element ref="capturedEvents"/>
+         <xs:element ref="bubbledEvents"/>
+         <xs:element ref="allEvents"/>
+         <xs:element ref="createEventMonitor"/>
+      </xs:choice>
+   </xs:group>
+   <xs:complexType name="comparison">
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+      <xs:attribute name="actual" type="variable" use="required"/>
+      <xs:attribute name="expected" type="variableOrLiteral" use="required"/>
+   </xs:complexType>
+   <xs:element name="same">
+      <xs:annotation>
+         <xs:documentation>Object identity comparison</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="actual" type="variable" use="required"/>
+         <xs:attribute name="expected" type="variable" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="ignoreCaseEnum">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="true"/>
+         <xs:enumeration value="false"/>
+         <xs:enumeration value="auto">
+            <xs:annotation>
+               <xs:documentation>If auto, the comparision will perform case folding 
+                            as appropriate for the content type.  Case insensitive for contentType="text/html",
+                            case sensitive for all others.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="comparisonWithCase">
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+      <xs:attribute name="actual" type="variable" use="required"/>
+      <xs:attribute name="expected" type="variableOrLiteral" use="required"/>
+      <xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
+   </xs:complexType>
+   <xs:element name="equals" type="comparisonWithCase">
+      <xs:annotation>
+         <xs:documentation>Value comparison, element-wise on collections.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="notEquals" type="comparisonWithCase"/>
+   <xs:element name="less" type="comparison">
+      <xs:annotation>
+         <xs:documentation>Actual is less than to expected.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="lessOrEquals" type="comparison">
+      <xs:annotation>
+         <xs:documentation>Actual is less than or equal to expected.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="greaterOrEquals" type="comparison">
+      <xs:annotation>
+         <xs:documentation>Actual is greater than or equal to expected.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="greater" type="comparison">
+      <xs:annotation>
+         <xs:documentation>Actual is greater than expected.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="unaryComparison">
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+      <xs:attribute name="obj" type="variable" use="required"/>
+   </xs:complexType>
+   <xs:element name="isNull" type="unaryComparison"/>
+   <xs:element name="notNull" type="unaryComparison"/>
+   <xs:element name="instanceOf">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="type" type="variableType" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="hasSize">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="expected" type="variableOrIntLiteral" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="contains">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="implementationAttribute">
+      <xs:complexType>
+         <xs:attribute name="name" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="validating"/>
+                  <xs:enumeration value="coalescing"/>
+                  <xs:enumeration value="expandEntityReferences"/>
+                  <xs:enumeration value="namespaceAware"/>
+                  <xs:enumeration value="ignoringElementContentWhitespace"/>
+                  <xs:enumeration value="signed"/>
+                  <xs:enumeration value="hasNullString"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="value" use="required" type="xs:boolean"/>
+         <xs:attribute name="id" use="optional" type="xs:ID"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="hasFeature">
+      <xs:annotation>
+         <xs:documentation>hasFeature is used both as a property of a DOMImplementation (when obj and var attributes are provided) and as a implementationCondition.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="feature" type="stringLiteral" use="required"/>
+         <xs:attribute name="version" type="stringLiteral" use="optional"/>
+         <xs:attribute name="value" type="xs:boolean" use="optional"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="not">
+      <xs:complexType>
+         <xs:group ref="condition"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isTrue">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="value" type="variable" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isFalse">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="value" type="variable" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="or">
+      <xs:complexType>
+         <xs:group ref="condition" minOccurs="2" maxOccurs="unbounded"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="and">
+      <xs:complexType>
+         <xs:group ref="condition" minOccurs="2" maxOccurs="unbounded"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="xor">
+      <xs:complexType>
+         <xs:group ref="condition" minOccurs="2" maxOccurs="2"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:group name="condition">
+      <xs:choice>
+         <xs:element ref="same"/>
+         <xs:element ref="equals"/>
+         <xs:element ref="notEquals"/>
+         <xs:element ref="less"/>
+         <xs:element ref="lessOrEquals"/>
+         <xs:element ref="greater"/>
+         <xs:element ref="greaterOrEquals"/>
+         <xs:element ref="isNull"/>
+         <xs:element ref="notNull"/>
+         <xs:element ref="and"/>
+         <xs:element ref="or"/>
+         <xs:element ref="xor"/>
+         <xs:element ref="instanceOf"/>
+         <xs:element ref="isTrue"/>
+         <xs:element ref="isFalse"/>
+         <xs:element ref="hasSize"/>
+         <xs:element ref="hasFeature"/>
+         <xs:element ref="implementationAttribute"/>
+         <!--<xs:element name="contentType">
+            <xs:annotation>
+               <xs:documentation>This condition will evaluate to true if the default
+                            content type for this test matches the specified type.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:attribute name="id" type="xs:ID" use="optional"/>
+               <xs:attribute name="type" type="loadContentType" use="required"/>
+            </xs:complexType>
+         </xs:element>
+         -->
+         <xs:element ref="contains"/>
+      </xs:choice>
+   </xs:group>
+   <xs:element name="else">
+      <xs:complexType>
+         <xs:group ref="statement" maxOccurs="unbounded"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="if">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:group ref="condition"/>
+            <xs:group ref="statement" maxOccurs="unbounded"/>
+            <xs:element ref="else" minOccurs="0"/>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="while">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:group ref="condition"/>
+            <xs:group ref="statement" maxOccurs="unbounded"/>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="for-each">
+      <xs:complexType>
+         <xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:attribute name="collection" type="variable" use="required"/>
+         <xs:attribute name="member" type="variable" use="required"/>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="EventMonitorAccessor">
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+      <xs:attribute name="obj" type="variable" use="required"/>
+      <xs:attribute name="interface" use="optional">
+         <xs:simpleType>
+            <xs:restriction base="xs:string">
+               <xs:enumeration value="EventMonitor"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="var" type="variable" use="required"/>
+   </xs:complexType>
+   <xs:element name="atEvents" type="EventMonitorAccessor"/>
+   <xs:element name="capturedEvents" type="EventMonitorAccessor"/>
+   <xs:element name="bubbledEvents" type="EventMonitorAccessor"/>
+   <xs:element name="allEvents" type="EventMonitorAccessor"/>
+   <xs:element name="createEventMonitor">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:group name="statement">
+      <xs:choice>
+         <xs:group ref="framework-statement"/>
+         <xs:group ref="assertion"/>
+         <xs:element ref="actualEncoding"/>
+         <xs:element ref="allowedAttributes"/>
+         <xs:element ref="allowedChildren"/>
+         <xs:element ref="allowedFirstChildElements"/>
+         <xs:element ref="allowedNextSiblings"/>
+         <xs:element ref="allowedParents"/>
+         <xs:element ref="allowedPreviousSiblings"/>
+         <xs:element ref="attributes"/>
+         <xs:element ref="baseURI"/>
+         <xs:element ref="childNodes"/>
+         <xs:element ref="columnNumber"/>
+         <xs:element ref="config"/>
+         <xs:element ref="contentType"/>
+         <xs:element ref="continuousValidityChecking"/>
+         <xs:element ref="data"/>
+         <xs:element ref="defaultValue"/>
+         <xs:element ref="doctype"/>
+         <xs:element ref="documentElement"/>
+         <xs:element ref="documentURI"/>
+         <xs:element ref="encoding"/>
+         <xs:element ref="entities"/>
+         <xs:element ref="enumeratedValues"/>
+         <xs:element ref="firstChild"/>
+         <xs:element ref="internalSubset"/>
+         <xs:element ref="lastChild"/>
+         <xs:element ref="length"/>
+         <xs:element ref="lineNumber"/>
+         <xs:element ref="localName"/>
+         <xs:element ref="location"/>
+         <xs:element ref="message"/>
+         <xs:element ref="name"/>
+         <xs:element ref="namespaceURI"/>
+         <xs:element ref="nextSibling"/>
+         <xs:element ref="nodeName"/>
+         <xs:element ref="nodeType"/>
+         <xs:element ref="nodeValue"/>
+         <xs:element ref="notationName"/>
+         <xs:element ref="notations"/>
+         <xs:element ref="offset"/>
+         <xs:element ref="ownerDocument"/>
+         <xs:element ref="ownerElement"/>
+         <xs:element ref="parentNode"/>
+         <xs:element ref="prefix"/>
+         <xs:element ref="previousSibling"/>
+         <xs:element ref="publicId"/>
+         <xs:element ref="relatedData"/>
+         <xs:element ref="relatedException"/>
+         <xs:element ref="relatedNode"/>
+         <xs:element ref="requiredAttributes"/>
+         <xs:element ref="schemaTypeInfo"/>
+         <xs:element ref="severity"/>
+         <xs:element ref="specified"/>
+         <xs:element ref="standalone"/>
+         <xs:element ref="strictErrorChecking"/>
+         <xs:element ref="systemId"/>
+         <xs:element ref="tagName"/>
+         <xs:element ref="target"/>
+         <xs:element ref="textContent"/>
+         <xs:element ref="type"/>
+         <xs:element ref="typeName"/>
+         <xs:element ref="typeNamespace"/>
+         <xs:element ref="uri"/>
+         <xs:element ref="value"/>
+         <xs:element ref="version"/>
+         <xs:element ref="wholeText"/>
+         <xs:element ref="adoptNode"/>
+         <xs:element ref="appendChild"/>
+         <xs:element ref="appendData"/>
+         <xs:element ref="canAppendChild"/>
+         <xs:element ref="canAppendData"/>
+         <xs:element ref="canDeleteData"/>
+         <xs:element ref="canInsertBefore"/>
+         <xs:element ref="canInsertData"/>
+         <xs:element ref="canRemoveAttribute"/>
+         <xs:element ref="canRemoveAttributeNode"/>
+         <xs:element ref="canRemoveAttributeNS"/>
+         <xs:element ref="canRemoveChild"/>
+         <xs:element ref="canReplaceChild"/>
+         <xs:element ref="canReplaceData"/>
+         <xs:element ref="canSetAttribute"/>
+         <xs:element ref="canSetAttributeNode"/>
+         <xs:element ref="canSetAttributeNS"/>
+         <xs:element ref="canSetData"/>
+         <xs:element ref="canSetParameter"/>
+         <xs:element ref="canSetTextContent"/>
+         <xs:element ref="cloneNode"/>
+         <xs:element ref="compareDocumentPosition"/>
+         <xs:element ref="createAttribute"/>
+         <xs:element ref="createAttributeNS"/>
+         <xs:element ref="createCDATASection"/>
+         <xs:element ref="createComment"/>
+         <xs:element ref="createDocument"/>
+         <xs:element ref="createDocumentFragment"/>
+         <xs:element ref="createDocumentType"/>
+         <xs:element ref="createElement"/>
+         <xs:element ref="createElementNS"/>
+         <xs:element ref="createEntityReference"/>
+         <xs:element ref="createProcessingInstruction"/>
+         <xs:element ref="createTextNode"/>
+         <xs:element ref="deleteData"/>
+         <xs:element ref="findOffset16"/>
+         <xs:element ref="findOffset32"/>
+         <xs:element ref="getAttribute"/>
+         <xs:element ref="getAttributeNode"/>
+         <xs:element ref="getAttributeNodeNS"/>
+         <xs:element ref="getAttributeNS"/>
+         <xs:element ref="getDefinedElements"/>
+         <xs:element ref="getDOMImplementation"/>
+         <xs:element ref="getDOMImplementations"/>
+         <xs:element ref="getElementById"/>
+         <xs:element ref="getElementsByTagName"/>
+         <xs:element ref="getElementsByTagNameNS"/>
+         <xs:element ref="getFeature"/>
+         <xs:element ref="getName"/>
+         <xs:element ref="getNamedItem"/>
+         <xs:element ref="getNamedItemNS"/>
+         <xs:element ref="getNamespaceURI"/>
+         <xs:element ref="getParameter"/>
+         <xs:element ref="getUserData"/>
+         <xs:element ref="handle"/>
+         <xs:element ref="handleError"/>
+         <xs:element ref="hasAttribute"/>
+         <xs:element ref="hasAttributeNS"/>
+         <xs:element ref="hasAttributes"/>
+         <xs:element ref="hasChildNodes"/>
+         <xs:element ref="importNode"/>
+         <xs:element ref="insertBefore"/>
+         <xs:element ref="insertData"/>
+         <xs:element ref="isDefaultNamespace"/>
+         <xs:element ref="isElementDefined"/>
+         <xs:element ref="isElementDefinedNS"/>
+         <xs:element ref="isEqualNode"/>
+         <xs:element ref="isId"/>
+         <xs:element ref="isSameNode"/>
+         <xs:element ref="isSupported"/>
+         <xs:element ref="isWhitespaceInElementContent"/>
+         <xs:element ref="isWhitespaceOnly"/>
+         <xs:element ref="item"/>
+         <xs:element ref="lookupNamespaceURI"/>
+         <xs:element ref="lookupPrefix"/>
+         <xs:element ref="nodeValidity"/>
+         <xs:element ref="normalize"/>
+         <xs:element ref="normalizeDocument"/>
+         <xs:element ref="removeAttribute"/>
+         <xs:element ref="removeAttributeNode"/>
+         <xs:element ref="removeAttributeNS"/>
+         <xs:element ref="removeChild"/>
+         <xs:element ref="removeNamedItem"/>
+         <xs:element ref="removeNamedItemNS"/>
+         <xs:element ref="renameNode"/>
+         <xs:element ref="replaceChild"/>
+         <xs:element ref="replaceData"/>
+         <xs:element ref="replaceWholeText"/>
+         <xs:element ref="setAttribute"/>
+         <xs:element ref="setAttributeNode"/>
+         <xs:element ref="setAttributeNodeNS"/>
+         <xs:element ref="setAttributeNS"/>
+         <xs:element ref="setIdAttribute"/>
+         <xs:element ref="setIdAttributeNode"/>
+         <xs:element ref="setIdAttributeNS"/>
+         <xs:element ref="setNamedItem"/>
+         <xs:element ref="setNamedItemNS"/>
+         <xs:element ref="setParameter"/>
+         <xs:element ref="setUserData"/>
+         <xs:element ref="splitText"/>
+         <xs:element ref="substringData"/>
+         <xs:element ref="validateDocument"/>
+      </xs:choice>
+   </xs:group>
+   <xs:element name="assertDOMException">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:choice>
+               <xs:element name="INDEX_SIZE_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="getName"/>
+                        <xs:element ref="getNamespaceURI"/>
+                        <xs:element ref="substringData"/>
+                        <xs:element ref="insertData"/>
+                        <xs:element ref="deleteData"/>
+                        <xs:element ref="replaceData"/>
+                        <xs:element ref="splitText"/>
+                        <xs:element ref="canReplaceData"/>
+                        <xs:element ref="canInsertData"/>
+                        <xs:element ref="canDeleteData"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="DOMSTRING_SIZE_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="nodeValue"/>
+                        <xs:element ref="textContent"/>
+                        <xs:element ref="data"/>
+                        <xs:element ref="substringData"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="HIERARCHY_REQUEST_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="insertBefore"/>
+                        <xs:element ref="replaceChild"/>
+                        <xs:element ref="appendChild"/>
+                        <xs:element ref="setNamedItem"/>
+                        <xs:element ref="setNamedItemNS"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="WRONG_DOCUMENT_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="createDocument"/>
+                        <xs:element ref="renameNode"/>
+                        <xs:element ref="insertBefore"/>
+                        <xs:element ref="replaceChild"/>
+                        <xs:element ref="appendChild"/>
+                        <xs:element ref="setNamedItem"/>
+                        <xs:element ref="setNamedItemNS"/>
+                        <xs:element ref="setAttributeNode"/>
+                        <xs:element ref="setAttributeNodeNS"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="INVALID_CHARACTER_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="prefix"/>
+                        <xs:element ref="createDocumentType"/>
+                        <xs:element ref="createDocument"/>
+                        <xs:element ref="createElement"/>
+                        <xs:element ref="createProcessingInstruction"/>
+                        <xs:element ref="createAttribute"/>
+                        <xs:element ref="createEntityReference"/>
+                        <xs:element ref="importNode"/>
+                        <xs:element ref="createElementNS"/>
+                        <xs:element ref="createAttributeNS"/>
+                        <xs:element ref="setAttribute"/>
+                        <xs:element ref="setAttributeNS"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="NO_DATA_ALLOWED_ERR">
+                  <xs:complexType>
+                     <xs:choice/>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="NO_MODIFICATION_ALLOWED_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="nodeValue"/>
+                        <xs:element ref="prefix"/>
+                        <xs:element ref="textContent"/>
+                        <xs:element ref="data"/>
+                        <xs:element ref="value"/>
+                        <xs:element ref="adoptNode"/>
+                        <xs:element ref="insertBefore"/>
+                        <xs:element ref="replaceChild"/>
+                        <xs:element ref="removeChild"/>
+                        <xs:element ref="appendChild"/>
+                        <xs:element ref="setNamedItem"/>
+                        <xs:element ref="removeNamedItem"/>
+                        <xs:element ref="setNamedItemNS"/>
+                        <xs:element ref="removeNamedItemNS"/>
+                        <xs:element ref="appendData"/>
+                        <xs:element ref="insertData"/>
+                        <xs:element ref="deleteData"/>
+                        <xs:element ref="replaceData"/>
+                        <xs:element ref="setAttribute"/>
+                        <xs:element ref="removeAttribute"/>
+                        <xs:element ref="setAttributeNode"/>
+                        <xs:element ref="removeAttributeNode"/>
+                        <xs:element ref="setAttributeNS"/>
+                        <xs:element ref="removeAttributeNS"/>
+                        <xs:element ref="setAttributeNodeNS"/>
+                        <xs:element ref="setIdAttribute"/>
+                        <xs:element ref="setIdAttributeNS"/>
+                        <xs:element ref="setIdAttributeNode"/>
+                        <xs:element ref="splitText"/>
+                        <xs:element ref="replaceWholeText"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="NOT_FOUND_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="insertBefore"/>
+                        <xs:element ref="replaceChild"/>
+                        <xs:element ref="removeChild"/>
+                        <xs:element ref="removeNamedItem"/>
+                        <xs:element ref="removeNamedItemNS"/>
+                        <xs:element ref="removeAttributeNode"/>
+                        <xs:element ref="setIdAttribute"/>
+                        <xs:element ref="setIdAttributeNS"/>
+                        <xs:element ref="setIdAttributeNode"/>
+                        <xs:element ref="setParameter"/>
+                        <xs:element ref="getParameter"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="NOT_SUPPORTED_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="version"/>
+                        <xs:element ref="continuousValidityChecking"/>
+                        <xs:element ref="createDocumentType"/>
+                        <xs:element ref="createDocument"/>
+                        <xs:element ref="createCDATASection"/>
+                        <xs:element ref="createProcessingInstruction"/>
+                        <xs:element ref="createEntityReference"/>
+                        <xs:element ref="importNode"/>
+                        <xs:element ref="createElementNS"/>
+                        <xs:element ref="createAttributeNS"/>
+                        <xs:element ref="getElementsByTagNameNS"/>
+                        <xs:element ref="adoptNode"/>
+                        <xs:element ref="renameNode"/>
+                        <xs:element ref="insertBefore"/>
+                        <xs:element ref="replaceChild"/>
+                        <xs:element ref="removeChild"/>
+                        <xs:element ref="compareDocumentPosition"/>
+                        <xs:element ref="getNamedItemNS"/>
+                        <xs:element ref="setNamedItemNS"/>
+                        <xs:element ref="removeNamedItemNS"/>
+                        <xs:element ref="getAttributeNS"/>
+                        <xs:element ref="setAttributeNS"/>
+                        <xs:element ref="removeAttributeNS"/>
+                        <xs:element ref="getAttributeNodeNS"/>
+                        <xs:element ref="setAttributeNodeNS"/>
+                        <xs:element ref="hasAttributeNS"/>
+                        <xs:element ref="setParameter"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="INUSE_ATTRIBUTE_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="setNamedItem"/>
+                        <xs:element ref="setNamedItemNS"/>
+                        <xs:element ref="setAttributeNode"/>
+                        <xs:element ref="setAttributeNodeNS"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="INVALID_STATE_ERR">
+                  <xs:complexType>
+                     <xs:choice/>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="SYNTAX_ERR">
+                  <xs:complexType>
+                     <xs:choice/>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="INVALID_MODIFICATION_ERR">
+                  <xs:complexType>
+                     <xs:choice/>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="NAMESPACE_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="prefix"/>
+                        <xs:element ref="createDocumentType"/>
+                        <xs:element ref="createDocument"/>
+                        <xs:element ref="createElementNS"/>
+                        <xs:element ref="createAttributeNS"/>
+                        <xs:element ref="renameNode"/>
+                        <xs:element ref="setAttributeNS"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="INVALID_ACCESS_ERR">
+                  <xs:complexType>
+                     <xs:choice/>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="VALIDATION_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="continuousValidityChecking"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+            </xs:choice>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="assertExceptionVAL">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="metadata" minOccurs="0"/>
+            <xs:choice>
+               <xs:element name="NO_SCHEMA_AVAILABLE_ERR">
+                  <xs:complexType>
+                     <xs:choice>
+                        <xs:element ref="continuousValidityChecking"/>
+                     </xs:choice>
+                     <xs:attribute name="id" type="xs:ID" use="optional"/>
+                  </xs:complexType>
+               </xs:element>
+            </xs:choice>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:group name="assertion">
+      <xs:choice>
+         <xs:group ref="framework-assertion"/>
+         <xs:element ref="assertDOMException"/>
+         <xs:element ref="assertExceptionVAL"/>
+      </xs:choice>
+   </xs:group>
+   <xs:element name="actualEncoding">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+                  <xs:enumeration value="Entity"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="allowedAttributes">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="allowedChildren">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="allowedFirstChildElements">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="allowedNextSiblings">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="allowedParents">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="allowedPreviousSiblings">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="attributes">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="baseURI">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="childNodes">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="columnNumber">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMLocator"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="config">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+                  <xs:enumeration value="DocumentEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="contentType">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="continuousValidityChecking">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrBoolLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="data">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterData"/>
+                  <xs:enumeration value="ProcessingInstruction"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="defaultValue">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="doctype">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="documentElement">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="documentURI">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="encoding">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+                  <xs:enumeration value="Entity"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="entities">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentType"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="enumeratedValues">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="firstChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="internalSubset">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentType"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="lastChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="length">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMStringList"/>
+                  <xs:enumeration value="NameList"/>
+                  <xs:enumeration value="DOMImplementationList"/>
+                  <xs:enumeration value="NodeList"/>
+                  <xs:enumeration value="NamedNodeMap"/>
+                  <xs:enumeration value="CharacterData"/>
+                  <xs:enumeration value="DOMString"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="lineNumber">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMLocator"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="localName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="location">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMError"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="message">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMError"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="name">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Attr"/>
+                  <xs:enumeration value="DocumentType"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="namespaceURI">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="nextSibling">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="nodeName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="nodeType">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="nodeValue">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="notationName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Entity"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="notations">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentType"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="offset">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMLocator"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ownerDocument">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ownerElement">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Attr"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="parentNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="prefix">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="previousSibling">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="publicId">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentType"/>
+                  <xs:enumeration value="Notation"/>
+                  <xs:enumeration value="Entity"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="relatedData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMError"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="relatedException">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMError"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="relatedNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMLocator"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="requiredAttributes">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="schemaTypeInfo">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Attr"/>
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="severity">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMError"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="specified">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Attr"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="standalone">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrBoolLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="strictErrorChecking">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrBoolLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="systemId">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentType"/>
+                  <xs:enumeration value="Notation"/>
+                  <xs:enumeration value="Entity"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="tagName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="target">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ProcessingInstruction"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="textContent">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="type">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMError"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="typeName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="TypeInfo"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="typeNamespace">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="TypeInfo"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="uri">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMLocator"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="value">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Attr"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="version">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="optional"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="optional"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+                  <xs:enumeration value="Entity"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="wholeText">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Text"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="adoptNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="source" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="appendChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="newChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="appendData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterData"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canAppendChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="newChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canAppendData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterDataEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canDeleteData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="count" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterDataEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canInsertBefore">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="newChild" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="refChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canInsertData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterDataEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canRemoveAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="attrname" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canRemoveAttributeNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="attrNode" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canRemoveAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canRemoveChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="oldChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canReplaceChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="newChild" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="oldChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canReplaceData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="count" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterDataEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canSetAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="attrname" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="attrval" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canSetAttributeNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Attr-->
+         <xs:attribute name="attrNode" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canSetAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canSetData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterDataEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canSetParameter">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/><!--type = DOMUserData-->
+         <xs:attribute name="value" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMConfiguration"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="canSetTextContent">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="possibleTextContent" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="cloneNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="deep" type="variableOrBoolLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="compareDocumentPosition">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="other" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createCDATASection">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="data" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createComment">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="data" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createDocument">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/><!--type = DocumentType-->
+         <xs:attribute name="doctype" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMImplementation"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createDocumentFragment">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createDocumentType">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="publicId" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="systemId" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMImplementation"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createElement">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="tagName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createElementNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createEntityReference">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createProcessingInstruction">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="target" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="data" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="createTextNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="data" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="deleteData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="count" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterData"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="findOffset16">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = int-->
+         <xs:attribute name="offset32" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="StringExtend"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="findOffset32">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = int-->
+         <xs:attribute name="offset16" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="StringExtend"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getAttributeNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getAttributeNodeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getDefinedElements">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getDOMImplementation">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="features" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMImplementationSource"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getDOMImplementations">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="features" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMImplementationSource"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getElementById">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="elementId" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getElementsByTagName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="tagname" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getElementsByTagNameNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getFeature">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="feature" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="version" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMImplementation"/>
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getName">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="index" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NameList"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getNamedItem">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getNamedItemNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getNamespaceURI">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="index" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NameList"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getParameter">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMConfiguration"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getUserData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="key" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="handle">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = unsigned short-->
+         <xs:attribute name="operation" type="variable" use="required"/>
+         <xs:attribute name="key" type="variableOrStringLiteral" use="required"/><!--type = DOMObject-->
+         <xs:attribute name="data" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="src" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="dst" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="UserDataHandler"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="handleError">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = DOMError-->
+         <xs:attribute name="error" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMErrorHandler"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="hasAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="hasAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="hasAttributes">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="hasChildNodes">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="importNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="importedNode" type="variable" use="required"/>
+         <xs:attribute name="deep" type="variableOrBoolLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="insertBefore">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="newChild" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="refChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="insertData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterData"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isDefaultNamespace">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isElementDefined">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isElementDefinedNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="ElementEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isEqualNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="arg" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isId">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Attr"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isSameNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="other" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isSupported">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="feature" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="version" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isWhitespaceInElementContent">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Text"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="isWhitespaceOnly">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterDataEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="item">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="index" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMStringList"/>
+                  <xs:enumeration value="DOMImplementationList"/>
+                  <xs:enumeration value="NodeList"/>
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="lookupNamespaceURI">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="prefix" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="lookupPrefix">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="nodeValidity">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = unsigned short-->
+         <xs:attribute name="valType" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NodeEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="normalize">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="normalizeDocument">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="removeAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="removeAttributeNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Attr-->
+         <xs:attribute name="oldAttr" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="removeAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="removeChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="oldChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="removeNamedItem">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="removeNamedItemNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="renameNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="n" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Document"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="replaceChild">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="newChild" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="oldChild" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="replaceData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="count" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="arg" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterData"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="replaceWholeText">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="content" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Text"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setAttributeNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Attr-->
+         <xs:attribute name="newAttr" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setAttributeNodeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Attr-->
+         <xs:attribute name="newAttr" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="qualifiedName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="value" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setIdAttribute">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="isId" type="variableOrBoolLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setIdAttributeNode">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Attr-->
+         <xs:attribute name="idAttr" type="variable" use="required"/>
+         <xs:attribute name="isId" type="variableOrBoolLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setIdAttributeNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="namespaceURI" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="localName" type="variableOrStringLiteral" use="required"/>
+         <xs:attribute name="isId" type="variableOrBoolLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Element"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setNamedItem">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="arg" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setNamedItemNS">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/><!--type = Node-->
+         <xs:attribute name="arg" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="NamedNodeMap"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setParameter">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="name" type="variableOrStringLiteral" use="required"/><!--type = DOMUserData-->
+         <xs:attribute name="value" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DOMConfiguration"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="setUserData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="key" type="variableOrStringLiteral" use="required"/><!--type = DOMUserData-->
+         <xs:attribute name="data" type="variable" use="required"/><!--type = UserDataHandler-->
+         <xs:attribute name="handler" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Node"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="splitText">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Text"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="substringData">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="offset" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="count" type="variableOrIntLiteral" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="CharacterData"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="validateDocument">
+      <xs:complexType>
+         <xs:attribute name="id" type="xs:ID" use="optional"/>
+         <xs:attribute name="var" type="variable" use="required"/>
+         <xs:attribute name="obj" type="variable" use="required"/>
+         <xs:attribute name="interface" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="DocumentEditVAL"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>
