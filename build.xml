@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.42  2002-01-29 06:21:44  dom-ts-4
+Revision 1.43  2002-01-29 06:27:11  dom-ts-4
+Changed tr/2001 to tr/2002 for new working drafts
+
+Revision 1.42  2002/01/29 06:21:44  dom-ts-4
 Moved patch files
 
 Revision 1.41  2002/01/04 07:59:14  dom-ts-4
@@ -993,13 +996,13 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-dom3-core" depends="dom3-available" unless="dom3-core-available">
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20020114/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Core-20020114/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 </target>
 
 <target name="get-dom3-asls" depends="dom3-available" unless="dom3-asls-available">
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20020114/DOM3-ASLS.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-ASLS-20020114/DOM3-ASLS.zip"
 		dest="${specs.dir}/DOM3-ASLS.zip"
 		usetimestamp="yes"/>
 </target>
