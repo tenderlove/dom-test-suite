@@ -24,7 +24,7 @@ Check implementation of DOMStringList.item by accessing items 0 and length-1 and
 a string and accessing items out of range and expecting null.
 </description>
 <date qualifier="created">2004-01-12</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="paramList" type="DOMStringList"/>

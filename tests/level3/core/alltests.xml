@@ -165,6 +165,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     <suite.member href="elementgetschematypeinfo01.xml"/>
     <suite.member href="elementgetschematypeinfo02.xml"/>
+    
+    <suite.member href="hasFeature01.xml"/>
+    <suite.member href="hasFeature02.xml"/>
+    <suite.member href="hasFeature03.xml"/>
+    <suite.member href="hasFeature04.xml"/>
  	
 	<!-- Node Tests -->	
 	<!-- insertBefore -->
