@@ -26,6 +26,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<!--  DOMImplementation.hasFeature  -->
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7"/>
   </metadata>
+  <!--  + on feature names requires L3 Core  -->
+  <hasFeature name="Core" version='"3.0"'/>
   <var name="domImpl" type="DOMImplementation"/>
   <var name="hasLS1" type="boolean"/>
   <var name="hasLS2" type="boolean"/>
