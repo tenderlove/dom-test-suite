@@ -28,7 +28,12 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.31  2003-01-25 17:59:16  dom-ts-4
+Revision 1.32  2003-01-29 04:58:15  dom-ts-4
+Added (short) on short literals passed to inner classes
+Added recursion into base interface for inner class feature
+production (DOMWriterFilter.acceptNode)
+
+Revision 1.31  2003/01/25 17:59:16  dom-ts-4
 Prettified generated java to conform to Sun coding conventions
 
 Revision 1.30  2003/01/20 06:11:17  dom-ts-4
@@ -384,7 +389,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
    <xsl:value-of select="@name"/>
    <xsl:text> 
       */
-      private class </xsl:text>
+      private static class </xsl:text>
    <xsl:value-of select="concat(@type, generate-id(.))"/>
    <xsl:text>
            extends org.w3c.domts.DOMTestInnerClass 
@@ -446,8 +451,23 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
    <xsl:variable name="interface-name" select="@type"/>
    <xsl:variable name="interface" select="$domspec/library/interface[@name=$interface-name]"/>
    <xsl:for-each select="*[local-name() != 'var']">
-        <xsl:variable name="method-name" select="local-name()"/>
-        <xsl:variable name="method-def" select="$interface/method[@name=$method-name]"/>
+        <xsl:call-template name="produce-inner-feature">
+            <xsl:with-param name="method-name" select="local-name()"/>
+            <xsl:with-param name="interface" select="$interface"/>
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:call-template>
+   </xsl:for-each>
+   <xsl:text>}
+</xsl:text>
+</xsl:template>
+
+
+<xsl:template name="produce-inner-feature">
+    <xsl:param name="interface"/>
+    <xsl:param name="method-name"/>
+    <xsl:param name="vardefs"/>
+
+    <xsl:variable name="method-def" select="$interface/method[@name=$method-name]"/>
         <xsl:choose>
             <xsl:when test="$method-def">
                 <xsl:text>
@@ -536,13 +556,17 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
                 </xsl:for-each>
             </xsl:when>
 
+            <xsl:when test="$interface/@inherits">
+                <xsl:call-template name="produce-inner-feature">
+                    <xsl:with-param name="interface" select="$domspec/library/interface[@name=$interface/@inherits]"/>
+                    <xsl:with-param name="method-name" select="$method-name"/>
+                </xsl:call-template>
+            </xsl:when>
+
             <xsl:otherwise>
                 <xsl:message terminate="yes">Method <xsl:value-of select="local-name()"/> not found.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
-   </xsl:for-each>
-   <xsl:text>}
-</xsl:text>
 </xsl:template>
 
 <!--   when encountering a test suite   -->
@@ -750,6 +774,12 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
                     to the constructor    -->
             <xsl:for-each select="*[local-name() = 'var' and @value]">
                 <xsl:text>, </xsl:text>
+                <!--  if the value of the variable is a number literal
+                         and the type is a short then
+                         add a cast to short      -->
+                <xsl:if test="@type = 'short' and string(number(@value)) != 'NaN'">
+                    <xsl:text> (short) </xsl:text>
+                </xsl:if>
                 <xsl:value-of select="@value"/>
             </xsl:for-each>
             <xsl:text>);</xsl:text>
