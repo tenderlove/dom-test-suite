@@ -49,10 +49,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <rows interface="HTMLTableElement" obj="testNode" var="rowsnodeList"/>
-<length interface="NodeList" obj="rowsnodeList" var="rowLength1"/>
+<length interface="HTMLCollection" obj="rowsnodeList" var="rowLength1"/>
 <append collection="result" obj="rowLength1"/>
 <insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="4"/>
-<length interface="NodeList" obj="rowsnodeList" var="rowLength2"/>
+<length interface="HTMLCollection" obj="rowsnodeList" var="rowLength2"/>
 <append collection="result" obj="rowLength2"/>
 <assertEquals actual="result" expected="expectedResult" id="rowIndexLink" ignoreCase="false"/>
 </test>
