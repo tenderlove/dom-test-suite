@@ -12,7 +12,7 @@
  [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 -->
 
-<!DOCTYPE suite [
+<!DOCTYPE suite SYSTEM "dom3.dtd" [
   <!ENTITY % entities SYSTEM "dom3xpathents.ent">
   %entities;
 ]>

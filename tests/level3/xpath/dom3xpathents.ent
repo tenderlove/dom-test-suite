@@ -23,7 +23,7 @@
     version='&quot;3.0&quot;' var='state'/>
   <if>
     <isTrue value='state' />
-    <getFeature var='xpEvaluator' obj='doc'
+    <getFeature interface='Node' var='xpEvaluator' obj='doc'
       feature='&quot;XPath&quot;'
       version='&quot;3.0&quot;'/>
   </if>

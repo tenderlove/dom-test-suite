@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.90  2003-04-09 21:15:18  plehegar
+Revision 1.91  2003-04-17 04:22:01  dom-ts-4
+Fixing schema validation problems with initial XPath submission
+Bug #186: http://www.w3.org/Bugs/Public/show_bug.cgi?id=186
+
+Revision 1.90  2003/04/09 21:15:18  plehegar
 Added rules for DOM Level 3 XPath (Java and JSUnit)
 Updated references to DOM Level 3 XPath and DOM Level 3 Events
 
@@ -1853,6 +1857,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls"/>
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/xpath"/>
 </target>
 
 <target name="dom3-ls-validate-tests" depends="dom3-dtd">

@@ -1390,6 +1390,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:attribute name="{$paramName}" type="variableOrIntLiteral" use="{$use}"/>
 			</xsl:when>
 
+			<xsl:when test="$type='unsigned short'">
+				<xs:attribute name="{$paramName}" type="variableOrIntLiteral" use="{$use}"/>
+			</xsl:when>
+
 			<xsl:when test="$type='boolean'">
 				<xs:attribute name="{$paramName}" type="variableOrBoolLiteral" use="{$use}"/>
 			</xsl:when>

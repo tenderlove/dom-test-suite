@@ -31,19 +31,14 @@
   &vars;
   <var name="root" type='Element'/>
   <var name="result" type="XPathResult"/>
-  <var name="obj" type="Object"/>
 
   &findXPathEvaluator;
     
   <documentElement obj='doc' var='root'/>
 
-  <evaluate obj='xpEvaluator' var='obj'
+  <evaluate interface="XPathEvaluator" obj='xpEvaluator' var='result'
     expression='&quot;/&quot;' contextNode='root' resolver='null' type='0' result='null'/>
 
-  <assertNotNull actual="obj" id="notnull"/>
-
-  <!-- should be an XPathResult -->
-  <assign var='result' value='obj'/>
-
+  <assertNotNull actual="result" id="notnull"/>
 
 </test>
