@@ -40,5 +40,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <selectedIndex interface="HTMLSelectElement" obj="testNode" var="vselectedindex"/>
-<assertEquals actual="vselectedindex" expected="-1" id="selectedIndexLink" ignoreCase="false"/>
+<assertEquals actual="vselectedindex" expected="0" id="selectedIndexLink" ignoreCase="false"/>
 </test>
