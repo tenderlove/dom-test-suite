@@ -18,7 +18,7 @@
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
 <var name="rootName" type="DOMString"/>
-<load var="doc" href="staff.html" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <nodeName obj="root" var="rootName"/>
 <assertEquals actual="rootName" expected="&quot;HTML&quot;" id="documentGetDocumentELementHTMLAssert" ignoreCase="false"/>

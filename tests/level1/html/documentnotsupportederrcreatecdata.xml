@@ -22,7 +22,7 @@
 </metadata>
 	<var name="doc" type="Document"/>
 	<var name="badCDATA" type="CDATASection"/>
-	<load var="doc" href="staff.html" willBeModified="false"/>
+	<load var="doc" href="staff" willBeModified="false"/>
 	<assertDOMException id="documentNotSupportedErrCreateCDATAAssert">
 		<NOT_SUPPORTED_ERR>
 			<createCDATASection var="badCDATA" obj="doc" data="&quot;This is a new CDATASection&quot;"/>

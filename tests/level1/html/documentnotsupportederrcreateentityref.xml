@@ -22,7 +22,7 @@
 </metadata>
 	<var name="doc" type="Document"/>
 	<var name="badEntRef" type="EntityReference"/>
-	<load var="doc" href="staff.html" willBeModified="false"/>
+	<load var="doc" href="staff" willBeModified="false"/>
 	<assertDOMException id="documentNotSupportedErrCreateEntityRefAssert">
 		<NOT_SUPPORTED_ERR>
 			<createEntityReference var="badEntRef" obj="doc" name="&quot;ent1&quot;"/>
