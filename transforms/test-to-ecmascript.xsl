@@ -466,7 +466,8 @@ function </xsl:text>
 	<xsl:choose>
 		<xsl:when test="@actual">
 			<xsl:text>assertTrue("</xsl:text>
-			<xsl:value-of select="@id"/>",
+			<xsl:value-of select="@id"/>
+			<xsl:text>",</xsl:text>
 			<xsl:value-of select="@actual"/>
 			<xsl:text>);
 </xsl:text>
@@ -509,7 +510,8 @@ function </xsl:text>
 	<xsl:choose>
 		<xsl:when test="@actual">
 			<xsl:text>assertFalse("</xsl:text>
-			<xsl:value-of select="@id"/>",
+			<xsl:value-of select="@id"/>
+			<xsl:text>",</xsl:text>
 			<xsl:value-of select="@actual"/>
 			<xsl:text>);
 </xsl:text>
@@ -525,7 +527,8 @@ function </xsl:text>
 		<xsl:otherwise>
 			{
 			<xsl:text>assertFalse("</xsl:text>
-			<xsl:value-of select="@id"/>",
+			<xsl:value-of select="@id"/>
+			<xsl:text>",</xsl:text>
 			<xsl:apply-templates select="*[1]" mode="condition"/>
 			<xsl:text>);
 </xsl:text>
@@ -540,7 +543,8 @@ function </xsl:text>
 
 <xsl:template match="*[local-name()='assertNull']" mode="body">
 	<xsl:text>assertNull("</xsl:text>
-	<xsl:value-of select="@id"/>",
+	<xsl:value-of select="@id"/>
+	<xsl:text>",</xsl:text>
 	<xsl:value-of select="@actual"/>
 	<xsl:text>);
     </xsl:text>
@@ -627,7 +631,9 @@ function </xsl:text>
     <xsl:if test="*">
    if(size(<xsl:value-of select="@collection"/>) == <xsl:value-of select="@size"/>) {
 <xsl:apply-templates mode="body"/>
+<xsl:text>
    }
+      </xsl:text>
 </xsl:if>
 </xsl:template>
 
@@ -891,7 +897,9 @@ function </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
 	<xsl:apply-templates select="*" mode="body"/>
+<xsl:text>
 	}
+   </xsl:text>
 </xsl:template>
 
 
@@ -970,15 +978,16 @@ function handleEvent(listener, event, userObj) {
 
 <xsl:template match="*" mode="body">
 	<xsl:variable name="feature" select="local-name(.)"/>
-	<xsl:variable name="method" select="$domspec/library/interface/method[@name = $feature]"/>
+    <xsl:variable name="interface" select="@interface"/>
+	<xsl:variable name="method" select="$domspec/library/interface[not($interface) or @name=$interface]/method[@name = $feature]"/>
 	<xsl:choose>
 		<xsl:when test="$method">
-			<xsl:call-template name="produce-method">
+			<xsl:call-template name="produce-method">                                  
 				<xsl:with-param name="method" select="$method"/>
 			</xsl:call-template>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:variable name="attribute" select="$domspec/library/interface/attribute[@name = $feature]"/>
+			<xsl:variable name="attribute" select="$domspec/library/interface[not($interface) or @name = $interface]/attribute[@name = $feature]"/>
 			<xsl:choose>
 				<xsl:when test="$attribute">
 					<xsl:call-template name="produce-attribute"/>
@@ -1016,7 +1025,6 @@ function handleEvent(listener, event, userObj) {
 
 <xsl:template name="produce-param">
 	<xsl:param name="value"/>
-	<xsl:param name="reqtype"/>
     <xsl:value-of select="$value"/>
 </xsl:template>
 
