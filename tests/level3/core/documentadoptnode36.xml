@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newPI2" type="ProcessingInstruction"/>
 <var name="adoptedPI1" type="ProcessingInstruction"/>
 <var name="adoptedPI2" type="ProcessingInstruction"/>
-<var name="PITarget" type="DOMString"/>
-<var name="PIData" type="DOMString"/>
+<var name="piTarget" type="DOMString"/>
+<var name="piData" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="docElem" type="Element"/>
 <var name="rootNS" type="DOMString"/>
@@ -54,14 +54,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <if><notNull obj="adoptedPI1"/>
 <adoptNode  var="adoptedPI2" obj="newDoc" source="newPI2"/>
 <if><notNull obj="adoptedPI2"/>
-<target var="PITarget" obj="adoptedPI1" interface="ProcessingInstruction"/>
-<data var="PIData" obj="adoptedPI1" interface="ProcessingInstruction"/>
-<assertEquals actual="PITarget" expected='"PITarget"' id="documentadoptnode36_Target1" ignoreCase="false"/>
-<assertEquals actual="PIData" expected='"PIData"' id="documentadoptnode36_Data1" ignoreCase="false"/>
-<target var="PITarget" obj="adoptedPI2" interface="ProcessingInstruction"/>
-<data var="PIData" obj="adoptedPI2" interface="ProcessingInstruction"/>
-<assertEquals actual="PITarget" expected='"PITarget"' id="documentadoptnode36_Target2" ignoreCase="false"/>
-<assertEquals actual="PIData" expected='"PIData"' id="documentadoptnode36_Data2" ignoreCase="false"/>
+<target var="piTarget" obj="adoptedPI1" interface="ProcessingInstruction"/>
+<data var="piData" obj="adoptedPI1" interface="ProcessingInstruction"/>
+<assertEquals actual="piTarget" expected='"PITarget"' id="documentadoptnode36_Target1" ignoreCase="false"/>
+<assertEquals actual="piData" expected='"PIData"' id="documentadoptnode36_Data1" ignoreCase="false"/>
+<target var="piTarget" obj="adoptedPI2" interface="ProcessingInstruction"/>
+<data var="piData" obj="adoptedPI2" interface="ProcessingInstruction"/>
+<assertEquals actual="piTarget" expected='"PITarget"' id="documentadoptnode36_Target2" ignoreCase="false"/>
+<assertEquals actual="piData" expected='"PIData"' id="documentadoptnode36_Data2" ignoreCase="false"/>
 </if>
 </if>
 </test>

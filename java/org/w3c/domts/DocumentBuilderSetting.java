@@ -10,180 +10,273 @@
  */
 
 package org.w3c.domts;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * This class is an parser setting, such as non-validating or entity-expanding.
- * 
+ *
  * @author Curt Arnold @date 2 Feb 2002
  */
 public final class DocumentBuilderSetting {
-	private final String property;
-	private final boolean value;
-	private final DocumentBuilderSettingStrategy strategy;
+  /**
+   * property name.
+   */
+  private final String property;
 
-	public final static DocumentBuilderSetting coalescing =
-		new DocumentBuilderSetting(
-			"coalescing",
-			true,
-			DocumentBuilderSettingStrategy.coalescing);
+  /**
+   *   property value.
+   */
+  private final boolean value;
 
-	public final static DocumentBuilderSetting notCoalescing =
-		new DocumentBuilderSetting(
-			"coalescing",
-			false,
-			DocumentBuilderSettingStrategy.coalescing);
+  /**
+   * strategy used to set or get property value.
+   */
+  private final DocumentBuilderSettingStrategy strategy;
 
-	public final static DocumentBuilderSetting expandEntityReferences =
-		new DocumentBuilderSetting(
-			"expandEntityReferences",
-			true,
-			DocumentBuilderSettingStrategy.expandEntityReferences);
+  /**
+   * coalescing = true.
+   */
+  public static final DocumentBuilderSetting coalescing =
+      new DocumentBuilderSetting(
+      "coalescing",
+      true,
+      DocumentBuilderSettingStrategy.coalescing);
 
-	public final static DocumentBuilderSetting notExpandEntityReferences =
-		new DocumentBuilderSetting(
-			"expandEntityReferences",
-			false,
-			DocumentBuilderSettingStrategy.expandEntityReferences);
+  /**
+   * coalescing = false.
+   */
+  public static final DocumentBuilderSetting notCoalescing =
+      new DocumentBuilderSetting(
+      "coalescing",
+      false,
+      DocumentBuilderSettingStrategy.coalescing);
 
-	public final static DocumentBuilderSetting ignoringElementContentWhitespace =
-		new DocumentBuilderSetting(
-			"ignoringElementContentWhitespace",
-			true,
-			DocumentBuilderSettingStrategy.ignoringElementContentWhitespace);
+  /**
+   * expandEntityReferences = false.
+   */
+  public static final DocumentBuilderSetting expandEntityReferences =
+      new DocumentBuilderSetting(
+      "expandEntityReferences",
+      true,
+      DocumentBuilderSettingStrategy.expandEntityReferences);
 
-	public final static DocumentBuilderSetting notIgnoringElementContentWhitespace =
-		new DocumentBuilderSetting(
-			"ignoringElementContentWhitespace",
-			false,
-			DocumentBuilderSettingStrategy.ignoringElementContentWhitespace);
+  /**
+   * expandEntityReferences = true.
+   */
+  public static final DocumentBuilderSetting notExpandEntityReferences =
+      new DocumentBuilderSetting(
+      "expandEntityReferences",
+      false,
+      DocumentBuilderSettingStrategy.expandEntityReferences);
 
-	public final static DocumentBuilderSetting namespaceAware =
-		new DocumentBuilderSetting(
-			"namespaceAware",
-			true,
-			DocumentBuilderSettingStrategy.namespaceAware);
+  /**
+   * ignoringElementContentWhitespace = true.
+   */
+  public static final DocumentBuilderSetting ignoringElementContentWhitespace =
+      new DocumentBuilderSetting(
+      "ignoringElementContentWhitespace",
+      true,
+      DocumentBuilderSettingStrategy.ignoringElementContentWhitespace);
 
-	public final static DocumentBuilderSetting notNamespaceAware =
-		new DocumentBuilderSetting(
-			"namespaceAware",
-			false,
-			DocumentBuilderSettingStrategy.namespaceAware);
+  /**
+   * ignoringElementContentWhitespace = false.
+   */
+  public static final DocumentBuilderSetting
+      notIgnoringElementContentWhitespace =
+      new DocumentBuilderSetting(
+      "ignoringElementContentWhitespace",
+      false,
+      DocumentBuilderSettingStrategy.ignoringElementContentWhitespace);
 
-	public final static DocumentBuilderSetting validating =
-		new DocumentBuilderSetting(
-			"validating",
-			true,
-			DocumentBuilderSettingStrategy.validating);
+  /**
+   * namespaceAware = true.
+   */
+  public static final DocumentBuilderSetting namespaceAware =
+      new DocumentBuilderSetting(
+      "namespaceAware",
+      true,
+      DocumentBuilderSettingStrategy.namespaceAware);
 
-	public final static DocumentBuilderSetting notValidating =
-		new DocumentBuilderSetting(
-			"validating",
-			false,
-			DocumentBuilderSettingStrategy.validating);
+  /**
+   * namespaceAware = false.
+   */
+  public static final DocumentBuilderSetting notNamespaceAware =
+      new DocumentBuilderSetting(
+      "namespaceAware",
+      false,
+      DocumentBuilderSettingStrategy.namespaceAware);
 
-	public final static DocumentBuilderSetting signed =
-		new DocumentBuilderSetting(
-			"signed",
-			true,
-			DocumentBuilderSettingStrategy.signed);
+  /**
+   * validating = true.
+   */
+  public static final DocumentBuilderSetting validating =
+      new DocumentBuilderSetting(
+      "validating",
+      true,
+      DocumentBuilderSettingStrategy.validating);
 
-	public final static DocumentBuilderSetting notSigned =
-		new DocumentBuilderSetting(
-			"signed",
-			false,
-			DocumentBuilderSettingStrategy.signed);
+  /**
+   * validating = false.
+   */
+  public static final DocumentBuilderSetting notValidating =
+      new DocumentBuilderSetting(
+      "validating",
+      false,
+      DocumentBuilderSettingStrategy.validating);
 
-	public final static DocumentBuilderSetting hasNullString =
-		new DocumentBuilderSetting(
-			"hasNullString",
-			true,
-			DocumentBuilderSettingStrategy.hasNullString);
+  /**
+   * signed = true.
+   */
+  public static final DocumentBuilderSetting signed =
+      new DocumentBuilderSetting(
+      "signed",
+      true,
+      DocumentBuilderSettingStrategy.signed);
 
-	public final static DocumentBuilderSetting notHasNullString =
-		new DocumentBuilderSetting(
-			"hasNullString",
-			false,
-			DocumentBuilderSettingStrategy.hasNullString);
+  /**
+   * signed = false.
+   */
+  public static final DocumentBuilderSetting notSigned =
+      new DocumentBuilderSetting(
+      "signed",
+      false,
+      DocumentBuilderSettingStrategy.signed);
 
-	public final static DocumentBuilderSetting schemaValidating =
-		new DocumentBuilderSetting(
-			"schemaValidating",
-			true,
-			DocumentBuilderSettingStrategy.schemaValidating);
+  /**
+   * hasNullString = true.
+   */
+  public static final DocumentBuilderSetting hasNullString =
+      new DocumentBuilderSetting(
+      "hasNullString",
+      true,
+      DocumentBuilderSettingStrategy.hasNullString);
 
-	public final static DocumentBuilderSetting notSchemaValidating =
-		new DocumentBuilderSetting(
-			"schemaValidating",
-			false,
-			DocumentBuilderSettingStrategy.schemaValidating);
+  /**
+   * hasNullString = false.
+   */
+  public static final DocumentBuilderSetting notHasNullString =
+      new DocumentBuilderSetting(
+      "hasNullString",
+      false,
+      DocumentBuilderSettingStrategy.hasNullString);
 
-	public final static DocumentBuilderSetting ignoringComments =
-		new DocumentBuilderSetting(
-			"ignoringComments",
-			true,
-			DocumentBuilderSettingStrategy.ignoringComments);
+  /**
+   * Schema validating enabled.
+   */
+  public static final DocumentBuilderSetting schemaValidating =
+      new DocumentBuilderSetting(
+      "schemaValidating",
+      true,
+      DocumentBuilderSettingStrategy.schemaValidating);
 
-	public final static DocumentBuilderSetting notIgnoringComments =
-		new DocumentBuilderSetting(
-			"ignoringComments",
-			false,
-			DocumentBuilderSettingStrategy.ignoringComments);
+  /**
+   * Schema validating disabled.
+   */
+  public static final DocumentBuilderSetting notSchemaValidating =
+      new DocumentBuilderSetting(
+      "schemaValidating",
+      false,
+      DocumentBuilderSettingStrategy.schemaValidating);
 
-	
-	/**
-	 * Protected constructor, use static members for supported settings.
-	 */
-	protected DocumentBuilderSetting(
-		String property,
-		boolean value,
-		DocumentBuilderSettingStrategy strategy) {
-		if (property == null) {
-			throw new NullPointerException("property");
-		}
-		this.property = property;
-		this.value = value;
-		this.strategy = strategy;
-	}
+  /**
+   * Comments ignored.
+   */
+  public static final DocumentBuilderSetting ignoringComments =
+      new DocumentBuilderSetting(
+      "ignoringComments",
+      true,
+      DocumentBuilderSettingStrategy.ignoringComments);
 
-	/**
-	 * Returns true if the settings have a conflict or are identical.
-	 * 
-	 * @param other
-	 *            other setting, may not be null.
-	 */
-	public final boolean hasConflict(DocumentBuilderSetting other) {
-		if (other == null) {
-			throw new NullPointerException("other");
-		}
-		if (other == this) {
-			return true;
-		}
-		return strategy.hasConflict(other.strategy);
-	}
+  /**
+   * Comments preserved.
+   */
+  public static final DocumentBuilderSetting notIgnoringComments =
+      new DocumentBuilderSetting(
+      "ignoringComments",
+      false,
+      DocumentBuilderSettingStrategy.ignoringComments);
 
-	public final boolean hasSetting(DOMTestDocumentBuilderFactory factory) {
-		return strategy.hasSetting(factory) == value;
-	}
+  /**
+   * Protected constructor, use static members for supported settings.
+   * @param property property name, follows JAXP.
+   * @param value property value
+   * @param strategy strategy, may not be null
+   */
+  protected DocumentBuilderSetting(
+      String property,
+      boolean value,
+      DocumentBuilderSettingStrategy strategy) {
+    if (property == null) {
+      throw new NullPointerException("property");
+    }
+    this.property = property;
+    this.value = value;
+    this.strategy = strategy;
+  }
 
-	public final void applySetting(DocumentBuilderFactory builder)
-		throws DOMTestIncompatibleException {
-		strategy.applySetting(builder, value);
-	}
-	
-	public final String getProperty() {
-		return property;
-	}
-	
-	public final boolean getValue() {
-		return value;
-	}
+  /**
+   * Returns true if the settings have a conflict or are identical.
+   *
+   * @param other
+   *            other setting, may not be null.
+   * @return true if this setting and the specified setting conflict
+   */
+  public final boolean hasConflict(DocumentBuilderSetting other) {
+    if (other == null) {
+      throw new NullPointerException("other");
+    }
+    if (other == this) {
+      return true;
+    }
+    return strategy.hasConflict(other.strategy);
+  }
 
-	public final String toString() {
-		StringBuffer builder = new StringBuffer(property);
-		builder.append('=');
-		builder.append(String.valueOf(value));
-		return builder.toString();
-	}
+  /**
+   * Determines current value of setting.
+   * @param factory DOMTestDocumentBuilderFactory factory
+   * @return boolean true if property enabled.
+   */
+  public final boolean hasSetting(DOMTestDocumentBuilderFactory factory) {
+    return strategy.hasSetting(factory) == value;
+  }
+
+  /**
+   * Attempts to change builder to have this setting.
+   * @param factory DocumentBuilderFactory Factory for DOM builders
+   * @throws DOMTestIncompatibleException
+   *      if factory does not support the setting
+   */
+  public final void applySetting(DocumentBuilderFactory factory) throws
+      DOMTestIncompatibleException {
+    strategy.applySetting(factory, value);
+  }
+
+  /**
+   * Gets the property name.
+   * @return property name
+   */
+  public final String getProperty() {
+    return property;
+  }
+
+  /**
+   * Gets the property value.
+   * @return property value
+   */
+  public final boolean getValue() {
+    return value;
+  }
+
+  /**
+   * Gets a string representation of the setting.
+   * @return string representation
+   */
+  public final String toString() {
+    StringBuffer builder = new StringBuffer(property);
+    builder.append('=');
+    builder.append(String.valueOf(value));
+    return builder.toString();
+  }
 
 }

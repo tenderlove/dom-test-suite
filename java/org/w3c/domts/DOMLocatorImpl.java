@@ -18,66 +18,67 @@ import org.w3c.dom.Node;
  * Implementation of DOMLocator
  *
  */
-public class DOMLocatorImpl implements DOMLocator {
-	private final int lineNumber;
-	private final int columnNumber;
-	private final int byteOffset;
-	private final int utf16Offset;
-	private final Node relatedNode;
-	private final String uri;
-	
-	public DOMLocatorImpl(DOMLocator src) {
-		this.lineNumber = src.getLineNumber();
-		this.columnNumber = src.getColumnNumber();
-		this.byteOffset = src.getByteOffset();
-		this.utf16Offset = src.getUtf16Offset();
-		this.relatedNode = src.getRelatedNode();
-		this.uri = src.getUri();
-	}
+public class DOMLocatorImpl
+    implements DOMLocator {
+  private final int lineNumber;
+  private final int columnNumber;
+  private final int byteOffset;
+  private final int utf16Offset;
+  private final Node relatedNode;
+  private final String uri;
 
-	/* 
-	 * Line number
-	 * @see org.w3c.dom.DOMLocator#getLineNumber()
-	 */
-	public int getLineNumber() {
-		return lineNumber;
-	}
+  public DOMLocatorImpl(DOMLocator src) {
+    this.lineNumber = src.getLineNumber();
+    this.columnNumber = src.getColumnNumber();
+    this.byteOffset = src.getByteOffset();
+    this.utf16Offset = src.getUtf16Offset();
+    this.relatedNode = src.getRelatedNode();
+    this.uri = src.getUri();
+  }
 
-	/*
-	 * Column number
-	 * @see org.w3c.dom.DOMLocator#getColumnNumber()
-	 */
-	public int getColumnNumber() {
-		return columnNumber;
-	}
+  /*
+   * Line number
+   * @see org.w3c.dom.DOMLocator#getLineNumber()
+   */
+  public int getLineNumber() {
+    return lineNumber;
+  }
 
-	/* 
-	 * Byte offset
-	 * @see org.w3c.dom.DOMLocator#getByteOffset()
-	 */
-	public int getByteOffset() {
-		return byteOffset;
-	}
+  /*
+   * Column number
+   * @see org.w3c.dom.DOMLocator#getColumnNumber()
+   */
+  public int getColumnNumber() {
+    return columnNumber;
+  }
 
-	/* UTF-16 offset
-	 * @see org.w3c.dom.DOMLocator#getUtf16Offset()
-	 */
-	public int getUtf16Offset() {
-		return utf16Offset;
-	}
+  /*
+   * Byte offset
+   * @see org.w3c.dom.DOMLocator#getByteOffset()
+   */
+  public int getByteOffset() {
+    return byteOffset;
+  }
 
-	/* Related node
-	 * @see org.w3c.dom.DOMLocator#getRelatedNode()
-	 */
-	public Node getRelatedNode() {
-		return relatedNode;
-	}
+  /* UTF-16 offset
+   * @see org.w3c.dom.DOMLocator#getUtf16Offset()
+   */
+  public int getUtf16Offset() {
+    return utf16Offset;
+  }
 
-	/* URI
-	 * @see org.w3c.dom.DOMLocator#getUri()
-	 */
-	public String getUri() {
-		return uri;
-	}
+  /* Related node
+   * @see org.w3c.dom.DOMLocator#getRelatedNode()
+   */
+  public Node getRelatedNode() {
+    return relatedNode;
+  }
+
+  /* URI
+   * @see org.w3c.dom.DOMLocator#getUri()
+   */
+  public String getUri() {
+    return uri;
+  }
 
 }

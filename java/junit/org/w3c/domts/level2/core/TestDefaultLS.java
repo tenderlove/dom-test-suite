@@ -15,12 +15,11 @@ import java.lang.reflect.Constructor;
 
 import junit.framework.TestSuite;
 
-
 import org.w3c.domts.DOMTestDocumentBuilderFactory;
 import org.w3c.domts.DOMTestSuite;
-import org.w3c.domts.LSDocumentBuilderFactory;
 import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
 import org.w3c.domts.JUnitTestSuiteAdapter;
+import org.w3c.domts.LSDocumentBuilderFactory;
 
 /**
  * Test suite that runs all DOM L2 Core tests using the

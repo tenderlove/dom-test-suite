@@ -10,42 +10,14 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
- /*
- $Log: DOMTestDocumentBuilderFactory.java,v $
- Revision 1.7  2004-02-09 19:06:39  dom-ts-4
- Test results improvment (bug 446)
-
- Revision 1.6  2003/06/27 05:36:05  dom-ts-4
- contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
-
- Revision 1.5  2003/04/23 05:48:24  dom-ts-4
- DOMTSML and framework support for createXPathEvaluator
- http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
-
- Revision 1.4  2002/02/03 04:22:35  dom-ts-4
- DOM4J and Batik support added.
- Rework of parser settings
-
- Revision 1.3  2002/01/30 07:08:44  dom-ts-4
- Update for GNUJAXP
-
- Revision 1.2  2001/08/22 22:12:49  dom-ts-4
- Now passing all tests with default settings
-
- Revision 1.1  2001/07/23 04:52:20  dom-ts-4
- Initial test running using JUnit.
-
- */
-
 package org.w3c.domts;
 
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import org.w3c.domts.*;
-import java.lang.reflect.*;
-import java.util.*;
-import org.xml.sax.*;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
 
 /**
  * This class represents a particular parser and configuration
@@ -62,18 +34,17 @@ public abstract class DOMTestDocumentBuilderFactory {
    */
   private final DocumentBuilderSetting[] settings;
 
-
   /**
    *   Constructor
    *   @param properties Array of parser settings, may be null.
    */
-  public DOMTestDocumentBuilderFactory(DocumentBuilderSetting[] settings)
-    throws DOMTestIncompatibleException {
-    if(settings == null) {
-        this.settings = new DocumentBuilderSetting[0];
+  public DOMTestDocumentBuilderFactory(DocumentBuilderSetting[] settings) throws
+      DOMTestIncompatibleException {
+    if (settings == null) {
+      this.settings = new DocumentBuilderSetting[0];
     }
     else {
-        this.settings = (DocumentBuilderSetting[]) settings.clone();
+      this.settings = (DocumentBuilderSetting[]) settings.clone();
     }
   }
 
@@ -83,12 +54,12 @@ public abstract class DOMTestDocumentBuilderFactory {
    *   and any non-revoked settings from the current object.
    *   @param settings array of settings, may be null.
    */
-  public abstract DOMTestDocumentBuilderFactory newInstance(DocumentBuilderSetting[] settings)
-    throws DOMTestIncompatibleException;
+  public abstract DOMTestDocumentBuilderFactory newInstance(
+      DocumentBuilderSetting[] settings) throws DOMTestIncompatibleException;
 
   public abstract DOMImplementation getDOMImplementation();
 
-  public abstract boolean hasFeature(String feature,String version);
+  public abstract boolean hasFeature(String feature, String version);
 
   public abstract Document load(java.net.URL url) throws DOMTestLoadException;
 
@@ -96,92 +67,90 @@ public abstract class DOMTestDocumentBuilderFactory {
    *  Creates XPath evaluator
    *  @param doc DOM document, may not be null
    */
-  public Object createXPathEvaluator(Document doc)  {
-      try {
-          Method getFeatureMethod = doc.getClass().getMethod("getFeature",
-            new Class[] { String.class, String.class });
-          if (getFeatureMethod != null) {
-              return getFeatureMethod.invoke(doc, new Object[] { "XPath", null });
-          }
+  public Object createXPathEvaluator(Document doc) {
+    try {
+      Method getFeatureMethod = doc.getClass().getMethod("getFeature",
+          new Class[] {String.class, String.class});
+      if (getFeatureMethod != null) {
+        return getFeatureMethod.invoke(doc, new Object[] {"XPath", null});
       }
-      catch(Exception ex) {
-      }
-      return doc;
-   }
-        
+    }
+    catch (Exception ex) {
+    }
+    return doc;
+  }
 
-    /**
-     *   Merges the settings from the specific test case or suite
-     *   with the existing (typically session) settings.
-     *   @param settings new settings, may be null which will
-     *   return clone of existing settings.
-     */
-  protected DocumentBuilderSetting[] mergeSettings(DocumentBuilderSetting[] newSettings)
-  {
-      if(newSettings == null) {
-        return (DocumentBuilderSetting[]) settings.clone();
-      }
-      List mergedSettings = new ArrayList(settings.length + newSettings.length);
-      //
-      //    all new settings are respected
-      //
-      for(int i = 0; i < newSettings.length; i++) {
-        mergedSettings.add(newSettings[i]);
-      }
-      //
-      //    for all previous settings, take only those that
-      //       do not conflict with existing settings
-      for(int i = 0; i < settings.length; i++) {
-        DocumentBuilderSetting setting = settings[i];
-        boolean hasConflict = false;
-        for(int j = 0; j < newSettings.length; j++) {
-          DocumentBuilderSetting newSetting = newSettings[j];
-          if(newSetting.hasConflict(setting) || setting.hasConflict(newSetting)) {
-            hasConflict = true;
-            break;
-          }
-        }
-        if(!hasConflict) {
-          mergedSettings.add(setting);
+  /**
+   *   Merges the settings from the specific test case or suite
+   *   with the existing (typically session) settings.
+   *   @param settings new settings, may be null which will
+   *   return clone of existing settings.
+   */
+  protected DocumentBuilderSetting[] mergeSettings(DocumentBuilderSetting[]
+      newSettings) {
+    if (newSettings == null) {
+      return (DocumentBuilderSetting[]) settings.clone();
+    }
+    List mergedSettings = new ArrayList(settings.length + newSettings.length);
+    //
+    //    all new settings are respected
+    //
+    for (int i = 0; i < newSettings.length; i++) {
+      mergedSettings.add(newSettings[i]);
+    }
+    //
+    //    for all previous settings, take only those that
+    //       do not conflict with existing settings
+    for (int i = 0; i < settings.length; i++) {
+      DocumentBuilderSetting setting = settings[i];
+      boolean hasConflict = false;
+      for (int j = 0; j < newSettings.length; j++) {
+        DocumentBuilderSetting newSetting = newSettings[j];
+        if (newSetting.hasConflict(setting) || setting.hasConflict(newSetting)) {
+          hasConflict = true;
+          break;
         }
       }
+      if (!hasConflict) {
+        mergedSettings.add(setting);
+      }
+    }
 
-      DocumentBuilderSetting[] mergedArray =
+    DocumentBuilderSetting[] mergedArray =
         new DocumentBuilderSetting[mergedSettings.size()];
-      for(int i = 0; i < mergedSettings.size(); i++) {
-        mergedArray[i] = (DocumentBuilderSetting) mergedSettings.get(i);
-      }
-      return mergedArray;
+    for (int i = 0; i < mergedSettings.size(); i++) {
+      mergedArray[i] = (DocumentBuilderSetting) mergedSettings.get(i);
     }
+    return mergedArray;
+  }
 
-
-    public String addExtension(String testFileName) {
-    	String contentType = getContentType();
-    	if ("text/html".equals(contentType)) {
-    		return testFileName + ".html";
-    	}
-    	if ("image/svg+xml".equals(contentType)) {
-    		return testFileName + ".svg";
-    	}
-    	if ("application/xhtml+xml".equals(contentType)) {
-    		return testFileName + ".xhtml";
-    	}
-        return testFileName + ".xml";
+  public String addExtension(String testFileName) {
+    String contentType = getContentType();
+    if ("text/html".equals(contentType)) {
+      return testFileName + ".html";
     }
-
-    public abstract boolean isCoalescing();
-
-    public abstract boolean isExpandEntityReferences();
-
-    public abstract boolean isIgnoringElementContentWhitespace();
-
-    public abstract boolean isNamespaceAware();
-
-    public abstract boolean isValidating();
-    
-    public String getContentType() {
-    	return System.getProperty("org.w3c.domts.contentType", "text/xml");
+    if ("image/svg+xml".equals(contentType)) {
+      return testFileName + ".svg";
     }
+    if ("application/xhtml+xml".equals(contentType)) {
+      return testFileName + ".xhtml";
+    }
+    return testFileName + ".xml";
+  }
+
+  public abstract boolean isCoalescing();
+
+  public abstract boolean isExpandEntityReferences();
+
+  public abstract boolean isIgnoringElementContentWhitespace();
+
+  public abstract boolean isNamespaceAware();
+
+  public abstract boolean isValidating();
+
+  public String getContentType() {
+    return System.getProperty("org.w3c.domts.contentType", "text/xml");
+  }
 
   /**
    * Creates an array of all determinable settings for the DocumentBuilder
@@ -191,34 +160,33 @@ public abstract class DOMTestDocumentBuilderFactory {
   public final DocumentBuilderSetting[] getActualSettings() {
 
     DocumentBuilderSetting[] allSettings = new DocumentBuilderSetting[] {
-      DocumentBuilderSetting.coalescing,
-      DocumentBuilderSetting.expandEntityReferences,
-      DocumentBuilderSetting.hasNullString,
-      DocumentBuilderSetting.ignoringElementContentWhitespace,
-      DocumentBuilderSetting.namespaceAware,
-      DocumentBuilderSetting.signed,
-      DocumentBuilderSetting.validating,
-      DocumentBuilderSetting.notCoalescing,
-      DocumentBuilderSetting.notExpandEntityReferences,
-      DocumentBuilderSetting.notHasNullString,
-      DocumentBuilderSetting.notIgnoringElementContentWhitespace,
-      DocumentBuilderSetting.notNamespaceAware,
-      DocumentBuilderSetting.notSigned,
-      DocumentBuilderSetting.notValidating
-      };
+        DocumentBuilderSetting.coalescing,
+        DocumentBuilderSetting.expandEntityReferences,
+        DocumentBuilderSetting.hasNullString,
+        DocumentBuilderSetting.ignoringElementContentWhitespace,
+        DocumentBuilderSetting.namespaceAware,
+        DocumentBuilderSetting.signed,
+        DocumentBuilderSetting.validating,
+        DocumentBuilderSetting.notCoalescing,
+        DocumentBuilderSetting.notExpandEntityReferences,
+        DocumentBuilderSetting.notHasNullString,
+        DocumentBuilderSetting.notIgnoringElementContentWhitespace,
+        DocumentBuilderSetting.notNamespaceAware,
+        DocumentBuilderSetting.notSigned,
+        DocumentBuilderSetting.notValidating
+    };
 
-      List list = new ArrayList(allSettings.length /2);
-      for(int i = 0; i < allSettings.length; i++) {
-        if(allSettings[i].hasSetting(this)) {
-          list.add(allSettings[i]);
-        }
+    List list = new ArrayList(allSettings.length / 2);
+    for (int i = 0; i < allSettings.length; i++) {
+      if (allSettings[i].hasSetting(this)) {
+        list.add(allSettings[i]);
       }
-      DocumentBuilderSetting[] settings = new DocumentBuilderSetting[list.size()];
-      for(int i = 0; i < settings.length; i++) {
-        settings[i] = (DocumentBuilderSetting) list.get(i);
-      }
-      return settings;
+    }
+    DocumentBuilderSetting[] settings = new DocumentBuilderSetting[list.size()];
+    for (int i = 0; i < settings.length; i++) {
+      settings[i] = (DocumentBuilderSetting) list.get(i);
+    }
+    return settings;
   }
 
 }
-

@@ -34,8 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="cdata" type="CDATASection"/>
 <var name="replacedCData" type="CDATASection"/>
 <var name="replacedEref" type="EntityReference"/>
-<var name="CDataName" type="DOMString"/>
-<var name="ERefName" type="DOMString"/>
+<var name="cdataName" type="DOMString"/>
+<var name="erefName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
@@ -44,9 +44,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="docFrag" var="appendedChild" newChild="entRef"/>
 <appendChild obj="docFrag" var="appendedChild" newChild="cdata"/>
 <replaceChild var="replacedCData" obj="docFrag" oldChild="cdata" newChild="entRef"/>
-<nodeValue var="CDataName" obj="replacedCData"/>
-<assertEquals actual="CDataName" expected='"CDATASection"' id="nodereplacechild18_1" ignoreCase="false"/>
+<nodeValue var="cdataName" obj="replacedCData"/>
+<assertEquals actual="cdataName" expected='"CDATASection"' id="nodereplacechild18_1" ignoreCase="false"/>
 <replaceChild var="replacedEref" obj="docFrag" oldChild="entRef" newChild="cdata"/>
-<nodeName var="ERefName" obj="replacedEref"/>
-<assertEquals actual="ERefName" expected='"alpha"' id="nodereplacechild18_2" ignoreCase="false"/>
+<nodeName var="erefName" obj="replacedEref"/>
+<assertEquals actual="erefName" expected='"alpha"' id="nodereplacechild18_2" ignoreCase="false"/>
 </test>

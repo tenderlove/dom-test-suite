@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -10,27 +10,32 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
- /*
- $Log: DOM4JTestDocumentBuilderFactory.java,v $
- Revision 1.1  2002-02-03 07:47:51  dom-ts-4
- More missing files
+/*
+  $Log: DOM4JTestDocumentBuilderFactory.java,v $
+  Revision 1.2  2004-03-11 01:44:21  dom-ts-4
+  Checkstyle fixes (bug 592)
+
+  Revision 1.1  2002/02/03 07:47:51  dom-ts-4
+  More missing files
 
  */
 
 package org.w3c.domts;
 
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import org.w3c.domts.*;
-import org.xml.sax.*;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.xml.sax.XMLReader;
 
 /**
  *   This class implements the generic parser and configuation
  *   abstract class for JAXP supporting parsers.
  */
 public class DOM4JTestDocumentBuilderFactory
-  extends DOMTestDocumentBuilderFactory {
+    extends DOMTestDocumentBuilderFactory {
 
   private final Object domFactory;
   private final Object saxReader;
@@ -48,8 +53,8 @@ public class DOM4JTestDocumentBuilderFactory
    * after the constructor.
    * @param settings array of settings, may be null.
    */
-  public DOM4JTestDocumentBuilderFactory(DocumentBuilderSetting[] settings)
-    throws DOMTestIncompatibleException {
+  public DOM4JTestDocumentBuilderFactory(DocumentBuilderSetting[] settings) throws
+      DOMTestIncompatibleException {
     super(settings);
     try {
       //
@@ -61,34 +66,36 @@ public class DOM4JTestDocumentBuilderFactory
       //xmlReader = saxReader.getXMLReader();
 
       ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-      Class domFactoryClass = classLoader.loadClass("org.dom4j.dom.DOMDocumentFactory");
+      Class domFactoryClass = classLoader.loadClass(
+          "org.dom4j.dom.DOMDocumentFactory");
       Method getInstance = domFactoryClass.getMethod("getInstance", new Class[] {});
-      domFactory = getInstance.invoke(null,new Object[] {});
+      domFactory = getInstance.invoke(null, new Object[] {});
       domImpl = (DOMImplementation) domFactory;
       Class saxReaderClass = classLoader.loadClass("org.dom4j.io.SAXReader");
       Constructor saxReaderConstructor = saxReaderClass.getConstructor(
-        new Class[] { classLoader.loadClass("org.dom4j.DocumentFactory") });
-      saxReader = saxReaderConstructor.newInstance(new Object[] { domFactory } );
+          new Class[] {classLoader.loadClass("org.dom4j.DocumentFactory")});
+      saxReader = saxReaderConstructor.newInstance(new Object[] {domFactory});
 
-      Method getReaderMethod = saxReaderClass.getMethod("getXMLReader", new Class[] {});
+      Method getReaderMethod = saxReaderClass.getMethod("getXMLReader",
+          new Class[] {});
       xmlReader = (XMLReader) getReaderMethod.invoke(saxReader, new Object[0]);
 
-      readMethod = saxReaderClass.getMethod("read",new Class[] { java.net.URL.class } );
+      readMethod = saxReaderClass.getMethod("read", new Class[] {java.net.URL.class});
     }
-    catch(InvocationTargetException ex) {
-      throw new DOMTestIncompatibleException(ex.getTargetException(),null);
+    catch (InvocationTargetException ex) {
+      throw new DOMTestIncompatibleException(ex.getTargetException(), null);
     }
-    catch(Exception ex) {
-      throw new DOMTestIncompatibleException(ex,null);
+    catch (Exception ex) {
+      throw new DOMTestIncompatibleException(ex, null);
     }
     //
     //   TODO: Process settings
     //
   }
 
-  public DOMTestDocumentBuilderFactory newInstance(DocumentBuilderSetting[] newSettings)
-    throws DOMTestIncompatibleException {
-    if(newSettings == null) {
+  public DOMTestDocumentBuilderFactory newInstance(DocumentBuilderSetting[]
+      newSettings) throws DOMTestIncompatibleException {
+    if (newSettings == null) {
       return this;
     }
     DocumentBuilderSetting[] mergedSettings = mergeSettings(newSettings);
@@ -96,20 +103,21 @@ public class DOM4JTestDocumentBuilderFactory
   }
 
   public Document load(java.net.URL url) throws DOMTestLoadException {
-    if(url == null) {
-        throw new NullPointerException("url");
+    if (url == null) {
+      throw new NullPointerException("url");
     }
-    if(saxReader == null) {
-        throw new NullPointerException("saxReader");
+    if (saxReader == null) {
+      throw new NullPointerException("saxReader");
     }
     try {
-      return (org.w3c.dom.Document) readMethod.invoke(saxReader, new Object[] { url });
+      return (org.w3c.dom.Document) readMethod.invoke(saxReader,
+          new Object[] {url});
     }
-    catch(InvocationTargetException ex) {
+    catch (InvocationTargetException ex) {
       ex.getTargetException().printStackTrace();
       throw new DOMTestLoadException(ex.getTargetException());
     }
-    catch(Exception ex) {
+    catch (Exception ex) {
       ex.printStackTrace();
       throw new DOMTestLoadException(ex);
     }
@@ -120,28 +128,27 @@ public class DOM4JTestDocumentBuilderFactory
   }
 
   public boolean hasFeature(String feature, String version) {
-    return domImpl.hasFeature(feature,version);
+    return domImpl.hasFeature(feature, version);
   }
 
-    public boolean isCoalescing() {
-      return false;
-    }
+  public boolean isCoalescing() {
+    return false;
+  }
 
-    public boolean isExpandEntityReferences() {
-      return false;
-    }
+  public boolean isExpandEntityReferences() {
+    return false;
+  }
 
-    public boolean isIgnoringElementContentWhitespace() {
-      return false;
-    }
+  public boolean isIgnoringElementContentWhitespace() {
+    return false;
+  }
 
-    public boolean isNamespaceAware() {
-      return true;
-    }
+  public boolean isNamespaceAware() {
+    return true;
+  }
 
-    public boolean isValidating() {
-      return false;
-    }
+  public boolean isValidating() {
+    return false;
+  }
 
 }
-

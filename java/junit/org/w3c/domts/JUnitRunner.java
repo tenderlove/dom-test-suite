@@ -10,42 +10,6 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
-/*
-$Log: JUnitRunner.java,v $
-Revision 1.10  2004-02-15 02:53:29  dom-ts-4
-Additional typeinfo tests, fix for schemaValidating implementation attribute (bug524)
-
-Revision 1.9  2003/11/10 07:34:13  dom-ts-4
-Update for 2003-11-07 CRs (bug 375)
-
-Revision 1.8  2002/03/14 05:00:12  dom-ts-4
-Add return code of 1 if there were any errors or failures, 0 if all tests passed
-
-Revision 1.7  2002/02/03 04:22:35  dom-ts-4
-DOM4J and Batik support added.
-Rework of parser settings
-
-Revision 1.6  2002/01/30 06:31:59  dom-ts-4
-Changed main() to run Swing UI, added -noloading to args
-
-Revision 1.5  2002/01/11 17:05:46  plehegar
-cleaned the DOMImplementation features to match the recommendations.
-Note that DOM Level 3 is still a WD
-
-Revision 1.4  2001/11/01 15:02:50  dom-ts-4
-Doxygen and Avalon support
-
-Revision 1.3  2001/10/18 07:58:17  dom-ts-4
-assertURIEquals added
-Can now run from dom1-core.jar
-
-Revision 1.2  2001/08/24 08:28:00  dom-ts-4
-Test matrix generation.  Some Node.setValue() tests
-
-Revision 1.1  2001/07/23 04:52:20  dom-ts-4
-Initial test running using JUnit.
-
-*/
 
 package org.w3c.domts;
 

@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.64  2004-02-17 16:57:58  dom-ts-4
+Revision 1.65  2004-03-11 01:44:22  dom-ts-4
+Checkstyle fixes (bug 592)
+
+Revision 1.64  2004/02/17 16:57:58  dom-ts-4
 Refined criteria for detection of doubles in list members (bug 532)
 
 Revision 1.63  2004/02/17 05:39:21  dom-ts-4
@@ -290,10 +293,10 @@ The source document contained the following notice:
 <!--   produces JavaDoc for metadata elements   -->
 <xsl:template match="*[local-name() = 'metadata']">
     <xsl:text>/**
-* </xsl:text>
-    <xsl:apply-templates select="*[local-name()='description']" mode="metadata"/>
-    <xsl:text>
 </xsl:text>
+    <xsl:call-template name="emit-description">
+    	<xsl:with-param name="description" select="translate(*[local-name() = 'description'], '&#9;', ' ')"/>
+    </xsl:call-template>
 
 <xsl:for-each select="*[local-name()='creator']">
 <xsl:text>* @author </xsl:text><xsl:apply-templates select="." mode="metadata"/><xsl:text>
@@ -316,6 +319,33 @@ The source document contained the following notice:
 </xsl:for-each>
 <xsl:text>*/
 </xsl:text>
+</xsl:template>
+
+<xsl:template name="emit-description">
+	<xsl:param name="description"/>
+	<xsl:choose>
+		<xsl:when test="contains($description, '&#xA;')">
+			<xsl:variable name="preceding" select="substring-before($description, '&#xA;')"/>
+			<xsl:if test="string-length($preceding) &gt; 0">		
+				<xsl:text> * </xsl:text>
+				<xsl:value-of select="substring-before($description, '&#xA;')"/>
+				<xsl:text>
+</xsl:text>
+			</xsl:if>
+			<xsl:variable name="following" select="substring-after($description, '&#xA;')"/>
+			<xsl:if test="string-length($following) &gt; 0">
+				<xsl:call-template name="emit-description">
+					<xsl:with-param name="description" select="substring-after($description, '&#xA;')"/>
+				</xsl:call-template>
+			</xsl:if>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text> * </xsl:text>
+			<xsl:value-of select="$description"/>
+			<xsl:text>
+</xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 
@@ -411,7 +441,9 @@ package <xsl:value-of select="$package"/>;
 
 import org.w3c.dom.*;
 <xsl:value-of select="$import-html"/>
+<xsl:if test="descendant::*[local-name() = 'var' and contains('EventTarget EventListener Event EventException UIEvent MouseEvent KeyEvent MutationEvent DocumentEvent ', concat(@type, ' '))]">
 import org.w3c.dom.events.*;
+</xsl:if>
 <xsl:if test="contains($package, 'level3.ls')">
 import org.w3c.dom.ls.*;
 </xsl:if>
@@ -429,24 +461,25 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 <!--  if there is a metadata child element then
           produce documentation comments    -->
 <xsl:apply-templates select="*[local-name()='metadata']"/>
-<xsl:text>public class </xsl:text><xsl:value-of select="@name"/>
+<xsl:text>public final class </xsl:text><xsl:value-of select="@name"/>
     <xsl:text> extends DOMTestCase {
 
    /**
-    * Constructor
+    * Constructor.
     * @param factory document factory, may not be null
     </xsl:text>
-    <xsl:if test="*[local-name() = 'implementationAttribute' or (local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var']))]">
+    <xsl:variable name="potentialIncompatibilities" select="*[local-name() = 'implementationAttribute' or local-name() = 'load' or (local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var']))]"/>
+    <xsl:if test="$potentialIncompatibilities">
         <xsl:text>* @throws org.w3c.domts.DOMTestIncompatibleException Thrown if test is not compatible with parser configuration
     </xsl:text>
     </xsl:if>
     <xsl:text>*/
    public </xsl:text>
     <xsl:value-of select="@name"/>
-    <xsl:text>(DOMTestDocumentBuilderFactory factory) </xsl:text>
+    <xsl:text>(final DOMTestDocumentBuilderFactory factory) </xsl:text>
     <!--  if there are any implementationAttribute, load or hasFeature (before a var) elements
                then must declare that we might throw an incompatible test exception   -->
-    <xsl:if test="*[local-name() = 'implementationAttribute' or local-name() = 'load' or (local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var']))]">
+    <xsl:if test="$potentialIncompatibilities">
         <xsl:text> throws org.w3c.domts.DOMTestIncompatibleException</xsl:text>
     </xsl:if>
     <xsl:text> {
@@ -456,15 +489,15 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     //
     //   check if loaded documents are supported for content type
     //
-	String contentType = getContentType();
-	</xsl:text>
+    String contentType = getContentType();
+    </xsl:text>
 	<xsl:for-each select="*[local-name() = 'load' and @href]">
 		<xsl:text>preload(contentType, "</xsl:text>
 		<xsl:value-of select="@href"/>
 		<xsl:text>", </xsl:text>
 		<xsl:value-of select="@willBeModified"/>
 		<xsl:text>);
-	</xsl:text>
+    </xsl:text>
 	</xsl:for-each>
 	<xsl:text>}
 </xsl:text>
@@ -474,30 +507,30 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 
 <xsl:text>
    /**
-    * Test body
+    * Runs the test case.
     * @throws Throwable Any uncaught exception causes test to fail
     */
    public void runTest() throws Throwable {
       </xsl:text>
 <xsl:apply-templates mode="body">
     <xsl:with-param name="vardefs" select="*[local-name() = 'var']"/>
-</xsl:apply-templates>
-   }
+</xsl:apply-templates>}
    /**
-    *  Gets URI that identifies the test
+    *  Gets URI that identifies the test.
     *  @return uri identifier of test
     */
    public String getTargetURI() {
       return "<xsl:value-of select="concat($target-uri-base, @name)"/>";
    }
    /**
-    * Runs individual test
+    * Runs this test from the command line.
     * @param args command line arguments
     */
-   public static void main(String[] args) {
+   public static void main(final String[] args) {
         DOMTestCase.doMain(<xsl:value-of select="@name"/>.class, args);
    }
 }
+
 </xsl:template>
 
 <xsl:template match="*[local-name() = 'var']" mode="innerClass">
@@ -594,7 +627,12 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
          *    </xsl:text><xsl:value-of select="$method-def/descr"/>
          <xsl:for-each select="$method-def/parameters/param">
             <xsl:text>
-         * @param </xsl:text><xsl:value-of select="@name"/><xsl:text> </xsl:text><xsl:value-of select="descr"/>
+         * @param </xsl:text><xsl:value-of select="@name"/><xsl:text> </xsl:text><xsl:value-of select="normalize-space(descr)"/>
+         </xsl:for-each>
+         <xsl:for-each select="$method-def/returns[@type and @type != 'void']">
+         	<xsl:text>
+         * @return </xsl:text>
+         	<xsl:value-of select="normalize-space(descr)"/>         
          </xsl:for-each>
          <xsl:text>
          */
@@ -1204,7 +1242,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:otherwise>
             <xsl:text>assertTrue("</xsl:text>
             <xsl:value-of select="@id"/>
-            <xsl:text>",</xsl:text>
+            <xsl:text>", </xsl:text>
             <xsl:apply-templates select="*[1]" mode="condition"/>
             <xsl:text>);
       </xsl:text>
@@ -1580,15 +1618,14 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
       	<xsl:with-param name="vardefs" select="$vardefs"/>
       </xsl:apply-templates>
       <xsl:text>
-      }
-      </xsl:text>
+      } </xsl:text>
       <!--  for each type of defined exception   -->
       <xsl:for-each select="$exceptions">
       	  <!--  if there is an ImplementationException or 
       	  		at least one element for the current exception  -->
       	  <xsl:if test="$implException or $catches[local-name() = current()/@name]">
       	  <xsl:text>catch (</xsl:text><xsl:value-of select="@name"/><xsl:text> ex) {
-      	  	  switch (ex.code) {
+           switch (ex.code) {
       </xsl:text>
       			<xsl:variable name="exception" select="."/>
       			<xsl:for-each select="$catches[local-name() = $exception/@name]">
@@ -1619,8 +1656,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
       			<xsl:text>    default:
           throw ex;
           }
-      }
-      </xsl:text>
+      } </xsl:text>
       		</xsl:if>
       </xsl:for-each>
       <!--  for any implementation exception  -->
@@ -1632,17 +1668,16 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
       	</xsl:apply-templates>
       	
       	<xsl:text>
-      	}
-      	</xsl:text>
+      	} </xsl:text>
       </xsl:for-each>
+      <xsl:text>
+</xsl:text>
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='while']" mode="body">
     <xsl:param name="vardefs"/>
-    while(
-    <xsl:apply-templates select="*[1]" mode="condition"/>
-    ) {
+    while (<xsl:apply-templates select="*[1]" mode="condition"/>) {
     <xsl:apply-templates select="*[position() &gt; 1]" mode="body">
         <xsl:with-param name="vardefs" select="$vardefs"/>
     </xsl:apply-templates>
@@ -1700,7 +1735,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 
 
     	<xsl:otherwise>
-    		<xsl:text>( </xsl:text>
+    		<xsl:text>(</xsl:text>
     		<xsl:call-template name="produce-type">
         		<xsl:with-param name="type" select="$memberType"/>
     		</xsl:call-template>

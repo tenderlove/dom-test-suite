@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -15,6 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="alltests">
 <metadata>
 <title>DOM Level 2 Events Test Suite</title>
+<creator>DOM Test Suite Project</creator>
 </metadata>
      <suite.member href="DocumentEventCast01.xml"/>
      <suite.member href="EventTargetCast01.xml"/>

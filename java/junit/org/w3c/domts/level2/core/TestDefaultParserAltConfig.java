@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -13,13 +13,14 @@
 
 package org.w3c.domts.level2.core;
 
-import junit.framework.*;
-import java.lang.reflect.*;
-import javax.xml.parsers.*;
-import java.util.*;
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import org.w3c.domts.*;
+import java.lang.reflect.Constructor;
+
+import junit.framework.TestSuite;
+
+import org.w3c.domts.DOMTestDocumentBuilderFactory;
+import org.w3c.domts.DOMTestSuite;
+import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
+import org.w3c.domts.JUnitTestSuiteAdapter;
 
 public class TestDefaultParserAltConfig extends TestSuite {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -10,18 +10,17 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
+package org.w3c.domts;
 
- package org.w3c.domts;
- import java.lang.reflect.*;
- import javax.xml.parsers.*;
 
-  /**
-  * Encapsulates a concrete load exception such as
-  * a SAX exception
-  * @author Curt Arnold
-  * @date 2 Feb 2002
-  */
- public class DOMTestLoadException extends Exception {
+/**
+ * Encapsulates a concrete load exception such as
+ * a SAX exception
+ * @author Curt Arnold
+ * @date 2 Feb 2002
+ */
+public class DOMTestLoadException
+    extends Exception {
   private final Throwable innerException;
 
   /**
@@ -33,7 +32,7 @@
   }
 
   public String toString() {
-    if(innerException != null) {
+    if (innerException != null) {
       return innerException.toString();
     }
     return super.toString();

@@ -13,13 +13,16 @@
 
 package org.w3c.domts.level3.xpath;
 
-import junit.framework.*;
-import java.lang.reflect.*;
-import javax.xml.parsers.*;
-import java.util.*;
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import org.w3c.domts.*;
+import java.lang.reflect.Constructor;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import junit.framework.TestSuite;
+
+import org.w3c.domts.DOMTestDocumentBuilderFactory;
+import org.w3c.domts.DOMTestSuite;
+import org.w3c.domts.JUnitTestSuiteAdapter;
+import org.w3c.domts.XalanDOMTestDocumentBuilderFactory;
 
 public class TestXalanAltConfig extends TestSuite {
 

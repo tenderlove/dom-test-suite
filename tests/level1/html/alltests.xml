@@ -14,6 +14,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="alltests">
 <metadata>
 <title>DOM Level 1 HTML Test Suite</title>
+<creator>DOM Test Suite Project</creator>
 </metadata>
      <suite.member href="HTMLAnchorElement01.xml"/>
      <suite.member href="HTMLAnchorElement02.xml"/>

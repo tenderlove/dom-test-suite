@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.141  2004-03-10 22:09:00  dom-ts-4
+Revision 1.142  2004-03-11 01:44:21  dom-ts-4
+Checkstyle fixes (bug 592)
+
+Revision 1.141  2004/03/10 22:09:00  dom-ts-4
 Remove XDK 10 Beta hacks (bug 591)
 
 Revision 1.140  2004/03/10 18:42:00  dom-ts-4
@@ -718,10 +721,20 @@ All implementation conditions combined into implementationAttribute element
     <taskdef resource="checkstyletask.properties"/>
 
     <checkstyle>
-        <fileset dir="java/org/w3c/domts" includes="*.java"/>
+        <fileset dir="java/org/w3c/domts" includes="**/*.java"/>
     </checkstyle>
 
 </target>
+
+<target name="junit-checkstyle" depends="checkstyle-available, junit-run">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="java/junit/org/w3c/domts" includes="**/*.java"/>
+    </checkstyle>
+
+</target>
+
 
 <target name="get-junit-license" depends="init" unless="junit-license-available">
     <get src="http://oss.software.ibm.com/developerworks/opensource/license10.html"

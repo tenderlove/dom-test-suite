@@ -21,12 +21,12 @@
     <title>XPathEvaluator_evaluate_TYPE_ERR</title>
     <creator>Curt Arnold</creator>
     <description>      
-      Retrieve the XPathEvaluator on which the
-      "evaluate("/", document, null, 0, null)" method is invoked with the document
-      element and the type is specified to be a number.
+Evaluate "string(/)" and request that the result be a FIRST_ORDERED_NODE_TYPE, should
+result in a TYPE_ERR.
     </description>
     <date qualifier="created">2004-01-10</date>
     <subject resource="&spec;#XPathEvaluator-evaluate"/>
+    <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=508"/>
   </metadata>
   &vars;
   <var name="result" type="XPathResult"/>
@@ -38,7 +38,7 @@
   <assertXPathException id="throw_TYPE_ERR">
   	<TYPE_ERR>
   		<evaluate interface="XPathEvaluator" obj='xpEvaluator' var='result'
-    		expression='&quot;/&quot;' contextNode='doc' resolver='nullNSResolver' type='1' result='nullResult'/>
+    		expression='"string(/)"' contextNode='doc' resolver='nullNSResolver' type='9' result='nullResult'/>
 	</TYPE_ERR>
   </assertXPathException>
 </test>

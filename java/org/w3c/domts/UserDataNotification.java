@@ -16,74 +16,73 @@ import org.w3c.dom.Node;
 /**
  * This class captures the parameters to one invocation of
  * UserDataHandler.handle.
- * 
+ *
  */
 public class UserDataNotification {
-	private final short operation;
-	private final String key;
-	private final Object data;
-	private final Node src;
-	private final Node dst;
-	
-	/**
-	 * Public constructor
-	 *  
-	 */
-	public UserDataNotification(short operation,
-								String key,
-								Object data,
-								Node src,
-								Node dst) {
-		this.operation = operation;
-		this.key = key;
-		this.data = data;
-		this.src = src;
-		this.dst = dst;
-	}
+  private final short operation;
+  private final String key;
+  private final Object data;
+  private final Node src;
+  private final Node dst;
 
+  /**
+   * Public constructor
+   *
+   */
+  public UserDataNotification(short operation,
+                              String key,
+                              Object data,
+                              Node src,
+                              Node dst) {
+    this.operation = operation;
+    this.key = key;
+    this.data = data;
+    this.src = src;
+    this.dst = dst;
+  }
 
-	/**
-	 * Get value of operation parameter
-	 * 
-	 * @return value of operation parameter
-	 */
-	public final short getOperation() {
-		return operation;
-	}
-	
-	/**
-	 * Gets value of key parameter
-	 * 
-	 * @return value of key parameter
-	 */
-	public final String getKey() {
-		return key;
-	}
-	
-	/**
-	 * Gets value of data parameter
-	 * 
-	 * @return value of data parameter
-	 */
-	public final Object getData() {
-		return data;
-	}
-	
-	/**
-	 * Gets value of src parameter
-	 * 
-	 * @return value of src parameter
-	 */
-	public final Node getSrc() {
-		return src;
-	}
-	
-	/**
-	 * Gets value of dst parameter
-	 * 
-	 * @return value of dst parameter
-	 */
-	public final Node getDst() {
-		return dst;
-	}
+  /**
+   * Get value of operation parameter
+   *
+   * @return value of operation parameter
+   */
+  public final short getOperation() {
+    return operation;
+  }
+
+  /**
+   * Gets value of key parameter
+   *
+   * @return value of key parameter
+   */
+  public final String getKey() {
+    return key;
+  }
+
+  /**
+   * Gets value of data parameter
+   *
+   * @return value of data parameter
+   */
+  public final Object getData() {
+    return data;
+  }
+
+  /**
+   * Gets value of src parameter
+   *
+   * @return value of src parameter
+   */
+  public final Node getSrc() {
+    return src;
+  }
+
+  /**
+   * Gets value of dst parameter
+   *
+   * @return value of dst parameter
+   */
+  public final Node getDst() {
+    return dst;
+  }
 }

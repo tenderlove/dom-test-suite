@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -40,14 +40,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docImp" type="Document"/>
 <var name="piImport" type="ProcessingInstruction"/>
 <var name="piToImport" type="ProcessingInstruction"/>
-<var name="PIData" type="DOMString"/>
-<var name="PITarget" type="DOMString"/>
+<var name="piData" type="DOMString"/>
+<var name="piTarget" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
 <load var="docImp" href="staffNS" willBeModified="true"/>
 <createProcessingInstruction var="piToImport" obj="doc" target='"Target"' data='"Data"'/>
 <importNode  var="piImport" obj="doc" importedNode="piToImport" deep="false"/>
-<target var="PITarget" obj="piImport" interface="ProcessingInstruction"/>
-<data var="PIData" obj="piImport" interface="ProcessingInstruction"/>
-<assertEquals expected='"Target"' actual="PITarget" id="documentimportnode18_Target" ignoreCase="false"/>
-<assertEquals expected='"Data"' actual="PIData" id="documentimportnode18_Data" ignoreCase="false"/>
+<target var="piTarget" obj="piImport" interface="ProcessingInstruction"/>
+<data var="piData" obj="piImport" interface="ProcessingInstruction"/>
+<assertEquals expected='"Target"' actual="piTarget" id="documentimportnode18_Target" ignoreCase="false"/>
+<assertEquals expected='"Data"' actual="piData" id="documentimportnode18_Data" ignoreCase="false"/>
 </test>

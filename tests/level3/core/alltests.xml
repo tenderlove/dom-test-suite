@@ -16,8 +16,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
 <metadata>
 <title>DOM Level 3 Core Test Suite</title>
+<creator>DOM Test Suite Project</creator>
 </metadata>
-
 <suite.member href="attrgetschematypeinfo01.xml"/>
 <suite.member href="attrgetschematypeinfo02.xml"/>
 <suite.member href="attrgetschematypeinfo03.xml"/>

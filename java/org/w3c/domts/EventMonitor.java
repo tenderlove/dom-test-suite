@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -11,18 +11,20 @@
  */
 
 package org.w3c.domts;
-import org.w3c.dom.events.*;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
 
-
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.EventListener;
 
 /**
- *   This is a utility implementation of EventListener  
+ *   This is a utility implementation of EventListener
  *      that captures all events and provides access
  *      to lists of all events by mode
  */
-public class EventMonitor implements EventListener {
+public class EventMonitor
+    implements EventListener {
   private final List atEvents = new ArrayList();
   private final List bubbledEvents = new ArrayList();
   private final List capturedEvents = new ArrayList();
@@ -32,16 +34,16 @@ public class EventMonitor implements EventListener {
   }
 
   public void handleEvent(Event evt) {
-    switch(evt.getEventPhase()) {
-        case  Event.CAPTURING_PHASE:
+    switch (evt.getEventPhase()) {
+      case Event.CAPTURING_PHASE:
         capturedEvents.add(evt);
         break;
 
-        case Event.BUBBLING_PHASE:
+      case Event.BUBBLING_PHASE:
         bubbledEvents.add(evt);
         break;
 
-        case Event.AT_TARGET:
+      case Event.AT_TARGET:
         atEvents.add(evt);
         break;
     }
@@ -64,4 +66,3 @@ public class EventMonitor implements EventListener {
     return new ArrayList(capturedEvents);
   }
 }
-

@@ -16,6 +16,7 @@
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
 	<metadata>
 		<title>DOM Level 3 LS Test Suite</title>
+		<creator>X-Hive Corporation</creator>
 	</metadata>
    <suite.member href="DOMBuilderFilterTest0.xml"/>
    <suite.member href="DOMBuilderFilterTest1.xml"/>

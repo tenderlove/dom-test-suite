@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -10,20 +10,13 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
- /*
- $Log: JUnitTestSuiteAdapter.java,v $
- Revision 1.2  2002-06-03 23:48:48  dom-ts-4
- Support for Events tests
-
- Revision 1.1  2001/07/23 04:52:20  dom-ts-4
- Initial test running using JUnit.
-
- */
-
 package org.w3c.domts;
 
-import junit.framework.*;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class JUnitTestSuiteAdapter extends TestSuite implements DOMTestSink  {
 
@@ -41,7 +34,7 @@ public class JUnitTestSuiteAdapter extends TestSuite implements DOMTestSink  {
       Constructor testConstructor = testclass.getConstructor(
           new Class[] { DOMTestDocumentBuilderFactory.class } );
         //
-        //   since this is done with reflection 
+        //   since this is done with reflection
         //     any exception on construction is wrapped with
         //     an InvocationTargetException and must be unwrapped
       Object domtest;
@@ -49,7 +42,7 @@ public class JUnitTestSuiteAdapter extends TestSuite implements DOMTestSink  {
         domtest = testConstructor.newInstance(new Object[] { factory });
       } catch(InvocationTargetException ex) {
         throw ex.getTargetException();
-      } 
+      }
 
       if(domtest instanceof DOMTestCase) {
         TestCase test = new JUnitTestCaseAdapter((DOMTestCase) domtest);

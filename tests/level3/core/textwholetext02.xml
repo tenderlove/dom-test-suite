@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementName" type="Element"/>
 <var name="textNode" type="Text"/>
 <var name="newTextNode" type="Text"/>
-<var name="WholeText" type="DOMString"/>
+<var name="wholeText" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName var="itemList" obj="doc" tagname='"strong"' interface="Document"/>
@@ -41,6 +41,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createTextNode var="newTextNode" obj="doc" data='"New Text"'/>
 <appendChild obj="elementName" var="appendedChild" newChild="newTextNode"/>
 <firstChild var="textNode" obj="elementName" interface="Node"/>
-<wholeText obj="textNode" var="WholeText"/>
-<assertEquals expected='"Margaret MartinNew Text"' actual="WholeText" id="textwholetext02" ignoreCase="false"/>
+<wholeText obj="textNode" var="wholeText"/>
+<assertEquals expected='"Margaret MartinNew Text"' actual="wholeText" id="textwholetext02" ignoreCase="false"/>
 </test>

@@ -10,54 +10,21 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
- /*
- $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.11  2004-01-05 08:27:15  dom-ts-4
- XHTML compatible L3 Core tests  (bug 455)
-
- Revision 1.10  2003/12/23 03:27:25  dom-ts-4
- Adds fail construct (bug 445)
-
- Revision 1.9  2003/12/19 22:21:04  dom-ts-4
- willBeModified violation detection support (bug 412)
-
- Revision 1.8  2003/12/15 19:05:55  dom-ts-4
- Changed implementation of assertEquals(double) (Bug 428)
-
- Revision 1.7  2003/12/06 06:50:30  dom-ts-4
- More fixes for L&S (Bug 396)
-
- Revision 1.6  2002/08/12 08:21:25  dom-ts-4
- Added name parameter to assertURIEquals (second try)
-
- Revision 1.5  2002/08/12 08:09:18  dom-ts-4
- Added name parameter to assertURIEquals
-
- Revision 1.4  2002/06/03 23:48:48  dom-ts-4
- Support for Events tests
-
- Revision 1.3  2001/10/18 07:58:17  dom-ts-4
- assertURIEquals added
- Can now run from dom1-core.jar
-
- Revision 1.2  2001/08/22 22:12:49  dom-ts-4
- Now passing all tests with default settings
-
- Revision 1.1  2001/07/23 04:52:20  dom-ts-4
- Initial test running using JUnit.
-
- */
-
-
+ 
 package org.w3c.domts;
 
-import junit.framework.*;
-import java.lang.reflect.*;
-import junit.framework.*;
-import javax.xml.parsers.*;
-import java.util.*;
-import org.w3c.dom.*;
-import org.xml.sax.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+
+import junit.framework.TestCase;
+
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {

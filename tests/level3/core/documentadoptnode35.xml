@@ -34,8 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newDoc" type="Document"/>
 <var name="newPI" type="ProcessingInstruction"/>
 <var name="adoptedPI" type="ProcessingInstruction"/>
-<var name="PITarget" type="DOMString"/>
-<var name="PIData" type="DOMString"/>
+<var name="piTarget" type="DOMString"/>
+<var name="piData" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="docElem" type="Element"/>
 <var name="rootNS" type="DOMString"/>
@@ -49,9 +49,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createProcessingInstruction var="newPI" obj="newDoc" target='"PITarget"' data='"PIData"'/>
 <adoptNode  var="adoptedPI" obj="doc" source="newPI"/>
 <if><notNull obj="adoptedPI"/>
-	<target var="PITarget" obj="adoptedPI" interface="ProcessingInstruction"/>
-	<data var="PIData" obj="adoptedPI" interface="ProcessingInstruction"/>
-	<assertEquals actual="PITarget" expected='"PITarget"' id="documentadoptnode35_Target" ignoreCase="false"/>
-	<assertEquals actual="PIData" expected='"PIData"' id="documentadoptnode35_Data" ignoreCase="false"/>
+	<target var="piTarget" obj="adoptedPI" interface="ProcessingInstruction"/>
+	<data var="piData" obj="adoptedPI" interface="ProcessingInstruction"/>
+	<assertEquals actual="piTarget" expected='"PITarget"' id="documentadoptnode35_Target" ignoreCase="false"/>
+	<assertEquals actual="piData" expected='"PIData"' id="documentadoptnode35_Data" ignoreCase="false"/>
 </if>
 </test>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -10,27 +10,9 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
-  /*
- $Log: DOMTestIncompatibleException.java,v $
- Revision 1.4  2004-02-09 19:07:03  dom-ts-4
- Test results improvment (bug 446)
-
- Revision 1.3  2002/06/03 23:48:48  dom-ts-4
- Support for Events tests
-
- Revision 1.2  2002/02/03 04:22:35  dom-ts-4
- DOM4J and Batik support added.
- Rework of parser settings
-
- Revision 1.1  2001/07/23 04:52:20  dom-ts-4
- Initial test running using JUnit.
-
- */
-
 
 package org.w3c.domts;
-import javax.xml.parsers.*;
-import java.lang.reflect.InvocationTargetException;
+
 
 /**
  * This exception represents a mismatch between the
@@ -38,31 +20,37 @@ import java.lang.reflect.InvocationTargetException;
  * and the capabilities of the parser under test.
  * @author Curt Arnold
  */
-public class DOMTestIncompatibleException extends Exception {
+public class DOMTestIncompatibleException
+    extends Exception {
   private final String msg;
 
-
   private DOMTestIncompatibleException(String msg) {
-  	this.msg = msg;
+    this.msg = msg;
   }
+
   /**
    *  Constructor from a ParserConfigurationException
    *  or reflection exception
    */
-  public DOMTestIncompatibleException(Throwable ex,DocumentBuilderSetting setting) {
+  public DOMTestIncompatibleException(Throwable ex,
+                                      DocumentBuilderSetting setting) {
     if (ex != null) {
-        msg = ex.toString();
-    } else {
-        if (setting != null) {
-            msg = setting.toString();
-        } else {
-            msg = super.toString();
-        }
+      msg = ex.toString();
+    }
+    else {
+      if (setting != null) {
+        msg = setting.toString();
+      }
+      else {
+        msg = super.toString();
+      }
     }
   }
 
-  public static DOMTestIncompatibleException incompatibleFeature(String feature, String version) {
-    StringBuffer buf = new StringBuffer("Implementation does not support feature \"");
+  public static DOMTestIncompatibleException incompatibleFeature(String feature,
+      String version) {
+    StringBuffer buf = new StringBuffer(
+        "Implementation does not support feature \"");
     buf.append(feature);
     buf.append("\" version=\"");
     buf.append(version);
@@ -70,8 +58,10 @@ public class DOMTestIncompatibleException extends Exception {
     return new DOMTestIncompatibleException(buf.toString());
   }
 
-  public static DOMTestIncompatibleException incompatibleLoad(String href, String contentType) {
-    StringBuffer buf = new StringBuffer("Document is incompatible with content type, \"");
+  public static DOMTestIncompatibleException incompatibleLoad(String href,
+      String contentType) {
+    StringBuffer buf = new StringBuffer(
+        "Document is incompatible with content type, \"");
     buf.append(href);
     buf.append("\" not available for =\"");
     buf.append(contentType);
@@ -84,4 +74,3 @@ public class DOMTestIncompatibleException extends Exception {
   }
 
 }
-

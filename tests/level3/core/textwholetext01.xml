@@ -32,11 +32,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="itemList" type="NodeList"/>
 <var name="elementName" type="Element"/>
 <var name="textNode" type="Text"/>
-<var name="NameWholeText" type="DOMString"/>
+<var name="nameWholeText" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="itemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <firstChild var="textNode" obj="elementName" interface="Node"/>
-<wholeText obj="textNode" var="NameWholeText"/>
-<assertEquals expected='"Margaret Martin"' actual="NameWholeText" id="textwholetext01" ignoreCase="false"/>
+<wholeText obj="textNode" var="nameWholeText"/>
+<assertEquals expected='"Margaret Martin"' actual="nameWholeText" id="textwholetext01" ignoreCase="false"/>
 </test>
