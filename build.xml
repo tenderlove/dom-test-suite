@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.73  2002-09-20 04:19:00  dom-ts-4
+Revision 1.74  2002-09-20 05:05:01  dom-ts-4
+Eliminated calls to SED (well except for SVG)
+
+Revision 1.73  2002/09/20 04:19:00  dom-ts-4
 Fix for dom2-html-matrix task
 
 Revision 1.72  2002/09/18 05:22:52  dom-ts-4
@@ -342,17 +345,18 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom1-schema" depends="dom1-init">
 	<style basedir="${specs.dir}/Level-1/xml"
 	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
-	       out="${build.dir}/_dom1.xsd"
+	       out="${build.dir}/dom1.xsd"
 	       style="${transforms.dir}/dom-to-xsd.xsl">
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
 	</style>
 
 	<!--  remove leading underscore from _xmlns attribute    -->
-	<exec executable="sed" output="${build.dir}/dom1.xsd">
-		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g' ${build.dir}/_dom1.xsd"/>
-	</exec>
-	<delete file="${build.dir}/_dom1.xsd"/>
+    <replace dir="${build.dir}" includes="dom1.xsd">
+        <replacefilter token="_xmlns" value="xmlns"/>
+        <replacefilter token="xmlns_test" value="xmlns:test"/>
+    </replace>
+
 	<copy file="${build.dir}/dom1.xsd" todir="${tests.dir}/level1/core"/>
 
 	<!-- xmlvalidate file="${build.dir}/dom1.xsd" lenient="no"
@@ -531,17 +535,18 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom1SE-schema" depends="dom1SE-init">
 	<style basedir="${specs.dir}/Level-1SE"
 	       in="${specs.dir}/Level-1SE/wd-dom.xml"
-	       out="${build.dir}/_dom1SE.xsd"
+	       out="${build.dir}/dom1SE.xsd"
 	       style="${transforms.dir}/dom-to-xsd.xsl">
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
 	</style>
 
 	<!--  remove leading underscore from _xmlns attribute    -->
-	<exec executable="sed" output="${build.dir}/dom1SE.xsd">
-		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g' ${build.dir}/_dom1SE.xsd"/>
-	</exec>
-	<delete file="${build.dir}/_dom1SE.xsd"/>
+    <replace dir="${build.dir}" includes="dom1SE.xsd">
+        <replacefilter token="_xmlns" value="xmlns"/>
+        <replacefilter token="xmlns_test" value="xmlns:test"/>
+    </replace>
+
 	<copy file="${build.dir}/dom1SE.xsd" todir="${tests.dir}/level1/core"/>
 
 </target>
@@ -726,17 +731,17 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-schema" depends="dom2-interfaces">
 	<style in="${build.dir}/dom2-interfaces.xml"
-	       out="${build.dir}/_dom2.xsd"
+	       out="${build.dir}/dom2.xsd"
 	       style="${transforms.dir}/dom-to-xsd.xsl">
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
 	</style>
 
-	<!--  remove leading underscore from _xmlns attribute    -->
-	<exec executable="sed" output="${build.dir}/dom2.xsd">
-		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g'  ${build.dir}/_dom2.xsd"/>
-	</exec>
-	<delete file="${build.dir}/_dom2.xsd"/>
+
+    <replace dir="${build.dir}" includes="dom2.xsd">
+        <replacefilter token="_xmlns" value="xmlns"/>
+        <replacefilter token="xmlns_test" value="xmlns:test"/>
+    </replace>
 </target>
 
 <target name="dom2-dtd" depends="dom2-interfaces">
@@ -753,12 +758,6 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-subjects" depends="dom2-init">
 	<!--  create a DOM 2 version of subjects.xsl  -->
-    <!--
-	<exec executable="sed" output="${build.dir}/dom2-subjects.xsl">
-		<arg line="'{s/dom1.dtd/dom2.dtd/;s/Level-1/Level-2/;}' ${transforms.dir}/subjects.xsl"/>
-	</exec>
-    -->
-
 	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
 	       out="${build.dir}/dom2-core-subjects.xml"
 	       style="${transforms.dir}/subjects.xsl">
@@ -1787,17 +1786,17 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom3-schema" depends="dom3-interfaces">
 	<style in="${build.dir}/dom3-interfaces.xml"
-	       out="${build.dir}/_dom3.xsd"
+	       out="${build.dir}/dom3.xsd"
 	       style="${transforms.dir}/dom-to-xsd.xsl">
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
 	</style>
 
 	<!--  remove leading underscore from _xmlns attribute    -->
-	<exec executable="sed" output="${build.dir}/dom3.xsd">
-		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g'  ${build.dir}/_dom3.xsd"/>
-	</exec>
-	<delete file="${build.dir}/_dom3.xsd"/>
+    <replace dir="${build.dir}" includes="dom3.xsd">
+        <replacefilter token="_xmlns" value="xmlns"/>
+        <replacefilter token="xmlns_test" value="xmlns:test"/>
+    </replace>
 </target>
 
 <target name="dom3-dtd" depends="dom3-interfaces">
@@ -1813,9 +1812,11 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom3-subjects" depends="dom3-init">
 	<!--  create a DOM 3 version of subjects.xsl  -->
-	<exec executable="sed" output="${build.dir}/dom3-subjects.xsl">
-		<arg line="'{s/dom1.dtd/dom3.dtd/;s/Level-1/Level-3/;}' ${transforms.dir}/subjects.xsl"/>
-	</exec>
+    <copy file="${transforms.dir}/subjects.xsl" tofile="${build.dir}/dom3-subjects.xsl"/>
+    <replace dir="${build.dir}" includes="dom3-subjects.xsl">
+        <replacefilter token="dom1.dtd" value="dom3.dtd"/>
+        <replacefilter token="Level-1" value="Level-3"/>
+    </replace>
 
 	<style in="${specs.dir}/Level-3/xml/core/dom-spec.xml"
 	       out="${build.dir}/dom3-core-subjects.xml"
