@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,15 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentgetxmlstandalone04</title>
 <creator>IBM</creator>
 <description>
-	The getXmlStandalone method returns an attribute specifying, as part of the XML declaration, 
-	whether this document is standalone. This is false when unspecified.
-	    
 	Retreive the documentURI of a document for which standalone was specified as "yes", this 
 	should return true.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-standalone"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone"/>
 </metadata>
 <implementationAttribute name="validating" value="false"/>
 <var name="doc" type="Document"/>

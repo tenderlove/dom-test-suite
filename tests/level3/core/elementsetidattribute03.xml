@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,18 +21,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>elementsetidattribute03</title>
 <creator>IBM</creator>
 <description>
-	The method setIdAttribute declares the attribute specified by name to be of type ID. 
-	If the value of the specified attribute is unique then this element node can later be retrieved 
-	using getElementById on Document. Note, however, that this simply affects this node and 
-	does not change any grammar that may be in use.
-	
 	First use setAttribute to change the street attribute of the third address element.  Invoke setIdAttribute
 	on the newly set attribute. Verify by calling isID on the new attribute and getElementById on document.
 	Invoke setIdAttribute again to reset.  Calling isID should return false.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-25</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#ID-ElSetIdAttr"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

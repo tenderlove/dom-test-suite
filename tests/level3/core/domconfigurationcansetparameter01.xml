@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,15 +20,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>domconfigurationcansetparameter01</title>
 <creator>IBM</creator>
 <description>
-	The canSetParameter method checks if setting a parameter to a specific value is supported.
-	
 	The parameter commments is turned on by default.  Check to see if this feature can be set
 	to false by invoking canSetParameter method.  Also check that this method does not change the
 	value of parameter.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-11-06</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#DOMConfiguration"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-canSetParameter"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>

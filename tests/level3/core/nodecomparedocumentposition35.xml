@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,15 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition35</title>
 <creator>IBM</creator>
 <description>
-	The method compareDocumentPosition compares a node with this node with regard to their position
-	in the document and according to the document order. 
-	
 	Using compareDocumentPosition to check if the Element contains and precedes its default attribute 
 	and that the attribute follows and iscontained by the Element
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-21</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

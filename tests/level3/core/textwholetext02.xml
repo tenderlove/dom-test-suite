@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,15 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textwholetext02</title>
 <creator>IBM</creator>
 <description>
-	The method wholetext returns all text of Text nodes logically-adjacent text 
-	nodes to this node, concatenated in document order.
-
 	Invoke wholetext on an existing Text Node that contains whitespace and and verify if 
 	the value returned is correct.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Text3-wholetext"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-wholeText"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

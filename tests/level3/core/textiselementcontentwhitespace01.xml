@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,14 +21,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textiselementcontentwhitespace01</title>
 <creator>IBM</creator>
 <description>
-	The method isElementContentWhitespace returns whether this text node contains whitespace in 
-	element content.
-
 	Invoke isElementContentWhitespace on a newly created Text Node that contains whitespace.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2002/WD-DOM-Level-3-Core-20020409/core#Text3-isElementContentWhiteSpace"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newText" type="Text"/>

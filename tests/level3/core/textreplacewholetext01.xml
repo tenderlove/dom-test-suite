@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,13 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textreplacewholetext01</title>
 <creator>IBM</creator>
 <description>
-	The method replaceWholeText substitutes the a specified text for the text of 
-	the current node and all logically-adjacent text nodes.  This method returns 
-	the node in the hierarchy which received the replacement text, which is null 
-	if the text was empty or is the current node if the current node is not read-only 
-	or otherwise is a new node of the same type as the current node inserted at 
-	the site of the replacement.
-
 	Invoke replaceWholeText on an existing Text Node to replace its value with a 
 	new value containing whiteSpace characters.  Verify the repalceWholeText by
 	verifying the values returned by wholeText and isElementContentWhitespace
@@ -35,7 +28,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Text3-replaceWholeText"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

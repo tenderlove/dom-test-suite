@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,14 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodesettextcontent04</title>
 <creator>IBM</creator>
 <description>
-	The method setTextContent has no effect when the node is defined to be null.
+
 	
 	Using setTextContent on this DocumentType node, attempt to set the textContent of a
 	Notation node to textContent.  Retreive the textContent and verify if it is null.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-textContent"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

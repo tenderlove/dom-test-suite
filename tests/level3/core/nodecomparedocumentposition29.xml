@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition29</title>
 <creator>IBM</creator>
 <description>
-	The method compareDocumentPosition compares a node with this node with regard to their position
-	in the document and according to the document order. 
-	
 	Create two entity reference nodes. Using compareDocumentPosition to check if the child of the first Entity 
 	Ref node precedes the child of the second Entity Ref node, and that the child of the second Entity Ref node
 	follows the child of the first Entity Ref node.  

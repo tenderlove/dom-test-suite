@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,15 +21,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild26</title>
 <creator>IBM</creator>
 <description>
-	The method replaceChild replaces the child node oldChild with newChild in the list of 
-	children, and returns the oldChild node.
+
+
 
 	Using replaceChild on an Element node attempt to replace a Text child node with an Element
 	node that is an ancestor of this Element node and verify if a HIERARCHY_REQUEST_ERR gets thrown.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-replaceChild"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>

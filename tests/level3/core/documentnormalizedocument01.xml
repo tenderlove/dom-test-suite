@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,15 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentnormalizedocument01</title>
 <creator>IBM</creator>
 <description>
-	The normalizeDocument method method acts as if the document was going through a save 
-	and load cycle, putting the document in a "normal" form. 
-
 	Invoke the normalizeDocument method on this document.  Retreive the documentElement node
 	and check the nodeName of this node to make sure it has not changed.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/2003/10/CR-DOM-Level-3-Core-20031010/core.html#Document3-normalizeDocument"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>

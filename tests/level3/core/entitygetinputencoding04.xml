@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,16 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>entitygetinputencoding04</title>
 <creator>IBM</creator>
 <description>
-	The method getInputEncoding returns the attribute specifying the encoding used for this
-	entity at the time of parsing, when it is an external parsed entity. This is null if it
-	an entity from the internal subset or if it is not known.
-
 	Call the getInputEncoding method on a UTF-16 encoded document that contains an external
 	parsed entity encoded in UTF-16 and check if the value returned is UTF-16.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Entity3-inputEncoding"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Entity3-inputEncoding"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,14 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentsetxmlversion03</title>
 <creator>IBM</creator>
 <description>
-	The setXmlVersion method sets the version number attribute of the XML declaration.
-	    
 	Set the value of the version attribute of the XML declaration of a new document to "1.0"
 	and check if it was correctly set.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2003-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-version"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="versionValue" type="DOMString"/>

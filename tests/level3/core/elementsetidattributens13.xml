@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,10 +20,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <title>elementsetidattributens13</title>
     <creator>IBM</creator>
     <description>
-     The method setIdAttributeNS declares the attribute specified by local name and namespace URI to be of type ID. 
-     If the value of the specified attribute is unique then this element node can later be retrieved using getElementById on Document. 
-     Note, however, that this simply affects this node and does not change any grammar that may be in use. 
-     
      Invoke setIdAttributeNS on newly added attribute on the third name element.  Verify by calling
      isID on the attribute node and getElementById on document node.
      Call setIdAttributeNS on the same element to reset ID but with a non-existing attribute should generate
@@ -31,7 +27,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     </description>
     <contributor>Jenny Hsu</contributor>
     <date qualifier="created">2003-02-26</date>
-    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#ID-ElSetIdAttrNS"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS"/>
   </metadata>
   <implementationAttribute name="namespaceAware" value="true"/>
   <var name="doc" type="Document"/>

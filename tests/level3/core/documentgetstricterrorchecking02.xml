@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,14 +21,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentgetstricterrorchecking02</title>
 <creator>IBM</creator>
 <description>
-	The getStrictErrorChecking method returns a boolean indicating if error checking is enforced 
-	or not.  The default is true.
-	    
 	Verify if the (default)value of the strictErrorChecking attribute of a new Document object is true.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-strictErrorChecking"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,19 +21,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode25</title>
 <creator>IBM</creator>
 <description>
-	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
-	attached attribute nodes if there are any. If the node has a parent it is first removed 
-	from its parent child list. 
-	For Element Nodes, specified attribute nodes of the source element are adopted, Default 
-	attributes are discarded and descendants of the source element are recursively adopted. 
-
 	Invoke the adoptNode method on a new document with a new Element of this
 	Document as the source.  Verify if the node has been adopted correctly by checking the 
 	nodeName of the adopted Element.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-adoptNode"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

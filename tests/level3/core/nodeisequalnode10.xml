@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode10</title>
 <creator>IBM</creator>
 <description>
-	The method isEqualNode returns whether this node is the same node as the given one.
+
 	
 	Retreive 2 element nodes of this Document having the nodeName employeeId and 
 	namespaceURI http://www.nist.gov and different child nodeLists.  Using isEqualNode 
@@ -29,7 +29,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-isEqualNode"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>

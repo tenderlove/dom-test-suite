@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,10 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentrenamenode01</title>
 <creator>IBM</creator>
 <description>
-	The method renameNode renames an existing node. When possible this simply changes 
-	the name of the given node, otherwise this creates a new node with the specified 
-	name and replaces the existing node with the new node as described below. 
-	
 	Invoke the renameNode method to rename the street attribute node of the 
 	second element whose localName is address and namespaceURI http://www.nist.gov
 	with the new namespaceURI as http://www.w3.org/DOM/Test and name as pre0fix:renamedNode. 
@@ -33,7 +29,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/DOM-Level-3-Core/core#Document3-renameNode"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
