@@ -130,10 +130,20 @@ of the DOM Level 1 Core Test Suite.</p>
 </div>
 <p>The DOM TS currently tests XML and SVG implementations of DOM Level 1 Core. Later revisions will provide testing of HTML implementation conformance with DOM Level 
 1.</p>
-<p>To run the ECMAScript tests, open the <a href="ecmascript/testRunner.html">JsUnit test runner</a> in the browser you want to test, then enter "tests/alltests.html" and press Run to run all DOM 1 tests compatible 
-with the implementation.  These tests have been run with Microsoft Internet Explorer 5.0 and later for Microsoft Windows and Mozilla 0.9.8 and Netscape Navigator 6.2 and later for Microsoft Windows, Linux and Apple OS X.  
+<p>To run the ECMAScript tests, open the <a 
+href="ecmascript/testRunner.html">JsUnit test runner</a> in the browser 
+you want to test, press the browse button and look for the file 
+"ecmascript/tests/alltests.html". 
+After that,  press Run to run all DOM 1 tests compatible 
+with the implementation.  If you choose to run individual tests, the 
+above procedure works similarly, just browse for the test you want to 
+run in the "ecmascript/tests" directory.</p>
+<p>These tests have been run with Microsoft 
+Internet Explorer 5.0 and later for Microsoft Windows and 
+Mozilla 0.9.8 and Netscape Navigator 6.2 and later for Microsoft Windows, Linux and Apple OS X.  
 Use on Apple OS X required replacing colon (:) in the test case name with slashes (/).</p>
-<p>To test the DOM implementation of the <a href="http://www.adobe.com/svg">Adobe SVG Viewer</a>, select "tests/svg-alltests.html" and press Run.</p>
+<p>To test the DOM implementation of the <a href="http://www.adobe.com/svg">Adobe SVG Viewer</a>, select 
+"ecmascript/tests/svg-alltests.html" and press Run.</p>
 <p>For JsUnit reference, please visit the <a href="http://www.jsunit.net">JsUnit 
 home page</a>.  JsUnit will provide output with indication on how many tests that were run, how many failed and 
 how many errors were found while running. The error log points to the actual test, so identifying 
@@ -150,9 +160,10 @@ be selected by any mechanism supported by JAXP 1.1.</p>
 
 <p>The Java tests may also be run using from JUnit TestRunner's.   To run
 all tests against the default JAXP parser in a default configuration from the JUnit text user interface, run "
-java -classpath dom1-core.jar junit.textui.testRunner org.w3c.domts.level1.core.TestDefaultParser".  
+java -classpath dom1-core.jar junit.textui.TestRunner org.w3c.domts.level1.core.TestDefaultParser".  
 The run the Swing or AWT user interfaces, replace "textui" with "swingui" or "awtui" and add "-noloading" before the 
-test case to not use JUnit's custom ClassLoader, for example, "java -classpath dom1-core.jar junit.swingui.testRunner -noloading org.w3c.domts.level1.core.TestDefaultParser"</p>
+test case to not use JUnit's custom ClassLoader, for example, "java -classpath dom1-core.jar 
+junit.swingui.TestRunner -noloading org.w3c.domts.level1.core.TestDefaultParser"</p>
 
 <p>Running "java -jar junit-run.jar" will launch the JUnit SwingUI without the custom ClassLoader.</p>
 
@@ -186,8 +197,10 @@ href="http://lists.w3.org/Archives/Public/www-dom-ts/">archive</a>).</p>
 <div id="copyright">
 <h2>Copyright</h2>
 </div>
-<p>Tests in this table are released under the the following <a 
-href="http://www.w3.org/Consortium/Legal/copyright-software-19980720.html">license</a>:<br /><a href="resources/COPYRIGHT.html">Copyright</a> (c) 
+<p>Tests in this table are released under the <a 
+href="http://www.w3.org/Consortium/Legal/copyright-software-19980720.html">W3C 
+Software Copyright Notice and license</a>:<br /><a 
+href="resources/COPYRIGHT.html">Copyright</a> (c) 
 2002 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
 			Recherche en Informatique et en Automatique, Keio University). All
