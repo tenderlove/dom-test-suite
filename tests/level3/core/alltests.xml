@@ -39,7 +39,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="datatypenormalization11.xml"/>	
 	<suite.member href="datatypenormalization12.xml"/>	
 
-
 	<!-- DOMImplementation tests -->
     <suite.member href="domimplementationgetfeature01.xml"/>
     <suite.member href="domimplementationgetfeature02.xml"/>
@@ -709,5 +708,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	
 	<suite.member href="wellformed01.xml"/>
 	<suite.member href="wellformed02.xml"/>
+	<suite.member href="wellformed03.xml"/>
+	<suite.member href="wellformed04.xml"/>
 		
 </suite>
