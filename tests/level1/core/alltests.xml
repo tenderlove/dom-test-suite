@@ -96,7 +96,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="documentinvalidcharacterexceptioncreateattribute.xml"/>
 <suite.member href="documentinvalidcharacterexceptioncreateelement.xml"/>
 <suite.member href="documentinvalidcharacterexceptioncreateentref.xml"/>
+<suite.member href="documentinvalidcharacterexceptioncreateentref1.xml"/>
 <suite.member href="documentinvalidcharacterexceptioncreatepi.xml"/>
+<suite.member href="documentinvalidcharacterexceptioncreatepi1.xml"/>
 <suite.member href="documenttypegetdoctype.xml"/>
 <suite.member href="documenttypegetentities.xml"/>
 <suite.member href="documenttypegetentitieslength.xml"/>
@@ -362,7 +364,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="hc_documentgetimplementation.xml"/>
 <suite.member href="hc_documentgetrootnode.xml"/>
 <suite.member href="hc_documentinvalidcharacterexceptioncreateattribute.xml"/>
+<suite.member href="hc_documentinvalidcharacterexceptioncreateattribute1.xml"/>
 <suite.member href="hc_documentinvalidcharacterexceptioncreateelement.xml"/>
+<suite.member href="hc_documentinvalidcharacterexceptioncreateelement1.xml"/>
 <suite.member href="hc_domimplementationfeaturenoversion.xml"/>
 <suite.member href="hc_domimplementationfeaturenull.xml"/>
 <suite.member href="hc_domimplementationfeaturexml.xml"/>
@@ -380,6 +384,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="hc_elementgettagname.xml"/>
 <suite.member href="hc_elementinuseattributeerr.xml"/>
 <suite.member href="hc_elementinvalidcharacterexception.xml"/>
+<suite.member href="hc_elementinvalidcharacterexception1.xml"/>
 <suite.member href="hc_elementnormalize.xml"/>
 <suite.member href="hc_elementnormalize2.xml"/>
 <suite.member href="hc_elementnotfounderr.xml"/>

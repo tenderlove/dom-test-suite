@@ -22,6 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="createAttributeNS03.xml"/>
      <suite.member href="createAttributeNS04.xml"/>
      <suite.member href="createAttributeNS05.xml"/>
+     <suite.member href="createAttributeNS06.xml"/>
      <suite.member href="createDocument01.xml"/>
      <suite.member href="createDocument02.xml"/>
      <suite.member href="createDocument03.xml"/>
@@ -29,9 +30,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="createDocument05.xml"/>
      <suite.member href="createDocument06.xml"/>
      <suite.member href="createDocument07.xml"/>
+     <suite.member href="createDocument08.xml"/>
      <suite.member href="createDocumentType01.xml"/>
      <suite.member href="createDocumentType02.xml"/>
      <suite.member href="createDocumentType03.xml"/>
+     <suite.member href="createDocumentType04.xml"/>
      <suite.member href="createElementNS01.xml"/>
      <suite.member href="createElementNS02.xml"/>
      <suite.member href="createElementNS03.xml"/>
@@ -279,6 +282,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="setAttributeNS06.xml"/>
      <suite.member href="setAttributeNS07.xml"/>
      <suite.member href="setAttributeNS09.xml"/>
+     <suite.member href="setAttributeNS10.xml"/>
      <suite.member href="setAttributeNodeNS01.xml"/>
      <suite.member href="setAttributeNodeNS02.xml"/>
      <suite.member href="setAttributeNodeNS03.xml"/>
