@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.54  2002-03-04 14:17:13  dom-ts-4
+Revision 1.55  2002-03-27 07:40:15  dom-ts-4
+dom3-schema builds "almost" final schema
+
+Revision 1.54  2002/03/04 14:17:13  dom-ts-4
 Added dom1-core-gen-browser that builds (currently non-functional)
 HTML test runner
 
@@ -1307,13 +1310,13 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom3-xpath" depends="dom3-available" unless="dom3-xpath-available">
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20011031/DOM3-XPath.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-XPath-20020208/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
 		usetimestamp="yes"/>
 </target>
 
 <target name="get-dom3-events" depends="dom3-available" unless="dom3-events-available">
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010823/DOM3-Events.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Events-20020208/DOM3-Events.zip"
 		dest="${specs.dir}/DOM3-Events.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1403,9 +1406,15 @@ All implementation conditions combined into implementationAttribute element
 	<patch patchfile="./patches/level-3-part-entities.patch"
 	       originalfile="${specs.dir}/Level-3/xml/part-entities.xml"/>
 
+    <patch patchfile="./patches/level-3-core-dom-spec.patch"
+           originalfile="${specs.dir}/Level-3/xml/core/dom-spec.xml"/>
+
     <!--  text.xml is missing   -->
     <copy file="${specs.dir}/Level-2/xml/core/definitions/text.xml"
-          todir="${specs.dir}Level-3/xml/core/definitions"/>
+          todir="${specs.dir}/Level-3/xml/core/definitions"/>
+
+    <!--  textevent.xml is missing, just put empty file   -->
+    <echo message="" file="${specs.dir}/Level-3/xml/events/definitions/textevent.xml"/>
 
 
 </target>
