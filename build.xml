@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.50  2002-03-01 07:29:42  dom-ts-4
+Revision 1.51  2002-03-01 08:12:34  dom-ts-4
+Added dom2-core-matrix back into dom2-core-dist
+
+Revision 1.50  2002/03/01 07:29:42  dom-ts-4
 DOM L2 Distribution runnable (at least with SAXON)
 
 Revision 1.49  2002/02/28 06:52:48  dom-ts-4
@@ -1125,8 +1128,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<!--   need to add dom2-core-matrix, but currently locks Xalan  -->
-<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema">
+<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema,dom2-core-matrix">
     <mkdir dir="${build.dir}/level2/core/resources"/>
     <mkdir dir="${build.dir}/level2/core/java"/>
     <copy file="docs/level2/core/index.htm" todir="${build.dir}/level2/core"/>
