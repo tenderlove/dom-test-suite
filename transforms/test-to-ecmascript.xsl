@@ -304,6 +304,14 @@ The source document contained the following notice:
 	</xsl:choose>	
 </xsl:template>
 
+<xsl:template match="*[local-name()='return']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:text>        return </xsl:text>
+    <xsl:value-of select="@value"/>
+    <xsl:text>;
+</xsl:text>
+</xsl:template>
+
 <xsl:template match="*[local-name()='increment']" mode="body">
 	<xsl:value-of select="@var"/>
 	<xsl:text> += </xsl:text>
@@ -758,10 +766,16 @@ The source document contained the following notice:
 </xsl:template>
 
 <xsl:template match="*[local-name()='for-each']" mode="body">
-    <xsl:text>for(var _index = 0; _index &lt; </xsl:text>
+    <xsl:variable name="indexvar" select="concat('index', generate-id(.))"/>
+    <xsl:text>for(var </xsl:text>
+    <xsl:value-of select="$indexvar"/>
+    <xsl:text> = 0;</xsl:text>
+    <xsl:value-of select="$indexvar"/>
+    <xsl:text> &lt; </xsl:text>
 	<xsl:variable name="varname" select="@collection"/>
 	<xsl:value-of select="@collection"/>
-	<xsl:text>.length; _index++) {
+	<xsl:text>.length; </xsl:text>
+	<xsl:value-of select="$indexvar"/><xsl:text>++) {
       </xsl:text>
 	<xsl:value-of select="@member"/>
 	<xsl:text> = </xsl:text>
@@ -769,11 +783,11 @@ The source document contained the following notice:
     <xsl:variable name="collType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name=$varname]/@type"/>
     <xsl:choose>
         <xsl:when test="$collType = 'List' or $collType='Collection'">
-            <xsl:text>[_index];
+            <xsl:text>[</xsl:text><xsl:value-of select="$indexvar"/><xsl:text>];
       </xsl:text>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:text>.item(_index);
+            <xsl:text>.item(</xsl:text><xsl:value-of select="$indexvar"/><xsl:text>);
       </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
