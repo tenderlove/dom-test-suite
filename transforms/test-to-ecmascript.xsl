@@ -309,7 +309,7 @@ var userDataMonitor;
         <!--  event monitor type implies constructor    -->
         <xsl:when test="@type='EventMonitor'">
         	<xsl:choose>
-        		<xsl:when test="@var != 'monitor'">
+        		<xsl:when test="@name != 'monitor'">
         			<xsl:message>EventMonitors must be named monitor</xsl:message>
         			<xsl:text>; fail("EventMonitors must be named monitor");
       </xsl:text>
@@ -325,7 +325,7 @@ var userDataMonitor;
         <!--  error monitor type implies constructor    -->
         <xsl:when test="@type='DOMErrorMonitor'">
         	<xsl:choose>
-        		<xsl:when test="@var != 'errorMonitor'">
+        		<xsl:when test="@name != 'errorMonitor'">
         			<xsl:message>DOMErrorMonitors must be named errorMonitor</xsl:message>
         			<xsl:text>; fail("DOMErrorMonitors must be named errorMonitor");
       </xsl:text>
@@ -341,7 +341,7 @@ var userDataMonitor;
         <!--  error monitor type implies constructor    -->
         <xsl:when test="@type='UserDataMonitor'">
         	<xsl:choose>
-        		<xsl:when test="@var != 'userDataMonitor'">
+        		<xsl:when test="@name != 'userDataMonitor'">
         			<xsl:message>UserDataMonitors must be named userDataMonitor</xsl:message>
         			<xsl:text>; fail("UserDataMonitors must be named userDataMonitor");
       </xsl:text>
