@@ -17,7 +17,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!DOCTYPE test SYSTEM "dom3.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="domstringlistcontains01">
 <metadata>
-<title>doomstringlistcontains01</title>
+<title>domstringlistcontains01</title>
 <creator>Curt Arnold</creator>
 <description>
 Check implementation of DOMStringList.contains by searching DOMConfig parameter
@@ -25,6 +25,7 @@ names for "comments" and "".
 </description>
 <date qualifier="created">2004-01-12</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="paramList" type="DOMStringList"/>

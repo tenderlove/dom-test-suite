@@ -17,7 +17,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!DOCTYPE test SYSTEM "dom3.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="domstringlistitem01">
 <metadata>
-<title>doomstringlistitem01</title>
+<title>domstringlistitem01</title>
 <creator>Curt Arnold</creator>
 <description>
 Check implementation of DOMStringList.item by accessing items 0 and length-1 and expecting
@@ -25,6 +25,7 @@ a string and accessing items out of range and expecting null.
 </description>
 <date qualifier="created">2004-01-12</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="paramList" type="DOMStringList"/>

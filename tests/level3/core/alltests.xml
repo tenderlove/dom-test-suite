@@ -180,6 +180,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="documentrenamenode28.xml"/>
 	<suite.member href="documentrenamenode29.xml"/>
 
+    <suite.member href="domconfigparameternames01.xml"/>
     <suite.member href="domconfigcanonicalform1.xml"/>
     <suite.member href="domconfigcdatasections1.xml"/>
     <suite.member href="domconfigcheckcharacternormalization1.xml"/>

@@ -154,6 +154,34 @@ sorted alphabetically.
                                 </tr>
                             </xsl:for-each>
                         </xsl:if>
+                        
+                        <xsl:variable name="interface-parameters" select="descendant::label[contains(@id, 'parameter-')]"/>
+                        <xsl:if test="$interface-parameters">
+                            <tr><th width="25%">Parameter</th><th>Tests</th></tr>
+                            <xsl:for-each select="$interface-parameters">
+                                <xsl:sort select="code/text()"/>
+                                <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
+                                <tr>
+                                    <td>
+                                        <a href="{$featureURI}" title="{code/text()}">
+                                            <xsl:value-of select="code/text()"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
+                                        <xsl:if test="$featuretests">
+                                            <table>
+                                                <xsl:call-template name="rowtests">
+                                                    <xsl:with-param name="tests" select="$featuretests"/>
+                                                    <xsl:with-param name="index">0</xsl:with-param>
+                                                    <xsl:with-param name="columns">1</xsl:with-param>
+                                                </xsl:call-template>
+                                            </table>
+                                        </xsl:if>
+                                    </td>
+                                </tr>
+                            </xsl:for-each>
+                        </xsl:if>
                     </table>
                 </xsl:for-each>
 

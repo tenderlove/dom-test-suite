@@ -28,6 +28,7 @@ where hasFeature("Core", null) returns true.
 <date qualifier="created">2004-01-15</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementationList-item"/>
 </metadata>
 <var name="domImplRegistry" type="DOMImplementationRegistry"/>
 <var name="hasFeature" type="boolean"/>
@@ -39,6 +40,8 @@ where hasFeature("Core", null) returns true.
 <assertNotNull actual="domImplRegistry" id="domImplRegistryNotNull"/>
 <getDOMImplementationList var="domImplList" obj="domImplRegistry" features='"cOrE"' interface="DOMImplementationRegistry"/>
 <length var="length" obj="domImplList" interface="DOMImplementationList"/>
+<item var="domImpl" obj="domImplList" index="length" interface="DOMImplementationList"/>
+<assertNull actual="domImpl" id="item_Length_shouldBeNull"/>
 <assertTrue id="atLeastOne">
 	<greater actual="length" expected="0"/>
 </assertTrue>
