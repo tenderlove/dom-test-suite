@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-setNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
-<var name="namespaceURI" type="DOMString" value="&quot;www.xyz.com&quot;"/>
+<var name="namespaceURI" type="DOMString" value="&quot;http://www.w3.org/2000/xmlns/&quot;"/>
 <var name="localName" type="DOMString" value="&quot;local1&quot;"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
