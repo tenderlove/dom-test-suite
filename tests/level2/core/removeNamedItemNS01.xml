@@ -34,8 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.usa.com&quot;"/>
-<var name="localName" type="DOMString" value="&quot;domestic&quot;"/>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddress" type="Node"/>
@@ -43,10 +42,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newAttr" type="Attr"/>
 <var name="removedNode" type="Node"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"address"'/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="1"/>
 <attributes obj="testAddress" var="attributes"/>
-<removeNamedItemNS var="removedNode" interface="NamedNodeMap" obj="attributes" namespaceURI="namespaceURI" localName="localName"/>
-<getNamedItem obj="attributes" var="newAttr" name="&quot;dmstc:domestic&quot;"/>
-<assertNull actual="newAttr" id="throw_Null"/>
+<removeNamedItemNS var="removedNode" interface="NamedNodeMap" obj="attributes" namespaceURI='"http://www.usa.com"' localName='"domestic"'/>
+<assertNotNull actual="removedNode" id="retval"/>
+<getNamedItem obj="attributes" var="newAttr" name='"dmstc:domestic"'/>
+<assertNull actual="newAttr" id="nodeRemoved"/>
 </test>
