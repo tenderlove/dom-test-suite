@@ -1,0 +1,12 @@
+<!DOCTYPE results [
+<!ENTITY dom2-core-xerces SYSTEM '../build/dom2-core-xerces.xml'>
+<!ENTITY dom2-core-xerces-alt SYSTEM '../build/dom2-core-xercesAltConfig.xml'>
+<!ENTITY dom2-core-oracle SYSTEM '../build/dom2-core-oracle.xml'>
+<!ENTITY dom2-core-oracle-alt SYSTEM '../build/dom2-core-oracleAltConfig.xml'>
+]>
+<results>
+&dom2-core-xerces;
+&dom2-core-xerces-alt;
+&dom2-core-oracle;
+&dom2-core-oracle-alt;
+</results>

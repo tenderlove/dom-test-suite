@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.2  2003-12-10 10:30:35  dom-ts-4
+Revision 1.3  2003-12-23 03:25:31  dom-ts-4
+Extends results matrix to L2 Core (bug 446)
+
+Revision 1.2  2003/12/10 10:30:35  dom-ts-4
 L3 Core fixups (Bug 404)
 
 Revision 1.1  2003/12/08 07:50:50  dom-ts-4
@@ -70,6 +73,52 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 			outfile="dom${level}-${module}-oracle${config}"/>
 	</junit>
 </target>
+
+<target name="dom2-core-oracle">
+	<antcall target="run-oracle">
+		<param name="level" value="2"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
+
+<target name="dom2-core-oracle-alt">
+	<antcall target="run-oracle">
+		<param name="level" value="2"/>
+		<param name="module" value="core"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+<target name="dom2-core-xerces">
+	<antcall target="run-xerces">
+		<param name="level" value="2"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
+
+<target name="dom2-core-xerces-alt">
+	<antcall target="run-xerces">
+		<param name="level" value="2"/>
+		<param name="module" value="core"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+<target name="dom2-core-results" depends="dom2-core-xerces, dom2-core-xerces-alt, dom2-core-oracle,dom2-core-oracle-alt">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom2-core-metadata.rdf" 
+		   out="${build.dir}/dom2-core-results.html" 
+	       style="transforms/results-matrix.xsl" force="true">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+        <param name="interfacesURL" expression="dom2-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom2-core-subjects.xml"/>
+        <param name="title" expression='DOM Level 2 Core Test Results'/>
+        <param name="resultsURL" expression="../transforms/dom2-core-results.xml"/>
+	</style>
+</target>
+
+
 
 <target name="dom3-core-oracle">
 	<antcall target="run-oracle">
