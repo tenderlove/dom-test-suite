@@ -843,6 +843,27 @@ function handleEvent(listener, event, userObj) {
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='assertXPathException']" mode="body">
+    <xsl:text>
+	{
+		var success = false;
+		try {
+            </xsl:text>
+	<xsl:apply-templates select="*/*" mode="body"/>
+    <xsl:text>  }
+		catch(ex) {            
+			success = (ex.code == </xsl:text>
+    <xsl:variable name="excode" select="local-name(*)"/>
+	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
+	<xsl:text>);
+		}
+		assertTrue("</xsl:text>
+	<xsl:value-of select="@id"/>
+	<xsl:text>",success);
+	}
+</xsl:text>
+</xsl:template>
+
 <xsl:template match="text()" mode="body"/>
 
 <xsl:template match="*" mode="body">
