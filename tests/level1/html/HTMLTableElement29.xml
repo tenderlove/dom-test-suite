@@ -48,13 +48,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
-<item interface="NodeList" obj="tbodiesnodeList" var="bodyNode" index="0"/>
+<item interface="HTMLCollection" obj="tbodiesnodeList" var="bodyNode" index="0"/>
 <rows interface="HTMLTableSectionElement" obj="bodyNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
 <assertEquals actual="vrows" expected="2" id="rowsLink1" ignoreCase="false"/>
 <insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="2"/>
 <tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
-<item interface="NodeList" obj="tbodiesnodeList" var="bodyNode" index="0"/>
+<item interface="HTMLCollection" obj="tbodiesnodeList" var="bodyNode" index="0"/>
 <rows interface="HTMLTableSectionElement" obj="bodyNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
 <assertEquals actual="vrows" expected="3" id="rowsLink2" ignoreCase="false"/>
