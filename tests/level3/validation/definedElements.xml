@@ -21,7 +21,7 @@ PURPOSE.
 <creator>Kongyi Zhou</creator>
 <description>
     This method retrieves all element declarations defined by schema
-    should return a NameList of length 7   
+    should return a NameList of length 8   
 </description>
 <contributor>Oracle Corp.</contributor>
 <date qualifier="created">2003-03-01</date>
@@ -32,9 +32,11 @@ PURPOSE.
 <var name="docVAL" type="DocumentEditVAL"/>
 <var name="nameList" type="NameList"/>
 <var name="nullNS" type="DOMString" isNull="true"/>
+<var name="definedElementsLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
 <assign var="docVAL" value="doc"/>
 <getDefinedElements obj="docVAL" interface="DocumentEditVAL" namespaceURI="nullNS" var="nameList"/>
-<assertSize size="8" collection="nameList" id="definedElements"/>
+<length var="definedElementsLength" obj="nameList" interface="NameList"/>
+<assertEquals expected="8" actual="definedElementsLength" id="definedElements"/>
 </test>
 

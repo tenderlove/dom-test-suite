@@ -28,20 +28,20 @@
   </metadata>
   &vars;
   
-  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
-  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='schemaType'/>
+  <createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createLSParser var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='schemaType'/>
   
   
   <assign var='schemaType' value='DTD_SCHEMATYPE'/> 
-  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
   
   <assign var='schemaType' value='SCHEMA_SCHEMATYPE'/> 
-  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
   
   <assign var='schemaType' value='&quot;nobody_should_support_this_schematype_this_should_throw_a_not_supported_err&quot;'/> 
   <assertDOMException id="NOT_SUPPORTED_ERR0">
   <NOT_SUPPORTED_ERR>
-  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
   </NOT_SUPPORTED_ERR>
   </assertDOMException>
 

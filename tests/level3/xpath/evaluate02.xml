@@ -31,13 +31,15 @@
   &vars;
   <var name="root" type='Element'/>
   <var name="result" type="XPathResult"/>
+  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>
+  <var name="nullResult" type="XPathResult" isNull="true"/>
 
   &findXPathEvaluator;
   
   <documentElement obj='doc' var='root'/>
 
   <evaluate interface="XPathEvaluator" obj='xpEvaluator' var='result'
-    expression='&quot;/&quot;' contextNode='root' resolver='null' type='0' result='null'/>
+    expression='&quot;/&quot;' contextNode='root' resolver='nullNSResolver' type='0' result='nullResult'/>
 
   <assertNotNull actual="result" id="notnull"/>
 

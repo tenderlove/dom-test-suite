@@ -20,25 +20,25 @@
 
 <test xmlns="&level3;" name="DOMBuilderFilterTest2">
   <metadata>
-    <title>DOMParserFilter</title>
+    <title>LSParserFilter</title>
     &creator; 
     <description>DOM Builder Filter test, tests whether default content is visible within the filter</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParserFilter"/>
+    <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
   </metadata>
 
 
-  <var name="myfilter" type="DOMParserFilter"> 
+  <var name="myfilter" type="LSParserFilter"> 
      &filterVars;
      <var name="name"         type="DOMString"/>
      <var name="hasattribute" type="boolean"/>
 
      <startElement>
 
-       <nodeName var="name" obj="element"/>
+       <nodeName var="name" obj="elementArg"/>
         <if>
             <equals actual="name" expected='"elt1"' ignoreCase="false"/>
-            <hasAttribute var="hasattribute" obj="element" name='"attr1"'/>
+            <hasAttribute var="hasattribute" obj="elementArg" name='"attr1"'/>
             <assertTrue actual="hasattribute" id="default_content_check"/> 
         </if>
 

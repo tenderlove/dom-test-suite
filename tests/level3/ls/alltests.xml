@@ -11,39 +11,33 @@
  [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 -->
 
-<!DOCTYPE suite SYSTEM 'dom3.dtd'>
+<!DOCTYPE suite SYSTEM "dom3.dtd">
+
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
-     <suite.member href="DOMBuilderFilterTest0.xml"/>
-     <suite.member href="DOMBuilderFilterTest1.xml"/>
-     <suite.member href="DOMBuilderFilterTest2.xml"/>
-     <suite.member href="DOMBuilderTest0.xml"/>
-     <suite.member href="DOMBuilderTest1.xml"/>
-     <suite.member href="DOMBuilderTest2.xml"/>
-     <suite.member href="DOMBuilderTest3.xml"/>
-     <suite.member href="DOMBuilderTest4.xml"/>
-     <suite.member href="DOMBuilderTest5.xml"/>
-     <suite.member href="DOMEntityResolverTest0.xml"/>
-     <suite.member href="DOMEntityResolverTest1.xml"/>
-     <suite.member href="DOMImplementationLSTest.xml"/>
-     <suite.member href="DOMInputSourceTest0.xml"/>
-     <suite.member href="DOMInputSourceTest1.xml"/>
-     <suite.member href="DOMInputSourceTest2.xml"/>
-     <suite.member href="DOMInputSourceTest3.xml"/>
-     <suite.member href="DOMInputSourceTest4.xml"/>
-     <suite.member href="DOMInputSourceTest5.xml"/>
-     <suite.member href="DOMWriterFilterTest0.xml"/>
-     <suite.member href="DOMWriterFilterTest1.xml"/>
-     <suite.member href="DOMWriterFilterTest2.xml"/>
-     <suite.member href="DOMWriterFilterTest3.xml"/>
-     <suite.member href="DOMWriterTest0.xml"/>
-     <suite.member href="DOMWriterTest1.xml"/>
-     <suite.member href="DOMWriterTest2.xml"/>
-     <suite.member href="DocumentLSTest0.xml"/>
-     <suite.member href="DocumentLSTest1.xml"/>
-     <suite.member href="DocumentLSTest2.xml"/>
-     <suite.member href="DocumentLSTest3.xml"/>
-     <suite.member href="DocumentLSTest4.xml"/>
-     <suite.member href="DocumentLSTest5.xml"/>
-     <suite.member href="ElementLSTest0.xml"/>
-     <suite.member href="ElementLSTest1.xml"/>
+   <suite.member href="DOMBuilderFilterTest0.xml"/>
+   <suite.member href="DOMBuilderFilterTest1.xml"/>
+   <suite.member href="DOMBuilderFilterTest2.xml"/>
+   <suite.member href="DOMBuilderTest0.xml"/>
+   <suite.member href="DOMBuilderTest1.xml"/>
+   <suite.member href="DOMBuilderTest2.xml"/>
+   <suite.member href="DOMBuilderTest3.xml"/>
+   <suite.member href="DOMBuilderTest4.xml"/>
+   <suite.member href="DOMBuilderTest5.xml"/>
+   <suite.member href="DOMEntityResolverTest0.xml"/>
+   <suite.member href="DOMEntityResolverTest1.xml"/>
+   <suite.member href="DOMImplementationLSTest.xml"/>
+   <suite.member href="DOMInputSourceTest0.xml"/>
+   <suite.member href="DOMInputSourceTest1.xml"/>
+   <suite.member href="DOMInputSourceTest2.xml"/>
+   <suite.member href="DOMInputSourceTest3.xml"/>
+   <suite.member href="DOMInputSourceTest4.xml"/>
+   <suite.member href="DOMInputSourceTest5.xml"/>
+   <suite.member href="DOMWriterFilterTest0.xml"/>
+   <suite.member href="DOMWriterFilterTest1.xml"/>
+   <suite.member href="DOMWriterFilterTest2.xml"/>
+   <suite.member href="DOMWriterFilterTest3.xml"/>
+   <suite.member href="DOMWriterTest0.xml"/>
+   <suite.member href="DOMWriterTest1.xml"/>
+   <suite.member href="DOMWriterTest2.xml"/>
+   <suite.member href="test1.xml"/>
 </suite>

@@ -54,7 +54,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMResourceResolver DOMParserFilter DOMSerializerFilter NodeFilter DOMErrorHandler </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener LSResourceResolver LSParserFilter LSSerializerFilter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -125,7 +125,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				<xsl:sort select="@name"/>
 
                 <xsl:choose>
-                	<!--  ElementEditVal.contentType conflicts with contentType conditional
+                	<!--  ElementEditVAL.contentType conflicts with contentType conditional
                 	           contentType element appears in fixed section   -->
                 	<xsl:when test="@name = 'contentType'"/>
                 	
@@ -243,10 +243,16 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
         <xsl:param name="content">EMPTY</xsl:param>
 
 			<!--  produce an element for all methods  -->
-			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'load' and @name != 'contentType']">
+			<xsl:for-each select="$methods">
 				<xsl:sort select="@name"/>
 
                 <xsl:choose>
+                	<!--  these methods have custom productions  -->
+					<xsl:when test="@name = 'hasFeature'"/>
+					<xsl:when test="@name = 'load'"/>
+					<xsl:when test="@name = 'contentType'"/>
+					<xsl:when test="@name = 'contains'"/>
+
                     <!--   if the interface is something like EventListener
                              that might be defined using anonymous inner classes  
                              which makes all the required attributes optional
@@ -773,7 +779,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	type CDATA #IMPLIED
 	obj CDATA #IMPLIED
 	var CDATA #IMPLIED
-	interface (ElementEditVal) #IMPLIED
+	interface (ElementEditVAL) #IMPLIED
 &gt;
 
 
@@ -781,7 +787,11 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST contains
 	id ID #IMPLIED
 	obj CDATA #REQUIRED
-	substring CDATA #REQUIRED
+	substring CDATA #IMPLIED
+	var CDATA #IMPLIED
+	str CDATA #IMPLIED
+	interface (DOMStringList|NameList) #IMPLIED
+	 
 &gt;
 
 &lt;!ELEMENT implementationAttribute EMPTY&gt;

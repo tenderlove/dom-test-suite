@@ -20,21 +20,21 @@
 
 <test xmlns="&level3;" name="DOMBuilderFilterTest0">
   <metadata>
-    <title>DOMParserFilter</title>
+    <title>LSParserFilter</title>
     &creator; 
     <description>DOM Builder Filter test</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParserFilter"/>
+    <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
   </metadata>
 
 
-  <var name="myfilter"         type="DOMParserFilter"> 
+  <var name="myfilter"         type="LSParserFilter"> 
      <var name="name"            type="DOMString"/>
      &filterVars;
 
 
      <startElement>
-        <nodeName var="name" obj="element"/>
+        <nodeName var="name" obj="elementArg"/>
         <if>
             <equals actual="name" expected='"elt1"' ignoreCase="false"/>
             <return value="FILTER_REJECT"/>            

@@ -27,7 +27,7 @@
     <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
   <!-- todo create reader -->
-  <var name="myReader" type="DOMReader"/>
+  <var name="myReader" type="LSReader"/>
   <var name="elementList" type="NodeList"/>
   &vars;
 
@@ -35,9 +35,9 @@
   &init;
 
   
-  <characterStream obj="inputSource" var="myReader" interface="DOMInput"/> 
+  <characterStream obj="inputSource" var="myReader" interface="LSInput"/> 
 
-  <parse var="document" obj="builder" is="inputSource"/>
+  <parse var="document" obj="builder" input="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="count_elt0"/>
 

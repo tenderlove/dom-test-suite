@@ -34,9 +34,11 @@ PURPOSE.
 <var name="elemVAL" type="ElementEditVAL"/>
 <var name="attrlist" type="NameList"/>
 <var name="attname" type="DOMString"/>
+<var name="allowedAttributesLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
 <assign var="elemVAL" value="root"/>
 <allowedAttributes obj="elemVAL" var="attrlist"/>
-<assertSize collection="attrlist" size="2" id="allowedAttributes"/>
+<length var="allowedAttributesLength" obj="attrlist" interface="NameList"/>
+<assertEquals actual="allowedAttributesLength" expected="2" id="allowedAttributes"/>
 </test>

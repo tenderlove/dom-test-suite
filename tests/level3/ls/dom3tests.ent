@@ -7,10 +7,10 @@
 <!ENTITY vars        "
                       <var name='implementation'   type='DOMImplementation'/> 
                       <var name='lsImplementation' type='DOMImplementationLS'/> 
-                      <var name='inputSource'      type='DOMInput'/> 
+                      <var name='inputSource'      type='LSInput'/> 
                       <var name='document'         type='Document'/>            
-                      <var name='writer'           type='DOMSerializer'/>            
-                      <var name='builder'          type='DOMParser'/>
+                      <var name='writer'           type='LSSerializer'/>            
+                      <var name='builder'          type='LSParser'/>
                       <var name='schemaType'       type='DOMString' isNull='true'/>
                      
                       <!-- constants  -->
@@ -43,6 +43,7 @@
 
 <!ENTITY filterVars  "
                       <var name='SHOW_ELEMENT'      type='int'    value='1'/>
+                      <var name='SHOW_TEXT'         type='int'    value='4'/>
                       <var name='SHOW_ALL'          type='int'    value='65535'/>
                       <var name='FILTER_ACCEPT'     type='short'  value='1'/>
                       <var name='FILTER_REJECT'     type='short'  value='2'/>
@@ -65,11 +66,11 @@
                       ">
 
 
-<!ENTITY init        "<createDOMParser      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
-                      <createDOMSerializer       var='writer'      obj='lsImplementation'/>
-                      <createDOMInput  var='inputSource' obj='lsImplementation'/>">
+<!ENTITY init        "<createLSParser      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+                      <createLSSerializer       var='writer'      obj='lsImplementation'/>
+                      <createLSInput  var='inputSource' obj='lsImplementation'/>">
 
-<!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='DOMParser'/>">
+<!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='LSParser'/>">
 
 
 

@@ -2,7 +2,7 @@
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-opyright (c) 2003 Oracle
+Copyright (c) 2003 Oracle
 
 All Rights Reserved.  This program is distributed under the W3C's 
 Software Intellectual Property License [1].  This program is distributed
@@ -16,7 +16,7 @@ PURPOSE.
 
 <!DOCTYPE suite SYSTEM "dom3.dtd">
 
-<suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="allvaltests">
+<suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
    <suite.member href="allowedAttributes.xml"/>
    <suite.member href="allowedChildren.xml"/>
    <suite.member href="allowedFirstChildren.xml"/>

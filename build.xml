@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.100  2003-10-24 17:09:38  dom-ts-4
+Revision 1.101  2003-11-10 07:34:13  dom-ts-4
+Update for 2003-11-07 CRs (bug 375)
+
+Revision 1.100  2003/10/24 17:09:38  dom-ts-4
 Support for working group drafts, bug 368
 
 Revision 1.99  2003/09/23 03:44:21  dom-ts-4
@@ -1740,19 +1743,19 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-dom3-core" depends="dom3-available"><!-- unless="dom3-core-available" -->
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030609/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 </target>
 
 <target name="get-dom3-ls" depends="dom3-available"><!-- unless="dom3-ls-available" -->
-	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-LS-20030226/DOM3-LS.zip"
+	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/DOM3-LS.zip"
 		dest="${specs.dir}/DOM3-LS.zip"
 		usetimestamp="yes"/>
 </target>
 
-<target name="get-dom3-val" depends="dom3-available" unless="dom3-val-available">
-	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Val-20030205/DOM3-Val.zip"
+<target name="get-dom3-val" depends="dom3-available"><!-- unless="dom3-val-available"-->
+	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/DOM3-Val.zip"
 		dest="${specs.dir}/DOM3-Val.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1764,20 +1767,20 @@ All implementation conditions combined into implementationAttribute element
 		usetimestamp="yes"/>
 </target>
 
-<target name="get-dom3-events" depends="dom3-available" unless="dom3-events-available">
-	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/DOM3-Events.zip"
+<target name="get-dom3-events" depends="dom3-available"><!-- unless="dom3-events-available"-->
+	<get src="http://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/DOM3-Events.zip"
 		dest="${specs.dir}/DOM3-Events.zip"
 		usetimestamp="yes"/>
 </target>
 
 
-<target name="get-dom3-views" depends="dom3-available" unless="dom3-views-available">
+<!--target name="get-dom3-views" depends="dom3-available" unless="dom3-views-available">
 	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-3-Views-20001115/DOM3-Views.zip"
 		dest="${specs.dir}/DOM3-Views.zip"
 		usetimestamp="yes"/>
-</target>
+</target-->
 
-<target name="get-dom3" depends="get-xmlspec-v22-dom-dtd,get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events,get-dom3-views">
+<target name="get-dom3" depends="get-xmlspec-v22-dom-dtd,get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events"><!--,get-dom3-views"-->
 </target>
 
 
@@ -1785,13 +1788,13 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-3"/>
 
-	<unzip src="${specs.dir}/DOM3-Views.zip"
-	       dest="${specs.dir}/Level-3/Views"/>
+	<!--unzip src="${specs.dir}/DOM3-Views.zip"
+	       dest="${specs.dir}/Level-3/Views"/-->
 	<!--  XML source has unusual ../../whatever paths,
 	        must put in several layers deep to prevent writing out
 			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/Views/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/views"/>
+	<!--unzip src="${specs.dir}/Level-3/Views/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/views"/-->
 
 	<unzip src="${specs.dir}/DOM3-XPath.zip"
 	       dest="${specs.dir}/Level-3/XPath"/>
@@ -1816,33 +1819,31 @@ All implementation conditions combined into implementationAttribute element
             value='../../pubtext/xmlspec-v22-dom.dtd'/>
 
 
-    <mkdir dir="${specs.dir}/Level-3/Core/java"/>
+    <delete dir="${specs.dir}/Level-3/Core/java"/>
 	<unzip src="${specs.dir}/Level-3/Core/java-binding.zip"
 	       dest="${specs.dir}/Level-3/Core/java"/>
 
-    <mkdir dir="${specs.dir}/Level-3/Events/java"/>
+    <delete dir="${specs.dir}/Level-3/Events/java"/>
 	<unzip src="${specs.dir}/Level-3/Events/java-binding.zip"
 	       dest="${specs.dir}/Level-3/Events/java"/>
 
-    <mkdir dir="${specs.dir}/Level-3/LS/java"/>
+    <delete dir="${specs.dir}/Level-3/LS/java"/>
 	<unzip src="${specs.dir}/Level-3/LS/java-binding.zip"
 	       dest="${specs.dir}/Level-3/LS/java"/>
 
-    <mkdir dir="${specs.dir}/Level-3/Val/java"/>
+    <delete dir="${specs.dir}/Level-3/Val/java"/>
 	<unzip src="${specs.dir}/Level-3/Val/java-binding.zip"
 	       dest="${specs.dir}/Level-3/Val/java"/>
 
-    <mkdir dir="${specs.dir}/Level-3/Views/java"/>
-	<unzip src="${specs.dir}/Level-3/Views/java-binding.zip"
-	       dest="${specs.dir}/Level-3/Views/java"/>
 
-    <mkdir dir="${specs.dir}/Level-3/XPath/java"/>
+    <delete dir="${specs.dir}/Level-3/XPath/java"/>
 	<unzip src="${specs.dir}/Level-3/XPath/java-binding.zip"
 	       dest="${specs.dir}/Level-3/XPath/java"/>
 
     <property name="dom3-core-java-src" location="${specs.dir}/Level-3/Core/java"/>
     <property name="dom3-ls-java-src" location="${specs.dir}/Level-3/LS/java"/>
     <property name="dom3-xpath-java-src" location="${specs.dir}/Level-3/XPath/java"/>
+    <property name="dom3-val-java-src" location="${specs.dir}/Level-3/Val/java"/>
 
 </target>
 
@@ -1923,6 +1924,8 @@ All implementation conditions combined into implementationAttribute element
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/xpath"/>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/>
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/core"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/validation"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/validation"/>
 </target>
 
 <target name="dom3-ls-validate-tests" depends="dom3-dtd">
@@ -2037,6 +2040,24 @@ All implementation conditions combined into implementationAttribute element
 		       expression="org.w3c.domts.level3.xpath"/>
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/xpath/"/>
+	</style>
+</target>
+
+<target name="dom3-val-gen-java" depends="dom3-interfaces,dom3-dtd">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level3/validation"/>
+
+	<style basedir="${tests.dir}/level3/validation" 
+		   destdir="${java.build.dir}/org/w3c/domts/level3/validation" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom3-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level3.validation"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/validation/"/>
 	</style>
 </target>
 
@@ -2316,6 +2337,68 @@ it would compile all DOM 3 java code
 		<fileset dir="tests/level3/xpath/files" excludes="*.bak"/>
 	</jar>
 </target>
+
+<target name="dom3-val-javac" depends="common-javac,dom3-val-gen-java">
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <src path="${dom3-core-java-src}"/>
+        <src path="${dom3-val-java-src}"/>
+        <include name="org/w3c/domts/level3/validation/*"/>
+        <include name="org/w3c/domts/*"/>
+        <include name="org/w3c/dom/**"/>
+    </javac>
+</target>
+
+
+<target name="dom3-val-checkstyle" depends="checkstyle-available, dom3-val-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level3/validation" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
+
+<target name="dom3-val-jar" depends="dom3-val-javac">
+	<jar jarfile="${build.dir}/dom3-val.jar"  manifest="java/dom3-val.mf">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level3/validation/*"
+		         excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/dom/*"
+		         excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/dom/validation/*"
+		         excludes="*.bak"/>
+
+        <!--   book.xml is missing from CVS -->
+		<!-- fileset dir="tests/level3/validation/files" excludes="*.bak"/ -->
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
+</target>
+
+
+
 
 <target name="dom3-xpath-metadata" depends="dom3-schema">
     <mkdir dir="${build.dir}"/>

@@ -24,7 +24,7 @@
       The XPathEvaluator can create a "XPathExpression" using the method
       "createExpression(expression, resolver)".
       
-      Retrieve the DOM document on which the
+      Retrie       ve the DOM document on which the
       "createExpression("/", null)" method is invoked with the document
       element. The method should return a pre-compiled expression.
     </description>
@@ -32,12 +32,13 @@
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
   </metadata>
   &vars;
+  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>
   <var name="exp" type="XPathExpression"/>
 
   &findXPathEvaluator;  
 
   <createExpression obj='xpEvaluator' var='exp'
-    expression='&quot;/&quot;' resolver='null' />
+    expression='&quot;/&quot;' resolver='nullNSResolver' />
 
   <assertNotNull actual="exp" id="notnull"/>
   

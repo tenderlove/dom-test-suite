@@ -62,7 +62,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMResourceResolver DOMParserFilter DOMSerializerFilter NodeFilter DOMErrorHandler </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener LSResourceResolver LSParserFilter LSSerializerFilter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -377,9 +377,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					</xs:enumeration>
                     <!--   DOM 3 LS defines some new platform pseudo types   -->
                     <xsl:if test="$schema-namespace='http://www.w3.org/2001/DOM-Test-Suite/Level-3'">
-					    <xs:enumeration value="DOMInputStream"/>
-                        <xs:enumeration value="DOMOutputStream"/>
-                        <xs:enumeration value="DOMReader"/>
+					    <xs:enumeration value="LSInputStream"/>
+                        <xs:enumeration value="LSOutputStream"/>
+                        <xs:enumeration value="LSReader"/>
+                        <xs:enumeration value="LSWriter"/>
                     </xsl:if>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
@@ -1084,13 +1085,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="expected" type="variableOrIntLiteral" use="required"/>
 				</xs:complexType>
 			</xs:element>
-            <xs:element name="contains">
-                <xs:complexType>
-                    <xs:attribute name="id" type="xs:ID" use="optional"/>
-                    <xs:attribute name="obj" type="variable" use="required"/>
-                    <xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
-                </xs:complexType>
-            </xs:element>
 
 
 
@@ -1195,7 +1189,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			                <xs:attribute name="type" type="loadContentType" use="required"/>
 		                </xs:complexType>
 	                </xs:element>
-                    <xs:element ref="contains"/>
+            		<xs:element name="contains">
+                		<xs:complexType>
+                    		<xs:attribute name="id" type="xs:ID" use="optional"/>
+                    		<xs:attribute name="obj" type="variable" use="required"/>
+                    		<xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
+                		</xs:complexType>
+            		</xs:element>
 				</xs:choice>
 			</xs:group>
 			<xs:element name="else">

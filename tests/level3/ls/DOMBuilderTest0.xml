@@ -37,9 +37,9 @@
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_1"/>
   
-  <writeToString var="stringDoc" obj="writer" node="document"/>
+  <writeToString var="stringDoc" obj="writer" nodeArg="document"/>
   <stringData obj="inputSource" value="stringDoc"/>
-  <parse  var="document" obj="builder" is="inputSource"/>
+  <parse  var="document" obj="builder" input="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_2"/>
 

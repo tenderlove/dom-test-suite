@@ -39,8 +39,8 @@
 
   <item interface="NodeList" obj="elementList" var="firstElt2" index="0"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="DOMInput"/>
-  <parseWithContext  obj="builder" input="inputSource" context="firstElt2" action="ACTION_REPLACE" var="returnNode"/>
+  <systemId obj="inputSource" value="TEST2" interface="LSInput"/>
+  <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt2" action="ACTION_REPLACE" var="returnNode"/>
   
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="elt2Count_2"/>

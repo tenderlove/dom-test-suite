@@ -13,18 +13,18 @@
     <contributor>X-Hive Corporation</contributor>
     <date qualifier='created'>2002-03-23</date>
     <!--   resource attribute was called specs   -->
-    <subject resource="http://www.w3.org/TR/DOM-Level-3-LS/load-save#LS-Interfaces-DOMParserFilter"/>
+    <subject resource="http://www.w3.org/TR/DOM-Level-3-LS/load-save#LS-Interfaces-LSParserFilter"/>
   </metadata>
   <!--   implementation variable was not needed -->
   <var name='lsImplementation' type='DOMImplementationLS'/> 
-  <var name='inputSource'      type='DOMInput'/> 
+  <var name='inputSource'      type='LSInput'/> 
   <var name='document'         type='Document'/>            
-  <var name='writer'           type='DOMSerializer'/>            
-  <var name='builder'          type='DOMParser'/>
+  <var name='writer'           type='LSSerializer'/>            
+  <var name='builder'          type='LSParser'/>
   <var name='testfile1'        type='DOMString' value='"test1.xml"'/>
   <var name='mode'             type='int'     value='1'/>
   <var name='schemaType'       type='DOMString' isNull='true'/>
-  <var name="myfilter"         type="DOMParserFilter"> 
+  <var name="myfilter"         type="LSParserFilter"> 
     <!--   startElement had elt attribute that is only appropriate
                 when calling startElement   -->
     <startElement>
@@ -33,7 +33,7 @@
         <var name="name"             type="DOMString"/>
         <!--  changed obj="element" to obj="elt" 
                  parameter name is obtained from spec   -->
-        <nodeName var="name" obj="element"/>
+        <nodeName var="name" obj="elementArg"/>
         <if>
             <equals actual="name" expected='"elt2"' ignoreCase="false"/>
             <return value="2"/>            
@@ -53,10 +53,10 @@
      </whatToShow>
   </var>
   <implementation var="lsImplementation"/>
-  <createDOMParser      var='builder'     obj='lsImplementation' mode='mode' schemaType='schemaType'/>
-  <createDOMSerializer       var='writer'      obj='lsImplementation'/>
-  <createDOMInput  var='inputSource' obj='lsImplementation'/>
-  <filter obj='builder' value='myfilter' interface='DOMParser'/>
+  <createLSParser      var='builder'     obj='lsImplementation' mode='mode' schemaType='schemaType'/>
+  <createLSSerializer       var='writer'      obj='lsImplementation'/>
+  <createLSInput  var='inputSource' obj='lsImplementation'/>
+  <filter obj='builder' value='myfilter' interface='LSParser'/>
   <parseURI  var="document" obj="builder" uri="testfile1"/>
 </test>
 

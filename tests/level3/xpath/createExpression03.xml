@@ -34,6 +34,7 @@
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
   </metadata>
   &vars;
+  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/> 
   <var name="exp" type="XPathExpression"/>
 
   &findXPathEvaluator;
@@ -41,7 +42,7 @@
   <assertDOMException id="throw_NAMESPACE_ERR">
     <NAMESPACE_ERR>
       <createExpression obj='xpEvaluator' var='exp'
-	expression='&quot;/jfouffa:employee&quot;' resolver='null' />
+	expression='&quot;/jfouffa:employee&quot;' resolver='nullNSResolver' />
     </NAMESPACE_ERR>
   </assertDOMException>
 

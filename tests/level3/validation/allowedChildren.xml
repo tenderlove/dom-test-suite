@@ -32,11 +32,13 @@ PURPOSE.
 <var name="root" type="Element"/>
 <var name="nlist" type="NameList"/>
 <var name="elemVAL" type="ElementEditVAL"/>
+<var name="allowedChildrenLength" type="int"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
 <assign var="elemVAL" value="root"/>
 <allowedChildren obj="elemVAL" var="nlist"/>
-<assertSize collection="nlist" size="7" id="allowedChildren"/>
+<length var="allowedChildrenLength" obj="nlist" interface="NameList"/>
+<assertEquals actual="allowedChildrenLength" expected="7" id="allowedChildren"/>
 </test>
 
 

@@ -34,6 +34,7 @@
     <date qualifier="created">2002-04-26</date>
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
   </metadata>
+  <var name="nullNSResolver" type="XPathNSResolver" isNull="true"/>  
   &vars;
   <var name="exp" type="XPathExpression"/>
 
@@ -42,7 +43,7 @@
   <assertXPathException id="throw_INVALID_EXPRESSION_ERR">
     <INVALID_EXPRESSION_ERR>
       <createExpression obj='xpEvaluator' var='exp'
-	expression='&quot;12&quot;' resolver='null' />
+	expression='&quot;12&quot;' resolver='nullNSResolver' />
     </INVALID_EXPRESSION_ERR>
   </assertXPathException>
 

@@ -33,12 +33,12 @@
   &vars;
   &init;
 
-  <stringData obj="inputSource" value="myString" interface="DOMInput"/> 
+  <stringData obj="inputSource" value="myString" interface="LSInput"/> 
 
-  <parse var="document" obj="builder" is="inputSource"/>
+  <parse var="document" obj="builder" input="inputSource"/>
 
   <!-- abort should be possible even in synchronous load -->
-  <abort obj="builder" interface="DOMParser"/> 
+  <abort obj="builder" interface="LSParser"/> 
 
 </test>
 

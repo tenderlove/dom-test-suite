@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2003 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -12,7 +12,10 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.8  2002-03-14 05:00:12  dom-ts-4
+Revision 1.9  2003-11-10 07:34:13  dom-ts-4
+Update for 2003-11-07 CRs (bug 375)
+
+Revision 1.8  2002/03/14 05:00:12  dom-ts-4
 Add return code of 1 if there were any errors or failures, 0 if all tests passed
 
 Revision 1.7  2002/02/03 04:22:35  dom-ts-4
@@ -195,7 +198,11 @@ public class JUnitRunner {
         printFeature(domimpl,"DOM Level 3","CORE","core","3.0");
         printFeature(domimpl,"DOM Level 3 XML","XML","xml","3.0");
         printFeature(domimpl,"DOM Level 3 Core","CORE","core","3.0");
+		printFeature(domimpl,"DOM Level 3 Events","EVENTS","events","3.0");
         printFeature(domimpl,"DOM Level 3 XPath", "XPATH", "xpath", "3.0");
+		printFeature(domimpl,"DOM Level 3 Load & Save", "LS", "ls", "3.0");
+		printFeature(domimpl,"DOM Level 3 Asynchronous Load & Save", "LS-ASYNC", "ls-async", "3.0");
+		printFeature(domimpl,"DOM Level 3 Validation", "Validation", "validation", "3.0");
         printFeature(domimpl,"SVG Version 1.0", "org.w3c.dom.svg", "org.w3c.dom.svg", "1.0");
         printFeature(domimpl,"SVG Version 1.0 Static", "org.w3c.dom.svg.static", "org.w3c.dom.svg.static", "1.0");
         printFeature(domimpl,"SVG Version 1.0 Dynamic", "org.w3c.dom.svg.dynamic", "org.w3c.dom.svg.dynamic", "1.0");

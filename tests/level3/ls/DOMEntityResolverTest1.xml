@@ -28,9 +28,9 @@
   </metadata>
 
 
-  <var name="myentityresolver" type="DOMResourceResolver"> 
+  <var name="myentityresolver" type="LSResourceResolver"> 
      <resolveResource>
-        <var name="erInputSource" type="DOMInput"/>
+        <var name="erInputSource" type="LSInput"/>
         <var name='implementation'   type='DOMImplementation'/> 
         <var name='lsImplementation' type='DOMImplementationLS'/> 
         <var name="substitute"       type="DOMString" value="&quot;&lt;elt1&gt;second elt1&lt;/elt1&gt;&lt;elt1&gt;third elt1&lt;/elt1&gt;&quot;"/>
@@ -38,8 +38,8 @@
         <implementation var='implementation'/> 
         <assign var='lsImplementation' value='implementation'/> 
 
-        <createDOMInput  var='erInputSource' obj='lsImplementation'/>
-        <stringData obj="erInputSource" value="substitute" interface="DOMInput"/>
+        <createLSInput  var='erInputSource' obj='lsImplementation'/>
+        <stringData obj="erInputSource" value="substitute" interface="LSInput"/>
         
         <return value="erInputSource"/>            
      </resolveResource>
@@ -53,7 +53,7 @@
   &vars;
   &init;
 
-  <config var="configuration" obj="builder" interface="DOMParser"/> 
+  <config var="configuration" obj="builder" interface="LSParser"/> 
 
   
   <!-- before applying the entity resolver there should be 2 elt1 in this document -->

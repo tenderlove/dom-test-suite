@@ -50,8 +50,8 @@
   <nodeName obj="secondElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="nextSibling_before_add" ignoreCase="false"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="DOMInput"/>
-  <parseWithContext  obj="builder" input="inputSource" context="firstElt1" action="ACTION_INSERT_AFTER" var="returnNode"/>
+  <systemId obj="inputSource" value="TEST2" interface="LSInput"/>
+  <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt1" action="ACTION_INSERT_AFTER" var="returnNode"/>
 
   <nextSibling interface="Node" obj="firstElt1" var="secondElt1"/>
   <nodeName obj="secondElt1" var="nodeName"/>

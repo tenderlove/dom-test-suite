@@ -28,10 +28,10 @@
   </metadata>
 
 
-  <var name="myentityresolver" type="DOMResourceResolver"> 
-     <var name="erInputSource" type="DOMInput"/>
+  <var name="myentityresolver" type="LSResourceResolver"> 
+     <var name="erInputSource" type="LSInput"/>
      <resolveResource>
-		<var name="nullInput" type="DOMInput" isNull="true"/>
+		<var name="nullInput" type="LSInput" isNull="true"/>
         <assertEquals actual="publicId"  expected='"new_public"' ignoreCase="false" id="er_public"/>
         <assertEquals actual="systemId"  expected='"new_system"' ignoreCase="false" id="er_system"/>
         <assertEquals actual="baseURI" expected='"new_base"'   ignoreCase="false" id="er_base"/>
@@ -48,15 +48,15 @@
   &vars;
   &init;
 
-  <config var="configuration" obj="builder" interface="DOMParser"/> 
+  <config var="configuration" obj="builder" interface="LSParser"/> 
 
   <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
  
-  <systemId obj="inputSource" value='"new_system"' interface="DOMInput"/>
-  <publicId obj="inputSource" value='"new_public"' interface="DOMInput"/>
-  <baseURI  obj="inputSource" value='"new_base"' interface="DOMInput"/>
+  <systemId obj="inputSource" value='"new_system"' interface="LSInput"/>
+  <publicId obj="inputSource" value='"new_public"' interface="LSInput"/>
+  <baseURI  obj="inputSource" value='"new_base"' interface="LSInput"/>
  
-  <parse var="document" obj="builder" is="inputSource"/>
+  <parse var="document" obj="builder" input="inputSource"/>
 
 
 

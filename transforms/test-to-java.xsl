@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.43  2003-10-24 17:10:16  dom-ts-4
+Revision 1.44  2003-11-10 07:34:13  dom-ts-4
+Update for 2003-11-07 CRs (bug 375)
+
+Revision 1.43  2003/10/24 17:10:16  dom-ts-4
 Changed copyright dates, bug 369
 
 Revision 1.42  2003/07/11 08:05:49  plehegar
@@ -352,6 +355,9 @@ import org.w3c.dom.ls.*;
 </xsl:if>
 <xsl:if test="contains($package, 'level3.xpath')">
 import org.w3c.dom.xpath.*;
+</xsl:if>
+<xsl:if test="contains($package, 'level3.validation')">
+import org.w3c.dom.validation.*;
 </xsl:if>
 
 import org.w3c.domts.DOMTestCase;
@@ -765,7 +771,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 </xsl:text>
         </xsl:when>
 
-        <xsl:when test="@value and @type = 'DOMInputStream'">
+        <xsl:when test="@value and @type = 'LSInputStream'">
             <xsl:text> = openStream(</xsl:text>
             <xsl:value-of select="@value"/>
             <xsl:text>);</xsl:text>
@@ -1466,9 +1472,10 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:when test="$type='DOMString'">String</xsl:when>
         <xsl:when test="contains($type, 'DOMObject')">Object</xsl:when>
         <xsl:when test="contains($type, 'DOMUserData')">Object</xsl:when>
-        <xsl:when test="contains($type, 'DOMInputStream')">java.io.InputStream</xsl:when>
-        <xsl:when test="contains($type, 'DOMOutputStream')">java.io.OutputStream</xsl:when>
-        <xsl:when test="contains($type, 'DOMReader')">java.io.Reader</xsl:when>
+        <xsl:when test="contains($type, 'LSInputStream')">java.io.InputStream</xsl:when>
+        <xsl:when test="contains($type, 'LSOutputStream')">java.io.OutputStream</xsl:when>
+        <xsl:when test="contains($type, 'LSReader')">java.io.Reader</xsl:when>
+        <xsl:when test="contains($type, 'LSWriter')">java.io.Writer</xsl:when>
         <xsl:when test="$type='Collection'">java.util.Collection</xsl:when>
         <xsl:when test="$type='List'">java.util.List</xsl:when>
         <xsl:when test="$type='EventMonitor'">org.w3c.domts.EventMonitor</xsl:when>

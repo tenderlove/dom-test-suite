@@ -20,16 +20,16 @@
 
 <test xmlns="&level3;" name="DOMWriterFilterTest1">
   <metadata>
-    <title>DOMSerializerFilter</title>
+    <title>LSSerializerFilter</title>
     &creator; 
-    <description>DOMSerializerFilter test, this test tests whether the whattoshow on a writer filter for attribute nodes is ignored. 
+    <description>LSSerializerFilter test, this test tests whether the whattoshow on a writer filter for attribute nodes is ignored. 
                  An attempt is made to filter out attribute, they should remain in the result</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMSerializerFilter"/>
+    <subject resource="&spec;#LS-Interfaces-LSSerializerFilter"/>
   </metadata>
 
 
-  <var name="myfilter" type="DOMSerializerFilter"> 
+  <var name="myfilter" type="LSSerializerFilter"> 
      <var name="name" type="DOMString"/>
      &filterVars;
 
@@ -62,17 +62,17 @@
 
   <!-- parse the string -->
   <stringData obj="inputSource" value="stringDoc"/>
-  <parse  var="document" obj="builder" is="inputSource"/>
+  <parse  var="document" obj="builder" input="inputSource"/>
 
   <!-- apply the filter -->
-  <filter obj="writer" value="myfilter" interface="DOMSerializer"/>
+  <filter obj="writer" value="myfilter" interface="LSSerializer"/>
 
   <!-- serialize result -->
-  <writeToString var="writeResult" obj="writer" node="document"/> 
+  <writeToString var="writeResult" obj="writer" nodeArg="document"/> 
 
   <!-- parse result -->
-  <stringData obj="inputSource" value="writeResult" interface="DOMInput"/>
-  <parse  var="document" obj="builder" is="inputSource"/>
+  <stringData obj="inputSource" value="writeResult" interface="LSInput"/>
+  <parse  var="document" obj="builder" input="inputSource"/>
 
   <!-- tests elt1 should be in the result-->
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>

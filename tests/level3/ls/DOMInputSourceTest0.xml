@@ -28,16 +28,16 @@
   </metadata>
 
   <!-- todo create inputstream -->
-  <var name="myByteStream" type="DOMInputStream"/>
+  <var name="myByteStream" type="LSInputStream"/>
   <var name="elementList" type="NodeList"/>
 
   &vars;
   &init;
 
   
-  <byteStream obj="inputSource" var="myByteStream" interface="DOMInput"/> 
+  <byteStream obj="inputSource" var="myByteStream" interface="LSInput"/> 
 
-  <parse var="document" obj="builder" is="inputSource"/>
+  <parse var="document" obj="builder" input="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="count_elt0"/>
 

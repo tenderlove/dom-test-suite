@@ -34,7 +34,7 @@
   <var name="utf"            type="DOMString" value="&quot;UTF-8&quot;"/>
 
   <!-- todo create char stream-->
-  <var name="myReader" type="DOMReader"/>
+  <var name="myReader" type="LSReader"/>
 
   &vars;
   &init;
@@ -44,20 +44,20 @@
 
 
 
-  <stringData obj="inputSource" value="myString" interface="DOMInput"/> 
-  <encoding   obj="inputSource" value="iso" interface="DOMInput"/> 
+  <stringData obj="inputSource" value="myString" interface="LSInput"/> 
+  <encoding   obj="inputSource" value="iso" interface="LSInput"/> 
 
-  <parse var="document" obj="builder" is="inputSource"/>
+  <parse var="document" obj="builder" input="inputSource"/>
 
   <!-- encoding should be changed for a DOMString inputsource -->
-  <actualEncoding var="encodingString" obj="document" interface="Document"/> 
+  <inputEncoding var="encodingString" obj="document" interface="Document"/> 
   <assertEquals actual="encodingString" expected="iso" ignoreCase="false" id="encodingstringcheck0"/>
 
   <!-- using a characterStream nothing should change-->
-  <createDOMInput  var="inputSource" obj="lsImplementation"/>
-  <encoding   obj="inputSource" value="iso" interface="DOMInput"/> 
-  <characterStream obj="inputSource" var="myReader" interface="DOMInput"/> 
-  <parse var="document" obj="builder" is="inputSource"/>
+  <createLSInput  var="inputSource" obj="lsImplementation"/>
+  <encoding   obj="inputSource" value="iso" interface="LSInput"/> 
+  <characterStream obj="inputSource" var="myReader" interface="LSInput"/> 
+  <parse var="document" obj="builder" input="inputSource"/>
   <assertEquals actual="encodingString" expected="utf" ignoreCase="false" id="encodingstringcheck1"/>
 
 </test>

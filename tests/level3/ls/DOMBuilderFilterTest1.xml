@@ -20,15 +20,15 @@
 
 <test xmlns="&level3;" name="DOMBuilderFilterTest1">
   <metadata>
-    <title>DOMParserFilter</title>
+    <title>LSParserFilter</title>
     &creator; 
     <description>DOM Builder Filter test, test whether incorrect node types are never passed to the filter</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParserFilter"/>
+    <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
   </metadata>
 
 
-  <var name="myfilter" type="DOMParserFilter"> 
+  <var name="myfilter" type="LSParserFilter"> 
      &filterVars;
      <var name="type" type="int"/>
 
@@ -37,7 +37,7 @@
      </startElement>
 
      <acceptNode>
-        <nodeType obj="node" var="type"/>
+        <nodeType obj="nodeArg" var="type"/>
 
         <assertNotEquals actual="type" expected="2"  id="attribute_node_test" ignoreCase="false"/>
         <assertNotEquals actual="type" expected="6"  id="entity_node_test" ignoreCase="false"/>

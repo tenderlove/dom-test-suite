@@ -28,9 +28,9 @@
   </metadata>
 
 
-  <var name="myentityresolver" type="DOMResourceResolver"> 
+  <var name="myentityresolver" type="LSResourceResolver"> 
      <resolveResource>
-     	<var name="nullInput" type="DOMInput" isNull="true"/>
+     	<var name="nullInput" type="LSInput" isNull="true"/>
 
         <assertEquals actual="publicId"  expected='"public"' ignoreCase="false" id="er_public"/>
         <assertEquals actual="systemId"  expected='"system"' ignoreCase="false" id="er_system"/>
@@ -48,7 +48,7 @@
   &vars;
   &init;
 
-  <config var="configuration" obj="builder" interface="DOMParser"/> 
+  <config var="configuration" obj="builder" interface="LSParser"/> 
 
   <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
   

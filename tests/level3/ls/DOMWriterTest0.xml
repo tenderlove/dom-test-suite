@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMWriterTest0">
   <metadata>
-    <title>DOMSerializer</title>
+    <title>LSInput</title>
     &creator; 
     <description>A Simple writer test, serializes a testfile and parses it back in again.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMSerializer"/>
+    <subject resource="&spec;#LS-Interfaces-LSInput"/>
   </metadata>
   <var name="stringDoc"   type="DOMString"/>
   <var name="writeResult"   type="DOMString"/>
@@ -34,10 +34,10 @@
   &init;
 
   <parseURI  var="document" obj="builder" uri="TEST0"/>
-  <writeToString var="writeResult" obj="writer" node="document"/> 
+  <writeToString var="writeResult" obj="writer" nodeArg="document"/> 
 
   <stringData obj="inputSource" value="writeResult"/>
-  <parse  var="document" obj="builder" is="inputSource"/>
+  <parse  var="document" obj="builder" input="inputSource"/>
   
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="elt2Count_1"/>

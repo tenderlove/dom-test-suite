@@ -49,7 +49,7 @@
 
   &init;
 
-  <config var="configuration" obj="builder" interface="DOMParser"/> 
+  <config var="configuration" obj="builder" interface="LSParser"/> 
 
   <setParameter obj="configuration" name="ERROR_HANDLER"             value="errorHandler"/>
   <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="atrue"/>
