@@ -38,7 +38,7 @@ DOM Test Suite
     <home nested="build"/>
     <jar name="dom1-core.jar" />
     <jar name="dom1-html.jar" />
-    <jar name="junit-jar.jar" />
+    <jar name="junit-run.jar" />
     <license name="docs/resources/COPYRIGHT.html"/>
 
     <nag from="Curt Arnold &lt;carnold@houston.rr.com&gt;"
