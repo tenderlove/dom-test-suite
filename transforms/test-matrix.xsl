@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -29,6 +29,7 @@ and combine-metadata.xsl
      <xsl:param name="doxyPath">doxygen/html/</xsl:param>
      <xsl:param name="doxySuffix">_8java-source.html</xsl:param>
      <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
+     <xsl:param name="specVersion"></xsl:param>
 
 	<xsl:output method="html"/>
 
@@ -55,7 +56,7 @@ and combine-metadata.xsl
 sorted alphabetically. 
 </p>
 
-                <xsl:variable name="untestedMethods" select="$methods[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource)]"/>
+                <xsl:variable name="untestedMethods" select="$methods[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion)]"/>
                 <xsl:if test="$untestedMethods">
                     <table col="3" border="1">
                         <thead>Methods with no corresponding test metadata</thead>
@@ -66,7 +67,7 @@ sorted alphabetically.
                         </xsl:call-template>
                     </table>
                 </xsl:if>
-                <xsl:variable name="untestedAttributes" select="$attributes[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource)]"/>
+                <xsl:variable name="untestedAttributes" select="$attributes[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion)]"/>
                 <xsl:if test="$untestedAttributes">
                     <table col="3" border="1">
                         <thead>Attributes with no corresponding test metadata</thead>
@@ -228,7 +229,7 @@ sorted alphabetically.
 href="resources/COPYRIGHT.html">W3C Software 
 Copyright Notice and License</a><xsl:text>:</xsl:text>
 			<br />
-			<xsl:text>Copyright (c) 2001-2003 World Wide Web Consortium,
+			<xsl:text>Copyright (c) 2001-2004 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
 			Recherche en Informatique et en Automatique, Keio University). All
 			Rights Reserved. This program is distributed under the W3C's Software
