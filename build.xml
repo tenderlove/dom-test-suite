@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.34  2001-11-14 08:47:46  dom-ts-4
+Revision 1.35  2001-11-16 05:46:09  dom-ts-4
+Set debug="on" for java compilation.  Puts line numbers in tracebacks
+
+Revision 1.34  2001/11/14 08:47:46  dom-ts-4
 Added pre-generated documentcreatecdatasection.js and .html to
 avoid Xalan-J lock ups with some versions
 
@@ -165,6 +168,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download DOM 1 spec to specs directory   -->
 	<get src="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/DOM.zip"
 	     dest="${specs.dir}/DOM.zip"
+         ignoreerrors="yes"
 	     usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM.zip" dest="${specs.dir}/Level-1"/>
@@ -272,6 +276,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download DOM 1 spec to specs directory   -->
 	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/DOM.zip"
 	     dest="${specs.dir}/DOM1SE.zip"
+         ignoreerrors="yes"
 	     usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM1SE.zip" dest="${specs.dir}/Level-1SE"/>
@@ -331,6 +336,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download DOM 1 spec to specs directory   -->
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/DOM2-Core.zip"
 		dest="${specs.dir}/DOM2-Core.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM2-Core.zip"
@@ -343,6 +349,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/DOM2-Views.zip"
 		dest="${specs.dir}/DOM2-Views.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM2-Views.zip"
@@ -356,6 +363,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/DOM2-Events.zip"
 		dest="${specs.dir}/DOM2-Events.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM2-Events.zip"
@@ -368,6 +376,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/DOM2-Style.zip"
 		dest="${specs.dir}/DOM2-Style.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM2-Style.zip"
@@ -380,6 +389,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/DOM2-Traversal-Range.zip"
 		dest="${specs.dir}/DOM2-Traversal-Range.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM2-Traversal-Range.zip"
@@ -393,6 +403,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-2-HTML-20011025/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM2-HTML.zip"
@@ -518,6 +529,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="jsunit-init" depends="init">
 	<get src="http://www.edwardh.com/jsunit/jsunit.zip"
 		dest="${lib.dir}/jsunit.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 	<unzip src="${lib.dir}/jsunit.zip" dest="${lib.dir}"/>
 </target>
@@ -586,6 +598,7 @@ All implementation conditions combined into implementationAttribute element
 	<javac srcdir="java/org/w3c/domts" 
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"
+           debug="on"
 		   encoding="UTF8"/>
 </target>
 
@@ -593,6 +606,7 @@ All implementation conditions combined into implementationAttribute element
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
 		encoding="UTF8"/>
 </target>
 
@@ -685,6 +699,7 @@ All implementation conditions combined into implementationAttribute element
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/core" 
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
 		encoding="UTF8"/>
 </target>
 
@@ -723,6 +738,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--  get JUnit 3.7 into lib directory  -->
 	<get src="http://download.sourceforge.net/junit/junit3.7.zip"
 		dest="${lib.dir}/junit.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 	<unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
 
@@ -733,6 +749,7 @@ All implementation conditions combined into implementationAttribute element
     <javac srcdir="java/junit/org/w3c/domts"
            destdir="${java.build.dir}/junit"
            classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"           
+           debug="on"
 		   encoding="UTF8"/>
 
 
@@ -779,6 +796,7 @@ All implementation conditions combined into implementationAttribute element
 	<javac srcdir="java/avalon/org/w3c/domts"
 	       destdir="${java.build.dir}/avalon"
 	       classpath="${lib.dir}/testlet.jar;${java.build.dir}"	       
+           debug="on"
 		   encoding="UTF8"/>
 
 	<jar jarfile="${dist.dir}/avalon-run.jar"
@@ -805,6 +823,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download DOM 3 Core spec to specs directory   -->
 	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010913/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM3-Core.zip"
@@ -817,6 +836,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20011025/DOM3-ASLS.zip"
 		dest="${specs.dir}/DOM3-ASLS.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM3-ASLS.zip"
@@ -830,6 +850,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20011031/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM3-XPath.zip"
@@ -843,6 +864,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010823/DOM3-Events.zip"
 		dest="${specs.dir}/DOM3-Events.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM3-Events.zip"
@@ -856,6 +878,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-3-Views-20001115/DOM3-Views.zip"
 		dest="${specs.dir}/DOM3-Views.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 	<unzip src="${specs.dir}/DOM3-Views.zip"
@@ -867,6 +890,7 @@ All implementation conditions combined into implementationAttribute element
 	       dest="${specs.dir}/Level-3/xml/views"/>
 
     <get src="http://www.w3.org/2001/11/xmlspec-v22-dom.dtd"
+        ignoreerrors="yes" usetimespace="yes"
         dest="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"/>
 
 	<echo file="${specs.dir}/Level-3/xml/status.xml"
@@ -957,6 +981,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download SVG 1.0 Proposed Recommendation to specs directory   -->
 	<get src="http://www.w3.org/TR/2001/PR-SVG-20010719/PR-SVG-20010719.zip"
 		dest="${specs.dir}/SVG.zip"
+        ignoreerrors="yes"
 		usetimestamp="yes"/>
 
 
