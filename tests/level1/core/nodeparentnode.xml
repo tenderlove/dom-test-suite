@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -26,6 +26,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1060184317"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -37,5 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <parentNode interface="Node" obj="employeeNode" var="parentNode"/>
 <nodeName obj="parentNode" var="parentName"/>
-<assertEquals actual="parentName" expected="&quot;staff&quot;" id="nodeParentNodeAssert1" ignoreCase="false"/>
+<if><contentType type="image/svg+xml"/>
+<assertEquals actual="parentName" expected='"svg"' id="svgTagName" ignoreCase="false"/>
+<else>
+<assertEquals actual="parentName" expected='"staff"' id="nodeParentNodeAssert1" ignoreCase="false"/>
+</else>
+</if>
 </test>

@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
@@ -38,5 +39,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <tagName obj="root" var="tagname"/>
-<assertEquals actual="tagname" expected="&quot;staff&quot;" id="elementGetTagNameAssert" ignoreCase="false"/>
+<if><contentType type="image/svg+xml"/>
+<assertEquals actual="tagname" expected='"svg"' id="svgTagName" ignoreCase="false"/>
+<else>
+<assertEquals actual="tagname" expected='"staff"' id="elementGetTagNameAssert" ignoreCase="false"/>
+</else>
+</if>
 </test>

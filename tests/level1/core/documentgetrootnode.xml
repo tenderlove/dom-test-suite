@@ -20,12 +20,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    to the child node that is the root element of the document.
    Retrieve the entire DOM document and invoke its 
    "getDocumentElement()" method.  It should return an
-   Element node whose NodeName is "staff".
+   Element node whose NodeName is "staff" (or "svg").
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <!--documentElement attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-87CD092"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
@@ -33,5 +34,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <nodeName obj="root" var="rootName"/>
-<assertEquals actual="rootName" expected="&quot;staff&quot;" id="documentGetRootNodeAssert" ignoreCase="false"/>
+<if><contentType type="image/svg+xml"/>
+<assertEquals actual="rootName" expected='"svg"' id="svgRootNode" ignoreCase="false"/>
+<else>
+<assertEquals actual="rootName" expected='"staff"' id="documentGetRootNodeAssert" ignoreCase="false"/>
+</else>
+</if>
 </test>

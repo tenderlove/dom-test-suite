@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -26,6 +26,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <!--documentElement attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-87CD092"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
@@ -33,5 +34,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <nodeName obj="root" var="rootName"/>
+<if><contentType type="image/svg+xml"/>
+<assertEquals actual="rootName" expected='"svg"' id="svgTagName" ignoreCase="false"/>
+<else>
 <assertEquals actual="rootName" expected='"html"' id="docElemName" ignoreCase="auto"/>
+</else>
+</if>
 </test>
