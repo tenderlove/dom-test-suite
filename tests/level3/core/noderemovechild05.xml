@@ -21,16 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild05</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on this Document node attempt to remove a new DocumentType node and
-	verify if the DocumentType node is null.   Now try the reverse and a NOT_FOUND_ERR should be
-	thrown.
+	verify if the DocumentType node is null.  Attempting to remove the DocumentType
+	a second type should result in a NOT_FOUND_ERR.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=417"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -41,13 +39,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nullSysId" type="DOMString" isNull="true"/>
 <var name="appendedChild" type="Node"/>
 <var name="removedChild" type="Node"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
-<implementation var="domImpl" obj="doc"/>
-<createDocumentType var="docType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
-<appendChild obj="doc" var="appendedChild" newChild="docType"/>
-<removeChild obj="doc" var="removedChild" oldChild="docType" />
+<load var="doc" href="barfoo" willBeModified="true"/>
+<doctype var="docType" obj="doc"/>
+<!--  An implemention may not support removing doctype   -->
+<try>
+	<removeChild obj="doc" var="removedChild" oldChild="docType" />
+	<catch>
+		<DOMException code="NOT_SUPPORTED_ERR">
+			<return/>
+		</DOMException>
+	</catch>
+</try>
+<assertNotNull actual="removedChild" id="removedChildNotNull"/>
+
 <doctype var="removedDocType" obj="doc"/>
 <assertNull actual="removedDocType" id="noderemovechild05"/>
+
 <assertDOMException id="NOT_FOUND_ERR_noderemovechild05">
 <NOT_FOUND_ERR>
 <removeChild obj="docType" var="removedChild" oldChild="doc" />

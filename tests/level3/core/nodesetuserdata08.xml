@@ -36,7 +36,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="cData" type="CDATASection"/>
 <var name="elemList" type="NodeList"/>
 <var name="elemName" type="Element"/>
-<var name="gender2List" type="Element"/>
 <var name="userData" type="DOMUserData"/>
 <var name="returned1" type="DOMUserData"/>
 <var name="returned2" type="DOMUserData"/>
