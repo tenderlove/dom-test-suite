@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.31  2001-11-01 16:41:05  dom-ts-4
+Revision 1.32  2001-11-07 06:25:28  dom-ts-4
+DOM Level 3 DTD and Schema building
+
+Revision 1.31  2001/11/01 16:41:05  dom-ts-4
 Added dom2-core-doxygen, updated usage
 
 Revision 1.30  2001/11/01 15:02:50  dom-ts-4
@@ -762,11 +765,12 @@ All implementation conditions combined into implementationAttribute element
     <delete file="tests\level2\core\dom2.xsd"/>
 </target>
 
-<target name="dom3-init" depends="init">
+<target name="dom3-init" depends="init,dom2-init">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-3"/>
-	<!--   download DOM 1 spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010605/DOM3-Core.zip"
+
+	<!--   download DOM 3 Core spec to specs directory   -->
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010913/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 
@@ -778,7 +782,7 @@ All implementation conditions combined into implementationAttribute element
 	<unzip src="${specs.dir}/Level-3/Core/xml-source.zip"
 	       dest="${specs.dir}/Level-3/xml/core"/>
 
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20010607/DOM3-ASLS.zip"
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20011025/DOM3-ASLS.zip"
 		dest="${specs.dir}/DOM3-ASLS.zip"
 		usetimestamp="yes"/>
 
@@ -791,7 +795,7 @@ All implementation conditions combined into implementationAttribute element
 	       dest="${specs.dir}/Level-3/xml/asls"/>
 
 
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20010618/DOM3-XPath.zip"
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20011031/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
 		usetimestamp="yes"/>
 
@@ -803,7 +807,116 @@ All implementation conditions combined into implementationAttribute element
 	<unzip src="${specs.dir}/Level-3/XPath/xml-source.zip"
 	       dest="${specs.dir}/Level-3/xml/xpath"/>
 
+
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010823/DOM3-Events.zip"
+		dest="${specs.dir}/DOM3-Events.zip"
+		usetimestamp="yes"/>
+
+	<unzip src="${specs.dir}/DOM3-Events.zip"
+	       dest="${specs.dir}/Level-3/Events"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/Events/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/events"/>
+
+
+	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-3-Views-20001115/DOM3-Views.zip"
+		dest="${specs.dir}/DOM3-Views.zip"
+		usetimestamp="yes"/>
+
+	<unzip src="${specs.dir}/DOM3-Views.zip"
+	       dest="${specs.dir}/Level-3/Views"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/Views/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/views"/>
+
+    <get src="http://www.w3.org/2001/11/xmlspec-v22-dom.dtd"
+        dest="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"/>
+
+	<echo file="${specs.dir}/Level-3/xml/status.xml"
+	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+
+	<echo file="${specs.dir}/Level-3/xml/toc.xml"
+	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+
+	<patch patchfile="./level-3-element.patch"
+	       originalfile="${specs.dir}/Level-3/xml/core/definitions/element.xml"/>
+
+	<patch patchfile="./level-3-version.patch"
+	       originalfile="${specs.dir}/Level-3/xml/version.xml"/>
+
+	<patch patchfile="./level-3-part-entities.patch"
+	       originalfile="${specs.dir}/Level-3/xml/part-entities.xml"/>
+
+    <!--  text.xml is missing   -->
+    <copy file="${specs.dir}/Level-2/xml/core/definitions/text.xml"
+          todir="${specs.dir}Level-3/xml/core/definitions"/>
+
+
 </target>
+
+<target name="dom3-interfaces" depends="dom3-init">
+	<style in="${specs.dir}/Level-3/xml/core/dom-spec.xml"
+	       out="${build.dir}/dom3-interfaces.xml"
+	       style="${transforms.dir}/dom3-combine.xsl"/>
+	<xmlvalidate file="${build.dir}/dom3-interfaces.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+</target>
+
+<target name="dom3-schema" depends="dom3-interfaces">
+	<style in="${build.dir}/dom3-interfaces.xml"
+	       out="${build.dir}/_dom3.xsd"
+	       style="${transforms.dir}/dom-to-xsd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
+	</style>
+
+	<!--  remove leading underscore from _xmlns attribute    -->
+	<exec executable="sed" output="${build.dir}/dom3.xsd">
+		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom3.xsd"/>
+	</exec>
+	<delete file="${build.dir}/_dom3.xsd"/>
+</target>
+
+<target name="dom3-dtd" depends="dom3-interfaces">
+	<style in="${build.dir}/dom3-interfaces.xml"
+	       out="${build.dir}/dom3.dtd"
+	       style="${transforms.dir}/dom-to-dtd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
+	</style>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/>
+</target>
+
+<target name="dom3-subjects" depends="dom3-init">
+	<!--  create a DOM 2 version of subjects.xsl  -->
+	<exec executable="sed" output="${build.dir}/dom3-subjects.xsl">
+		<arg line="'{s/dom1.dtd/dom3.dtd/;s/Level-1/Level-3/;}' ${transforms.dir}/subjects.xsl"/>
+	</exec>
+
+	<style in="${specs.dir}/Level-3/xml/core/dom-spec.xml"
+	       out="${build.dir}/dom3-core-subjects.xml"
+	       style="${build.dir}/dom3-subjects.xsl"/>
+	<style in="${specs.dir}/Level-3/xml/views/dom-spec.xml"
+	       out="${build.dir}/dom3-views-subjects.xml"
+	       style="${build.dir}/dom3-subjects.xsl"/>
+	<style in="${specs.dir}/Level-3/xml/events/dom-spec.xml"
+	       out="${build.dir}/dom3-events-subjects.xml"
+	       style="${build.dir}/dom3-subjects.xsl"/>
+	<style in="${specs.dir}/Level-3/xml/xpath/dom-spec.xml"
+	       out="${build.dir}/dom3-xpath-subjects.xml"
+	       style="${build.dir}/dom3-subjects.xsl"/>
+	<style in="${specs.dir}/Level-3/xml/asls/dom-spec.xml"
+	       out="${build.dir}/dom3-asls-subjects.xml"
+	       style="${build.dir}/dom3-subjects.xsl"/>
+	<!--  remove DOM 2 version of subjects.xsl  -->
+	<delete file="{build.dir}/dom3-subjects.xsl"/>
+</target>
+
 
 <target name="svg-init" depends="init">
 	<mkdir dir="${specs.dir}"/>

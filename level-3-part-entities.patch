@@ -1,0 +1,23 @@
+24,25c24,25
+< <!ENTITY content-models       SYSTEM "cm-ls/content-models.xml">
+< <!ENTITY load-save            SYSTEM "cm-ls/load-save.xml">
+---
+> <!ENTITY content-models       SYSTEM "asls/content-models.xml">
+> <!ENTITY load-save            SYSTEM "asls/load-save.xml">
+27a28,43
+> 
+> <!ENTITY exceptions           SYSTEM "core/definitions/exceptions.xml">
+> <!ENTITY core-dom-impl-source SYSTEM "core/definitions/impl-source.xml">
+> <!ENTITY core-dom-impl        SYSTEM "core/definitions/dom.xml">
+> <!ENTITY core-document        SYSTEM "core/definitions/document.xml">
+> <!ENTITY core-node            SYSTEM "core/definitions/node.xml">
+> <!ENTITY core-node-list       SYSTEM "core/definitions/node-list.xml">
+> <!ENTITY core-named-node-map  SYSTEM "core/definitions/named-node-map.xml">
+> <!ENTITY core-data            SYSTEM "core/definitions/data.xml">
+> <!ENTITY core-attribute       SYSTEM "core/definitions/attribute.xml">
+> <!ENTITY core-element         SYSTEM "core/definitions/element.xml">
+> <!ENTITY core-text            SYSTEM "core/definitions/text.xml">
+> <!ENTITY core-comment         SYSTEM "core/definitions/comment.xml">
+> <!ENTITY core-userdata-handler SYSTEM "core/definitions/userdata-handler.xml">
+> <!ENTITY core-error            SYSTEM "core/definitions/error.xml">
+> <!ENTITY core-locator          SYSTEM "core/definitions/locator.xml">
