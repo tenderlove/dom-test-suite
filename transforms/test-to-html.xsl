@@ -19,17 +19,25 @@ of a test file
 
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="html"/>
+	<xsl:output method="html" 
+		doctype-public="-//W3C//DTD HTML 4.01//EN" 
+		doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+		encoding="US-ASCII"/>
+
+
 
 <xsl:template match="/">
     <html>
         <head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>        
             <xsl:apply-templates mode="head"/>
         </head>
         <body>
+        	<pre>
             <xsl:apply-templates select="*|comment()" mode="body">
                 <xsl:with-param name="indent"></xsl:with-param>
             </xsl:apply-templates>
+            </pre>
         </body>
     </html>
 </xsl:template>
@@ -38,14 +46,24 @@ of a test file
     <title>Test <xsl:value-of select="@name"/></title>
 </xsl:template>
 
+<xsl:template match="*[local-name() = 'suite']" mode="head">
+    <title>Test Suite <xsl:value-of select="@name"/></title>
+</xsl:template>
+
+<xsl:template match="text()" mode="head"/>
+
+
 <xsl:template match="*[local-name()='metadata']" mode="body">
     <xsl:param name="indent"/>
     <xsl:value-of select="$indent"/>
-    <xsl:text>&lt;metadata&gt;</xsl:text>
-    <br/>
+    <xsl:text>&lt;metadata&gt;
+</xsl:text>
     <xsl:apply-templates select="*" mode="metadata">
           <xsl:with-param name="indent" select="concat('&#160;&#160;&#160;&#160;&#160;',$indent)"/>
     </xsl:apply-templates>
+    <xsl:value-of select="$indent"/>
+    <xsl:text>&lt;/metadata&gt;
+</xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="metadata">
@@ -55,9 +73,20 @@ of a test file
     <xsl:value-of select="local-name()"/>
     <xsl:apply-templates select="@*" mode="body"/>
     <xsl:choose>
+        <xsl:when test="string-length(normalize-space(text())) &gt; 50">
+            <xsl:text>&gt;
+</xsl:text>
+            <xsl:value-of select="text()"/>
+            <xsl:text>
+</xsl:text>
+    		<xsl:value-of select="$indent"/>            
+            <xsl:text>&lt;/</xsl:text>
+            <xsl:value-of select="local-name()"/>
+            <xsl:text>&gt;</xsl:text>
+        </xsl:when>
         <xsl:when test="string-length(normalize-space(text())) &gt; 0">
             <xsl:text>&gt;</xsl:text>
-            <xsl:value-of select="text()"/>
+            <xsl:value-of select="normalize-space(text())"/>
             <xsl:text>&lt;/</xsl:text>
             <xsl:value-of select="local-name()"/>
             <xsl:text>&gt;</xsl:text>
@@ -66,7 +95,8 @@ of a test file
             <xsl:text>/&gt;</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
-    <br/>
+    <xsl:text>
+</xsl:text>
 </xsl:template>
         
 
@@ -80,14 +110,21 @@ of a test file
     <xsl:value-of select="local-name()"/>
     <!--  output any attributes  -->
     <xsl:apply-templates select="@*" mode="body"/>
+    <xsl:if test="local-name() = 'test' or local-name() = 'suite'">
+    	<xsl:text>
+      xmlns='</xsl:text>
+    	<xsl:value-of select="namespace-uri()"/>
+    	<xsl:text>'</xsl:text>
+    </xsl:if>
+    
 
     <xsl:choose>
         <!--  if there are any child elements  -->
 
         <xsl:when test="*|comment()">
             <!--   then close the start tag  -->
-            <xsl:text>&gt;</xsl:text>
-            <br/>
+            <xsl:text>&gt;
+</xsl:text>
             <!--    emit the child elements   -->
             <xsl:apply-templates select="*|comment()|text()" mode="body">
                 <xsl:with-param name="indent" select="concat('&#160;&#160;&#160;&#160;&#160;',$indent)"/>
@@ -97,13 +134,12 @@ of a test file
             <xsl:text>&lt;/</xsl:text>
             <xsl:value-of select="local-name()"/>
             <xsl:text>&gt;</xsl:text>
-            <br/>
         </xsl:when>
 
         <xsl:otherwise>
             <!--  close an empty tag   -->
-            <xsl:text>/&gt;</xsl:text>
-            <br/>
+            <xsl:text>/&gt;
+</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -143,7 +179,7 @@ of a test file
 
 <xsl:template match="@*" mode="body">
     <xsl:text> </xsl:text>
-    <xsl:value-of select="local-name()"/>
+    <xsl:value-of select="name()"/>
     <xsl:text>='</xsl:text>
     <xsl:value-of select="."/>
     <xsl:text>'</xsl:text>
@@ -154,18 +190,10 @@ of a test file
     <xsl:value-of select="$indent"/>
     <xsl:text>&lt;!--</xsl:text>
     <xsl:value-of select="."/>
-    <xsl:text>--&gt;</xsl:text>
-    <br/>
+    <xsl:text>--&gt;
+</xsl:text>
 </xsl:template>
 
-<xsl:template match="text()">
-    <xsl:param name="indent"/>
-    <xsl:variable name="normedText" select="normalize-space(.)"/>
-    <xsl:if test="string-length($normedText) &gt; 0">
-        <xsl:value-of select="$indent"/>
-        <xsl:value-of select="$normedText"/>
-        <br/>
-    </xsl:if>
-</xsl:template>
+<xsl:template match="text()" mode="body"/>
 
 </xsl:stylesheet>

@@ -1,4 +1,4 @@
-<!ELEMENT svg (rect, script, (elt0|elt1)*>
+<!ELEMENT svg (rect, script, (elt0|elt1)*)>
 <!ATTLIST svg 
       xmlns CDATA #FIXED "http://www.w3.org/2000/svg"
       name CDATA #IMPLIED>

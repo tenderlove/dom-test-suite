@@ -21,7 +21,8 @@ and combine-metadata.xsl
 <xsl:stylesheet version="1.0" 
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     exclude-result-prefixes="rdf dc">
      <xsl:param name="interfacesURL">../build/dom1-interfaces.xml</xsl:param>
      <xsl:param name="specURI">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#</xsl:param>
      <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
@@ -31,8 +32,12 @@ and combine-metadata.xsl
      <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
      <xsl:param name="specVersion"></xsl:param>
      <xsl:param name="excludeInterfaces"></xsl:param>
+     <xsl:param name="noTestInterfaces"></xsl:param>
 
-	<xsl:output method="html"/>
+	<xsl:output method="html" 
+		doctype-public="-//W3C//DTD HTML 4.01//EN" 
+		doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+		encoding="US-ASCII"/>
 
     <!--   filter subjects by specification    -->
     <xsl:variable name="subjects" select="document($specMetadataURL,.)/rdf:RDF/rdf:Description[contains(@rdf:about,$specURI)]"/>
@@ -48,6 +53,7 @@ and combine-metadata.xsl
 	<xsl:template match="/">
         <html>
 		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 			<title><xsl:value-of select="$title"/></title>
 			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
 		</head>
@@ -61,73 +67,73 @@ sorted alphabetically.
                   (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion or ancestor::interface/@since = $specVersion) and
                   not(contains($excludeInterfaces, ancestor::interface/@name))]"/>
                 <xsl:if test="$untestedMethods">
-                    <table col="3" border="1">
-                        <thead>Methods with no corresponding test metadata</thead>
-                        <xsl:call-template name="rowmethods">
+                	<p>The following methods do not have associated tests:
+                        <xsl:call-template name="brmethods">
                             <xsl:with-param name="methods" select="$untestedMethods"/>
                             <xsl:with-param name="index">0</xsl:with-param>
                             <xsl:with-param name="columns">1</xsl:with-param>
                         </xsl:call-template>
-                    </table>
+                    </p>
                 </xsl:if>
                 <xsl:variable name="untestedAttributes" select="$attributes[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and 
                        (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion  or ancestor::interface/@since = $specVersion) and
                        not(contains($excludeInterfaces, ancestor::interface/@name))]"/>
                 <xsl:if test="$untestedAttributes">
-                    <table col="3" border="1">
-                        <thead>Attributes with no corresponding test metadata</thead>
-                        <xsl:call-template name="rowmethods">
+                	<p>The following attributes do not have associated tests:
+                        <xsl:call-template name="brmethods">
                             <xsl:with-param name="methods" select="$untestedAttributes"/>
                             <xsl:with-param name="index">0</xsl:with-param>
                             <xsl:with-param name="columns">1</xsl:with-param>
                         </xsl:call-template>
-                    </table>
+                    </p>
                 </xsl:if>
 
 
                 <xsl:for-each select="$interfaces">
                     <xsl:sort select="@name"/>
                      <xsl:variable name="interface" select="."/>
-			<h2>Interface <xsl:value-of select="@name" /></h2>
-			<table border="1" cols="2">
+					<h2>Interface <xsl:value-of select="@name" /></h2>
+                     <table border="1" summary="Tests for interface {@name}" width="100%">
                         <!-- tests which have the interface as a subject  -->
                         <xsl:variable name="interfacetests" select="$descriptions[dc:subject/@rdf:resource= concat($specURI,current()/@id)]"/>
-                        <xsl:if test="$interfacetests">
-                            <tr>
-                                <td width="25%"/>
-                                <td>
-                                    <table>
-                                        <xsl:call-template name="rowtests">
-                                            <xsl:with-param name="tests" select="$interfacetests"/>
-                                            <xsl:with-param name="index">0</xsl:with-param>
-                                            <xsl:with-param name="columns">1</xsl:with-param>
-                                        </xsl:call-template>
-                                    </table>
-                                </td>
-                            </tr>
-                        </xsl:if>            
+                        <xsl:choose>
+                        	<xsl:when test="$interfacetests">
+                        		<tr><td/><td><p>
+                            	<xsl:call-template name="brtests">
+                                	<xsl:with-param name="tests" select="$interfacetests"/>
+                                	<xsl:with-param name="index">0</xsl:with-param>
+                                	<xsl:with-param name="columns">1</xsl:with-param>
+                            	</xsl:call-template>
+                           		</p></td></tr>
+                        	</xsl:when>
+                        	<!--  if there are no tests defined for the interface
+                        	         and the interface appears in noTestInterfaces
+                        	         output a row to avoid an empty table  -->            
+                        	<xsl:when test="contains($noTestInterfaces, @name)">
+                        		<tr><td/><td>No tests defined for interface</td></tr>
+                        	</xsl:when>
+                        </xsl:choose>
 
                         <xsl:if test="attribute">
-                            <tr><th width="25%">Attribute</th><th>Tests</th></tr>
                             <xsl:for-each select="attribute">
                                 <xsl:sort select="@name"/>
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="{$featureURI}" title="{descr}">
+                                        <a href="{$featureURI}" title="{normalize-space(descr)}">
                                             <xsl:value-of select="@name"/>
                                         </a>
                                     </td>
                                     <td>
                                         <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
                                         <xsl:if test="$featuretests">
-                                            <table>
-                                                <xsl:call-template name="rowtests">
-                                                    <xsl:with-param name="tests" select="$featuretests"/>
-                                                    <xsl:with-param name="index">0</xsl:with-param>
-                                                    <xsl:with-param name="columns">1</xsl:with-param>
-                                                </xsl:call-template>
-                                            </table>
+                                        	<p>
+                                            <xsl:call-template name="brtests">
+                                                <xsl:with-param name="tests" select="$featuretests"/>
+                                                <xsl:with-param name="index">0</xsl:with-param>
+                                                <xsl:with-param name="columns">1</xsl:with-param>
+                                            </xsl:call-template>
+                                           	</p>
                                         </xsl:if>
                                     </td>
                                 </tr>
@@ -135,26 +141,25 @@ sorted alphabetically.
                         </xsl:if>
 
                         <xsl:if test="method">
-                            <tr><th width="25%">Method</th><th>Tests</th></tr>
                             <xsl:for-each select="method">
                                 <xsl:sort select="@name"/>
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="{$featureURI}" title="{descr}">
+                                        <a href="{$featureURI}" title="{normalize-space(descr)}">
                                             <xsl:value-of select="@name"/>
                                         </a>
                                     </td>
                                     <td>
                                         <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
                                         <xsl:if test="$featuretests">
-                                            <table>
-                                                <xsl:call-template name="rowtests">
+                                        	<p>
+                                                <xsl:call-template name="brtests">
                                                     <xsl:with-param name="tests" select="$featuretests"/>
                                                     <xsl:with-param name="index">0</xsl:with-param>
                                                     <xsl:with-param name="columns">1</xsl:with-param>
                                                 </xsl:call-template>
-                                            </table>
+                                            </p>
                                         </xsl:if>
                                     </td>
                                 </tr>
@@ -169,20 +174,20 @@ sorted alphabetically.
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="{$featureURI}" title="{code/text()}">
+                                        <a href="{$featureURI}" title="normalize-space({code/text()})">
                                             <xsl:value-of select="code/text()"/>
                                         </a>
                                     </td>
                                     <td>
                                         <xsl:variable name="featuretests" select="$descriptions[dc:subject/@rdf:resource=$featureURI]"/>
                                         <xsl:if test="$featuretests">
-                                            <table>
-                                                <xsl:call-template name="rowtests">
+                                        	<p>
+                                                <xsl:call-template name="brtests">
                                                     <xsl:with-param name="tests" select="$featuretests"/>
                                                     <xsl:with-param name="index">0</xsl:with-param>
                                                     <xsl:with-param name="columns">1</xsl:with-param>
                                                 </xsl:call-template>
-                                            </table>
+                                            </p>
                                         </xsl:if>
                                     </td>
                                 </tr>
@@ -191,83 +196,77 @@ sorted alphabetically.
                     </table>
                 </xsl:for-each>
 
-                <table border="1" cols="2">
-                    <tr><th>Test</th><th>Subjects</th><th/><th/></tr>
+                <table border="1" summary="Subjects">
                     <xsl:for-each select="$descriptions">
                         <xsl:sort select="dc:title"/>
 
                         <xsl:variable name="test" select="."/>
                         <tr>
-                            <td width="25%">
+                            <td>
 		                    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>                             
                             <xsl:call-template name="emit-title"/>
                             <xsl:text> (</xsl:text> 
-                		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+                		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="XML definition">XML</a>
                             <xsl:text> </xsl:text>
-                		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
+                		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="Generated Java">Java</a>
                             <xsl:text>)</xsl:text>
                             </td>
-                            <td>
+                            <td><p>
                                 <xsl:variable name="testsubjects" select="$subjects[@rdf:about = $test/dc:subject/@rdf:resource]"/>
                                 <xsl:choose>
                                     <xsl:when test="$testsubjects">
-                                        <table>
-                                            <xsl:call-template name="rowsubjects">
+                                            <xsl:call-template name="brsubjects">
                                                 <xsl:with-param name="subjects" select="$testsubjects"/>
                                                 <xsl:with-param name="index">0</xsl:with-param>
                                                 <xsl:with-param name="columns">1</xsl:with-param>
                                             </xsl:call-template>
-                                        </table>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <p color="red">No subjects defined for test</p>
+                                        <span style="color:red">No subjects defined for test</span>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </td>
+                            </p></td>
                         </tr>
                     </xsl:for-each>
                 </table>     
                 <!--  the copyright notice placed in the output file.    -->
-		
-			<br />
-			<xsl:text>Tests in this table are released under the </xsl:text><a 
+
+			<p>		
+			Tests in this table are released under the <a 
 href="resources/COPYRIGHT.html">W3C Software 
-Copyright Notice and License</a><xsl:text>:</xsl:text>
+Copyright Notice and License</a>:
 			<br />
-			<xsl:text>Copyright (c) 2001-2004 World Wide Web Consortium,
+			Copyright (c) 2001-2004 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
 			Recherche en Informatique et en Automatique, Keio University). All
 			Rights Reserved. This program is distributed under the W3C's Software
 			Intellectual Property License. This program is distributed in the
 			hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-			PURPOSE.</xsl:text>
+			PURPOSE.
 			<br />
-			<xsl:text>See W3C License </xsl:text> <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
-			<xsl:text> for more details.</xsl:text>
-
+			See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+			 for more details.
+			</p>
 
 	    </body>
         </html>
     </xsl:template>
-
-    <xsl:template name="rowmethods">
+    
+    <xsl:template name="brmethods">
         <xsl:param name="methods"/>
         <xsl:param name="index"/>
         <xsl:param name="columns"/>
-        <tr>
             <xsl:for-each select="$methods[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
-                <td>
-                    <a href="{concat($specURI,@id)}" title="{descr}">
+                    <a href="{concat($specURI,@id)}" title="{normalize-space(descr)}">
                         <xsl:value-of select="ancestor::interface/@name"/>
                         <xsl:text>.</xsl:text>
                         <xsl:value-of select="@name"/>
                     </a>
-                </td>
             </xsl:for-each>
-        </tr>
+        <br/>
         <xsl:if test="count($methods) &gt; $index + $columns">
-            <xsl:call-template name="rowmethods">
+            <xsl:call-template name="brmethods">
                 <xsl:with-param name="methods" select="$methods"/>
                 <xsl:with-param name="index" select="$index + $columns"/>
                 <xsl:with-param name="columns" select="$columns"/>
@@ -276,26 +275,25 @@ Copyright Notice and License</a><xsl:text>:</xsl:text>
     </xsl:template>
 
 
-    <xsl:template name="rowtests">
+    
+    
+
+    <xsl:template name="brtests">
         <xsl:param name="tests"/>
         <xsl:param name="index"/>
         <xsl:param name="columns"/>
-        <tr>
             <xsl:for-each select="$tests[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
-                <td>
 		    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>
             <xsl:call-template name="emit-title"/>
             <xsl:text> (</xsl:text>
-		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="XML definition">XML</a>
             <xsl:text> </xsl:text>
-		    <a href="{concat($doxyPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
+		    <a href="{concat($doxyPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="Generated Java">Java</a>
             <xsl:text>) </xsl:text>
-			<xsl:value-of select="dc:description" />
-                </td>
             </xsl:for-each>
-        </tr>
+        <br/>
         <xsl:if test="count($tests) &gt; $index + $columns">
-            <xsl:call-template name="rowtests">
+            <xsl:call-template name="brtests">
                 <xsl:with-param name="tests" select="$tests"/>
                 <xsl:with-param name="index" select="$index + $columns"/>
                 <xsl:with-param name="columns" select="$columns"/>
@@ -304,23 +302,19 @@ Copyright Notice and License</a><xsl:text>:</xsl:text>
     </xsl:template>
 
 
-
-    <xsl:template name="rowsubjects">
+    <xsl:template name="brsubjects">
         <xsl:param name="subjects"/>
         <xsl:param name="index"/>
         <xsl:param name="columns"/>
-        <tr>
             <xsl:for-each select="$subjects[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
-                <td>
-                    <a title="{dc:description}">
+                    <a title="{substring(normalize-space(dc:description), 1, 80)})">
 						<xsl:call-template name="emit-href"/>
                         <xsl:call-template name="emit-title"/>
                     </a>
-                </td>
             </xsl:for-each>
-        </tr>
+        <br/>
         <xsl:if test="count($subjects) &gt; $index + $columns">
-            <xsl:call-template name="rowsubjects">
+            <xsl:call-template name="brsubjects">
                 <xsl:with-param name="subjects" select="$subjects"/>
                 <xsl:with-param name="index" select="$index + $columns"/>
                 <xsl:with-param name="columns" select="$columns"/>

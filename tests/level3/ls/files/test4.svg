@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<!DOCTYPE elt0 SYSTEM 'testsvg.dtd' [
+<!DOCTYPE svg SYSTEM 'testsvg.dtd' [
 
   <!ELEMENT elt0 (elt1+,elt2?)>
-
+  <!ATTLIST elt0 xmlns CDATA #IMPLIED>
   <!ELEMENT elt1 (#PCDATA)>
   <!ELEMENT elt2 EMPTY>
   <!ENTITY ref SYSTEM "test5.xml">

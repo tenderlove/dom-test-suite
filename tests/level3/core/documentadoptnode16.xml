@@ -21,13 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode16</title>
 <creator>IBM</creator>
 <description>
-	Using the method adoptNode, adopt a newly created DocFragment as below
-		&lt;parent&gt;
-			&lt;child state=&amp;ent3;&gt;Test&lt;/child&gt;
-		&lt;/parent&gt;
-	Verify if the node has been adopted correctly by checking the value of the 
-	attribute value of the adopted node which is an entity reference that is defined
-	in this document.
+Create a document fragment with an entity reference, adopt the node and check
+that the entity reference value comes from the adopting documents DTD.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>

@@ -75,12 +75,16 @@ The source document contained the following notice:
 </xsl:for-each>
 
 <xsl:for-each select="*[local-name()='subject']">
-<xsl:text>* @see &lt;a href="</xsl:text><xsl:value-of select="@resource"/>"&gt;<xsl:value-of select="@resource"/><xsl:text>&lt;/a&gt;
+	<xsl:text>* @see </xsl:text>
+	<xsl:value-of select="@resource"/>
+	<xsl:text>
 </xsl:text>
 </xsl:for-each>
 
 <xsl:for-each select="*[local-name()='source']">
-<xsl:text>* @see &lt;a href="</xsl:text><xsl:value-of select="@resource"/>"&gt;<xsl:value-of select="@resource"/><xsl:text>&lt;/a&gt;
+	<xsl:text>* @see </xsl:text>
+	<xsl:value-of select="@resource"/>
+	<xsl:text>
 </xsl:text>
 </xsl:for-each>
 <xsl:text>*/

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
-xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; 
 charset=us-ascii" />
@@ -70,7 +70,7 @@ of the DOM Level 3 Load and Save Test Suite.</p>
 <h2>Distribution</h2>
 </div>
 <p>This distribution is organized as follows:</p>
-<table width="100%" border="0">
+<table summary="Organization" width="100%" border="0">
 <tr>
     <td width="20%">index.html</td><td>This file</td>
 </tr>
@@ -79,11 +79,11 @@ of the DOM Level 3 Load and Save Test Suite.</p>
     <td>A cross reference of the tests to the DOM 3 Load and Save Recommendation, pointers to the tests and documentation.</td>
 </tr>
 <tr>
-    <td>ecmascript/level3/ls/*.html</a></td>
+    <td>ecmascript/level3/ls/*.html</td>
     <td>DOM tests for ECMAScript implementations.  Launch tests from <a href="ecmascript/level3/ls/alltests.html">ecmascript/level3/ls/alltests.html</a></td>
 </tr>
 <tr>
-    <td>svg/level3/ls/*.svg</a></td>
+    <td>svg/level3/ls/*.svg</td>
     <td>DOM tests in ECMAScript for SVG Viewers that support external entity references.</td>
 </tr>
 <tr>
@@ -120,7 +120,7 @@ of the DOM Level 3 Load and Save Test Suite.</p>
     <td><a href="http://www.junit.org">JUnit 3.7</a>.  JUnit 3.7 is licensed under the <a href="java/junit-license.html">IBM Public License</a>.</td>
 </tr>
 <tr>
-    <td>ecmascript/jsunit</a></td>
+    <td>ecmascript/jsunit</td>
     <td><a href="http://www.jsunit.net">JSUnit 2.0</a>.  JSUnit is licensed under the <a href="ecmascript/jsunit/docs/gnugpl.html">GNU Public License</a></td>
 </tr>
 
@@ -157,7 +157,7 @@ junit.swingui.TestRunner -noloading org.w3c.domts.level3.ls.TestDefaultLS"</p>
 <p>The following TestSuite's are provided for use within JUnit TestRunner's.  These provide
 the only mechanism for testing implementations that do not support JAXP 1.1 such as Batik or
 DOM4J.</p>
-<table border="0" width="100%">
+<table summary="JUnit Test Suites" border="0" width="100%">
 <tr><td width="20%">org.w3c.domts.level3.ls.TestBatik</td><td>Tests the <a href="http://xml.apache.org/batik">Apache Batik</a> SVG project.</td></tr>
 <tr><td>org.w3c.domts.level3.ls.TestDefaultLS</td><td>Tests the implementation returned by the DOM Level 3 bootstrap loading files using DOM Level 3 Load and Save in the default configuration.</td></tr>
 <tr><td>org.w3c.domts.level3.ls.TestDefaultParser</td><td>Tests the current JAXP 1.1 Parser in the default configuration.</td></tr>

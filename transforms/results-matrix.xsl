@@ -21,7 +21,8 @@ and combine-metadata.xsl
 <xsl:stylesheet version="1.0" 
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     exclude-result-prefixes="rdf dc">
      <xsl:param name="interfacesURL">../build/dom1-interfaces.xml</xsl:param>
      <xsl:param name="specURI">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#</xsl:param>
      <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
@@ -30,7 +31,10 @@ and combine-metadata.xsl
      <xsl:param name="doxySuffix">_8java-source.html</xsl:param>
      <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
      <xsl:param name="resultsURL">../transforms/dom1-core-results.xml</xsl:param>
-	<xsl:output method="html"/>
+	<xsl:output method="html" 
+		doctype-public="-//W3C//DTD HTML 4.01//EN" 
+		doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+		encoding="US-ASCII"/>
 
     <!--   filter subjects by specification    -->
     <xsl:variable name="subjects" select="document($specMetadataURL,.)/rdf:RDF/rdf:Description[contains(@rdf:about,$specURI)]"/>
@@ -48,6 +52,7 @@ and combine-metadata.xsl
 	<xsl:template match="/">
         <html>
 		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 			<title><xsl:value-of select="$title"/></title>
 			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
 		</head>

@@ -29,8 +29,13 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
     <xsl:param name="testpath">../level1/core/</xsl:param>
     <xsl:param name="hideHTML">no</xsl:param>
     <xsl:param name="hideSVG">no</xsl:param>
+    <xsl:param name="target-uri-base"/>
 
-<xsl:output method="html"/>
+<xsl:output 
+	method="html" 
+	doctype-public="-//W3C//DTD HTML 4.01//EN" 
+	doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+	encoding="US-ASCII"/>
 
 <xsl:template match="/">
     <xsl:apply-templates mode="jsunit"/>
@@ -39,13 +44,13 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 <xsl:template match="*[local-name() = 'test']" mode="jsunit">
     <xsl:variable name="loads" select="*[local-name() = 'load' and not(@interface)]"/>
     <html>
-        <xsl:call-template name="copyright-comment"/>
         <head>
-            <title><xsl:value-of select="@name"/></title>
-            <link rel="stylesheet" href="../../jsunit/css/jsUnitStyle.css"/>
-            <script language="JavaScript" type="text/javascript" src="../../jsunit/app/jsUnitCore.js"></script>
-            <script language="JavaScript" type="text/javascript" src="DOMTestCase.js"></script>
-            <script language="JavaScript" type="text/javascript">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <title><xsl:value-of select="concat($target-uri-base, @name)"/></title>
+			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="../../jsunit/app/jsUnitCore.js"></script>
+            <script type="text/javascript" src="DOMTestCase.js"></script>
+            <script type="text/javascript">
 // expose test function names
 function exposeTestFunctionNames()
 {
@@ -135,36 +140,28 @@ function loadComplete() {
 </script>
         </head>
         <body>
-            <p class="jsUnitHeading"><xsl:value-of select="@name"/></p>
-            <p class="jsUnitDefault">Test source:</p>
-            <xsl:apply-templates select="." mode="html_source"/>
-            <p class="jsUnitDefault">Test documents:</p>
+            <h2>Test <xsl:value-of select="concat($target-uri-base, @name)"/></h2>
+            
+            <p>
+            	<xsl:apply-templates select="." mode="html_source"/>
+            </p>
+            <xsl:call-template name="copyright"/>
             <xsl:for-each select="$loads">
             	<xsl:choose>
+            		<!--  theses files don't have [X]HTML equivalents   -->
             		<xsl:when test="@href = 'staff'"/>
             		<xsl:when test="@href = 'nodtdstaff'"/>
             		<xsl:when test="@href = 'staffNS'"/>
+            		<xsl:when test="@href = 'datatype-normalization'"/>
             		
             		<xsl:otherwise>
                 		<iframe name="{@var}">
-                			<xsl:attribute name="src">
-                				<xsl:text>files/</xsl:text>
-                				<xsl:value-of select="@href"/>
-                				<xsl:choose>
-                					<xsl:when test="$hideHTML = 'no'">.html</xsl:when>
-                					<xsl:otherwise>.xhtml</xsl:otherwise>
-                				</xsl:choose>
-                			</xsl:attribute>
+                			<xsl:attribute name="src">files/<xsl:value-of select="@href"/>.<xsl:if test="$hideHTML != 'no'">x</xsl:if>html</xsl:attribute>
                 		</iframe>
                 		<br/>
                 	</xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each>
-            
-            <a href="javascript:setUpPage()">Run setUpPage</a>
-            <br/>
-            <a href="javascript:{@name}()">Run <xsl:value-of select="@name"/></a>
-            <xsl:call-template name="copyright"/>
         </body>
     </html>
 </xsl:template>
@@ -172,14 +169,14 @@ function loadComplete() {
 
 <xsl:template match="*[local-name() = 'suite']" mode="jsunit">
     <html>
-    	<xsl:call-template name="copyright-comment"/>
         <head>
-            <title><xsl:value-of select="@name"/></title>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <title><xsl:value-of select="concat($target-uri-base, @name)"/></title>
 			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
-            <script language="JavaScript" src="../../jsunit/app/jsUnitCore.js"></script>
-            <script language="JavaScript" src="DOMTestCase.js"></script>
-            <script language="JavaScript" src="DOMTestSuite.js"></script>
-            <script language="JavaScript">
+            <script type="text/javascript" src="../../jsunit/app/jsUnitCore.js"></script>
+            <script type="text/javascript" src="DOMTestCase.js"></script>
+            <script type="text/javascript" src="DOMTestSuite.js"></script>
+            <script type="text/javascript">
             
 function suite() {
   var newsuite = new top.jsUnitTestSuite();
@@ -195,7 +192,7 @@ function suite() {
         </head>
         <body onload="onImplementationChange()">
         	<h1><xsl:value-of select="*[local-name() = 'metadata']/*[local-name() = 'title']"/></h1>
-            <form id="configuration" action="../../jsunit/testRunner.html" target="jsunit" onsubmit="fixTestPagePath()">
+            <form id="configuration" action="../../jsunit/testRunner.html" onsubmit="fixTestPagePath()">
             <table width="100%" border="1" summary="Configuration">
                 <tr><td>                    
                     <table width="100%" summary="Tests">
@@ -228,7 +225,7 @@ function suite() {
                     <td valign="top">
                             <input type="radio" name="implementation" id="iframeImpl" value="iframe" checked="checked" onclick="onImplementationChange()"/> iframe<br/>
                             <input type="radio" name="implementation" id="dom3lsImpl" value="dom3ls" onclick="onImplementationChange()"/> DOM 3 Load/Save<br/> 
-                            	Features: <input type="text" name="dom3lsFeatures" disabled="true"/><br/>
+                            	Features: <input type="text" name="dom3lsFeatures" disabled="disabled"/><br/>
                             <input type="radio" name="implementation" id="mozillaXMLImpl" value="mozillaXML" onclick="onImplementationChange()"/> Mozilla XML<br/>
                             <input type="radio" name="implementation" id="msxml3Impl" value="msxml3" onclick="onImplementationChange()"/> MSXML 3.0<br/>
                             <input type="radio" name="implementation" id="msxml4Impl" value="msxml4" onclick="onImplementationChange()"/> MSXML 4.0<br/>
@@ -249,13 +246,13 @@ function suite() {
 							<input type="checkbox" name="skipIncompatibleTests" value="true" checked="checked"/> Skip incompatible tests<br/>
                             <input type="checkbox" name="autorun" checked="checked" value="true"/> Autorun<br/>
                             <input type="checkbox" name="submitCheckbox" onclick="updateTestSubmission()"/> Submit results<br/>
-                            Acceptor: http://<input type="text" name="submitresults" value="" disabled="true" size="35"/><br/>
-							Result ID: <input type="text" name="resultid" value="" disabled="true"/><br/>
+                            Acceptor: http://<input type="text" name="submitresults" value="" disabled="disabled" size="35"/><br/>
+							Result ID: <input type="text" name="resultid" value="" disabled="disabled"/><br/>
                     </td>
                     <td valign="top">
                             <input type="radio" name="contentType" id="contentTypeXML" value="text/xml" onclick="setContentType('text/xml')">XML</input><br/>
                             <xsl:if test="$hideHTML = 'no'">
-                            	<input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input><br/>
+                            	<input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="checked" onclick="setContentType('text/html')">HTML</input><br/>
                             </xsl:if>
                             <input type="radio" name="contentType" id="contentTypeXHTML" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input><br/>
                             <xsl:if test="$hideSVG = 'no'">
@@ -353,18 +350,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:template>
 
 <xsl:template name="copyright">
-			<br />
-			<xsl:text>Copyright (c) 2001-2004 World Wide Web Consortium,
+			<p>
+			Copyright (c) 2001-2004 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
 			Recherche en Informatique et en Automatique, Keio University). All
 			Rights Reserved. This program is distributed under the W3C's Software
 			Intellectual Property License. This program is distributed in the
 			hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-			PURPOSE.</xsl:text>
-			<br />
-			<xsl:text>See W3C License </xsl:text> <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
-			<xsl:text> for more details.</xsl:text>
+			PURPOSE.
+			</p>
+			<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+ for more details.</p>
 </xsl:template>
 
 
@@ -392,10 +389,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     		<xsl:apply-templates select="*|text()" mode="html-metadata"/>
     		<xsl:text>&lt;/</xsl:text>
     		<xsl:value-of select="local-name()"/>
-    		<xsl:text>&gt;</xsl:text>
+    		<xsl:text>&gt;
+</xsl:text>
     	</xsl:when>
     	<xsl:otherwise>
-    		<xsl:text>/&gt;</xsl:text>    	
+    		<xsl:text>/&gt;
+</xsl:text>    	
     	</xsl:otherwise>
     </xsl:choose>
     <br/>
@@ -448,6 +447,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <xsl:text>'</xsl:text>
     </a>
 </xsl:template>
+
 
 <xsl:template match="@resource" mode="html_source">
     <xsl:text> resource='</xsl:text>

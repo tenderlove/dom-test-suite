@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
-<!DOCTYPE elt0 SYSTEM 'testsvg.dtd' [
+<!DOCTYPE svg SYSTEM 'testsvg.dtd' [
 
   <!ELEMENT elt0 (elt1+)>
+  <!ATTLIST elt0 
+  	base CDATA #IMPLIED
+  	xmlns CDATA #IMPLIED>
+  
 
-  <!ENTITY logo SYSTEM "files/logo.png" NDATA PNG>
+  <!ENTITY logo SYSTEM "logo.png" NDATA PNG>
   <!NOTATION PNG SYSTEM "image/png">
 
   <!ELEMENT elt1 (#PCDATA)>

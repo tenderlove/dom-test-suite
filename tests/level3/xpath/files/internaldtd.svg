@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE test [
+<!DOCTYPE svg [
   <!ELEMENT test (child)+ >
   <!ATTLIST test xmlns CDATA #IMPLIED>
   <!ELEMENT child EMPTY>

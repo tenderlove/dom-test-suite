@@ -57,6 +57,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
     <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
+    <available property="jtidy-available" file="${lib.dir}/jtidy.zip"/>
 </target>
 
 
@@ -104,7 +105,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-<target name="gen-jsunit">
+<target name="gen-jsunit-no-validation">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
     <property name="hideHTML" value="no"/>
@@ -136,7 +137,54 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="hideHTML" expression="${hideHTML}"/>
         <param name="hideSVG" expression="${hideSVG}"/>
 	</style>
+	
 </target>
+
+
+<target name="gen-jsunit">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+    <property name="hideHTML" value="no"/>
+    <property name="hideSVG" value="no"/>
+
+	<antcall target="gen-jsunit-no-validation">
+		<param name="level" value="${level}"/>
+		<param name="module" value="${module}"/>
+		<param name="hideHTML" value="${hideHTML}"/>
+		<param name="hideSVG" value="${hideSVG}"/>
+	</antcall>
+	<!-- check that generated HTML passes JTidy   -->	
+    <antcall target="validate-html">
+    	<param name="dir" value="${build.dir}/ecmascript/level${level}/${module}"/>
+    </antcall>
+	
+</target>
+
+
+<!--   
+Tests contain an xml-stylesheet processing instruction
+This target checks that the output of that implied transform is valid HTML
+-->
+<target name="validate-test-html" depends="init">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	
+    <mkdir dir="${build.dir}/html/level${level}/${module}/files"/>
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${build.dir}/html/level${level}/${module}" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-html.xsl" 
+	       extension=".html">
+	</style>
+
+	<!-- check that generated HTML passes JTidy   -->	
+    <antcall target="validate-html">
+    	<param name="dir" value="${build.dir}/html/level${level}/${module}"/>
+    </antcall>
+	
+</target>
+
 
 
 
@@ -226,6 +274,27 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</jar>
 </target>
 
+<target name="get-jtidy" depends="init" unless="jtidy-available">
+	<!--  get JTidy  3.7 into lib directory  -->
+	<get src="http://unc.dl.sourceforge.net/sourceforge/jtidy/jtidy-04aug2000r7-dev.zip"
+		dest="${lib.dir}/jtidy.zip"
+        ignoreerrors="yes"
+		usetimestamp="yes"/>
+	<unzip src="${lib.dir}/jtidy.zip" dest="${lib.dir}/jtidy"/>
+</target>
+
+
+
+<target name="validate-html" depends="get-jtidy">
+	<property name="dir" value="."/>
+	<property name="file" value="*.html"/>
+	<java classname="org.w3c.tidy.Tidy" classpath="${lib.dir}\jtidy\jtidy-04aug2000r7-dev\build\Tidy.jar" failonerror="yes" dir="${dir}" fork="yes">
+		<arg value="-e"/>
+		<arg value="-q"/>
+		<arg value="${file}"/>
+	</java> 
+</target>
+
 
 <target name="checkstyle-available">
     <available property="checkstyle-task" resource="checkstyletask.properties"/>
@@ -259,6 +328,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<property name="module" value="core"/>
     <mkdir dir="${build.dir}/level${level}/${module}/resources"/>
     <mkdir dir="${build.dir}/level${level}/${module}/java"/>
+
+	<antcall target="validate-html">
+		<param name="dir" value="docs/level${level}/${module}"/>
+		<param name="file" value="index.htm"/>
+	</antcall>
+
+
     <copy file="docs/level${level}/${module}/index.htm" todir="${build.dir}/level${level}/${module}"/>
     <copy todir="${build.dir}/level${level}/${module}/resources">
         <fileset dir="docs/resources" excludes="*.bak"/>
@@ -288,6 +364,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <copy todir="${build.dir}/level${level}/${module}/tests/files">
         <fileset dir="${tests.dir}/level${level}/${module}/files" excludes="*.bak"/>
     </copy>
+    
+    <mkdir dir="${build.dir}/level${level}/${module}/survey/transforms"/>
+    <copy tofile="${build.dir}/level${level}/${module}/survey/build.xml"
+        file="runtests.xml"/>
+    <copy todir="${build.dir}/level${level}/${module}/survey/transforms">
+    	<fileset dir="${transforms.dir}">
+    		<include name="results-matrix.xsl"/>
+    		<include name="dom${level}-${module}-results.xml"/>
+    	</fileset>
+    </copy>    
+    <copy todir="${build.dir}/level${level}/${module}/survey"
+    	file="${build.dir}/dom${level}-${module}-metadata.rdf"/>
 
     <available property="dist-includes-svg" file="${build.dir}/svg/level${level}/${module}/alltests.ant"/>
 </target>
@@ -537,7 +625,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</antcall>
 </target>
 
-<target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd">
+<target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,dom1-core-validate-files">
     <antcall target="gen-jsunit">
     	<param name="level" value="1"/>
     	<param name="module" value="core"/>
@@ -565,12 +653,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     </ant>
 </target>
 
+<target name="dom1-core-validate-test-html" depends="dom1-dtd">
+    <antcall target="validate-test-html">
+    	<param name="level" value="1"/>
+    	<param name="module" value="core"/>
+    </antcall>
+</target>
+
+
 
 <target name="dom1-core-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml *.xhtml *.svg" excludes="hc_nodtdstaff.*"/>  
 	</xmlvalidate>
+    <antcall target="validate-html">
+    	<param name="dir" value="${tests.dir}/level1/core/files"/>
+    </antcall>	
 </target>
 
 
@@ -597,6 +696,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="interfacesURL" expression="dom1-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom1-subjects.xml"/>
 	</style>
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom1-core-matrix.html"/>
+	</antcall>
 </target>
 
 <target name="dom1-core-javac" depends="common-javac,dom1-core-gen-java">
@@ -653,6 +756,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <target name="dom1-core-dist" 
      depends="dom1-core-jar,
               dom1-core-gen-jsunit,
+              dom1-core-validate-test-html,
               dom1-core-matrix,
               dom1-core-doxygen,
               junit-run,
@@ -693,6 +797,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom1-subjects.xml"/>
         <param name="title" expression="DOM Level 1 HTML Test Suite Matrix"/>
 	</style>
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom1-html-matrix.html"/>
+	</antcall>
+	
 </target>
 
 <target name="dom1-html-validate-tests" depends="dom1-dtd">
@@ -719,6 +828,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml *.xhtml"/>  
 	</xmlvalidate>
+	
+	<!--  JTidy complains about these files that the W3C validator accepts   -->
+	<delete dir="${build.dir}/files"/>
+	<mkdir dir="${build.dir}/files/level1/html"/>
+	<copy todir="${build.dir}/files/level1/html">
+		<fileset dir="${tests.dir}/level1/html/files">
+			<include name="*.html"/>
+			<exclude name="directory.html"/>
+			<exclude name="iframe.html"/>
+			<exclude name="legend.html"/>
+			<exclude name="menu.html"/>
+		</fileset>
+	</copy> 
+	
+    <antcall target="validate-html">
+    	<param name="dir" value="${build.dir}/files/level1/html"/>
+    </antcall>	
+	<delete dir="${build.dir}/files"/>
+	
 </target>
 
 
@@ -1086,6 +1214,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/core/files" includes="*.xml *.xhtml *.svg" excludes="nodtdstaff.*"/>  
 	</xmlvalidate>
+    <antcall target="validate-html">
+    	<param name="dir" value="${tests.dir}/level2/core/files"/>
+    </antcall>	
+	
+	
 </target>
 
 
@@ -1206,7 +1339,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="interfacesURL" expression="dom2-core-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom2-core-subjects.xml"/>
         <param name="title" expression="DOM Level 2 Core Test Suite Matrix"/>
+        <param name="noTestInterfaces" expression="CDATASection Comment EntityReference"/>
 	</style>
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom2-core-matrix.html"/>
+	</antcall>
+	
 </target>
 
 
@@ -1235,7 +1374,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</xmlvalidate>
 </target>
 
-<target name="dom2-html-schema-validate-tests" depends="check-schema-support, dom1-html-validate-tests, dom2-dtd, dom2-schema">
+<target name="dom2-html-schema-validate-tests" depends="check-schema-support, dom1-html-schema-validate-tests, dom2-dtd, dom2-schema">
     <ant antfile="schemavalidate.ant">
     	<property name="validate.dir" location="${tests.dir}/level2/html"/>  
     </ant>
@@ -1250,6 +1389,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/html/files" includes="*.xml *.xhtml"/>  
 	</xmlvalidate>
+	
+    <!-- antcall target="validate-html">
+    	<param name="dir" value="${tests.dir}/level2/html/files"/>
+    </antcall -->	
+	
+	
 </target>
 
 
@@ -1408,6 +1553,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom2-html-subjects.xml"/>
         <param name="title" expression='DOM Level 2 HTML Test Suite Matrix'/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom2-html-matrix.html"/>
+	</antcall>
+	
 </target>
 
 
@@ -1437,6 +1588,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/events/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
 	</xmlvalidate>
+    <antcall target="validate-html">
+    	<param name="dir" value="${tests.dir}/level2/events/files"/>
+    </antcall>	
+	
 </target>
 
 
@@ -1550,6 +1705,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom2-events-subjects.xml"/>
         <param name="title" expression="DOM Level 2 Events Test Suite Matrix"/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom2-events-matrix.html"/>
+	</antcall>
+	
 </target>
 
 
@@ -1810,10 +1971,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</antcall>
 </target>
 
-<target name="dom3-core-validate-files" depends="init">
-	<xmlvalidate lenient="no" failonerror="no"
+<target name="dom3-core-validate-files" depends="get-xhtml1-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* canonicalform*.*"/>  
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.xhtml *.svg" excludes="hc_nodtdstaff.* canonicalform*.*"/>  
 	</xmlvalidate>
 </target>
 
@@ -1927,7 +2088,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="title" expression='DOM Level 3 Core Test Suite Matrix'/>
         <param name="specVersion" expression="DOM Level 3"/>
         <param name="excludeInterfaces" expression="NameList"/>
+        <param name="noTestInterfaces" expression="CDATASection Comment DocumentFragment EntityReference"/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom3-core-matrix.html"/>
+	</antcall>
+	
 </target>
 
 <target name="dom3-core-doxygen" depends="dom3-core-gen-java">
@@ -1965,6 +2133,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</antcall>
 </target>
 
+<target name="dom3-events-validate-files" depends="init">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/events/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* canonicalform*.*"/>  
+	</xmlvalidate>
+</target>
+
+
+
 <target name="dom3-events-javac" depends="common-javac,dom3-events-gen-java">
 
 	<javac 
@@ -1981,7 +2158,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     </javac>
 </target>
 
-<target name="dom3-events-jar" depends="dom3-events-javac">
+<target name="dom3-events-jar" depends="dom3-events-javac, dom3-events-validate-files">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="events"/>
@@ -2051,6 +2228,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom3-events-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Events Test Suite Matrix'/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom3-events-matrix.html"/>
+	</antcall>
+	
 </target>
 
 <target name="dom3-events-doxygen" depends="dom3-events-gen-java">
@@ -2091,6 +2274,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</antcall>
 </target>
 
+<target name="dom3-ls-validate-files" depends="init">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/ls/files" includes="*.svg *.xml *.xhtml">
+			<exclude name="test0.*"/>
+			<exclude name="test1.*"/>
+			<exclude name="test2.*"/>
+			<exclude name="test5.*"/>
+			<exclude name="test7.*"/>
+		</fileset>  
+	</xmlvalidate>
+</target>
+
+
+
 <target name="dom3-ls-javac" depends="common-javac,dom3-ls-gen-java">
 
 	<javac 
@@ -2110,7 +2308,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 
-<target name="dom3-ls-jar" depends="dom3-ls-javac">
+<target name="dom3-ls-jar" depends="dom3-ls-javac, dom3-ls-validate-files">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="ls"/>
@@ -2118,11 +2316,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 <target name="dom3-ls-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
-    <antcall target="gen-jsunit">
+    <antcall target="gen-jsunit-no-validation">
     	<param name="level" value="3"/>
     	<param name="module" value="ls"/>
     	<param name="hideHTML" value="yes"/>
     </antcall>
+    
+    <!--  fix up tests which could be produced with <elt*> in string literals  -->
+    <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;elt" value="&amp;lt;elt"/>
+    <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;/elt" value="&amp;lt;/elt"/>
+    <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;hello" value="&amp;lt;hello"/>
+    <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;/hello" value="&amp;lt;/hello"/>
+
+    <antcall target="validate-html">
+    	<param name="dir" value="${build.dir}/ecmascript/level3/ls"/>
+    </antcall>
+
 </target>
 
 <target name="dom3-ls-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
@@ -2180,6 +2389,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom3-ls-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Load and Save Test Suite Matrix'/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom3-ls-matrix.html"/>
+	</antcall>
+	
 </target>
 
 <target name="dom3-ls-doxygen" depends="dom3-ls-gen-java">
@@ -2217,6 +2432,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</antcall>
 </target>
 
+
+
+<target name="dom3-xpath-validate-files" depends="init">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/xpath/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* canonicalform*.*"/>  
+	</xmlvalidate>
+</target>
+
+
+
 <target name="dom3-xpath-javac" depends="common-javac,dom3-xpath-gen-java">
 
 	<javac 
@@ -2234,7 +2460,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     </javac>
 </target>
 
-<target name="dom3-xpath-jar" depends="dom3-xpath-javac">
+<target name="dom3-xpath-jar" depends="dom3-xpath-javac, dom3-xpath-validate-files">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="xpath"/>
@@ -2302,6 +2528,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom3-xpath-subjects.xml"/>
         <param name="title" expression='DOM Level 3 XPath Test Suite Matrix'/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom3-xpath-matrix.html"/>
+	</antcall>
+	
 </target>
 
 <target name="dom3-xpath-doxygen" depends="dom3-xpath-gen-java">
@@ -2341,6 +2573,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</antcall>
 </target>
 
+<target name="dom3-val-validate-files" depends="init">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/validation/files">
+			<include name="*.xml *.xhtml *.svg"/>
+			<exclude name="book.*"/>
+		</fileset>
+	</xmlvalidate>
+</target>
+
+
 
 <target name="dom3-val-javac" depends="common-javac,dom3-val-gen-java">
 
@@ -2361,7 +2604,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-<target name="dom3-val-jar" depends="dom3-val-javac">
+<target name="dom3-val-jar" depends="dom3-val-javac, dom3-val-validate-files">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="validation"/>
@@ -2404,7 +2647,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <target name="dom3-val-metadata" depends="dom3-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/validation/alltests.xml" 
-		   out="${build.dir}/dom3-val-metadata.rdf" 
+		   out="${build.dir}/dom3-validation-metadata.rdf" 
 	       style="${transforms.dir}/combine-metadata.xsl"
 	       force="true">
 		<param name="baseURI"
@@ -2415,7 +2658,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <target name="dom3-val-matrix" depends="dom3-val-metadata,dom3-subjects,dom3-interfaces">
     <mkdir dir="${build.dir}"/>
-	<style in="${build.dir}/dom3-val-metadata.rdf" 
+	<style in="${build.dir}/dom3-validation-metadata.rdf" 
 		   out="${build.dir}/dom3-validation-matrix.html" 
 	       style="${transforms.dir}/test-matrix.xsl">
 		<param name="specURI"
@@ -2424,6 +2667,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <param name="specMetadataURL" expression="dom3-val-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Validation Test Suite Matrix'/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="dir" value="${build.dir}"/>
+		<param name="file" value="dom3-validation-matrix.html"/>
+	</antcall>
+	
 </target>
 
 <target name="dom3-val-doxygen" depends="dom3-val-gen-java">

@@ -2,8 +2,9 @@
 <!DOCTYPE elt0 [
 
   <!ELEMENT elt0 (elt1+)>
+  <!ATTLIST elt0 base CDATA #IMPLIED>
 
-  <!ENTITY logo SYSTEM "files/logo.png" NDATA PNG>
+  <!ENTITY logo SYSTEM "logo.png" NDATA PNG>
   <!NOTATION PNG SYSTEM "image/png">
 
   <!ELEMENT elt1 (#PCDATA)>

@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="expectedNames" type="List">
     <member>"html"</member>
     <member>"head"</member>
+    <member>"meta"</member>
     <member>"title"</member>
     <member>"body"</member>
     <member>"p"</member>
