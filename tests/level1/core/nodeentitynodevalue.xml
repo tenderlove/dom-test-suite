@@ -16,26 +16,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeEntityNodeValue</title>
 <creator>NIST</creator>
 <description>
-
     The string returned by the "getNodeValue()" method for an 
-
     Entity Node is null.
 
-    
-
     Retrieve the first Entity declaration in the "DOCTYPE"
-
     section of the XML file and check the string 
-
     returned by the "getNodeValue()" method.   It should be 
-
     equal to null. 
-
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 </metadata>
+<hasFeature feature="XML"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="testName" type="NamedNodeMap"/>
