@@ -81,26 +81,38 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild var="appendedChild" obj="element2" newChild="text3"/>
 <appendChild var="appendedChild" obj="element1" newChild="element2"/>
 
+<cloneNode var="text1" obj="text1" deep="false"/>
+<cloneNode var="text2" obj="text2" deep="false"/>
 <appendChild var="appendedChild" obj="element3" newChild="entRef"/>
 <appendChild var="appendedChild" obj="element3" newChild="text1"/>
 <appendChild var="appendedChild" obj="element3" newChild="text2"/>
 <appendChild var="appendedChild" obj="element1" newChild="element3"/>
 
+<cloneNode var="text1" obj="text1" deep="false"/>
+<cloneNode var="text2" obj="text2" deep="false"/>
 <appendChild var="appendedChild" obj="element4" newChild="cData"/>
 <appendChild var="appendedChild" obj="element4" newChild="text1"/>
 <appendChild var="appendedChild" obj="element4" newChild="text2"/>
 <appendChild var="appendedChild" obj="element1" newChild="element4"/>
 
+<cloneNode var="text2" obj="text2" deep="false"/>
+<cloneNode var="text3" obj="text3" deep="false"/>
 <appendChild var="appendedChild" obj="element5" newChild="comment"/>
 <appendChild var="appendedChild" obj="element5" newChild="text2"/>
 <appendChild var="appendedChild" obj="element5" newChild="text3"/>
 <appendChild var="appendedChild" obj="element1" newChild="element5"/>
 				
+<cloneNode var="text2" obj="text2" deep="false"/>
+<cloneNode var="text3" obj="text3" deep="false"/>
 <appendChild var="appendedChild" obj="element6" newChild="pi"/>
 <appendChild var="appendedChild" obj="element6" newChild="text2"/>
 <appendChild var="appendedChild" obj="element6" newChild="text3"/>
 <appendChild var="appendedChild" obj="element1" newChild="element6"/>
 
+<cloneNode var="entRef" obj="entRef" deep="false"/>
+<cloneNode var="text1" obj="text1" deep="false"/>
+<cloneNode var="text2" obj="text2" deep="false"/>
+<cloneNode var="text3" obj="text3" deep="false"/>
 <appendChild var="appendedChild" obj="element7" newChild="entRef"/>
 <appendChild var="appendedChild" obj="element7" newChild="text1"/>
 <appendChild var="appendedChild" obj="element7" newChild="text2"/>
@@ -109,32 +121,32 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <childNodes var="elementList" obj="element1"/>
 <assertSize  size="6" collection="elementList" id="nodeNormalize01_1Bef"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element2"/>
 <assertSize  size="3" collection="elementList" id="nodeNormalize01_2Bef"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element3"/>
 <assertSize  size="3" collection="elementList" id="nodeNormalize01_3Bef"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element4"/>
 <assertSize  size="3" collection="elementList" id="nodeNormalize01_4Bef"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element5"/>
 <assertSize  size="3" collection="elementList" id="nodeNormalize01_5Bef"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element6"/>
 <assertSize  size="3" collection="elementList" id="nodeNormalize01_6Bef"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element7"/>
 <assertSize  size="4" collection="elementList" id="nodeNormalize01_7Bef"/>
 <normalize obj="newDoc"/>
 <childNodes var="elementList" obj="element1"/>
 <assertSize  size="6" collection="elementList" id="nodeNormalize01_1Aft"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element2"/>
 <assertSize  size="1" collection="elementList" id="nodeNormalize01_2Aft"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element3"/>
 <assertSize  size="2" collection="elementList" id="nodeNormalize01_3Aft"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element4"/>
 <assertSize  size="2" collection="elementList" id="nodeNormalize01_4Aft"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element5"/>
 <assertSize  size="2" collection="elementList" id="nodeNormalize01_5Aft"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element6"/>
 <assertSize  size="2" collection="elementList" id="nodeNormalize01_6Aft"/>
-<childNodes var="elementList" obj="element1"/>
+<childNodes var="elementList" obj="element7"/>
 <assertSize  size="2" collection="elementList" id="nodeNormalize01_7Aft"/>
 </test>
 
