@@ -22,8 +22,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Invoke replaceWholeText on an existing Text Node to replace its value with a 
-	new value containing whiteSpace characters.  Verify the repalceWholeText by
-	verifying the values returned by wholeText and isElementContentWhitespace
+	new value containing white space characters.  Verify the replaceWholeText by
+	verifying the values returned by wholeText
 	of the returned Text node.
 </description>
 <contributor>Neil Delima</contributor>
@@ -37,13 +37,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="textNode" type="Text"/>
 <var name="replacedText" type="Text"/>
 <var name="wholeText" type="DOMString"/>
-<var name="hasWhitespace" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"strong"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <firstChild var="textNode" obj="elementName" interface="Node"/>
 <replaceWholeText obj="textNode" var="replacedText" content='"New Content"'/>
 <wholeText var="wholeText" obj="replacedText"/>
-<isElementContentWhitespace obj="replacedText" var="hasWhitespace"/>
 <assertEquals expected='"New Content"' actual="wholeText" id="textreplacewholetext01_1" ignoreCase="false"/>
 </test>
