@@ -1,36 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 
+<html
 xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; 
+<meta http-equiv="Content-Type" content="text/html;
 charset=us-ascii" />
-<title>Document Object Model (DOM) Conformance Test 
+<title>Document Object Model (DOM) Conformance Test
 Suites, Level 3 Events</title>
 <link type="text/css" rel="stylesheet" href="resources/activity-home.css" />
-<script type="text/javascript" 
+<script type="text/javascript"
 src="resources/toc.js">
 </script>
 </head>
 
 
 <body onload="init()">
-<p class="navbar" align="right"><a href="http://www.w3.org/"><img 
-align="left" src="resources/w3c_home.png" border="0" 
-alt="W3C" /></a><a href="http://www.nist.gov/"><img 
-src="resources/nist_home.gif" alt="National Institute of 
-Standards and Technology" height="45" width="231" align="left" 
-border="0" /></a><small><a href="http://www.w3.org/DOM/">About 
+<p class="navbar" align="right"><a href="http://www.w3.org/"><img
+align="left" src="resources/w3c_home.png" border="0"
+alt="W3C" /></a><a href="http://www.nist.gov/"><img
+src="resources/nist_home.gif" alt="National Institute of
+Standards and Technology" height="45" width="231" align="left"
+border="0" /></a><small><a href="http://www.w3.org/DOM/">About
 DOM</a> .
 <a href="http://www.w3.org/DOM/Activity">DOM Activity statement</a><br />
-<a href="http://www.w3.org/DOM/DOMTR">Technical Reports</a> . <a 
+<a href="http://www.w3.org/DOM/DOMTR">Technical Reports</a> . <a
 href="http://www.w3.org/DOM/DOMTM">Technical
 Materials</a><br />
-<a href="http://www.w3.org/DOM/Test/">Test Suites</a> . <a 
-href="http://www.w3.org/DOM/Test/Documents/DOMTSFAQ">Test Suites FAQ</a> . 
+<a href="http://www.w3.org/DOM/Test/">Test Suites</a> . <a
+href="http://www.w3.org/DOM/Test/Documents/DOMTSFAQ">Test Suites FAQ</a> .
 <a href="http://www.w3.org/DOM/Test/MailingList">Mailing
 Lists</a><br />
-Members only resource: <a href="http://www.w3.org/DOM/Group/">DOM Working 
+Members only resource: <a href="http://www.w3.org/DOM/Group/">DOM Working
 Group</a></small></p>
 
 <h1>DOM Conformance Test Suite, Level 3 Events Working Draft</h1>
@@ -42,9 +42,9 @@ Group</a></small></p>
 <p>
 This document describes how to run the DOM Level 3 Events Test Suite. It also includes pointers to relevant software as well as relevant resources.
 </p>
-<p>The DOM TS has been developed in accordance with the <a 
-href="http://www.w3.org/DOM/DOMTS-Process">DOM Conformance Test Suites Process Document</a>. For 
-additional information and to download other DOM Test Suites, visit the <a 
+<p>The DOM TS has been developed in accordance with the <a
+href="http://www.w3.org/DOM/DOMTS-Process">DOM Conformance Test Suites Process Document</a>. For
+additional information and to download other DOM Test Suites, visit the <a
 href="http://www.w3.org/DOM/Test">DOM Conformance Test Suites page</a>.</p>
 
 <div id="overview">
@@ -52,9 +52,9 @@ href="http://www.w3.org/DOM/Test">DOM Conformance Test Suites page</a>.</p>
 </div>
 
 <p>
-The DOM Conformance Test Suite consist of a series of tests that have been generated from XML test descriptions, then transformed into the two official DOM 
-bindings, Java and ECMA. In order to run the test suite, we have provided  the possibility to run the 
-tests using the <a href="http://www.junit.org">JUnit</a> and <a href="http://www.jsunit.net">JsUnit</a> testing frameworks, both included in this 
+The DOM Conformance Test Suite consist of a series of tests that have been generated from XML test descriptions, then transformed into the two official DOM
+bindings, Java and ECMA. In order to run the test suite, we have provided  the possibility to run the
+tests using the <a href="http://www.junit.org">JUnit</a> and <a href="http://www.jsunit.net">JsUnit</a> testing frameworks, both included in this
 distribution.
 </p>
 <p>The DOM Level 3 Events test suite has not been released.</p>
@@ -62,8 +62,8 @@ distribution.
 <div id="latestVersion">
 <h2>Latest Version</h2>
 </div>
-<p>Download the <a 
-href="http://www.w3.org/DOM/Test/Downloads/DOMTSL3Events">latest version</a> 
+<p>Download the <a
+href="http://www.w3.org/DOM/Test/Downloads/DOMTSL3Events">latest version</a>
 of the DOM Level 3 Events Test Suite.</p>
 
 <div id="distribution">
@@ -83,7 +83,7 @@ of the DOM Level 3 Events Test Suite.</p>
     <td>A modified <a href="http://www.jsunit.net">JSUnit</a> test runner.  JSUnit is licensed under the <a href="ecmascript/jsunit/docs/gnugpl.html">GNU Public License</a></td>
 </tr>
 <tr>
-	<td>ecmascript/jsunit/app, ecmascript/jsunit/docs, ecmascript/jsunit/images, ecmascript/jsunit/tests</td>
+        <td>ecmascript/jsunit/app, ecmascript/jsunit/docs, ecmascript/jsunit/images, ecmascript/jsunit/tests</td>
     <td>JSUnit support files</td>
 </tr>
 <tr>
@@ -120,7 +120,7 @@ of the DOM Level 3 Events Test Suite.</p>
 </tr>
 <tr>
     <td>doxygen/</td>
-    <td>Documentation generated by <a href="http://www.doxygen.org">doxygen</a> from the generated Java code.  Useful in diagnosing test failures.  
+    <td>Documentation generated by <a href="http://www.doxygen.org">doxygen</a> from the generated Java code.  Useful in diagnosing test failures.
     Click <a href="doxygen/html/hierarchy.html">here</a> for a class hierarchy.</td>
 </tr>
 </table>
@@ -128,25 +128,25 @@ of the DOM Level 3 Events Test Suite.</p>
 <div id="runningECMA">
 <h2>Running the ECMAScript tests</h2>
 </div>
-<p>The DOM TS currently tests XML and SVG implementations of DOM Level 1 Core. Later revisions will provide testing of HTML implementation conformance with DOM Level 
+<p>The DOM TS currently tests XML and SVG implementations of DOM Level 1 Core. Later revisions will provide testing of HTML implementation conformance with DOM Level
 1.</p>
-<p>To run the ECMAScript tests, open the <a 
-href="ecmascript/jsunit/testRunner.html">JsUnit test runner</a> in the browser 
-you want to test, press the browse button and look for the file 
-"ecmascript/level1/core/alltests.html". 
-After that,  press Run to run all DOM 1 tests compatible 
-with the implementation.  If you choose to run individual tests, the 
-above procedure works similarly, just browse for the test you want to 
+<p>To run the ECMAScript tests, open the <a
+href="ecmascript/jsunit/testRunner.html">JsUnit test runner</a> in the browser
+you want to test, press the browse button and look for the file
+"ecmascript/level1/core/alltests.html".
+After that,  press Run to run all DOM 1 tests compatible
+with the implementation.  If you choose to run individual tests, the
+above procedure works similarly, just browse for the test you want to
 run in the "ecmascript/level1/core" directory.</p>
-<p>These tests have been run with Microsoft 
-Internet Explorer 5.0 and later for Microsoft Windows and 
-Mozilla 0.9.8 and Netscape Navigator 6.2 and later for Microsoft Windows, Linux and Apple OS X.  
+<p>These tests have been run with Microsoft
+Internet Explorer 5.0 and later for Microsoft Windows and
+Mozilla 0.9.8 and Netscape Navigator 6.2 and later for Microsoft Windows, Linux and Apple OS X.
 Use on Apple OS X required replacing colon (:) in the test case name with slashes (/).</p>
-<p>To test the DOM implementation of the <a href="http://www.adobe.com/svg">Adobe SVG Viewer</a>, select 
+<p>To test the DOM implementation of the <a href="http://www.adobe.com/svg">Adobe SVG Viewer</a>, select
 "ecmascript/level1/core/svg-alltests.html" and press Run.</p>
-<p>For JsUnit reference, please visit the <a href="http://www.jsunit.net">JsUnit 
-home page</a>.  JsUnit will provide output with indication on how many tests that were run, how many failed and 
-how many errors were found while running. The error log points to the actual test, so identifying 
+<p>For JsUnit reference, please visit the <a href="http://www.jsunit.net">JsUnit
+home page</a>.  JsUnit will provide output with indication on how many tests that were run, how many failed and
+how many errors were found while running. The error log points to the actual test, so identifying
 what you need to do in your implementation is simplified.</p>
 
 <div id="runningJava">
@@ -160,9 +160,9 @@ be selected by any mechanism supported by JAXP 1.1.</p>
 
 <p>The Java tests may also be run using from JUnit TestRunner's.   To run
 all tests against the default JAXP parser in a default configuration from the JUnit text user interface, run "
-java -classpath dom1-core.jar junit.textui.TestRunner org.w3c.domts.level3.events.TestDefaultParser".  
-The run the Swing or AWT user interfaces, replace "textui" with "swingui" or "awtui" and add "-noloading" before the 
-test case to not use JUnit's custom ClassLoader, for example, "java -classpath dom1-core.jar 
+java -classpath dom1-core.jar junit.textui.TestRunner org.w3c.domts.level3.events.TestDefaultParser".
+The run the Swing or AWT user interfaces, replace "textui" with "swingui" or "awtui" and add "-noloading" before the
+test case to not use JUnit's custom ClassLoader, for example, "java -classpath dom1-core.jar
 junit.swingui.TestRunner -noloading org.w3c.domts.level3.events.TestDefaultParser"</p>
 
 <p>Running "java -jar junit-run.jar" will launch the JUnit SwingUI without the custom ClassLoader.</p>
@@ -190,26 +190,23 @@ DOM4J.</p>
 <div id="feedback">
 <h2>Feedback</h2>
 </div>
-<p>We look forward to your comments. The DOM TS Group communicates primarily through the <a href="mailto:www-dom-ts@w3.org">DOM TS mailing list</a> (<a 
+<p>We look forward to your comments. The DOM TS Group communicates primarily through the <a href="mailto:www-dom-ts@w3.org">DOM TS mailing list</a> (<a
 href="http://lists.w3.org/Archives/Public/www-dom-ts/">archive</a>).</p>
 
 
 <div id="copyright">
 <h2>Copyright</h2>
 </div>
-<p>Tests in this table are released under the <a 
-href="http://www.w3.org/Consortium/Legal/copyright-software-19980720.html">W3C 
-Software Copyright Notice and license</a>:<br /><a 
-href="resources/COPYRIGHT.html">Copyright</a> (c) 
-2003 World Wide Web Consortium,
-			(Massachusetts Institute of Technology, Institut National de
-			Recherche en Informatique et en Automatique, Keio University). All
-			Rights Reserved. This program is distributed under the W3C's Software
-			Intellectual Property License. This program is distributed in the
-			hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-			PURPOSE.<br />See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> for more 
-details.</p>
+<p>Tests in this table are released under the <a
+href="http://www.w3.org/Consortium/Legal/copyright-software-20021231.html">W3C
+Software Copyright Notice and license</a>:<br />
+Copyright &#169; 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C&#174; Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</p>
 
 
 

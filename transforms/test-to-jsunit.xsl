@@ -1,15 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-Copyright (c) 2001-2004 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
--->
+Copyright © 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
 <!--   
 This transform generates HTML pages for use with JSUnit.
 
@@ -347,31 +346,26 @@ function suite() {
 
 <xsl:template name="copyright-comment">
 <xsl:comment>
-Copyright (c) 2001-2004 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+Copyright © 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 </xsl:comment>
 </xsl:template>
 
 <xsl:template name="copyright">
-			<p>
-			Copyright (c) 2001-2004 World Wide Web Consortium,
-			(Massachusetts Institute of Technology, Institut National de
-			Recherche en Informatique et en Automatique, Keio University). All
-			Rights Reserved. This program is distributed under the W3C's Software
-			Intellectual Property License. This program is distributed in the
-			hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-			PURPOSE.
-			</p>
-			<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
- for more details.</p>
+<p>
+Copyright © 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C® Software License</a> in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+</p>
 </xsl:template>
 
 

@@ -1,13 +1,13 @@
+<?xml version="1.0"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+Copyright &#xA9; 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C&#xAE; Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 -->
 
 <!--   

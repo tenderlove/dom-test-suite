@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-Copyright (c) 2001-2004 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+Copyright © 2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 -->
 
 <!--   
@@ -211,17 +210,15 @@ and combine-metadata.xsl
 href="resources/COPYRIGHT.html">W3C Software 
 Copyright Notice and License</a><xsl:text>:</xsl:text>
 			<br />
-			<xsl:text>Copyright (c) 2001-2004 World Wide Web Consortium,
-			(Massachusetts Institute of Technology, Institut National de
-			Recherche en Informatique et en Automatique, Keio University). All
-			Rights Reserved. This program is distributed under the W3C's Software
-			Intellectual Property License. This program is distributed in the
-			hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-			PURPOSE.</xsl:text>
+			<xsl:text>Copyright © 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</xsl:text>
 			<br />
-			<xsl:text>See W3C License </xsl:text> <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
-			<xsl:text> for more details.</xsl:text>
+			<xsl:text>[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+			See W3C License </xsl:text>
 
 
 	    </body>

@@ -1,15 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-Copyright (c) 2001-2004 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
--->
+Copyright © 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
 <!--   
 This transform generates Java source code from a language independent
 test representation.
@@ -28,7 +27,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.65  2004-03-11 01:44:22  dom-ts-4
+Revision 1.66  2004-04-15 14:59:29  dom-ts-4
+Copyright notice update (bug 672)
+
+Revision 1.65  2004/03/11 01:44:22  dom-ts-4
 Checkstyle fixes (bug 592)
 
 Revision 1.64  2004/02/17 16:57:58  dom-ts-4
