@@ -20,11 +20,12 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest2">
   <metadata>
-    <title>DOMInput</title>
+    <title>DOMInputSourceTest2</title>
     &creator; 
     <description>test the builder by using a string inputsource</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-stringData"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
   </metadata>
 
   <var name="elementList" type="NodeList"/>

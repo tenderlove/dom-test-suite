@@ -13,14 +13,24 @@
 
 package org.w3c.domts.level3.ls;
 
-import junit.framework.*;
-import java.lang.reflect.*;
-import javax.xml.parsers.*;
-import java.util.*;
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import org.w3c.domts.*;
+import java.lang.reflect.Constructor;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import junit.framework.TestSuite;
+
+import org.w3c.domts.DOMTestDocumentBuilderFactory;
+import org.w3c.domts.DOMTestSuite;
+import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
+import org.w3c.domts.JUnitTestSuiteAdapter;
+
+/**
+ * A JUnit test suite that will run all Load and Save tests
+ * using Xerces-J
+ * 
+ * @author Curt Arnold
+ *
+ */
 public class TestXerces extends TestSuite {
 
   public static TestSuite suite() throws Exception

@@ -20,7 +20,7 @@
 
 <test xmlns="&level3;" name="DOMEntityResolverTest0">
   <metadata>
-    <title>DOMEntityResolverTest01</title>
+    <title>DOMEntityResolverTest0</title>
     &creator; 
     <description>Simple entity resolver test, see whether all parameters are forwarded to the entity resolver</description> 
     &contributor; &date;

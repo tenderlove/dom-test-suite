@@ -18,7 +18,7 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest5">
   <metadata>
-    <title>DOMParser</title>
+    <title>DOMBuilderTest5</title>
     &creator; 
     <description>DOM Builder test, tests unsupported media types. DOMConfiguration has an option to check media types. A pdf file is loaded which should generate error using the registered error handler</description> 
     &contributor; &date;

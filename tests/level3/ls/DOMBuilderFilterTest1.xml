@@ -20,23 +20,25 @@
 
 <test xmlns="&level3;" name="DOMBuilderFilterTest1">
   <metadata>
-    <title>LSParserFilter</title>
+    <title>DOMBuilderFilterTest1</title>
     &creator; 
-    <description>DOM Builder Filter test, test whether incorrect node types are never passed to the filter</description> 
+    <description>DOM Builder Filter test, test whether incorrect node types are never passed to the filter.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-filter"/>    
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-acceptNode"/>    
   </metadata>
 
   <var name="resourceURI" type="DOMString"/>
   <var name="myfilter" type="LSParserFilter"> 
      &filterVars;
-     <var name="type" type="int"/>
 
      <startElement>
         <return value="FILTER_ACCEPT"/>            
      </startElement>
 
      <acceptNode>
+     	<var name="type" type="int"/>
         <nodeType obj="nodeArg" var="type"/>
 
         <assertNotEquals actual="type" expected="2"  id="attribute_node_test" ignoreCase="false"/>
@@ -63,7 +65,7 @@
 
   <getResourceURI var="resourceURI" href="TEST7"/>
   <parseURI  var="document" obj="builder" uri="resourceURI"/>
-
+  <assertNotNull actual="document" id="documentNotNull"/>
 </test>
 
 

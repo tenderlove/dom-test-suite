@@ -20,11 +20,12 @@
 
 <test xmlns="&level3;" name="DOMBuilderFilterTest2">
   <metadata>
-    <title>LSParserFilter</title>
+    <title>DOMBuilderFilterTest2</title>
     &creator; 
-    <description>DOM Builder Filter test, tests whether default content is visible within the filter</description> 
+    <description>Checks that attributes are visible when elements are passed to LSParserFilter.startElement.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-startElement"/>
   </metadata>
   <var name="resourceURI" type="DOMString"/>
 

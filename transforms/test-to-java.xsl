@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.47  2003-12-02 04:01:19  dom-ts-4
+Revision 1.48  2003-12-08 07:50:50  dom-ts-4
+L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 396)
+
+Revision 1.47  2003/12/02 04:01:19  dom-ts-4
 Load/save fixup (bug 396)
 
 Revision 1.46  2003/11/19 03:55:52  dom-ts-4
@@ -783,9 +786,9 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         </xsl:when>
 
         <xsl:when test="@value and @type = 'LSInputStream'">
-            <xsl:text> = createStream("</xsl:text>
+            <xsl:text> = createStream(</xsl:text>
             <xsl:value-of select="@value"/>
-            <xsl:text>");</xsl:text>
+            <xsl:text>);</xsl:text>
         </xsl:when>
         
         <xsl:when test="@value and @type = 'LSReader'">
@@ -1008,6 +1011,21 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> / </xsl:text>
     <xsl:value-of select="@op2"/>
     <xsl:text>;
+</xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='substring']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:value-of select="@var"/>
+    <xsl:text> = </xsl:text>
+    <xsl:value-of select="@obj"/>
+    <xsl:text>.substring(</xsl:text>
+    <xsl:value-of select="@beginIndex"/>
+    <xsl:if test="@endIndex">
+    	<xsl:text>, </xsl:text>
+    	<xsl:value-of select="@endIndex"/>
+    </xsl:if>
+    <xsl:text>);
 </xsl:text>
 </xsl:template>
 

@@ -20,11 +20,12 @@
 
 <test xmlns="&level3;" name="DOMWriterFilterTest0">
   <metadata>
-    <title>DOMSerializerFilter</title>
+    <title>DOMWriterFilterTest0</title>
     &creator; 
     <description>DOMSerializerFilter test, a simple test eliminating a subtree</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMSerializerFilter"/>
+    <subject resource="&spec;#LS-Interfaces-LSSerializerFilter"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-acceptNode"/>    
   </metadata>
 
 

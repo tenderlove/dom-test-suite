@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.113  2003-12-06 06:50:30  dom-ts-4
+Revision 1.114  2003-12-08 07:50:50  dom-ts-4
+L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 396)
+
+Revision 1.113  2003/12/06 06:50:30  dom-ts-4
 More fixes for L&S (Bug 396)
 
 Revision 1.112  2003/12/05 07:09:12  dom-ts-4
@@ -375,6 +378,7 @@ All implementation conditions combined into implementationAttribute element
 
 -->
 <project default="usage" basedir=".">
+    <property name="xdk10.jar" location="lib/xmlparserv2.jar"/>
 
 <target name="usage">
 	<echo message="common targets:"/>
@@ -498,7 +502,8 @@ All implementation conditions combined into implementationAttribute element
 <target name="jar">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
-	<jar jarfile="${build.dir}/dom${level}-${module}.jar"  
+	<property name="jarfile" value="dom${level}-${module}.jar"/>
+	<jar jarfile="${build.dir}/${jarfile}"  
 		 manifest="java/dom${level}-${module}.mf"
 		 basedir="${java.build.dir}"
 		 includes="org/w3c/domts/* org/w3c/domts/level${level}/${module}/*"
@@ -638,7 +643,7 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${java.build.dir}/junit"/>
 
     <javac srcdir="java/junit"
-		   includes="org/w3c/domts/*.java"
+		   includes="org/w3c/domts/**/*.java"
            destdir="${java.build.dir}/junit"
            classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"           
            debug="on"
@@ -1142,7 +1147,8 @@ All implementation conditions combined into implementationAttribute element
         usetimestamp="yes"/ -->
 </target>
 
-<target name="get-xmlspec-v22-dom-dtd" unless="xmlspec-v22-dom-available">
+<target name="get-xmlspec-v22-dom-dtd" depends="dom2-check-spec" 
+	unless="xmlspec-v22-dom-available">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/pubtext"/>
 	<get src="http://www.w3.org/2002/08/xmlspec-v22-dom.dtd"
@@ -2128,6 +2134,62 @@ All implementation conditions combined into implementationAttribute element
 	</antcall>
 </target>
 
+<!--  This target hacks the CR ls test so that it can run
+         against the slightly stale Oracle XDK 10_0_1_0_1A   -->
+<target name="dom3-ls-xdk" depends="dom3-ls-gen-java,common-javac">
+	<replace dir="${java.build.dir}" includes="**/*.java">
+		<replacefilter token="LSParser " value="DOMBuilder "/>
+		<replacefilter token="LSInput " value="DOMInputSource "/>
+		<replacefilter token="LSResourceResolver " value="DOMEntityResolver "/>
+		<replacefilter token="LSParserFilter " value="DOMBuilderFilter "/>
+		<replacefilter token="LSSerializer " value="DOMWriter "/>
+		<replacefilter token="LSSerializerFilter " value="DOMWriterFilter "/>
+		<replacefilter token="resolveResource(String type, String namespaceURI, " value="resolveEntity("/>
+		<replacefilter token="createLSParser" value="createDOMBuilder"/>
+		<replaceFilter token="createLSInput" value="createDOMInputSource"/>
+		<replaceFilter token="createLSSerializer" value="createDOMWriter"/>
+		<replaceFilter token="resource-resolver" value="entity-resolver"/>
+		<replaceFilter token=", ACTION_APPEND_AS_CHILDREN" value=", DOMBuilder.ACTION_APPEND_AS_CHILDREN"/> 
+		<replaceFilter token=", ACTION_REPLACE_CHILDREN" value=", DOMBuilder.ACTION_REPLACE_CHILDREN"/> 
+		<replaceFilter token=", ACTION_INSERT_BEFORE" value=", DOMBuilder.ACTION_INSERT_BEFORE"/> 
+		<replaceFilter token=", ACTION_INSERT_AFTER" value=", DOMBuilder.ACTION_INSERT_AFTER"/> 
+		<replaceFilter token=", ACTION_REPLACE" value=", DOMBuilder.ACTION_REPLACE"/> 
+	</replace> 
+
+	<replace dir="${java.build.dir}" includes="org/w3c/domts/level3/ls/alltests.java">
+      <replacefilter token="sink.addTest(DOMBuilderTest5.class);" value="//sink.addTest(DOMBuilderTest5.class);"/>
+      <replacefilter token="sink.addTest(DOMInputSourceTest3.class);" value="//sink.addTest(DOMInputSourceTest3.class);"/>
+      <replacefilter token="sink.addTest(DOMWriterTest1.class);" value="//sink.addTest(DOMWriterTest1.class);"/>
+	</replace> 
+
+	<replace dir="${java.build.dir}" includes="org/w3c/domts/level3/ls/DOMWriterFilterTest*.java">
+      <replacefilter token="return FILTER_" value="return DOMWriterFilter.FILTER_"/>
+      <replacefilter token="return SHOW_" value="return DOMWriterFilter.SHOW_"/>
+	</replace> 
+
+
+	<delete>
+		<fileset dir="${java.build.dir}" includes="org/w3c/dom/**/*.class"/>
+	</delete>
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${xdk10.jar};${java.build.dir}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <include name="org/w3c/domts/level3/ls/*"/>
+        <include name="org/w3c/domts/*"/>
+        <exclude name="org/w3c/domts/level3/ls/DOMBuilderTest5.java"/>
+        <exclude name="org/w3c/domts/level3/ls/DOMInputSourceTest3.java"/>
+        <exclude name="org/w3c/domts/level3/ls/DOMWriterTest1.java"/>
+    </javac>
+	<antcall target="jar">
+		<param name="level" value="3"/>
+		<param name="module" value="ls"/>
+		<param name="jarfile" value="dom3-ls-xdk.jar"/>
+	</antcall>
+</target>
 
 <target name="dom3-ls-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
     <antcall target="gen-jsunit">

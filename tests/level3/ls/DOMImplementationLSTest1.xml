@@ -20,14 +20,15 @@
 
 <test xmlns="&level3;" name="DOMImplementationLSTest1">
   <metadata>
-    <title>DOMImplementationLS</title>
+    <title>DOMImplementationLSTest1</title>
     &creator; 
     <description>Calls DOMImplementationLS.createLSParser(MODE_ASYNCHRONOUS, null) and 
        checks the return value is not null.  Only applicable if DOMImplementation.hasFeature("LS-ASync", null) is true.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMImplementationLS"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>    
   </metadata>
-  <hasFeature feature='"LS-Async"'/>
+  <!-- temporarily commented out    -->
+  <!-- hasFeature feature='"LS-Async"'/ -->
   &vars;
   
   <createLSParser var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='NULL_SCHEMATYPE'/>

@@ -25,7 +25,7 @@
     <description>Calls DOMImplementationLS.createLSParser(MODE_SYNCHRONOUS, "http://nobody...err") expecting that a
     NOT_SUPPORTED_ERR would be raised.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMImplementationLS"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>    
   </metadata>
   &vars;
   <assertDOMException id="NOT_SUPPORTED_ERR">

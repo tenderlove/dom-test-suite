@@ -20,19 +20,18 @@
 
 <test xmlns="&level3;" name="DOMWriterFilterTest3">
   <metadata>
-    <title>DOMSerializerFilter</title>
+    <title>DOMWriterFilterTest3</title>
     &creator; 
-    <description>DOMSerializerFilter test, eliminating a comment</description> 
+    <description>Eliminates comments on serialization, parses results and checks for comments.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMSerializerFilter"/>
+    <subject resource="&spec;#LS-Interfaces-LSSerializerFilter"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-acceptNode"/>    
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-whatToShow"/>    	
   </metadata>
 
 
   <var name="myfilter" type="LSSerializerFilter"> 
-     <var name="name" type="DOMString"/>
      &filterVars;
-
-
      <acceptNode>
         <return value="FILTER_REJECT"/>            
      </acceptNode>
@@ -42,7 +41,6 @@
         <return value="SHOW_COMMENT"/>
        </get>
      </whatToShow>
-
   </var>
 
 

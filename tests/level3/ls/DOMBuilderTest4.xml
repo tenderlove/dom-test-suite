@@ -19,11 +19,11 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest4">
   <metadata>
-    <title>DOMParser</title>
+    <title>DOMBuilderTest4</title>
     &creator; 
-    <description>DOM Builder test</description> 
+    <description>Uses LSParser.parseWithContext to insert a document before a node.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseWithContext"/>
   </metadata>
   
   <var name="elementList" type="NodeList"/>
@@ -50,7 +50,8 @@
   <nodeName obj="firstElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="previousSibling_before_insert_before" ignoreCase="false"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="LSInput"/>
+  <getResourceURI var="resourceURI" href="TEST2"/>
+  <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
   <parseWithContext  obj="builder" input="inputSource" contextArg="secondElt1" action="ACTION_INSERT_BEFORE" var="returnNode"/>
 
   <previousSibling interface="Node" obj="secondElt1" var="firstElt1"/>

@@ -19,11 +19,11 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest2">
   <metadata>
-    <title>DOMParser</title>
+    <title>DOMBuilderTest2</title>
     &creator; 
-    <description>DOM Builder test</description> 
+    <description>Uses LSParser.parseWithContext to append a document as a child of an existing node.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseWithContext"/>
   </metadata>
   
   <var name="elementList" type="NodeList"/>
@@ -42,7 +42,8 @@
 
   <item interface="NodeList" obj="elementList" var="firstElt0" index="0"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="LSInput"/>
+  <getResourceURI var="resourceURI" href="TEST2"/>
+  <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
   <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt0" action="ACTION_APPEND_AS_CHILDREN" var="returnNode"/>
   
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>

@@ -20,11 +20,14 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest5">
   <metadata>
-    <title>DOMInput</title>
+    <title>DOMInputSourceTest5</title>
     &creator; 
     <description>Tests behaviour of the baseURI of DOMInput</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-systemId"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-publicId"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-baseURI"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSResourceResolver-resolveResource"/>
   </metadata>
 
 
@@ -42,7 +45,6 @@
 
   </var>
 
-  <var name="ENTITY_RESOLVER" type="DOMString" value='"resource-resolver"'/>
   <var name="configuration" type="DOMConfiguration"/>
 
   &vars;
@@ -50,14 +52,14 @@
 
   <config var="configuration" obj="builder" interface="LSParser"/> 
 
-  <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
+  <setParameter obj="configuration" name='"resource-resolver"' value="myentityresolver"/>
  
   <systemId obj="inputSource" value='"new_system"' interface="LSInput"/>
   <publicId obj="inputSource" value='"new_public"' interface="LSInput"/>
   <baseURI  obj="inputSource" value='"new_base"' interface="LSInput"/>
  
   <parse var="document" obj="builder" input="inputSource"/>
-
+  <assertNull actual="document" id="nullDocument"/>
 
 
 </test>

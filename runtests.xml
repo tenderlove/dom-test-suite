@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2003 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+-->
+
+<!--  This ant file runs the tests againsts various implementations
+          and creates a report of all test failures    -->
+
+<!--
+$Log: runtests.xml,v $
+Revision 1.1  2003-12-08 07:50:50  dom-ts-4
+L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 396)
+
+
+-->
+<project default="usage" basedir=".">
+	<property name="build.dir" location="build"/>
+    <property name="xdk.lib.dir" location="/xdk_10/lib"/>
+    <property name="xerces.build.dir" location="../xerces/java/build"/>
+    
+<target name="usage">
+	<echo message="common targets:"/>
+    <echo message="TODO"/>
+</target>
+
+
+<target name="run-xerces">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<junit fork="true">
+		<classpath>
+			<fileset dir="${xerces.build.dir}" includes="dom3-xercesImpl.jar dom3-xml-apis.jar"/>
+			<fileset dir="${build.dir}" includes="dom${level}-${module}.jar junit-run.jar"/>
+		</classpath> 
+		<formatter type="xml"/>
+		<test name="org.w3c.domts.level${level}.${module}.TestXerces" todir="${build.dir}" outfile="dom${level}-${module}-xerces"/>
+	</junit>
+</target>
+
+
+<target name="run-oracle">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="jarname" value="dom${level}-${module}.jar"/>
+	<junit fork="true">
+		<classpath>
+			<fileset dir="${xdk.lib.dir}" includes="xmlparserv2.jar"/>
+			<fileset dir="${build.dir}" includes="${jarname} junit-run.jar"/>
+		</classpath> 
+		<formatter type="xml"/>
+		<test name="org.w3c.domts.level${level}.${module}.TestOracle" todir="${build.dir}" outfile="dom${level}-${module}-oracle"/>
+	</junit>
+</target>
+
+<target name="dom3-ls-xerces">
+	<antcall target="run-xerces">
+		<param name="level" value="3"/>
+		<param name="module" value="ls"/>
+	</antcall>
+</target>
+
+<target name="dom3-ls-oracle">
+	<antcall target="run-oracle">
+		<param name="level" value="3"/>
+		<param name="module" value="ls"/>
+		<param name="jarname" value="dom3-ls-xdk.jar"/>
+	</antcall>
+</target>
+
+<target name="dom3-ls-results" depends="dom3-ls-oracle,dom3-ls-xerces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom3-ls-metadata.rdf" 
+		   out="${build.dir}/dom3-ls-results.html" 
+	       style="transforms/results-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#"/>
+        <param name="interfacesURL" expression="dom3-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom3-ls-subjects.xml"/>
+        <param name="resultsURL" expression="../transforms/dom3-ls-results.xml"/>
+        <param name="title" expression='DOM Level 3 Load and Save Test Suite Results Matrix'/>
+	</style>
+</target>
+
+
+</project>

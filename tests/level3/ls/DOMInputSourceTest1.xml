@@ -20,13 +20,13 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest1">
   <metadata>
-    <title>DOMInput</title>
+    <title>DOMInputSourceTest1</title>
     &creator; 
-    <description>test the builder by using a characterstream inputsource</description> 
+    <description>Parses a document from a character stream.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-characterStream"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
   </metadata>
-  <!-- todo create reader -->
   <var name="myReader" type="LSReader" value='"&lt;elt0/&gt;"'/>
   <var name="elementList" type="NodeList"/>
   &vars;

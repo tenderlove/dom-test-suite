@@ -20,14 +20,16 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest0">
   <metadata>
-    <title>DOMInput</title>
+    <title>DOMInputSourceTest0</title>
     &creator; 
-    <description>test the builder by using a bytestream inputsource</description> 
+    <description>Parses a document from a byte stream.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-byteStream"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
   </metadata>
 
-  <var name="myByteStream" type="LSInputStream" value="3C656C74302F3E"/>
+  <!--  stream value is <elt0/> in UTF-8   -->
+  <var name="myByteStream" type="LSInputStream" value='"3C656C74302F3E"'/>
   <var name="elementList" type="NodeList"/>
 
   &vars;

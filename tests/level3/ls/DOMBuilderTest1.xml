@@ -19,11 +19,11 @@
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="DOMBuilderTest1">
   <metadata>
-    <title>DOMParser</title>
+    <title>DOMBuilderTest1</title>
     &creator; 
-    <description>DOM Builder test</description> 
+    <description>Uses LSParser.parseWithContext to replace a node in an existing document.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseWithContext"/>
   </metadata>
   <var name="elementList" type="NodeList"/>
   <var name="stringDoc"   type="DOMString"/>
@@ -40,7 +40,8 @@
 
   <item interface="NodeList" obj="elementList" var="firstElt2" index="0"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="LSInput"/>
+  <getResourceURI var="resourceURI" href="TEST2"/>
+  <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
   <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt2" action="ACTION_REPLACE" var="returnNode"/>
   
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>

@@ -18,11 +18,11 @@
 ]>
 
 
-<test xmlns="&level3;" name="DOMWriterTest2">
+<test xmlns="&level3;" name="DOMWriterTest3">
   <metadata>
-    <title>DOMWriterTest2</title>
+    <title>DOMWriterTest3</title>
     &creator; 
-    <description>Serializes a document without a XML declaration for both for 'xml-declaration' configuration values.</description> 
+    <description>Serializes a document with a XML declaration for both for 'xml-declaration' configuration values.</description> 
     &contributor; &date;
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-canSetParameter"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-config"/>
@@ -30,7 +30,7 @@
 
   <var name="configuration"   type="DOMConfiguration"/>
   <var name="XML_DECLARATION" type="DOMString" value='"xml-declaration"'/>
-  <var name="stringDoc"       type="DOMString" value='"&lt;hello&gt;me again&lt;/hello&gt;"'/>
+  <var name="stringDoc"       type="DOMString" value='"&lt;?xml version=&apos;1.0&apos;?&gt;&lt;hello&gt;me again&lt;/hello&gt;"'/>
   <var name="writeResult"     type="DOMString"/>
   <var name="xmlDecl"          type="DOMString"/>
 
@@ -46,7 +46,7 @@
 
   <setParameter obj="configuration" name="XML_DECLARATION" value="false"/>
   <writeToString var="writeResult" obj="writer" nodeArg="document"/> 
-  <assertEquals actual="writeResult" expected="stringDoc" id="without_xml_declaration" ignoreCase="false"/>
+  <assertEquals actual="writeResult" expected='"&lt;hello&gt;me again&lt;/hello&gt;"' id="without_xml_declaration" ignoreCase="false"/>
 
   <setParameter obj="configuration" name="XML_DECLARATION" value="true"/>
   <writeToString var="writeResult" obj="writer" nodeArg="document"/> 

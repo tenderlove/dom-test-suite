@@ -19,11 +19,14 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest0">
   <metadata>
-    <title>DOMParser</title>
+    <title>DOMBuilderTest0</title>
     &creator; 
-    <description>DOM Builder test</description> 
+    <description>Parses a document, writes it to string, parses the string and checks that the number of elt1 elements is as expected.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-stringData"/>
   </metadata>
   
   <var name="elementList" type="NodeList"/>

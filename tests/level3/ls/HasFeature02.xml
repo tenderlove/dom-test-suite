@@ -23,6 +23,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <creator>Curt Arnold</creator>
     <description>Implementations should return true for hasFeature("LS", null).</description>
 	<date qualifier="created">2003-12-01</date>
+	<!--  DOMImplementation.hasFeature  -->
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7"/>
   </metadata>
   <var name="domImpl" type="DOMImplementation"/>
   <var name="hasLS" type="boolean"/>

@@ -20,10 +20,11 @@
                       <var name='NULL_SCHEMATYPE'  type='DOMString' isNull='true'/>
 
                       <!-- action types DOMParser.parseWithContext -->
-                      <var name='ACTION_REPLACE'             type='short' value='1'/>
-                      <var name='ACTION_APPEND_AS_CHILDREN'  type='short' value='2'/>
-                      <var name='ACTION_INSERT_AFTER'        type='short' value='3'/>
-                      <var name='ACTION_INSERT_BEFORE'       type='short' value='4'/>
+                      <var name='ACTION_REPLACE_CHILDREN'    type='short' value='2'/>
+                      <var name='ACTION_APPEND_AS_CHILDREN'  type='short' value='1'/>
+                      <var name='ACTION_INSERT_AFTER'        type='short' value='4'/>
+                      <var name='ACTION_INSERT_BEFORE'       type='short' value='3'/>
+                      <var name='ACTION_REPLACE'             type='short' value='5'/>
 
 
                       <!-- testfiles  -->

@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMImplementationLSTest0">
   <metadata>
-    <title>DOMImplementationLS</title>
+    <title>DOMImplementationLSTest0</title>
     &creator; 
-    <description>all available constructors are called, SYNCHRONOUS mode must be supported, schemaType is tested</description> 
+    <description>Uses DOMImplementationLS.createLSParser to create a synchronous parser with an unspecified schema type.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMImplementationLS"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>
   </metadata>
   &vars;
   

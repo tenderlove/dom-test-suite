@@ -19,11 +19,11 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest3">
   <metadata>
-    <title>DOMParser</title>
+    <title>DOMBuilderTest3</title>
     &creator; 
-    <description>DOM Builder test</description> 
+    <description>Uses LSParser.parseWithContext to insert a document after a node.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseWithContext"/>
   </metadata>
   
   <var name="elementList" type="NodeList"/>
@@ -52,7 +52,8 @@
   <nodeName obj="secondElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="nextSibling_before_add" ignoreCase="false"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="LSInput"/>
+  <getResourceURI var="resourceURI" href="TEST2"/>
+  <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
   <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt1" action="ACTION_INSERT_AFTER" var="returnNode"/>
 
   <nextSibling interface="Node" obj="firstElt1" var="secondElt1"/>
@@ -63,7 +64,6 @@
   <nodeName obj="secondElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="nextSiblings_sibling_after_add" ignoreCase="false"/>
 
-  
 </test>
 
 

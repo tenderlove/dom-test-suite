@@ -20,11 +20,12 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest3">
   <metadata>
-    <title>DOMInput</title>
+    <title>DOMInputSourceTest3</title>
     &creator; 
     <description>test the builder by using a string inputsource overriding the encoding type, using characterStream however nothing should change</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-encoding"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
   </metadata>
   <hasFeature feature='"Core"' version='"3.0"'/>
 
@@ -34,8 +35,7 @@
   <var name="iso"            type="DOMString" value="&quot;ISO-8859-1&quot;"/>
   <var name="utf"            type="DOMString" value="&quot;UTF-8&quot;"/>
 
-  <!-- todo create char stream-->
-  <var name="myReader" type="LSReader"/>
+  <var name="myReader" type="LSReader" value="myString"/>
 
   &vars;
   &init;
