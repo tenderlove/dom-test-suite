@@ -39,16 +39,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <var name="namespaceURI" type="DOMString"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootTagname" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"newD"' doctype="nullDocType"/>
-<createElementNS var="element" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test"'/>
-<renameNode var="renamedNode" obj="newDoc" n="element" namespaceURI='"http://www.w3.org/2000/xmlns/"' qualifiedName='"xmlns:xmlns"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootTagname' doctype="nullDocType"/>
+<createElementNS var="element" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"body"'/>
+<renameNode var="renamedNode" obj="newDoc" n="element" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:head"'/>
 <nodeName var="nodeName" obj="renamedNode"/>
 <namespaceURI var="namespaceURI" obj="renamedNode" interface="Node"/>
 <nodeType var="nodeType" obj="renamedNode"/>
-<assertEquals expected='"xmlns:xmlns"' actual="nodeName"  id="documentrenamenode16_nodeName" ignoreCase="false"/>
+<assertEquals expected='"xhtml:head"' actual="nodeName"  id="documentrenamenode16_nodeName" ignoreCase="false"/>
 <assertEquals expected="1" actual="nodeType"  id="documentrenamenode16_nodeType" ignoreCase="false"/>
-<assertEquals expected='"http://www.w3.org/2000/xmlns/"' actual="namespaceURI"  id="documentrenamenode16_nodeValue" ignoreCase="false"/>
+<assertEquals expected='"http://www.w3.org/1999/xhtml"' actual="namespaceURI"  id="documentrenamenode16_nodeValue" ignoreCase="false"/>
 </test>

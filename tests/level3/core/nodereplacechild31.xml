@@ -50,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <firstChild var="parent" obj="entRef" interface="Node"/>
 <childNodes var="oldchildList" obj="parent"/>
 <item var="oldChild" obj="oldchildList" index="0" interface="NodeList"/>
-<createElementNS var="newChild" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
+<createElementNS var="newChild" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:p"'/>
 <assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_nodereplacechild31">
 <NO_MODIFICATION_ALLOWED_ERR>
 <replaceChild obj="parent" var="replaced" oldChild="oldChild" newChild="newChild"/>

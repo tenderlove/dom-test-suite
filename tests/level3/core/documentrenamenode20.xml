@@ -22,8 +22,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Invoke the renameNode method on this document node to rename a node such that its
-	qualifiedName has a prefix that is "xml:xml"and namespaceURI is 
-	"http://www.w3.org/XML/1998/namespace/".
+	qualifiedName has a prefix that is "xml:html" and namespaceURI is 
+	"http://www.example.com/namespace".
 	Check if a NAMESPACE_ERR gets thrown.
 </description>
 <contributor>Neil Delima</contributor>
@@ -34,11 +34,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="renamedNode" type="Node"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
-<createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test"'/>
-<assertDOMException id="documentrenamenode20_NAMESPACE_ERR">
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootTagname" type="DOMString"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
+<createElementNS var="element" obj="doc" namespaceURI='rootNS' qualifiedName='rootTagname'/>
+<assertDOMException id="throw_NAMESPACE_ERR">
 <NAMESPACE_ERR>
-<renameNode var="renamedNode" obj="doc" n="element" namespaceURI='"http://www.w3.org/XML/1998/namespace/"' qualifiedName='"xml:xml"'/>
+<renameNode var="renamedNode" obj="doc" n="element" namespaceURI='"http://www.example.com/xml"' qualifiedName='"xml:html"'/>
 </NAMESPACE_ERR>
 </assertDOMException>
 </test>

@@ -35,14 +35,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domImpl" type="DOMImplementation"/>
 <var name="element" type="Element"/>
 <var name="renamedNode" type="Node"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootTagname" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:newD"' doctype="nullDocType"/>
-<createElementNS var="element" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootTagname' doctype="nullDocType"/>
+<createElementNS var="element" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"body"'/>
 <assertDOMException id="documentrenamenode18_WRONG_DOCUMENT_ERR">
 <WRONG_DOCUMENT_ERR>
-<renameNode var="renamedNode" obj="doc" n="element" namespaceURI='"http://www.w3.org/2000/xmlns/"' qualifiedName='"xmlns"'/>
+<renameNode var="renamedNode" obj="doc" n="element" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"head"'/>
 </WRONG_DOCUMENT_ERR>
 </assertDOMException>
 </test>

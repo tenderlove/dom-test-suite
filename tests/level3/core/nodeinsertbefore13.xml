@@ -40,13 +40,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="appendedChild" type="Node"/>
 <var name="inserted" type="Node"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootTagname" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
 <load var="docAlt" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
-<createElementNS var="elem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
-<createElementNS var="elemAlt" obj="docAlt"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<createElementNS var="elem" obj="doc"  qualifiedName='rootTagname' namespaceURI='rootNS'/>
+<createElementNS var="elemAlt" obj="docAlt"  qualifiedName='rootTagname' namespaceURI='rootNS'/>
 <appendChild obj="docFrag" var="appendedChild" newChild="elem"/>
-<assertDOMException id="WRONG_DOCUMENT_ERR_nodeinsertbefore13">
+<assertDOMException id="throw_WRONG_DOCUMENT_ERR">
 <WRONG_DOCUMENT_ERR>
 <insertBefore obj="docFrag" var="inserted" newChild="elemAlt" refChild="elem"/>
 </WRONG_DOCUMENT_ERR>

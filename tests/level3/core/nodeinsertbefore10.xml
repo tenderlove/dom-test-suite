@@ -36,10 +36,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="newElem" type="Element"/>
 <var name="inserted" type="Node"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootTagname" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
 <getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="1" interface="NodeList"/>
-<createElementNS var="newElem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<createElementNS var="newElem" obj="doc"  qualifiedName='rootTagname' namespaceURI='rootNS'/>
 <try>
    <insertBefore obj="doc" var="inserted" newChild="newElem" refChild="elem"/>
    <fail id="throw_DOMException"/>

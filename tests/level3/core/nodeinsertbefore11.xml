@@ -45,7 +45,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
-<createElementNS var="elem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<createElementNS var="elem" obj="doc"  qualifiedName='"body"' namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <createProcessingInstruction var="pi" obj="doc" target='"PITarget"' data='"PIData"' />
 <createComment var="comment" obj="doc" data='"Comment"' />
 <createTextNode var="txt" obj="doc" data='"Text"' />

@@ -39,8 +39,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="returnedUserData" type="DOMUserData"/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"' />
+<load var="doc" href="barfoo" willBeModified="false"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"body"' />
 <setUserData obj="doc" var="returnedUserData" key='"something"' data="elem" handler="nullHandler"/>
 <getUserData var="retUserData" obj="doc" key='"something"'/>
 <isEqualNode var="success" obj="retUserData" arg="elem"/>

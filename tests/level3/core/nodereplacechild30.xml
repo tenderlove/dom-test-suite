@@ -46,9 +46,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:parent"'/>
-<createElementNS var="oldChild" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:oldChild"'/>
-<createElementNS var="newElement" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:newChild"'/>
+<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
+<createElementNS var="oldChild" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:head"'/>
+<createElementNS var="newElement" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:body"'/>
 <appendChild obj="parent" var="appendedChild" newChild="oldChild"/>
 <appendChild obj="parent" var="appendedChild" newChild="newElement"/>
 <createTextNode var="newText" obj="doc" data='"Text"' />
@@ -63,19 +63,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="parent" var="appendedChild" newChild="newERef"/>
 <replaceChild var="replaced" obj="parent" oldChild="oldChild" newChild="newElement"/>
 <nodeName var="nodeName" obj="replaced" />
-<assertEquals actual="nodeName" expected='"dom3:oldChild"' id="nodereplacechild30_1" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"xhtml:head"' id="nodereplacechild30_1" ignoreCase="false"/>
 <replaceChild var="replaced" obj="parent" oldChild="newElement" newChild="oldChild"/>
 <nodeName var="nodeName" obj="replaced" />
-<assertEquals actual="nodeName" expected='"dom3:newChild"' id="nodereplacechild30_2" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"xhtml:body"' id="nodereplacechild30_2" ignoreCase="false"/>
 <replaceChild var="replaced" obj="parent" oldChild="oldChild" newChild="newText"/>
 <nodeName var="nodeName" obj="replaced" />
-<assertEquals actual="nodeName" expected='"dom3:oldChild"' id="nodereplacechild30_3" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"xhtml:head"' id="nodereplacechild30_3" ignoreCase="false"/>
 <replaceChild var="replaced" obj="parent" oldChild="newText" newChild="oldChild"/>
 <nodeName var="nodeName" obj="replaced" />
 <assertEquals actual="nodeName" expected='"#text"' id="nodereplacechild30_4" ignoreCase="false"/>
 <replaceChild var="replaced" obj="parent" oldChild="oldChild" newChild="newComment"/>
 <nodeName var="nodeName" obj="replaced" />
-<assertEquals actual="nodeName" expected='"dom3:oldChild"' id="nodereplacechild30_5" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"xhtml:head"' id="nodereplacechild30_5" ignoreCase="false"/>
 <replaceChild var="replaced" obj="parent" oldChild="newComment" newChild="oldChild"/>
 <nodeName var="nodeName" obj="replaced" />
 <assertEquals actual="nodeName" expected='"#comment"' id="nodereplacechild30_6" ignoreCase="false"/>

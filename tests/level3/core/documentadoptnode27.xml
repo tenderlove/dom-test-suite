@@ -41,19 +41,24 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="adoptedNS" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootTagname" type="DOMString"/>
 <var name="nullValue" type="DOMString" isNull="true"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootTagname" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:test"' doctype="nullDocType"/>
-<createElementNS var="newElem" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test/Elem"' qualifiedName='"l3:elem"'/>
-<setAttributeNS obj="newElem" namespaceURI='"http://www.w3.org/DOM/Test/Attr"' qualifiedName='"l3:attr"' value="nullValue"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootTagname' doctype="nullDocType"/>
+<createElementNS var="newElem" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:head"'/>
+<setAttributeNS obj="newElem" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:lang"' value="nullValue"/>
 <documentElement obj="newDoc" var="docElem"/>
 <appendChild obj="docElem" var="appendedChild" newChild="newElem"/>
 <importNode var="newImpElem" obj="doc" importedNode="newElem" deep="true"/>
 <adoptNode var="adoptedNode" obj="doc" source="newImpElem"/>
 <nodeName var="adoptedName" obj="adoptedNode"/>
 <namespaceURI var="adoptedNS" obj="adoptedNode" interface="Node"/>
-<assertEquals actual="adoptedName" expected='"l3:elem"' id="documentadoptnode27_1" ignoreCase="false"/>
-<assertEquals actual="adoptedNS" expected='"http://www.w3.org/DOM/Test/Elem"' id="documentadoptnode27_2" ignoreCase="false"/>
+<assertEquals actual="adoptedName" expected='"xhtml:head"' id="documentadoptnode27_1" ignoreCase="false"/>
+<assertEquals actual="adoptedNS" expected='"http://www.w3.org/1999/xhtml"' id="documentadoptnode27_2" ignoreCase="false"/>
 </test>
  
