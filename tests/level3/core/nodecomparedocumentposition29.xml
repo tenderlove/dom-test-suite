@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -30,10 +30,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-20</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="entRef1" type="EntityReference"/>
@@ -43,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefChild1Position" type="int"/>
 <var name="entRefChild2Position" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createEntityReference name='"ent4"' obj="doc" var="entRef1"/>
 <createEntityReference name='"ent4"' obj="doc" var="entRef2"/>
 <documentElement var="docElem" obj="doc"/>

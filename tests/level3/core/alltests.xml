@@ -491,6 +491,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="textreplacewholetext04.xml"/>
 	<suite.member href="textreplacewholetext05.xml"/>
 	<suite.member href="textreplacewholetext07.xml"/>	
+	<suite.member href="textreplacewholetext08.xml"/>	
 
 	
 	<!-- TypeInfo -->

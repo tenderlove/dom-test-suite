@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,20 +21,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textreplacewholetext07</title>
 <creator>IBM</creator>
 <description>
-	The method replaceWholeText substitutes the a specified text for the text of 
-	the current node and all logically-adjacent text nodes.  This method raises
-	a NO_MODIFICATION_ALLOWED_ERR if one of the Text nodes being replaced is readonly.
-
-	Invoke replaceWholeText on an existing text node with newly created text and Entityreference
-	nodes (whose replacement text is not text or cdata) appended as children of its parent element node.  
-	Check if a NO_MODIFICATION_ALLOWED_ERR gets thrown.
+Append an entity reference and a text node after to the content of the
+first name element.  Then call replaceWholeText on initial content
+of that element.  Since the entity reference does not contain any 
+logically-adjacent text content, only the initial text element should
+be replaced. 
 </description>
 <contributor>Neil Delima</contributor>
+<contributor>Curt Arnold</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Text3-replaceWholeText"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="true"/>
 <var name="doc" type="Document"/>
 <var name="itemList" type="NodeList"/>
 <var name="elementName" type="Element"/>
@@ -42,7 +41,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="erefNode" type="EntityReference"/>
 <var name="replacedText" type="Text"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<var name="node" type="Node"/>
+<var name="nodeValue" type="DOMString"/>
+<var name="nodeType" type="int"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"name"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <createEntityReference var="erefNode" obj="doc" name='"ent4"'/>
@@ -50,9 +52,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="elementName" var="appendedChild" newChild="erefNode"/>
 <appendChild obj="elementName" var="appendedChild" newChild="textNode"/>
 <firstChild var="textNode" obj="elementName" interface="Node"/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_textreplacewholetext07">
-<NO_MODIFICATION_ALLOWED_ERR>
 <replaceWholeText obj="textNode" var="replacedText" content='"New Text and Cdata"'/>
-</NO_MODIFICATION_ALLOWED_ERR>
-</assertDOMException>
+<firstChild var="textNode" obj="elementName" interface="Node"/>
+<assertSame expected="textNode" actual="replacedText" id="retval_same"/>
+<nodeValue var="nodeValue" obj="textNode"/>
+<assertEquals actual="nodeValue" expected='"New Text and Cdata"' 
+	id="nodeValueSame" ignoreCase="false"/>
+<nextSibling var="node" obj="textNode" interface="Node"/>
+<assertNotNull actual="node" id="secondChildNotNull"/>
+<nodeType var="nodeType" obj="node"/>
+<assertEquals actual="nodeType" expected="5" id="secondChildIsEntRef" ignoreCase="false"/>
 </test>
