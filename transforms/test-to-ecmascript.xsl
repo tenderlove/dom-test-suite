@@ -1268,7 +1268,7 @@ function handleEvent(listener, event, userObj) {
       </xsl:apply-templates>
       <xsl:text>
       } catch (ex) {
-		  if (typeof(ex.code) != 'undefined')) {      
+		  if (typeof(ex.code) != 'undefined') {      
        </xsl:text>
       <xsl:if test="*[local-name() = 'catch']/*[local-name() != 'ImplementationException']">
       	   <xsl:text>switch(ex.code) {
