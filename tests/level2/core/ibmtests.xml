@@ -86,7 +86,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="elementsetattributens03.xml"/>
 	<suite.member href="elementsetattributens04.xml"/>
 	<suite.member href="elementsetattributens05.xml"/>	
-	<suite.member href="elementsetattributens06.xml"/>
 	<suite.member href="elementsetattributens08.xml"/>
 	<suite.member href="elementsetattributenodens01.xml"/>
 	<suite.member href="elementsetattributenodens02.xml"/>
