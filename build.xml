@@ -994,10 +994,8 @@ This target checks that the output of that implied transform is valid HTML
 								  dom1-html-validate-tests,
 								  dom1-core-jar,
 								  dom1-html-jar,
-								  dom1-core-gen-jsunit-base,
-								  dom1-html-gen-jsunit-base"/>
+								  junit-run"/>
 								  
-<target name="domts-junit-gump" depends="junit-run"/>								  
 
 
 <target name="dom1-dist" depends="dom1-core-dist,dom1-html-dist">
@@ -1819,10 +1817,7 @@ This target checks that the output of that implied transform is valid HTML
 								  dom2-html-validate-tests,
 								  dom2-core-jar,
 								  dom2-events-jar,
-								  dom2-html-jar,
-								  dom2-core-gen-jsunit-base,
-								  dom2-html-gen-jsunit-base,
-								  dom2-events-gen-jsunit-base"/>
+								  dom2-html-jar"/>
 
 <target name="dom2-dist" depends="dom2-core-dist,dom2-html-dist,dom2-events-dist">
 </target>
@@ -2872,21 +2867,11 @@ it would compile all DOM 3 java code
 								  dom3-xpath-validate-tests, 
 								  dom3-val-validate-tests,
 								  dom3-events-validate-tests, 
-								  dom3-core-schema-validate-tests, 
-                                  dom3-ls-schema-validate-tests, 
-								  dom3-xpath-schema-validate-tests, 
-								  dom3-val-schema-validate-tests,
-								  dom3-events-schema-validate-tests,								  
 								  dom3-core-jar,
 								  dom3-ls-jar,
 								  dom3-xpath-jar,
 								  dom3-val-jar,
-								  dom3-events-jar,
-								  dom3-core-gen-jsunit-base,
-								  dom3-ls-gen-jsunit-base,
-								  dom3-xpath-gen-jsunit-base,
-								  dom3-val-gen-jsunit-base,
-								  dom3-events-gen-jsunit-base"/>
+								  dom3-events-jar"/>
 
 
 <!--   SVG 1.0   -->
