@@ -530,6 +530,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ELEMENT metadata (metadata | title | creator | subject | description | contributor | date | source | relation)*&gt;
 &lt;!ATTLIST metadata
+        xmlns CDATA #FIXED "<xsl:value-of select="$schema-namespace"/>"
 	id ID #IMPLIED
 	about CDATA #IMPLIED
 &gt;
