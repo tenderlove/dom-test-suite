@@ -45,15 +45,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="setAttr1" type="Attr"/>
 <var name="setAttr2" type="Attr"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="addressElementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="addressElementList"/>
 <item interface="NodeList" obj="addressElementList" index="1" var="testAddress"/>
-<createElement obj="doc" var="newElement" tagName="&quot;newElement&quot;"/>
+<createElement obj="doc" var="newElement" tagName='"newElement"'/>
 <appendChild var="appendedChild" obj="testAddress" newChild="newElement"/>
-<createAttribute obj="doc" var="newAttribute" name="&quot;newAttribute&quot;"/>
-<setAttributeNode var="setAttr1" obj="testAddress" newAttr="newAttribute"/>
-<assertDOMException id="elementInUseAttributeErrAssert">
-<INUSE_ATTRIBUTE_ERR>
-<setAttributeNode var="setAttr2" obj="testAddress" newAttr="newAttribute"/>
-</INUSE_ATTRIBUTE_ERR>
+<createAttribute obj="doc" var="newAttribute" name='"newAttribute"'/>
+<setAttributeNode var="setAttr1" obj="newElement" newAttr="newAttribute"/>
+<assertDOMException id="throw_INUSE_ATTRIBUTE_ERR">
+    <INUSE_ATTRIBUTE_ERR>
+        <setAttributeNode var="setAttr2" obj="testAddress" newAttr="newAttribute"/>
+    </INUSE_ATTRIBUTE_ERR>
 </assertDOMException>
 </test>
