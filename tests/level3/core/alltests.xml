@@ -276,6 +276,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="nodegettextcontent14.xml"/>	
 	<suite.member href="nodegettextcontent17.xml"/>
 	<suite.member href="nodegettextcontent18.xml"/>
+	<suite.member href="nodegettextcontent19.xml"/>
 					
 	<suite.member href="nodesettextcontent01.xml"/>	
 	<suite.member href="nodesettextcontent03.xml"/>	
