@@ -523,7 +523,7 @@ function assertTrue(id, actual) {
 
 function assertFalse(id, actual) {
    if (actual) {
-       throw id + ": assertTrue failed";
+       throw id + ": assertFalse failed";
    }
 }
 
