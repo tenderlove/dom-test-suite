@@ -94,6 +94,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="isSupported10.xml"/>
      <suite.member href="isSupported11.xml"/>
      <suite.member href="isSupported12.xml"/>
+     <suite.member href="isSupported13.xml"/>
+     <suite.member href="isSupported14.xml"/>
      <suite.member href="localName01.xml"/>
      <suite.member href="localName02.xml"/>
      <suite.member href="localName03.xml"/>
