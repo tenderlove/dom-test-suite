@@ -25,11 +25,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <implementationAttribute name="validating" value="false"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
-<load var="doc" href="nodtdstaff" willBeModified="false"/>
+<load var="doc" href="hc_nodtdstaff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <assertNull actual="docType" id="documentGetDocTypeNoDTDAssert"/>
 </test>
