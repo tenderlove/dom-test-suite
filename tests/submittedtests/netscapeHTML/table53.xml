@@ -36,5 +36,5 @@ The value of attribute width of the tablecol element is read and checked against
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <width interface="HTMLTableColElement" obj="testNode" var="vwidth"/>
-<assertEquals actual="vwidth" expected='"20"' id="widthLink" ignoreCase-="false"/>
+<assertEquals actual="vwidth" expected='"20"' id="widthLink" ignoreCase="false"/>
 </test>
