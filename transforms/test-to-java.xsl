@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.32  2003-01-29 04:58:15  dom-ts-4
+Revision 1.33  2003-02-02 21:38:03  dom-ts-4
+Fixes for DocumentLS.load
+
+Revision 1.32  2003/01/29 04:58:15  dom-ts-4
 Added (short) on short literals passed to inner classes
 Added recursion into base interface for inner class feature
 production (DOMWriterFilter.acceptNode)
@@ -1486,7 +1489,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='load']" mode="body">
+<xsl:template match="*[local-name()='load' and not(@interface)]" mode="body">
     <xsl:value-of select="@var"/>
     <xsl:text> = load("</xsl:text>
     <xsl:value-of select="@href"/>

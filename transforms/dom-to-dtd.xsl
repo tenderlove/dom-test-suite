@@ -513,7 +513,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
     uri CDATA #IMPLIED
     obj CDATA #IMPLIED
     interface (DocumentLS) #IMPLIED
-	willBeModified (true | false) #REQUIRED
+	willBeModified (true | false) #IMPLIED
 &gt;
 
 &lt;!ELEMENT implementation EMPTY&gt;
