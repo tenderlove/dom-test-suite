@@ -27,17 +27,21 @@ Check if strongType is derived from anySimpleType by restriction.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
 <var name="typeInfo" type="TypeInfo"/>
 <var name="isDerived" type="boolean"/>
+<var name="typeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
 <!--  type should be strongType  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
+<typeName var="typeName" obj="typeInfo"/>
+<assertEquals actual="typeName" expected='"strongType"' ignoreCase="false" id="typeName"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anySimpleType"' derivationMethod="1"/>
 <assertTrue actual="isDerived" id="derivedFromAnySimpleType"/>

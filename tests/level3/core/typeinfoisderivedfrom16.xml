@@ -27,17 +27,21 @@ Check emType is derived from emp0001_3Type by union.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
 <var name="typeInfo" type="TypeInfo"/>
 <var name="isDerived" type="boolean"/>
+<var name="typeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"em"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
 <!--  type should be emType  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
+<typeName var="typeName" obj="typeInfo"/>
+<assertEquals actual="typeName" expected='"emType"' ignoreCase="false" id="name"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
 	typeNameArg='"emp0001_3Type"' derivationMethod="4"/>
 <assertTrue actual="isDerived" id="derivedFromEmp13Union"/>

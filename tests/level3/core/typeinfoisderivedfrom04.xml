@@ -26,6 +26,7 @@ Check if xsd:string is derived from xsd:anyType by any method.
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
@@ -35,6 +36,7 @@ Check if xsd:string is derived from xsd:anyType by any method.
 <var name="elemName" type="DOMString"/>
 <var name="typeInfo" type="TypeInfo"/>
 <var name="isDerived" type="boolean"/>
+<var name="typeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="elemList" index="0" interface="NodeList"/>
@@ -42,6 +44,8 @@ Check if xsd:string is derived from xsd:anyType by any method.
 <schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
 <!--  type info should be xsd:string  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
+<typeName var="typeName" obj="typeInfo"/>
+<assertEquals actual="typeName" expected='"string"' ignoreCase="false" id="nameIsString"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anyType"' derivationMethod="15"/>
 <assertTrue actual="isDerived" id="derivedFromAnyType"/>
