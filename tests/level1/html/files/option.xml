@@ -7,7 +7,7 @@
 <title>NIST DOM HTML Test - OPTION</title>
 </head>
 <body> 
-<form id="form1" name="form1" action="./files/getData.pl" method="post">
+<form id="form1" action="./files/getData.pl" method="post">
 <p>
 <select id="selectId" dir="ltr" tabindex="7" name="select1" multiple="multiple" size="1" onblur="newId(this)" onfocus="newDir(this)">
 <option selected="selected" value="10001">EMP10001</option>

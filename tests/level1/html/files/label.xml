@@ -7,7 +7,7 @@
 <title>NIST DOM HTML Test - LABEL</title>
 </head>
 <body> 
-<form name="form1" action="./files/getData.pl" method="post">
+<form id="form1" action="./files/getData.pl" method="post">
 <p>
 <label accesskey="b" for="input1">Enter Your First Password:</label>
 <input id="input1" type="password" name="Password1"/>

@@ -10,7 +10,7 @@
 <table cellpadding="15" border="border">
 <tr align="center">
 <td valign="top">Under a FORM control
-<form id="form1" name="form1" action="./files/getData.pl" method="post">
+<form id="form1" action="./files/getData.pl" method="post">
 <table border="15">
 <tr>
 <td>
