@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.60  2002-06-03 23:56:13  dom-ts-4
+Revision 1.61  2002-06-06 05:04:11  dom-ts-4
+Update for DOM Level 2 HTML CR
+Added dom2-html-jar target
+
+Revision 1.60  2002/06/03 23:56:13  dom-ts-4
 Added dom2-events-jar and related tasks
 
 Revision 1.59  2002/05/23 13:35:35  dom-ts-4
@@ -516,7 +520,7 @@ All implementation conditions combined into implementationAttribute element
     <available property="dom2-events-available" file="${specs.dir}/DOM2-Events-Java-Binding.zip"/>
     <available property="dom2-style-available" file="${specs.dir}/DOM2-Style.zip"/>
     <available property="dom2-traversal-available" file="${specs.dir}/DOM2-Traversal-Range.zip"/>
-    <available property="dom2-html-available" file="${specs.dir}/DOM2-HTML.zip"/>
+    <available property="dom2-html-available" file="${specs.dir}/DOM2-HTML-Java-Binding.zip"/>
 </target>
 
 <!--  gets DOM 2 Core spec unless it is available locally   -->
@@ -572,9 +576,12 @@ All implementation conditions combined into implementationAttribute element
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-2"/>
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-2-HTML-20011210/DOM2-HTML.zip"
+	<get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20020605/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
 		usetimestamp="yes"/>
+    <get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20020605/java-binding.zip"
+        dest="${specs.dir}/DOM2-HTML-Java-Binding.zip"
+        usetimestamp="yes"/>
 </target>
 
 <target name="get-dom2" depends="get-dom2-core,get-dom2-events,get-dom2-html,get-dom2-views,get-dom2-traversal,get-dom2-style">
@@ -648,6 +655,8 @@ All implementation conditions combined into implementationAttribute element
 	       originalfile="${specs.dir}/Level-2/xml/core/definitions/element.xml"/>
 
 
+	<unzip src="${specs.dir}/DOM2-HTML-Java-Binding.zip"
+	       dest="${specs.dir}/Level-2/HTML/java"/>
 	<unzip src="${specs.dir}/DOM2-Events-Java-Binding.zip"
 	       dest="${specs.dir}/Level-2/Events"/>
 	<unzip src="${specs.dir}/DOM2-Views-Java-Binding.zip"
@@ -1108,6 +1117,7 @@ All implementation conditions combined into implementationAttribute element
 		       expression="org.w3c.domts.level2.html"/>
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+        <param name="import-html" expression="import org.w3c.dom.html2.*;"/>
 	</style>
 </target>
 
@@ -1179,7 +1189,26 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
-		encoding="UTF8"/>
+		encoding="UTF8">  
+        <src path="${java.build.dir}"/>
+        <src path="${specs.dir}/Level-2/HTML/java"/>
+        <include name="org/w3c/domts/*"/>
+        <include name="org/w3c/domts/level2/html/*"/>
+        <include name="org/w3c/dom/**"/>
+    </javac>
+</target>
+
+<target name="dom2-html-jar" depends="dom2-html-javac">
+	<jar jarfile="${build.dir}/dom2-html.jar"  manifest="java/dom2-html.mf">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level2/html/*"
+		         excludes="*.bak"/>
+		<fileset dir="tests/level2/html/files" excludes="*.bak"/>
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
 </target>
 
 
