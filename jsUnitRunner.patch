@@ -1,6 +1,0 @@
-476,477c476,477
-<         while (result.indexOf("\\")!=-1)
-<                 result=result.replace("\\", "/");
----
-> //        while (result.indexOf("\\")!=-1)
-> //                result=result.replace("\\", "/");
