@@ -120,5 +120,10 @@ public class JTidyDOMImplementation implements DOMImplementation {
         throw new DOMException(DOMException.NOT_SUPPORTED_ERR,"Not Implemented");
     }
 
+    public DOMImplementation getInterface(String feature) {
+        return this;
+    }
+    
+
 }
 
