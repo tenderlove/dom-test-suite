@@ -46,11 +46,12 @@ Validate a document with no DTD against an externally specified schema that does
 <var name="error" type="DOMError"/>
 <var name="severity" type="int"/>
 <var name="errorCount" type="int" value="0"/>
+<var name="xsdNS" type="DOMString" value='"http://www.w3.org/2001/XMLSchema"'/>
 <implementation var="domImplLS"/>
 <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
-<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='"http://www.w3.org/2001/XMLSchema"'/>
+<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='xsdNS'/>
 <getResourceURI var="resourceURI" href='"validateschema1"' contentType="text/xml"/>
 <canSetParameter var="canSetSchemaLocation" obj="domConfig" name='"schema-location"' value="resourceURI"/>
 <if>
@@ -60,7 +61,7 @@ Validate a document with no DTD against an externally specified schema that does
 		<isTrue value="canSetSchemaLocation"/>
 	</and>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
-	<setParameter obj="domConfig" name='"schema-type"' value='"http://www.w3.org/2001/XMLSchema"'/>
+	<setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
 	<setParameter obj="domConfig" name='"schema-location"' value="resourceURI"/>
 	<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 	<getResourceURI var="resourceURI" href='"test3"' contentType="text/xml"/>

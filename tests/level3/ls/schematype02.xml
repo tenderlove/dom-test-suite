@@ -39,18 +39,19 @@ Specify DTD validation for a document with a matching DTD.
 <var name="resourceURI" type="DOMString"/>
 <var name="canSetValidate" type="boolean"/>
 <var name="canSetSchemaType" type="boolean"/>
+<var name="dtdNS" type="DOMString" value='"http://www.w3.org/TR/REC-xml"'/>
 <implementation var="domImplLS"/>
 <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
-<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='"http://www.w3.org/TR/REC-xml"'/>
+<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='dtdNS'/>
 <if>
 	<and>
 		<isTrue value="canSetValidate"/>
 		<isTrue value="canSetSchemaType"/>
 	</and>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
-	<setParameter obj="domConfig" name='"schema-type"' value='"http://www.w3.org/TR/REC-xml"'/>
+	<setParameter obj="domConfig" name='"schema-type"' value='dtdNS'/>
 	<getResourceURI var="resourceURI" href='"test3"' contentType="text/xml"/>
 	<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
 	<assertNotNull actual="doc" id="docNotNull"/>

@@ -39,18 +39,19 @@ Specify schema validation for a document with no DTD but schema location hints.
 <var name="resourceURI" type="DOMString"/>
 <var name="canSetValidate" type="boolean"/>
 <var name="canSetSchemaType" type="boolean"/>
+<var name="xsdNS" type="DOMString" value='"http://www.w3.org/2001/XMLSchema"'/>
 <implementation var="domImplLS"/>
 <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
-<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='"http://www.w3.org/2001/XMLSchema"'/>
+<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='xsdNS'/>
 <if>
 	<and>
 		<isTrue value="canSetValidate"/>
 		<isTrue value="canSetSchemaType"/>
 	</and>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
-	<setParameter obj="domConfig" name='"schema-type"' value='"http://www.w3.org/2001/XMLSchema"'/>
+	<setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
 	<getResourceURI var="resourceURI" href='"schematype1"' contentType="text/xml"/>
 	<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
 	<assertNotNull actual="doc" id="docNotNull"/>
