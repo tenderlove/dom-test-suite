@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.24  2002-07-01 03:57:06  dom-ts-4
+Revision 1.25  2002-08-12 09:01:27  dom-ts-4
+Added production of inner class property accessors
+
+Revision 1.24  2002/07/01 03:57:06  dom-ts-4
 Added name parameter to assertURIEquals
 
 Revision 1.23  2002/06/06 05:09:33  dom-ts-4
@@ -381,7 +384,7 @@ import java.util.ArrayList;
                     <xsl:value-of select="@name"/>
                 </xsl:for-each>
                 <xsl:text>) {
-             </xsl:text>
+        </xsl:text>
 
              <xsl:apply-templates mode="body">
                     <xsl:with-param name="vardefs" select="*[local-name() = 'var'] | $method-def/parameters/param | preceding-sibling::*[local-name() = 'var']"/>
@@ -389,8 +392,29 @@ import java.util.ArrayList;
                 <xsl:text>}
 </xsl:text>
             </xsl:when>
+
+            <!--  not method, possibly an attribute   -->
+            <xsl:when test="$interface/attribute[@name = $method-name]">
+                <xsl:text>        public </xsl:text>
+                <xsl:call-template name="produce-type">
+		            <xsl:with-param name="type" select="$interface/attribute[@name = $method-name]/@type"/>
+	            </xsl:call-template>
+                <xsl:text> get</xsl:text>
+                <xsl:value-of select="concat(translate(
+                    substring($method-name,1,1),'abcdefghijklmnopqrstuvwxyz',
+                    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($method-name,2))"/>
+                <xsl:text>() {
+        </xsl:text>
+
+             <xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="*[local-name() = 'var'] | $method-def/parameters/param | preceding-sibling::*[local-name() = 'var']"/>
+             </xsl:apply-templates>
+                <xsl:text>}
+</xsl:text>
+            </xsl:when>
+
             <xsl:otherwise>
-                <xsl:message terminate="yes">Method <xsl:value-of select="@name"/> not found.</xsl:message>
+                <xsl:message terminate="yes">Method <xsl:value-of select="local-name()"/> not found.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
    </xsl:for-each>
@@ -1258,6 +1282,9 @@ import java.util.*;
 	<xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="contains($type,'DOMString')">String</xsl:when>
+        <xsl:when test="substring($type, 1, 9) = 'unsigned '">
+            <xsl:value-of select="substring($type, 10)"/>
+        </xsl:when> 
 		<xsl:otherwise>
 			<xsl:value-of select="$type"/>
 		</xsl:otherwise>
