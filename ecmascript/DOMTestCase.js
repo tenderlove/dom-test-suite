@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
 
   function IE5DocumentBuilder_load(sourceURL, willBeModified) {
-	var actualURL = "file:///d:/domts/2001/DOM-Test-Suite/tests/level1/core/files/" + sourceURL;
+	var actualURL = sourceURL;
 	if(!this.parser.load(actualURL)) {
 		throw this.parser.parseError.reason;
 	}
@@ -53,9 +53,45 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    }
 
   function IE5DocumentBuilder_isDOMExceptionCode(ex, code) {
-	var retval = false;
-	if(code == 7) {
+	var retval;
+    switch(code) {
+        //
+        //  INDEX_SIZE_ERR
+        case 1:
+        retval = (ex.number == -2147024809);
+        break;
+
+        //
+        //  HIERARCHY_REQUEST_ERR
+        case 3:
+        retval = (ex.number == -2147467259);
+        break;
+
+
+        //
+        //  INVALID_CHARACTER_ERR
+        case 5:
+        retval = (ex.description.search(".*may not contain.*") >= 0);
+        break;
+
+        //
+        //   NO_MODIFICATION_ALLOWED_ERR
+        case 7:
 		retval = (ex.description.search(".*read.*only.*") >= 0);
+        break;
+
+        //
+        //   NOT_FOUND_ERR
+        //
+        case 8:
+        retval = (ex.number == -2147024809 || ex.number == -2147467259);
+        break;
+
+        //
+        //   INUSE_ATTRIBUTE_ERR
+        case 10:
+        retval = (ex.description.search(".*must be removed.*") >= 0);
+        break;
 	}
 	return retval;
   }

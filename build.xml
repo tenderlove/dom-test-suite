@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.21  2001-09-05 16:41:04  dom-ts-4
+Revision 1.22  2001-09-05 17:33:42  dom-ts-4
+IE5 support.
+
+Revision 1.21  2001/09/05 16:41:04  dom-ts-4
 Support for JsUnit and IE5.
 
 Revision 1.20  2001/09/05 16:39:55  dom-ts-4
@@ -459,6 +462,9 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom1-core-gen-jsunit" depends="jsunit-init,dom1-interfaces,dom1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level1/core"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level1/core"/>
+    <copy todir="${build.dir}/ecmascript/level1/core">
+		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
+    </copy>
 
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${build.dir}/ecmascript/level1/core" 
