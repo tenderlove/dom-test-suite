@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="newElem" type="Element"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="elem" obj="elemList" index="1" interface="NodeList"/>
 <createElementNS var="newElem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>

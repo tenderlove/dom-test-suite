@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Element"/>
 <var name="attrValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <removeAttributeNS obj="testAddr" namespaceURI="namespaceURI" localName="localName"/>

@@ -62,7 +62,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeImp2" type="Node"/>
 <var name="nodeValueImp2" type="DOMString"/>
 <var name="nodeValueImp3" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <implementation var="domImpl" obj="doc" />
 <createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="docTypeNull"/>
 <getElementsByTagName var="addressList" obj="doc" tagname='"address"' interface="Document"/>

@@ -42,8 +42,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="name" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="aNewDoc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="aNewDoc" href="staffNS" willBeModified="true"/>
 <getElementById interface="Document" obj="aNewDoc" var="element" elementId='"CANADA"'/>
 <importNode obj="doc" var="aNode" importedNode="element" deep="true"/>
 <hasChildNodes obj="aNode" var="hasChild"/>

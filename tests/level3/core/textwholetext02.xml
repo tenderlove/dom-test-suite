@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newTextNode" type="Text"/>
 <var name="WholeText" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"name"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <createTextNode var="newTextNode" obj="doc" data='"New Text"'/>

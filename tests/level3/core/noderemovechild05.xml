@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nullSysId" type="DOMString" isNull="true"/>
 <var name="appendedChild" type="Node"/>
 <var name="removedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="docType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
 <appendChild obj="doc" var="appendedChild" newChild="docType"/>

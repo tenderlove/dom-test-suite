@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedNode" type="Node"/>
 <var name="removedName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="elem" obj="parentList" index="3" interface="NodeList"/>
 <attributes var="attrsMap" obj="elem"/>

@@ -33,9 +33,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docFragment" type="DocumentFragment"/>
 <var name="childList" type="NodeList"/>
@@ -56,7 +53,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="firstChildType" type="int"/>
 <var name="firstChildName" type="DOMString"/>
 <var name="firstChildValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createDocumentFragment var="docFragment" obj="doc"/>
 <createElement var="parent" obj="doc" tagName='"parent"'/>
 <createElement var="child" obj="doc" tagName='"child"'/>

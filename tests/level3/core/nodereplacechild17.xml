@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="data" type="DOMString"/>
 <var name="target" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <createComment var="cmt" obj="doc" data='"Comment"'/>
 <createProcessingInstruction var="pi" obj="doc" target='"target"' data='"Comment"'/>

@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newNode" type="Attr"/>
 <var name="childList" type="NodeList"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
 <item var="element" obj="childList" index="2" interface="NodeList"/>
 <firstChild var="refNode" obj="element" interface="Node"/>

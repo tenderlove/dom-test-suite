@@ -41,8 +41,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="commentImport" type="Node"/>
 <var name="commentToImport" type="Node"/>
 <var name="nodeValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="docImp" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="docImp" href="staffNS" willBeModified="true"/>
 <createComment var="commentToImport" obj="doc" data='"Document.importNode test for a COMMENT_NODE"'/>
 <importNode  var="commentImport" obj="doc" importedNode="commentToImport" deep="true"/>
 <nodeValue var="nodeValue" obj="commentImport"/>

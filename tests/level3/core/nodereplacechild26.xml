@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="firstChild" type="Node"/>
 <var name="nodeName" type="DOMString"/>
 <var name="replaced" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="elem" obj="childList" index="0" interface="NodeList"/>

@@ -42,8 +42,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="piToImport" type="ProcessingInstruction"/>
 <var name="PIData" type="DOMString"/>
 <var name="PITarget" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="docImp" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="docImp" href="staffNS" willBeModified="true"/>
 <createProcessingInstruction var="piToImport" obj="doc" target='"Target"' data='"Data"'/>
 <importNode  var="piImport" obj="doc" importedNode="piToImport" deep="false"/>
 <target var="PITarget" obj="piImport" interface="ProcessingInstruction"/>

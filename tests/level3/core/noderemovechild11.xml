@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedTxt" type="Text"/>
 <var name="appendedChild" type="Node"/>
 <var name="removedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <createTextNode var="txt" obj="doc" data='"TEXT"'/>
 <appendChild obj="docFrag" var="appendedChild" newChild="txt"/>

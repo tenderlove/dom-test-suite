@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="entName" type="DOMString"/>
 <var name="removed" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createEntityReference var="eRef" obj="doc" name='"ent4"'/>
 <firstChild obj="eRef" var="elem" interface="Node"/>
 <assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_noderemovechild14">

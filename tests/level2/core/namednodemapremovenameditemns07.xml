@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Node"/>
 <var name="attribute" type="Attr"/>
 <var name="elementList" type="NodeList"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="elementList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
 <item var="element" obj="elementList" index="1" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>

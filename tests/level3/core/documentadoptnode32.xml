@@ -35,8 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newCDATA" type="Node"/>
 <var name="adoptedCDATA" type="Node"/>
 <var name="nodeValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="docAdopter" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="docAdopter" href="staffNS" willBeModified="true"/>
 <createCDATASection var="newCDATA" obj="doc" data='"Document.adoptNode test for a CDATASECTION_NODE"'/>
 <adoptNode  var="adoptedCDATA" obj="docAdopter" source="newCDATA"/>
 <nodeValue var="nodeValue" obj="adoptedCDATA"/>

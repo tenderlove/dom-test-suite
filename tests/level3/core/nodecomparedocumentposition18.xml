@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txt1Position" type="int"/>
 <var name="txt2Position" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createTextNode var="txt1" obj="doc" data='"T1"'/>
 <createTextNode var="txt2" obj="doc" data='"T2"'/>

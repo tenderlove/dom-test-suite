@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docElem" type="Element"/>
 <var name="newElem" type="Element"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createElementNS var="newElem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
 <assertDOMException id="HIERARCHY_REQUEST_ERR_nodeinsertbefore06">

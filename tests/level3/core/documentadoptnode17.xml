@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityMap" type="NamedNodeMap"/>
 <var name="ent" type="Entity"/>
 <var name="adoptedEnt" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entityMap" obj="docType"/>
 <getNamedItem var="ent" obj="entityMap" name='"ent1"'/>

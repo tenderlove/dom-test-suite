@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removed" type="CDATASection"/>
 <var name="removedValue" type="DOMString"/>
 <var name="removedNode" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document" />
 <item var="parent" obj="parentList" index="1" interface="NodeList"/>
 <lastChild var="child" obj="parent" interface="Node"/>

@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="textNode" type="Text"/>
 <var name="replacedText" type="Text"/>
 <var name="wholeText" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createTextNode var="textNode" obj="doc" data='"New Text"'/>
 <replaceWholeText obj="textNode" var="replacedText" content='"
 a	b	c	b	"'/>

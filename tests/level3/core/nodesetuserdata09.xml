@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="returned" type="DOMUserData"/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
 <var name="retUserData" type="DOMUserData"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <setUserData obj="docElem" var="retUserData" key='"Key1"' data="doc" handler="nullHandler"/>
 <getUserData var="returned" obj="doc" key='"Key1"'/>

@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeissamenode06</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isSameNode check if 2 Document Element nodes that reference the same object are 
 	the same.
 </description>
@@ -31,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="element1" type="Element"/>

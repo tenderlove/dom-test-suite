@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <var name="nodeValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"l2:root"' doctype="docType"/>
 <getElementsByTagNameNS var="childList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>

@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newChild" type="EntityReference"/>
 <var name="replaced" type="Node"/>
 <var name="nodeValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createEntityReference var="newChild" obj="doc" name='"ent4"' />
 <getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="elem" obj="childList" index="3" interface="NodeList"/>

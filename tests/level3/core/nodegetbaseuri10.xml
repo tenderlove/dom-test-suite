@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri10</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Append as a child of this documentElement a new Processing Instruction.  Using getBaseURI 
 	check if the baseURI attribute of the new Processing Instruction node is "'http://www.w3.org/DOM/L3Test".
 </description>
@@ -36,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newPI" type="ProcessingInstruction"/>
 <var name="baseURI" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNSBaseURI" willBeModified="false"/>
+<load var="doc" href="staffNSBaseURI" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createProcessingInstruction var="newPI" obj="doc" target='"TARGET"' data='"DATA"'/>
 <appendChild obj="docElem" var="appendedChild" newChild="newPI"/>

@@ -45,7 +45,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="replaced" type="Node"/>
 <var name="nodeName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:parent"'/>
 <createElementNS var="oldChild" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:oldChild"'/>
 <createElementNS var="newElement" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:newChild"'/>

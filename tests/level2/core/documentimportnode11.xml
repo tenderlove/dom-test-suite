@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="success" type="boolean"/>
 <var name="nodeNameOrig" type="DOMString"/>
 <var name="nodeNameImported" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElement" obj="doc"/>
 <importNode var="imported" obj="doc" importedNode="docElement" deep="false"/>
 <hasChildNodes var="success" obj="imported"/>

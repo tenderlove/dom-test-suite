@@ -31,7 +31,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docFrag" type="DocumentFragment"/>
 <var name="elem" type="Element"/>
@@ -43,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="pi" type="ProcessingInstruction"/>
 <var name="textContent" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:elem"'/>
 <createTextNode var="txt" obj="doc" data='"Text "' />

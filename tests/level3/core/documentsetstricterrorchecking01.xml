@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newAttr" type="Attr"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <strictErrorChecking  obj="doc" value="false"/>
 <strictErrorChecking  obj="doc" value="true"/>
 <assertDOMException id="INVALID_CHARACTER_ERR_documentsetstricterrorchecking01">

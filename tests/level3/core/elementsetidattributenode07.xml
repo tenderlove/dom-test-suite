@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    <var name="id" type="boolean" value="false"/>
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
-  <load var="doc" href="staffNS" willBeModified="false"/>
+  <load var="doc" href="staffNS" willBeModified="true"/>
   <getElementsByTagNameNS var="elemList1" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
   <getElementsByTagNameNS var="elemList2" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
   <item var="addressElem1" obj="elemList1" index="1" interface="NodeList"/>

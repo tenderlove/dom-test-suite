@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="test" type="DOMUserData" isNull="true"/>
 <var name="str" type="DOMString" value='"Junk"'/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <setUserData var="prevUserData" obj="doc" key='"something"' data="test" handler="nullHandler"/>
 <assertNull  actual="prevUserData"  id="nodesetuserdata02"/>
 </test>

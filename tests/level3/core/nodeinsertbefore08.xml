@@ -38,8 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docElem" type="Element"/>
 <var name="newComment" type="Comment"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="docAlt" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="docAlt" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="docAlt"/>
 <createComment var="newComment" obj="doc" data='"Comment"' />
 <assertDOMException id="NOT_FOUND_ERR_nodeinsertbefore08">

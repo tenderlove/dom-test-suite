@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newPI" type="ProcessingInstruction"/>
 <var name="insertedPI" type="ProcessingInstruction"/>
 <var name="target" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createComment var="newComment" obj="doc" data='"Comment"' />
 <createProcessingInstruction var="newPI" obj="doc" target='"PITarget"' data='"PIData"' />

@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attribute" type="Attr"/>
 <var name="elementList" type="NodeList"/>
 <var name="nullNS" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagName var="elementList" obj="doc" tagname='"emp:employee"' interface="Document"/>
 <item var="element" obj="elementList" index="0" interface="NodeList"/>
 <getAttributeNodeNS var="attribute" obj="element" namespaceURI="nullNS" localName='"defaultAttr"'/>

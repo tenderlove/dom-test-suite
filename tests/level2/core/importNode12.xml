@@ -45,8 +45,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityName" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="aNewDoc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="aNewDoc" href="staffNS" willBeModified="true"/>
 <doctype obj="aNewDoc" var="doc1Type"/>
 <entities obj="doc1Type" var="entityList"/>
 <getNamedItem obj="entityList" var="entity2" name='"ent4"'/>

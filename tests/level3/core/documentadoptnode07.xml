@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="adoptedDoc" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <assertDOMException id="NOT_SUPPORTED_ERR_documentadoptnode07">
 <NOT_SUPPORTED_ERR>
 <adoptNode var="adoptedDoc" obj="doc" source="doc"/>

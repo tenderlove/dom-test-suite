@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="notation" type="Notation"/>
 <var name="newNode" type="Node"/>
 <var name="nullNS" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <notations var="notations" obj="docType"/>

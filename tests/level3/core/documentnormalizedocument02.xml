@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="userData" type="DOMUserData" />
 -->
 <var name="domConfig" type="DOMConfiguration"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="cdata" obj="elemName" interface="Node"/>

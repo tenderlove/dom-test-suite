@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="docFrag" type="DocumentFragment"/>
 <var name="renamedNode" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <assertDOMException id="documentrenamenode26_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>

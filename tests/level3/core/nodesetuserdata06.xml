@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="retUserData" type="DOMUserData"/>
 <var name="success" type="boolean"/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <getNamedItem var="entity" obj="entities" name='"ent4"'/>

@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrImp" type="Attr"/>
 <var name="nodeName" type="DOMString"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="employeeElem" obj="childList" index="3" interface="NodeList"/>
 <adoptNode var="adoptedNode" obj="doc" source="employeeElem"/>

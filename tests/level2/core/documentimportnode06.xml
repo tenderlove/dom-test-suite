@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docImported" type="Document"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <assertDOMException id="documentimportnode06">
 <NOT_SUPPORTED_ERR>
 <importNode var="docImported" obj="doc" importedNode="doc" deep="false"/>

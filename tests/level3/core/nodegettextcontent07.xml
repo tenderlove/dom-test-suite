@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegettextcontent07</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Invoke the method getTextContent on a new Attr node and check if the value returned 
 	is the attributes Value.
 </description>
@@ -36,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="attr" type="Attr"/>
 <var name="textContent" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <setAttributeNS obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"' value='"NA"'/>

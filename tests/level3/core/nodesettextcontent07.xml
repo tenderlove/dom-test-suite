@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="txt" type="Text"/>
 <var name="textContent" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="elemList" obj="doc" localName='"employeeId"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <firstChild var="txt" obj="elem" interface="Node"/>

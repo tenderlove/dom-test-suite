@@ -38,8 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="anotherDoc" type="Document"/>
 <var name="node" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="anotherDoc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="anotherDoc" href="staffNS" willBeModified="true"/>
 <assertDOMException id="throw_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>
 <importNode obj="doc" var="node" importedNode="anotherDoc" deep="false"/>

@@ -45,7 +45,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <var name="nodeValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="childList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
 <item var="element" obj="childList" index="1" interface="NodeList"/>
 <getAttributeNode var="attr" obj="element" name='"defaultAttr"'/>

@@ -52,7 +52,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeNameImp" type="DOMString"/>
 <var name="systemIdImp" type="DOMString"/>
 <var name="notationNameImp" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <implementation var="domImpl" obj="doc" />
 <doctype var="docType" obj="doc"/>
 <createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="docTypeNull"/>

@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="success" type="boolean"/>
 <var name="nodeNameOrig" type="DOMString"/>
 <var name="nodeName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElement" obj="doc"/>
 <adoptNode var="adoptedNode" obj="doc" source="docElement"/>
 <hasChildNodes var="success" obj="adoptedNode"/>

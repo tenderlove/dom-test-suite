@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="elementList" type="NodeList"/>
 <var name="attribute" type="Attr"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagName var="elementList" obj="doc" tagname='"employee"' interface="Document"/>
 <item var="element" obj="elementList" index="0" interface="NodeList"/>
 <getAttributeNode var="attribute" obj="element" name='"xmlns"'/>

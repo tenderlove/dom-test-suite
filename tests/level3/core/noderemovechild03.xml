@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docElem" type="Element"/>
 <var name="removedChild" type="Element"/>
 <var name="removed" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <removeChild obj="doc" var="removed" oldChild="docElem" />
 <documentElement var="removedChild" obj="doc"/>

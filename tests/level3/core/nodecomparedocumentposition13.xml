@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition13</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using compareDocumentPosition check if the Document node contains and precedes the new Comment node, 
 	and if the Comment node is contained and follows the Document node.
 </description>
@@ -39,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="documentPosition" type="int"/>
 <var name="commentPosition" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createComment var="comment" obj="doc" data='"Another Comment"'/>
 <getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
 <item var="elem" obj="elemList" index="1" interface="NodeList"/>

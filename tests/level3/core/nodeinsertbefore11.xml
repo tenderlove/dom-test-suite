@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="inserted" type="Node"/>
 <var name="insertedVal" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <createElementNS var="elem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
 <createProcessingInstruction var="pi" obj="doc" target='"PITarget"' data='"PIData"' />

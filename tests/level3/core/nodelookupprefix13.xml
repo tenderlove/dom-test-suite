@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupprefix13</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Invoke lookupPrefix on a Element's new Text node, which has a namespace attribute declaration 
 	with a namespace prefix in its parent Element node and check if the value of the prefix
 	returned by using its namespaceURI as a parameter is valid.
@@ -39,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txt" type="Text"/>
 <var name="prefix" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:Text"'/>
 <createTextNode var="txt" obj="doc" data='"Text"'/>

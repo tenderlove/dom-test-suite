@@ -44,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="renamedPi" type="Node"/>
 <var name="renamedEntRef" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:newD"' doctype="nullDocType"/>
 <createTextNode var="text" obj="newDoc" data='"text"'/>

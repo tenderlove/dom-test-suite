@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementName" type="Element"/>
 <var name="textNode" type="Text"/>
 <var name="hasWhitespace" type="boolean"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"name"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <firstChild var="textNode" obj="elementName" interface="Node"/>

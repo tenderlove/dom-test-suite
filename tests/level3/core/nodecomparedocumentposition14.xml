@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition14</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using compareDocumentPosition check if the DocumentFragment node contains and precedes 	an Element 
 	node appended to it, and that the Element node is contained and follows the DocumentFragment node.
 </description>
@@ -38,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docFragPosition" type="int"/>
 <var name="docFragChildPosition" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <appendChild obj="docFrag" var="appendedChild" newChild="docElem" />

@@ -39,8 +39,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="nodeName" type="DOMString"/>
 <var name="replaced" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="doc2" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc2" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createElementNS var="elem" obj="doc2" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:elem"'/>
 <assertDOMException id="WRONG_DOCUMENT_ERR_nodereplacechild08">

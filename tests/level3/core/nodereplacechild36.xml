@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newChild" type="Text"/>
 <var name="nodeValue" type="DOMString"/>
 <var name="replaced" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createAttributeNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"'/>
 <createEntityReference var="oldChild" obj="doc" name='"ent4"' />
 <createTextNode var="newChild" obj="doc" data='"Text"' />

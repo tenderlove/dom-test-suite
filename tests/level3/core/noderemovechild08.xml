@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedCmt" type="Comment"/>
 <var name="data" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createComment var="comment" obj="doc" data='"Comment"'/>
 <appendChild obj="doc" var="appendedChild" newChild="comment"/>
 <removeChild var="removedCmt" obj="doc" oldChild="comment" />

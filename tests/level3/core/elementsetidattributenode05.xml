@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addressElem" type="Element"/>
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="elemList1" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
 <getElementsByTagNameNS var="elemList2" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
 <item var="nameElem" obj="elemList1" index="1" interface="NodeList"/>

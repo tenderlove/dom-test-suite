@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <var name="lastChild" type="Node"/>
 <var name="commentValue" type="DOMString"/> 
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createComment obj="doc" var="newCommentNode" data='"This is a new Comment node"'/>
 <documentElement obj="doc" var="docElem" interface="Document"/>
 <appendChild obj="docElem" var="appendedChild" newChild="newCommentNode" interface="Node"/>

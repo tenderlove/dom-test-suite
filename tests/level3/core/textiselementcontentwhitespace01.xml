@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="newText" type="Text"/>
 <var name="hasWhitespace" type="boolean"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createTextNode var="newText" obj="doc" data='"This   	contains
 white s p a c e      "'/>
 <isElementContentWhitespace obj="newText" var="hasWhitespace"/>

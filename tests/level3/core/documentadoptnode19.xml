@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="notationMap" type="NamedNodeMap"/>
 <var name="notation" type="Notation"/>
 <var name="adoptedNotaion" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <notations var="notationMap" obj="docType"/>
 <getNamedItem var="notation" obj="notationMap" name='"notation1"'/>
