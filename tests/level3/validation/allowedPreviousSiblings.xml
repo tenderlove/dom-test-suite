@@ -21,8 +21,7 @@ PURPOSE.
 <creator>Kongyi Zhou</creator>
 <description>
     The method getAllowedPreviousSiblings return the NameList of elements that may be the
-    previous siblings
-    should return NameList containing name 'title'.   
+    previous siblings, should return empty list.
 </description>
 <contributor>Oracle Corp.</contributor>
 <date qualifier="created">2003-03-01</date>
@@ -41,5 +40,5 @@ PURPOSE.
 <allowedPreviousSiblings obj="elem" var="nlist"/>
 <assertNotNull actual="nlist" id="allowedPreviousSiblingsNotNull"/>
 <getName interface="NameList" obj="nlist" index="0" var="childname"/>
-<assertEquals actual="childname" expected='"title"' id="allowedPreviousSiblings" ignoreCase="false"/>
+<assertNull actual="childname" id="noPreviousSiblings"/>
 </test>

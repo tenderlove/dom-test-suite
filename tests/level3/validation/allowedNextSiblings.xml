@@ -20,9 +20,8 @@ PURPOSE.
 <title>allowedNextSiblings</title>
 <creator>Kongyi Zhou</creator>
 <description>
-    The method getAllowedNextSiblings return the NameList of elements that may be the
-    following siblings
-    should return NameList containing name 'ISBN'.   
+    The method getAllowedNextSiblings return the NameList of elements that may be 
+    inserted, should return empty list.   
 </description>
 <contributor>Oracle Corp.</contributor>
 <date qualifier="created">2003-03-01</date>
@@ -41,5 +40,6 @@ PURPOSE.
 <allowedNextSiblings obj="elem" var="nlist"/>
 <assertNotNull actual="nlist" id="allowedNextSiblingsNotNull"/>
 <getName interface="NameList" obj="nlist" index="0" var="childname"/>
-<assertEquals actual="childname" expected='"ISBN"' ignoreCase="false" id="allowedNextSiblings"/>
+<!--  since ISBN is already present, no insertable sibling   -->
+<assertNull actual="childName" id="noAllowableNextSibling"/>
 </test>
