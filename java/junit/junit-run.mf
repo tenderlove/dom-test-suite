@@ -4,8 +4,8 @@ Class-Path: dom1-core.jar junit.jar
 
 Name: org/w3c/domts/JUnitRunner.class
 Specification-Title: JUnit adapter for DOM Test Suite
-Specification-Version: 0.0.1
+Specification-Version: 1.0
 Specification-Vendor: World Wide Consortium
 Implementation-Vendor: World Wide Consortium
-Implementation-Version: 0.0.1
+Implementation-Version: 1.0
 Implementation-Title: JUnit adapter for DOM Test Suite

@@ -4,8 +4,8 @@ Class-Path:  xmlParserAPIs.jar xercesImpl.jar xerces.jar xml4j.jar xmlparserv2.j
 
 Name: org/w3c/domts/level1/core
 Specification-Title: W3C/NIST Test Suite for DOM Level 1 Core
-Specification-Version: 0.0.1
+Specification-Version: 1.0
 Specification-Vendor: World Wide Web Consortium
 Implementation-Vendor: World Wide Web Consortium 
-Implementation-Version: 0.0.1
+Implementation-Version: 1.0
 Implementation-Title: W3C/NIST Test Suite for DOM Level 1 Core
