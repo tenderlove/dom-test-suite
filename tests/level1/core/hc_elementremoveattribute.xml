@@ -27,7 +27,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!--  DOM WG opinion on default attributes -->
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html"/>
 </metadata>
-<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Element"/>

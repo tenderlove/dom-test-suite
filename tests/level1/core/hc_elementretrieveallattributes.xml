@@ -32,7 +32,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=184"/>
 </metadata>
-<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="addressList" type="NodeList"/>
 <var name="testAddress" type="Node"/>
