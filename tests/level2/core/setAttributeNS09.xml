@@ -46,25 +46,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="resultNamespaceURI" type="DOMString"/>
 <var name="resultLocalName" type="DOMString"/>
 <var name="resultPrefix" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"newValue"</member>
-<member>"http://www.newattr.com"</member>
-<member>"newAttr"</member>
-<member>"emp"</member>
-</var>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;emp:address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
 <setAttributeNS obj="testAddr" namespaceURI="namespaceURI" qualifiedName="qualifiedName" value="&quot;newValue&quot;"/>
 <getAttributeNodeNS obj="testAddr" var="addrAttr" namespaceURI="namespaceURI" localName="localName"/>
 <getAttributeNS obj="testAddr" var="resultAttr" namespaceURI="namespaceURI" localName="localName"/>
+<assertEquals actual="resultAttr" expected='"newValue"' id="attrValue" ignoreCase="false"/>
 <namespaceURI obj="addrAttr" var="resultNamespaceURI"/>
+<assertEquals actual="resultNamespaceURI" expected='"http://www.newattr.com"' id="nsuri" ignoreCase="false"/>
 <localName obj="addrAttr" var="resultLocalName"/>
+<assertEquals actual="resultLocalName" expected='"newAttr"' id="lname" ignoreCase="false"/>
 <prefix obj="addrAttr" var="resultPrefix"/>
-<append collection="result" obj="resultAttr"/>
-<append collection="result" obj="resultNamespaceURI"/>
-<append collection="result" obj="resultLocalName"/>
-<append collection="result" obj="resultPrefix"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="resultPrefix" expected='"emp"' id="prefix" ignoreCase="false"/>
 </test>
