@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom14</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if classType is derived from itself.
+Check how classType is derived from itself.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -46,6 +46,15 @@ Check if classType is derived from itself.
 <typeName var="typeName" obj="typeInfo"/>
 <assertEquals actual="typeName" expected='"classType"' ignoreCase="false" id="name"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"classType"' derivationMethod="1"/>
+<assertTrue actual="isDerived" id="derivedFromSelfRestriction"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"classType"' derivationMethod="14"/>
+<assertFalse actual="isDerived" id="notDerivedFromSelfOther"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
 	typeNameArg='"classType"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="notDerivedFromSelf"/>
+<assertTrue actual="isDerived" id="derivedFromSelfAll"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"classType"' derivationMethod="0"/>
+<assertTrue actual="isDerived" id="derivedFromSelfAny"/>
 </test>

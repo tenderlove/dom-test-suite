@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom02</title>
 <creator>Curt Arnold</creator>
 <description>
-Check that isDerivedFrom does not consider xsd:string to be derived from itself.
+Check how xsd:string is derived from itself.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -43,6 +43,15 @@ Check that isDerivedFrom does not consider xsd:string to be derived from itself.
 <!--  type info should be xsd:string  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
+	typeNameArg='"string"' derivationMethod="1"/>
+<assertTrue actual="isDerived" id="derivedFromSelfRestriction"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
+	typeNameArg='"string"' derivationMethod="14"/>
+<assertFalse actual="isDerived" id="derivedFromSelfOther"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
+	typeNameArg='"string"' derivationMethod="0"/>
+<assertTrue actual="isDerived" id="derivedFromSelfAny"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"string"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="notDerivedFromSelf"/>
+<assertTrue actual="isDerived" id="derivedFromSelfAll"/>
 </test>

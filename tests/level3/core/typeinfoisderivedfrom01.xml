@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom01</title>
 <creator>Curt Arnold</creator>
 <description>
-DTD types always return false for isDerivedFrom.
+DTD types are only considered to derive by restriction from themselves.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -42,9 +42,21 @@ DTD types always return false for isDerivedFrom.
 <schemaTypeInfo var="typeInfo" obj="attr" interface="Attr"/>
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/TR/REC-xml"'
-	typeNameArg='"CDATA"' derivationMethod="0"/>
-<assertFalse actual="isDerived" id="isDerived0"/>	
+	typeNameArg='"CDATA"' derivationMethod="1"/>
+<assertTrue actual="isDerived" id="isDerivedRestriction"/>	
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/TR/REC-xml"'
-	typeNameArg='"CDATA"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="isDerived15"/>	
+	typeNameArg='"CDATA"' derivationMethod="14"/>
+<assertFalse actual="isDerived" id="isDerivedOther"/>	
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/TR/REC-xml"'
+	typeNameArg='"CDATA"' derivationMethod="0"/>
+<assertTrue actual="isDerived" id="isDerivedAny"/>	
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
+	typeNameArg='"string"' derivationMethod="0"/>
+<assertFalse actual="isDerived" id="isDerivedXSDString"/>	
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
+	typeNameArg='"anySimpleType"' derivationMethod="0"/>
+<assertFalse actual="isDerived" id="isDerivedXSDAnySimpleType"/>	
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
+	typeNameArg='"anySimpleType"' derivationMethod="0"/>
+<assertFalse actual="isDerived" id="isDerivedXSDAnyType"/>	
 </test>

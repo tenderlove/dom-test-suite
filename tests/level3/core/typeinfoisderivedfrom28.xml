@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom28</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if strongType is derived from itself.
+Check how strongType is derived from itself.
 </description>
 <date qualifier="created">2004-01-13</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -42,6 +42,15 @@ Check if strongType is derived from itself.
 <typeName var="typeName" obj="typeInfo"/>
 <assertEquals actual="typeName" expected='"strongType"' ignoreCase="false" id="typeName"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"strongType"' derivationMethod="1"/>
+<assertTrue actual="isDerived" id="notDerivedFromSelfRestriction"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"strongType"' derivationMethod="14"/>
+<assertFalse actual="isDerived" id="notDerivedFromSelfOther"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
 	typeNameArg='"strongType"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="notDerivedFromSelf"/>
+<assertTrue actual="isDerived" id="notDerivedFromSelfAll"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"strongType"' derivationMethod="0"/>
+<assertTrue actual="isDerived" id="notDerivedFromSelfAny"/>
 </test>

@@ -42,6 +42,15 @@ Check if emType is derived from itself.
 <typeName var="typeName" obj="typeInfo"/>
 <assertEquals actual="typeName" expected='"emType"' ignoreCase="false" id="typeName"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"emType"' derivationMethod="1"/>
+<assertTrue actual="isDerived" id="derivedFromSelfByRestriction"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"emType"' derivationMethod="14"/>
+<assertFalse actual="isDerived" id="notDerivedFromSelfOtherMethod"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
+	typeNameArg='"emType"' derivationMethod="0"/>
+<assertTrue actual="isDerived" id="derivedFromSelfByAny"/>
+<isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/1999/xhtml"'
 	typeNameArg='"emType"' derivationMethod="15"/>
-<assertFalse actual="isDerived" id="notDerivedFromSelf"/>
+<assertTrue actual="isDerived" id="derivedFromSelfByAll"/>
 </test>

@@ -42,9 +42,9 @@ Check if emType is derived from xsd:ID by restriction.
 <typeName var="typeName" obj="typeInfo"/>
 <assertEquals actual="typeName" expected='"emType"' ignoreCase="false" id="typeName"/>
 
-<!--  emType is derived by restriction from xsd:ID since 
+<!--  emType is not derived by restriction from xsd:ID even though 
 		every memberType in the union is derived by restriction from xsd:ID   -->
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"ID"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromID"/>
+<assertFalse actual="isDerived" id="derivedFromID"/>
 </test>

@@ -30,20 +30,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 
 <implementationAttribute name="schemaValidating" value="true"/>
-<implementationAttribute name="validating" value="true"/>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="elemTypeInfo" type="Element"/>
 <var name="elemList" type="NodeList"/>
-<var name="supElem" type="Element"/>
+<var name="strongElem" type="Element"/>
 <var name="attrTypeInfo" type="TypeInfo"/>
 <var name="typeName" type="DOMString"/>
 <var name="retValue" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName var="elemList" obj="doc" tagname='"sup"' interface="Document"/>
-<item var="supElem" obj="elemList" index="0" interface="NodeList"/>
-<schemaTypeInfo var="elemTypeInfo" obj="supElem" interface="Element"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
+<item var="strongElem" obj="elemList" index="0" interface="NodeList"/>
+<schemaTypeInfo var="elemTypeInfo" obj="strongElem" interface="Element"/>
 <isDerivedFrom obj="elemTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"' typeNameArg='"string"' derivationMethod="8"/>
-<assertTrue actual="retValue" id="typeinfoisderivedfrom65" />
+<assertTrue actual="retValue" id="lisrDerivedFromString" />
 </test>

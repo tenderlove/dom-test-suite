@@ -19,10 +19,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom64</title>
 <creator>IBM</creator>
 <description>
-	The isDerivedFrom method checks if this TypeInfo derives from the specified ancestor type. 
-	
-	Get schemaTypeInfo on a simple type attribute that belongs to a document with an XML schema.
-	Invoke method isDerivedFrom with derivation method restriction and verify that the value returned is true.
+Check that the simpleType of an attributes derives by restriction from itself
+and from its base type. 
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-10-31</date>
@@ -30,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 
 <implementationAttribute name="schemaValidating" value="true"/>
-<implementationAttribute name="validating" value="true"/>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="elemList" type="NodeList"/>
@@ -46,5 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getAttributeNode var="classAttr" obj="acElem" name='"class"'/>
 <schemaTypeInfo var="attrTypeInfo" obj="classAttr" interface="Attr"/>
 <isDerivedFrom obj="attrTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/1999/xhtml"' typeNameArg='"classType"' derivationMethod="1"/>
-<assertTrue actual="retValue" id="typeinfoisderivedfrom64" />
+<assertTrue actual="retValue" id="derivedFromClassType" />
+<isDerivedFrom obj="attrTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"' typeNameArg='"string"' derivationMethod="1"/>
+<assertTrue actual="retValue" id="derivedFromString" />
 </test>
