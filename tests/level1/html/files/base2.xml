@@ -4,12 +4,12 @@
    "xhtml1-frameset.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<base href="http://xw2k.sdct.itl.nist.gov/brady/dom/" target="Frame1"/>
+<base href="about:blank" target="Frame1"/>
 <title>NIST DOM HTML Test - Base2</title>
 </head>
 <frameset cols="20, 80"  onload="parent.loadComplete()">
 <frameset rows="100, 200">
-<frame longdesc="http://www.w3.org/DOM/Test/" marginheight="10" marginwidth="5" noresize="noresize" name="Frame1" frameborder="1" scrolling="yes" src="right.png" />
+<frame marginheight="10" marginwidth="5" noresize="noresize" name="Frame1" frameborder="1" scrolling="yes" src="right.png" />
 </frameset>
 <frame src="w3c_main.png" />
 </frameset>

@@ -3,7 +3,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     of this image or frame.
 
     Retrieve the longDesc attribute of the first IFRAME element and examine
-    it's value.  
+    its value.  
 </description>
 <contributor>Rick Rivello</contributor>
 <date qualifier="created">2002-05-08</date>
@@ -40,5 +40,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <longDesc interface="HTMLIFrameElement" obj="testNode" var="vlongdesc"/>
-<assertURIEquals actual="vlongdesc" path='"//www.w3.org/DOM/Test/"' id="longdescLink"/>
+<assertEquals actual="vlongdesc" expected='"about:blank"' ignoreCase="false" id="longdescLink"/>
 </test>

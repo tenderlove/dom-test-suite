@@ -28,6 +28,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLAnchorElement10.xml"/>
      <suite.member href="HTMLAnchorElement11.xml"/>
      <suite.member href="HTMLAnchorElement12.xml"/>
+     <suite.member href="HTMLAnchorElement13.xml"/>
+     <suite.member href="HTMLAnchorElement14.xml"/>
      <suite.member href="HTMLAppletElement01.xml"/>
      <suite.member href="HTMLAppletElement02.xml"/>
      <suite.member href="HTMLAppletElement03.xml"/>
@@ -97,6 +99,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLDocument14.xml"/>
      <suite.member href="HTMLDocument15.xml"/>
      <suite.member href="HTMLDocument16.xml"/>
+     <suite.member href="HTMLDocument17.xml"/>
+     <suite.member href="HTMLDocument18.xml"/>
+     <suite.member href="HTMLDocument19.xml"/>
+     <suite.member href="HTMLDocument20.xml"/>
+     <suite.member href="HTMLDocument21.xml"/>
      <suite.member href="HTMLElement01.xml"/>
      <suite.member href="HTMLElement02.xml"/>
      <suite.member href="HTMLElement03.xml"/>
@@ -255,6 +262,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLFormElement06.xml"/>
      <suite.member href="HTMLFormElement07.xml"/>
      <suite.member href="HTMLFormElement08.xml"/>
+     <suite.member href="HTMLFormElement09.xml"/>
+     <suite.member href="HTMLFormElement10.xml"/>
      <suite.member href="HTMLFrameElement01.xml"/>
      <suite.member href="HTMLFrameElement02.xml"/>
      <suite.member href="HTMLFrameElement03.xml"/>
@@ -318,6 +327,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLInputElement16.xml"/>
      <suite.member href="HTMLInputElement17.xml"/>
      <suite.member href="HTMLInputElement18.xml"/>
+     <suite.member href="HTMLInputElement19.xml"/>
+     <suite.member href="HTMLInputElement20.xml"/>
+     <suite.member href="HTMLInputElement21.xml"/>
+     <suite.member href="HTMLInputElement22.xml"/>
      <suite.member href="HTMLIsIndexElement01.xml"/>
      <suite.member href="HTMLIsIndexElement02.xml"/>
      <suite.member href="HTMLIsIndexElement03.xml"/>
@@ -397,6 +410,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLScriptElement03.xml"/>
      <suite.member href="HTMLScriptElement04.xml"/>
      <suite.member href="HTMLScriptElement05.xml"/>
+     <suite.member href="HTMLScriptElement06.xml"/>
+     <suite.member href="HTMLScriptElement07.xml"/>
      <suite.member href="HTMLSelectElement01.xml"/>
      <suite.member href="HTMLSelectElement02.xml"/>
      <suite.member href="HTMLSelectElement03.xml"/>
@@ -410,6 +425,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLSelectElement11.xml"/>
      <suite.member href="HTMLSelectElement12.xml"/>
      <suite.member href="HTMLSelectElement13.xml"/>
+     <suite.member href="HTMLSelectElement14.xml"/>
+     <suite.member href="HTMLSelectElement15.xml"/>
+     <suite.member href="HTMLSelectElement16.xml"/>
+     <suite.member href="HTMLSelectElement17.xml"/>
+     <suite.member href="HTMLSelectElement18.xml"/>
+     <suite.member href="HTMLSelectElement19.xml"/>
      <suite.member href="HTMLStyleElement01.xml"/>
      <suite.member href="HTMLStyleElement02.xml"/>
      <suite.member href="HTMLStyleElement03.xml"/>
@@ -539,6 +560,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLTextAreaElement10.xml"/>
      <suite.member href="HTMLTextAreaElement11.xml"/>
      <suite.member href="HTMLTextAreaElement12.xml"/>
+     <suite.member href="HTMLTextAreaElement13.xml"/>
+     <suite.member href="HTMLTextAreaElement14.xml"/>
+     <suite.member href="HTMLTextAreaElement15.xml"/>
      <suite.member href="HTMLTitleElement01.xml"/>
      <suite.member href="HTMLUListElement01.xml"/>
      <suite.member href="HTMLUListElement02.xml"/>
@@ -567,6 +591,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="button09.xml"/>
      <suite.member href="dlist01.xml"/>
      <suite.member href="doc01.xml"/>
+     <suite.member href="hasFeature01.xml"/>
      <suite.member href="object01.xml"/>
      <suite.member href="object02.xml"/>
      <suite.member href="object03.xml"/>
