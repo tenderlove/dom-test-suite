@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9"/>
 <!--length attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=250"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -39,12 +40,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child" type="Node"/>
 <var name="strong" type="DOMString"/>
 <var name="length" type="int"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
 <attributes obj="testEmployee" var="attributes"/>
 <length var="length" obj="attributes" interface="NamedNodeMap"/>
+<if><contentType type="text/html"/>
 <assertEquals actual="length" expected="2" id="length" ignoreCase="false"/>
+<else>
+<assertEquals actual="length" expected="3" id="length" ignoreCase="false"/>
+<item var="child" index="2" obj="attributes" interface="NamedNodeMap"/>
+<assertNotNull actual="child" id="attr2"/>
+</else>
+</if>
 <item var="child" index="0" obj="attributes" interface="NamedNodeMap"/>
+<assertNotNull actual="child" id="attr0"/>
 <item var="child" index="1" obj="attributes" interface="NamedNodeMap"/>
+<assertNotNull actual="child" id="attr1"/>
+<item var="child" index="3" obj="attributes" interface="NamedNodeMap"/>
+<assertNull actual="child" id="attr3"/>
 </test>

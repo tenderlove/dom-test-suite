@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
 <!--length attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=250"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -41,5 +42,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
 <attributes obj="testEmployee" var="attributes"/>
 <length var="length" obj="attributes" interface="NamedNodeMap"/>
+<if><contentType type="text/html"/>
 <assertEquals actual="length" expected="2" id="length" ignoreCase="false"/>
+<else>
+<assertEquals actual="length" expected="3" id="length" ignoreCase="false"/>
+</else>
+</if>
 </test>
