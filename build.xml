@@ -53,6 +53,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 		<!--  patch wd-dom file to add missing xmlns:xlink attribute  -->
 		<patch patchfile="./wd-dom.patch" originalfile="${specs.dir}/Level-1/xml/wd-dom.xml"/>
+		<patch patchfile="./level-1-element.patch" originalfile="${specs.dir}/Level-1/xml/definitions/level-one-core/element.xml"/>
+
 	</target>
 
 	<target name="dom1-schema" depends="dom1-init">

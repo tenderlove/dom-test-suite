@@ -160,7 +160,11 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 </xsl:template>
 
 <xsl:template match="*[local-name()='hasFeature']" mode="testConditions">
+	<!--
+	       This should not produce if has-feature appears in the body of the test
+	-->
 	<xsl:param name="operator"/>
+	<xsl:if test="not(preceding-sibling::var)">
 	retval &amp;= <xsl:value-of select="$operator"/>domImpl.hasFeature("<xsl:value-of select="@feature"/>"
 	<xsl:choose>
 		<xsl:when test="@version">
@@ -172,6 +176,7 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 </xsl:text>
 		</xsl:otherwise>
 	</xsl:choose>
+	</xsl:if>
 </xsl:template>
 
 <!--  Java implementations are always signed   -->
@@ -305,11 +310,31 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 		<!--  explict value, just add it  -->
 		<xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 		<!--  member, allocate collection or list and populate it  -->
-		<xsl:when test="*[local-name()='member']">
+		<xsl:when test="@type='List' or @type='Collection'">
 			<xsl:text> = new ArrayList();
 </xsl:text>
 			<xsl:for-each select="*[local-name()='member']">
-     <xsl:value-of select="$varname"/>.add(<xsl:value-of select="text()"/>);
+     			<xsl:value-of select="$varname"/><xsl:text>.add(</xsl:text>
+				<xsl:choose>
+					<!--  member is not a number, just add it to collection  -->
+					<xsl:when test="string(number(text())) = 'NaN'">
+						<xsl:value-of select="text()"/>
+					</xsl:when>
+					<!--   if a decimal point, add it as a Double   -->
+					<xsl:when test="contains(text(),'.')">
+						<xsl:text>new Double(</xsl:text>
+						<xsl:value-of select="text()"/>
+						<xsl:text>)</xsl:text>
+					</xsl:when>
+					<!--   otherwise an Integer   -->
+					<xsl:otherwise>
+						<xsl:text>new Integer(</xsl:text>
+						<xsl:value-of select="text()"/>
+						<xsl:text>)</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:text>);
+</xsl:text>
 			</xsl:for-each>
 		</xsl:when>
 		<!--  virtual method  -->
@@ -341,7 +366,27 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 </xsl:template>
 
 <xsl:template match="*[local-name()='append']" mode="body">
-	<xsl:value-of select="@collection"/>.add(<xsl:value-of select="@obj"/><xsl:text>);
+	<xsl:value-of select="@collection"/>
+	<xsl:text>.add(</xsl:text>
+	<xsl:variable name="obj" select="@obj"/>
+	<xsl:variable name="type" select="ancestor::*[local-name()='test']/*[local-name()='var' and @name=$obj]/@type"/>
+	<xsl:choose>
+		<xsl:when test="$type = 'int'">
+			<xsl:text>new Integer(</xsl:text>
+			<xsl:value-of select="@obj"/>
+			<xsl:text>));</xsl:text>
+		</xsl:when>
+		<xsl:when test="$type = 'double'">
+			<xsl:text>new Double(</xsl:text>
+			<xsl:value-of select="@obj"/>
+			<xsl:text>));</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="@obj"/>
+			<xsl:text>);</xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
+	<xsl:text>
 </xsl:text>
 </xsl:template>
 
@@ -476,15 +521,16 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-		    {
-			_framework.assertTrue(
-			"<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
-			"<xsl:value-of select="@id"/>",
-			<xsl:apply-templates select="*[1]" mode="condition"/>
-			<xsl:text>);</xsl:text>
-			if(<xsl:apply-templates select="*[1]" mode="condition"/>) {
-			<xsl:apply-templates select="*[position() &gt; 1]" mode="body"/>
-			}
+	_framework.assertTrue(
+		"<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+		"<xsl:value-of select="@id"/>",
+		<xsl:apply-templates select="*[1]" mode="condition"/><xsl:text>);
+</xsl:text>
+	<xsl:if test="count(*) &gt; 1">
+	if(<xsl:apply-templates select="*[1]" mode="condition"/>) {
+		<xsl:apply-templates select="*[position() &gt; 1]" mode="body"/>
+	}
+</xsl:if>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
@@ -495,8 +541,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 	<xsl:choose>
 		<xsl:when test="@actual">
 			<xsl:text>_framework.assertFalse("</xsl:text>
-			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-			<xsl:value-of select="@id"/>",
+			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+			"<xsl:value-of select="@id"/>",
 			<xsl:value-of select="@actual"/>
 			<xsl:text>);
 </xsl:text>
@@ -512,16 +558,16 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 		<xsl:otherwise>
 			{
 			<xsl:text>_framework.assertFalse("</xsl:text>
-			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-			<xsl:value-of select="@id"/>
-			<xsl:text>",</xsl:text>
+			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+			"<xsl:value-of select="@id"/>",
 			<xsl:apply-templates select="*[1]" mode="condition"/>
-			<xsl:text>);</xsl:text>
+			<xsl:text>);
+</xsl:text>
 			<xsl:if test="count(*) &gt; 1">
-				if(!<xsl:apply-templates select="*[1]" mode="condition"/>) {
-				<xsl:apply-templates mode="body"/>
-				}
-			</xsl:if>
+    if(!<xsl:apply-templates select="*[1]" mode="condition"/>) {
+<xsl:apply-templates mode="body"/>
+    }
+</xsl:if>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
@@ -529,9 +575,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 <xsl:template match="*[local-name()='assertNull']" mode="body">
 	<xsl:text>_framework.assertNull("</xsl:text>
 	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>
-	<xsl:text>","</xsl:text>
-	<xsl:value-of select="@id"/>
 	<xsl:text>",</xsl:text>
+	"<xsl:value-of select="@id"/>",
 	<xsl:value-of select="@actual"/>
 	<xsl:text>);
 </xsl:text>
@@ -547,8 +592,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 
 <xsl:template match="*[local-name()='assertNotNull']" mode="body">
 	<xsl:text>_framework.assertNotNull("</xsl:text>
-	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-	<xsl:value-of select="@id"/>",
+	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+	"<xsl:value-of select="@id"/>",
 	<xsl:value-of select="@actual"/>
 	<xsl:text>);
 </xsl:text>
@@ -564,8 +609,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 
 <xsl:template match="*[local-name()='assertSame']" mode="body">
 	<xsl:text>_framework.assertSame(</xsl:text>
-	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-	<xsl:value-of select="@id"/>",
+	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+	"<xsl:value-of select="@id"/>",
 	<xsl:value-of select="@expected"/>
 	<xsl:text>,</xsl:text>
 	<xsl:value-of select="@actual"/>
@@ -585,8 +630,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 
 <xsl:template match="*[local-name()='assertInstanceOf']" mode="body">
 	<xsl:text>_framework.assertInstanceOf(</xsl:text>
-	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-	<xsl:value-of select="@id"/>",
+	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+	"<xsl:value-of select="@id"/>",
 	<xsl:call-template name="produce-type">
 		<xsl:with-param name="type" select="@expected"/>
 	</xsl:call-template>
@@ -613,9 +658,9 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 		"<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
 		"<xsl:value-of select="@id"/>",
 		<xsl:value-of select="@size"/>,
-		<xsl:value-of select="@collection"/>.size());
+		<xsl:value-of select="@collection"/>);
 <xsl:if test="*">
-    if(<xsl:value-of select="@collection"/>.size() == <xsl:value-of select="@size"/>) {
+    if(_framework.size(<xsl:value-of select="@collection"/>) == <xsl:value-of select="@size"/>) {
 <xsl:apply-templates mode="body"/>
     }
 </xsl:if>
@@ -625,8 +670,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
 			<xsl:text>_framework.assertEqualsIgnoreCase("</xsl:text>
-			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-			<xsl:value-of select="@id"/>",
+			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+			"<xsl:value-of select="@id"/>",
 			<xsl:value-of select="@expected"/>
 			<xsl:text>,</xsl:text>
 			<xsl:value-of select="@actual"/>
@@ -647,18 +692,14 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 		<xsl:otherwise>
 			<xsl:text>_framework.assertEquals("</xsl:text>
 			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>
-			<xsl:text>","</xsl:text>
-			<xsl:value-of select="@id"/>
 			<xsl:text>",</xsl:text>
-			<xsl:value-of select="@expected"/>
-			<xsl:text>,</xsl:text>
-			<xsl:value-of select="@actual"/>
-			<xsl:text>);
+			"<xsl:value-of select="@id"/>",
+			<xsl:value-of select="@expected"/>,
+			<xsl:value-of select="@actual"/><xsl:text>);
 </xsl:text>
 			<xsl:if test="*">
 				<xsl:text>if(_framework.equals(</xsl:text>
-				<xsl:value-of select="@expected"/>
-				<xsl:text>,</xsl:text>
+				<xsl:value-of select="@expected"/>,
 				<xsl:value-of select="@actual"/>
 				<xsl:text>)) {
 </xsl:text>
@@ -675,10 +716,9 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
 			<xsl:text>_framework.assertNotEqualsIgnoreCase("</xsl:text>
-			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-			<xsl:value-of select="@id"/>",
-			<xsl:value-of select="@expected"/>
-			<xsl:text>,</xsl:text>
+			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+			"<xsl:value-of select="@id"/>",
+			<xsl:value-of select="@expected"/>,
 			<xsl:value-of select="@actual"/>
 			<xsl:text>);
 </xsl:text>
@@ -696,8 +736,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>_framework.assertNotEquals("</xsl:text>
-			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-			<xsl:value-of select="@id"/>",
+			<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+			"<xsl:value-of select="@id"/>",
 			<xsl:value-of select="@expected"/>
 			<xsl:text>,</xsl:text>
 			<xsl:value-of select="@actual"/>
@@ -755,8 +795,8 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 </xsl:text>
 	</xsl:if>
 	<xsl:text>_framework.assertTrue("</xsl:text>
-	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>","
-	<xsl:value-of select="@id"/>
+	<xsl:value-of select="ancestor::*[local-name()='test']/@targetURI"/>",
+	"<xsl:value-of select="@id"/>"
 	<xsl:text>,_tmpBool);
 </xsl:text>
 	<xsl:if test="*">
@@ -1102,8 +1142,9 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 			</xsl:call-template>
 		</xsl:when>
 		<xsl:otherwise>
+			<xsl:variable name="methods" select="$domspec/library/interface/method[@name = $methodName]"/>
 			<xsl:call-template name="produce-specific-method">
-				<xsl:with-param name="method" select="$domspec/library/interface/method[@name = $methodName]"/>
+				<xsl:with-param name="method" select="$methods[1]"/>
 			</xsl:call-template>
 		</xsl:otherwise>
 	</xsl:choose>

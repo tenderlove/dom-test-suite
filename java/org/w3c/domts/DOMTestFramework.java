@@ -31,7 +31,9 @@ public interface DOMTestFramework {
 	void assertNotNull(String testURI, String assertID, Object actual);
 	void assertSame(String testURI, String assertID, Object expected, Object actual);
 	void assertInstanceOf(String testURI, String assertID, Object obj, Class cls);
-	void assertSize(String testURI, String assertID, Object collection, int expectedSize);
+	void assertSize(String testURI, String assertID, int expectedSize, NodeList collection);
+	void assertSize(String testURI, String assertID, int expectedSize, NamedNodeMap collection);
+	void assertSize(String testURI, String assertID, int expectedSize, Collection collection);
 	void assertEqualsIgnoreCase(String testURI, String assertID, String expected, String actual);
 	void assertEquals(String testURI, String assertID, String expected, String actual);
 	void assertEquals(String testURI, String assertID, int expected, int actual);
@@ -46,5 +48,8 @@ public interface DOMTestFramework {
 	boolean equalsIgnoreCase(String expected, String actual);
 	boolean equals(String expected, String actual);
 	boolean equals(int expected, int actual);
+	int size(Collection collection);
+	int size(NamedNodeMap collection);
+	int size(NodeList collection);
 }
 
