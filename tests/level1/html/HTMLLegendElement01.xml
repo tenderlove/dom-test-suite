@@ -40,6 +40,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <form interface="HTMLLegendElement" obj="testNode" var="fNode"/>
-<name interface="HTMLFormElement" obj="fNode" var="vform"/>
+<id obj="fNode" var="vform"/>
 <assertEquals actual="vform" expected='"form1"' id="formLink" ignoreCase="false"/>
 </test>
