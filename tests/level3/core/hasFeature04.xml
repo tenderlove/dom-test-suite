@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 DOMImplementation.hasFeature("XML", "3.0") should return true.
 </description>
 <date qualifier="created">2003-05-20</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-5CED94D7"/>
 </metadata>
 <hasFeature feature='"XML"'/>
 <var name="impl" type="DOMImplementation"/>

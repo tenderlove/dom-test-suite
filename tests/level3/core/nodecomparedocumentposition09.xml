@@ -26,7 +26,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-19</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Node3-compareDocumentPosition"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>

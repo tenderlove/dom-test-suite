@@ -24,7 +24,7 @@ and from its base type.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-10-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 
 <implementationAttribute name="schemaValidating" value="true"/>
@@ -45,4 +45,4 @@ and from its base type.
 <assertTrue actual="retValue" id="derivedFromClassType" />
 <isDerivedFrom obj="attrTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"' typeNameArg='"string"' derivationMethod="1"/>
 <assertTrue actual="retValue" id="derivedFromString" />
-</test>
+</test

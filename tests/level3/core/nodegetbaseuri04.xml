@@ -25,9 +25,9 @@ Node.baseURI for a document element without an xml:base attribute should be same
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Node3-baseURI"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Document"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/infoset-mapping#Infoset2Document"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>

@@ -26,7 +26,7 @@ isElementContentWhitespace should be true since the node is whitespace and in el
 </description>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2004-01-05</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Text3-isElementContentWhitespace"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

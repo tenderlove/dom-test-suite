@@ -30,7 +30,7 @@ be replaced.
 <contributor>Neil Delima</contributor>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Text3-replaceWholeText"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>

@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-10-27</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo"/>
 </metadata>
 
 <implementationAttribute name="schemaValidating" value="true"/>
@@ -51,4 +51,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <typeNamespace var="typeNamespace" obj="attrTypeInfo"/>
 <assertEquals expected='"ID"' actual="typeName" id="attrgetschematypeinfo07_typeName" ignoreCase="false"/>
 <assertEquals expected='"http://www.w3.org/2001/XMLSchema"' actual="typeNamespace" id="attrgetschematypeinfo07_typeNamespace" ignoreCase="false"/>
-</test> 
+</test>

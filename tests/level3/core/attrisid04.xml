@@ -26,7 +26,7 @@ since its type is ID.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2003-03-04</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-isId"/>
 </metadata>
 <implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>

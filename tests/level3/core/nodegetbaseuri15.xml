@@ -25,9 +25,9 @@ Node.getBaseURI for an Attr is null.
 </description>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2004-01-07</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Node3-baseURI"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Attr"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/infoset-mapping#Infoset2Attr"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
@@ -42,4 +42,4 @@ Node.getBaseURI for an Attr is null.
 <baseURI var="baseURI" obj="attrNode" interface="Node"/>
 <assertNull  actual="baseURI" id="baseURI"/>
 </test>
- 
+

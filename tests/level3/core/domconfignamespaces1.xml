@@ -23,8 +23,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <creator>Curt Arnold</creator>
     <description>Checks behavior of "namespaces" configuration parameter.</description>
 	<date qualifier="created">2004-01-10</date>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces"/>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-namespaces"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration"/>
   </metadata>
   <var name="domImpl" type="DOMImplementation"/>
   <var name="doc" type="Document"/>

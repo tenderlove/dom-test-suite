@@ -25,8 +25,8 @@ Normalize document with check-character-normalization set to true, check that
 non-normalized characters are signaled.
 </description>
 <date qualifier="created">2004-02-24</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Document3-normalizeDocument"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-check-character-normalization"/>
 <subject resource="http://www.w3.org/TR/2003/WD-charmod-20030822/"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
@@ -78,4 +78,4 @@ non-normalized characters are signaled.
 </if>
 </test> 
  
- 
+

@@ -25,9 +25,9 @@ Add a L1 element to a L2 namespace aware document and perform namespace normaliz
 in an error.
 </description>
 <date qualifier="created">2004-01-19</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Document3-normalizeDocument"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms#normalizeDocumentAlgo"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-namespaces"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

@@ -27,7 +27,7 @@ is UTF-8.
 <contributor>Neil Delima</contributor>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Entity3-inputEncoding"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Entity3-inputEncoding"/>
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Dec/0045.html"/>
 </metadata>
 <implementationAttribute name="validating" value="true"/>
@@ -45,4 +45,4 @@ is UTF-8.
 <!--  check that document's encoding is UTF-8   -->
 <inputEncoding obj="doc" var="encodingName" interface="Document"/>
 <assertEquals id="documentIsUTF8" actual="encodingName" expected='"UTF-8"' ignoreCase="true"/>
-</test>
+</test

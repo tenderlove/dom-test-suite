@@ -24,7 +24,7 @@ text node, then calls Text.replaceWholeText on the existing text node.
 A NO_MODIFICATION_ALLOWED_ERR should be thrown.
 </description>
 <date qualifier="created">2003-12-18</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Text3-replaceWholeText"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=540"/>
 </metadata>

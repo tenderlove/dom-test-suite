@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 Check how xsd:string is derived from itself.
 </description>
 <date qualifier="created">2004-01-11</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>

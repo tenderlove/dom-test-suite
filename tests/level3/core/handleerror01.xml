@@ -26,9 +26,9 @@ with an error handler that stops processing.  Only one of the
 CDATASections should be split.
 </description>
 <date qualifier="created">2004-02-25</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ERRORS-DOMErrorHandler-handleError"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-normalize"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-split-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-ERRORS-DOMErrorHandler-handleError"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

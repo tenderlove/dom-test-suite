@@ -24,8 +24,8 @@ Check implementation of DOMStringList.item by accessing items 0 and length-1 and
 a string and accessing items out of range and expecting null.
 </description>
 <date qualifier="created">2004-01-12</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMStringList-item"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-parameterNames"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="paramList" type="DOMStringList"/>
@@ -46,4 +46,4 @@ a string and accessing items out of range and expecting null.
 <item var="parameter" obj="paramList" index="length" interface="DOMStringList"/>
 <assertNotNull actual="parameter" id="itemLengthMinus1NotNull"/>
 </test> 
- 
+

@@ -25,9 +25,9 @@ DOMImplementationRegistry.getDOMImplementationList("cOrE 3.0 xMl 3.0 eVeNts 2.0 
 should return an empty list or a list of DOMImplementation that implements the specified features.
 </description>
 <date qualifier="created">2004-03-19</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/java-binding"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/ecma-script-binding"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-getDOMImpls"/>
 <subject resource="http://lists.w3.org/Archives/Public/www-dom/2004JanMar/0111.html"/>
 </metadata>
 <var name="domImplRegistry" type="DOMImplementationRegistry"/>

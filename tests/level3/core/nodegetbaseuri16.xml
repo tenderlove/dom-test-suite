@@ -25,9 +25,9 @@ Node.getBaseURI for an EntityReference to should be the baseURI where the entity
 </description>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2004-01-07</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Node3-baseURI"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/infoset-mapping#Infoset2EntityReference"/>
 </metadata>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
@@ -44,4 +44,4 @@ Node.getBaseURI for an EntityReference to should be the baseURI where the entity
 <baseURI var="baseURI" obj="entRef" interface="Node"/>
 <assertURIEquals actual="baseURI" isAbsolute="true" name='"external_barfoo"' id="baseURI"/>
 </test>
- 
+

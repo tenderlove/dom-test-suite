@@ -27,7 +27,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-952280727"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>

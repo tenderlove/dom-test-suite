@@ -27,9 +27,9 @@ the CDATASection has been preserved and then coalesced.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Document3-normalizeDocument"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-cdata-sections"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>

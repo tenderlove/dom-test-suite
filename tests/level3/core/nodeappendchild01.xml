@@ -24,7 +24,7 @@ An attempt to add a second doctype node should result in a HIERARCHY_REQUEST_ERR
 or a NOT_SUPPORTED_ERR.
 </description>
 <date qualifier="created">2004-01-22</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-184E7107"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-184E7107"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>

@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-10-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 
 <implementationAttribute name="validating" value="true"/>
@@ -48,4 +48,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <schemaTypeInfo var="elemTypeInfo" obj="acronymElem" interface="Element"/>
 <isDerivedFrom obj="elemTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/TR/REC-xml"' typeNameArg="nullName" derivationMethod="0" />
 <assertFalse actual="retValue" id="typeinfoisderivedfrom63" />
-</test> 
+</test>

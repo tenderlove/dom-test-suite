@@ -28,8 +28,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-10-29</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-length"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMStringList-length"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-parameterNames"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="paramList" type="DOMStringList"/>
@@ -42,4 +42,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <length obj="paramList" var="listSize" interface="DOMStringList"/>
 <assertNotEquals actual="listSize" expected="0" id="domstringlistgetlength01_notZero" ignoreCase="false"/>
 </test> 
- 
+

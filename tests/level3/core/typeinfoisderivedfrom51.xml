@@ -25,7 +25,7 @@ Check if a type derived by extension from a list of a item type returns false
 when asked if it derives by any method other than list from the item type.
 </description>
 <date qualifier="created">2004-02-14</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>

@@ -25,8 +25,8 @@ Normalize an element with normalize-characters set to false, check that
 characters are not normalized.
 </description>
 <date qualifier="created">2004-02-26</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-normalize-characters"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-normalize"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-normalize-characters"/>
 <subject resource="http://www.w3.org/TR/2003/WD-charmod-20030822/"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
@@ -60,4 +60,4 @@ characters are not normalized.
 	ignoreCase="false" id="noCharNormalization"/> 
 </test> 
  
- 
+

@@ -26,7 +26,7 @@ is both a union and list derivation steps between the target and
 ancestor type.
 </description>
 <date qualifier="created">2004-03-04</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
 <implementationAttribute name="validating" value="true"/>
@@ -43,4 +43,4 @@ ancestor type.
 <schemaTypeInfo var="elemTypeInfo" obj="elem" interface="Element"/>
 <isDerivedFrom obj="elemTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"' typeNameArg='"integer"' derivationMethod="12"/>
 <assertFalse actual="retValue" id="isDerived" />
-</test> 
+</test>

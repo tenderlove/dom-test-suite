@@ -23,9 +23,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <creator>Curt Arnold</creator>
     <description>Checks behavior of "error-handler" configuration parameter.</description>
 	<date qualifier="created">2004-01-10</date>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-error-handler"/>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter"/>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-error-handler"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-getParameter"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-setParameter"/>
     <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=544"/>
   </metadata>
   <var name="domImpl" type="DOMImplementation"/>

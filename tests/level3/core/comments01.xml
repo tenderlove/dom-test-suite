@@ -24,8 +24,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 Check that Node.normalize ignores the setting of configuration parameter 'comments'.
 </description>
 <date qualifier="created">2004-02-25</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#ID-normalize"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-comments"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -54,4 +54,4 @@ Check that Node.normalize ignores the setting of configuration parameter 'commen
 <nodeName var="nodeName" obj="lastChild"/>
 <assertEquals actual="nodeName" expected='"#comment"' id="documentnormalizedocument04_true" ignoreCase="false"/>
 </test> 
- 
+

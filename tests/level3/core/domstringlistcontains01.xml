@@ -24,8 +24,8 @@ Check implementation of DOMStringList.contains by searching DOMConfig parameter
 names for "comments" and "".
 </description>
 <date qualifier="created">2004-01-12</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMStringList-contains"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#DOMConfiguration-parameterNames"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="paramList" type="DOMStringList"/>
@@ -39,4 +39,4 @@ names for "comments" and "".
 <contains var="contains" obj="paramList" str='""' interface="DOMStringList"/>
 <assertFalse actual="contains" id="paramsDoesntContainEmpty"/>
 </test> 
- 
+
