@@ -43,6 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<member>"ent5"</member>
 	</var>
 	<var name="nameList" type="Collection"/>
+    <var name="entity" type="Node"/>
 	<load var="doc" href="staff.xml" willBeModified="false"/>
 	<doctype obj="doc" var="docType"/>
 	<entities obj="docType" var="entityList"/>

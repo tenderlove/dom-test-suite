@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="commentValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <childNodes obj="doc" var="elementList"/>
-<for-each collection="testList" member="commentNode">
+<for-each collection="elementList" member="commentNode">
 <nodeName obj="commentNode" var="commentName"/>
 <if>
 <equals actual="commentName" expected="&quot;#comment&quot;" ignoreCase="false"/>

@@ -15,7 +15,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<?xml-stylesheet type="text/xsl" href="D:\domts\2001\DOM-Test-Suite\transforms\test-to-java.xsl"?>
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentCreateCDATASection">
 	<metadata>
 		<title>documentCreateCDATASection</title>
@@ -38,19 +37,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<var name="newCDATASectionValue" type="DOMString"/>
 	<var name="newCDATASectionName" type="DOMString"/>
 	<var name="newCDATASectionType" type="int"/>
-	<var name="result" type="List"/>
-	<var name="expectedResult" type="List">
-		<member>"This is a new CDATASection node"</member>
-		<member>"#cdata-section"</member>
-		<member>"4"</member>
-	</var>
 	<load var="doc" href="staff.xml" willBeModified="false"/>
 	<createCDATASection obj="doc" var="newCDATASectionNode" data="&quot;This is a new CDATASection node&quot;"/>
 	<nodeValue obj="newCDATASectionNode" var="newCDATASectionValue"/>
+	<assertEquals id="nodeValue" actual="newCDATASectionValue" expected='"This is a new CDATASection node"' ignoreCase="false"/>
 	<nodeName obj="newCDATASectionNode" var="newCDATASectionName"/>
+	<assertEquals id="nodeName" actual="newCDATASectionNode" expected='"#cdata-section"' ignoreCase="false"/>
 	<nodeType obj="newCDATASectionNode" var="newCDATASectionType"/>
-	<append collection="result" obj="newCDATASectionValue"/>
-	<append collection="result" obj="newCDATASectionName"/>
-	<append collection="result" obj="newCDATASectionType"/>
-	<assertEquals actual="result" expected="expectedResult" id="documentCreateCDATASectionAssert" ignoreCase="false"/>
+	<assertEquals id="nodeType" actual="newCDATASectionType" expected="4" ignoreCase="false"/>
 </test>
