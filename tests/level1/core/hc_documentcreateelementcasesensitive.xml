@@ -52,5 +52,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName var="nodeName1" obj="newElement1"/>
 <nodeName var="nodeName2" obj="newElement2"/>
 <assertEquals actual="nodeName1" expected='"ACRONYM"' ignoreCase="auto" id="nodeName1"/>
-<assertEquals actual="nodeName2" expected='"acronym"' ignoreCase="auto" id="nodeName1"/>
+<assertEquals actual="nodeName2" expected='"acronym"' ignoreCase="auto" id="nodeName2"/>
 </test>

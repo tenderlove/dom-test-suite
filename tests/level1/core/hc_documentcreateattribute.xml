@@ -38,14 +38,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrName" type="DOMString"/>
 <var name="attrType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createAttribute obj="doc" var="newAttrNode" name='"lang"'/>
+<createAttribute obj="doc" var="newAttrNode" name='"title"'/>
 <nodeValue obj="newAttrNode" var="attrValue"/>
 <assertEquals actual="attrValue" expected='""' ignoreCase="false" id="value"/>
 <nodeName obj="newAttrNode" var="attrName"/>
 <if><contentType type='text/html'/>
-<assertEquals actual="attrName" expected='"lang"' ignoreCase="true" id="name_html"/>
+<assertEquals actual="attrName" expected='"title"' ignoreCase="true" id="name_html"/>
 <else>
-<assertEquals actual="attrName" expected='"lang"' ignoreCase="false" id="name"/>
+<assertEquals actual="attrName" expected='"title"' ignoreCase="false" id="name"/>
 </else>
 </if>
 <nodeType obj="newAttrNode" var="attrType"/>
