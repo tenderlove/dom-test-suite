@@ -71,13 +71,39 @@ function update() {
         contentTypes[i].disabled = disabled;
     }
     updateIncompatibleTests();
+
+    if (typeof(ActiveXObject) == 'undefined')
+    {
+      document.getElementById('msxml3Impl').disabled = true;
+      document.getElementById('msxml4Impl').disabled = true;
+    }
+    if (typeof(document.implementation) != 'undefined')
+    {
+      var impl = document.implementation;
+      if (impl && typeof(impl.createDOMBuilder) == 'undefined')
+      {
+        document.getElementById('dom3lsImpl').disabled = true;
+      }
+      if (impl && typeof(impl.createDocument) == 'undefined')
+      {
+        document.getElementById('mozillaXMLImpl').disabled = true;
+      }
+    }
+    if (document.location.href.indexOf('/core/') == -1 &&
+    document.location.href.indexOf('/level2/events/') == -1)
+    {
+      // only core and level 2 events has svg files
+      document.getElementById('svgpluginImpl').disabled = true;
+      document.getElementById('contentTypeSVG').disabled = true;
+    }
+    
 }
 
 function updateIncompatibleTests() {
     var incompatibleTests = new Array();
     checkTests(null, incompatibleTests);
     var i = 0;
-    existingTests = document.forms[0].incompatible.options;
+    var existingTests = document.forms[0].incompatible.options;
     var overlapCount = existingTests.length;
     if (overlapCount > incompatibleTests.length) {
         overlapCount = incompatibleTests.length;
@@ -111,7 +137,6 @@ function setContentType(contentType) {
     for (var i = 0; i < builder.supportedContentTypes.length; i++) {
         if (builder.supportedContentTypes[i] == contentType) {
             builder.setContentType(contentType);
-            updateIncompatibleTests();
             update();
             return;
         }

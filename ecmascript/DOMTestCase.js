@@ -331,7 +331,7 @@ IFrameBuilder.prototype.preload = function(frame, varname, url) {
   var srcname = url + getSuffix(this.contentType);
   iframe.setAttribute("name", srcname);
   iframe.setAttribute("src", fileBase + srcname);
-  iframe.addEventListener("load", loadComplete, false);  
+  jsUnitSetOnLoad(iframe, loadComplete);
   document.getElementsByTagName("body").item(0).appendChild(iframe);
   return 0; 
 }
@@ -344,7 +344,14 @@ IFrameBuilder.prototype.load = function(frame, varname, url) {
     var iframes = document.getElementsByTagName("iframe");
     for(var i = 0; i < iframes.length; i++) {
        if (iframes.item(i).getAttribute("name") == name) {
-           return iframes.item(i).contentDocument;
+           var item = iframes.item(i);
+           if (typeof(item.contentDocument) != 'undefined') {
+               return item.contentDocument;
+           }
+           if (typeof(item.document) != 'undefined') {
+           	   return item.document;
+           }
+           return null;
        }
     }
     return null;
@@ -406,6 +413,7 @@ SVGPluginBuilder.prototype.hasFeature = function(feature, version) {
             return true;
         }
     }
+    return false;
 }
 
 SVGPluginBuilder.prototype.setContentType = function(contentType) {
@@ -749,6 +757,17 @@ MozillaXMLBuilder.prototype.toAutoCaseArray = function(s) {
     return s;
 }
 
+MozillaXMLBuilder.prototype.hasFeature = function(feature, version)
+{
+  return this.getImplementation().hasFeature(feature, version);
+}
+
+MozillaXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
+    var supported = this.getImplementationAttribute(attribute);
+    if (supported != value) {
+        throw "Mozilla XML loader does not support " + attribute + "=" + value;
+    }
+}
 
 function DOM3LSBuilder() {
     this.contentType = "text/xml";
@@ -818,6 +837,7 @@ DOM3LSBuilder.prototype.getImplementationAttribute = function(attr) {
             return this.fixedAttributeValues[i];
         }
     }
+    return null;
 }
 
 
@@ -842,7 +862,7 @@ function createBuilder(implementation) {
     case "msxml4":
     return new MSXMLBuilder("Msxml2.DOMDocument.4.0");
 
-    case "mozilla":
+    case "mozillaXML":
     return new MozillaXMLBuilder();
 
     case "svgplugin":
@@ -850,8 +870,11 @@ function createBuilder(implementation) {
 
     case "dom3ls":
     return new DOM3LSBuilder();
+    
+    case "iframe":
+    return new IFrameBuilder();
   }
-  return new IFrameBuilder();
+  return null;
 }
 
 function checkFeature(feature, version)
@@ -864,49 +887,49 @@ function checkFeature(feature, version)
 
 var builder = null;
 
-if (top && top.jsUnitParmHash)
+if (top && typeof(top.jsUnitParmHash) != 'undefined')
 {
-    builder = createBuilder(top.jsUnitParmHash.implementation);
+    builder = createBuilder(top.jsUnitGetParm('implementation'));
     try {
         if (top.jsUnitParmHash.asynchronous == 'true' && builder.supportAsync) {
             builder.async = true;
         }
-        if (top.jsUnitParmHash.expandentityreferences) {
-            if (top.jsUnitParmHash.expandEntityReferences == 'true') {
+        if (top.jsUnitGetParm('expandentityreferences')) {
+            if (top.jsUnitGetParm('expandEntityReferences') == 'true') {
                 builder.setImplementationAttribute('expandEntityReferences', true);
             } else {
                 builder.setImplementationAttribute('expandEntityReferences', false);
             }
         }
-        if (top.jsUnitParmHash.ignoringelementcontentwhitespace) {
-            if (top.jsUnitParmHash.ignoringElementContentWhitespace == 'true') {
+        if (top.jsUnitGetParm('ignoringelementcontentwhitespace')) {
+            if (top.jsUnitGetParm('ignoringElementContentWhitespace') == 'true') {
                 builder.setImplementationAttribute('ignoringElementContentWhitespace', true);
             } else {
                 builder.setImplementationAttribute('ignoringElementContentWhitespace', false);
             }
         }
-        if (top.jsUnitParmHash.validating) {
-            if (top.jsUnitParmHash.validating == 'true') {
+        if (top.jsUnitGetParm('validating')) {
+            if (top.jsUnitGetParm('validating') == 'true') {
                 builder.setImplementationAttribute('validating', true);
             } else {
                 builder.setImplementationAttribute('validating', false);
             }
         }
-        if (top.jsUnitParmHash.coalescing) {
-            if (top.jsUnitParmHash.coalescing == 'true') {
+        if (top.jsUnitGetParm('coalescing')) {
+            if (top.jsUnitGetParm('coalescing') == 'true') {
                 builder.setImplementationAttribute('coalescing', true);
             } else {
                 builder.setImplementationAttribute('coalescing', false);
             }
         }
-        if (top.jsUnitParmHash.namespaceaware) {
-            if (top.jsUnitParmHash.namespaceaware == 'true') {
+        if (top.jsUnitGetParm('namespaceaware')) {
+            if (top.jsUnitGetParm('namespaceaware') == 'true') {
                 builder.setImplementationAttribute('namespaceAware', true);
             } else {
                 builder.setImplementationAttribute('namespaceAware', false);
             }
         }
-        var contentType = top.jsUnitParmHash.contenttype;
+        var contentType = top.jsUnitGetParm('contenttype');
         if (contentType != null) {
             var contentTypeSet = false;
             for (var i = 0; i < builder.supportedContentTypes.length; i++) {
@@ -920,8 +943,8 @@ if (top && top.jsUnitParmHash)
                 builder.exception = "Builder does not support content type " + contentType;
             }
         }
-        if (top.jsUnitParmHash.ignoringcomments) {
-            if (top.jsUnitParmHash.ignoringcomments == 'true') {
+        if (top.jsUnitGetParm('ignoringcomments')) {
+            if (top.jsUnitGetParm('ignoringcomments') == 'true') {
                 builder.setImplementationAttribute('ignoringComments', true);
             } else {
                 builder.setImplementationAttribute('ignoringComments', false);
