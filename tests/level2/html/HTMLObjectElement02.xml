@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The code attribute specifies an Applet class file.
 
     Retrieve the code attribute of the second OBJECT element and examine
-    it's value.  
+    it's value. Should be "" since CODE is not a valid attribute for OBJECT. 
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-02</date>
@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <code interface="HTMLObjectElement" obj="testNode" var="vcode"/>
-<assertEquals actual="vcode" expected="&quot;object2.class&quot;" id="codeLink" ignoreCase="false"/>
+<assertEquals actual="vcode" expected='""' id="codeLink" ignoreCase="false"/>
 </test>
