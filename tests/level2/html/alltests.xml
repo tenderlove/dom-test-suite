@@ -12,6 +12,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE suite SYSTEM "dom2.dtd">
 
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="alltests">
+<metadata>
+<title>DOM Level 2 HTML Test Suite</title>
+</metadata>
 
 <suite.member href="../../level1/html/HTMLAnchorElement01.xml"/>
 <suite.member href="../../level1/html/HTMLAnchorElement02.xml"/>
@@ -571,4 +574,93 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/documentnotsupportederrcreateentityref.xml"/>
 <suite.member href="../../level1/html/documentnotsupportederrcreatepi.xml"/>
 <suite.member href="../../level1/html/domimplementationfeaturehtml.xml"/>
+
+
+     <suite.member href="../../level1/html/anchor01.xml"/>
+     <suite.member href="../../level1/html/anchor02.xml"/>
+     <suite.member href="../../level1/html/anchor03.xml"/>
+     <suite.member href="../../level1/html/anchor04.xml"/>
+     <suite.member href="../../level1/html/anchor05.xml"/>
+     <suite.member href="../../level1/html/anchor06.xml"/>
+     <suite.member href="../../level1/html/area01.xml"/>
+     <suite.member href="../../level1/html/area02.xml"/>
+     <suite.member href="../../level1/html/area03.xml"/>
+     <suite.member href="../../level1/html/area04.xml"/>
+     <suite.member href="../../level1/html/basefont01.xml"/>
+     <suite.member href="../../level1/html/body01.xml"/>
+     <suite.member href="../../level1/html/button01.xml"/>
+     <suite.member href="../../level1/html/button02.xml"/>
+     <suite.member href="../../level1/html/button03.xml"/>
+     <suite.member href="../../level1/html/button04.xml"/>
+     <suite.member href="../../level1/html/button05.xml"/>
+     <suite.member href="../../level1/html/button06.xml"/>
+     <suite.member href="../../level1/html/button07.xml"/>
+     <suite.member href="../../level1/html/button08.xml"/>
+     <suite.member href="../../level1/html/button09.xml"/>
+     <suite.member href="../../level1/html/dlist01.xml"/>
+     <suite.member href="../../level1/html/doc01.xml"/>
+     <suite.member href="../../level1/html/object01.xml"/>
+     <suite.member href="../../level1/html/object02.xml"/>
+     <suite.member href="../../level1/html/object03.xml"/>
+     <suite.member href="../../level1/html/object04.xml"/>
+     <suite.member href="../../level1/html/object05.xml"/>
+     <suite.member href="../../level1/html/object06.xml"/>
+     <suite.member href="../../level1/html/object07.xml"/>
+     <suite.member href="object08.xml"/>
+     <suite.member href="../../level1/html/object09.xml"/>
+     <suite.member href="../../level1/html/object10.xml"/>
+     <suite.member href="../../level1/html/object11.xml"/>
+     <suite.member href="../../level1/html/object12.xml"/>
+     <suite.member href="object13.xml"/>
+     <suite.member href="../../level1/html/object14.xml"/>
+     <suite.member href="../../level1/html/object15.xml"/>
+     <suite.member href="../../level1/html/table01.xml"/>
+     <suite.member href="../../level1/html/table02.xml"/>
+     <suite.member href="../../level1/html/table03.xml"/>
+     <suite.member href="../../level1/html/table04.xml"/>
+     <suite.member href="../../level1/html/table06.xml"/>
+     <suite.member href="../../level1/html/table07.xml"/>
+     <suite.member href="../../level1/html/table08.xml"/>
+     <suite.member href="../../level1/html/table09.xml"/>
+     <suite.member href="../../level1/html/table10.xml"/>
+     <suite.member href="../../level1/html/table12.xml"/>
+     <suite.member href="../../level1/html/table15.xml"/>
+     <suite.member href="../../level1/html/table17.xml"/>
+     <suite.member href="../../level1/html/table18.xml"/>
+     <suite.member href="../../level1/html/table19.xml"/>
+     <suite.member href="../../level1/html/table20.xml"/>
+     <suite.member href="../../level1/html/table21.xml"/>
+     <suite.member href="../../level1/html/table22.xml"/>
+     <suite.member href="../../level1/html/table23.xml"/>
+     <suite.member href="../../level1/html/table24.xml"/>
+     <suite.member href="../../level1/html/table25.xml"/>
+     <suite.member href="../../level1/html/table26.xml"/>
+     <suite.member href="../../level1/html/table27.xml"/>
+     <suite.member href="../../level1/html/table28.xml"/>
+     <suite.member href="../../level1/html/table29.xml"/>
+     <suite.member href="../../level1/html/table30.xml"/>
+     <suite.member href="../../level1/html/table31.xml"/>
+     <suite.member href="../../level1/html/table32.xml"/>
+     <suite.member href="../../level1/html/table33.xml"/>
+     <suite.member href="../../level1/html/table34.xml"/>
+     <suite.member href="../../level1/html/table35.xml"/>
+     <suite.member href="../../level1/html/table36.xml"/>
+     <suite.member href="../../level1/html/table37.xml"/>
+     <suite.member href="../../level1/html/table38.xml"/>
+     <suite.member href="../../level1/html/table39.xml"/>
+     <suite.member href="../../level1/html/table40.xml"/>
+     <suite.member href="../../level1/html/table41.xml"/>
+     <suite.member href="../../level1/html/table42.xml"/>
+     <suite.member href="../../level1/html/table43.xml"/>
+     <suite.member href="../../level1/html/table44.xml"/>
+     <suite.member href="../../level1/html/table45.xml"/>
+     <suite.member href="../../level1/html/table46.xml"/>
+     <suite.member href="../../level1/html/table47.xml"/>
+     <suite.member href="../../level1/html/table48.xml"/>
+     <suite.member href="../../level1/html/table49.xml"/>
+     <suite.member href="../../level1/html/table50.xml"/>
+     <suite.member href="../../level1/html/table51.xml"/>
+     <suite.member href="../../level1/html/table52.xml"/>
+     <suite.member href="../../level1/html/table53.xml"/>
+
 </suite>

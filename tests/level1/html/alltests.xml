@@ -12,6 +12,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE suite SYSTEM "dom1.dtd">
 
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="alltests">
+<metadata>
+<title>DOM Level 1 HTML Test Suite</title>
+</metadata>
      <suite.member href="HTMLAnchorElement01.xml"/>
      <suite.member href="HTMLAnchorElement02.xml"/>
      <suite.member href="HTMLAnchorElement03.xml"/>
@@ -538,4 +541,93 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLTitleElement01.xml"/>
      <suite.member href="HTMLUListElement01.xml"/>
      <suite.member href="HTMLUListElement02.xml"/>
+     
+     <!--  netscape tests  -->
+     <suite.member href="anchor01.xml"/>
+     <suite.member href="anchor02.xml"/>
+     <suite.member href="anchor03.xml"/>
+     <suite.member href="anchor04.xml"/>
+     <suite.member href="anchor05.xml"/>
+     <suite.member href="anchor06.xml"/>
+     <suite.member href="area01.xml"/>
+     <suite.member href="area02.xml"/>
+     <suite.member href="area03.xml"/>
+     <suite.member href="area04.xml"/>
+     <suite.member href="basefont01.xml"/>
+     <suite.member href="body01.xml"/>
+     <suite.member href="button01.xml"/>
+     <suite.member href="button02.xml"/>
+     <suite.member href="button03.xml"/>
+     <suite.member href="button04.xml"/>
+     <suite.member href="button05.xml"/>
+     <suite.member href="button06.xml"/>
+     <suite.member href="button07.xml"/>
+     <suite.member href="button08.xml"/>
+     <suite.member href="button09.xml"/>
+     <suite.member href="dlist01.xml"/>
+     <suite.member href="doc01.xml"/>
+     <suite.member href="object01.xml"/>
+     <suite.member href="object02.xml"/>
+     <suite.member href="object03.xml"/>
+     <suite.member href="object04.xml"/>
+     <suite.member href="object05.xml"/>
+     <suite.member href="object06.xml"/>
+     <suite.member href="object07.xml"/>
+     <suite.member href="object08.xml"/>
+     <suite.member href="object09.xml"/>
+     <suite.member href="object10.xml"/>
+     <suite.member href="object11.xml"/>
+     <suite.member href="object12.xml"/>
+     <suite.member href="object13.xml"/>
+     <suite.member href="object14.xml"/>
+     <suite.member href="object15.xml"/>
+     <suite.member href="table01.xml"/>
+     <suite.member href="table02.xml"/>
+     <suite.member href="table03.xml"/>
+     <suite.member href="table04.xml"/>
+     <suite.member href="table06.xml"/>
+     <suite.member href="table07.xml"/>
+     <suite.member href="table08.xml"/>
+     <suite.member href="table09.xml"/>
+     <suite.member href="table10.xml"/>
+     <suite.member href="table12.xml"/>
+     <suite.member href="table15.xml"/>
+     <suite.member href="table17.xml"/>
+     <suite.member href="table18.xml"/>
+     <suite.member href="table19.xml"/>
+     <suite.member href="table20.xml"/>
+     <suite.member href="table21.xml"/>
+     <suite.member href="table22.xml"/>
+     <suite.member href="table23.xml"/>
+     <suite.member href="table24.xml"/>
+     <suite.member href="table25.xml"/>
+     <suite.member href="table26.xml"/>
+     <suite.member href="table27.xml"/>
+     <suite.member href="table28.xml"/>
+     <suite.member href="table29.xml"/>
+     <suite.member href="table30.xml"/>
+     <suite.member href="table31.xml"/>
+     <suite.member href="table32.xml"/>
+     <suite.member href="table33.xml"/>
+     <suite.member href="table34.xml"/>
+     <suite.member href="table35.xml"/>
+     <suite.member href="table36.xml"/>
+     <suite.member href="table37.xml"/>
+     <suite.member href="table38.xml"/>
+     <suite.member href="table39.xml"/>
+     <suite.member href="table40.xml"/>
+     <suite.member href="table41.xml"/>
+     <suite.member href="table42.xml"/>
+     <suite.member href="table43.xml"/>
+     <suite.member href="table44.xml"/>
+     <suite.member href="table45.xml"/>
+     <suite.member href="table46.xml"/>
+     <suite.member href="table47.xml"/>
+     <suite.member href="table48.xml"/>
+     <suite.member href="table49.xml"/>
+     <suite.member href="table50.xml"/>
+     <suite.member href="table51.xml"/>
+     <suite.member href="table52.xml"/>
+     <suite.member href="table53.xml"/>
+
 </suite>

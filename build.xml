@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.134  2004-03-09 04:31:04  dom-ts-4
+Revision 1.135  2004-03-09 07:46:24  dom-ts-4
+Integration of Netscape HTML test submission (bug 255)
+
+Revision 1.134  2004/03/09 04:31:04  dom-ts-4
 Remove duplicate L2 HTML tests (bug 587)
 
 Revision 1.133  2004/03/09 03:03:42  dom-ts-4
@@ -839,7 +842,6 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/core"/>
 	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/html"/>
-    <copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/submittedtests/netscapeHTML"/>
 </target>
 
 <target name="dom1-subjects" depends="dom1-init">
@@ -1042,7 +1044,6 @@ All implementation conditions combined into implementationAttribute element
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/html" includes="*.xml"/>  
-        <fileset dir="${tests.dir}/submittedtests/netscapeHTML" includes="*.xml"/>
 	</xmlvalidate>
 </target>
 
@@ -1068,29 +1069,11 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-html-gen-java" depends="dom1-interfaces,dom1-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level2/html"/>
-
-
-
-
 	<antcall target="gen-java">
 		<param name="level" value="1"/>
 		<param name="module" value="html"/>
 		<param name="import-html" value="import org.w3c.dom.html.*;"/>		
 	</antcall>
-	<style basedir="${tests.dir}/submittedtests/netscapeHTML" 
-		   destdir="${java.build.dir}/org/w3c/domts/level1/html" 
-		   includes="*.xml" 
-           excludes="metadata.xml,xml_alltests.xml"
-	       style="${transforms.dir}/test-to-java.xsl" 
-	       extension=".java">
-		<param name="interfaces-docname"
-		       expression="../${build.dir}/dom1-interfaces.xml"/>
-		<param name="package"
-		       expression="org.w3c.domts.level1.html"/>
-		<param name="target-uri-base"
-		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
-	</style>
-
 </target>
 
 <target name="dom1-html-javac" depends="common-javac,dom1-html-gen-java">
@@ -1609,7 +1592,9 @@ All implementation conditions combined into implementationAttribute element
                      HTMLObjectElement16.xml
                      HTMLObjectElement19.xml
                      HTMLTableElement31.xml
-                     HTMLTableRowElement04.xml"
+                     HTMLTableRowElement04.xml
+                     object08.xml
+                     object13.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -1656,7 +1641,9 @@ All implementation conditions combined into implementationAttribute element
                      HTMLObjectElement16.xml
                      HTMLObjectElement19.xml
                      HTMLTableElement31.xml
-                     HTMLTableRowElement04.xml"
+                     HTMLTableRowElement04.xml
+                     object08.xml
+                     object13.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
 	       extension=".html">
 		<param name="interfaces-docname"
