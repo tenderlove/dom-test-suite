@@ -119,9 +119,25 @@ of a test file
 
 <xsl:template match="@resource" mode="body">
     <xsl:text> resource='</xsl:text>
-    <a href="{.}">
-    <xsl:value-of select="."/>
-    </a>
+    <xsl:choose>
+		<xsl:when test="contains(.,'#xpointer(id(')">
+            <a>
+                <xsl:attribute name="href">
+		            <xsl:value-of select="substring-before(.,'#xpointer')"/>
+			        <xsl:text>#</xsl:text>
+			        <xsl:variable name="after" select="substring-after(.,&quot;#xpointer(id(&apos;&quot;)"/>
+			        <xsl:value-of select="substring-before($after,&quot;')&quot;)"/>
+                </xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>
+		</xsl:when>
+
+        <xsl:otherwise>
+            <a href="{.}">
+                <xsl:value-of select="."/>
+            </a>
+        </xsl:otherwise>
+    </xsl:choose>
     <xsl:text>'</xsl:text>
 </xsl:template>
 
