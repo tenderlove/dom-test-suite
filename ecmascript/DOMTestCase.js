@@ -9,30 +9,6 @@ the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 */
-  function assertTrue(descr, boo) {
-    top.assertTrue(descr, boo);
-  }
-
-  function assertFalse(descr, boo) {
-    top.assertFalse(descr, boo);
-  }
-
-  function assertEquals(descr, expected, actual) {
-     top.assertEquals(descr, expected, actual);
-  }
-
-  function assertNotEquals(descr, expected, actual) {
-     top.assertNotEquals(descr, expected, actual);
-  }
-
-  function assertNull(descr, obj) {
-    top.assertNull(descr, obj);
-  }
-
-  function assertNotNull(descr, obj) {
-    top.assertNotNull(descr, obj);
-  }
-
   function assertSize(descr, expected, actual) {
     var actualSize;
     actualSize = actual.length;
@@ -43,7 +19,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   function assertEqualsCollection(descr, expected, actual) {
     //
     //  if they aren't the same size, they aren't equal
-    top.assertEquals(descr, expected.length, actual.length);
+    assertEquals(descr, expected.length, actual.length);
     //
     //  if there length is the same, then every entry in the expected list
     //     must appear once and only once in the actual list
@@ -62,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             }
         }
         if(matches == 0) {
-            top.assert(descr + ": No match found for " + expectedValue,false);
+            assert(descr + ": No match found for " + expectedValue,false);
         }
         if(matches > 1) {
-            top.assert(descr + ": Multiple matches found for " + expectedValue, false);
+            assert(descr + ": Multiple matches found for " + expectedValue, false);
         }
     }
   }
@@ -74,35 +50,35 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   function assertEqualsList(descr, expected, actual) {
     //
     //  if they aren't the same size, they aren't equal
-    top.assertEquals(descr, expected.length, actual.length);
+    assertEquals(descr, expected.length, actual.length);
     //
     var actualLen = actual.length;
     var i;
     for(i = 0; i < actualLen; i++) {
         if(expected[i] != actual[i]) {
-			top.assertEquals(descr, expected[i], actual[i]);
+			assertEquals(descr, expected[i], actual[i]);
         }
     }
   }
 
   function assertInstanceOf(descr, type, obj) {
     if(type == "Attr") {
-        top.assertEquals(descr,2,obj.nodeType);
+        assertEquals(descr,2,obj.nodeType);
         var specd = obj.specified;
     }
   }
 
   function assertSame(descr, expected, actual) {
     if(expected != actual) {
-        top.assertEquals(descr, expected.nodeType, actual.nodeType);
-        top.assertEquals(descr, expected.nodeValue, actual.nodeValue);
+        assertEquals(descr, expected.nodeType, actual.nodeType);
+        assertEquals(descr, expected.nodeValue, actual.nodeValue);
     }
   }
 
   function assertURIEquals(assertID, scheme, path, host, file, name, query, fragment, isAbsolute, actual) {
     //
     //  URI must be non-null
-    top.assertNotNull(assertID, actual);
+    assertNotNull(assertID, actual);
 
     var uri = actual;
 
@@ -115,7 +91,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         uri = actual.substring(0,lastPound);
         actualFragment = actual.substring(lastPound+1);
     }
-    if(fragment != null) top.assertEquals(assertID,fragment, actualFragment);
+    if(fragment != null) assertEquals(assertID,fragment, actualFragment);
 
     var lastQuestion = uri.lastIndexOf("?");
     var actualQuery = "";
@@ -126,7 +102,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         uri = actual.substring(0,lastQuestion);
         actualQuery = actual.substring(lastQuestion+1);
     }
-    if(query != null) top.assertEquals(assertID, query, actualQuery);
+    if(query != null) assertEquals(assertID, query, actualQuery);
 
     var firstColon = uri.indexOf(":");
     var firstSlash = uri.indexOf("/");
@@ -138,11 +114,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
 
     if(scheme != null) {
-        top.assertEquals(assertID, scheme, actualScheme);
+        assertEquals(assertID, scheme, actualScheme);
     }
 
     if(path != null) {
-        top.assertEquals(assertID, path, actualPath);
+        assertEquals(assertID, path, actualPath);
     }
 
     if(host != null) {
@@ -151,7 +127,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             var termSlash = actualPath.substring(2).indexOf("/") + 2;
             actualHost = actualPath.substring(0,termSlash);
         }
-        top.assertEquals(assertID, host, actualHost);
+        assertEquals(assertID, host, actualHost);
     }
 
     if(file != null || name != null) {
@@ -161,7 +137,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             actualFile = actualPath.substring(finalSlash+1);
         }
         if (file != null) {
-            top.assertEquals(assertID, file, actualFile);
+            assertEquals(assertID, file, actualFile);
         }
         if (name != null) {
             var actualName = actualFile;
@@ -169,325 +145,42 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             if (finalDot != -1) {
                 actualName = actualName.substring(0, finalDot);
             }
-            top.assertEquals(assertID, name, actualName);
+            assertEquals(assertID, name, actualName);
         }
     }
 
     if(isAbsolute != null) {
-        top.assertEquals(assertID, isAbsolute, actualPath.substring(0,1) == "/");
+        assertEquals(assertID, isAbsolute, actualPath.substring(0,1) == "/");
     }
   }
 
-  var currentBuilder = null;
-
-  function MSXMLBuilder(test, contentType, attributes, features, progid) {
-    this.test = test;
-    this.progid = progid;
-    this.async = false;
-    this.domImpl = new ActiveXObject(progid).domImplementation;
-    this.attributes = attributes;
-    this.features = features;
-    this.contentType = contentType;
-    if (this.attributes != null) {
-        for (var i = 0; i < this.attributes.length; i++) {
-            if(this.attributes[i][0] == 'expandEntityReferences' && 
-                this.attributes[i][1]) {
-                test.ignored = true;
-                break;
-            }
-        }
-    }
-  }
-
-  MSXMLBuilder.prototype.createMSXML = function() {
-    var parser = new ActiveXObject(this.progid);
-    parser.async = false;
-    parser.preserveWhiteSpace = true;
-    if (this.attributes != null) {
-        var supported = true;
-        for (var i = 0; i < this.attributes.length; i++) {
-            if(this.attributes[i][0] == "validating") {
-                parser.validateOnParse = this.attributes[i][1];
-                break;
-            }
-			if(this.attributes[i][0] == "ignoreElementContentWhitespace") {
-				parser.preserveWhiteSpace = !this.attributes[i][1];
-			}
-        }
-    }
-    return parser;
-  }
-
-  MSXMLBuilder.prototype.startLoad = function(varname, file) {
-    var extension = ".xml";
-    //
-    //   if trying to ready HTML or some other content with
-    //     the MSXML parser, then ignore the test
-    if (this.contentType != null) {
-        if (this.contentType == 'text/xml') {
+function toUpperCaseArray() {
+    var upperCased = new Array(expected.length);
+    for(var i = 0; i < expected.length; i++) {
+        if (expected[i].substring(0,1) != "#") {
+            upperCased[i] = expected[i].toUpperCase();
         } else {
-            if(this.contentType == 'image/svg+xml') {
-                extension = '.svg';
-            } else { 
-                this.test.ignored = true;
-                this.test.ready = true;
-                return null;
-            }
+            upperCased[i] = expected[i];
         }
     }
-    var parser = this.createMSXML();
-	if(!parser.load(file + ".xml")) {
-		throw parser.parseError.reason;
-	}
-    //
-    //   if the first child of the document is a PI representing
-    //      the XML Declaration, remove it from the tree.
-    //
-    //   According to the DOM FAQ, this behavior is not wrong,
-    //      but the tests are written assuming that it is not there.
-    //
-    var xmlDecl = parser.firstChild;
-    if(xmlDecl != null && xmlDecl.nodeType == 7 && xmlDecl.target.toLowerCase() == "xml") {
-        parser.removeChild(xmlDecl);
-    }
-	return parser;
-  }
+    return upperCased;
+}
 
-  //
-  //   document was fully loaded in startLoad,
-  //      just return existing document reference
-  //
-  MSXMLBuilder.prototype.load = function (doc, varname, file) {
-    return doc;
-  }
+function IFrameBuilder() {
+    this.suffix = ".html";
+}
 
-  MSXMLBuilder.prototype.close = function(doc) {
-  }
+IFrameBuilder.prototype.preload = function(frame, varname, url) {
+  frame.document.location.href = fileBase + url + suffix;
+  return 0;
+}
 
-  MSXMLBuilder.prototype.toAutoCase = function(expected) {
-    return expected;
-  }
+IFrameBuilder.prototype.load = function(frame, varname, url) {
+    return frame.document;
+}
 
-
-  MSXMLBuilder.prototype.toAutoCaseArray = function(expected) {
-    return expected;
-  }
-
-  MSXMLBuilder.prototype.getDOMImplementation = function() {
-    return this.domImpl;
-  }
-
-  MSXMLBuilder.prototype.hasFeature = function(feature, version) {
-    //
-    //   MSXML will take null, unfortunately 
-    //      there is no way to get it to there from script
-    //      without a type mismatch error
-    if(version == null) {
-		switch(feature.toUpperCase()) {
-		   case "XML":
-		   case "CORE":
-		   return true;
-		   
-		   case "HTML":
-		   case "ORG.W3C.DOM":
-		   return false;
-		}
-		if(this.getDOMImplementation().hasFeature(feature,"1.0")) {
-		   return true;
-		}
-		if(this.getDOMImplementation().hasFeature(feature,"2.0")) {
-		   return true;
-		}
-		if(this.getDOMImplementation().hasFeature(feature,"3.0")) {
-		   return true;
-		}
-    }
-	return this.getDOMImplementation().hasFeature(feature,version);
-  }
-
-  MSXMLBuilder.prototype.getImplementationAttribute = function(attr) {
-    if (this.attributes != null) {
-        for (var i = 0; i < this.attributes.length; i++) {
-            if(attr == this.attributes[i][0]) {
-                return this.attributes[i][1];
-            }
-        }
-    }
-    if (attr == "expandEntityReferences" || 
-        attr == "signed" || 
-        attr == "hasNullString") {
-        return true;
-    }
-    if (attr == "validating" || attr == "ignoreElementContentWhitespace") {
-        return false;
-    }
-    return false;
-  }
-
-
-  function DOM3XMLBuilder(test, contentType, attrNames, attrValues) {
-    this.test = test;
-    this.contentType = contentType;
-    this.async = true;
-    this.domImpl = null;
-    this.attrNames = attrNames;
-    this.attrValues = attrValues;
-  }
-
-  DOM3XMLBuilder.prototype.startLoad = function(varname, file) {
-    var extension = ".xml";
-    //
-    //   if trying to ready HTML or some other content with
-    //     the DOM 3 LS parser, then ignore the test
-    if (this.contentType != null) {
-        if (this.contentType == 'text/xml') {
-        } else {
-            if(this.contentType == 'image/svg+xml') {
-                extension = '.svg';
-            } else { 
-                this.test.ignored = true;
-                this.test.ready = true;
-                return null;
-            }
-        }
-    }
-    if (this.async) {
-       var domimpl = document.implementation;
-       var builder = domimpl.getDOMBuilder(1, null);
-       builder.addEventListener("load", this, false);
-       builder.addEventListener("error", this, false);
-       return builder.parseURI(file + extension);
-    } 
-    var builder = document.implementation.getDOMBuilder(2, null);
-    return builder.parseURI(file + extension);
-  }
-
-  DOM3XMLBuilder.prototype.load = function (doc, varname, file) {
-    return doc;
-  }
-
-  DOM3XMLBuilder.prototype.handleEvent = function(evt) {
-    if (evt.type == "load") {
-        this.test.onLoadComplete(evt.newDocument);
-    } else {
-        if (evt.type == "error") {
-            this.test.onLoadError("Load error " + evt.error);
-        }
-    }
-  }
-
-  DOM3XMLBuilder.prototype.close = function(doc) {
-  }
-
-  DOM3XMLBuilder.prototype.toAutoCase = function(expected) {
-    return expected;
-  }
-
-  DOM3XMLBuilder.prototype.toAutoCaseArray = function(expected) {
-    return expected;
-  }
-
-
-  DOM3XMLBuilder.prototype.getDOMImplementation = function() {
-    return document.implementation;
-  }
-
-  DOM3XMLBuilder.prototype.hasFeature = function(feature, version) {
-    return document.implementation.hasFeature(feature, version);
-  }
-
-  DOM3XMLBuilder.prototype.getImplementationAttribute = function(attr) {
-    return false;
-  }
-
-
-  function MozillaXMLBuilder(test, contentType, attrNames, attrValues) {
-    this.test = test;
-    this.contentType = contentType;
-    this.async = true;
-    this.domImpl = null;
-    this.attrNames = attrNames;
-    this.attrValues = attrValues;
-    if (attrNames != null) {
-        var supported = true;
-        for (var i = 0; i < attrNames.length; i++) {
-            if(attrNames[i] == 'validating' && attrValues[i]) {
-                supported = false;
-                break;
-            }
-        }
-        if (!supported) {
-            test.ignored = true;
-        }
-    }
-  }
-
-  function MozillaXMLBuilder_onLoadComplete(evt) {
-      alert("onLoad");
-      currentBuilder.test.onLoadComplete(evt.currentTarget);
-  }
-
-
-  MozillaXMLBuilder.prototype.startLoad = function(varname, file) {
-    var extension = ".xml";
-    //
-    //   if trying to ready HTML or some other content with
-    //     the DOM 3 LS parser, then ignore the test
-    if (this.contentType != null) {
-        if (this.contentType == 'text/xml') {
-        } else {
-            if(this.contentType == 'image/svg+xml') {
-                extension = '.svg';
-            } else { 
-                this.test.ignored = true;
-                this.test.ready = true;
-                return null;
-            }
-        }
-    }
-    var domimpl = document.implementation;
-    var doc = domimpl.createDocument("", "temp", null);
-    doc.addEventListener("load", MozillaXMLBuilder_onLoadComplete, false);
-    currentBuilder = this;
-    this.test.deferredDocs++;
-    alert("startLoad");
-    doc.load(file + extension);
-    return doc;
-  }
-
-  MozillaXMLBuilder.prototype.load = function (doc, varname, file) {
-    return doc;
-  }
-
-  MozillaXMLBuilder.prototype.close = function(doc) {
-  }
-
-  MozillaXMLBuilder.prototype.toAutoCase = function(expected) {
-    return expected;
-  }
-
-  MozillaXMLBuilder.prototype.toAutoCaseArray = function(expected) {
-    return expected;
-  }
-
-
-  MozillaXMLBuilder.prototype.getDOMImplementation = function() {
-    return document.implementation;
-  }
-
-  MozillaXMLBuilder.prototype.hasFeature = function(feature, version) {
-    return document.implementation.hasFeature(feature, version);
-  }
-
-  MozillaXMLBuilder.prototype.getImplementationAttribute = function(attr) {
-    return false;
-  }
-
-  function IFrameBuilder(test, contentType, attributes, features) {
-    this.test = test;
-    this.contentType = contentType;
-    this.async = false;
-    this.supportedAttributes = [
+IFrameBuilder.prototype.getImplementationAttribute = function(attr) {
+        var supportedAttributes = [
         [ "validating", false ],
         [ "expandEntityReferences", true],
         [ "coalescing", false],
@@ -495,163 +188,87 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         [ "hasNullString", true ],
         [ "ignoringElementContentWhitespace", false] ];
 
-    var supported = true;
-
-    for (var i = 0; i < attributes.length && supported; i++) {
-        for (var j = 0; j < this.supportedAttributes.length; j++) {
-            if (attributes[i][0] == this.supportedAttributes[j][0] &&
-                attributes[i][1] != this.supportedAttributes[j][1]) {
-                supported = false;
-                break;
-            }
-        }
-    }
-
-    if (supported) {
-        for (var i = 0; i < features.length; i++) {
-            if (features[i][0].toUpperCase() == "XML") {
-                supported = false;
-                break;
-            }
-        }
-    }
-    if (!supported) {
-        this.test.ignored = true;
-    }
-  }
-
-
-  IFrameBuilder.prototype.startLoad = function(varname, file) {
-    var extension = ".xml";
-    //
-    //   if trying to ready HTML or some other content with
-    //     the DOM 3 LS parser, then ignore the test
-    switch(this.contentType) {
-        case null:
-        case "text/xml":
-        break;
-
-        case "text/html":
-        if (file == "staff" || file == "nodtdstaff") {
-            this.test.ignored = true;
-            this.test.ready = true;
-            return null;
-        }
-        extension = ".html";
-        break;
-
-        case "image/svg+xml":
-        extension = ".svg";
-        break;
-    }
-    var iframe = document.getElementById(varname + extension);
-    var doc = iframe.contentDocument;
-    if (doc == undefined || doc == null) {
-        doc = iframe.contentWindow.window.document;
-    }
-    return doc;
-  }
-
-  IFrameBuilder.prototype.load = function (doc, varname, filename) {
-    return doc;
-  }
-
-  IFrameBuilder.prototype.close = function(doc) {
-  }
-
-  IFrameBuilder.prototype.toAutoCase = function(expected) {
-    if (this.contentType == "text/html") {
-        if(expected.substring(0,1) != "#") {
-            return expected.toUpperCase();
-        }
-    }
-    return expected;
-  }
-
-
-  IFrameBuilder.prototype.toAutoCaseArray = function(expected) {
-    if (this.contentType == "text/html") {
-        var upperCased = new Array(expected.length);
-        for(var i = 0; i < expected.length; i++) {
-            if (expected[i].substring(0,1) != "#") {
-                upperCased[i] = expected[i].toUpperCase();
-            } else {
-                upperCased[i] = expected[i];
-            }
-        }
-        return upperCased;
-    }
-    return expected;
-  }
-
-  IFrameBuilder.prototype.getDOMImplementation = function() {
-    return document.implementation;
-  }
-
-  IFrameBuilder.prototype.hasFeature = function(feature, version) {
-    return document.implementation.hasFeature(feature, version);
-  }
-
-  IFrameBuilder.prototype.getImplementationAttribute = function(attr) {
-    for (var i = 0; i < this.supportedAttributes.length; i++) {
-        if (this.supportedAttributes[i][0] == attr) {
-            return this.supportedAttributes[i][1];
+    for (var i = 0; i < supportedAttributes.length; i++) {
+        if (supportedAttributes[i][0] == attr) {
+            return supportedAttributes[i][1];
         }
     }
     return false;
-  }
-
-   
-  function getBuilder(test, contentType, attributes, features) {
-//    return new MSXMLBuilder(test, contentType, attributes, features, "MSXML2.DOMDocument.3.0");
-//      return new DOM3XMLBuilder(test, contentType, attributes, features);
-//      return new MozillaXMLBuilder(test, contentType, attributes, features);
-      return new IFrameBuilder(test, "text/html", attributes, features);
-  }  
-
-function DOMTestCase(name) {
-    this.deferredDocs = 0;
-    this.jstest = top.jsUnitTestCase;
-    this.jstest(name);
 }
 
-DOMTestCase.prototype = new top.jsUnitTestCase;
 
-
-DOMTestCase.prototype.onLoadComplete = function(doc) {
-    if(--this.deferredDocs == 0) {
-        this.setReady(true);
-    }
+IFrameBuilder.prototype.toAutoCase = function(s) {
+    return s.toUpperCase();
 }
 
-DOMTestCase.prototype.onLoadError = function(error) {
-    this.deferredDocs = -1;
-    this.fail(error);
-}
-        
-DOMTestCase.prototype.runTest = function() {
-    throw "runTest() not overriden";
+IFrameBuilder.prototype.toAutoCaseArray = function(s) {
+    return toUpperCaseArray(s);
 }
 
-DOMTestCase.prototype.attemptTest = function() {
-    try {
-        this.runTest();
-    } catch (e1) {
-        return e1;
+
+function MozillaXMLBuilder() {
+    this.suffix = ".xml";
+    this.docs = new Array();
+    this.docnames = new Array();
+}
+
+MozillaXMLBuilder.prototype.preload = function(frame, varname, url) {
+  var domimpl = document.implementation;
+  var doc = domimpl.createDocument("", "temp", null);
+  doc.addEventListener("load", loadComplete, false);
+  doc.load(fileBase + url + this.suffix);
+  this.docs[this.docs.length] = doc;
+  this.docnames[this.docnames.length] = varname;
+  return 0;
+}
+
+MozillaXMLBuilder.prototype.load = function(frame, varname, url) {
+    for(i = 0; i < this.docnames.length; i++) {
+        if (this.docnames[i] == varname) {
+            return this.docs[i];
+        }
     }
     return null;
 }
 
 
-
-
-var isTestPageLoaded=false;
-
-function isLoaded() {
-        return isTestPageLoaded;
-}
-function newOnLoadEvent() {
-        isTestPageLoaded=true;
+MozillaXMLBuilder.prototype.getImplementationAttribute = function(attr) {
+    return false;
 }
 
-window.onload=newOnLoadEvent;
+
+MozillaXMLBuilder.prototype.toAutoCase = function(s) {
+    return s;
+}
+
+MozillaXMLBuilder.prototype.toAutoCaseArray = function(s) {
+    return s;
+}
+
+
+var builder = new IFrameBuilder();
+//var builder = new MozillaXMLBuilder();
+
+function preload(frame, varname, url) {
+  return builder.preload(frame, varname, url);
+}
+
+function load(frame, varname, url) {
+    return builder.load(frame, varname, url);
+}
+
+function getImplementationAttribute(attr) {
+    return builder.getImplementationAttribute(attr);
+}
+
+
+function toAutoCase(s) {
+    return builder.toAutoCase(s);
+}
+
+function toAutoCaseArray(s) {
+    return builder.toAutoCaseArray(s);
+}
+
+var suffix = builder.suffix;
+
