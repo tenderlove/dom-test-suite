@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.37  2001-11-27 19:42:27  dom-ts-2
+Revision 1.38  2001-11-28 15:26:53  dom-ts-4
+Copied dom2.dtd to tests/level2/html directory
+
+Revision 1.37  2001/11/27 19:42:27  dom-ts-2
 Added targets for dom2-html.
 
 
@@ -456,6 +459,7 @@ All implementation conditions combined into implementationAttribute element
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
 	</style>
 	<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/core"/>
+	<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/html"/>
 </target>
 
 <target name="dom2-subjects" depends="dom2-init">
