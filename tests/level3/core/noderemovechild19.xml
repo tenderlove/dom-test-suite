@@ -21,12 +21,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild19</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on the first 'employee' Element node attempt to remove a EntityReference 
-	node child and verify the nodeName of the returned node that was removed.  Now attempt
-	the reverse and verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
+	node child and verify the nodeName of the returned node that was removed.  Attempt
+	to remove a non-child from an entity reference and expect either a NOT_FOUND_ERR or
+	a NO_MODIFICATION_ALLOWED_ERR.  Renove a child from an entity reference and expect
+	a NO_MODIFICATION_ALLOWED_ERR.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -41,6 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removed" type="EntityReference"/>
 <var name="removedName" type="DOMString"/>
 <var name="removedNode" type="Node"/>
+<var name="entRefChild" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"address"' interface="Document"/>
 <item var="parent" obj="parentList" index="1" interface="NodeList"/>
@@ -48,9 +48,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeName obj="removed" var="removedName"/>
 <assertEquals actual="removedName" expected='"ent2"' id="noderemovechild19" ignoreCase="false"/>
-<assertDOMException id="NOT_FOUND_ERR_noderemovechild19">
-<NO_MODIFICATION_ALLOWED_ERR>
-<removeChild obj="child" var="removedNode" oldChild="parent" />
-</NO_MODIFICATION_ALLOWED_ERR>
-</assertDOMException>
+<!--  
+   Remove a non-member of the entity reference,
+   expect either a NO_MODIFICATION_ALLOWED_ERR or a NOT_FOUND_ERR
+-->   
+<try>
+	<removeChild obj="child" var="removedNode" oldChild="parent" />
+	<fail id="throw_DOMException"/>
+	<catch>
+		<DOMException code="NO_MODIFICATION_ALLOWED_ERR"/>
+		<DOMException code="NOT_FOUND_ERR"/>
+	</catch>
+</try>
+<!--
+Remove a child of the entity reference
+   Expect a NO_MODIFICATION_ALLOWED_ERR exception 
+-->   
+<firstChild var="entRefChild" obj="child" interface="Node"/>
+<if>
+    <!-- entity may not be resolved if validating is false  -->
+	<notNull obj="entRefChild"/>
+	<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
+		<NO_MODIFICATION_ALLOWED_ERR>
+			<removeChild obj="child" var="removedNode" oldChild="entRefChild"/>
+		</NO_MODIFICATION_ALLOWED_ERR>
+	</assertDOMException>
+</if>
 </test>
