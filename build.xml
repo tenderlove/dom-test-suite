@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.69  2002-08-13 05:20:37  dom-ts-4
+Revision 1.70  2002-08-23 04:00:56  dom-ts-4
+Copied xhtml.dtd and DOMTSApplet.class to DOM L2 HTML JsUnit build
+
+Revision 1.69  2002/08/13 05:20:37  dom-ts-4
 Commented out inclusion of tests/level3/ls/files in dom3-ls.jar until there are some l3 test files
 
 Revision 1.68  2002/08/13 04:51:34  dom-ts-4
@@ -1216,11 +1219,20 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom2-html-gen-jsunit" depends="dom2-interfaces,dom2-dtd">
+<target name="dom2-html-gen-jsunit" depends="dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/level2/html/ecmascript/tests"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/html/ecmascript/tests"/>
     <copy todir="${build.dir}/level2/html/ecmascript/tests">
 		<fileset dir="tests/level2/html/files" excludes="*.bak"/>
+    </copy>
+
+    <!--  copy XHTML 1.0 DTD's to output directory   -->
+    <copy todir="${build.dir}/level1/html/ecmascript/tests">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
+    <copy todir="${build.dir}/level1/html/ecmascript/tests/applets/org/w3c/domts">
+        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
     </copy>
 
 	<style basedir="${tests.dir}/level2/html" 
