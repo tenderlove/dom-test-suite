@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="docElem" type="Element"/>
@@ -42,18 +41,24 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="imported" type="Node"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:doc"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <createDocumentFragment var="docFragment" obj="newDoc"/>
 <importNode obj="newDoc" var="imported" importedNode="docElem" deep="true"/>
 <documentElement var="docElem" obj="newDoc"/>
 <appendChild obj="docElem" var="appendedChild" newChild="imported"/>
-<getElementsByTagNameNS var="childList" obj="newDoc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="childList" obj="newDoc" tagname='"acronym"' interface="Document"/>
 <item var="acronymNode" obj="childList" index="0" interface="NodeList"/>
 <appendChild obj="docFragment" var="appendedChild" newChild="acronymNode"/>
 <adoptNode var="adoptedDocFrag" obj="newDoc" source="docFragment"/>
+<if><notNull obj="adoptedDocFrag"/>
 <hasChildNodes var="success" obj="adoptedDocFrag"/>
 <assertTrue actual="success" id="documentadoptnode14"/>
+</if>
 </test>

@@ -34,10 +34,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="adoptedDocType" type="Node"/>
 <var name="nullPubID" type="DOMString" isNull="true"/>
 <var name="nullSysID" type="DOMString" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocumentType var="docType" obj="domImpl" qualifiedName='"level3:docTyp"' publicId="nullPubID" systemId="nullSysID"/>
-<assertDOMException id="NOT_SUPPORTED_ERR_documentadoptnode11">
+<createDocumentType var="docType" obj="domImpl" qualifiedName="rootName" publicId="nullPubID" systemId="nullSysID"/>
+<assertDOMException id="throw_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>
 <adoptNode var="adoptedDocType" obj="doc" source="docType"/>
 </NOT_SUPPORTED_ERR>

@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
@@ -50,23 +49,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="adoptedEntRefNodeValue" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="appendedChild" type="Node"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<var name="xmlNS" type="DOMString" value='"http://www.w3.org/XML/1998/namespace"'/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:l3"' doctype="nullDocType"/>
-<createAttributeNS var="newAttr" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:attr"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<createAttributeNS var="newAttr" obj="doc" namespaceURI="xmlNS" qualifiedName='"xml:lang"'/>
 <createTextNode var="newText" obj="doc" data='"Text Node"'/>
 <createEntityReference var="newEntRef" obj="doc" name='"alpha"'/>
 <appendChild obj="newAttr" var="appendedChild" newChild="newText"/>
 <appendChild obj="newAttr" var="appendedChild" newChild="newEntRef"/>
 <adoptNode var="adoptedAttr" obj="newDoc" source="newAttr"/>
+<if><notNull obj="adoptedAttr"/>
 <nodeName var="nodeName" obj="adoptedAttr"/>
 <namespaceURI var="nodeNamespaceURI" obj="adoptedAttr" interface="Node"/>
 <prefix var="nodePrefix"  obj="adoptedAttr"/>
 <ownerElement var="attrOwnerElem" obj="adoptedAttr" interface="Attr"/>
 <specified var="isSpecified"  obj="adoptedAttr" />
-<assertEquals expected='"level3:attr"' actual="nodeName"  id="documentadoptnode06_nodeName" ignoreCase="false"/>
-<assertEquals expected='"http://www.w3.org/DOM/Test"' actual="nodeNamespaceURI"  id="documentadoptnode06_namespaceURI" ignoreCase="false"/>
-<assertEquals expected='"level3"' actual="nodePrefix"  id="documentadoptnode06_prefix" ignoreCase="false"/>
+<assertEquals expected='"xml:lang"' actual="nodeName"  id="documentadoptnode06_nodeName" ignoreCase="false"/>
+<assertEquals expected="xmlNS" actual="nodeNamespaceURI"  id="documentadoptnode06_namespaceURI" ignoreCase="false"/>
+<assertEquals expected='"xml"' actual="nodePrefix"  id="documentadoptnode06_prefix" ignoreCase="false"/>
 <assertNull  actual="attrOwnerElem"  id="documentadoptnode06_ownerDoc"/>
 <assertTrue  actual="isSpecified"  id="documentadoptnode06_specified"/>
 <childNodes var="nodeList" obj="adoptedAttr"/>
@@ -76,4 +83,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName var="adoptedEntRefNodeValue" obj="adoptEntRef"/>
 <assertEquals expected='"Text Node"' actual="adoptedTextNodeValue"  id="documentadoptnode06_TextNodeValue" ignoreCase="false"/>
 <assertEquals expected='"alpha"' actual="adoptedEntRefNodeValue"  id="documentadoptnode06_EntRefNodeValue" ignoreCase="false"/>
+</if>
 </test>

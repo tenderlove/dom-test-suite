@@ -66,6 +66,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="parent" var="appendedChild" newChild="child"/>
 <appendChild obj="docFragment" var="appendedChild" newChild="parent"/>
 <adoptNode  var="adopted" obj="doc" source="docFragment"/>
+<if><notNull obj="adopted"/>
 <firstChild var="parentImp" obj="adopted" interface="Node"/>
 <firstChild var="childImp" obj="parentImp" interface="Node"/>
 <attributes var="attributes" obj="childImp"/>
@@ -87,5 +88,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			id="documentadoptnode16" 
 			ignoreCase="false"/>
 	</else>
+</if>
 </if>
 </test>

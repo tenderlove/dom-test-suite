@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docFragment" type="DocumentFragment"/>
 <var name="success" type="boolean"/>
@@ -36,6 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFragment" obj="doc"/>
 <adoptNode var="adoptedDocFrag" obj="doc" source="docFragment"/>
+<if><notNull obj="adoptedDocFrag"/>
 <hasChildNodes var="success" obj="adoptedDocFrag"/>
 <assertFalse actual="success" id="documentadoptnode15"/>
+</if>
 </test>

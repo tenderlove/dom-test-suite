@@ -33,10 +33,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domImpl" type="DOMImplementation"/>
 <var name="adoptedDoc" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:l3"' doctype="nullDocType"/>
-<assertDOMException id="NOT_SUPPORTED_ERR_documentadoptnode09">
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<assertDOMException id="throw_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>
 <adoptNode var="adoptedDoc" obj="newDoc" source="doc"/>
 </NOT_SUPPORTED_ERR>

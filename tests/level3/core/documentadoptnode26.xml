@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="newElem" type="Element"/>
@@ -55,9 +54,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <documentElement obj="newDoc" var="docElem"/>
 <appendChild obj="docElem" var="appendedChild" newChild="newElem"/>
 <adoptNode var="adoptedNode" obj="doc" source="newElem"/>
+<if><notNull obj="adoptedNode"/>
 <nodeName var="adoptedName" obj="adoptedNode"/>
 <namespaceURI var="adoptedNS" obj="adoptedNode" interface="Node"/>
 <assertEquals actual="adoptedName" expected='"head"' id="documentadoptnode26_1" ignoreCase="false"/>
 <assertEquals actual="adoptedNS" expected='"http://www.w3.org/1999/xhtml"' id="documentadoptnode26_2" ignoreCase="false"/>
+</if>
 </test>
  

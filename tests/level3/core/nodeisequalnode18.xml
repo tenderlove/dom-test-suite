@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode18</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isEqualNode check if a new Attr node created in this Document is equal to 
 	the attr node adopted by a new document.
 </description>
@@ -38,11 +36,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument  var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:doc"' doctype="nullDocType"/>
-<createAttributeNS var="attr1" obj="doc" namespaceURI="nullNSURI" qualifiedName='"root"'/>
+<createDocument  var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<createAttributeNS var="attr1" obj="doc" namespaceURI="nullNSURI" qualifiedName='"title"'/>
 <adoptNode var="attr2" obj="newDoc" source="attr1" />
+<if><notNull obj="attr2"/>
 <isEqualNode var="isEqual" obj="attr1" arg="attr2"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode18"/>
+</if>
 </test>

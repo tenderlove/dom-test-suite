@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newAttr"  type="Attr"/>
 <var name="adoptedAttr" type="Attr"/>
@@ -38,17 +37,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodePrefix" type="DOMString"/>
 <var name="attrOwnerElem" type="Element"/>
 <var name="isSpecified" type="boolean"/>
+<var name="xmlNS" type="DOMString" value='"http://www.w3.org/XML/1998/namespace"'/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createAttributeNS var="newAttr" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:attr"'/>
+<createAttributeNS var="newAttr" obj="doc" namespaceURI="xmlNS" qualifiedName='"xml:lang"'/>
 <adoptNode var="adoptedAttr" obj="doc" source="newAttr"/>
+<if><notNull obj="adoptedAttr"/>
 <nodeName var="nodeName" obj="adoptedAttr"/>
 <namespaceURI var="nodeNamespaceURI" obj="adoptedAttr" interface="Node"/>
 <prefix var="nodePrefix"  obj="adoptedAttr"/>
 <ownerElement var="attrOwnerElem" obj="adoptedAttr" interface="Attr"/>
 <specified var="isSpecified"  obj="adoptedAttr" />
-<assertEquals expected='"level3:attr"' actual="nodeName"  id="documentadoptode03_nodeName" ignoreCase="false"/>
-<assertEquals expected='"http://www.w3.org/DOM/Test"' actual="nodeNamespaceURI"  id="documentadoptNode03_namespaceURI" ignoreCase="false"/>
-<assertEquals expected='"level3"' actual="nodePrefix"  id="documentadoptnode03_prefix" ignoreCase="false"/>
+<assertEquals expected='"xml:lang"' actual="nodeName"  id="documentadoptode03_nodeName" ignoreCase="false"/>
+<assertEquals expected='xmlNS' actual="nodeNamespaceURI"  id="documentadoptNode03_namespaceURI" ignoreCase="false"/>
+<assertEquals expected='"xml"' actual="nodePrefix"  id="documentadoptnode03_prefix" ignoreCase="false"/>
 <assertNull  actual="attrOwnerElem"  id="documentadoptnode03_ownerDoc"/>
 <assertTrue  actual="isSpecified"  id="documentadoptnode03_specified"/>
+</if>
 </test>

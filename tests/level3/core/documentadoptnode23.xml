@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
 <var name="adoptedNode" type="Node"/>
@@ -39,12 +38,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="acronymElemChild" type="NodeList"/>
 <var name="adoptedNodeChild" type="NodeList"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="childList" index="0" interface="NodeList"/>
 <adoptNode var="adoptedNode" obj="doc" source="acronymElem"/>
+<if><notNull obj="adoptedNode"/>
 <childNodes var="acronymElemChild" obj="acronymElem"/>
 <length var="acronymElemLen" obj="acronymElemChild" interface="NodeList"/>
 <childNodes var="adoptedNodeChild" obj="adoptedNode"/>
 <length var="adoptedLen" obj="adoptedNodeChild" interface="NodeList"/>
 <assertEquals actual="acronymElemLen" expected="adoptedLen" id="documentadoptnode23" ignoreCase="false"/>
+</if>
 </test>

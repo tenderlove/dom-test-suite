@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
@@ -49,15 +48,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="secondChild" type="EntityReference"/>
 <var name="secondChildType" type="int"/>
 <var name="secondChildName" type="DOMString"/>
-
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"htp://www.w3.org/DOM/Test"' qualifiedName='"dom:l3"' doctype="nullDocType"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"acronym"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="element" obj="childList" index="3" interface="NodeList"/>
 <getAttributeNode var="attr" obj="element" name='"class"'/>
 <adoptNode var="adoptedclass" obj="newDoc" source="attr"/>
+<if><notNull obj="adoptedclass"/>
 <nodeName var="nodeName" obj="adoptedclass"/>
 <nodeValue var="nodeValue" obj="adoptedclass"/>
 <nodeType var="nodeType" obj="adoptedclass"/>
@@ -85,5 +90,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<else>
 		<assertEquals expected='"Y&#945;"' actual="nodeValue"  id="documentadoptnode02_nodeValue" ignoreCase="false"/>
 	</else>
+</if>
 </if>
 </test>

@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="newDoc" type="Document"/>
@@ -40,13 +39,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="PITarget" type="DOMString"/>
 <var name="PIData" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:test"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <createProcessingInstruction var="newPI1" obj="newDoc" target='"PITarget"' data='"PIData"'/>
 <createProcessingInstruction var="newPI2" obj="doc" target='"PITarget"' data='"PIData"'/>
 <adoptNode  var="adoptedPI1" obj="newDoc" source="newPI1"/>
+<if><notNull obj="adoptedPI1"/>
 <adoptNode  var="adoptedPI2" obj="newDoc" source="newPI2"/>
+<if><notNull obj="adoptedPI2"/>
 <target var="PITarget" obj="adoptedPI1" interface="ProcessingInstruction"/>
 <data var="PIData" obj="adoptedPI1" interface="ProcessingInstruction"/>
 <assertEquals actual="PITarget" expected='"PITarget"' id="documentadoptnode36_Target1" ignoreCase="false"/>
@@ -55,4 +62,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <data var="PIData" obj="adoptedPI2" interface="ProcessingInstruction"/>
 <assertEquals actual="PITarget" expected='"PITarget"' id="documentadoptnode36_Target2" ignoreCase="false"/>
 <assertEquals actual="PIData" expected='"PIData"' id="documentadoptnode36_Data2" ignoreCase="false"/>
+</if>
+</if>
 </test>

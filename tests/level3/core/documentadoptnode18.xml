@@ -36,13 +36,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="ent" type="Entity"/>
 <var name="adoptedEnt" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:doc"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entityMap" obj="docType"/>
 <getNamedItem var="ent" obj="entityMap" name='"delta"'/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_documentadoptnode18">
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <adoptNode var="adoptedEnt" obj="newDoc" source="ent"/>
 </NO_MODIFICATION_ALLOWED_ERR>
