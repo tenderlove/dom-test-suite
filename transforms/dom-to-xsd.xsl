@@ -438,42 +438,42 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:complexType>
                 <!--  variables must be uniquely named   -->
                 <xs:key name="var-name">
-                    <xs:selector xpath="test:var"/>
+                    <xs:selector xpath="./test:var"/>
                     <xs:field xpath="@name"/>
                 </xs:key>
                 <!--  all var attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="var-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@var"/>
                 </xs:keyref>
                 <!--  all obj attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="obj-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@obj"/>
                 </xs:keyref>
                 <!--  all actual attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="actual-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@actual"/>
                 </xs:keyref>
                 <!--  all collection attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="collection-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@collection"/>
                 </xs:keyref>
                 <!--  all member attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="member-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@member"/>
                 </xs:keyref>
                 <!--  all refChild attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="refChild-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@refChild"/>
                 </xs:keyref>
                 <!--  all doctype attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="doctype-attrib" refer="var-name">
-                    <xs:selector xpath=".//*"/>
+                    <xs:selector xpath="./*"/>
                     <xs:field xpath="@doctype"/>
                 </xs:keyref>
 			</xs:element>
@@ -617,27 +617,35 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:complexType>
 					<xs:choice minOccurs="0">
 						<xs:element ref="member" maxOccurs="unbounded"/>
-                            <!--  define elements for every method in user implemented interfaces
-                                      used like anonymous inner class definitions  -->
-                        <xsl:for-each select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]">
+                        <xsl:variable name="sinks" select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]"/>
+                        <xsl:if test="$sinks">
                             <xs:sequence>
-                                <xsl:for-each select="method|attribute">
-                                    <xsl:choose>
-                                        <xsl:when test="name() = 'method'">
-                                            <xs:element name="{@name}" type="sinkMethod"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xs:element name="{@name}" type="sinkAttribute"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </xsl:for-each>
+                                <xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
+                                <!--  define elements for every method in user implemented interfaces
+                                    used like anonymous inner class definitions  -->
+                                <xs:choice>
+                                    <xsl:for-each select="$sinks">
+                                        <xs:sequence>
+                                            <xsl:for-each select="method|attribute">
+                                                <xsl:choose>
+                                                    <xsl:when test="name() = 'method'">
+                                                        <xs:element name="{@name}" type="sinkMethod"/>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <xs:element name="{@name}" type="sinkAttribute"/>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:for-each>
+                                        </xs:sequence>
+                                    </xsl:for-each>
+                                </xs:choice>
                             </xs:sequence>
-                        </xsl:for-each>
+                        </xsl:if>
                     </xs:choice>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 					<xs:attribute name="name" type="variable" use="required"/>
 					<xs:attribute name="type" type="variableType" use="required"/>
-					<xs:attribute name="value" type="literal" use="optional"/>
+					<xs:attribute name="value" type="variableOrLiteral" use="optional"/>
                     <xs:attribute name="isNull" type="xs:boolean" use="optional"/>
 				</xs:complexType>
 			</xs:element>
@@ -906,6 +914,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:complexType>
 			</xs:element>
 
+            <xs:element name="assertImplementationException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="metadata" minOccurs="0"/>
+                        <xs:group ref="statement" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:ID" use="required"/>
+				</xs:complexType>
+            </xs:element>
+
 			<xs:group name="framework-assertion">
 				<xs:choice>
 					<xs:element ref="assertTrue"/>
@@ -919,6 +937,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="assertSize"/>
 					<xs:element ref="assertEventCount"/>
 					<xs:element ref="assertURIEquals"/>
+                    <xs:element ref="assertImplementationException"/>
 				</xs:choice>
 			</xs:group>
 			<xs:group name="framework-statement">
@@ -939,12 +958,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="for-each"/>
 					<xs:element ref="comment"/>
                     <xs:element ref="return"/>
-					<xs:element ref="EventMonitor.setUserObj"/>
-					<xs:element ref="EventMonitor.getAtEvents"/>
-					<xs:element ref="EventMonitor.getCaptureEvents"/>
-					<xs:element ref="EventMonitor.getBubbleEvents"/>
-					<xs:element ref="EventMonitor.getAllEvents"/>
-					<xs:element ref="wait"/>
+					<xs:element ref="atEvents"/>
+					<xs:element ref="capturedEvents"/>
+					<xs:element ref="bubbledEvents"/>
+					<xs:element ref="allEvents"/>
+					<xs:element ref="createEventMonitor"/>
 				</xs:choice>
 			</xs:group>
 
@@ -1167,25 +1185,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="EventMonitor.setUserObj">
-				<xs:annotation>
-					<xs:documentation>Assignes an object to a userObj variable that is accessible from the handleEvent handler of the specified EventMonitor.</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:attribute name="id" type="xs:ID" use="optional"/>
-					<xs:attribute name="obj" type="variable" use="required"/>
-					<xs:attribute name="userObj" type="variable" use="required"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:complexType name="EventMonitorAccessor">
-					<xs:attribute name="id" type="xs:ID" use="optional"/>
-				<xs:attribute name="monitor" type="variable" use="required"/>
+				<xs:attribute name="id" type="xs:ID" use="optional"/>
+				<xs:attribute name="obj" type="variable" use="required"/>
+                <xs:attribute name="interface" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="EventMonitor"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
 				<xs:attribute name="var" type="variable" use="required"/>
 			</xs:complexType>
-			<xs:element name="EventMonitor.getAtEvents" type="EventMonitorAccessor"/>
-			<xs:element name="EventMonitor.getCaptureEvents" type="EventMonitorAccessor"/>
-			<xs:element name="EventMonitor.getBubbleEvents" type="EventMonitorAccessor"/>
-			<xs:element name="EventMonitor.getAllEvents" type="EventMonitorAccessor"/>
+			<xs:element name="atEvents" type="EventMonitorAccessor"/>
+			<xs:element name="capturedEvents" type="EventMonitorAccessor"/>
+			<xs:element name="bubbledEvents" type="EventMonitorAccessor"/>
+			<xs:element name="allEvents" type="EventMonitorAccessor"/>
+            <xs:element name="createEventMonitor">
+                <xs:complexType>
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+				    <xs:attribute name="var" type="variable" use="required"/>
+			    </xs:complexType>
+            </xs:element>
 
 	</xsl:template>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * (Massachusetts Institute of Technology, Institut National de
+ * (Massachusetts Institute of Technology, Institut National de               
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
  * Intellectual Property License. This program is distributed in the
@@ -78,9 +78,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 --&gt;
 
-&lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals"&gt;
+&lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
@@ -463,18 +463,30 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 
 
-<xsl:text>&lt;!ELEMENT var (member+ </xsl:text>
+<xsl:text>&lt;!ELEMENT var </xsl:text>
         <!--  define elements for every method in user implemented interfaces
                   used like anonymous inner class definitions  -->
-    <xsl:for-each select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]">
-        <xsl:text> | ( </xsl:text>
-        <xsl:for-each select="method|attribute">
-            <xsl:if test="position() &gt; 1"> , </xsl:if>
-            <xsl:value-of select="@name"/>
-        </xsl:for-each>
-        <xsl:text> ) </xsl:text>
-    </xsl:for-each>
-<xsl:text>)?&gt;
+    <xsl:variable name="sinks" select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]"/>
+    <xsl:choose>
+        <xsl:when test="$sinks">
+            <xsl:text> (member+ | ( var* , ( ( </xsl:text>
+            <xsl:for-each select="$sinks">
+                <xsl:if test="position() &gt; 1">
+                    <xsl:text> | ( </xsl:text>
+                </xsl:if>
+                <xsl:for-each select="method|attribute">
+                    <xsl:if test="position() &gt; 1"> , </xsl:if>
+                    <xsl:value-of select="@name"/>
+                </xsl:for-each>
+                <xsl:text> ) </xsl:text>
+            </xsl:for-each>
+            <xsl:text> ) ) )? &gt;</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text> (member*) &gt; </xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
+ <xsl:text>
 &lt;!ATTLIST var
 	id ID #IMPLIED
 	name CDATA #REQUIRED
@@ -656,6 +668,12 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #REQUIRED
 &gt;
 
+&lt;!ELEMENT assertImplementationException (metadata?, (%statement;))&gt;
+&lt;!ATTLIST assertImplementationException
+	id ID #REQUIRED
+&gt;
+
+
 &lt;!ELEMENT same EMPTY&gt;
 &lt;!ATTLIST same
 	id ID #IMPLIED
@@ -812,39 +830,42 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 &gt;
 
-&lt;!ELEMENT EventMonitor.setUserObj EMPTY&gt;
-&lt;!ATTLIST EventMonitor.setUserObj
+&lt;!ELEMENT atEvents EMPTY&gt;
+&lt;!ATTLIST atEvents
 	id ID #IMPLIED
 	obj CDATA #REQUIRED
-	userObj CDATA #REQUIRED
-&gt;
-
-&lt;!ELEMENT EventMonitor.getAtEvents EMPTY&gt;
-&lt;!ATTLIST EventMonitor.getAtEvents
-	id ID #IMPLIED
-	monitor CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
 	var CDATA #REQUIRED
 &gt;
 
-&lt;!ELEMENT EventMonitor.getBubbleEvents EMPTY&gt;
-&lt;!ATTLIST EventMonitor.getBubbleEvents
+&lt;!ELEMENT bubbledEvents EMPTY&gt;
+&lt;!ATTLIST bubbledEvents
 	id ID #IMPLIED
-	monitor CDATA #REQUIRED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
 	var CDATA #REQUIRED
 &gt;
 
-&lt;!ELEMENT EventMonitor.getCaptureEvents EMPTY&gt;
-&lt;!ATTLIST EventMonitor.getCaptureEvents
+&lt;!ELEMENT capturedEvents EMPTY&gt;
+&lt;!ATTLIST capturedEvents
 	id ID #IMPLIED
-	monitor CDATA #REQUIRED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
 	var CDATA #REQUIRED
 &gt;
 
 
-&lt;!ELEMENT EventMonitor.getAllEvents EMPTY&gt;
-&lt;!ATTLIST EventMonitor.getAllEvents
+&lt;!ELEMENT allEvents EMPTY&gt;
+&lt;!ATTLIST allEvents
 	id ID #IMPLIED
-	monitor CDATA #REQUIRED
+	obj CDATA #REQUIRED
+    interface (EventMonitor) #IMPLIED
+	var CDATA #REQUIRED
+&gt;
+
+&lt;!ELEMENT createEventMonitor EMPTY&gt;
+&lt;!ATTLIST createEventMonitor
+	id ID #IMPLIED
 	var CDATA #REQUIRED
 &gt;
 

@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.20  2002-02-26 05:25:52  dom-ts-4
+Revision 1.21  2002-06-03 23:45:22  dom-ts-4
+Updates for Events tests
+
+Revision 1.20  2002/02/26 05:25:52  dom-ts-4
 Support for hasFeature("HTML","2.0") == "false" conditions on tests
 
 Revision 1.19  2002/02/03 04:22:35  dom-ts-4
@@ -249,7 +252,9 @@ import org.w3c.dom.html.*;
 import org.w3c.dom.events.*;
 import org.w3c.domts.*;
 import javax.xml.parsers.*;
-import java.util.*;
+import java.util.List;
+import java.util.Collection;
+import java.util.ArrayList;
 
 <!--  if there is a metadata child element then
           produce documentation comments    -->
@@ -273,11 +278,15 @@ import java.util.*;
    }
 </xsl:text>
 
+<xsl:apply-templates mode="innerClass" select="*[local-name() = 'var' and *[local-name() != 'member']]"/>
+
 
 <xsl:text>
    public void runTest() throws java.lang.Throwable {
       </xsl:text>
-<xsl:apply-templates mode="body"/>
+<xsl:apply-templates mode="body">
+    <xsl:with-param name="vardefs" select="*[local-name() = 'var']"/>
+</xsl:apply-templates>
    }
    public String getTargetURI() {
       return "<xsl:value-of select="concat($target-uri-base,@name)"/>";
@@ -288,6 +297,96 @@ import java.util.*;
 }
 </xsl:template>
 
+<xsl:template match="*[local-name() = 'var']" mode="innerClass">
+   <xsl:param name="vardefs"/>
+   <xsl:text>    private class </xsl:text>
+   <xsl:value-of select="concat(@type,generate-id(.))"/>
+   <xsl:text> implements </xsl:text>
+   <xsl:value-of select="@type"/>
+   <xsl:text> {
+       </xsl:text>
+   <xsl:for-each select="*[local-name() = 'var']">
+        <xsl:value-of select="@type"/>
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text>;
+        </xsl:text>
+   </xsl:for-each>
+   <!-- constructor    -->
+   <xsl:text>        public </xsl:text>
+   <xsl:value-of select="concat(@type,generate-id(.))"/>
+   <xsl:text>(</xsl:text>
+   <!--   constructor argument list   -->
+   <xsl:for-each select="*[local-name() = 'var' and @value]">
+        <xsl:if test="position() &gt; 1">
+            <xsl:text>, </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@type"/>
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="@name"/>
+   </xsl:for-each>
+   <xsl:text>) { 
+           </xsl:text>
+   <xsl:for-each select="*[local-name() = 'var' and @value]">
+        <xsl:text>this.</xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text> = </xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text>;
+           </xsl:text>
+   </xsl:for-each>
+   <!--  end of constructor    -->
+   <xsl:text>}
+   </xsl:text>
+   <!--  for each non-var element (should correspond to abstract method)  -->
+   <xsl:variable name="interface-name" select="@type"/>
+   <xsl:variable name="interface" select="$domspec/library/interface[@name=$interface-name]"/>
+   <xsl:for-each select="*[local-name() != 'var']">
+        <xsl:variable name="method-name" select="local-name()"/>
+        <xsl:variable name="method-def" select="$interface/method[@name=$method-name]"/>
+        <xsl:choose>
+            <xsl:when test="$method-def">
+                <xsl:text>        public </xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$method-def/returns[@type and @type != 'void']">
+                        <xsl:apply-templates select="$method-def/returns/@type">
+                            <xsl:with-param name="vardefs" select="$vardefs"/>
+                        </xsl:apply-templates>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>void</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="$method-def/@name"/>
+                <xsl:text>(</xsl:text>
+                <xsl:for-each select="$method-def/parameters/param">
+                    <xsl:if test="position() &gt; 1">
+                        <xsl:text>, </xsl:text>
+                    </xsl:if>
+                    <xsl:apply-templates select="@type">
+                        <xsl:with-param name="vardefs" select="$vardefs"/>
+                    </xsl:apply-templates>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="@name"/>
+                </xsl:for-each>
+                <xsl:text>) {
+             </xsl:text>
+
+             <xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="*[local-name() = 'var'] | $method-def/parameters/param | preceding-sibling::*[local-name() = 'var']"/>
+             </xsl:apply-templates>
+                <xsl:text>}
+</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="yes">Method <xsl:value-of select="@name"/> not found.</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+   </xsl:for-each>
+   <xsl:text>}
+</xsl:text>
+</xsl:template>
 
 <!--   when encountering a test   -->
 <xsl:template match="*[local-name()='suite']">
@@ -424,6 +523,7 @@ import java.util.*;
             <xsl:text> = null;
 </xsl:text>
         </xsl:when>
+
 		<!--  explict value, just add it  -->
 		<xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 		<!--  member, allocate collection or list and populate it  -->
@@ -454,11 +554,21 @@ import java.util.*;
       </xsl:text>
 			</xsl:for-each>
 		</xsl:when>
-		<!--  virtual method  -->
+		<!--  inner classes    -->
 		<xsl:when test="*">
-			<xsl:text> = new </xsl:text><xsl:apply-templates select="@type"/> {
-				<xsl:apply-templates mode="anonInner"/>
-			};
+			<xsl:text> = new </xsl:text>
+            <xsl:value-of select="@type"/>
+            <xsl:value-of select="generate-id(.)"/>
+            <xsl:text>(</xsl:text>
+            <!--  any var's with value attributes are passed
+                    to the constructor    -->
+            <xsl:for-each select="*[local-name() = 'var' and @value]">
+                <xsl:if test="position() &gt; 1">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="@value"/>
+            </xsl:for-each>
+            <xsl:text> );</xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>;</xsl:text>
@@ -483,10 +593,11 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='append']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@collection"/>
 	<xsl:text>.add(</xsl:text>
 	<xsl:variable name="obj" select="@obj"/>
-	<xsl:variable name="type" select="ancestor::*[local-name()='test']/*[local-name()='var' and @name=$obj]/@type"/>
+	<xsl:variable name="type" select="$vardefs[@name=$obj]/@type"/>
 	<xsl:choose>
 		<xsl:when test="$type = 'int'">
 			<xsl:text>new Integer(</xsl:text>
@@ -508,6 +619,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='assign']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:choose>
@@ -521,8 +633,8 @@ import java.util.*;
 			<xsl:variable name="value" select="@value"/>
 			<xsl:call-template name="retval-cast">
 				<xsl:with-param name="variable" select="@var"/>
-				<xsl:with-param name="vartype" select="ancestor::*[local-name()='test']/*[local-name() = 'var' and @name = $var]/@type"/>
-				<xsl:with-param name="rettype" select="ancestor::*[local-name()='test']/*[local-name() = 'var' and @name = $value]/@type"/>
+				<xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
+				<xsl:with-param name="rettype" select="$vardefs[@name = $value]/@type"/>
 			</xsl:call-template>
 			<xsl:text> </xsl:text>
 			<xsl:value-of select="@value"/>
@@ -533,6 +645,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='increment']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> += </xsl:text>
 	<xsl:value-of select="@value"/>
@@ -541,6 +654,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='decrement']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> -= </xsl:text>
 	<xsl:value-of select="@value"/>
@@ -549,6 +663,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='plus']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:value-of select="@op1"/>
@@ -559,6 +674,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='subtract']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:value-of select="@op1"/>
@@ -570,6 +686,7 @@ import java.util.*;
 
 
 <xsl:template match="*[local-name()='mult']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:value-of select="@op1"/>
@@ -581,6 +698,7 @@ import java.util.*;
 
 
 <xsl:template match="*[local-name()='divide']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:value-of select="@op1"/>
@@ -590,19 +708,9 @@ import java.util.*;
 </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[local-name()='handleEvent']" mode="anonInner">
-<xsl:text>boolean handleEvent(
-		org.w3c.dom.events.EventListener listener, 
-		org.w3c.dom.events.Events evt,
-		org.w3c.dom.events.EventTarget currentTarget,
-		Object userObj) {
-</xsl:text>
-	<xsl:apply-templates mode="body"/>
-<xsl:text>}
-</xsl:text>
-</xsl:template>
 
 <xsl:template match="*[local-name()='implementation']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:if test="@obj">
@@ -614,6 +722,8 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertTrue']" mode="body">
+    <xsl:param name="vardefs"/>
+	<xsl:value-of select="@var"/>
 	<xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="@actual">
@@ -628,7 +738,9 @@ import java.util.*;
 				<xsl:value-of select="@actual"/>
 				<xsl:text>) {
       </xsl:text>
-				<xsl:apply-templates mode="body"/>
+				<xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
 				<xsl:text>}
       </xsl:text>
 			</xsl:if>
@@ -647,7 +759,9 @@ import java.util.*;
                 <xsl:apply-templates select="*[1]" mode="condition"/>
                 <xsl:text>) {
       </xsl:text>
-		        <xsl:apply-templates select="*[position() &gt; 1]" mode="body"/>
+		        <xsl:apply-templates select="*[position() &gt; 1]" mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
                 <xsl:text>
 	}
       </xsl:text>
@@ -658,6 +772,8 @@ import java.util.*;
 
 
 <xsl:template match="*[local-name()='assertFalse']" mode="body">
+    <xsl:param name="vardefs"/>
+	<xsl:value-of select="@var"/>
 	<xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="@actual">
@@ -671,7 +787,9 @@ import java.util.*;
 				<xsl:text>if(!</xsl:text>
 				<xsl:value-of select="@actual"/>
 				<xsl:text>) {</xsl:text>
-				<xsl:apply-templates mode="body"/>
+				<xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
 				<xsl:text>}
 </xsl:text>
 			</xsl:if>
@@ -686,7 +804,10 @@ import java.util.*;
 </xsl:text>
 			<xsl:if test="count(*) &gt; 1">
     if(!<xsl:apply-templates select="*[1]" mode="condition"/>) {
-<xsl:apply-templates mode="body"/>
+<xsl:apply-templates mode="body">
+    <xsl:with-param name="vardefs" select="$vardefs"/>
+</xsl:apply-templates>
+
     }
 </xsl:if>
 		</xsl:otherwise>
@@ -694,6 +815,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertNull']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:text>assertNull("</xsl:text>
 	<xsl:value-of select="@id"/>
 	<xsl:text>",</xsl:text>
@@ -704,13 +826,16 @@ import java.util.*;
 		<xsl:text>if(</xsl:text>
 		<xsl:value-of select="@actual"/>
 		<xsl:text> == null) {</xsl:text>
-		<xsl:apply-templates mode="body"/>
+		<xsl:apply-templates mode="body">
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>
 		<xsl:text>}
       </xsl:text>
 	</xsl:if>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertNotNull']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:text>assertNotNull("</xsl:text>
 	<xsl:value-of select="@id"/>
 	<xsl:text>",</xsl:text>
@@ -721,13 +846,16 @@ import java.util.*;
 		<xsl:text>if(</xsl:text>
 		<xsl:value-of select="@actual"/>
 		<xsl:text> != null) {</xsl:text>
-		<xsl:apply-templates mode="body"/>
+		<xsl:apply-templates mode="body">
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>
 		<xsl:text>}
       </xsl:text>
 	</xsl:if>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertSame']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:text>assertSame("</xsl:text>
 	<xsl:value-of select="@id"/>
 	<xsl:text>",</xsl:text>
@@ -742,13 +870,16 @@ import java.util.*;
 		<xsl:text>,</xsl:text>
 		<xsl:value-of select="@actual"/>
 		<xsl:text>)) {</xsl:text>
-		<xsl:apply-templates mode="body"/>
+		<xsl:apply-templates mode="body">
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>
 		<xsl:text>}
 </xsl:text>
 	</xsl:if>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertInstanceOf']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:text>assertInstanceOf("</xsl:text>
 	<xsl:value-of select="@id"/>
 	<xsl:text>",</xsl:text>
@@ -767,13 +898,16 @@ import java.util.*;
 			<xsl:with-param name="type" select="@type"/>
 		</xsl:call-template>
 		<xsl:text>) {</xsl:text>
-		<xsl:apply-templates mode="body"/>
+		<xsl:apply-templates mode="body">
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>
 		<xsl:text>}
 </xsl:text>
 	</xsl:if>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertSize']" mode="body">
+    <xsl:param name="vardefs"/>
     <xsl:text>assertSize("</xsl:text>
     <xsl:value-of select="@id"/>
     <xsl:text>",</xsl:text>
@@ -784,7 +918,9 @@ import java.util.*;
       </xsl:text>
     <xsl:if test="*">
    if(size(<xsl:value-of select="@collection"/>) == <xsl:value-of select="@size"/>) {
-<xsl:apply-templates mode="body"/>
+<xsl:apply-templates mode="body">
+    <xsl:with-param name="vardefs" select="$vardefs"/>
+</xsl:apply-templates>
 <xsl:text>
    }
       </xsl:text>
@@ -792,6 +928,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertURIEquals']" mode="body">
+    <xsl:param name="vardefs"/>
     <xsl:text>assertURIEquals("</xsl:text>
     <xsl:value-of select="@id"/>
     <xsl:text>",</xsl:text>
@@ -834,6 +971,7 @@ import java.util.*;
 
 
 <xsl:template match="*[local-name()='assertEquals']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
 			<xsl:text>assertEqualsIgnoreCase("</xsl:text>
@@ -851,7 +989,9 @@ import java.util.*;
 				<xsl:value-of select="@actual"/>
 				<xsl:text>)) {
       </xsl:text>
-				<xsl:apply-templates mode="body"/>
+				<xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
 				<xsl:text>      }
       </xsl:text>
 			</xsl:if>
@@ -871,7 +1011,9 @@ import java.util.*;
 				<xsl:value-of select="@actual"/>
 				<xsl:text>)) {
 </xsl:text>
-				<xsl:apply-templates mode="body"/>
+				<xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
 				<xsl:text>      }
       </xsl:text>
 			</xsl:if>
@@ -881,6 +1023,7 @@ import java.util.*;
 
 
 <xsl:template match="*[local-name()='assertNotEquals']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
 			<xsl:text>assertNotEqualsIgnoreCase("</xsl:text>
@@ -897,7 +1040,9 @@ import java.util.*;
 				<xsl:value-of select="@actual"/>
 				<xsl:text>)) {
 </xsl:text>
-				<xsl:apply-templates mode="body"/>
+				<xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
 				<xsl:text>}
 </xsl:text>
 			</xsl:if>
@@ -918,7 +1063,9 @@ import java.util.*;
 				<xsl:value-of select="@actual"/>
 				<xsl:text>)) {
 </xsl:text>
-				<xsl:apply-templates mode="body"/>
+				<xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="$vardefs"/>
+                </xsl:apply-templates>
 				<xsl:text>}
 </xsl:text>
 			</xsl:if>
@@ -927,6 +1074,7 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertEventCount']" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:text>{
 	boolean _tmpBool = true;
 </xsl:text>
@@ -969,7 +1117,9 @@ import java.util.*;
 	<xsl:if test="*">
 		<xsl:text>if(_tmpBool) {
 </xsl:text>
-		<xsl:apply-templates mode="body"/>
+		<xsl:apply-templates mode="body">
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>
 		<xsl:text>}
 </xsl:text>
 	</xsl:if>
@@ -977,31 +1127,40 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='if']" mode="body">
+    <xsl:param name="vardefs"/>
 	if(
 	<xsl:apply-templates select="*[1]" mode="condition"/>
 	) {
-	<xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body"/>
+	<xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+    </xsl:apply-templates>
 	}
 	<xsl:for-each select="*[local-name()='else']">
 		else {
-			<xsl:apply-templates mode="body"/>
+			<xsl:apply-templates mode="body">
+                <xsl:with-param name="vardefs" select="$vardefs"/>
+            </xsl:apply-templates>
 		}
 	</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="*[local-name()='while']" mode="body">
+    <xsl:param name="vardefs"/>
     while(
 	<xsl:apply-templates select="*[1]" mode="condition"/>
 	) {
-	<xsl:apply-templates select="*[position() &gt; 1]" mode="body"/>
+	<xsl:apply-templates select="*[position() &gt; 1]" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+    </xsl:apply-templates>
 	}
 </xsl:template>
 
 <xsl:template match="*[local-name()='for-each']" mode="body">
+	<xsl:param name="vardefs"/>
     <xsl:text>for(int _index = 0; _index &lt; </xsl:text>
 	<xsl:variable name="varname" select="@collection"/>
 	<xsl:value-of select="@collection"/>
-    <xsl:variable name="vartype" select="ancestor::*[local-name()='test']/*[local-name() = 'var' and @name = $varname]/@type"/>
+    <xsl:variable name="vartype" select="$vardefs[@name = $varname]/@type"/>
     <xsl:variable name="member" select="@member"/>
 	<xsl:choose>
 		<xsl:when test="$vartype = 'Collection' or $vartype = 'List'">
@@ -1015,7 +1174,7 @@ import java.util.*;
       </xsl:text>
     <xsl:value-of select="$member"/>
     <xsl:text> = ( </xsl:text>
-    <xsl:variable name="memberType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $member]/@type"/>
+    <xsl:variable name="memberType" select="$vardefs[@name = $member]/@type"/>
     <xsl:choose>
         <xsl:when test="$memberType = 'DOMString'">
             <xsl:text>String</xsl:text>
@@ -1036,34 +1195,37 @@ import java.util.*;
 	   </xsl:text>
 		</xsl:otherwise>
 	</xsl:choose>
-	<xsl:apply-templates select="*" mode="body"/>
+	<xsl:apply-templates select="*" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+    </xsl:apply-templates>
     <xsl:text>
 	}
       </xsl:text>
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='EventMonitor.setUserObj']" mode="body">
-	<xsl:value-of select="@obj"/>.setUserObj(<xsl:value-of select="@userObj"/>);
-</xsl:template>
-
-<xsl:template match="*[local-name()='EventMonitor.getAtEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getAtEvents();
+<xsl:template match="*[local-name()='atEvents']" mode="body">
+	<xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAtEvents();
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='EventMonitor.getCaptureEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getCaptureEvents();
+<xsl:template match="*[local-name()='capturedEvents']" mode="body">
+	<xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getCapturedEvents();
 </xsl:template>
 
-<xsl:template match="*[local-name()='EventMonitor.getBubbleEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getBubbleEvents();
+<xsl:template match="*[local-name()='bubbledEvents']" mode="body">
+	<xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getBubbledEvents();
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='EventMonitor.getAllEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getAddEvents();
+<xsl:template match="*[local-name()='allEvents']" mode="body">
+	<xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllEvents();
 </xsl:template>
+
+<xsl:template match="*[local-name()='createEventMonitor']" mode="body">
+	<xsl:value-of select="@var"/> = new EventMonitor();
+</xsl:template>
+
 
 <xsl:template name="produce-type">
 	<xsl:param name="type"/>
@@ -1081,12 +1243,6 @@ import java.util.*;
 	</xsl:call-template>
 </xsl:template>
 
-<!--  this builds an override for the handleEvent method of EventMonitor  -->
-<xsl:template match="*[local-name()='handleEvent']" mode="anonInner">
-void handleEvent(EventListener listener, Event event, Object userObj) {
-<xsl:apply-templates mode="body"/>
-}
-</xsl:template>
 
 <xsl:template match="*[local-name()='load']" mode="body">
 	<xsl:value-of select="@var"/>
@@ -1096,11 +1252,35 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
       </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[local-name()='assertDOMException']" mode="body">
+<xsl:template match="*[local-name()='assertImplementationException']" mode="body">
+    <xsl:param name="vardefs"/>
 	{
 		boolean success = false;
 		try {
-			<xsl:apply-templates select="*/*" mode="body"/>
+			<xsl:apply-templates mode="body">
+                <xsl:with-param name="vardefs" select="$vardefs"/>
+            </xsl:apply-templates>
+		}
+		catch(DOMException ex) {
+		}
+        catch(EventException ex) {
+        }
+        catch(Throwable ex) {
+            success = true;
+        }
+		assertTrue("<xsl:value-of select="@id"/>",success);
+	}
+</xsl:template>
+
+
+<xsl:template match="*[local-name()='assertDOMException']" mode="body">
+    <xsl:param name="vardefs"/>
+	{
+		boolean success = false;
+		try {
+			<xsl:apply-templates select="*/*" mode="body">
+                <xsl:with-param name="vardefs" select="$vardefs"/>
+            </xsl:apply-templates>
 		}
 		catch(DOMException ex) {
 			success = (ex.code == DOMException.<xsl:value-of select="name(*)"/>);
@@ -1109,9 +1289,26 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 	}
 </xsl:template>
 
+<xsl:template match="*[local-name()='assertEventException']" mode="body">
+    <xsl:param name="vardefs"/>
+	{
+		boolean success = false;
+		try {
+			<xsl:apply-templates select="*/*" mode="body">
+                <xsl:with-param name="vardefs" select="$vardefs"/>
+            </xsl:apply-templates>
+		}
+		catch(EventException ex) {
+			success = (ex.code == EventException.<xsl:value-of select="name(*)"/>);
+		}
+		assertTrue("<xsl:value-of select="@id"/>",success);
+	}
+</xsl:template>
+
 <xsl:template match="text()" mode="body"/>
 
 <xsl:template match="*" mode="body">
+    <xsl:param name="vardefs"/>
 	<xsl:variable name="feature" select="local-name(.)"/>
     <xsl:variable name="interface" select="@interface"/>
 	<xsl:variable name="method" select="$domspec/library/interface[not($interface) or @name = $interface]/method[@name = $feature]"/>
@@ -1119,13 +1316,16 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 		<xsl:when test="$method">
 			<xsl:call-template name="produce-method">
 				<xsl:with-param name="method" select="$method"/>
+                <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:variable name="attribute" select="$domspec/library/interface[not($interface) or @name = $interface]/attribute[@name = $feature]"/>
 			<xsl:choose>
 				<xsl:when test="$attribute">
-					<xsl:call-template name="produce-attribute"/>
+					<xsl:call-template name="produce-attribute">
+                        <xsl:with-param name="vardefs" select="$vardefs"/>
+                    </xsl:call-template>
 				</xsl:when>
 
 				<xsl:otherwise>
@@ -1182,7 +1382,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 	<xsl:param name="variable"/>
 	<xsl:choose>
 		<!--  left hand side variable not declared   -->
-		<xsl:when test="not($vartype)">
+		<xsl:when test="string-length($vartype) = 0">
 			<xsl:message>Variable <xsl:value-of select="$variable"/> not defined.</xsl:message>
 		</xsl:when>
 		<!--  variable is already appropriate type, do nothing  -->
@@ -1198,7 +1398,9 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 
 		<!--  cast and hope for the best  -->		
 		<xsl:otherwise>
-			<xsl:text>(</xsl:text><xsl:value-of select="$vartype"/><xsl:text>)</xsl:text>
+			<xsl:text>(</xsl:text>
+			<xsl:value-of select="$vartype"/>
+			<xsl:text>)</xsl:text>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
@@ -1213,6 +1415,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 </xsl:template>
 
 <xsl:template name="produce-param">
+    <xsl:param name="vardefs"/>
 	<xsl:param name="value"/>
     <xsl:param name="vartype"/>
 	<xsl:param name="reqtype"/>
@@ -1242,12 +1445,13 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 </xsl:template>
 
 <xsl:template name="produce-specific-attribute">
+    <xsl:param name="vardefs"/>
 	<xsl:param name="attribute"/>
 	<xsl:variable name="obj" select="@obj"/>
 	<xsl:if test="@value">
 		<xsl:call-template name="cast">
 			<xsl:with-param name="var" select="$obj"/>
-			<xsl:with-param name="vartype" select="ancestor::*[local-name() = 'test']/*[local-name()='var' and @name = $obj]/@type"/>
+			<xsl:with-param name="vartype" select="$vardefs[@name = $obj]/@type"/>
 			<xsl:with-param name="reqtype" select="$attribute/parent::interface/@name"/>
 		</xsl:call-template>
 		<xsl:call-template name="build-accessor">
@@ -1258,6 +1462,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 			<xsl:call-template name="produce-param">
 				<xsl:with-param name="value" select="@value"/>
 				<xsl:with-param name="reqtype" select="$attribute/parent::interface/@name"/>
+                <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		<xsl:text>);</xsl:text>
 	</xsl:if>
@@ -1267,12 +1472,12 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 		<xsl:text> = </xsl:text>
 		<xsl:call-template name="retval-cast">
 			<xsl:with-param name="variable" select="$var"/>
-			<xsl:with-param name="vartype" select="ancestor::*[local-name() = 'test']/*[local-name()='var' and @name = $var]/@type"/>
+			<xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
 			<xsl:with-param name="rettype" select="$attribute/@type"/>
 		</xsl:call-template>
 		<xsl:call-template name="cast">
 			<xsl:with-param name="var" select="$obj"/>
-			<xsl:with-param name="vartype" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $obj]/@type"/>
+			<xsl:with-param name="vartype" select="$vardefs[@name = $obj]/@type"/>
 			<xsl:with-param name="reqtype" select="$attribute/parent::interface/@name"/>
 		</xsl:call-template>
 		<xsl:call-template name="build-accessor">
@@ -1286,10 +1491,10 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 
 <xsl:template name="produce-specific-method">
 	<xsl:param name="method"/>
+    <xsl:param name="vardefs"/>
 	<xsl:variable name="current" select="."/>
 	<xsl:variable name="obj" select="@obj"/>
 	<xsl:variable name="var" select="@var"/>
-    <xsl:variable name="test" select="ancestor::*[local-name() = 'test']"/>
 
 
 	<xsl:if test="@var">
@@ -1297,13 +1502,13 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 		<xsl:text> = </xsl:text>
 		<xsl:call-template name="retval-cast">
 			<xsl:with-param name="variable" select="$var"/>
-			<xsl:with-param name="vartype" select="$test/*[local-name() = 'var' and @name = $var]/@type"/>
+			<xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
 			<xsl:with-param name="rettype" select="$method/returns/@type"/>
 		</xsl:call-template>
 	</xsl:if>
 	<xsl:call-template name="cast">
 		<xsl:with-param name="var" select="$obj"/>
-		<xsl:with-param name="vartype" select="$test/*[local-name() = 'var' and @name = $obj]/@type"/>
+		<xsl:with-param name="vartype" select="$vardefs[@name = $obj]/@type"/>
 		<xsl:with-param name="reqtype" select="$method/parent::interface/@name"/>
 	</xsl:call-template>
 	<xsl:text>.</xsl:text>
@@ -1317,7 +1522,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
         <xsl:variable name="value" select="$current/@*[name() = $paramDef/@name]"/>
 		<xsl:call-template name="produce-param">
 			<xsl:with-param name="value" select="$value"/>
-            <xsl:with-param name="vartype" select="$test/*[local-name() = 'var' and @name = $value]/@type"/>
+            <xsl:with-param name="vartype" select="$vardefs[@name = $value]/@type"/>
 			<xsl:with-param name="reqtype" select="$paramDef/@type"/>
 		</xsl:call-template>
 	</xsl:for-each>
@@ -1327,6 +1532,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 
 
 <xsl:template name="produce-attribute">
+    <xsl:param name="vardefs"/>
 	<xsl:variable name="attribName" select="local-name(.)"/>
 	<xsl:choose>
 		<!--  if interface is specified -->
@@ -1334,11 +1540,13 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 			<xsl:variable name="interface" select="@interface"/>			
 			<xsl:call-template name="produce-specific-attribute">
 				<xsl:with-param name="attribute" select="$domspec/library/interface[@name = $interface]/attribute[@name = $attribName]"/>
+                <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="produce-specific-attribute">
 				<xsl:with-param name="attribute" select="$domspec/library/interface/attribute[@name = $attribName]"/>
+                <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		</xsl:otherwise>
 	</xsl:choose>
@@ -1346,6 +1554,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 </xsl:template>
 
 <xsl:template name="produce-method">
+    <xsl:param name="vardefs"/>
 	<xsl:variable name="methodName" select="local-name(.)"/>
 	<xsl:choose>
 		<!--  if interface is specified -->
@@ -1353,12 +1562,14 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 			<xsl:variable name="interface" select="@interface"/>			
 			<xsl:call-template name="produce-specific-method">
 				<xsl:with-param name="method" select="$domspec/library/interface[@name = $interface]/method[@name = $methodName]"/>
+                <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:variable name="methods" select="$domspec/library/interface/method[@name = $methodName]"/>
 			<xsl:call-template name="produce-specific-method">
 				<xsl:with-param name="method" select="$methods[1]"/>
+                <xsl:with-param name="vardefs" select="$vardefs"/>
 			</xsl:call-template>
 		</xsl:otherwise>
 	</xsl:choose>
