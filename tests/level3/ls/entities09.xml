@@ -16,37 +16,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="cdatasections04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="entities09">
 <metadata>
-<title>cdatasections04</title>
+<title>entities09</title>
 <creator>Curt Arnold</creator>
 <description>
-CDATASections should be eliminated when cdata-sections is false.
+Entity references should be expanded when entities is false.
 </description>
 <date qualifier="created">2004-03-31</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="domImplLS" type="DOMImplementationLS"/>
 <var name="lsSerializer" type="LSSerializer"/>
-<var name="docType" type="DocumentType" isNull="true"/>
-<var name="docElem" type="Element"/>
-<var name="newNode" type="Node"/>
 <var name="output" type="DOMString"/>
-<var name="retNode" type="Node"/>
 <implementation var="domImplLS"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
-<createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
-	qualifiedName='"test"' doctype="docType"/>
-<documentElement var="docElem" obj="doc"/>
-<createCDATASection var="newNode" obj="doc" data='"foo"'/>
-<appendChild var="retNode" obj="docElem" newChild="newNode"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<setParameter obj="domConfig" name='"entities"' value="false"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-<assertTrue id="containsCDATA"><contains obj="output" str='"&gt;foo&lt;/"' interface="DOMString"/></assertTrue>
+<assertFalse id="noEntRef"><contains obj="output" str='"ent4;"' interface="DOMString"/></assertFalse>
+<assertTrue id="entDef"><contains obj="output" str='"!ENTITY"' interface="DOMString"/></assertTrue>
 </test> 
  
  

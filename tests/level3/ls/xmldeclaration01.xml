@@ -16,37 +16,33 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="cdatasections04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="xmldeclaration01">
 <metadata>
-<title>cdatasections04</title>
+<title>xmldeclaration01</title>
 <creator>Curt Arnold</creator>
 <description>
-CDATASections should be eliminated when cdata-sections is false.
+XML declarations should be serialized if xml-declaration is true.
 </description>
 <date qualifier="created">2004-03-31</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-xml-declaration"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="domImplLS" type="DOMImplementationLS"/>
 <var name="lsSerializer" type="LSSerializer"/>
 <var name="docType" type="DocumentType" isNull="true"/>
-<var name="docElem" type="Element"/>
-<var name="newNode" type="Node"/>
 <var name="output" type="DOMString"/>
-<var name="retNode" type="Node"/>
 <implementation var="domImplLS"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
 <createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
-	qualifiedName='"test"' doctype="docType"/>
-<documentElement var="docElem" obj="doc"/>
-<createCDATASection var="newNode" obj="doc" data='"foo"'/>
-<appendChild var="retNode" obj="docElem" newChild="newNode"/>
+	qualifiedName='"test"' doctype="docType"/>	
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<setParameter obj="domConfig" name='"xml-declaration"' value="true"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-<assertTrue id="containsCDATA"><contains obj="output" str='"&gt;foo&lt;/"' interface="DOMString"/></assertTrue>
+<assertTrue id="containsXMLDecl"><contains obj="output" str='"&lt;?xml"' interface="DOMString"/></assertTrue>
+<assertTrue id="containsUTF16"><contains obj="output" str='"UTF-16"' interface="DOMString"/></assertTrue>
+<assertTrue id="contains1_0"><contains obj="output" str='"1.0"' interface="DOMString"/></assertTrue>
 </test> 
  
  

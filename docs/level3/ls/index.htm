@@ -165,6 +165,13 @@ DOM4J.</p>
 <tr><td>org.w3c.domts.level3.ls.TestXerces</td><td>Tests the Apache Xerces Parser in the default configuration.</td></tr>
 </table>
 
+<p>In addition, several of the serialization tests require a properly configured HTTP server to accept HTTP PUT requests.
+The default pattern for the URL's used in these tests is "http://localhost:8080/webdav/tmpXXXX.xml".  A different path can
+be specified using the "org.w3c.domts.httpbase" property.  A simple way to set up a test server is to install 
+<a href="http://jakarta.apache.org/tomcat">Apache Tomcat</a>, change the readoly property in webapps/webdav/WEB-INF/web.xml to false
+and start the server.
+</p>
+
 <div id="feedback">
 <h2>Feedback</h2>
 </div>

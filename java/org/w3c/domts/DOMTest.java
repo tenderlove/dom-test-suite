@@ -185,7 +185,10 @@ public abstract class DOMTest /* wBM: implements EventListener */ {
       String httpBase = System.getProperty("org.w3c.domts.httpbase",
                                            "http://localhost:8080/webdav/");
       java.lang.StringBuffer buf = new StringBuffer(httpBase);
-      buf.append("/tmp");
+      if (!httpBase.endsWith("/")) {
+          buf.append("/");
+      }
+      buf.append("tmp");
       buf.append( (new java.util.Random()).nextInt(Integer.MAX_VALUE));
       buf.append(".xml");
       return buf.toString();

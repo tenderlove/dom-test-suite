@@ -16,16 +16,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="cdatasections04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="comments03">
 <metadata>
-<title>cdatasections04</title>
+<title>comments03</title>
 <creator>Curt Arnold</creator>
 <description>
-CDATASections should be eliminated when cdata-sections is false.
+Comments should be preserved when comments is true.
 </description>
 <date qualifier="created">2004-03-31</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
@@ -41,12 +41,12 @@ CDATASections should be eliminated when cdata-sections is false.
 <createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
 	qualifiedName='"test"' doctype="docType"/>
 <documentElement var="docElem" obj="doc"/>
-<createCDATASection var="newNode" obj="doc" data='"foo"'/>
+<createComment var="newNode" obj="doc" data='"foo"'/>
 <appendChild var="retNode" obj="docElem" newChild="newNode"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<setParameter obj="domConfig" name='"comments"' value="true"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-<assertTrue id="containsCDATA"><contains obj="output" str='"&gt;foo&lt;/"' interface="DOMString"/></assertTrue>
+<assertTrue id="hasComment"><contains obj="output" str='"&gt;&lt;!--foo--&gt;&lt;/"' interface="DOMString"/></assertTrue>
 </test> 
  
  

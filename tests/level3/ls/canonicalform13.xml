@@ -16,37 +16,46 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="cdatasections04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="canonicalform13">
 <metadata>
-<title>cdatasections04</title>
+<title>canonicalform13</title>
 <creator>Curt Arnold</creator>
 <description>
-CDATASections should be eliminated when cdata-sections is false.
+Serializing an XML 1.1 document when canonical-form raises a SERIALIZE_ERR.
 </description>
 <date qualifier="created">2004-03-31</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="domImplLS" type="DOMImplementationLS"/>
 <var name="lsSerializer" type="LSSerializer"/>
 <var name="docType" type="DocumentType" isNull="true"/>
-<var name="docElem" type="Element"/>
-<var name="newNode" type="Node"/>
 <var name="output" type="DOMString"/>
-<var name="retNode" type="Node"/>
+<var name="canSet" type="boolean"/>
 <implementation var="domImplLS"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
+<domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
+<canSetParameter var="canSet" obj="domConfig" name='"canonical-form"' value="true"/>
+<if><isTrue value="canSet"/>
+<setParameter obj="domConfig" name='""' value="true"/>
 <createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
 	qualifiedName='"test"' doctype="docType"/>
-<documentElement var="docElem" obj="doc"/>
-<createCDATASection var="newNode" obj="doc" data='"foo"'/>
-<appendChild var="retNode" obj="docElem" newChild="newNode"/>
-<domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
-<writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-<assertTrue id="containsCDATA"><contains obj="output" str='"&gt;foo&lt;/"' interface="DOMString"/></assertTrue>
+<try>
+	<xmlVersion obj="doc" value='"1.1"' interface="Document"/>
+	<catch>
+		<DOMException code="NOT_SUPPORTED_ERR">
+			<return/>
+		</DOMException>
+	</catch>
+</try>
+<assertLSException id="throw_SERIALIZE_ERR">
+	<SERIALIZE_ERR>
+		<writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
+	</SERIALIZE_ERR>
+</assertLSException>
+</if>
 </test> 
  
  

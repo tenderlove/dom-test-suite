@@ -16,16 +16,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="cdatasections04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="splitcdatasections01">
 <metadata>
-<title>cdatasections04</title>
+<title>splitcdatasections01</title>
 <creator>Curt Arnold</creator>
 <description>
-CDATASections should be eliminated when cdata-sections is false.
+CDATASections containing unrepresentable characters should be split when split-cdata-sections is true.
 </description>
 <date qualifier="created">2004-03-31</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
@@ -41,12 +41,13 @@ CDATASections should be eliminated when cdata-sections is false.
 <createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
 	qualifiedName='"test"' doctype="docType"/>
 <documentElement var="docElem" obj="doc"/>
-<createCDATASection var="newNode" obj="doc" data='"foo"'/>
+<createCDATASection var="newNode" obj="doc" data='"this is not ]]&gt; good"'/>
 <appendChild var="retNode" obj="docElem" newChild="newNode"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<setParameter obj="domConfig" name='"split-cdata-sections"' value="true"/>
+<setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-<assertTrue id="containsCDATA"><contains obj="output" str='"&gt;foo&lt;/"' interface="DOMString"/></assertTrue>
+<assertFalse id="notNaive"><contains obj="output" str='"this is not ]]&gt; good"' interface="DOMString"/></assertFalse>
 </test> 
  
  

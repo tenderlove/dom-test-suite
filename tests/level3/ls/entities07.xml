@@ -53,7 +53,7 @@ A warning should be dispatched if the base URI of a processing instruction can n
 	<severity var="severity" obj="error"/>
 	<type var="type" obj="error" interface="DOMError"/>
 	<if><equals actual="type" expected='"pi-base-uri-not-preserved"' ignoreCase="false"/>
-		<assertEquals actual="severity" expected="1" id="isError"/>
+		<assertEquals actual="severity" expected="1" id="isError" ignoreCase="false"/>
 		<increment var="warningCount" value="1"/>
 	</if>
 </for-each>

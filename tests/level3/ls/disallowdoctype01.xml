@@ -59,7 +59,7 @@ is false.
 	<severity var="severity" obj="error"/>
 	<type var="type" obj="error" interface="DOMError"/>
 	<if><greater actual="severity" expected="1"/>
-		<assertEquals actual="severity" expected="3" id="isFatalError"/>
+		<assertEquals actual="severity" expected="3" id="isFatalError" ignoreCase="false"/>
 		<assertEquals actual="type" expected='"doctype-not-allowed"' id="isDoctypeNotAllowed" ignoreCase="false"/>
 		<increment var="errorCount" value="1"/>
 	</if>

@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>validate03</title>
 <creator>Curt Arnold</creator>
 <description>
-Load a document without a DTD that doesn't match content with validate=false, should load without complaint.
+Load a document with a DTD that doesn't match content with validate=false, should load without complaint.
 </description>
 <date qualifier="created">2004-03-29</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>

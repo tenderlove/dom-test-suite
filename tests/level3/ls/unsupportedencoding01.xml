@@ -54,7 +54,7 @@ DOM error.
 	<severity var="severity" obj="error"/>
 	<type var="type" obj="error" interface="DOMError"/>
 	<if><equals actual="type" expected='"unsupported-encoding"' ignoreCase="true"/>
-		<assertEquals actual="severity" expected="3" id="isError"/>
+		<assertEquals actual="severity" expected="3" id="isError" ignoreCase="false"/>
 		<increment var="errorCount" value="1"/>
 	</if>
 </for-each>

@@ -16,16 +16,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="cdatasections04">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="normalizecharacters03">
 <metadata>
-<title>cdatasections04</title>
+<title>normalizecharacters03</title>
 <creator>Curt Arnold</creator>
 <description>
-CDATASections should be eliminated when cdata-sections is false.
+Characters should be normalized on serialization if normalize-characters is true.
 </description>
-<date qualifier="created">2004-03-31</date>
+<date qualifier="created">2004-04-01</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-normalize-characters"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
@@ -36,17 +36,17 @@ CDATASections should be eliminated when cdata-sections is false.
 <var name="newNode" type="Node"/>
 <var name="output" type="DOMString"/>
 <var name="retNode" type="Node"/>
+<var name="canSet" type="boolean"/>
 <implementation var="domImplLS"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
-<createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
-	qualifiedName='"test"' doctype="docType"/>
-<documentElement var="docElem" obj="doc"/>
-<createCDATASection var="newNode" obj="doc" data='"foo"'/>
-<appendChild var="retNode" obj="docElem" newChild="newNode"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<canSetParameter var="canSet" obj="domConfig" name='"normalize-characters"' value="true"/>
+<if><isTrue value="canSet"/>
+<createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
+	qualifiedName='"suc&#x327;on"' doctype="docType"/>
+<documentElement var="docElem" obj="doc"/>
+<setParameter obj="domConfig" name='"normalize-characters"' value="true"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-<assertTrue id="containsCDATA"><contains obj="output" str='"&gt;foo&lt;/"' interface="DOMString"/></assertTrue>
-</test> 
- 
- 
+<assertTrue id="notNormalized"><contains obj="output" str='"su&#xE7;on"' interface="DOMString"/></assertTrue>
+</if>
+</test>

@@ -99,6 +99,7 @@
    <suite.member href="canonicalform10.xml"/>
    <suite.member href="canonicalform11.xml"/>
    <suite.member href="canonicalform12.xml"/>
+   <suite.member href="canonicalform13.xml"/>
    
    <suite.member href="cdatasections01.xml"/>
    <suite.member href="cdatasections02.xml"/>
@@ -106,8 +107,12 @@
    <suite.member href="cdatasections04.xml"/>
    <suite.member href="checkcharacternormalization01.xml"/>
    <suite.member href="checkcharacternormalization02.xml"/>
+   <suite.member href="checkcharacternormalization03.xml"/>
+   <suite.member href="checkcharacternormalization04.xml"/>
    <suite.member href="comments01.xml"/>
    <suite.member href="comments02.xml"/>
+   <suite.member href="comments03.xml"/>
+   <suite.member href="comments04.xml"/>
    
    <suite.member href="datatypenormalization01.xml"/>
    <suite.member href="datatypenormalization02.xml"/>
@@ -128,6 +133,8 @@
 <suite.member href="datatypenormalization17.xml"/>
 
 <suite.member href="disallowdoctype01.xml"/>
+<suite.member href="discarddefaultcontent01.xml"/>
+<suite.member href="discarddefaultcontent02.xml"/>
    
    <suite.member href="elementcontentwhitespace01.xml"/>
    <suite.member href="elementcontentwhitespace02.xml"/>
@@ -138,6 +145,8 @@
    <suite.member href="entities05.xml"/>
    <suite.member href="entities06.xml"/>
    <suite.member href="entities07.xml"/>
+   <suite.member href="entities08.xml"/>
+   <suite.member href="entities09.xml"/>
    
    <suite.member href="infoset01.xml"/>
    <suite.member href="infoset02.xml"/>
@@ -162,18 +171,30 @@
    
    <suite.member href="normalizecharacters01.xml"/>
    <suite.member href="normalizecharacters02.xml"/>
+   <suite.member href="normalizecharacters03.xml"/>
+   <suite.member href="normalizecharacters04.xml"/>
    
    <suite.member href="schemalocation01.xml"/>
    <suite.member href="schemalocation02.xml"/>
+   <suite.member href="schemalocation03.xml"/>
+   <suite.member href="schemalocation04.xml"/>
    <suite.member href="schematype01.xml"/>
    <suite.member href="schematype02.xml"/>
    <suite.member href="schematype03.xml"/>
+   <suite.member href="schematype04.xml"/>
+   
+   <suite.member href="splitcdatasections01.xml"/>
+   <suite.member href="splitcdatasections02.xml"/>
    
    <suite.member href="unsupportedencoding01.xml"/>
    <suite.member href="validate01.xml"/>
    <suite.member href="validate02.xml"/>
    <suite.member href="validate03.xml"/>
    <suite.member href="validate04.xml"/>
+   <suite.member href="validate05.xml"/>
+   <suite.member href="validate06.xml"/>
+   <suite.member href="validate07.xml"/>
+   <suite.member href="validate08.xml"/>
    <suite.member href="validateifschema01.xml"/>
    <suite.member href="validateifschema02.xml"/>
    <suite.member href="validateifschema03.xml"/>
@@ -182,5 +203,8 @@
    <suite.member href="wellformed01.xml"/>
    <suite.member href="wellformed02.xml"/>
    <suite.member href="wellformed03.xml"/>
+
+   <suite.member href="xmldeclaration01.xml"/>
+   <suite.member href="xmldeclaration02.xml"/>
    
 </suite>
