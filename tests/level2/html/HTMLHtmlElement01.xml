@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLHtmlElement01">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLHtmlElement01" contentType="text/html">
 <metadata>
 <title>HTMLHtmlElement01</title>
 <creator>NIST</creator>
@@ -24,6 +24,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     DTD. 
 
     Retrieve the version attribute and examine it's value.  
+
+
+    Test is only applicable to HTML, version attribute is not supported in XHTML.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-07</date>
@@ -38,5 +41,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <version interface="HTMLHtmlElement" obj="testNode" var="vversion"/>
-<assertEquals actual="vversion" expected="&quot;transitional 4.0&quot;" id="versionLink" ignoreCase="false"/>
+<assertEquals actual="vversion" expected='"-//W3C//DTD HTML 4.01 Transitional//EN"' id="versionLink" ignoreCase="false"/>
 </test>
