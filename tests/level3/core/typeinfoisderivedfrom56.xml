@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>typeinfoisderivedfrom56</title>
 <creator>Curt Arnold</creator>
 <description>
-Check if a type derived by extension from a list of a item type returns false
+Check if a type derived by extension from a list of a item type returns true
 when asked if it derives by extension from anyType.
 </description>
 <date qualifier="created">2004-02-14</date>
@@ -40,5 +40,5 @@ when asked if it derives by extension from anyType.
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anyType"' derivationMethod="2"/>
-<assertFalse actual="isDerived" id="derivedFromAnyExtension"/>
+<assertTrue actual="isDerived" id="derivedFromAnyExtension"/>
 </test>

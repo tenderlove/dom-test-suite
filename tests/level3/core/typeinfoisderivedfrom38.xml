@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>Curt Arnold</creator>
 <description>
 Check if anonymous type of p element is derived from xsd:anyType by any method other
-than restriction.
+than extension.
 </description>
 <date qualifier="created">2004-01-13</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -40,6 +40,6 @@ than restriction.
 <!--  type should be anonymous type defined within p element  -->
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="14"/>
-<assertFalse actual="isDerived" id="derivedFromAnyTypeNotRestriction"/>
+	typeNameArg='"anyType"' derivationMethod="13"/>
+<assertFalse actual="isDerived" id="derivedFromAnyTypeNotExtension"/>
 </test>

@@ -40,5 +40,5 @@ Check if anonymous type of p element is derived from xsd:anyType by restriction.
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anyType"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromAnyTypeRestriction"/>
+<assertFalse actual="isDerived" id="derivedFromAnyTypeRestriction"/>
 </test>

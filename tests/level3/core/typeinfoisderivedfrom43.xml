@@ -42,5 +42,5 @@ Check if anonymous type of acronym element derived from anyType by restriction.
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
 	typeNameArg='"anyType"' derivationMethod="1"/>
-<assertTrue actual="isDerived" id="derivedFromAnyType"/>
+<assertFalse actual="isDerived" id="derivedFromAnyType"/>
 </test>

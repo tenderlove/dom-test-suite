@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>Curt Arnold</creator>
 <description>
 Check if a type derived by extension from a list of a item type returns true
-when asked if it derives by restriction from anyType type.
+when asked if it derives by extension from anyType type.
 </description>
 <date qualifier="created">2004-02-14</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
@@ -39,6 +39,6 @@ when asked if it derives by restriction from anyType type.
 <schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"'
-	typeNameArg='"anyType"' derivationMethod="1"/>
+	typeNameArg='"anyType"' derivationMethod="2"/>
 <assertTrue actual="isDerived" id="derivedFromAnyRestriction"/>
 </test>
