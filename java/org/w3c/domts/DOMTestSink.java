@@ -11,30 +11,15 @@
  */
 
  /*
- $Log: DOMTestSuite.java,v $
- Revision 1.2  2001-07-23 04:52:20  dom-ts-4
+ $Log: DOMTestSink.java,v $
+ Revision 1.1  2001-07-23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
 
 package org.w3c.domts;
 
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import org.w3c.domts.*;
-import java.util.*;
-
-public abstract class DOMTestSuite extends DOMTest {
-  private DOMTestDocumentBuilderFactory factory;
-
-  public DOMTestSuite() {
-  }
-  public void setFactory(DOMTestDocumentBuilderFactory factory) {
-    this.factory = factory;
-  }
-  public DOMTestDocumentBuilderFactory getFactory() {
-    return factory;
-  }
-  abstract public void build(DOMTestSink sink);
+public interface DOMTestSink {
+  public void addTest(Class test);
 }
 

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.6  2001-07-20 05:44:32  dom-ts-4
+Revision 1.7  2001-07-23 04:52:20  dom-ts-4
+Initial test running using JUnit.
+
+Revision 1.6  2001/07/20 05:44:32  dom-ts-4
 Initial SVG support.  multiply renamed mult,
 All implementation conditions combined into implementationAttribute element
 
@@ -35,16 +38,20 @@ All implementation conditions combined into implementationAttribute element
 	</target>
 
 	<target name="init">
-		<property name="specs.dir" value="./build/specs"/>
+		<property name="specs.dir" value="./lib/specs"/>
 		<property name="transforms.dir" value="./transforms"/>
 		<property name="build.dir" value="./build"/>
 		<property name="java.build.dir" value="./build/java"/>
 		<property name="tests.dir" value="./tests"/>
 		<property name="metadata.dir" value="./build/metadata"/>
+        <property name="dist.dir" value="./dist"/>
+        <property name="lib.dir" value="./lib"/>
 		<!--  any jar that contains org.w3c.dom and javax.xml.parsers classes  -->
 		<property name="jaxp.jar" value="d:/ant1.4/lib/xerces.jar"/>
 		<mkdir dir="${build.dir}"/>
+        <mkdir dir="${lib.dir}"/>
 		<mkdir dir="${specs.dir}"/>
+        <mkdir dir="${dist.dir}"/>
 	</target>
 
 	<target name="dom1-init" depends="init">
@@ -220,7 +227,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="dom1-core-gen-java" depends="init">
+<target name="dom1-core-gen-java" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
@@ -231,13 +238,49 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom1-core-javac" depends="init">
+<target name="common-javac" depends="init">
+    <mkdir dir="${java.build.dir}"/>
 	<javac srcdir="java/org/w3c/domts" 
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"/>
+</target>
+
+<target name="dom1-core-javac" depends="common-javac,dom1-core-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"/>
+</target>
+
+<target name="dom1-core-jar" depends="dom1-core-javac">
+    <!--  will need to provide a manifest    -->
+    <jar jarfile="${dist.dir}/dom1-core.jar">
+        <fileset dir="${java.build.dir}" includes="org/w3c/domts/*" excludes="*.bak"/>
+        <fileset dir="${java.build.dir}" includes="org/w3c/domts/level1/core/*" excludes="*.bak"/>
+        <fileset dir="files/level1/core" excludes="*.bak"/>
+        <fileset dir="java" includes="org/w3c/domts/*" excludes="*.bak"/>
+    </jar>
+</target>
+
+<target name="junit-run" depends="common-javac">
+    <!--  get JUnit 3.7 into lib directory  -->
+	<get src="http://download.sourceforge.net/junit/junit3.7.zip"
+		dest="${lib.dir}/junit.zip"
+		usetimestamp="yes"/>
+	<unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
+
+    <mkdir dir="${java.build.dir}/junit"/>
+
+    <javac srcdir="java/junit/org/w3c/domts"
+           destdir="${java.build.dir}/junit"
+           classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"/>
+
+
+    <jar jarfile="${dist.dir}/junit-run.jar"
+        manifest="java/junit/junit-run.mf">
+        <fileset dir="${java.build.dir}/junit" includes="org/w3c/domts/*" excludes="*.bak"/>
+    </jar>
+    
+
 </target>
 
 <target name="clean" depends="init">

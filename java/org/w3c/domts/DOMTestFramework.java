@@ -10,42 +10,52 @@
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
+  /*
+ $Log: DOMTestFramework.java,v $
+ Revision 1.4  2001-07-23 04:52:20  dom-ts-4
+ Initial test running using JUnit.
+
+ */
+
+
 package org.w3c.domts;
 
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import java.lang.*;
 import java.util.*;
+import org.xml.sax.*;
 
 /**
  *    This interface provides services typically provided by a test framework
  */
 public interface DOMTestFramework {
-	boolean hasFeature(String feature,String version) throws Exception;
+	boolean hasFeature(DocumentBuilder docBuilder,
+          String feature,
+          String version);
+        boolean getImplementationAttribute(DocumentBuilderFactory factory,
+          String name) throws Exception;
 	void wait(int millisecond);
-	Document load(String docURI);
-	DOMImplementation getImplementation();
-	void assertTrue(String testURI, String assertID, boolean actual);
-	void assertFalse(String testURI, String assertID, boolean actual);
-	void assertNull(String testURI, String assertID, Object actual);
-	void assertNotNull(String testURI, String assertID, Object actual);
-	void assertSame(String testURI, String assertID, Object expected, Object actual);
-	void assertInstanceOf(String testURI, String assertID, Object obj, Class cls);
-	void assertSize(String testURI, String assertID, int expectedSize, NodeList collection);
-	void assertSize(String testURI, String assertID, int expectedSize, NamedNodeMap collection);
-	void assertSize(String testURI, String assertID, int expectedSize, Collection collection);
-	void assertEqualsIgnoreCase(String testURI, String assertID, String expected, String actual);
-	void assertEqualsIgnoreCase(String testURI, String assertID, Collection expected, Collection actual);
-	void assertEqualsIgnoreCase(String testURI, String assertID, List expected, List actual);
-	void assertEquals(String testURI, String assertID, String expected, String actual);
-	void assertEquals(String testURI, String assertID, int expected, int actual);
-	void assertEquals(String testURI, String assertID, double expected, double actual);
-	void assertEquals(String testURI, String assertID, Collection expected, NodeList actual);
-	void assertEquals(String testURI, String assertID, Collection expected, Collection actual);
-	void assertNotEqualsIgnoreCase(String testURI, String assertID, String expected, String actual);
-	void assertNotEquals(String testURI, String assertID, String expected, String actual);
-	void assertNotEquals(String testURI, String assertID, int expected, int actual);
-	void assertNotEquals(String testURI, String assertID, double expected, double actual);
+	void assertTrue(DOMTestCase test, String assertID, boolean actual);
+	void assertFalse(DOMTestCase test, String assertID, boolean actual);
+	void assertNull(DOMTestCase test, String assertID, Object actual);
+	void assertNotNull(DOMTestCase test, String assertID, Object actual);
+	void assertSame(DOMTestCase test, String assertID, Object expected, Object actual);
+	void assertInstanceOf(DOMTestCase test, String assertID, Object obj, Class cls);
+	void assertSize(DOMTestCase test, String assertID, int expectedSize, NodeList collection);
+	void assertSize(DOMTestCase test, String assertID, int expectedSize, NamedNodeMap collection);
+	void assertSize(DOMTestCase test, String assertID, int expectedSize, Collection collection);
+	void assertEqualsIgnoreCase(DOMTestCase test, String assertID, String expected, String actual);
+	void assertEqualsIgnoreCase(DOMTestCase test, String assertID, Collection expected, Collection actual);
+	void assertEqualsIgnoreCase(DOMTestCase test, String assertID, List expected, List actual);
+	void assertEquals(DOMTestCase test, String assertID, String expected, String actual);
+	void assertEquals(DOMTestCase test, String assertID, int expected, int actual);
+	void assertEquals(DOMTestCase test, String assertID, double expected, double actual);
+	void assertEquals(DOMTestCase test, String assertID, Collection expected, Collection actual);
+	void assertNotEqualsIgnoreCase(DOMTestCase test, String assertID, String expected, String actual);
+	void assertNotEquals(DOMTestCase test, String assertID, String expected, String actual);
+	void assertNotEquals(DOMTestCase test, String assertID, int expected, int actual);
+	void assertNotEquals(DOMTestCase test, String assertID, double expected, double actual);
 
 
 	boolean same(Object expected, Object actual);
