@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.59  2002-05-23 13:35:35  dom-ts-4
+Revision 1.60  2002-06-03 23:56:13  dom-ts-4
+Added dom2-events-jar and related tasks
+
+Revision 1.59  2002/05/23 13:35:35  dom-ts-4
 Changed depenencies for -validate-tests tasks
 
 Revision 1.58  2002/04/21 23:13:30  dom-ts-4
@@ -303,6 +306,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/core"/>
 	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/html"/>
+    <copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/submittedtests/netscapeHTML"/>
 </target>
 
 <target name="dom1-subjects" depends="dom1-init">
@@ -508,8 +512,8 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-check-spec" depends="init">
     <available property="dom2-core-available" file="${specs.dir}/DOM2-Core.zip"/>
-    <available property="dom2-views-available" file="${specs.dir}/DOM2-Views.zip"/>
-    <available property="dom2-events-available" file="${specs.dir}/DOM2-Events.zip"/>
+    <available property="dom2-views-available" file="${specs.dir}/DOM2-Views-Java-Binding.zip"/>
+    <available property="dom2-events-available" file="${specs.dir}/DOM2-Events-Java-Binding.zip"/>
     <available property="dom2-style-available" file="${specs.dir}/DOM2-Style.zip"/>
     <available property="dom2-traversal-available" file="${specs.dir}/DOM2-Traversal-Range.zip"/>
     <available property="dom2-html-available" file="${specs.dir}/DOM2-HTML.zip"/>
@@ -530,6 +534,11 @@ All implementation conditions combined into implementationAttribute element
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/DOM2-Views.zip"
 		dest="${specs.dir}/DOM2-Views.zip"
 		usetimestamp="yes"/>
+
+    <get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/java-binding.zip"
+        dest="${specs.dir}/DOM2-Views-Java-Binding.zip"
+        usetimestamp="yes"/>
+
 </target>
 
 <target name="get-dom2-events" depends="dom2-check-spec" unless="dom2-events-available">
@@ -538,6 +547,9 @@ All implementation conditions combined into implementationAttribute element
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/DOM2-Events.zip"
 		dest="${specs.dir}/DOM2-Events.zip"
 		usetimestamp="yes"/>
+    <get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/java-binding.zip"
+        dest="${specs.dir}/DOM2-Events-Java-Binding.zip"
+        usetimestamp="yes"/>
 </target>
 
 <target name="get-dom2-style" depends="dom2-check-spec" unless="dom2-style-available">
@@ -635,6 +647,12 @@ All implementation conditions combined into implementationAttribute element
 	<patch patchfile="./patches/level-2-element.patch"
 	       originalfile="${specs.dir}/Level-2/xml/core/definitions/element.xml"/>
 
+
+	<unzip src="${specs.dir}/DOM2-Events-Java-Binding.zip"
+	       dest="${specs.dir}/Level-2/Events"/>
+	<unzip src="${specs.dir}/DOM2-Views-Java-Binding.zip"
+	       dest="${specs.dir}/Level-2/Views"/>
+
 </target>
 
 <target name="dom2-schema" depends="dom2-interfaces">
@@ -661,6 +679,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 	<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/core"/>
 	<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/html"/>
+	<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/events"/>
 </target>
 
 <target name="dom2-subjects" depends="dom2-init">
@@ -772,6 +791,16 @@ All implementation conditions combined into implementationAttribute element
 
 </target>
 
+<target name="dom1-html-validate-tests" depends="dom1-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level1/html" includes="*.xml"/>  
+        <fileset dir="${tests.dir}/submittedtests/netscapeHTML" includes="*.xml"/>
+	</xmlvalidate>
+</target>
+
+
+
 <target name="dom1-html-gen-java" depends="dom1-interfaces,dom1-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/html"/>
 	<style basedir="${tests.dir}/level1/html" 
@@ -787,6 +816,20 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
 	</style>
+	<style basedir="${tests.dir}/submittedtests/netscapeHTML" 
+		   destdir="${java.build.dir}/org/w3c/domts/level1/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml,xml_alltests.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level1.html"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
+	</style>
+
 </target>
 
 <target name="dom1-html-javac" depends="common-javac,dom1-html-gen-java">
@@ -974,6 +1017,20 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
+<target name="dom2-html-validate-tests" depends="dom2-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/html" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
+<target name="dom2-events-validate-tests" depends="dom2-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/events" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
 
 <target name="dom2-core-gen-java" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level2/core"/>
@@ -1090,6 +1147,24 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
+<target name="dom2-events-gen-java" depends="dom2-interfaces,dom2-dtd">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level2/events"/>
+
+	<style basedir="${tests.dir}/level2/events" 
+		   destdir="${java.build.dir}/org/w3c/domts/level2/events" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level2.events"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/events/"/>
+	</style>
+</target>
+
 
 <target name="dom2-core-javac" depends="common-javac,dom2-core-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/core" 
@@ -1108,6 +1183,22 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
+<target name="dom2-events-javac" depends="common-javac,dom2-events-gen-java">
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <src path="${specs.dir}/Level-2/Events/java"/>
+        <src path="${specs.dir}/Level-2/Views/java"/>
+        <include name="org/w3c/domts/*"/>
+        <include name="org/w3c/domts/level2/events/*"/>
+        <include name="org/w3c/dom/**"/>
+    </javac>
+</target>
+
 <target name="dom2-core-jar" depends="dom2-core-javac">
 	<!--  will need to provide a manifest    -->
 	<jar jarfile="${build.dir}/dom2-core.jar"  manifest="java/dom2-core.mf">
@@ -1121,6 +1212,21 @@ All implementation conditions combined into implementationAttribute element
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
 </target>
+
+<target name="dom2-events-jar" depends="dom2-events-javac">
+	<!--  will need to provide a manifest    -->
+	<jar jarfile="${build.dir}/dom2-events.jar"  manifest="java/dom2-events.mf">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level2/events/*"
+		         excludes="*.bak"/>
+		<fileset dir="tests/level2/events/files" excludes="*.bak"/>
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
+</target>
+
 
 
 <target name="dom2-core-doxygen" depends="dom2-core-gen-java">
