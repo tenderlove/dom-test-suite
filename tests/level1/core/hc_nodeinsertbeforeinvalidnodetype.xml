@@ -34,6 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=406"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="rootNode" type="Element"/>
@@ -42,10 +43,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="refChild" type="Node"/>
 <var name="insertedNode" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<documentElement obj="doc" var="rootNode"/>
 <createAttribute obj="doc" name='"title"' var="newChild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="refChild"/>
+<parentNode var="rootNode" obj="refChild" interface="Node"/>
 <assertDOMException id="throw_HIERARCHY_REQUEST_ERR">
 <HIERARCHY_REQUEST_ERR>
 <insertBefore var="insertedNode" obj="rootNode" newChild="newChild" refChild="refChild"/>
