@@ -399,7 +399,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                             <xs:documentation>Generic XML</xs:documentation>
                         </xs:annotation>
                     </xs:enumeration>
-                    <xs:enumeration value="image/xml+svg">
+                    <xs:enumeration value="image/svg+xml">
                         <xs:annotation>
                             <xs:documentation>SVG</xs:documentation>
                         </xs:annotation>
@@ -436,6 +436,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>Used in method name in generated code.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
+                    <xs:attribute name="contentType" type="loadContentType" use="optional">
+                        <xs:annotation>
+                            <xs:documentation>Content type used to select the appropriate test documents.  Value propagates from enclosing suites.
+                            For example, loading "file1" when contextType="text/xml" should load "staff.xml".  If contentType="image/xsl+svg", file1.svg would be loaded.
+                         </xs:documentation>
+                         </xs:annotation>
+                    </xs:attribute>
 				</xs:complexType>
                 <!--  variables must be uniquely named   -->
                 <xs:key name="var-name">
