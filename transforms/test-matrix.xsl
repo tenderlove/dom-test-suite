@@ -25,6 +25,7 @@ and combine-metadata.xsl
      <xsl:param name="interfacesURL">../build/dom1-interfaces.xml</xsl:param>
      <xsl:param name="specURI">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#</xsl:param>
      <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
+     <xsl:param name="buildPath">../tests/level1/core/</xsl:param>
 
 	<xsl:output method="html"/>
 
@@ -33,25 +34,21 @@ and combine-metadata.xsl
     <xsl:variable name="methods" select="$interfaces/method"/>
     <xsl:variable name="attributes" select="$interfaces/attribute"/>
     <xsl:variable name="descriptions" select="/rdf:RDF/rdf:Description"/>
-
     <xsl:variable name="subjects" select="document($specMetadataURL,.)/rdf:RDF/rdf:Description"/>
 
 	<!--  match document root    -->
 	<xsl:template match="/">
-		<!--  the copyright notice placed in the output file.    -->
-		<xsl:comment>
-Copyright (c) 2001 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Document
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
-</xsl:comment>
         <html>
-            <body>
+		<head>
+			<title>DOM Level 1 Core Test Suite Matrix</title>
+			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
+		</head>
+        	<body>
+		<h1>DOM Level 1 Core Test Suite Matrix</h1>
+		<p>Below you will find a description of and pointer to each test in the DOM TS categorized under interface, attribute and method, 
+sorted alphabetically. 
+</p>
+
                 <xsl:variable name="untestedMethods" select="$methods[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource)]"/>
                 <xsl:if test="$untestedMethods">
                     <table col="3" border="1">
@@ -59,7 +56,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xsl:call-template name="rowmethods">
                             <xsl:with-param name="methods" select="$untestedMethods"/>
                             <xsl:with-param name="index">0</xsl:with-param>
-                            <xsl:with-param name="columns">3</xsl:with-param>
+                            <xsl:with-param name="columns">1</xsl:with-param>
                         </xsl:call-template>
                     </table>
                 </xsl:if>
@@ -70,7 +67,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xsl:call-template name="rowmethods">
                             <xsl:with-param name="methods" select="$untestedAttributes"/>
                             <xsl:with-param name="index">0</xsl:with-param>
-                            <xsl:with-param name="columns">3</xsl:with-param>
+                            <xsl:with-param name="columns">1</xsl:with-param>
                         </xsl:call-template>
                     </table>
                 </xsl:if>
@@ -78,9 +75,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
                 <xsl:for-each select="$interfaces">
                     <xsl:sort select="@name"/>
-                    <table border="1" cols="2">
-                        <thead>Interface <xsl:value-of select="@name"/></thead>
-
+			<h2>Interface <xsl:value-of select="@name" /></h2>
+			<table border="1" cols="2">
                         <!-- tests which have the interface as a subject  -->
                         <xsl:variable name="interfacetests" select="$descriptions[dc:subject/@rdf:resource= concat($specURI,current()/@id)]"/>
                         <xsl:if test="$interfacetests">
@@ -91,7 +87,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                         <xsl:call-template name="rowtests">
                                             <xsl:with-param name="tests" select="$interfacetests"/>
                                             <xsl:with-param name="index">0</xsl:with-param>
-                                            <xsl:with-param name="columns">3</xsl:with-param>
+                                            <xsl:with-param name="columns">1</xsl:with-param>
                                         </xsl:call-template>
                                     </table>
                                 </td>
@@ -116,7 +112,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                                 <xsl:call-template name="rowtests">
                                                     <xsl:with-param name="tests" select="$featuretests"/>
                                                     <xsl:with-param name="index">0</xsl:with-param>
-                                                    <xsl:with-param name="columns">2</xsl:with-param>
+                                                    <xsl:with-param name="columns">1</xsl:with-param>
                                                 </xsl:call-template>
                                             </table>
                                         </xsl:if>
@@ -143,7 +139,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                                 <xsl:call-template name="rowtests">
                                                     <xsl:with-param name="tests" select="$featuretests"/>
                                                     <xsl:with-param name="index">0</xsl:with-param>
-                                                    <xsl:with-param name="columns">2</xsl:with-param>
+                                                    <xsl:with-param name="columns">1</xsl:with-param>
                                                 </xsl:call-template>
                                             </table>
                                         </xsl:if>
@@ -162,7 +158,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xsl:variable name="test" select="."/>
                         <tr>
                             <td width="25%">
-                                <a href="{@rdf:about}" title="{dc:description}">
+		                    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>                             
+                		    <a href="{concat($buildPath,$testName,'.xml')}" title="{dc:description}">
                                     <xsl:call-template name="emit-title"/>
                                 </a>
                             </td>
@@ -174,7 +171,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                             <xsl:call-template name="rowsubjects">
                                                 <xsl:with-param name="subjects" select="$testsubjects"/>
                                                 <xsl:with-param name="index">0</xsl:with-param>
-                                                <xsl:with-param name="columns">3</xsl:with-param>
+                                                <xsl:with-param name="columns">1</xsl:with-param>
                                             </xsl:call-template>
                                         </table>
                                     </xsl:when>
@@ -186,7 +183,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         </tr>
                     </xsl:for-each>
                 </table>     
-            </body>
+                <!--  the copyright notice placed in the output file.    -->
+		
+			<br />
+			<xsl:text>Tests in this table are released under the the following license:</xsl:text>
+			<br />
+			<xsl:text>Copyright (c) 2001 World Wide Web Consortium,
+			(Massachusetts Institute of Technology, Institut National de
+			Recherche en Informatique et en Automatique, Keio University). All
+			Rights Reserved. This program is distributed under the W3C's Software
+			Intellectual Property License. This program is distributed in the
+			hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+			PURPOSE.</xsl:text>
+			<br />
+			<xsl:text>See W3C License </xsl:text> <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+			<xsl:text> for more details.</xsl:text>
+
+
+	    </body>
         </html>
     </xsl:template>
 
@@ -222,9 +237,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <tr>
             <xsl:for-each select="$tests[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
-                    <a href="{@rdf:about}" title="{dc:description}">
+		    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>
+		    <a href="{concat($buildPath,$testName,'.xml')}" title="{dc:description}">
                           <xsl:call-template name="emit-title"/>
                     </a>
+			<xsl:value-of select="dc:description" />
                 </td>
             </xsl:for-each>
         </tr>
@@ -277,5 +294,3 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:template>
 
 </xsl:stylesheet>
-
-
