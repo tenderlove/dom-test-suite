@@ -24,7 +24,6 @@
    <suite.member href="DOMBuilderTest4.xml"/>
    <suite.member href="DOMBuilderTest5.xml"/>
    <suite.member href="DOMBuilderTest6.xml"/>
-   <suite.member href="DOMBuilderTest7.xml"/>
    <suite.member href="DOMBuilderTest8.xml"/>
    <suite.member href="DOMEntityResolverTest0.xml"/>
    <suite.member href="DOMEntityResolverTest1.xml"/>

@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.56  2003-12-23 03:27:25  dom-ts-4
+Revision 1.57  2003-12-30 06:17:07  dom-ts-4
+Miscellaneous L&S changes based on implementor feedback (bug 447)
+
+Revision 1.56  2003/12/23 03:27:25  dom-ts-4
 Adds fail construct (bug 445)
 
 Revision 1.55  2003/12/19 22:20:49  dom-ts-4
@@ -1752,19 +1755,31 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:value-of select="@var"/>
     <xsl:text> = getResourceURI(</xsl:text>
     <xsl:value-of select="@href"/>
-    <xsl:text>);
+    <xsl:text>,"</xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@scheme">
+    		<xsl:value-of select="@scheme"/>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>file</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>");
       </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[local-name()='createTempFileURI']" mode="body">
+<xsl:template match="*[local-name()='createTempURI']" mode="body">
     <xsl:value-of select="@var"/>
-    <xsl:text> = createTempFileURI();
-      </xsl:text>
-</xsl:template>
-
-<xsl:template match="*[local-name()='createTempHttpURI']" mode="body">
-    <xsl:value-of select="@var"/>
-    <xsl:text> = createTempHttpURI();
+    <xsl:text> = createTempURI("</xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@scheme">
+    		<xsl:value-of select="@scheme"/>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>file</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>");
       </xsl:text>
 </xsl:template>
 

@@ -40,13 +40,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <assertTrue actual="state" id="defaultValue"/>
   <canSetParameter var="canSet" obj="config" name="propertyName" value="true"/>
   <assertTrue actual="canSet" id="canSetTrue"/>
+  <!--  TODO: Changed in anticipation of forthcoming spec change
+            will need to review final wording   -->
   <canSetParameter var="canSet" obj="config" name="propertyName" value="false"/>
-  <assertFalse actual="canSet" id="canSetFalse"/>
-  <assertDOMException id="throw_NOT_SUPPORTED_EXCEPTION">
-  	  <NOT_SUPPORTED_ERR>
-  			<setParameter obj="config" name="propertyName" value="false"/>
-  	  </NOT_SUPPORTED_ERR>
-  </assertDOMException>
+  <if>
+  	  <isTrue value="canSet"/>
+  	  <setParameter obj="config" name="propertyName" value="false"/>
+  	  <getParameter var="state" obj="config" name="propertyName"/>
+  	  <assertFalse actual="state" id="setFalseIsEffective"/>
+  	  <setParameter obj="config" name="propertyName" value="true"/>
+  	  <getParameter var="state" obj="config" name="propertyName"/>
+  	  <assertTrue actual="state" id="setTrueIsEffective"/>
+  	  <else>
+  	  	<assertDOMException id="settingFalseWhenNotSupported">
+  	  		<NOT_SUPPORTED_ERR>
+  	  			<setParameter obj="config" name="propertyName" value="false"/>
+  	  		</NOT_SUPPORTED_ERR>
+  	  	</assertDOMException>
+  	  </else>
+  </if>
 </test>
 
 

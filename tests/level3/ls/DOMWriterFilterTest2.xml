@@ -55,6 +55,7 @@
   <var name="elementList"     type="NodeList"/>
   <var name="elt1"            type="Element"/>
   <var name="childs"          type="boolean"/>
+  <var name="attrNode"        type="Attr"/>
   <var name="attr1"           type="DOMString"/>
 
   &vars;
@@ -79,9 +80,12 @@
   <item interface="NodeList" obj="elementList" index="0" var="elt1"/>
 
   <!--  text content of attribute node (but not attribute) should have been stripped -->
-  <getAttribute var="attr1" obj="elt1" name='"attr1"'/>
-  <assertEquals actual="attr1"  expected='""' ignoreCase="false" id="attr1_value"/>
+  <getAttributeNode var="attrNode" obj="elt1" name='"attr1"'/>
+  <assertNotNull actual="attrNode" id="attrExists"/>
+  <nodeValue var="attr1" obj="attrNode"/>
+  <assertEquals actual="attr1"  expected='""' ignoreCase="false" id="attrIsBlank"/>
 
+  <!--  elt1 should be empty   -->
   <hasChildNodes obj="elt1" var="childs"/>
   <assertFalse actual="childs" id="nodeHasChilds_elt1"/>
 

@@ -50,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <!--   check that it was initially null    -->
   <systemId var="checkSystemId" obj="output" interface="LSOutput"/>
   <assertNull actual="checkSystemId" id="LSOutputSystemIdInitiallyNull"/>
-  <createTempHttpURI var="systemId"/>
+  <createTempURI var="systemId" scheme="http"/>
   <systemId obj="output" value="systemId" interface="LSOutput"/>
   <systemId var="checkSystemId" obj="output" interface="LSOutput"/>
   <assertEquals expected="systemId" 
@@ -73,7 +73,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   	actual="checkSystemId" 
   	ignoreCase="false" 
   	id="LSInputSystemIdMatch"/>
-  <createLSParser var="parser" obj="domImpl" schemaType="NULL_SCHEMA_TYPE" mode="0"/>
+  <createLSParser var="parser" obj="domImpl" schemaType="NULL_SCHEMA_TYPE" mode="1"/>
   <parse var="checkDoc" obj="parser" input="input"/>
   <assertNotNull actual="checkDoc" id="checkNotNull"/>
   <documentElement var="docElem" obj="checkDoc"/>

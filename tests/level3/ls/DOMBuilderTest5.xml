@@ -35,13 +35,12 @@
   <var name="ERROR_HANDLER" type="DOMString" value='"error-handler"'/>
   <var name="SUPPORTED_MEDIATYPES_ONLY" type="DOMString" value='"supported-media-types-only"'/>
   <var name="mediaTypesSupported" type="boolean"/>
+  <var name="resourceURI" type="DOMString"/>
 
   <var name="errorHandler" type="DOMErrorHandler"> 
-     &errorHandlerVars;
-
      <handleError>
-        &assignErrorHandlerVars;
-
+        <var name="type" type="DOMString"/>
+        <type var="type" obj="error" interface="DOMError"/>
         <assertEquals id="handler_1" actual="type" expected='"unsupported-media-type"' ignoreCase="false"/> 
         <return value="false"/>
      </handleError>
@@ -52,14 +51,23 @@
 
   <config var="configuration" obj="builder" interface="LSParser"/> 
 
-  <setParameter obj="configuration" name="ERROR_HANDLER"             value="errorHandler"/>
-
   <canSetParameter var="mediaTypesSupported" obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
   <if>
   	 <isTrue value="mediaTypesSupported"/>
+     <getResourceURI var="resourceURI" href="TESTPDF" scheme="http"/>
+	 <parseURI var="document" obj="builder" uri="resourceURI"/>
+	 <!--  
+	 	document should successfully parse since, properly configured,
+	 	testpdf.pdf is a valid XML file on the http server. 
+	 --> 
+	 <assertNotNull actual="document" id="testpdf_parsed"/>  	 
+  	 
+  	 
   	 <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
-	 <parseURI var="document" obj="builder" uri="TESTPDF"/>
-	 <assertNull actual="document" id="docNull"/>
+  	 <setParameter obj="configuration" name="ERROR_HANDLER" value="errorHandler"/>
+	 <parseURI var="document" obj="builder" uri="resourceURI"/>
+	 <!--  document should fail to parse due to unsupported media type  -->
+	 <assertNull actual="document" id="testpdf_failed"/>
   </if>
   
 </test>

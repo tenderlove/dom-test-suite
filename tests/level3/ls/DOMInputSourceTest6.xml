@@ -39,9 +39,10 @@
 
   <!--  initialize an input source with a string and a misleading encoding  -->
   <encoding   obj="inputSource" value='"UTF-8"' interface="LSInput"/> 
-  <characterStream obj="inputSource" var="myReader" interface="LSInput"/> 
+  <characterStream obj="inputSource" value="myReader" interface="LSInput"/> 
   <!--  parse   -->
   <parse var="document" obj="builder" input="inputSource"/>
+  <assertNotNull actual="document" id="documentNotNull"/>
 
   <!--  check inputEncoding, should be UTF-16   -->
   <inputEncoding var="encodingString" obj="document" interface="Document"/> 

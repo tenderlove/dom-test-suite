@@ -22,7 +22,7 @@
   <metadata>
     <title>DOMWriterFilterTest1</title>
     &creator; 
-    <description>Uses a serializer filter to eliminate attributes, parses the output and checks if the attribute is there.</description> 
+    <description>Uses a serializer filter to eliminate attributes, parses the output and checks if the attribute is not there.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSSerializerFilter"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-acceptNode"/>    
@@ -53,7 +53,7 @@
   <var name="length"          type="int"/>
   <var name="elementList"     type="NodeList"/>
   <var name="elt1"            type="Element"/>
-  <var name="attr1"           type="DOMString"/>
+  <var name="attrNode"           type="Attr"/>
 
   &vars;
   &init;
@@ -76,11 +76,10 @@
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="count_elt2"/>
 
-  <!-- attr1 of elt1 should still be there !!-->
+  <!-- attr1 of elt1 should have been suppressed  -->
   <item interface="NodeList" obj="elementList" index="0" var="elt1"/>
-
-  <getAttribute obj="elt1" var="attr1" name="&quot;attr1&quot;"/>
-  <assertEquals actual="attr1" expected='"attr1"' ignoreCase="false" id="attrib1"/>
+  <getAttributeNode obj="elt1" var="attrNode" name="&quot;attr1&quot;"/>
+  <assertNull actual="attrNode" id="attrib1"/>
 
 
 </test>

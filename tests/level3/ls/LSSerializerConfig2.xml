@@ -61,8 +61,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   				<equals actual="parameterName" expected='"namespaces"'/>
   				<equals actual="parameterName" expected='"namespace-declarations"'/>
   				<equals actual="parameterName" expected='"normalize-characters"'/>
-  				<equals actual="parameterName" expected='"schema-location"'/>
-  				<equals actual="parameterName" expected='"schema-type"'/>
   				<equals actual="parameterName" expected='"split-cdata-sections"'/>
   				<equals actual="parameterName" expected='"validate"'/>
   				<equals actual="parameterName" expected='"validate-if-schema"'/>
@@ -76,7 +74,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   			<increment var="matchCount" value="1"/>
   		</if>
   </for-each>
-  <assertEquals actual="matchCount" expected="22" id="definedParameterCount" ignoreCase="false"/>
+  <assertEquals actual="matchCount" expected="20" id="definedParameterCount" ignoreCase="false"/>
 </test>
 
 

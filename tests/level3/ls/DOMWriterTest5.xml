@@ -72,7 +72,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <assertEquals actual="docElemLocalName" expected='"test"' ignoreCase="false" id="docElemLocalName"/>
 
   <!--   namespace of document element   -->
-  <namespaceURI var="docElemNS" obj="docElem"/>
+  <namespaceURI var="docElemNS" obj="docElem" interface="Node"/>
   <assertEquals actual="docElemNS" expected="namespaceURI" ignoreCase="false" id="docElemNS"/>
   
   <!--  attribute with namespaceURI namespace  -->

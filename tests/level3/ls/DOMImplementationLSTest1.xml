@@ -27,8 +27,7 @@
     &contributor; &date;
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>    
   </metadata>
-  <!-- temporarily commented out    -->
-  <!-- hasFeature feature='"LS-Async"'/ -->
+  <hasFeature feature='"LS-Async"'/>
   <var name="isAsync" type="boolean"/>
   <var name="isBusy" type="boolean"/>
   <var name="filter" type="LSParserFilter"/>  

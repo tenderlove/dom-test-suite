@@ -11,7 +11,10 @@
 
 /*
  * $Log: DOMTest.java,v $
- * Revision 1.10  2003-12-19 22:21:04  dom-ts-4
+ * Revision 1.11  2003-12-30 06:17:08  dom-ts-4
+ * Miscellaneous L&S changes based on implementor feedback (bug 447)
+ *
+ * Revision 1.10  2003/12/19 22:21:04  dom-ts-4
  * willBeModified violation detection support (bug 412)
  * Revision 1.9 2003/12/09 08:22:27 dom-ts-4 Additional
  * L&S tests, mostly configuration (Bug 401)
@@ -46,6 +49,8 @@ import java.net.URL;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import java.io.File;
+import java.lang.reflect.*;
 
 /**
  * This is an abstract base class for generated DOM tests
@@ -151,27 +156,56 @@ public abstract class DOMTest /* wBM: implements EventListener */ {
 		return resolvedURI;
 	}
 
-	public String getResourceURI(String href) throws DOMTestLoadException {
-		return resolveURI(href).toString();
-	}
-
-	public String createTempFileURI() throws DOMTestLoadException {
-		try {
-			return java
-				.io
-				.File
-				.createTempFile("domts", ".xml")
-				.toURL()
-				.toExternalForm();
-		} catch (IOException ex) {
-			throw new DOMTestLoadException(ex);
+	public String getResourceURI(String href, String scheme) throws DOMTestLoadException {
+		if (scheme == null) {
+			throw new NullPointerException("scheme");
 		}
+		if ("file".equals(scheme)) {
+			return resolveURI(href).toString();
+		}
+		if ("http".equals(scheme)) {
+			String httpBase = System.getProperty("org.w3c.domts.httpbase", 
+						"http://localhost:8080/webdav/");
+			return httpBase + href;
+		}
+		throw new DOMTestLoadException(new Exception("Unrecognized URI scheme " + scheme));
 	}
-
-	public String createTempHttpURI() throws DOMTestLoadException {
-		return "http://localhost:8080/domts/temp/"
-			+ Integer.toString(new java.util.Random().nextInt())
-			+ ".xml";
+	
+	public String createTempURI(String scheme) throws DOMTestLoadException {
+		if (scheme == null) {
+			throw new NullPointerException("scheme");
+		}
+		if ("file".equals(scheme)) {
+			try {
+				File tempFile = File.createTempFile("domts", ".xml");
+				try {
+					//
+					//   if available use JDK 1.4's File.toURI().toString()
+					//
+					Method method = File.class.getMethod("toURI", null);
+					Object uri = method.invoke(tempFile, null);
+					return uri.toString();
+				} catch (NoSuchMethodException ex) {
+					//
+					//   File.toURL is not as robust
+					//
+					URL url = tempFile.toURL();
+					return url.toString();
+				}
+			} catch (Exception ex) {
+				throw new DOMTestLoadException(ex);
+			}
+		}
+		if ("http".equals(scheme)) {
+			String httpBase = System.getProperty("org.w3c.domts.httpbase", 
+						"http://localhost:8080/webdav/");
+			java.lang.StringBuffer buf = new StringBuffer(httpBase);
+			buf.append("/tmp");
+			buf.append((new java.util.Random()).nextInt(Integer.MAX_VALUE));
+			buf.append(".xml");
+			return buf.toString();
+		}
+		throw new DOMTestLoadException(new Exception("Unrecognized URI scheme " + scheme));
 	}
 
 	public Document load(String docURI, boolean willBeModified)

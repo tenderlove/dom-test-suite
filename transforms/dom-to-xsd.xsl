@@ -1072,8 +1072,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="createXPathEvaluator"/>
 					<xs:element ref="getResourceURI"/>
 					<xs:element ref="substring"/>
-					<xs:element ref="createTempFileURI"/>
-					<xs:element ref="createTempHttpURI"/>
+					<xs:element ref="createTempURI"/>
 				</xs:choice>
 			</xs:group>
 
@@ -1384,23 +1383,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				    <xs:attribute name="document" type="variable" use="required"/>
 			    </xs:complexType>
             </xs:element>
+			<xs:simpleType name="uriScheme">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="file"/>
+					<xs:enumeration value="http"/>
+				</xs:restriction>
+			</xs:simpleType>
             <xs:element name="getResourceURI">
             	<xs:complexType>
             		<xs:attribute name="id" type="xs:ID" use="optional"/>
             		<xs:attribute name="var" type="variable" use="required"/>
             		<xs:attribute name="href" type="variableOrStringLiteral" use="required"/>
+            		<xs:attribute name="scheme" type="uriScheme" use="optional"/>
             	</xs:complexType>
             </xs:element>
-            <xs:element name="createTempFileURI">
+            <xs:element name="createTempURI">
             	<xs:complexType>
             		<xs:attribute name="id" type="xs:ID" use="optional"/>
             		<xs:attribute name="var" type="variable" use="required"/>
-            	</xs:complexType>
-            </xs:element>
-            <xs:element name="createTempHttpURI">
-            	<xs:complexType>
-            		<xs:attribute name="id" type="xs:ID" use="optional"/>
-            		<xs:attribute name="var" type="variable" use="required"/>
+            		<xs:attribute name="scheme" type="uriScheme" use="required"/>
             	</xs:complexType>
             </xs:element>
             

@@ -9,7 +9,7 @@
   <!ELEMENT elt1 (#PCDATA)>
   <!ATTLIST elt1 source ENTITY #REQUIRED>
 
-  <!ENTITY ref PUBLIC "-//X-Hive//native xml storage//EN" "files/text5.xml">
+  <!ENTITY ref PUBLIC "-//X-Hive//native xml storage//EN" "test5.xml">
 ]>
    <elt0 base="base">
       <elt1 source="logo">first elt1</elt1>

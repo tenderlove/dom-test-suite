@@ -78,7 +78,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "fail|assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempFileURI|createTempHttpURI"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempURI"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
@@ -982,7 +982,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 	var CDATA #REQUIRED
     href CDATA #REQUIRED
+    scheme (file|http) #IMPLIED
 &gt;
+
 
 &lt;!ELEMENT substring EMPTY&gt;
 &lt;!ATTLIST substring
@@ -993,16 +995,11 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	endIndex CDATA #IMPLIED
 &gt;
 
-&lt;!ELEMENT createTempFileURI EMPTY&gt;
-&lt;!ATTLIST createTempFileURI
+&lt;!ELEMENT createTempURI EMPTY&gt;
+&lt;!ATTLIST createTempURI
 	id ID #IMPLIED
 	var CDATA #REQUIRED
-&gt;
-
-&lt;!ELEMENT createTempHttpURI EMPTY&gt;
-&lt;!ATTLIST createTempHttpURI
-	id ID #IMPLIED
-	var CDATA #REQUIRED
+    scheme (file|http) #REQUIRED
 &gt;
 
 
