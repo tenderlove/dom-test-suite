@@ -23,6 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <creator>Curt Arnold</creator>
     <description>Writes a document to a character stream and rereads the document.</description>
 	<date qualifier="created">2003-12-08</date>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSInput"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-characterStream"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSOutput-characterStream"/>
   </metadata>

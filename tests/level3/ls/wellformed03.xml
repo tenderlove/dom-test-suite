@@ -25,7 +25,7 @@ Load a document with an invalid character in an attribute value, should throw a 
 dispatch a DOMError with type 'wf-invalid-character'.
 </description>
 <date qualifier="created">2004-03-29</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed"/>
 </metadata>
 <var name="doc" type="Document"/>

@@ -25,7 +25,7 @@ Parsing a document with a unsupported encoding should raise a PARSE_ERR and disp
 DOM error.
 </description>
 <date qualifier="created">2004-03-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>

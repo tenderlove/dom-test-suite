@@ -25,7 +25,7 @@ Parsing using an uninitialized LSInput should result in a PARSE_ERR.
 is false.
 </description>
 <date qualifier="created">2004-03-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parse"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>

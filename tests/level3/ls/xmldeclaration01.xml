@@ -24,8 +24,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 XML declarations should be serialized if xml-declaration is true.
 </description>
 <date qualifier="created">2004-03-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-xml-declaration"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#parameter-xml-declaration"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>

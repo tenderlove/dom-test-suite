@@ -24,8 +24,9 @@
     &creator; 
     <description>Parses a document twice, once using a filter to reject all elt1 elements.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
-    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-filter"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-filter"/>    
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-startElement"/>    
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-whatToShow"/>    
   </metadata>
 
 

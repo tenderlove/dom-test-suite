@@ -25,8 +25,9 @@
     <description>Uses a serializer filter to eliminate attributes, parses the output and checks if the attribute is not there.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSSerializerFilter"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-LSSerializerFilter"/>    
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-acceptNode"/>    
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-whatToShow"/>    	
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-whatToShow"/>    	
   </metadata>
 
 

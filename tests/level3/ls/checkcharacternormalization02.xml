@@ -2,14 +2,14 @@
 
 <!--
 
-Copyright (c) 2004 World Wide Web Consortium, 
+Copyright (c) 2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
+Recherche en Informatique et en Automatique, Keio University).  All
 Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
+Intellectual Property License.  This program is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
 
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
@@ -25,7 +25,7 @@ Parsing a non-Unicode normalized document should raise PARSE_ERR if check-charac
 is false.
 </description>
 <date qualifier="created">2004-03-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization"/>
 </metadata>
 <var name="doc" type="Document"/>
@@ -50,22 +50,22 @@ is false.
 <setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <getResourceURI var="resourceURI" href='"characternormalization1"' contentType="text/xml"/>
 <assertLSException id="throw_PARSE_ERR">
-	<PARSE_ERR>
-		<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
-	</PARSE_ERR>
+        <PARSE_ERR>
+                <parseURI var="doc" obj="lsParser" uri="resourceURI"/>
+        </PARSE_ERR>
 </assertLSException>
 <allErrors var="errors" obj="errorMonitor"/>
 <for-each member="error" collection="errors">
-	<severity var="severity" obj="error"/>
-	<type var="type" obj="error" interface="DOMError"/>
-	<if><greater actual="severity" expected="1"/>
-		<assertEquals actual="severity" expected="2" id="isError" ignoreCase="false"/>
-		<assertEquals actual="type" expected='"check-character-normalization-failure"' id="isCheck_Failure" ignoreCase="false"/>
-		<increment var="errorCount" value="1"/>
-	</if>
+        <severity var="severity" obj="error"/>
+        <type var="type" obj="error" interface="DOMError"/>
+        <if><greater actual="severity" expected="1"/>
+                <assertEquals actual="severity" expected="2" id="isError" ignoreCase="false"/>
+                <assertEquals actual="type" expected='"check-character-normalization-failure"' id="isCheck_Failure" ignoreCase="false"/>
+                <increment var="errorCount" value="1"/>
+        </if>
 </for-each>
 <assertEquals actual="errorCount" expected="1" ignoreCase="false" id="oneError"/>
 </if>
-</test> 
- 
- 
+</test>
+
+

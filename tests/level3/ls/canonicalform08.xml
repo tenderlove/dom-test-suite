@@ -2,14 +2,14 @@
 
 <!--
 
-Copyright (c) 2004 World Wide Web Consortium, 
+Copyright (c) 2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
+Recherche en Informatique et en Automatique, Keio University).  All
 Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
+Intellectual Property License.  This program is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
 
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 Normalize document based on section 3.1 with canonical-form set to true and check normalized document.
 </description>
 <date qualifier="created">2004-03-29</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form"/>
 </metadata>
 <var name="doc" type="Document"/>
@@ -108,6 +108,6 @@ Normalize document based on section 3.1 with canonical-form set to true and chec
 <nextSibling interface="Node"  var="node" obj="node"/>
 <assertNull actual="node" id="TenthIsNull"/>
 </if>
-</test> 
- 
- 
+</test>
+
+

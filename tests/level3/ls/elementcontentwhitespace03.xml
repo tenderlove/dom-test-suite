@@ -16,44 +16,45 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="validate08">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="elementcontentwhitespace03">
 <metadata>
-<title>validate08</title>
+<title>elementcontentwhitespace03</title>
 <creator>Curt Arnold</creator>
 <description>
-Load a document with a DTD that doesn't match content, then attempt to serialize when validate is true which
-should result in a SERIALIZE_ERR.
+Serialize a document when element-content-whitespace is false, element content whitespace should be eliminated. 
 </description>
 <date qualifier="created">2004-04-01</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-validate"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="domConfig" type="DOMConfiguration"/>
+<var name="serializerDomConfig" type="DOMConfiguration"/>
 <var name="domImplLS" type="DOMImplementationLS"/>
 <var name="lsParser" type="LSParser"/>
 <var name="nullSchemaType" type="DOMString" isNull="true"/>
 <var name="resourceURI" type="DOMString"/>
 <var name="lsSerializer" type="LSSerializer"/>
 <var name="output" type="DOMString"/>
-<var name="canSet" type="boolean"/>
+<var name="canSetValidate" type="boolean"/>
+<var name="canSetWhitespace" type="boolean"/>
 <implementation var="domImplLS"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<canSetParameter var="canSet" obj="domConfig" name='"validate"' value="true"/>
-<if><isTrue value="canSet"/>
+<canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
+<createLSSerializer var="lsSerializer" obj="domImplLS"/>
+<domConfig var="serializerDomConfig" obj="lsSerializer" interface="LSSerializer"/>
+<canSetParameter var="canSetWhitespace" obj="serializerDomConfig" name='"element-content-whitespace"' value="false"/>
+<if><and><isTrue value="canSetValidate"/><isTrue value="canSetWhitespace"/></and>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
 	<createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 	<domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
 	<setParameter obj="domConfig" name='"validate"' value="false"/>
-	<getResourceURI var="resourceURI" href='"validate1"' contentType="text/xml"/>
+	<getResourceURI var="resourceURI" href='"test3"' contentType="text/xml"/>
 	<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
-	<assertLSException id="throw_SERIALIZE_ERR">
-		<SERIALIZE_ERR>
-			<writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
-		</SERIALIZE_ERR>
-	</assertLSException>
+	<setParameter obj="serializerDomConfig" name='"element-content-whitespace"' value="false"/>
+	<writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
+	<assertTrue id="noWhitespace"><contains obj="output" str='"&lt;elt0&gt;&lt;elt1&gt;"' interface="DOMString"/></assertTrue>
 </if>
 </test> 
  

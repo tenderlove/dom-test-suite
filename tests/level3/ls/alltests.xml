@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!-- 
- Copyright (c) 2003 X-Hive Corporation
+ Copyright (c) 2003-2004 X-Hive Corporation
 
  All Rights Reserved. This work is distributed under the W3C(r)
  Software License [1] in the hope that it will be useful, but WITHOUT
@@ -56,6 +56,8 @@
    <suite.member href="DOMWriterTest4.xml"/>
    <suite.member href="DOMWriterTest5.xml"/>
    <suite.member href="DOMWriterTest6.xml"/>
+
+   <suite.member href="encoding01.xml"/>
    <suite.member href="GetFeature1.xml"/>
    <suite.member href="GetFeature2.xml"/>
    <suite.member href="HasFeature01.xml"/>
@@ -138,6 +140,7 @@
    
    <suite.member href="elementcontentwhitespace01.xml"/>
    <suite.member href="elementcontentwhitespace02.xml"/>
+   <suite.member href="elementcontentwhitespace03.xml"/>
    <suite.member href="entities01.xml"/>
    <suite.member href="entities02.xml"/>
    <suite.member href="entities03.xml"/>

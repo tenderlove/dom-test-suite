@@ -24,7 +24,8 @@
     an XML file with an unsupported media type from an HTTP server
     on the local machine is retrieved.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
+    <subject resource="&spec;#LS-LSParser-parseURI"/>
+    <subject resource="&spec;#parameter-supported-media-types-only"/>
   </metadata>
 
 

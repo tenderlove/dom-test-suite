@@ -26,9 +26,8 @@
     This test attempts to redirect any resource and then checks that the
     requested document was not affected.</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-LSParser-parseURI"/>
-    <subject resource="&spec;#LS-LSResourceResolver"/>
-    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-property"/>
+    <subject resource="&spec;#LS-LSResourceResolver-resolveResource"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#parameter-resource-resolver"/>
   </metadata>
 
   <var name="resourceURI" type="DOMString"/>

@@ -25,7 +25,7 @@ Load a document with namespace-declarations = false and see that attributes
 for namespace declarations are not present.
 </description>
 <date qualifier="created">2004-03-29</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations"/>
 </metadata>
 <var name="doc" type="Document"/>

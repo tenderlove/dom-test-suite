@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 Serialize a document with schema validation but no available schema.
 </description>
 <date qualifier="created">2004-03-29</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-schema-type"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-validate"/>
 </metadata>

@@ -2,14 +2,14 @@
 
 <!--
 
-Copyright (c) 2004 World Wide Web Consortium, 
+Copyright (c) 2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
+Recherche en Informatique et en Automatique, Keio University).  All
 Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
+Intellectual Property License.  This program is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
 
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
@@ -21,11 +21,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>datatypenormalization17</title>
 <creator>Curt Arnold</creator>
 <description>
-Parse document with datatype-normalization set to false.  
+Parse document with datatype-normalization set to false.
 Check if string values were not normalized per an explicit whitespace=collapse.
 </description>
 <date qualifier="created">2004-03-29</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization"/>
 </metadata>
 <var name="doc" type="Document"/>
@@ -46,31 +46,31 @@ Check if string values were not normalized per an explicit whitespace=collapse.
 <implementation var="domImplLS"/>
 <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="xsdNS"/>
 <if><isNull obj="lsParser"/>
-	<createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
+        <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 </if>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
 
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
 <if><isTrue value="canSetValidate"/>
-	<setParameter obj="domConfig" name='"validate"' value="true"/>
+        <setParameter obj="domConfig" name='"validate"' value="true"/>
 </if>
 <canSetParameter var="canSetXMLSchema" obj="domConfig"  name='"schema-type"' value="xsdNS"/>
 <if><isTrue value="canSetXMLSchema"/>
-	<setParameter obj="domConfig"  name='"schema-type"' value="xsdNS"/>
+        <setParameter obj="domConfig"  name='"schema-type"' value="xsdNS"/>
 </if>
 <setParameter obj="domConfig" name='"datatype-normalization"' value="false"/>
 <getResourceURI var="resourceURI" href='"datatype_normalization2"' contentType="text/xml"/>
 <parseURI var="doc" obj="lsParser" uri="resourceURI"/>
-<getElementsByTagNameNS 
-		var="elemList" 
-		obj="doc" 
-		namespaceURI='"http://www.w3.org/1999/xhtml"' 
-		localName='"code"' 
-		interface="Document"/>
+<getElementsByTagNameNS
+                var="elemList"
+                obj="doc"
+                namespaceURI='"http://www.w3.org/1999/xhtml"'
+                localName='"code"'
+                interface="Document"/>
 <item var="element" obj="elemList" interface="NodeList" index="1"/>
 <firstChild var="childNode" obj="element" interface="Node"/>
 <nodeValue var="childValue" obj="childNode"/>
 <assertEquals actual="childValue" expected='"EMP  0001"' ignoreCase="false" id="content2"/>
-</test> 
- 
- 
+</test>
+
+

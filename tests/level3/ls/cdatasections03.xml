@@ -2,14 +2,14 @@
 
 <!--
 
-Copyright (c) 2004 World Wide Web Consortium, 
+Copyright (c) 2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
+Recherche en Informatique et en Automatique, Keio University).  All
 Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
+Intellectual Property License.  This program is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
 
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 CDATASections should be preserved when cdata-sections is true.
 </description>
 <date qualifier="created">2004-03-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSSerializer-writeToString"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
 </metadata>
 <var name="doc" type="Document"/>
@@ -38,8 +38,8 @@ CDATASections should be preserved when cdata-sections is true.
 <var name="retNode" type="Node"/>
 <implementation var="domImplLS"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
-<createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
-	qualifiedName='"test"' doctype="docType"/>
+<createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"'
+        qualifiedName='"test"' doctype="docType"/>
 <documentElement var="docElem" obj="doc"/>
 <createCDATASection var="newNode" obj="doc" data='"foo"'/>
 <appendChild var="retNode" obj="docElem" newChild="newNode"/>
@@ -47,6 +47,6 @@ CDATASections should be preserved when cdata-sections is true.
 <setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
 <assertTrue id="containsCDATA"><contains obj="output" str='"![CDATA[foo]]"' interface="DOMString"/></assertTrue>
-</test> 
- 
- 
+</test>
+
+

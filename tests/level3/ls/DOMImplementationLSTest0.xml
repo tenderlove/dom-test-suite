@@ -25,6 +25,9 @@
     <description>Uses DOMImplementationLS.createLSParser to create a synchronous parser with an unspecified schema type.</description> 
     &contributor; &date;
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-async"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-busy"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-filter"/>
   </metadata>
   <var name="isAsync" type="boolean"/>
   <var name="isBusy" type="boolean"/>
