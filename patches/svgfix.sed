@@ -11,3 +11,6 @@ s\</p>\\
 s\class=noxref\\
 s\sequence.</P></LI></OL>\sequence.</P></OL>\
 s\standards.</P></LI></UL></BLOCKQUOTE></LI></UL>\standards.</P></UL></BLOCKQUOTE></UL>\
+s\<pre>\\
+s\<pre .*>\\
+s\</pre>\\
