@@ -25,11 +25,11 @@
       "createExpression(expression, resolver)".
       
       Retrieve the DOM document on which the
-      'createExpression("12", null)' method is
+      'createExpression("12a", null)' method is
       invoked with the document element.  The method should fail to create
       pre-compiled expression and throws
       XPathException.INVALID_EXPRESSION_ERR
-      since "12" is not an XPath expression.
+      since "12a" is not an XPath expression.
     </description>
     <date qualifier="created">2002-04-26</date>
     <subject resource="&spec;#XPathEvaluator-createExpression"/>
@@ -43,7 +43,7 @@
   <assertXPathException id="throw_INVALID_EXPRESSION_ERR">
     <INVALID_EXPRESSION_ERR>
       <createExpression obj='xpEvaluator' var='exp'
-	expression='&quot;12&quot;' resolver='nullNSResolver' />
+	expression='&quot;12a&quot;' resolver='nullNSResolver' />
     </INVALID_EXPRESSION_ERR>
   </assertXPathException>
 
