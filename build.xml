@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.126  2004-02-15 02:53:30  dom-ts-4
+Revision 1.127  2004-02-21 04:09:20  dom-ts-4
+Adds a fake version of xhtml1-strict.dtd that the beta XDK 10  can read (bug 533)
+
+Revision 1.126  2004/02/15 02:53:30  dom-ts-4
 Additional typeinfo tests, fix for schemaValidating implementation attribute (bug524)
 
 Revision 1.125  2004/02/10 21:33:53  dom-ts-4
@@ -552,11 +555,25 @@ All implementation conditions combined into implementationAttribute element
 		 excludes="*.bak">
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
 		<fileset dir="java" includes="org/w3c/domts/*.java"/>
-        <fileset dir="${lib.dir}/xhtml1-dtd"/>
         <fileset dir="java" includes="org/**/*.java"/>
 	</jar>
 </target>
 
+<target name="html-jar">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="jarfile" value="dom${level}-${module}.jar"/>
+	<jar jarfile="${build.dir}/${jarfile}"  
+		 manifest="java/dom${level}-${module}.mf"
+		 basedir="${java.build.dir}"
+		 includes="org/w3c/domts/* org/w3c/domts/level${level}/${module}/* org/w3c/dom/* org/w3c/dom/${module}/*"
+		 excludes="*.bak">
+		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
+		<fileset dir="java" includes="org/w3c/domts/*.java"/>
+        <fileset dir="java" includes="org/**/*.java"/>
+        <fileset dir="${lib.dir}/xhtml1-dtd"/>
+	</jar>
+</target>
 
 
 <target name="checkstyle-available">
@@ -856,7 +873,7 @@ All implementation conditions combined into implementationAttribute element
 	</antcall>
 </target>
 
-<target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
+<target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="1"/>
     	<param name="module" value="core"/>
@@ -879,11 +896,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom1-core-validate-files" depends="get-xhtml1-dtd">
-    <copy todir="${tests.dir}/level1/core/files">
-		<fileset dir="${lib.dir}/xhtml1-dtd"/>
-    </copy>
-
+<target name="dom1-core-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.*"/>  
@@ -1105,7 +1118,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="dom1-html-jar" depends="dom1-html-javac,dom1-html-validate-files">
-	<antcall target="jar">
+	<antcall target="html-jar">
 		<param name="level" value="1"/>
 		<param name="module" value="html"/>
 	</antcall>
@@ -1397,11 +1410,7 @@ All implementation conditions combined into implementationAttribute element
     </style>
 </target>
 
-<target name="dom2-core-validate-files" depends="get-xhtml1-dtd">
-    <copy todir="${tests.dir}/level2/core/files">
-		<fileset dir="${lib.dir}/xhtml1-dtd"/>
-    </copy>
-
+<target name="dom2-core-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/core/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
@@ -1604,7 +1613,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="dom2-html-jar" depends="dom2-html-javac,dom2-html-validate-files">
-	<antcall target="jar">
+	<antcall target="html-jar">
 		<param name="level" value="2"/>
 		<param name="module" value="html"/>
 	</antcall>
@@ -1660,11 +1669,7 @@ All implementation conditions combined into implementationAttribute element
 
 <!--   DOM Level 2 Events   -->
 
-<target name="dom2-events-validate-files" depends="get-xhtml1-dtd">
-    <copy todir="${tests.dir}/level2/events/files">
-		<fileset dir="${lib.dir}/xhtml1-dtd"/>
-    </copy>
-    
+<target name="dom2-events-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/events/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
@@ -1731,7 +1736,7 @@ All implementation conditions combined into implementationAttribute element
 	</antcall>
 </target>
 
-<target name="dom2-events-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
+<target name="dom2-events-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="2"/>
     	<param name="module" value="events"/>
@@ -1880,7 +1885,7 @@ All implementation conditions combined into implementationAttribute element
 	
 	
 
-<target name="dom3-init" depends="init,get-dom3,get-xhtml1-dtd, dom2-traversal-init">
+<target name="dom3-init" depends="init,get-dom3,dom2-traversal-init">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-3"/>
 
@@ -2030,11 +2035,7 @@ All implementation conditions combined into implementationAttribute element
 	</antcall>
 </target>
 
-<target name="dom3-core-validate-files" depends="get-xhtml1-dtd">
-    <copy todir="${tests.dir}/level3/core/files">
-		<fileset dir="${lib.dir}/xhtml1-dtd"/>
-    </copy>
-
+<target name="dom3-core-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="no"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* datatype_normalization.*"/>  
@@ -2335,7 +2336,7 @@ All implementation conditions combined into implementationAttribute element
     </javac>
 </target>
 
-<target name="dom3-events-jar" depends="dom3-events-javac,get-xhtml1-dtd">
+<target name="dom3-events-jar" depends="dom3-events-javac">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="events"/>
@@ -2447,7 +2448,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-ls-jar" depends="dom3-ls-javac,get-xhtml1-dtd">
+<target name="dom3-ls-jar" depends="dom3-ls-javac">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="ls"/>
@@ -2628,7 +2629,7 @@ All implementation conditions combined into implementationAttribute element
     </javac>
 </target>
 
-<target name="dom3-xpath-jar" depends="dom3-xpath-javac,get-xhtml1-dtd">
+<target name="dom3-xpath-jar" depends="dom3-xpath-javac">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="xpath"/>
@@ -2738,7 +2739,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="dom3-val-jar" depends="dom3-val-javac,get-xhtml1-dtd">
+<target name="dom3-val-jar" depends="dom3-val-javac">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="validation"/>
