@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodegettextcontent07">
+<metadata>
+<title>nodegettextcontent07</title>
+<creator>IBM</creator>
+<description>
+	The method getTextContent returns the text content of this node and its descendants.
+	
+	Invoke the method getTextContent on a new Attr node and check if the value returned 
+	is the attributes Value.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-textContent"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elemList" type="NodeList"/>
+<var name="elem" type="Element"/>
+<var name="attr" type="Attr"/>
+<var name="textContent" type="DOMString"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
+<item var="elem" obj="elemList" index="3" interface="NodeList"/>
+<setAttributeNS obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"' value='"NA"'/>
+<getAttributeNodeNS var="attr" obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' localName='"attr"'/>
+<textContent var="textContent" obj="attr"/>
+<assertEquals  actual="textContent" expected='"NA"' id="nodegettextcontent07" ignoreCase="false"/>
+</test>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="documentnormalizedocument03">
+<metadata>
+<title>documentnormalizedocument03</title>
+<creator>IBM</creator>
+<description>
+	The normalizeDocument method method acts as if the document was going through a save 
+	and load cycle, putting the document in a "normal" form. 
+
+	Create an Element and a CDATASection node and verify the nodeName of this node and append these to
+	this Document.  Invoke the setNormalizationFeature method on this document to set the 
+	"cdata-sections"  feature to false.  Invoke the normalizeDocume method and verify if 
+	the CDATASection node has been transformed to a Text node.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/2003/10/CR-DOM-Level-3-Core-20031010/core.html#Document3-normalizeDocument"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elem" type="Element"/>
+<var name="newCdata" type="CDATASection"/>
+<var name="cdata" type="CDATASection"/>
+<var name="text" type="Text"/>
+<var name="nodeName" type="DOMString"/>
+<var name="appendedChild" type="Node"/>
+<var name="domConfig" type="DOMConfiguration"/>
+<!--
+<var name="nullUserData" type="DOMUserData" isNull="true"/>
+-->
+<load var="doc" href="staffNS" willBeModified="false"/>
+<createElement var="elem" obj="doc" tagName='"newElem"'/>
+<createCDATASection var="newCdata" obj="doc" data='"CDATA"'/>
+<appendChild obj="elem" var="appendedChild" newChild="newCdata"/>
+<appendChild obj="doc" var="appendedChild" newChild="elem"/>
+<firstChild var="cdata" obj="elem" interface="Node"/>
+<nodeName var="nodeName" obj="cdata"/>
+<assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument03" ignoreCase="false"/>
+<domConfig obj="doc" var="domConfig" interface="Document"/>
+<setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
+<normalizeDocument obj="doc"/>
+<firstChild var="cdata" obj="elem" interface="Node"/>
+<nodeName var="nodeName" obj="cdata"/>
+<assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument03_true" ignoreCase="false"/>
+<setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
+<normalizeDocument obj="doc"/>
+<firstChild var="text" obj="elem" interface="Node"/>
+<nodeName var="nodeName" obj="text"/>
+<assertEquals actual="nodeName" expected='"#text"' id="documentnormalizedocument03_false" ignoreCase="false"/>
+</test> 
+ 

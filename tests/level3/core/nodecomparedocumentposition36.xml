@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodecomparedocumentposition36">
+<metadata>
+<title>nodecomparedocumentposition36</title>
+<creator>IBM</creator>
+<description>
+	The method compareDocumentPosition compares a node with this node with regard to their position
+	in the document and according to the document order. 
+	
+	Using compareDocumentPosition to check if the document position of an Attribute compared with
+	the element that follows its parent as a parameter is FOLLOWING, and is PRECEDING
+	vice versa.
+</description>
+<contributor>Jenny Hsu</contributor>
+<date qualifier="created">2003-02-21</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elemList" type="NodeList"/>
+<var name="elem" type="Element"/>
+<var name="elemListFollows" type="NodeList"/>
+<var name="elemFollows" type="Element"/>
+<var name="attr" type="Attr"/>
+<var name="attrPosition" type="int"/>
+<var name="elemFollowsPosition" type="int"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
+<item var="elem" obj="elemList" index="3" interface="NodeList"/>
+<getAttributeNode var="attr" obj="elem" name='"defaultAttr"'/>
+<getElementsByTagNameNS var="elemListFollows" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
+<item var="elemFollows" obj="elemListFollows" index="3" interface="NodeList"/>
+<compareDocumentPosition var="attrPosition" obj="attr" other="elemFollows"/>
+<assertEquals  actual="attrPosition" expected="4" id="nodecomparedocumentpositionFollowing36" ignoreCase="false"/>
+<compareDocumentPosition var="elemFollowsPosition" obj="elemFollows" other="attr"/>
+<assertEquals  actual="elemFollowsPosition" expected="2" id="nodecomparedocumentpositionPreceding36" ignoreCase="false"/>
+</test>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodeisequalnode15">
+<metadata>
+<title>nodeisequalnode15</title>
+<creator>IBM</creator>
+<description>
+	The method isEqualNode returns whether this node is the same node as the given one.
+	
+	Using isEqualNode check if 2 Attr nodes having the same nodeName and a null namespaceURI 
+	attribute, one created using createAttributeNS and the other retreived from this document
+	are equal.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-isEqualNode"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="attr1" type="Attr"/>
+<var name="attr2" type="Attr"/>
+<var name="addrElement" type="Element"/>
+<var name="elementList" type="NodeList"/>
+<var name="isEqual" type="boolean"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"emp:address"' var="elementList"/>
+<item interface="NodeList" obj="elementList" var="addrElement" index="0" />
+<getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI='"http://www.nist.gov"' localName='"domestic"'/>
+<createAttributeNS var="attr2" obj="doc" namespaceURI='"http://www.nist.gov"' qualifiedName='"emp:domestic"'/>
+<value obj="attr2" value='"Yes"'/>
+<isEqualNode var="isEqual" obj="attr1" arg="attr2"/>
+<assertTrue  actual="isEqual"  id="nodeisequalnode15"/>
+</test>

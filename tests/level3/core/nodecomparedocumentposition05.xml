@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodecomparedocumentposition05">
+<metadata>
+<title>nodecomparedocumentposition05</title>
+<creator>IBM</creator>
+<description>
+	The method compareDocumentPosition compares a node with this node with regard to their position in the 
+	document and according to the document order.
+	
+	Using compareDocumentPosition check if the document position of a Document and a new Document node
+	are disconnected, implementation-specific and preceding/following.
+</description>
+<contributor>Jenny Hsu</contributor>
+<date qualifier="created">2003-02-19</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="newDoc" type="Document"/>
+<var name="domImpl" type="DOMImplementation"/>
+<var name="documentPosition" type="int"/>
+<var name="nullDocType" type="DocumentType" isNull="true"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<implementation var="domImpl" obj="doc"/>
+<createDocument var="newDoc" obj="domImpl" qualifiedName='"dom3:doc"' namespaceURI='"http://www.w3.org/DOM/Test"' doctype="nullDocType"/>
+<compareDocumentPosition var="documentPosition" obj="doc" other="newDoc"/>
+<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentpositionDisconnectedImpSpecPreceding05" ignoreCase="false"/>
+<compareDocumentPosition var="documentPosition" obj="newDoc" other="doc"/>
+<assertEquals  actual="documentPosition" expected="37" id="nodecomparedocumentpositionDisconnectedImpSpecFollowing05" ignoreCase="false"/>
+</test>

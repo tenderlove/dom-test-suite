@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="attrisid03">
+<metadata>
+<title>attrisid03</title>
+<creator>IBM</creator>
+<description>
+	The method isId returns whether this attribute is known to be of type ID or not.
+	
+	Invoke setIdAttribute on the third address element's street attribute and set 
+	isID=false.  Verify by calling isID on the street attribute and getElementById 
+	on document and check if the value returned is false.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2003-03-04</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Attr-isId"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elemList" type="NodeList"/>
+<var name="addressElem" type="Element"/>
+<var name="attributesMap" type="NamedNodeMap"/>
+<var name="attr" type="Attr"/>
+<var name="id" type="boolean" value="false"/>
+<var name="elem" type="Element"/>
+<var name="elemName" type="DOMString"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<item var="addressElem" obj="elemList" index="2" interface="NodeList"/>
+<setAttributeNS obj="addressElem" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:newAttr"' value='"null"'/>
+<setIdAttributeNS obj="addressElem" localName='"newAttr"' namespaceURI='"http://www.w3.org/DOM"' isId="false"/>
+<getAttributeNodeNS var="attr" obj="addressElem" namespaceURI='"http://www.w3.org/DOM"' localName='"newAttr"'/>
+<isId var="id" obj="attr"/>
+<assertFalse actual="id" id="AttrIsIDFalse03"/>
+</test>

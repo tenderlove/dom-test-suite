@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodereplacechild31">
+<metadata>
+<title>nodereplacechild31</title>
+<creator>IBM</creator>
+<description>
+	The method replaceChild replaces the child node oldChild with newChild in the list of 
+	children, and returns the oldChild node.
+
+	Using replaceChild on an Element node that is the replacement Text of an EntityReference
+	node, attempt to replace its Text child node with a new Element node and verify if 
+	a NO_MODIFICATION_ALLOWED_ERR gets thrown.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-replaceChild"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="expandEntityReferences" value="false"/>
+<var name="doc" type="Document"/>
+<var name="childList" type="NodeList"/>
+<var name="oldchildList" type="NodeList"/>
+<var name="elem" type="Element"/>
+<var name="parent" type="Element"/>
+<var name="entRef" type="EntityReference"/>
+<var name="oldChild" type="Text"/>
+<var name="newChild" type="Element"/>
+<var name="replaced" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<item var="elem" obj="childList" index="2" interface="NodeList"/>
+<firstChild var="entRef" obj="elem" interface="Node"/>
+<firstChild var="parent" obj="entRef" interface="Node"/>
+<childNodes var="oldchildList" obj="parent"/>
+<item var="oldChild" obj="oldchildList" index="0" interface="NodeList"/>
+<createElementNS var="newChild" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_nodereplacechild31">
+<NO_MODIFICATION_ALLOWED_ERR>
+<replaceChild obj="parent" var="replaced" oldChild="oldChild" newChild="newChild"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+</test>

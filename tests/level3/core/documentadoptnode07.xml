@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="documentadoptnode07">
+<metadata>
+<title>documentadoptnode07</title>
+<creator>IBM</creator>
+<description>
+	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
+	attached attribute nodes if there are any. If the node has a parent it is first removed 
+	from its parent child list. 
+	Document nodes cannot be adopted and throw a NOT_SUPPORTED_ERR if an attempt is made to do so.
+	
+	Invoke the adoptNode method on this document with the value of the source parameter as itself.  
+	Verify if a NOT_SUPPORTED_ERR is thrown.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-adoptNode"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="adoptedDoc" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<assertDOMException id="NOT_SUPPORTED_ERR_documentadoptnode07">
+<NOT_SUPPORTED_ERR>
+<adoptNode var="adoptedDoc" obj="doc" source="doc"/>
+</NOT_SUPPORTED_ERR>
+</assertDOMException>
+</test>

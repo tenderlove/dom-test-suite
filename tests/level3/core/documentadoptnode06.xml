@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="documentadoptnode06">
+<metadata>
+<title>documentadoptnode06</title>
+<creator>IBM</creator>
+<description>
+	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
+	attached attribute nodes if there are any. If the node has a parent it is first removed 
+	from its parent child list. 
+	If the node is an Attr node, the ownerElement attribute is set to null and the specified 
+	flag is set to true on the adopted Attr. The descendants of the source Attr are recursively 
+	adopted. 
+	
+	Invoke adoptNode on a new document to adopt the a new Attribute node having a Text and an EntityReference 
+	child.  Check if this attribute has been adopted successfully by verifying the nodeName, namespaceURI, prefix, 
+	specified and ownerElement attributes of the adopted node.  Also verify the ownerDocument attribute
+	of the adopted node and the adopted children of the attribute node.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-adoptNode"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="newDoc" type="Document"/>
+<var name="domImpl" type="DOMImplementation"/>
+<var name="newAttr"  type="Attr"/>
+<var name="newText"  type="Text"/>
+<var name="newEntRef"  type="EntityReference"/>
+<var name="adoptedAttr" type="Attr"/>
+<var name="adoptText" type="Text"/>
+<var name="adoptEntRef" type="EntityReference"/>
+<var name="nodeList" type="NodeList"/>
+<var name="nodeName" type="DOMString"/>
+<var name="nodeNamespaceURI" type="DOMString"/>
+<var name="nodePrefix" type="DOMString"/>
+<var name="attrOwnerElem" type="Element"/>
+<var name="isSpecified" type="boolean"/>
+<var name="adoptedTextNodeValue" type="DOMString"/>
+<var name="adoptedEntRefNodeValue" type="DOMString"/>
+<var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="appendedChild" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<implementation var="domImpl" obj="doc"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:l3"' doctype="nullDocType"/>
+<createAttributeNS var="newAttr" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:attr"'/>
+<createTextNode var="newText" obj="doc" data='"Text Node"'/>
+<createEntityReference var="newEntRef" obj="doc" name='"ent1"'/>
+<appendChild obj="newAttr" var="appendedChild" newChild="newText"/>
+<appendChild obj="newAttr" var="appendedChild" newChild="newEntRef"/>
+<adoptNode var="adoptedAttr" obj="newDoc" source="newAttr"/>
+<nodeName var="nodeName" obj="adoptedAttr"/>
+<namespaceURI var="nodeNamespaceURI" obj="adoptedAttr" interface="Node"/>
+<prefix var="nodePrefix"  obj="adoptedAttr"/>
+<ownerElement var="attrOwnerElem" obj="adoptedAttr" interface="Attr"/>
+<specified var="isSpecified"  obj="adoptedAttr" />
+<assertEquals expected='"level3:attr"' actual="nodeName"  id="documentadoptnode06_nodeName" ignoreCase="false"/>
+<assertEquals expected='"http://www.w3.org/DOM/Test"' actual="nodeNamespaceURI"  id="documentadoptnode06_namespaceURI" ignoreCase="false"/>
+<assertEquals expected='"level3"' actual="nodePrefix"  id="documentadoptnode06_prefix" ignoreCase="false"/>
+<assertNull  actual="attrOwnerElem"  id="documentadoptnode06_ownerDoc"/>
+<assertTrue  actual="isSpecified"  id="documentadoptnode06_specified"/>
+<childNodes var="nodeList" obj="adoptedAttr"/>
+<item var="adoptText" obj="nodeList" index="0" interface="NodeList"/>
+<item var="adoptEntRef" obj="nodeList" index="1" interface="NodeList"/>
+<nodeValue var="adoptedTextNodeValue" obj="adoptText"/>
+<nodeName var="adoptedEntRefNodeValue" obj="adoptEntRef"/>
+<assertEquals expected='"Text Node"' actual="adoptedTextNodeValue"  id="documentadoptnode06_TextNodeValue" ignoreCase="false"/>
+<assertEquals expected='"ent1"' actual="adoptedEntRefNodeValue"  id="documentadoptnode06_EntRefNodeValue" ignoreCase="false"/>
+</test>

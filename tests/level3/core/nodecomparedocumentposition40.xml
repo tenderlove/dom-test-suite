@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodecomparedocumentposition40">
+<metadata>
+<title>nodecomparedocumentposition40</title>
+<creator>IBM</creator>
+<description>
+	The method compareDocumentPosition compares a node with this node with regard to their position
+	in the document and according to the document order. 
+	
+	Using compareDocumentPosition to check if the document position of the street's attribute 
+	when compared with a new attribute node is implementation_specific
+</description>
+<contributor>Jenny Hsu</contributor>
+<date qualifier="created">2003-02-21</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elemList" type="NodeList"/>
+<var name="elem" type="Element"/>
+<var name="attr1" type="Attr"/>
+<var name="attr2" type="Attr"/>
+<var name="attrPosition" type="int"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<item var="elem" obj="elemList" index="3" interface="NodeList"/>
+<getAttributeNode var="attr1" obj="elem" name='"street"'/>
+<setAttributeNS obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:att"' value='"blah"'/>
+<getAttributeNode var="attr2" obj="elem" name='"dom3:att"'/>
+<compareDocumentPosition var="attrPosition" obj="attr1" other="attr2"/>
+<assertEquals  actual="attrPosition" expected="34" id="nodecomparedocumentposition40" ignoreCase="false"/>
+</test>
+ 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodeinsertbefore24">
+<metadata>
+<title>nodeinsertbefore24</title>
+<creator>IBM</creator>
+<description>
+	The method insertBefore inserts the node newChild before the existing child node refChild. 
+	If refChild is null, insert newChild at the end of the list of children.
+	
+	Using insertBefore on an Element node attempt to insert a Comment node before 
+	a CDATASection node that is not a child and verify if a NOT_FOUND_ERR is raised.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-insertBefore"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="expandEntityReferences" value="false"/>
+<var name="doc" type="Document"/>
+<var name="element" type="Element"/>
+<var name="refNode" type="CDATASection"/>
+<var name="newNode" type="Comment"/>
+<var name="childList" type="NodeList"/>
+<var name="inserted" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
+<createCDATASection var="refNode" obj="doc" data='"CDATASection"' />
+<createComment var="newNode" obj="doc" data='"Comment"' />
+<assertDOMException id="NOT_FOUND_ERR_nodeinsertbefore24">
+<NOT_FOUND_ERR>
+<insertBefore obj="element" var="inserted" refChild="refNode" newChild="newNode"/>
+</NOT_FOUND_ERR>
+</assertDOMException>
+</test>

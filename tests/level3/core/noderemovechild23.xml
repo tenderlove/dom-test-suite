@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="noderemovechild23">
+<metadata>
+<title>noderemovechild23</title>
+<creator>IBM</creator>
+<description>
+	The method removeChild removes the child node indicated by oldChild from the list 
+	of children, and returns it. 
+
+	Using removeChild on a new Element node attempt to remove a new ProcessingInstruction child 
+	and verify the name of the returned node that was removed.  Now to remove the child 
+	using removeChild on the parent and verify if a NOT_FOUND_ERR is thrown.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-removeChild"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="parent" type="Element"/>
+<var name="child" type="ProcessingInstruction"/>
+<var name="removed" type="ProcessingInstruction"/>
+<var name="removedName" type="DOMString"/>
+<var name="removedNode" type="Node"/>
+<var name="appendedChild" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:parent"'/>
+<createProcessingInstruction var="child" obj="doc" data='"DATA"' target='"TARGET"'/>
+<appendChild obj="parent" var="appendedChild" newChild="child"/>
+<removeChild var="removed" obj="parent" oldChild="child" />
+<target obj="removed" var="removedName" interface="ProcessingInstruction"/>
+<assertEquals actual="removedName" expected='"TARGET"' id="noderemovechild23" ignoreCase="false"/>
+<assertDOMException id="NOT_FOUND_ERR_noderemovechild23">
+<NOT_FOUND_ERR>
+<removeChild obj="parent" var="removedNode" oldChild="child" />
+</NOT_FOUND_ERR>
+</assertDOMException>
+</test>

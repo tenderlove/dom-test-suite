@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodegettextcontent09">
+<metadata>
+<title>nodegettextcontent09</title>
+<creator>IBM</creator>
+<description>
+	The method getTextContent returns the text content of this node and its descendants.
+	
+	Invoke the method getTextContent on a new Text node and check if the value returned 
+	is the text content.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-textContent"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elemList" type="NodeList"/>
+<var name="elem" type="Element"/>
+<var name="txt" type="Text"/>
+<var name="textContent" type="DOMString"/>
+<var name="appendedChild" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:elem"'/>
+<createTextNode var="txt" obj="doc" data='"Replacement Text"' />
+<appendChild obj="elem" var="appendedChild" newChild="txt"/>
+<textContent var="textContent" obj="txt"/>
+<assertEquals  actual="textContent" expected='"Replacement Text"' id="nodegettextcontent09" ignoreCase="false"/>
+</test>

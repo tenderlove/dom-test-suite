@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodecomparedocumentposition28">
+<metadata>
+<title>nodecomparedocumentposition28</title>
+<creator>IBM</creator>
+<description>
+	The method compareDocumentPosition compares a node with this node with regard to their position
+	in the document and according to the document order. 
+	
+	Using compareDocumentPosition check the document position of the EntityReference node ent4's
+	first child and last child.  Invoke compareDocumentPositon on first child with last child as a parameter
+	should return FOLLOWING, and should return PRECEDING vice versa.
+</description>
+<contributor>Jenny Hsu</contributor>
+<date qualifier="created">2003-02-20</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elemList" type="NodeList"/>
+<var name="gender2List" type="NodeList"/>
+<var name="elemName" type="Element"/>
+<var name="entRef" type="EntityReference"/>
+<var name="entRefChild1" type="Element"/>
+<var name="entRefChild2" type="ProcessingInstruction"/>
+<var name="entRefChild1Position" type="int"/>
+<var name="entRefChild2Position" type="int"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<if>
+<implementationAttribute name="expandEntityReferences" value="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<item var="elemName" obj="elemList" index="2" interface="NodeList"/>
+<childNodes obj="elemName" var="gender2List"/>
+<item interface="NodeList" obj="gender2List" var="entRef" index="0"/>
+<else>
+<createEntityReference name='"ent4"' obj="doc" var="entRef"/>
+</else>
+</if>
+<firstChild obj="entRef" var="entRefChild1" interface="Node"/>
+<lastChild obj="entRef" var="entRefChild2" interface="Node"/>
+<compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRefChild2"/>
+<assertEquals  actual="entRefChild1Position" expected="4" id="nodecomparedocumentpositionFollowing28" ignoreCase="false"/>
+<compareDocumentPosition var="entRefChild2Position" obj="entRefChild2" other="entRefChild1"/>
+<assertEquals  actual="entRefChild2Position" expected="2" id="nodecomparedocumentpositionPreceding28" ignoreCase="false"/>
+</test>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="documentadoptnode18">
+<metadata>
+<title>documentadoptnode18</title>
+<creator>IBM</creator>
+<description>
+	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
+	attached attribute nodes if there are any. If the node has a parent it is first removed 
+	from its parent child list. 
+	Entity nodes cannot be adopted and since they are readonly throw a NO_MODIFICATION_ALLOWED_ERR 
+	if an attempt is made to do so.
+	
+	Invoke the adoptNode method on a new document with the entity ent4 as the source.  Since this is 
+	read-only verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-adoptNode"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="newDoc" type="Document"/>
+<var name="domImpl" type="DOMImplementation"/>
+<var name="docType" type="DocumentType"/>
+<var name="entityMap" type="NamedNodeMap"/>
+<var name="ent" type="Entity"/>
+<var name="adoptedEnt" type="Node"/>
+<var name="nullDocType" type="DocumentType" isNull="true"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<implementation var="domImpl" obj="doc"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:doc"' doctype="nullDocType"/>
+<doctype var="docType" obj="doc"/>
+<entities var="entityMap" obj="docType"/>
+<getNamedItem var="ent" obj="entityMap" name='"ent4"'/>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_documentadoptnode18">
+<NO_MODIFICATION_ALLOWED_ERR>
+<adoptNode var="adoptedEnt" obj="newDoc" source="ent"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+</test>

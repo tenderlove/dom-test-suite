@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="documentadoptnode14">
+<metadata>
+<title>documentadoptnode14</title>
+<creator>IBM</creator>
+<description>
+	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
+	attached attribute nodes if there are any. If the node has a parent it is first removed 
+	from its parent child list. 
+	If the node is an DocumentFragment node, its descendants are recursively adopted.
+	
+	Using the method adoptNode in a new Document, adopt a newly created DocumentFragment node populated with
+	with the first address element of this Document as its newChild.  Since the decendants of a documentFragment
+	are recursively adopted, check if the adopted node has children.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-adoptNode"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="newDoc" type="Document"/>
+<var name="docElem" type="Element"/>
+<var name="domImpl" type="DOMImplementation"/>
+<var name="docFragment" type="DocumentFragment"/>
+<var name="childList" type="NodeList"/>
+<var name="success" type="boolean"/>
+<var name="addressNode" type="Node"/>
+<var name="adoptedDocFrag" type="Node"/>
+<var name="appendedChild" type="Node"/>
+<var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="imported" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<implementation var="domImpl" obj="doc"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:doc"' doctype="nullDocType"/>
+<createDocumentFragment var="docFragment" obj="newDoc"/>
+<importNode obj="newDoc" var="imported" importedNode="docElem" deep="true"/>
+<documentElement var="docElem" obj="newDoc"/>
+<appendChild obj="docElem" var="appendedChild" newChild="imported"/>
+<getElementsByTagNameNS var="childList" obj="newDoc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<item var="addressNode" obj="childList" index="0" interface="NodeList"/>
+<appendChild obj="docFragment" var="appendedChild" newChild="addressNode"/>
+<adoptNode var="adoptedDocFrag" obj="newDoc" source="docFragment"/>
+<hasChildNodes var="success" obj="adoptedDocFrag"/>
+<assertTrue actual="success" id="documentadoptnode14"/>
+</test>

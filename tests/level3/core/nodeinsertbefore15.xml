@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodeinsertbefore15">
+<metadata>
+<title>nodeinsertbefore15</title>
+<creator>IBM</creator>
+<description>
+	The method insertBefore inserts the node newChild before the existing child node refChild. 
+	If refChild is null, insert newChild at the end of the list of children.
+	A NO_MODIFICATION_ALLOWED_ERR is raised if the node is read-only.
+	
+	Using insertBefore on a new EntityReference node attempt to insert Element, Text,
+	Comment, ProcessingInstruction and CDATASection nodes before an element child
+	and verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-insertBefore"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="expandEntityReferences" value="false"/>
+<var name="doc" type="Document"/>
+<var name="entRef" type="EntityReference"/>
+<var name="elemChild" type="Element"/>
+<var name="txt" type="Text"/>
+<var name="elem" type="Element"/>
+<var name="comment" type="Comment"/>
+<var name="pi" type="ProcessingInstruction"/>
+<var name="cdata" type="CDATASection"/>
+<var name="inserted" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
+<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+<createTextNode var="txt" obj="doc" data='"Text"'/>
+<createComment var="comment" obj="doc" data='"Comment"'/>
+<createCDATASection var="cdata" obj="doc" data='"CDATASection"'/>
+<createProcessingInstruction var="pi" obj="doc" target='"target"' data='"data"'/>
+<firstChild obj="entRef" var="elemChild" interface="Node"/>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR1_nodeinsertbefore15">
+<NO_MODIFICATION_ALLOWED_ERR>
+<insertBefore obj="entRef" var="inserted" refChild="elemChild" newChild="cdata"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR2_nodeinsertbefore15">
+<NO_MODIFICATION_ALLOWED_ERR>
+<insertBefore obj="entRef" var="inserted" refChild="elemChild" newChild="pi"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR3_nodeinsertbefore15">
+<NO_MODIFICATION_ALLOWED_ERR>
+<insertBefore obj="entRef" var="inserted" refChild="elemChild" newChild="comment"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR4_nodeinsertbefore15">
+<NO_MODIFICATION_ALLOWED_ERR>
+<insertBefore obj="entRef" var="inserted" refChild="elemChild" newChild="txt"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR5_nodeinsertbefore15">
+<NO_MODIFICATION_ALLOWED_ERR>
+<insertBefore obj="entRef" var="inserted" refChild="elemChild" newChild="elem"/>
+</NO_MODIFICATION_ALLOWED_ERR>
+</assertDOMException>
+</test>

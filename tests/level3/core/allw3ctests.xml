@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+-->
+<!DOCTYPE suite SYSTEM "dom3.dtd">
+
+<suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="allw3ctests">
+
+	<!-- DOMImplementation tests -->
+    <suite.member href="domimplementationgetfeature01.xml"/>
+    <suite.member href="domimplementationgetfeature02.xml"/>
+    <suite.member href="domimplementationgetfeature03.xml"/>
+    <suite.member href="domimplementationgetfeature05.xml"/> 
+    <suite.member href="domimplementationgetfeature06.xml"/>	
+
+	<!-- Document tests -->
+	<!-- xml(Encoding|Version|Standalone), inputEncoding -->
+	<suite.member href="documentgetxmlencoding01.xml"/>
+	<suite.member href="documentgetxmlencoding02.xml"/>
+	<suite.member href="documentgetxmlencoding03.xml"/>
+	<suite.member href="documentgetxmlencoding04.xml"/>
+	<suite.member href="documentgetxmlencoding05.xml"/>
+
+	<suite.member href="documentgetxmlversion01.xml"/>
+	<suite.member href="documentgetxmlversion02.xml"/>
+	<suite.member href="documentgetxmlversion03.xml"/>
+
+	<suite.member href="documentsetxmlversion01.xml"/>
+	<suite.member href="documentsetxmlversion02.xml"/>
+	<suite.member href="documentsetxmlversion03.xml"/>	
+	<suite.member href="documentsetxmlversion04.xml"/>	
+	<suite.member href="documentsetxmlversion05.xml"/>	
+			
+	<suite.member href="documentgetxmlstandalone01.xml"/>
+	<suite.member href="documentgetxmlstandalone02.xml"/>
+	<suite.member href="documentgetxmlstandalone03.xml"/>
+	<suite.member href="documentgetxmlstandalone04.xml"/>
+	<suite.member href="documentgetxmlstandalone05.xml"/>
+	<suite.member href="documentsetxmlstandalone01.xml"/>
+	<suite.member href="documentsetxmlstandalone02.xml"/>
+
+	<suite.member href="documentgetinputencoding01.xml"/>
+	<suite.member href="documentgetinputencoding02.xml"/>
+	<suite.member href="documentgetinputencoding03.xml"/>
+	<suite.member href="documentgetinputencoding04.xml"/>
+	
+	<!-- doctype -->	
+    <suite.member href="documentgetdoctype01.xml"/>
+	
+	<!-- strictErrorChecking -->	
+	<suite.member href="documentgetstricterrorchecking01.xml"/>
+	<suite.member href="documentgetstricterrorchecking02.xml"/>
+	<suite.member href="documentsetstricterrorchecking01.xml"/>
+	<suite.member href="documentsetstricterrorchecking02.xml"/>
+	<suite.member href="documentsetstricterrorchecking03.xml"/>	
+	
+	<!-- documentURI -->
+	<suite.member href="documentgetdocumenturi01.xml"/>
+	<suite.member href="documentgetdocumenturi02.xml"/>
+	<suite.member href="documentgetdocumenturi03.xml"/>
+	<suite.member href="documentsetdocumenturi01.xml"/>
+	<suite.member href="documentsetdocumenturi02.xml"/>
+	<suite.member href="documentsetdocumenturi03.xml"/>
+
+	<!-- domConfig: see DOMConfiguration tests -->
+	
+	<!-- adoptNode -->
+    <suite.member href="documentadoptnode01.xml"/>
+    <suite.member href="documentadoptnode02.xml"/>
+    <suite.member href="documentadoptnode03.xml"/>
+    <suite.member href="documentadoptnode04.xml"/>
+    <suite.member href="documentadoptnode05.xml"/>
+	<suite.member href="documentadoptnode06.xml"/>
+	<suite.member href="documentadoptnode07.xml"/>
+	<suite.member href="documentadoptnode08.xml"/>
+	<suite.member href="documentadoptnode09.xml"/>
+	<suite.member href="documentadoptnode10.xml"/>
+	<suite.member href="documentadoptnode11.xml"/>
+	<suite.member href="documentadoptnode12.xml"/>
+	<suite.member href="documentadoptnode13.xml"/>
+	<suite.member href="documentadoptnode14.xml"/> 
+	<suite.member href="documentadoptnode15.xml"/>
+	<suite.member href="documentadoptnode16.xml"/>
+	<suite.member href="documentadoptnode17.xml"/>
+	<suite.member href="documentadoptnode18.xml"/>
+	<suite.member href="documentadoptnode19.xml"/>
+	<suite.member href="documentadoptnode20.xml"/>
+	<suite.member href="documentadoptnode22.xml"/>
+	<suite.member href="documentadoptnode23.xml"/>	  
+	<suite.member href="documentadoptnode25.xml"/>
+	<suite.member href="documentadoptnode26.xml"/> 
+	<suite.member href="documentadoptnode27.xml"/>
+	<suite.member href="documentadoptnode28.xml"/>
+	<suite.member href="documentadoptnode30.xml"/>
+	<suite.member href="documentadoptnode31.xml"/>
+	<suite.member href="documentadoptnode32.xml"/>	  
+	<suite.member href="documentadoptnode33.xml"/>
+	<suite.member href="documentadoptnode34.xml"/>
+	<suite.member href="documentadoptnode35.xml"/>
+	<suite.member href="documentadoptnode36.xml"/>
+	
+	<!-- normalizeDocument -->
+	<suite.member href="documentnormalizedocument01.xml"/>
+	<suite.member href="documentnormalizedocument02.xml"/>
+	<suite.member href="documentnormalizedocument03.xml"/>	
+	<suite.member href="documentnormalizedocument04.xml"/>	
+	<!-- need to add more tests here -->
+	
+	<!-- rename Node -->
+	<suite.member href="documentrenamenode01.xml"/>
+	<suite.member href="documentrenamenode02.xml"/>
+	<suite.member href="documentrenamenode03.xml"/>
+	<suite.member href="documentrenamenode04.xml"/>
+	<suite.member href="documentrenamenode05.xml"/>
+	<suite.member href="documentrenamenode06.xml"/>
+	<suite.member href="documentrenamenode07.xml"/>
+	<suite.member href="documentrenamenode08.xml"/>
+	<suite.member href="documentrenamenode15.xml"/>
+	<suite.member href="documentrenamenode16.xml"/>
+	<suite.member href="documentrenamenode17.xml"/>
+	<suite.member href="documentrenamenode18.xml"/>
+	<suite.member href="documentrenamenode20.xml"/>
+	<suite.member href="documentrenamenode21.xml"/>
+	<suite.member href="documentrenamenode22.xml"/>
+	<suite.member href="documentrenamenode25.xml"/>
+	<suite.member href="documentrenamenode26.xml"/>
+	<suite.member href="documentrenamenode27.xml"/>
+	<suite.member href="documentrenamenode28.xml"/>
+	<suite.member href="documentrenamenode29.xml"/>
+	
+
+	<!-- Node Tests -->	
+	<!-- insetBefore -->
+	<suite.member href="nodeinsertbefore01.xml"/>
+	<suite.member href="nodeinsertbefore02.xml"/>
+	<suite.member href="nodeinsertbefore03.xml"/>
+	<suite.member href="nodeinsertbefore04.xml"/>
+	<suite.member href="nodeinsertbefore05.xml"/>
+	<suite.member href="nodeinsertbefore06.xml"/>
+	<suite.member href="nodeinsertbefore07.xml"/>
+	<suite.member href="nodeinsertbefore08.xml"/>
+	<suite.member href="nodeinsertbefore10.xml"/>
+	<suite.member href="nodeinsertbefore11.xml"/>
+	<suite.member href="nodeinsertbefore13.xml"/>
+	<suite.member href="nodeinsertbefore15.xml"/>
+	<suite.member href="nodeinsertbefore16.xml"/>
+	<suite.member href="nodeinsertbefore19.xml"/>	
+	<suite.member href="nodeinsertbefore20.xml"/>
+	<suite.member href="nodeinsertbefore21.xml"/>
+	<suite.member href="nodeinsertbefore22.xml"/>
+	<suite.member href="nodeinsertbefore23.xml"/>
+	<suite.member href="nodeinsertbefore24.xml"/>
+	<suite.member href="nodeinsertbefore25.xml"/>
+
+	<!-- replaceChild -->
+	<suite.member href="nodereplacechild06.xml"/>
+	<suite.member href="nodereplacechild07.xml"/>
+	<suite.member href="nodereplacechild08.xml"/>
+	<suite.member href="nodereplacechild12.xml"/>
+	<suite.member href="nodereplacechild13.xml"/>
+	<suite.member href="nodereplacechild15.xml"/>
+	<suite.member href="nodereplacechild16.xml"/>
+	<suite.member href="nodereplacechild17.xml"/>
+	<suite.member href="nodereplacechild18.xml"/>
+	<suite.member href="nodereplacechild19.xml"/>
+	<suite.member href="nodereplacechild20.xml"/>
+	<suite.member href="nodereplacechild22.xml"/>
+	<suite.member href="nodereplacechild23.xml"/>
+	<suite.member href="nodereplacechild24.xml"/>
+	<suite.member href="nodereplacechild25.xml"/>
+	<suite.member href="nodereplacechild26.xml"/>
+	<suite.member href="nodereplacechild28.xml"/>
+	<suite.member href="nodereplacechild29.xml"/>
+	<suite.member href="nodereplacechild30.xml"/>
+	<suite.member href="nodereplacechild31.xml"/>
+	<suite.member href="nodereplacechild33.xml"/>
+	<suite.member href="nodereplacechild34.xml"/>
+	<suite.member href="nodereplacechild35.xml"/>
+	<suite.member href="nodereplacechild36.xml"/>
+	<suite.member href="nodereplacechild37.xml"/>
+	<suite.member href="nodereplacechild38.xml"/>
+	
+	<!-- removeChild -->
+	<suite.member href="noderemovechild01.xml"/>	
+	<suite.member href="noderemovechild02.xml"/>		
+	<suite.member href="noderemovechild03.xml"/>
+	<suite.member href="noderemovechild04.xml"/>
+	<suite.member href="noderemovechild05.xml"/>
+	<suite.member href="noderemovechild07.xml"/>
+	<suite.member href="noderemovechild08.xml"/>
+	<suite.member href="noderemovechild09.xml"/>
+	<suite.member href="noderemovechild10.xml"/>			
+	<suite.member href="noderemovechild11.xml"/>
+	<suite.member href="noderemovechild13.xml"/>
+	<suite.member href="noderemovechild14.xml"/>
+	<suite.member href="noderemovechild15.xml"/>
+	<suite.member href="noderemovechild16.xml"/>
+	<suite.member href="noderemovechild17.xml"/>
+	<suite.member href="noderemovechild18.xml"/>
+	<suite.member href="noderemovechild19.xml"/>				
+	<suite.member href="noderemovechild20.xml"/>	
+	<suite.member href="noderemovechild21.xml"/>	
+	<suite.member href="noderemovechild22.xml"/>
+	<suite.member href="noderemovechild23.xml"/>
+	<suite.member href="noderemovechild24.xml"/>
+	<suite.member href="noderemovechild25.xml"/>
+	<suite.member href="noderemovechild26.xml"/>
+	<suite.member href="noderemovechild28.xml"/>
+	<suite.member href="noderemovechild29.xml"/>
+	<suite.member href="noderemovechild30.xml"/>
+	<suite.member href="noderemovechild31.xml"/>
+
+
+	<!-- baseURI -->
+	<suite.member href="nodegetbaseuri01.xml"/>
+	<suite.member href="nodegetbaseuri02.xml"/>
+	<suite.member href="nodegetbaseuri03.xml"/>
+	<suite.member href="nodegetbaseuri04.xml"/>		
+	<suite.member href="nodegetbaseuri05.xml"/>
+	<suite.member href="nodegetbaseuri06.xml"/>
+	<suite.member href="nodegetbaseuri07.xml"/> 
+	<suite.member href="nodegetbaseuri09.xml"/>
+	<suite.member href="nodegetbaseuri10.xml"/>
+	<suite.member href="nodegetbaseuri11.xml"/>
+	<suite.member href="nodegetbaseuri12.xml"/>
+	<suite.member href="nodegetbaseuri13.xml"/>
+	<suite.member href="nodegetbaseuri14.xml"/>
+
+	<!-- textContent -->
+	<suite.member href="nodegettextcontent01.xml"/>	
+	<suite.member href="nodegettextcontent02.xml"/>	
+	<suite.member href="nodegettextcontent03.xml"/>		
+	<suite.member href="nodegettextcontent04.xml"/>	
+	<suite.member href="nodegettextcontent05.xml"/>	
+	<suite.member href="nodegettextcontent06.xml"/>	
+	<suite.member href="nodegettextcontent07.xml"/>	
+	<suite.member href="nodegettextcontent08.xml"/>
+	<suite.member href="nodegettextcontent09.xml"/>
+	<suite.member href="nodegettextcontent10.xml"/>	
+	<suite.member href="nodegettextcontent11.xml"/>	
+	<suite.member href="nodegettextcontent12.xml"/>	
+	<suite.member href="nodegettextcontent13.xml"/>	
+	<suite.member href="nodegettextcontent14.xml"/>	
+	<suite.member href="nodegettextcontent17.xml"/>
+	<suite.member href="nodegettextcontent18.xml"/>
+					
+	<suite.member href="nodesettextcontent01.xml"/>	
+	<suite.member href="nodesettextcontent03.xml"/>	
+	<suite.member href="nodesettextcontent04.xml"/>		
+	<suite.member href="nodesettextcontent05.xml"/>	
+	<suite.member href="nodesettextcontent06.xml"/>		
+	<suite.member href="nodesettextcontent07.xml"/>	
+	<suite.member href="nodesettextcontent08.xml"/>	
+	<suite.member href="nodesettextcontent11.xml"/>	
+	<suite.member href="nodesettextcontent12.xml"/>	
+	<suite.member href="nodesettextcontent13.xml"/>		
+	
+	<!-- compare document position -->
+	<suite.member href="nodecomparedocumentposition01.xml"/>
+	<suite.member href="nodecomparedocumentposition02.xml"/>
+	<suite.member href="nodecomparedocumentposition03.xml"/>
+	<suite.member href="nodecomparedocumentposition04.xml"/>
+	<suite.member href="nodecomparedocumentposition05.xml"/>		
+	<suite.member href="nodecomparedocumentposition06.xml"/>	
+	<suite.member href="nodecomparedocumentposition07.xml"/>		
+	<suite.member href="nodecomparedocumentposition08.xml"/>	
+	<suite.member href="nodecomparedocumentposition09.xml"/>	
+	<suite.member href="nodecomparedocumentposition10.xml"/>
+	<suite.member href="nodecomparedocumentposition11.xml"/>
+	<suite.member href="nodecomparedocumentposition12.xml"/>
+	<suite.member href="nodecomparedocumentposition13.xml"/>
+	<suite.member href="nodecomparedocumentposition14.xml"/>
+	<suite.member href="nodecomparedocumentposition15.xml"/>
+	<suite.member href="nodecomparedocumentposition16.xml"/>	
+	<suite.member href="nodecomparedocumentposition17.xml"/>
+	<suite.member href="nodecomparedocumentposition18.xml"/>	
+	<suite.member href="nodecomparedocumentposition20.xml"/>
+	<suite.member href="nodecomparedocumentposition21.xml"/>
+	<suite.member href="nodecomparedocumentposition22.xml"/>
+	<suite.member href="nodecomparedocumentposition23.xml"/>
+	<suite.member href="nodecomparedocumentposition24.xml"/>		
+	<suite.member href="nodecomparedocumentposition25.xml"/>	
+	<suite.member href="nodecomparedocumentposition26.xml"/>		
+	<suite.member href="nodecomparedocumentposition27.xml"/>	
+	<suite.member href="nodecomparedocumentposition28.xml"/>
+	<suite.member href="nodecomparedocumentposition29.xml"/>
+	<suite.member href="nodecomparedocumentposition30.xml"/>
+	<suite.member href="nodecomparedocumentposition31.xml"/>
+	<suite.member href="nodecomparedocumentposition32.xml"/>
+	<suite.member href="nodecomparedocumentposition33.xml"/>
+	<suite.member href="nodecomparedocumentposition34.xml"/>
+	<suite.member href="nodecomparedocumentposition35.xml"/>
+	<suite.member href="nodecomparedocumentposition36.xml"/>
+	<suite.member href="nodecomparedocumentposition37.xml"/>
+	<suite.member href="nodecomparedocumentposition38.xml"/>
+	<suite.member href="nodecomparedocumentposition39.xml"/>								
+	<suite.member href="nodecomparedocumentposition40.xml"/>	
+		
+	<!-- sameNode -->
+	<suite.member href="nodeissamenode01.xml"/>
+	<suite.member href="nodeissamenode02.xml"/>
+	<suite.member href="nodeissamenode03.xml"/>
+	<suite.member href="nodeissamenode04.xml"/>
+	<suite.member href="nodeissamenode05.xml"/>
+	<suite.member href="nodeissamenode06.xml"/>
+	<suite.member href="nodeissamenode07.xml"/>
+	<suite.member href="nodeissamenode08.xml"/>
+	<suite.member href="nodeissamenode09.xml"/>
+	<suite.member href="nodeissamenode10.xml"/>	
+	
+	<!-- isEqualsNode -->
+	<suite.member href="nodeisequalnode01.xml"/>
+	<suite.member href="nodeisequalnode02.xml"/>
+	<suite.member href="nodeisequalnode03.xml"/>
+	<suite.member href="nodeisequalnode04.xml"/>
+	<suite.member href="nodeisequalnode05.xml"/>
+	<suite.member href="nodeisequalnode06.xml"/>
+	<suite.member href="nodeisequalnode07.xml"/>
+	<suite.member href="nodeisequalnode08.xml"/>	
+	<suite.member href="nodeisequalnode09.xml"/>	
+	<suite.member href="nodeisequalnode10.xml"/>		
+	<suite.member href="nodeisequalnode11.xml"/>
+	<suite.member href="nodeisequalnode12.xml"/>
+	<suite.member href="nodeisequalnode13.xml"/>	
+	<suite.member href="nodeisequalnode14.xml"/>	
+	<suite.member href="nodeisequalnode15.xml"/>
+	<suite.member href="nodeisequalnode16.xml"/>
+	<suite.member href="nodeisequalnode17.xml"/>
+	<suite.member href="nodeisequalnode18.xml"/>	
+	<suite.member href="nodeisequalnode19.xml"/>	
+	<suite.member href="nodeisequalnode20.xml"/>
+	<suite.member href="nodeisequalnode21.xml"/>
+	<suite.member href="nodeisequalnode22.xml"/>
+	<suite.member href="nodeisequalnode25.xml"/>
+	<suite.member href="nodeisequalnode26.xml"/>
+	<suite.member href="nodeisequalnode27.xml"/>
+	<suite.member href="nodeisequalnode28.xml"/>	
+	<suite.member href="nodeisequalnode29.xml"/>
+	<suite.member href="nodeisequalnode31.xml"/>
+	<suite.member href="nodeisequalnode32.xml"/>
+		
+	<!-- lookupPrefix -->
+	<suite.member href="nodelookupprefix01.xml"/>
+	<suite.member href="nodelookupprefix02.xml"/>
+	<suite.member href="nodelookupprefix03.xml"/>
+	<suite.member href="nodelookupprefix04.xml"/>
+	<suite.member href="nodelookupprefix05.xml"/>		
+	<suite.member href="nodelookupprefix06.xml"/>
+	<suite.member href="nodelookupprefix07.xml"/>	
+	<suite.member href="nodelookupprefix08.xml"/>
+	<suite.member href="nodelookupprefix09.xml"/>
+	<suite.member href="nodelookupprefix10.xml"/>
+	<suite.member href="nodelookupprefix11.xml"/>
+	<suite.member href="nodelookupprefix12.xml"/>					
+	<suite.member href="nodelookupprefix13.xml"/>
+	<suite.member href="nodelookupprefix14.xml"/>	
+	<suite.member href="nodelookupprefix15.xml"/>
+	<suite.member href="nodelookupprefix16.xml"/>
+	<suite.member href="nodelookupprefix17.xml"/>
+	<suite.member href="nodelookupprefix18.xml"/>
+	<suite.member href="nodelookupprefix19.xml"/>
+	<suite.member href="nodelookupprefix20.xml"/>
+
+	<!-- lookupNamespaceURI -->
+	<suite.member href="nodelookupnamespaceuri01.xml"/>
+	<suite.member href="nodelookupnamespaceuri02.xml"/>
+	<suite.member href="nodelookupnamespaceuri03.xml"/>
+	<suite.member href="nodelookupnamespaceuri04.xml"/>
+	<suite.member href="nodelookupnamespaceuri05.xml"/>		
+	<suite.member href="nodelookupnamespaceuri06.xml"/>
+	<suite.member href="nodelookupnamespaceuri07.xml"/>	
+	<suite.member href="nodelookupnamespaceuri08.xml"/>
+	<suite.member href="nodelookupnamespaceuri09.xml"/>
+	<suite.member href="nodelookupnamespaceuri10.xml"/>
+	<suite.member href="nodelookupnamespaceuri11.xml"/>
+	<suite.member href="nodelookupnamespaceuri13.xml"/>
+	<suite.member href="nodelookupnamespaceuri14.xml"/>	
+	<suite.member href="nodelookupnamespaceuri15.xml"/>
+	<suite.member href="nodelookupnamespaceuri16.xml"/>
+	<suite.member href="nodelookupnamespaceuri17.xml"/>
+	<suite.member href="nodelookupnamespaceuri18.xml"/>
+	<suite.member href="nodelookupnamespaceuri19.xml"/>
+	<suite.member href="nodelookupnamespaceuri20.xml"/>
+
+	<suite.member href="nodeisdefaultnamespace01.xml"/>	
+	<suite.member href="nodeisdefaultnamespace02.xml"/>
+	<suite.member href="nodeisdefaultnamespace03.xml"/>
+	<suite.member href="nodeisdefaultnamespace04.xml"/>
+	<suite.member href="nodeisdefaultnamespace05.xml"/>
+	<suite.member href="nodeisdefaultnamespace06.xml"/>
+	<suite.member href="nodeisdefaultnamespace07.xml"/>	
+	<suite.member href="nodeisdefaultnamespace08.xml"/>
+	<suite.member href="nodeisdefaultnamespace09.xml"/>
+	<suite.member href="nodeisdefaultnamespace10.xml"/>
+	<suite.member href="nodeisdefaultnamespace11.xml"/>
+	<suite.member href="nodeisdefaultnamespace13.xml"/>
+	<suite.member href="nodeisdefaultnamespace14.xml"/>
+	<suite.member href="nodeisdefaultnamespace15.xml"/>
+	<suite.member href="nodeisdefaultnamespace16.xml"/>
+		
+	<!-- isSupported and getFeature -->
+	
+	
+	<!-- get/set userData -->
+	<suite.member href="nodegetuserdata01.xml"/>
+	<suite.member href="nodegetuserdata02.xml"/>
+	<suite.member href="nodegetuserdata03.xml"/>
+	<suite.member href="nodegetuserdata04.xml"/>
+	<suite.member href="nodegetuserdata05.xml"/>	
+	<suite.member href="nodegetuserdata06.xml"/>
+	<suite.member href="nodegetuserdata07.xml"/>
+
+	<suite.member href="nodesetuserdata01.xml"/>
+	<suite.member href="nodesetuserdata02.xml"/>
+	<suite.member href="nodesetuserdata03.xml"/>
+	<suite.member href="nodesetuserdata04.xml"/>
+	<suite.member href="nodesetuserdata05.xml"/>
+	<suite.member href="nodesetuserdata06.xml"/>
+	<suite.member href="nodesetuserdata07.xml"/>
+	<suite.member href="nodesetuserdata08.xml"/>
+	<suite.member href="nodesetuserdata09.xml"/>
+	
+	
+	<!-- Attr Tests -->
+	<!-- isID -->
+	<suite.member href="attrisid01.xml"/>
+	<suite.member href="attrisid02.xml"/>
+	<suite.member href="attrisid03.xml"/>
+	<suite.member href="attrisid04.xml"/>
+	<suite.member href="attrisid05.xml"/>
+	<suite.member href="attrisid06.xml"/>
+		
+	<!-- schemaTypeInfo -->
+
+
+	<!-- Element Tests -->
+	<!-- setidattribute -->
+	<suite.member href="elementsetidattribute01.xml"/>
+	<suite.member href="elementsetidattribute03.xml"/>
+	<suite.member href="elementsetidattribute04.xml"/>
+	<suite.member href="elementsetidattribute05.xml"/>
+	<suite.member href="elementsetidattribute06.xml"/>
+	<suite.member href="elementsetidattribute07.xml"/>
+	<suite.member href="elementsetidattribute08.xml"/>
+	<suite.member href="elementsetidattribute09.xml"/>
+	<suite.member href="elementsetidattribute10.xml"/>
+	<suite.member href="elementsetidattribute11.xml"/>
+
+	<!-- setidattributenode -->
+	<suite.member href="elementsetidattributenode01.xml"/>
+	<suite.member href="elementsetidattributenode02.xml"/>
+	<suite.member href="elementsetidattributenode03.xml"/>
+	<suite.member href="elementsetidattributenode04.xml"/>
+	<suite.member href="elementsetidattributenode05.xml"/>
+	<suite.member href="elementsetidattributenode06.xml"/>
+	<suite.member href="elementsetidattributenode07.xml"/>
+
+	<!-- setidattributens -->
+	<suite.member href="elementsetidattributens01.xml"/>
+	<suite.member href="elementsetidattributens02.xml"/>
+	<suite.member href="elementsetidattributens03.xml"/>
+	<suite.member href="elementsetidattributens06.xml"/>
+	<suite.member href="elementsetidattributens07.xml"/>
+	<suite.member href="elementsetidattributens08.xml"/>
+	<suite.member href="elementsetidattributens13.xml"/>
+
+
+	<!-- Text Node tests -->
+	<!-- isElementcContentWhitespace -->
+	<suite.member href="textiselementcontentwhitespace01.xml"/>
+	<suite.member href="textiselementcontentwhitespace02.xml"/>
+	<suite.member href="textiselementcontentwhitespace03.xml"/>
+	
+	<!-- wholetext -->	
+	<suite.member href="textwholetext01.xml"/>
+	<suite.member href="textwholetext02.xml"/>
+	<suite.member href="textwholetext03.xml"/>
+	
+	<!-- replaceWholetext -->
+	<suite.member href="textreplacewholetext01.xml"/>
+	<suite.member href="textreplacewholetext02.xml"/>
+	<suite.member href="textreplacewholetext03.xml"/>
+	<suite.member href="textreplacewholetext04.xml"/>
+	<suite.member href="textreplacewholetext05.xml"/>
+	<suite.member href="textreplacewholetext07.xml"/>	
+
+	
+	<!-- TypeInfo -->
+	
+	<!-- DOMConfiguration -->
+	<!-- canSetParameter -->
+	<suite.member href="domconfigurationcansetparameter01.xml"/>
+	
+	<!-- DOMStringList -->
+	<!-- getLength -->
+	<suite.member href="domstringlistgetlength01.xml"/>	
+
+	<!-- Entity Tests -->
+	<suite.member href="entitygetinputencoding01.xml"/>
+	<suite.member href="entitygetinputencoding02.xml"/>
+	<suite.member href="entitygetinputencoding03.xml"/>
+	<suite.member href="entitygetinputencoding04.xml"/>
+	
+	<suite.member href="entitygetxmlversion01.xml"/>
+	<suite.member href="entitygetxmlversion02.xml"/>
+	<suite.member href="entitygetxmlversion03.xml"/>
+	<suite.member href="entitygetxmlversion04.xml"/>
+
+	<suite.member href="entitygetxmlencoding01.xml"/>
+	<suite.member href="entitygetxmlencoding02.xml"/>
+	<suite.member href="entitygetxmlencoding03.xml"/>
+	<suite.member href="entitygetxmlencoding04.xml"/>
+		
+</suite>

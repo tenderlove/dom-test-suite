@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodecomparedocumentposition11">
+<metadata>
+<title>nodecomparedocumentposition11</title>
+<creator>IBM</creator>
+<description>
+	The method compareDocumentPosition compares a node with this node with regard to their position in the 
+	document and according to the document order. 
+	
+	Using compareDocumentPosition check if the Document node precedes and contains the Attr node.
+</description>
+<contributor>Jenny Hsu</contributor>
+<date qualifier="created">2003-02-19</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-compareDocumentPosition"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="elem" type="Element"/>
+<var name="newAttr" type="Attr"/>
+<var name="elemList" type="NodeList"/>
+<var name="documentPosition" type="int"/>
+<var name="attrPosition" type ="int"/>
+<var name="replacedAttr" type="Attr"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
+<item var="elem" obj="elemList" index="1" interface="NodeList"/>
+<createAttributeNS var="newAttr" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"'/>
+<setAttributeNodeNS obj="elem" var="replacedAttr" newAttr="newAttr"/>
+<compareDocumentPosition var="attrPosition" obj="newAttr" other="doc"/>
+<assertEquals  actual="attrPosition" expected="10" id="nodecomparedocumentpositionPrecedingContains11" ignoreCase="false"/>
+</test>

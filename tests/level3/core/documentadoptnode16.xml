@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!-- 
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="documentadoptnode16">
+<metadata>
+<title>documentadoptnode16</title>
+<creator>IBM</creator>
+<description>
+	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
+	attached attribute nodes if there are any. If the node has a parent it is first removed 
+	from its parent child list. 
+	If the node is an DocumentFragment node, its descendants are recursively adopted.
+	
+	Using the method adoptNode, adopt a newly created DocFragment as below
+		&lt;parent&gt;
+			&lt;child state=&amp;ent3;&gt;Test&lt;/child&gt;
+		&lt;/parent&gt;
+	Verify if the node has been adopted correctly by checking the value of the 
+	attribute value of the adopted node which is an entity reference that is defined
+	in this document.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-adoptNode"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="expandEntityReferences" value="false"/>
+<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+<var name="doc" type="Document"/>
+<var name="docFragment" type="DocumentFragment"/>
+<var name="childList" type="NodeList"/>
+<var name="parent" type="Element"/>
+<var name="child" type="Element"/>
+<var name="childsAttr" type="Attr"/>
+<var name="entRef" type="EntityReference"/>
+<var name="textNode" type="Text"/>
+<var name="adopted" type="Node"/>
+<var name="parentImp" type="Element"/>
+<var name="childImp" type="Element"/>
+<var name="attributes" type="NamedNodeMap"/>
+<var name="childAttrImp" type="Attr"/>
+<var name="nodeValue" type="DOMString"/>
+<var name="appendedChild" type="Node"/>
+<var name="attrNode" type="Attr"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<createDocumentFragment var="docFragment" obj="doc"/>
+<createElement var="parent" obj="doc" tagName='"parent"'/>
+<createElement var="child" obj="doc" tagName='"child"'/>
+<createAttribute var="childsAttr" obj="doc" name='"state"'/>
+<createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+<createTextNode var="textNode" obj="doc" data='"Test"'/>
+<appendChild obj="childsAttr" var="appendedChild" newChild="entRef"/>
+<setAttributeNode obj="child" var="attrNode" newAttr="childsAttr"/>
+<appendChild obj="child" var="appendedChild" newChild="textNode"/>
+<appendChild obj="parent" var="appendedChild" newChild="child"/>
+<appendChild obj="docFragment" var="appendedChild" newChild="parent"/>
+<adoptNode  var="adopted" obj="doc" source="docFragment"/>
+<firstChild var="parentImp" obj="adopted" interface="Node"/>
+<firstChild var="childImp" obj="parentImp" interface="Node"/>
+<attributes var="attributes" obj="childImp"/>
+<getNamedItem var="childAttrImp" obj="attributes" name='"state"'/>
+<nodeValue var="nodeValue" obj="childAttrImp"/>
+<assertEquals expected='"Texas"' actual="nodeValue" id="documentadoptnode16" ignoreCase="false"/>
+</test>

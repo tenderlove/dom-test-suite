@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="textiselementcontentwhitespace03">
+<metadata>
+<title>textiselementcontentwhitespace03</title>
+<creator>IBM</creator>
+<description>
+	The method isWhitespaceInElementContent returns whether this text node contains whitespace in 
+	element content.
+
+	Invoke isWhitespaceInElementContent on an existing Text Node that contains whitespace.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-05-30</date>
+<subject resource="http://www.w3.org/TR/2002/WD-DOM-Level-3-Core-20020409/core#Text3-isElementContentWhitespace"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="itemList" type="NodeList"/>
+<var name="elementName" type="Element"/>
+<var name="textNode" type="Text"/>
+<var name="hasWhitespace" type="boolean"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"name"' interface="Document"/>
+<item var="elementName" obj="itemList" index="0" interface="NodeList"/>
+<firstChild var="textNode" obj="elementName" interface="Node"/>
+<isElementContentWhitespace obj="textNode" var="hasWhitespace"/>
+<assertTrue actual="hasWhitespace" id="textiswhitespaceinelementcontent03"/>
+</test>

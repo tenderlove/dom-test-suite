@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodeinsertbefore13">
+<metadata>
+<title>nodeinsertbefore13</title>
+<creator>IBM</creator>
+<description>
+	The method insertBefore inserts the node newChild before the existing child node refChild. 
+	If refChild is null, insert newChild at the end of the list of children.
+
+	Using insertBefore on a DocumentFragment node attempt to insert a new Element node 
+	created by another Document, before this DocumentFragment's Element node and 
+	verfiy if a WRONG_DOCUMENT_ERR is raised. 
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-insertBefore"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="docAlt" type="Document"/>
+<var name="docFrag" type="DocumentFragment"/>
+<var name="elemAlt" type="Element"/>
+<var name="elem" type="Element"/>
+<var name="appendedChild" type="Node"/>
+<var name="inserted" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="docAlt" href="staffNS" willBeModified="false"/>
+<createDocumentFragment var="docFrag" obj="doc"/>
+<createElementNS var="elem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<createElementNS var="elemAlt" obj="docAlt"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<appendChild obj="docFrag" var="appendedChild" newChild="elem"/>
+<assertDOMException id="WRONG_DOCUMENT_ERR_nodeinsertbefore13">
+<WRONG_DOCUMENT_ERR>
+<insertBefore obj="docFrag" var="inserted" newChild="elemAlt" refChild="elem"/>
+</WRONG_DOCUMENT_ERR>
+</assertDOMException>
+</test>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodeinsertbefore02">
+<metadata>
+<title>nodeinsertbefore02</title>
+<creator>IBM</creator>
+<description>
+	The method insertBefore inserts the node newChild before the existing child node refChild. 
+	If refChild is null, insert newChild at the end of the list of children.
+
+	Using insertBefore on a new Document node attempt to insert a new Comment node before
+	this DocumentType node and verfiy the name of the inserted Comment node.  Now
+	attempt to insert a new Processing Instruction node before the new Comment and 
+	verify the target of the inserted ProcessingInstruction.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-insertBefore"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="newDoc" type="Document"/>
+<var name="domImpl" type="DOMImplementation"/>
+<var name="newDocType" type="DocumentType"/>
+<var name="newComment" type="Comment"/>
+<var name="insertedComment" type="Comment"/>
+<var name="data" type="DOMString"/>
+<var name="newPI" type="ProcessingInstruction"/>
+<var name="insertedPI" type="ProcessingInstruction"/>
+<var name="target" type="DOMString"/>
+<var name="nullPubId" type="DOMString" isNull="true"/>
+<var name="nullSysId" type="DOMString" isNull="true"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<implementation var="domImpl" obj="doc"/>
+<createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
+<createDocument var="newDoc" obj="domImpl"  qualifiedName='"dom3:docType"' namespaceURI='"http://www.w3.org/DOM/Test"' doctype="newDocType" />
+<createComment var="newComment" obj="newDoc" data='"Comment"' />
+<createProcessingInstruction var="newPI" obj="newDoc" target='"PITarget"' data='"PIData"' />
+<insertBefore var="insertedComment" obj="newDoc" newChild="newComment" refChild="newDocType"/>
+<data var="data" obj="insertedComment" interface="CharacterData"/>
+<assertEquals actual="data" expected='"Comment"' id="nodeinsertbefore02_1" ignoreCase="false"/>
+<insertBefore var="insertedPI" obj="newDoc" newChild="newPI" refChild="newComment"/>
+<target var="target" obj="insertedPI" interface="ProcessingInstruction"/>
+<assertEquals actual="target" expected='"PITarget"' id="nodeinsertbefore02_2" ignoreCase="false"/>
+</test>

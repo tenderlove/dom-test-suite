@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodereplacechild07">
+<metadata>
+<title>nodereplacechild07</title>
+<creator>IBM</creator>
+<description>
+	The method replaceChild replaces the child node oldChild with newChild in the list of 
+	children, and returns the oldChild node.
+
+	Using replaceChild on this Document node attempt to replace this DocumentElement node 
+	with  a new element and verify if the name of the replaced documentElement Node.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-06-10</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-replaceChild"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="docElem" type="Element"/>
+<var name="replaced" type="Element"/>
+<var name="elem" type="Element"/>
+<var name="nodeName" type="DOMString"/>
+<var name="replacedNode" type="Node"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:elem"'/>
+<replaceChild obj="doc" var="replacedNode" oldChild="docElem" newChild="elem"/>
+<documentElement var="replaced" obj="doc"/>
+<nodeName obj="replaced" var="nodeName"/>
+<assertEquals actual="nodeName" expected='"dom3:elem"' id="nodereplacechild07" ignoreCase="false"/>
+</test>
