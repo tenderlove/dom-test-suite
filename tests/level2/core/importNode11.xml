@@ -43,19 +43,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="name" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="childValue" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"ent3"</member>
-<member>"Texas"</member>
-</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <load var="aNewDoc" href="staff.xml" willBeModified="false"/>
-<createEntityReference obj="aNewDoc" var="entRef" name="&quot;ent3&quot;"/>
+<createEntityReference obj="aNewDoc" var="entRef" name='"ent3"'/>
 <importNode obj="doc" var="aNode" importedNode="entRef" deep="true"/>
 <nodeName obj="aNode" var="name"/>
-<append collection="result" obj="name"/>
+<assertEquals actual="name" id="entityName" expected='"ent3"' ignoreCase="false"/>
 <firstChild interface="Node" obj="aNode" var="child"/>
+<assertNotNull id="child" actual="child"/>
 <nodeValue obj="child" var="childValue"/>
-<append collection="result" obj="childValue"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="childValue" id="childValue" expected='"Texas"' ignoreCase="false"/>
 </test>
