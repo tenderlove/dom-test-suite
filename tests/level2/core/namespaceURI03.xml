@@ -30,13 +30,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname"/>
 </metadata>
+<!--   this test requires namespace awareness  -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Node"/>
 <var name="employeeNamespace" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <namespaceURI obj="testEmployee" var="employeeNamespace"/>
-<assertEquals actual="employeeNamespace" expected="&quot;http://www.nist.gov&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="employeeNamespace" expected='"http://www.nist.gov"' id="namespaceURI" ignoreCase="false"/>
 </test>
