@@ -13,7 +13,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.86  2003-02-12 06:25:20  dom-ts-4
+Revision 1.87  2003-02-12 21:57:52  plehegar
+Added
+xmlspec-v22-dom-available
+and
+get-xmlspec-v22-dom-dtd
+
+Revision 1.86  2003/02/12 06:25:20  dom-ts-4
 Typo resulting in buildecmascript directory
 Missing  unzips for jsunit.zip in some -gen-jsunits
 
@@ -558,6 +564,7 @@ All implementation conditions combined into implementationAttribute element
     <available property="dom2-style-available" file="${specs.dir}/DOM2-Style.zip"/>
     <available property="dom2-traversal-available" file="${specs.dir}/DOM2-Traversal-Range.zip"/>
     <available property="dom2-html-available" file="${specs.dir}/DOM2-HTML-Java-Binding.zip"/>
+    <available property="xmlspec-v22-dom-available" file="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"/>
 </target>
 
 <!--  gets DOM 2 Core spec unless it is available locally   -->
@@ -621,7 +628,15 @@ All implementation conditions combined into implementationAttribute element
         usetimestamp="yes"/>
 </target>
 
-<target name="get-dom2" depends="get-dom2-core,get-dom2-events,get-dom2-html,get-dom2-views,get-dom2-traversal,get-dom2-style">
+<target name="get-xmlspec-v22-dom-dtd" unless="xmlspec-v22-dom-available">
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/pubtext"/>
+	<get src="http://www.w3.org/2002/08/xmlspec-v22-dom.dtd"
+		dest="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"
+		usetimestamp="yes"/>
+</target>
+
+<target name="get-dom2" depends="get-dom2-core,get-dom2-events,get-xmlspec-v22-dom-dtd,get-dom2-html,get-dom2-views,get-dom2-traversal,get-dom2-style">
 </target>
 
 <target name="dom2-init" depends="get-dom2">
@@ -675,8 +690,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<unzip src="${specs.dir}/DOM2-HTML.zip"
 	       dest="${specs.dir}/Level-2/HTML"/>
-    <!--  xml-source.xml had bad encoding declaration
-              and unresolved DTD     -->
+    <!--  xml-source.xml had bad encoding declaration  -->
     <replace file="${specs.dir}/Level-2/HTML/xml-source.xml">
         <replacefilter token='encoding="us-ascii"'
         value='encoding="ISO-8859-1"'/>
@@ -1713,7 +1727,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="get-dom3" depends="get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events,get-dom3-views">
+<target name="get-dom3" depends="get-xmlspec-v22-dom-dtd,get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events,get-dom3-views">
 </target>
 
 <target name="dom3-init" depends="init,get-dom3">
