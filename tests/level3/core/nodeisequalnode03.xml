@@ -28,6 +28,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=528"/>
 </metadata>
 <var name="doc1" type="Document"/>
 <var name="doc2" type="Document"/>
@@ -37,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc1" href="barfoo_utf8" willBeModified="false"/>
 <load var="doc2" href="barfoo_utf16" willBeModified="false"/>
 <isEqualNode var="isEqual" obj="doc1" arg="doc2"/>
-<assertFalse  actual="isEqual"  id="docAreNotEquals"/>
+<!--  encoding is not significant in equality  -->
+<assertTrue  actual="isEqual"  id="docAreNotEquals"/>
 <documentElement var="docElem1" obj="doc1"/>
 <documentElement var="docElem2" obj="doc2"/>
 <isEqualNode var="isEqual" obj="docElem1" arg="docElem2"/>
-<!--  This should be true, but original tests didn't check it   -->
-<!-- assertTrue  actual="isEqual"  id="docElemsAreEquals"/ -->
+<assertTrue  actual="isEqual"  id="docElemsAreEquals"/>
 </test>
