@@ -42,11 +42,17 @@
 
   <getResourceURI var="resourceURI" href="TEST2"/>
   <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
-  <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt2" action="ACTION_REPLACE" var="returnNode"/>
-  
+  <try>
+  		<parseWithContext  obj="builder" input="inputSource" 
+  			contextArg="firstElt2" action="ACTION_REPLACE" var="returnNode"/>
+  		<catch>
+  			<DOMException code="NOT_SUPPORTED_ERR">
+  				<return/>
+  			</DOMException>
+  		</catch>
+  </try>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="elt2Count_2"/>
-
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt3&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="elt3Count"/>
 

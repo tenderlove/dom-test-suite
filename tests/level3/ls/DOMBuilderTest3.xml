@@ -54,8 +54,14 @@
 
   <getResourceURI var="resourceURI" href="TEST2"/>
   <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
-  <parseWithContext  obj="builder" input="inputSource" contextArg="firstElt1" action="ACTION_INSERT_AFTER" var="returnNode"/>
-
+  <try>
+  	<parseWithContext  obj="builder" input="inputSource" contextArg="firstElt1" action="ACTION_INSERT_AFTER" var="returnNode"/>
+	<catch>
+		<DOMException code="NOT_SUPPORTED_ERR">
+			<return/>
+		</DOMException>
+	</catch>
+  </try>
   <nextSibling interface="Node" obj="firstElt1" var="secondElt1"/>
   <nodeName obj="secondElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt2&quot;" id="nextSibling_after_add" ignoreCase="false"/>
