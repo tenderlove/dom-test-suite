@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 	Invoke lookupPrefix on an Element node with no prefix, whose parent has no prefix and 
-	2 namespace attribute declarations with and without namespace prefices and check if the value of 
+	2 namespace attribute declarations with and without namespace prefixes and check if the value of 
 	the prefix returned by using each namespaceURI as a parameter is valid.
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -38,11 +38,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elemList" type="NodeList"/>
 <var name="prefix" type="DOMString"/>
 <var name="prefixEmpty" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employeeId"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"em"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <lookupPrefix var="prefix" obj="elem" namespaceURI='"http://www.usa.com"'/>
 <assertEquals  actual="prefix" expected='"dmstc"' id="nodelookupprefix09" ignoreCase="false"/>
-<lookupPrefix var="prefixEmpty" obj="elem" namespaceURI='"http://www.nist.gov"'/>
+<lookupPrefix var="prefixEmpty" obj="elem" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <assertNull  actual="prefixEmpty" id="nodelookupprefixEmpty09"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="parent" type="Entity"/>
 <var name="child" type="Element"/>
 <var name="removed" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitiesMap" obj="docType"/>
-<getNamedItem var="parent" interface="NamedNodeMap" obj="entitiesMap" name='"ent4"'/>
+<getNamedItem var="parent" interface="NamedNodeMap" obj="entitiesMap" name='"delta"'/>
 <firstChild var="child" obj="parent" interface="Node"/>
 <assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_noderemovechild25">
 <NO_MODIFICATION_ALLOWED_ERR>

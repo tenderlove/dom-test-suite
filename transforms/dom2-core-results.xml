@@ -3,10 +3,22 @@
 <!ENTITY dom2-core-xerces-alt SYSTEM '../build/dom2-core-xercesAltConfig.xml'>
 <!ENTITY dom2-core-oracle SYSTEM '../build/dom2-core-oracle.xml'>
 <!ENTITY dom2-core-oracle-alt SYSTEM '../build/dom2-core-oracleAltConfig.xml'>
+<!ENTITY dom2-core-crimson SYSTEM '../build/dom2-core-crimson.xml'>
+<!ENTITY dom2-core-crimson-alt SYSTEM '../build/dom2-core-crimsonAltConfig.xml'>
+<!ENTITY dom2-core-gnujaxp SYSTEM '../build/dom2-core-gnujaxp.xml'>
+<!ENTITY dom2-core-gnujaxp-alt SYSTEM '../build/dom2-core-gnujaxpAltConfig.xml'>
+<!ENTITY dom2-core-dom4j SYSTEM '../build/dom2-core-dom4j.xml'>
+<!ENTITY dom2-core-batik SYSTEM '../build/dom2-core-batik.xml'>
 ]>
 <results>
 &dom2-core-xerces;
 &dom2-core-xerces-alt;
 &dom2-core-oracle;
 &dom2-core-oracle-alt;
+&dom2-core-crimson;
+&dom2-core-crimson-alt;
+&dom2-core-gnujaxp;
+&dom2-core-gnujaxp-alt;
+&dom2-core-dom4j;
+&dom2-core-batik;
 </results>

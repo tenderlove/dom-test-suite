@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode05</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isEqualNode check if 2 Document nodes created by parsing different xml document
 	are equal.
 </description>
@@ -33,8 +31,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc1" type="Document"/>
 <var name="doc2" type="Document"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc1" href="staffNS" willBeModified="false"/>
-<load var="doc2" href="staff" willBeModified="false"/>
+<load var="doc1" href="barfoo_standalone_yes" willBeModified="false"/>
+<load var="doc2" href="barfoo" willBeModified="false"/>
 <isEqualNode var="isEqual" obj="doc1" arg="doc2"/>
 <assertFalse  actual="isEqual"  id="nodeisequalnode05"/>
 </test>

@@ -36,7 +36,7 @@
                       <var name='TEST5'   type='DOMString' value='&quot;test5&quot;'/>
                       <var name='TEST6'   type='DOMString' value='&quot;test6&quot;'/>
                       <var name='TEST7'   type='DOMString' value='&quot;test7&quot;'/>
-                      <var name='TESTPDF' type='DOMString' value='&quot;testpdf.pdf&quot;'/>
+                      <var name='TESTPDF' type='DOMString' value='&quot;testpdf&quot;'/>
 
                       <implementation var='implementation'/> 
                       <assign var='lsImplementation' value='implementation'/> 

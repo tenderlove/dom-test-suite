@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -33,10 +33,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entitiesMap" type="NamedNodeMap"/>
 <var name="entity" type="Entity"/>
 <var name="entityVersion" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitiesMap" obj="docType"/>
-<getNamedItem var="entity" obj="entitiesMap" name='"ent5"'/>
+<getNamedItem var="entity" obj="entitiesMap" name='"epsilon"'/>
 <xmlVersion obj="entity" var="entityVersion" interface="Entity"/>
 <assertNull actual="entityVersion" id="entitygetxmlversion01"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <title>elementsetidattributenode07</title>
     <creator>IBM</creator>
     <description>
-     Invoke setIdAttributeNode on the 2nd and 3rd address element using the street attribute as a parameter .  Verify by calling
+     Invoke setIdAttributeNode on the 2nd and 3rd acronym element using the class attribute as a parameter .  Verify by calling
      isID on the attribute node and getElementById on document node.  
     </description>
     <contributor>Jenny Hsu</contributor>
@@ -31,32 +31,32 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="doc" type="Document"/>
   <var name="elemList1" type="NodeList"/>
   <var name="elemList2" type="NodeList"/>
-  <var name="addressElem1" type="Element"/>
-  <var name="addressElem2" type="Element"/>
+  <var name="acronymElem1" type="Element"/>
+  <var name="acronymElem2" type="Element"/>
   <var name="attributesMap" type="NamedNodeMap"/>
   <var name="attr" type="Attr"/>
    <var name="id" type="boolean" value="false"/>
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
-  <load var="doc" href="staffNS" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList1" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-  <getElementsByTagNameNS var="elemList2" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-  <item var="addressElem1" obj="elemList1" index="1" interface="NodeList"/>
-  <item var="addressElem2" obj="elemList2" index="2" interface="NodeList"/>
-  <attributes var="attributesMap" obj="addressElem1"/>
-  <getNamedItem var="attr" obj="attributesMap" name='"street"'/>
-  <setIdAttributeNode obj="addressElem1" idAttr="attr" isId="true"/>
+  <load var="doc" href="hc_staff" willBeModified="true"/>
+  <getElementsByTagNameNS var="elemList1" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+  <getElementsByTagNameNS var="elemList2" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+  <item var="acronymElem1" obj="elemList1" index="1" interface="NodeList"/>
+  <item var="acronymElem2" obj="elemList2" index="2" interface="NodeList"/>
+  <attributes var="attributesMap" obj="acronymElem1"/>
+  <getNamedItem var="attr" obj="attributesMap" name='"class"'/>
+  <setIdAttributeNode obj="acronymElem1" idAttr="attr" isId="true"/>
   <isId var="id" obj="attr"/>
   <assertTrue actual="id" id="elementsetidattributenodeIsId1True07"/>
-  <attributes var="attributesMap" obj="addressElem2"/>
-  <getNamedItem var="attr" obj="attributesMap" name='"street"'/>
-  <setIdAttributeNode obj="addressElem2" idAttr="attr" isId="true"/>
+  <attributes var="attributesMap" obj="acronymElem2"/>
+  <getNamedItem var="attr" obj="attributesMap" name='"class"'/>
+  <setIdAttributeNode obj="acronymElem2" idAttr="attr" isId="true"/>
   <isId var="id" obj="attr"/>
   <assertTrue actual="id" id="elementsetidattributenodeIsId2True07"/>
   <getElementById obj="doc" var="elem" elementId='"No"'/>
   <tagName obj="elem" var="elemName"/>
-  <assertEquals actual="elemName" expected='"address"' id="elementsetidattributenode1GetElementById07" ignoreCase="false"/>
+  <assertEquals actual="elemName" expected='"acronym"' id="elementsetidattributenode1GetElementById07" ignoreCase="false"/>
   <getElementById obj="doc" var="elem" elementId='"Yes"'/>
   <tagName obj="elem" var="elemName"/>
-  <assertEquals actual="elemName" expected='"address"' id="elementsetidattributenode2GetElementById07" ignoreCase="false"/>
+  <assertEquals actual="elemName" expected='"acronym"' id="elementsetidattributenode2GetElementById07" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -44,12 +44,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:doc"' doctype="nullDocType"/>
-<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"employeeId"' interface="Document"/>
+<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"em"' interface="Document"/>
 <item var="elem1" obj="employeeList" index="0" interface="NodeList"/>
-<createElementNS var="elem2" obj="newDoc" namespaceURI='"http://www.nist.gov"' qualifiedName='"employeeId"'/>
+<createElementNS var="elem2" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"em"'/>
 <createTextNode var="text" obj="newDoc" data='"EMP0001"'/>
 <appendChild obj="elem2" var="appendedChild" newChild="text"/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>elementsetidattribute09</title>
 <creator>IBM</creator>
 <description>
-	First use setAttribute to create two new attributes on the second name element and salary element.
+	First use setAttribute to create two new attributes on the second strong element and sup element.
 	Invoke setIdAttribute on the new attributes. Verify by calling isID on the new attributes and getElementById 
 	with two different values on document.	
 </description>
@@ -40,9 +40,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="id" type="boolean" value="false"/>
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList1" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
-<getElementsByTagNameNS var="elemList2" obj="doc" localName='"salary"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList1" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagNameNS var="elemList2" obj="doc" localName='"sup"' namespaceURI='"*"' interface="Document"/>
 <item var="nameElem" obj="elemList1" index="2" interface="NodeList"/>
 <item var="salaryElem" obj="elemList2" index="2" interface="NodeList"/>
 <setAttribute obj="nameElem" name= '"hasMiddleName"' value='"Antoine"'/>
@@ -59,8 +59,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertTrue actual="id" id="elementsetidattributeIsId2True09"/>
 <getElementById obj="doc" var="elem" elementId='"Antoine"'/>
 <tagName obj="elem" var="elemName"/>
-<assertEquals actual="elemName" expected='"name"' id="elementsetidattribute1GetElementById09" ignoreCase="false"/>
+<assertEquals actual="elemName" expected='"strong"' id="elementsetidattribute1GetElementById09" ignoreCase="false"/>
 <getElementById obj="doc" var="elem" elementId='"2002"'/>
 <tagName obj="elem" var="elemName"/>
-<assertEquals actual="elemName" expected='"salary"' id="elementsetidattribute2GetElementById09" ignoreCase="false"/>
+<assertEquals actual="elemName" expected='"sup"' id="elementsetidattribute2GetElementById09" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -36,12 +36,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="ent" type="Entity"/>
 <var name="adoptedEnt" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:doc"' doctype="nullDocType"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entityMap" obj="docType"/>
-<getNamedItem var="ent" obj="entityMap" name='"ent4"'/>
+<getNamedItem var="ent" obj="entityMap" name='"delta"'/>
 <assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_documentadoptnode18">
 <NO_MODIFICATION_ALLOWED_ERR>
 <adoptNode var="adoptedEnt" obj="newDoc" source="ent"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -40,9 +40,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeValue" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <var name="replaced" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createAttributeNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"'/>
-<createEntityReference var="oldChild" obj="doc" name='"ent4"' />
+<createEntityReference var="oldChild" obj="doc" name='"delta"' />
 <appendChild obj="parent" var="appendedChild" newChild="oldChild"/>
 <createAttributeNS var="newChild" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"'/>
 <assertDOMException id="HIERARCHY_REQUEST_ERR_nodereplacechild35">

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentrenamenode01</title>
 <creator>IBM</creator>
 <description>
-	Invoke the renameNode method to rename the street attribute node of the 
-	second element whose localName is address and namespaceURI http://www.nist.gov
+	Invoke the renameNode method to rename the class attribute node of the 
+	second element whose localName is acronym and namespaceURI http://www.nist.gov
 	with the new namespaceURI as http://www.w3.org/DOM/Test and name as pre0fix:renamedNode. 
 	Check if this attribute has been renamed successfully by verifying the
 	nodeName, namespaceURI, nodeType attributes of the renamed node.
@@ -36,18 +36,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="attr" type="Attr"/>
 <var name="childList" type="NodeList"/>
-<var name="renamedStreet" type="Node"/>
+<var name="renamedclass" type="Node"/>
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <var name="namespaceURI" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="childList" obj="doc" localName='"acronym"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
 <item var="element" obj="childList" index="1" interface="NodeList"/>
-<getAttributeNode var="attr" obj="element" name='"street"'/>
-<renameNode var="renamedStreet" obj="doc" n="attr" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"renamedNode"'/>
-<nodeName var="nodeName" obj="renamedStreet"/>
-<namespaceURI var="namespaceURI" obj="renamedStreet" interface="Node"/>
-<nodeType var="nodeType" obj="renamedStreet"/>
+<getAttributeNode var="attr" obj="element" name='"class"'/>
+<renameNode var="renamedclass" obj="doc" n="attr" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"renamedNode"'/>
+<nodeName var="nodeName" obj="renamedclass"/>
+<namespaceURI var="namespaceURI" obj="renamedclass" interface="Node"/>
+<nodeType var="nodeType" obj="renamedclass"/>
 <assertEquals expected='"renamedNode"' actual="nodeName"  id="documentrenameode01_nodeName" ignoreCase="false"/>
 <assertEquals expected="2" actual="nodeType"  id="documentrenameNode01_nodeType" ignoreCase="false"/>
 <assertEquals expected='"http://www.w3.org/DOM/Test"' actual="namespaceURI"  id="documentrenamenode01_nodeValue" ignoreCase="false"/>

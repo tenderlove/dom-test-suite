@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -36,7 +36,7 @@ A NO_MODIFICATION_ALLOWED_ERR should be thrown.
 <load var="doc" href="barfoo" willBeModified="true"/>
 <getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"p"' interface="Document"/>
 <item var="p" obj="itemList" index="0" interface="NodeList"/>
-<createEntityReference var="entRef" obj="doc" name='"ent2"'/>
+<createEntityReference var="entRef" obj="doc" name='"beta"'/>
 <appendChild obj="p" var="node" newChild="entRef"/>
 <firstChild var="node" obj="p" interface="Node"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

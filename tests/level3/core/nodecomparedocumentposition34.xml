@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementToTxtPosition" type="int"/>
 <var name="txtToPiPosition" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <createElementNS var="elemMain" obj="doc" namespaceURI='"http:www.w3.org/DOM/Test"' qualifiedName='"dom3:Element"'/>
 <createElementNS var="elem" obj="doc" namespaceURI='"http:www.w3.org/DOM/Test"' qualifiedName='"dom3:Elem"'/>
 <createTextNode var="txt" obj="doc" data='"TEXT"'/>
@@ -49,5 +49,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="elementToTxtPosition" obj="txt" other="elem"/>
 <assertEquals  actual="elementToTxtPosition" expected="4" id="nodecomparedocumentpositionFollowing34" ignoreCase="false"/>
 <compareDocumentPosition var="txtToPiPosition" obj="pi" other="txt"/>
-<assertEquals  actual="txtToPiPosition" expected="2" id="nodecomparedocumentpositionPreceding34" ignoreCase="false"/>
+<assertEquals  actual="txtToPiPosition" expected="2" id="nodecomparedocumentpositionPRECEEDING34" ignoreCase="false"/>
 </test>

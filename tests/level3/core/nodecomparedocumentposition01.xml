@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -35,10 +35,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="documentPositionDoc" type="int"/>
 <var name="documentPositionDocType" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <compareDocumentPosition var="documentPositionDoc" obj="doc" other="docType"/>
 <assertEquals  actual="documentPositionDoc" expected="20" id="nodecomparedocumentpositionIsContainedFollowing01" ignoreCase="false"/>
 <compareDocumentPosition var="documentPositionDocType" obj="docType" other="doc"/>
-<assertEquals  actual="documentPositionDocType" expected="10" id="nodecomparetreepositionContainsPreceding01" ignoreCase="false"/>
+<assertEquals  actual="documentPositionDocType" expected="10" id="nodecomparetreepositionContainsPRECEEDING01" ignoreCase="false"/>
 </test>

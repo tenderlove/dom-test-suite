@@ -1,0 +1,26 @@
+<!DOCTYPE results [
+<!ENTITY dom1-core-xerces SYSTEM '../build/dom1-core-xerces.xml'>
+<!ENTITY dom1-core-xerces-alt SYSTEM '../build/dom1-core-xercesAltConfig.xml'>
+<!ENTITY dom1-core-oracle SYSTEM '../build/dom1-core-oracle.xml'>
+<!ENTITY dom1-core-oracle-alt SYSTEM '../build/dom1-core-oracleAltConfig.xml'>
+<!ENTITY dom1-core-crimson SYSTEM '../build/dom1-core-crimson.xml'>
+<!ENTITY dom1-core-crimson-alt SYSTEM '../build/dom1-core-crimsonAltConfig.xml'>
+<!ENTITY dom1-core-gnujaxp SYSTEM '../build/dom1-core-gnujaxp.xml'>
+<!ENTITY dom1-core-gnujaxp-alt SYSTEM '../build/dom1-core-gnujaxpAltConfig.xml'>
+<!ENTITY dom1-core-dom4j SYSTEM '../build/dom1-core-dom4j.xml'>
+<!ENTITY dom1-core-batik SYSTEM '../build/dom1-core-batik.xml'>
+<!ENTITY dom1-core-jtidy SYSTEM '../build/dom1-core-jtidy.xml'>
+]>
+<results>
+&dom1-core-xerces;
+&dom1-core-xerces-alt;
+&dom1-core-oracle;
+&dom1-core-oracle-alt;
+&dom1-core-crimson;
+&dom1-core-crimson-alt;
+&dom1-core-gnujaxp;
+&dom1-core-gnujaxp-alt;
+&dom1-core-dom4j;
+&dom1-core-batik;
+<!-- &dom1-core-jtidy; -->
+</results>

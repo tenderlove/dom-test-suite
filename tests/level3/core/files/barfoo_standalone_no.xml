@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html [
+<!ENTITY ent1 'foo'>
+<!ENTITY ent2 'foo<br/>'>
+<!ELEMENT html (head, body)>
+<!ATTLIST html xmlns CDATA #IMPLIED>
+<!ELEMENT head (title)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT body (p)>
+<!ELEMENT p (#PCDATA|br)*>
+<!ELEMENT br EMPTY>
+]>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>replaceWholeText sample</title>
+</head>
+<body> 
+<p>bar</p>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -33,14 +33,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <var name="positionList" type="NodeList"/>
-<var name="name" type="Element"/>
-<var name="position" type="Element"/>
+<var name="strong" type="Element"/>
+<var name="code" type="Element"/>
 <var name="namePosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="nameList" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
-<item var="name" obj="nameList" index="0" interface="NodeList"/>
-<getElementsByTagNameNS var="positionList" obj="doc" localName='"position"' namespaceURI='"*"' interface="Document"/>
-<item var="position" obj="positionList" index="0" interface="NodeList"/>
-<compareDocumentPosition var="namePosition" obj="position" other="name"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="nameList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+<item var="strong" obj="nameList" index="0" interface="NodeList"/>
+<getElementsByTagNameNS var="positionList" obj="doc" localName='"code"' namespaceURI='"*"' interface="Document"/>
+<item var="code" obj="positionList" index="0" interface="NodeList"/>
+<compareDocumentPosition var="namePosition" obj="code" other="strong"/>
 <assertEquals  actual="namePosition" expected="2" id="nodecomparedocumentpositionFollowing30" ignoreCase="false"/>
 </test>

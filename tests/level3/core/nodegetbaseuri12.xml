@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri12</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Using getBaseURI verify if the entity ent5 is not null.
+	Using getBaseURI verify if the entity epsilon is absolute
+	and matches the URL of the document entity.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -35,11 +34,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entitiesMap" type="NamedNodeMap"/>
 <var name="entity" type="Entity"/>
 <var name="baseURI" type="DOMString"/>
-<load var="doc" href="staffNSBaseURI" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitiesMap" obj="docType"/>
-<getNamedItem var="entity" obj="entitiesMap" name='"ent5"'/>
+<getNamedItem var="entity" obj="entitiesMap" name='"epsilon"'/>
 <baseURI var="baseURI" obj="entity" interface="Node"/>
-<assertNotNull  actual="baseURI" id="nodegetbaseuri12"/>
+<assertURIEquals actual="baseURI" id="entityBase" isAbsolute="true" name='"hc_staff"'/>
 </test>
  

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -44,17 +44,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <var name="entRefChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"address"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
 <item var="elem" obj="parentList" index="3" interface="NodeList"/>
 <attributes var="attrsMap" obj="elem"/>
-<getNamedItem var="parent" obj="attrsMap" name='"street"'/>
-<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+<getNamedItem var="parent" obj="attrsMap" name='"class"'/>
+<createEntityReference var="entRef" obj="doc" name='"delta"'/>
 <appendChild obj="parent" var="appendedChild" newChild="entRef"/>
 <lastChild var="child" obj="parent" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeName obj="removed" var="removedName"/>
-<assertEquals actual="removedName" expected='"ent4"' id="noderemovechild31" ignoreCase="false"/>
+<assertEquals actual="removedName" expected='"delta"' id="noderemovechild31" ignoreCase="false"/>
 <!--
 Remove a non-child from an entity reference
 Should throw either a NO_MODIFICATION_ALLOWED_ERR or a NOT_FOUND_ERR

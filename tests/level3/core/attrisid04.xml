@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,29 +21,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>attrisid04</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Retrieve the fourth address element's zone attribute, whose type is ID.  
-	Invoke isID on the street attribute, this should return true.
+Attr.isID should return true for the id attribute on the fourth acronym node
+since its type is ID.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2003-03-04</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
-<var name="addressElem" type="Element"/>
-<var name="clonedAddressElem" type="Element"/>
+<var name="acronymElem" type="Element"/>
+<var name="clonedacronymElem" type="Element"/>
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <var name="id" type="boolean" value="false"/>
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-<item var="addressElem" obj="elemList" index="3" interface="NodeList"/>
-<getAttributeNodeNS var="attr" obj="addressElem" namespaceURI='"http://www.nist.gov"' localName='"zone"'/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<item var="acronymElem" obj="elemList" index="3" interface="NodeList"/>
+<getAttributeNode var="attr" obj="acronymElem" name='"id"'/>
 <isId var="id" obj="attr"/>
 <assertTrue actual="id" id="AttrIsIDTrue04"/>
 </test>

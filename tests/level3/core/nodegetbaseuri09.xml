@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,28 +21,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri09</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Using getBaseURI check if the baseURI attribute of an element node having the xml:base 
-	attribute specified on it as well as its parent.
+Get the baseURI value on an element with an explicit xml:base attribute.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 <var name="doc" type="Document"/>
-<var name="elementParent" type="Element"/>
-<var name="element" type="Element"/>
-<var name="childList" type="NodeList"/>
-<var name="childChildList" type="NodeList"/>
+<var name="bodyElem" type="Element"/>
+<var name="bodyList" type="NodeList"/>
 <var name="baseURI" type="DOMString"/>
-<load var="doc" href="staffNSBaseURI" willBeModified="false"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
-<item var="elementParent" obj="childList" index="0" interface="NodeList"/>
-<childNodes var="childChildList" obj="elementParent" />
-<item var="element" obj="childChildList" index="0" interface="NodeList"/>
-<baseURI var="baseURI" obj="element" interface="Node"/>
+<load var="doc" href="barfoo_base" willBeModified="false"/>
+<getElementsByTagNameNS var="bodyList" obj="doc" localName='"body"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
+<baseURI var="baseURI" obj="bodyElem" interface="Node"/>
 <assertEquals  actual="baseURI" expected='"http://www.w3.org/DOM/EmployeeID"' id="nodegetbaseuri09" ignoreCase="false"/>
 </test>

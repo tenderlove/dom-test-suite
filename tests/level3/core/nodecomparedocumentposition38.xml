@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition38</title>
 <creator>IBM</creator>
 <description>
-	Using compareDocumentPosition to check if the street's attribute contains and precedes it's content, 
+	Using compareDocumentPosition to check if the class's attribute contains and precedes it's content, 
 	and the content node is contained and follows the attribute node.
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -36,14 +36,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr" type="Attr"/>
 <var name="attrPosition" type="int"/>
 <var name="attrChildPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
-<getAttributeNode var="attr" obj="elem" name='"street"'/>
+<getAttributeNode var="attr" obj="elem" name='"class"'/>
 <firstChild var="txt" obj="attr" interface="Node"/>
 <compareDocumentPosition var="attrPosition" obj="attr" other="txt"/>
 <assertEquals  actual="attrPosition" expected="20" id="nodecomparedocumentpositionIsContainsFollowing38" ignoreCase="false"/>
 <compareDocumentPosition var="attrChildPosition" obj="txt" other="attr"/>
-<assertEquals  actual="attrChildPosition" expected="10" id="nodecomparedocumentpositionContainsPreceding38" ignoreCase="false"/>
+<assertEquals  actual="attrChildPosition" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING38" ignoreCase="false"/>
 </test>
  

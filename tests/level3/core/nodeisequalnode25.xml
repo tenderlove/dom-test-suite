@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -37,17 +37,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType2" type="DocumentType"/>
 <var name="entitiesMap1" type="NamedNodeMap"/>
 <var name="entitiesMap2" type="NamedNodeMap"/>
-<var name="ent1" type="Entity"/>
-<var name="ent2" type="Entity"/>
+<var name="alpha" type="Entity"/>
+<var name="beta" type="Entity"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc1" href="staffNS" willBeModified="false"/>
-<load var="doc2" href="staffNS" willBeModified="false"/>
+<load var="doc1" href="hc_staff" willBeModified="false"/>
+<load var="doc2" href="hc_staff" willBeModified="false"/>
 <doctype var="docType1" obj="doc1"/>
 <doctype var="docType2" obj="doc2"/>
 <entities var="entitiesMap1" obj="docType1"/>
 <entities var="entitiesMap2" obj="docType2"/>
-<getNamedItem var="ent1" obj="entitiesMap1" name='"ent4"'/>
-<getNamedItem var="ent2" obj="entitiesMap2" name='"ent4"'/>
-<isEqualNode var="isEqual" obj="ent1" arg="ent2"/>
+<getNamedItem var="alpha" obj="entitiesMap1" name='"delta"'/>
+<getNamedItem var="beta" obj="entitiesMap2" name='"delta"'/>
+<isEqualNode var="isEqual" obj="alpha" arg="beta"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode25"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 	Using insertBefore on a DocumentFragment node attempt to insert a child nodes before
-	other permissible nodes and verfiy the contents/name of each inserted node.
+	other permissible nodes and verify the contents/name of each inserted node.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -43,14 +43,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="inserted" type="Node"/>
 <var name="insertedVal" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <createElementNS var="elem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
 <createProcessingInstruction var="pi" obj="doc" target='"PITarget"' data='"PIData"' />
 <createComment var="comment" obj="doc" data='"Comment"' />
 <createTextNode var="txt" obj="doc" data='"Text"' />
 <createCDATASection var="cdata" obj="doc" data='"CDATA"' />
-<createEntityReference var="eRef" obj="doc" name='"ent1"' />
+<createEntityReference var="eRef" obj="doc" name='"alpha"' />
 <appendChild obj="docFrag" var="appendedChild" newChild="elem"/>
 <appendChild obj="docFrag" var="appendedChild" newChild="pi"/>
 <appendChild obj="docFrag" var="appendedChild" newChild="comment"/>
@@ -73,6 +73,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="insertedVal" expected='"CDATA"' id="nodeinsertbefore11_CDATA" ignoreCase="false"/>
 <insertBefore var="inserted" obj="docFrag" newChild="eRef" refChild="cdata"/>
 <nodeName var="insertedVal" obj="inserted" />
-<assertEquals actual="insertedVal" expected='"ent1"' id="nodeinsertbefore11_Ent1" ignoreCase="false"/>
+<assertEquals actual="insertedVal" expected='"alpha"' id="nodeinsertbefore11_Ent1" ignoreCase="false"/>
 
 </test>

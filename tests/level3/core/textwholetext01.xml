@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -34,8 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementName" type="Element"/>
 <var name="textNode" type="Text"/>
 <var name="NameWholeText" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"name"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"strong"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <firstChild var="textNode" obj="elementName" interface="Node"/>
 <wholeText obj="textNode" var="NameWholeText"/>

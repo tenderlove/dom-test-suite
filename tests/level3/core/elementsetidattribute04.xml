@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>elementsetidattribute04</title>
 <creator>IBM</creator>
 <description>
-	First use setAttribute to create a new attribute on the third name element.  Invoke setIdAttribute
+	First use setAttribute to create a new attribute on the third strong element.  Invoke setIdAttribute
 	on the new  attribute. Verify by calling isID on the new attribute and getElementById on document.
 	Invoke setIdAttribute again to reset. Calling isID should return false.
 </description>
@@ -38,8 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="id" type="boolean" value="false"/>
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
 <item var="nameElem" obj="elemList" index="2" interface="NodeList"/>
 <setAttribute obj="nameElem" name= '"hasMiddleName"' value='"Antoine"'/>
 <setIdAttribute obj="nameElem" name='"hasMiddleName"' isId="true"/>
@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertTrue actual="id" id="elementsetidattributeIsIdTrue03"/>
 <getElementById obj="doc" var="elem" elementId='"Antoine"'/>
 <tagName obj="elem" var="elemName"/>
-<assertEquals actual="elemName" expected='"name"' id="elementsetidattributeGetElementById03" ignoreCase="false"/>
+<assertEquals actual="elemName" expected='"strong"' id="elementsetidattributeGetElementById03" ignoreCase="false"/>
 <setIdAttribute obj="nameElem" name='"hasMiddleName"' isId="false"/>
 <isId var="id" obj="attr"/>
 <assertFalse actual="id" id="elementsetidattributeIsIdFalse03"/>

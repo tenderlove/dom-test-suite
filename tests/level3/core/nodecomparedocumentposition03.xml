@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -35,12 +35,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="docComp" type="Document"/>
 <var name="documentPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<load var="docComp" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<load var="docComp" href="hc_staff" willBeModified="false"/>
 <compareDocumentPosition var="documentPosition" obj="doc" other="docComp"/>
-<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentposition1DisconnectedImpSpecPreceding03" ignoreCase="false"/>
+<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentposition1DisconnectedImpSpecPRECEEDING03" ignoreCase="false"/>
 <compareDocumentPosition var="documentPosition" obj="docComp" other="doc"/>
 <assertEquals  actual="documentPosition" expected="37" id="nodecomparedocumentposition2DisconnectedImpSpecFollowing03" ignoreCase="false"/>
 <compareDocumentPosition var="documentPosition" obj="doc" other="docComp"/>
-<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentposition3DisconnectedImpSpecPreceding03" ignoreCase="false"/>
+<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentposition3DisconnectedImpSpecPRECEEDING03" ignoreCase="false"/>
 </test>

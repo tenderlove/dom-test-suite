@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -33,21 +33,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <var name="positionList" type="NodeList"/>
-<var name="name" type="Element"/>
-<var name="position" type="Element"/>
+<var name="strong" type="Element"/>
+<var name="code" type="Element"/>
 <var name="newElem" type="Element"/>
 <var name="namePosition" type="int"/>
 <var name="elemPosition" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="nameList" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
-<item var="name" obj="nameList" index="0" interface="NodeList"/>
-<getElementsByTagNameNS var="positionList" obj="doc" localName='"position"' namespaceURI='"*"' interface="Document"/>
-<item var="position" obj="positionList" index="1" interface="NodeList"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="nameList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+<item var="strong" obj="nameList" index="0" interface="NodeList"/>
+<getElementsByTagNameNS var="positionList" obj="doc" localName='"code"' namespaceURI='"*"' interface="Document"/>
+<item var="code" obj="positionList" index="1" interface="NodeList"/>
 <createElementNS var="newElem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:position"'/>
-<appendChild obj="position" var="appendedChild" newChild="newElem"/>
-<compareDocumentPosition var="namePosition" obj="name" other="newElem"/>
+<appendChild obj="code" var="appendedChild" newChild="newElem"/>
+<compareDocumentPosition var="namePosition" obj="strong" other="newElem"/>
 <assertEquals  actual="namePosition" expected="4" id="nodecomparedocumentpositionFollowing31" ignoreCase="false"/>
-<compareDocumentPosition var="elemPosition" obj="newElem" other="name"/>
-<assertEquals  actual="elemPosition" expected="2" id="nodecomparedocumentpositionPreceding31" ignoreCase="false"/>
+<compareDocumentPosition var="elemPosition" obj="newElem" other="strong"/>
+<assertEquals  actual="elemPosition" expected="2" id="nodecomparedocumentpositionPRECEEDING31" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeinsertbefore20</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using insertBefore on an Element node attempt to insert a new Attr node, before 
 	an EntityReference child and verify if a HIERARCHY_REQUEST_ERR is raised.
 </description>
@@ -39,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newNode" type="Attr"/>
 <var name="childList" type="NodeList"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
 <item var="element" obj="childList" index="2" interface="NodeList"/>
 <firstChild var="refNode" obj="element" interface="Node"/>
 <createAttributeNS var="newNode" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"'/>

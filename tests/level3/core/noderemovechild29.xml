@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,10 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild29</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Using removeChild on a namepsace Attribute node attempt to remove its Text child node and
+	Using removeChild on a namespace Attribute node attempt to remove its Text child node and
 	and verify the name of the returned node that was removed.  Now attempt the reverse
 	and verify if a NOT_FOUND_ERR is thrown.
 </description>
@@ -42,15 +39,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removed" type="Text"/>
 <var name="removedName" type="DOMString"/>
 <var name="removedNode" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
 <item var="elem" obj="parentList" index="0" interface="NodeList"/>
 <attributes var="attrsMap" obj="elem"/>
-<getNamedItem var="parent" obj="attrsMap" name='"xmlns"'/>
+<getNamedItem var="parent" obj="attrsMap" name='"xmlns:dmstc"'/>
 <firstChild var="child" obj="parent" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeValue obj="removed" var="removedName"/>
-<assertEquals actual="removedName" expected='"http://www.nist.gov"' id="noderemovechild29" ignoreCase="false"/>
+<assertEquals actual="removedName" expected='"http://www.usa.com"' id="noderemovechild29" ignoreCase="false"/>
 <assertDOMException id="NOT_FOUND_ERR_noderemovechild29">
 <NOT_FOUND_ERR>
 <removeChild obj="child" var="removedNode" oldChild="parent" />

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-	Using removeChild on the first 'employee' Element node attempt to remove a CDATASection 
+	Using removeChild on the first 'p' Element node attempt to remove a CDATASection 
 	node child and verify the contents of the returned node that was removed.  Now attempt
 	the reverse and verify if a NOT_FOUND_ERR is thrown.
 </description>
@@ -40,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removed" type="CDATASection"/>
 <var name="removedValue" type="DOMString"/>
 <var name="removedNode" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document" />
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document" />
 <item var="parent" obj="parentList" index="1" interface="NodeList"/>
 <lastChild var="child" obj="parent" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />

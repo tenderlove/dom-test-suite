@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 	Using insertBefore on this Document node attempt to insert a Comment node created by
-	this Document before another Document's DocumentElement node and verfiy if a 
+	this Document before another Document's DocumentElement node and verify if a 
 	NOT_FOUND_ERR is raised.
 </description>
 <contributor>Neil Delima</contributor>
@@ -38,8 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docElem" type="Element"/>
 <var name="newComment" type="Comment"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<load var="docAlt" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<load var="docAlt" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="docAlt"/>
 <createComment var="newComment" obj="doc" data='"Comment"' />
 <assertDOMException id="NOT_FOUND_ERR_nodeinsertbefore08">

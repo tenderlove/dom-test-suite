@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element1" type="Element"/>
 <var name="element2" type="Element"/>
 <var name="isSame" type="boolean"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <documentElement  var="element1" obj="doc"/>
 <documentElement  var="element2" obj="doc"/>
 <isSameNode var="isSame" obj="element2" other="element1"/>

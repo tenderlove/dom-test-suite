@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,36 +21,35 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>attrisid05</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Retrieve the fourth address element's zone attribute, whose type is ID.  
-	Deep clone the element node and append it as a sibling of the address node.
-	We now have two zone attributes of type ID with identical values.   
-	Invoke isID on the street attribute, should this return true???
+	Retrieve the fourth acronym element's id attribute, whose type is ID.  
+	Deep clone the element node and append it as a sibling of the acronym node.
+	We now have two id attributes of type ID with identical values.   
+	Invoke isID on the class attribute, should this return true???
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2003-03-04</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
-<var name="addressElem" type="Element"/>
-<var name="clonedAddressElem" type="Element"/>
-<var name="addressParentElem" type="Element"/>
+<var name="acronymElem" type="Element"/>
+<var name="clonedacronymElem" type="Element"/>
+<var name="acronymParentElem" type="Element"/>
 <var name="appendedNode" type="Node"/>
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <var name="id" type="boolean" value="false"/>
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-<item var="addressElem" obj="elemList" index="3" interface="NodeList"/>
-<parentNode var="addressParentElem" obj="addressElem" interface="Node"/>
-<cloneNode var="clonedAddressElem" obj="addressElem" deep="true"/>
-<appendChild var="appendedNode" obj="addressParentElem" newChild="clonedAddressElem"/>
-<getAttributeNodeNS var="attr" obj="addressElem" namespaceURI='"http://www.nist.gov"' localName='"zone"'/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<item var="acronymElem" obj="elemList" index="3" interface="NodeList"/>
+<parentNode var="acronymParentElem" obj="acronymElem" interface="Node"/>
+<cloneNode var="clonedacronymElem" obj="acronymElem" deep="true"/>
+<appendChild var="appendedNode" obj="acronymParentElem" newChild="clonedacronymElem"/>
+<getAttributeNode var="attr" obj="acronymElem" name='"id"'/>
 <isId var="id" obj="attr"/>
 <assertTrue actual="id" id="AttrIsIDTrue05"/>
 </test>

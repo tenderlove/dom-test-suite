@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -44,14 +44,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="renamedPi" type="Node"/>
 <var name="renamedEntRef" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:newD"' doctype="nullDocType"/>
 <createTextNode var="text" obj="newDoc" data='"text"'/>
 <createComment var="comment" obj="newDoc" data='"comment"'/>
 <createCDATASection var="cdata" obj="newDoc" data='"cdata"'/>
 <createProcessingInstruction var="pi" obj="newDoc" target='"pit"' data='"pid"'/>
-<createEntityReference var="entref" obj="newDoc" name='"ent1"'/>
+<createEntityReference var="entref" obj="newDoc" name='"alpha"'/>
 <assertDOMException id="documentrenamenode27_Text_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>
 <renameNode var="renamedTxt" obj="newDoc" n="text" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"text"'/>

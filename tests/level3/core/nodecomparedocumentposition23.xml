@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using compareDocumentPosition check if the document position of an Entity node compared to another
-	Entity node following it in DocumentType is implementation specific and preceding
+	Entity node following it in DocumentType is implementation specific and PRECEEDING
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-20</date>
@@ -35,11 +35,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entity" type="Entity"/>
 <var name="entity2" type="Entity"/>
 <var name="entityPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitiesMap" obj="docType"/>
-<getNamedItem var="entity" obj="entitiesMap" name='"ent1"'/>
-<getNamedItem var="entity2" obj="entitiesMap" name='"ent4"'/>
+<getNamedItem var="entity" obj="entitiesMap" name='"alpha"'/>
+<getNamedItem var="entity2" obj="entitiesMap" name='"delta"'/>
 <compareDocumentPosition var="entityPosition" obj="entity" other="entity2"/>
-<assertEquals  actual="entityPosition" expected="36" id="nodecomparedocumentpositionImpSpecificPreceding23" ignoreCase="false"/>
+<assertEquals  actual="entityPosition" expected="36" id="nodecomparedocumentpositionImpSpecificPRECEEDING23" ignoreCase="false"/>
 </test>

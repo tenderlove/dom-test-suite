@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild16</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Using removeChild on the first 'employee' Element node attempt to remove its employeeId
-	Element child and verify the name of the rturned node that was removed.  Now attempt
+	Using removeChild on the first 'p' Element node attempt to remove its 'em'
+	Element child and verify the name of the returned node that was removed.  Now attempt
 	the reverse and verify if a NOT_FOUND_ERR is thrown.
 </description>
 <contributor>Neil Delima</contributor>
@@ -42,14 +39,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removed" type="Element"/>
 <var name="removedName" type="DOMString"/>
 <var name="removedNode" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
-<item var="parent" obj="parentList" index="0" interface="NodeList"/>
-<childNodes var="childList" obj="parent"/>
-<item var="child" obj="childList" index="0" interface="NodeList"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"em"' interface="Document"/>
+<item var="child" obj="parentList" index="0" interface="NodeList"/>
+<parentNode var="parent" obj="child" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeName obj="removed" var="removedName"/>
-<assertEquals actual="removedName" expected='"employeeId"' id="noderemovechild16" ignoreCase="false"/>
+<assertEquals actual="removedName" expected='"em"' id="noderemovechild16" ignoreCase="false"/>
 <assertDOMException id="NOT_FOUND_ERR_noderemovechild16">
 <NOT_FOUND_ERR>
 <removeChild obj="child" var="removedNode" oldChild="parent" />

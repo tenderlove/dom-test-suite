@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -41,8 +41,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childList" type="NodeList"/>
 <var name="appendedChild" type="Node"/>
 <var name="inserted" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<load var="doc2" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<load var="doc2" href="hc_staff" willBeModified="true"/>
 <createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
 <createElementNS var="refNode" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:refNode"'/>
 <createTextNode var="newNode" obj="doc2" data='"TextNode"' />

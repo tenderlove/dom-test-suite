@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild13</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on this Document node attempt to replace this DocumentType node with 
 	a new DocumentType and verify the name of the replaced DocumentType node.
 </description>
@@ -40,11 +37,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="nullPubId" type="DOMString" isNull="true"/>
 <var name="nullSysId" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<var name="docElem" type="Element"/>
+<var name="docElemName" type="DOMString"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<tagName var="docElemName" obj="docElem"/>
 <doctype var="docType" obj="doc"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"'  publicId="nullPubId" systemId="nullSysId"/>
 <replaceChild var="replaced" obj="doc" oldChild="docType" newChild="newDocType"/>
 <nodeName var="nodeName" obj="replaced"/>
-<assertEquals actual="nodeName" expected='"staff"' id="nodereplacechild13" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='docElemName' id="nodereplacechild13" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode05</title>
 <creator>IBM</creator>
 <description>
-	Invoke adoptNode on a new document to adopt the default attribute defaultAttr.  Check if 
+	Invoke adoptNode on a new document to adopt the default attribute "dir".  Check if 
 	this attribute has been adopted successfully by verifying the nodeName, namespaceURI, prefix, 
 	specified and ownerElement attributes of the adopted node.
 </description>
@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domImpl" type="DOMImplementation"/>
 <var name="elementEmp" type="Element"/>
 <var name="childList" type="NodeList"/>
-<var name="defaultAttr"  type="Attr"/>
+<var name="dir"  type="Attr"/>
 <var name="adoptedAttr" type="Node"/>
 <var name="nodeName" type="DOMString"/>
 <var name="nodeNamespaceURI" type="DOMString"/>
@@ -43,19 +43,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrOwnerElem" type="Element"/>
 <var name="isSpecified" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:l3"' doctype="nullDocType"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
-<item var="elementEmp" obj="childList" index="1" interface="NodeList"/>
-<getAttributeNode var="defaultAttr" obj="elementEmp" name='"defaultAttr"'/>
-<adoptNode var="adoptedAttr" obj="newDoc" source="defaultAttr"/>
+<getElementsByTagNameNS var="childList" obj="doc" localName='"p"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="elementEmp" obj="childList" index="3" interface="NodeList"/>
+<getAttributeNode var="dir" obj="elementEmp" name='"dir"'/>
+<adoptNode var="adoptedAttr" obj="newDoc" source="dir"/>
 <nodeName var="nodeName" obj="adoptedAttr"/>
 <namespaceURI var="nodeNamespaceURI" obj="adoptedAttr" interface="Node"/>
 <prefix var="nodePrefix"  obj="adoptedAttr"/>
 <ownerElement var="attrOwnerElem" obj="adoptedAttr" interface="Attr"/>
 <specified var="isSpecified"  obj="adoptedAttr" />
-<assertEquals expected='"defaultAttr"' actual="nodeName"  id="documentadoptnode05_nodeName" ignoreCase="false"/>
+<assertEquals expected='"dir"' actual="nodeName"  id="documentadoptnode05_nodeName" ignoreCase="false"/>
 <assertNull actual="nodeNamespaceURI"  id="documentadoptnode05_namespaceURI"/>
 <assertNull actual="nodePrefix"  id="documentadoptnode05_prefix"/>
 <assertNull  actual="attrOwnerElem"  id="documentadoptnode05_ownerDoc"/>

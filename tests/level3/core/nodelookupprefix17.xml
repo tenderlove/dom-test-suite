@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupprefix17</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Invoke lookupPrefix on the domestic attribute node of the address node with
-	a namsepaceURI and a node prefix and check if the value of the prefix returned by 
+	Invoke lookupPrefix on the title attribute node of the acronym node with
+	a namespaceURI and a node prefix and check if the value of the prefix returned by 
 	using its namespaceURI as a parameter is valid.
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -39,11 +36,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <var name="prefix" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="2" interface="NodeList"/>
 <attributes var="attributesMap" obj="elem"/>
-<getNamedItem var="attr" obj="attributesMap" name='"dmstc:domestic"'/>
+<getNamedItem var="attr" obj="attributesMap" name='"xsi:noNamespaceSchemaLocation"'/>
 <lookupPrefix var="prefix" obj="attr" namespaceURI='"http://www.netzero.com"'/>
 <assertEquals  actual="prefix" expected='"dmstc"' id="nodelookupprefix17" ignoreCase="false"/>
 </test>

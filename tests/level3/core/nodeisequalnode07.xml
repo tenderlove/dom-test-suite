@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -35,8 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem1" type="Element"/>
 <var name="elem2" type="Element"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc1" href="staffNS" willBeModified="false"/>
-<load var="doc2" href="staffNS" willBeModified="false"/>
+<load var="doc1" href="hc_staff" willBeModified="false"/>
+<load var="doc2" href="hc_staff" willBeModified="false"/>
 <createElementNS var="elem1" obj="doc1" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
 <createElementNS var="elem2" obj="doc2" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisdefaultnamespace01</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Using isDefaultNamespace on this Document node with the value of the namespaceURI parameter
-	as null check if the value returned is true.
+	Using isDefaultNamespace on this Document node with the
+	namespace of the document element check if the value returned is true.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -34,8 +31,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="isDefault" type="boolean"/>
-<var name="nullNSURI" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<isDefaultNamespace var="isDefault" obj="doc" namespaceURI="nullNSURI"/>
+<var name="docElem" type="Element"/>
+<var name="docElemNS" type="DOMString"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="docElemNS" obj="docElem" interface="Node"/>
+<isDefaultNamespace var="isDefault" obj="doc" namespaceURI="docElemNS"/>
 <assertTrue  actual="isDefault" id="nodeisdefaultnamespace01"/>
 </test>

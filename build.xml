@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.118  2003-12-19 06:25:24  dom-ts-4
+Revision 1.119  2004-01-05 08:27:14  dom-ts-4
+XHTML compatible L3 Core tests  (bug 455)
+
+Revision 1.118  2003/12/19 06:25:24  dom-ts-4
 Force evaluation of metadata transform (bug 395)
 
 Revision 1.117  2003/12/15 18:07:04  dom-ts-4
@@ -391,6 +394,13 @@ All implementation conditions combined into implementationAttribute element
 -->
 <project default="usage" basedir=".">
     <property name="xdk10.lib.dir" location="/xdk_10/lib"/>
+    <!-- 
+       specifying -Dno-network=true on command line
+       should allow building without a network
+       connection as long as all necessary files 
+       have previously been downloaded.
+    -->    
+    <property name="no-network" value="false"/>
 
 <target name="usage">
 	<echo message="common targets:"/>
@@ -620,6 +630,7 @@ All implementation conditions combined into implementationAttribute element
 		   includes="org/w3c/domts/*.java" 
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"
+		   target="1.1"
            debug="on"
 		   encoding="UTF8"/>
 </target>
@@ -635,7 +646,9 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-junit-license" depends="init" unless="junit-license-available">
     <get src="http://oss.software.ibm.com/developerworks/opensource/license10.html"
-         dest="${lib.dir}/junit-license.html"/>
+         dest="${lib.dir}/junit-license.html"
+         usetimestamp="true"
+         ignoreerrors="${no-network}"/>
 </target>
 
 
@@ -659,6 +672,7 @@ All implementation conditions combined into implementationAttribute element
            destdir="${java.build.dir}/junit"
            classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"           
            debug="on"
+           target="1.1"
 		   encoding="UTF8"/>
 
 
@@ -677,22 +691,28 @@ All implementation conditions combined into implementationAttribute element
     <mkdir dir="${lib.dir}/xhtml1-dtd"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"
         dest="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
         dest="${lib.dir}/xhtml1-dtd/xhtml1-transitional.dtd"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
         dest="${lib.dir}/xhtml1-dtd/xhtml1-strict.dtd"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent"
         dest="${lib.dir}/xhtml1-dtd/xhtml-lat1.ent"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent"
         dest="${lib.dir}/xhtml1-dtd/xhtml-symbol.ent"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent"
         dest="${lib.dir}/xhtml1-dtd/xhtml-special.ent"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <!--  determines if DOM 1 spec files are already available locally  -->
@@ -707,7 +727,8 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download DOM 1 spec to specs directory   -->
 	<get src="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/DOM.zip"
 	     dest="${specs.dir}/DOM.zip"
-	     usetimestamp="yes"/>
+	     usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="dom1-init" depends="get-dom1">
@@ -839,7 +860,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml" excludes="nodtdstaff.xml"/>  
+		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
 	</xmlvalidate>
 </target>
 
@@ -875,6 +896,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8"/>
 </target>
 
@@ -885,7 +907,7 @@ All implementation conditions combined into implementationAttribute element
     </antcall>
 </target>
 
-<target name="dom1-core-jar" depends="dom1-core-javac,get-xhtml1-dtd">
+<target name="dom1-core-jar" depends="dom1-core-javac,dom1-core-validate-files">
 	<antcall target="jar">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -979,7 +1001,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml" excludes="nodtdstaff.xml"/>  
+		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml"/>  
 	</xmlvalidate>
 </target>
 
@@ -1012,6 +1034,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8"/>
 </target>
 
@@ -1055,7 +1078,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="dom1-html-jar" depends="dom1-html-javac,get-xhtml1-dtd">
+<target name="dom1-html-jar" depends="dom1-html-javac,dom1-html-validate-files">
 	<antcall target="jar">
 		<param name="level" value="1"/>
 		<param name="module" value="html"/>
@@ -1103,7 +1126,8 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/DOM2-Core.zip"
 		dest="${specs.dir}/DOM2-Core.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom2-views" depends="dom2-check-spec" unless="dom2-views-available">
@@ -1111,11 +1135,13 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/DOM2-Views.zip"
 		dest="${specs.dir}/DOM2-Views.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 
     <get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/java-binding.zip"
         dest="${specs.dir}/DOM2-Views-Java-Binding.zip"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 
 </target>
 
@@ -1124,10 +1150,12 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/DOM2-Events.zip"
 		dest="${specs.dir}/DOM2-Events.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/java-binding.zip"
         dest="${specs.dir}/DOM2-Events-Java-Binding.zip"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom2-style" depends="dom2-check-spec" unless="dom2-style-available">
@@ -1135,7 +1163,8 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/DOM2-Style.zip"
 		dest="${specs.dir}/DOM2-Style.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 
@@ -1144,7 +1173,8 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/DOM2-Traversal-Range.zip"
 		dest="${specs.dir}/DOM2-Traversal-Range.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
@@ -1152,13 +1182,16 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <get src="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/java-binding.zip"
         dest="${specs.dir}/DOM2-HTML-Java-Binding.zip"
-        usetimestamp="yes"/>
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
     <!-- get src="http://www.w3.org/2002/08/xmlspec-v22-dom.dtd"
         dest="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"
-        usetimestamp="yes"/ -->
+        usetimestamp="yes"
+        ignoreerrors="${no-network}"/ -->
 </target>
 
 <target name="get-xmlspec-v22-dom-dtd" depends="dom2-check-spec" 
@@ -1167,7 +1200,8 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}/pubtext"/>
 	<get src="http://www.w3.org/2002/08/xmlspec-v22-dom.dtd"
 		dest="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom2" depends="get-dom2-core,get-dom2-events,get-xmlspec-v22-dom-dtd,get-dom2-html,get-dom2-views,get-dom2-traversal,get-dom2-style">
@@ -1329,6 +1363,16 @@ All implementation conditions combined into implementationAttribute element
     </style>
 </target>
 
+<target name="dom2-core-validate-files" depends="get-xhtml1-dtd">
+    <copy todir="${tests.dir}/level2/core/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/core/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
+	</xmlvalidate>
+</target>
 
 
 <target name="dom2-interfaces" depends="dom2-init">
@@ -1385,6 +1429,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8"/>
 </target>
 
@@ -1396,7 +1441,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-core-jar" depends="dom2-core-javac,get-xhtml1-dtd">
+<target name="dom2-core-jar" depends="dom2-core-javac,dom2-core-validate-files">
 	<antcall target="jar">
 		<param name="level" value="2"/>
 		<param name="module" value="core"/>
@@ -1464,6 +1509,18 @@ All implementation conditions combined into implementationAttribute element
     </ant>
 </target>
 
+<target name="dom2-html-validate-files" depends="get-xhtml1-dtd">
+    <copy todir="${tests.dir}/level2/html/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/html/files" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
+
 <target name="dom2-html-gen-java" depends="dom2-interfaces,dom2-dtd">
 	<antcall target="gen-java">
 		<param name="level" value="2"/>
@@ -1493,6 +1550,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">  
         <src path="${java.build.dir}"/>
         <src path="${specs.dir}/Level-2/HTML/java"/>
@@ -1510,7 +1568,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-html-jar" depends="dom2-html-javac,get-xhtml1-dtd">
+<target name="dom2-html-jar" depends="dom2-html-javac,dom2-html-validate-files">
 	<antcall target="jar">
 		<param name="level" value="2"/>
 		<param name="module" value="html"/>
@@ -1567,6 +1625,20 @@ All implementation conditions combined into implementationAttribute element
 
 <!--   DOM Level 2 Events   -->
 
+<target name="dom2-events-validate-files" depends="get-xhtml1-dtd">
+    <copy todir="${tests.dir}/level2/events/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+    
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/events/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
+	</xmlvalidate>
+</target>
+
+
+
+
 <target name="dom2-events-validate-tests" depends="dom2-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
@@ -1598,6 +1670,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${specs.dir}/Level-2/Events/java"/>
@@ -1616,7 +1689,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-events-jar" depends="dom2-events-javac,get-xhtml1-dtd">
+<target name="dom2-events-jar" depends="dom2-events-javac,dom2-events-validate-files">
 	<antcall target="jar">
 		<param name="level" value="2"/>
 		<param name="module" value="events"/>
@@ -1705,39 +1778,45 @@ All implementation conditions combined into implementationAttribute element
 	<!--   download DOM 3 Core spec to specs directory   -->
 	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom3-ls" depends="dom3-available"><!-- unless="dom3-ls-available" -->
 	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/DOM3-LS.zip"
 		dest="${specs.dir}/DOM3-LS.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom3-val" depends="dom3-available"><!-- unless="dom3-val-available"-->
 	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/DOM3-Val.zip"
 		dest="${specs.dir}/DOM3-Val.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 
 <target name="get-dom3-xpath" depends="dom3-available" unless="dom3-xpath-available">
 	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-XPath-20030331/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom3-events" depends="dom3-available"><!-- unless="dom3-events-available"-->
 	<get src="http://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/DOM3-Events.zip"
 		dest="${specs.dir}/DOM3-Events.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 
 <!--target name="get-dom3-views" depends="dom3-available" unless="dom3-views-available">
 	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-3-Views-20001115/DOM3-Views.zip"
 		dest="${specs.dir}/DOM3-Views.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target-->
 
 <target name="get-dom3" depends="get-xmlspec-v22-dom-dtd,get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events"><!--,get-dom3-views"-->
@@ -1835,6 +1914,7 @@ All implementation conditions combined into implementationAttribute element
 	<copy file="${build.dir}/dom3.xsd" todir="${tests.dir}/level3/xpath" overwrite="true"/>
 	<copy file="${build.dir}/dom3.xsd" todir="${tests.dir}/level3/core" overwrite="true"/>
 	<copy file="${build.dir}/dom3.xsd" todir="${tests.dir}/level3/validation" overwrite="true"/>
+	<copy file="${build.dir}/dom3.xsd" todir="${tests.dir}/level3/events" overwrite="true"/>
 </target>
 
 <target name="dom3-dtd" depends="dom3-interfaces">
@@ -1916,7 +1996,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="no"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml"/>  
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
 	</xmlvalidate>
 </target>
 
@@ -1926,6 +2006,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
         fork="true"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
@@ -1953,7 +2034,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-core-jar" depends="dom3-core-javac,get-xhtml1-dtd">
+<target name="dom3-core-jar" depends="dom3-core-javac,dom3-core-validate-files">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="core"/>
@@ -2075,6 +2156,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${xdk10.lib.dir}/xmlparserv2.jar;${java.build.dir}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <include name="org/w3c/domts/level3/core/*"/>
@@ -2186,6 +2268,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -2294,6 +2377,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -2364,6 +2448,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${xdk10.lib.dir}/xmlparserv2.jar;${java.build.dir}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <include name="org/w3c/domts/level3/ls/*"/>
@@ -2475,6 +2560,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -2582,6 +2668,7 @@ All implementation conditions combined into implementationAttribute element
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -2722,6 +2809,7 @@ it would compile all DOM 3 java code
 		destdir="${java.build.dir}"
 		classpath="${java.build.dir};${jaxp.jar}"
                 debug="on"
+        target="1.1"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <include name="org/w3c/domts/level3/${module}/*"/>
@@ -2757,7 +2845,8 @@ it would compile all DOM 3 java code
 	<!--   download SVG 1.0 Recommendation to specs directory   -->
 	<get src="http://www.w3.org/TR/2001/REC-SVG-20010904/REC-SVG-20010904.zip"
 		dest="${specs.dir}/SVG.zip"
-		usetimestamp="yes"/>
+		usetimestamp="yes"
+        ignoreerrors="${no-network}"/>
 </target>
 
 <target name="svg-init" depends="get-svg">

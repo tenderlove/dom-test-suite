@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupprefix07</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Invoke lookupPrefix on an Element node with no prefix, which has a namespace
 	attribute declaration with a namespace prefix in its parent Element node and check if the value of the prefix
 	returned by using its namespaceURI as a parameter is valid.
@@ -37,8 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="elemList" type="NodeList"/>
 <var name="prefix" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employeeId"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"em"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="2" interface="NodeList"/>
 <lookupPrefix var="prefix" obj="elem" namespaceURI='"http://www.netzero.com"'/>
 <assertEquals  actual="prefix" expected='"dmstc"' id="nodelookupprefix07" ignoreCase="false"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txt" type="Text"/>
 <var name="eRef" type="EntityReference"/>
 <var name="removed" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<createEntityReference var="eRef" obj="doc" name='"ent1"'/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<createEntityReference var="eRef" obj="doc" name='"alpha"'/>
 <firstChild obj="eRef" var="txt" interface="Node"/>
 <assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_noderemovechild13">
 <NO_MODIFICATION_ALLOWED_ERR>

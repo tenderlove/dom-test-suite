@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -37,13 +37,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="EntityReference"/>
 <var name="elementPosition" type="int"/>
 <var name="entRefPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
 <item var="elemName" obj="elemList" index="2" interface="NodeList"/>
 <childNodes obj="elemName" var="gender2List"/>
 <item obj="gender2List" var="entRef" index="0" interface="NodeList"/>
 <compareDocumentPosition var="elementPosition" obj="elemName" other="entRef"/>
 <assertEquals  actual="elementPosition" expected="20" id="nodecomparedocumentpositionIsContainedFollowing25" ignoreCase="false"/>
 <compareDocumentPosition var="entRefPosition" obj="entRef" other="elemName"/>
-<assertEquals  actual="entRefPosition" expected="10" id="nodecomparedocumentpositionContainsPreceding25" ignoreCase="false"/>
+<assertEquals  actual="entRefPosition" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING25" ignoreCase="false"/>
 </test>

@@ -51,18 +51,17 @@
 
   <config var="configuration" obj="builder" interface="LSParser"/> 
 
+  <getResourceURI var="resourceURI" href="TESTPDF" scheme="http" contentType="application/pdf"/>
+  <parseURI var="document" obj="builder" uri="resourceURI"/>
+  <!--  
+ 	document should successfully parse since, properly configured,
+ 	testpdf.pdf is a valid XML file on the http server. 
+  --> 
+  <assertNotNull actual="document" id="testpdf_parsed"/>  	 
+
   <canSetParameter var="mediaTypesSupported" obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
   <if>
   	 <isTrue value="mediaTypesSupported"/>
-     <getResourceURI var="resourceURI" href="TESTPDF" scheme="http"/>
-	 <parseURI var="document" obj="builder" uri="resourceURI"/>
-	 <!--  
-	 	document should successfully parse since, properly configured,
-	 	testpdf.pdf is a valid XML file on the http server. 
-	 --> 
-	 <assertNotNull actual="document" id="testpdf_parsed"/>  	 
-  	 
-  	 
   	 <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
   	 <setParameter obj="configuration" name="ERROR_HANDLER" value="errorHandler"/>
 	 <parseURI var="document" obj="builder" uri="resourceURI"/>

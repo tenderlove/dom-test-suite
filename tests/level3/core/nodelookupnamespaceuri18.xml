@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupnamespaceuri18</title>
 <creator>IBM</creator>
 <description>
-
-
-	
-	Invoke lookupNamespaceURI on the default attribute node of the employee node with
-	a namsepaceURI and a node prefix and check if the value of the namespaceURI returned by 
+	Invoke lookupNamespaceURI on the default attribute node of the p node with
+	a namespaceURI and a node prefix and check if the value of the namespaceURI returned by 
 	using its prefix as a parameter is valid.
 </description>
 <contributor>Neil Delima</contributor>
@@ -39,11 +36,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <var name="namespaceURI" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <attributes var="attributesMap" obj="elem"/>
-<getNamedItem var="attr" obj="attributesMap" name='"defaultAttr"'/>
-<lookupNamespaceURI var="namespaceURI" obj="attr" prefix='"emp"' interface="Node" />
-<assertEquals  actual="namespaceURI" expected='"http://www.nist.gov"' id="nodelookupnamespaceuri18" ignoreCase="false"/>
+<getNamedItem var="attr" obj="attributesMap" name='"dir"'/>
+<lookupNamespaceURI var="namespaceURI" obj="attr" prefix='"nm"' interface="Node" />
+<assertEquals  actual="namespaceURI" expected='"http://www.altavista.com"' id="nodelookupnamespaceuri18" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -43,15 +43,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedNode" type="Node"/>
 <var name="removedName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
 <item var="elem" obj="parentList" index="3" interface="NodeList"/>
 <attributes var="attrsMap" obj="elem"/>
-<getNamedItem var="parent" obj="attrsMap" name='"defaultAttr"'/>
+<getNamedItem var="parent" obj="attrsMap" name='"dir"'/>
 <firstChild var="child" obj="parent" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeValue obj="removed" var="removedName"/>
-<assertEquals actual="removedName" expected='"defaultVal"' id="noderemovechild30" ignoreCase="false"/>
+<assertEquals actual="removedName" expected='"rtl"' id="noderemovechild30" ignoreCase="false"/>
 <assertDOMException id="NOT_FOUND_ERR_noderemovechild16">
 <NOT_FOUND_ERR>
 <removeChild obj="child" var="removedNode" oldChild="parent" />

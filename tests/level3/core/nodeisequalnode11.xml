@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -43,10 +43,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem3" type="Element"/>
 <var name="isEqual" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument  var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:doc"' doctype="nullDocType"/>
-<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
 <item var="elem1" obj="employeeList" index="0" interface="NodeList"/>
 <importNode var="elem2" obj="newDoc" importedNode="elem1" deep="false"/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>

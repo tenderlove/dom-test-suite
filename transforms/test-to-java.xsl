@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.57  2003-12-30 06:17:07  dom-ts-4
+Revision 1.58  2004-01-05 08:27:15  dom-ts-4
+XHTML compatible L3 Core tests  (bug 455)
+
+Revision 1.57  2003/12/30 06:17:07  dom-ts-4
 Miscellaneous L&S changes based on implementor feedback (bug 447)
 
 Revision 1.56  2003/12/23 03:27:25  dom-ts-4
@@ -1340,41 +1343,18 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:value-of select="@actual"/>
             <xsl:text>);
 </xsl:text>
-            <xsl:if test="*">
-                <xsl:text>      if (equalsIgnoreCase(</xsl:text>
-                <xsl:value-of select="@expected"/>
-                <xsl:text>, </xsl:text>
-                <xsl:value-of select="@actual"/>
-                <xsl:text>)) {
-      </xsl:text>
-                <xsl:apply-templates mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>      }
-      </xsl:text>
-            </xsl:if>
         </xsl:when>
         <xsl:otherwise>
             <xsl:text>assertEquals("</xsl:text>
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:value-of select="@expected"/>
+            <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
+            <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
             <xsl:text>);
       </xsl:text>
-            <xsl:if test="*">
-                <xsl:text>if (equals(</xsl:text>
-                <xsl:value-of select="@expected"/>,
-                <xsl:value-of select="@actual"/>
-                <xsl:text>)) {
-</xsl:text>
-                <xsl:apply-templates mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>      }
-      </xsl:text>
-            </xsl:if>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -1391,42 +1371,18 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:value-of select="@actual"/>
             <xsl:text>);
 </xsl:text>
-            <xsl:if test="*">
-                <xsl:text>if (!equalsIgnoreCase(</xsl:text>
-                <xsl:value-of select="@expected"/>
-                <xsl:text>, </xsl:text>
-                <xsl:value-of select="@actual"/>
-                <xsl:text>)) {
-</xsl:text>
-                <xsl:apply-templates mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>}
-</xsl:text>
-            </xsl:if>
         </xsl:when>
         <xsl:otherwise>
             <xsl:text>assertNotEquals("</xsl:text>
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:value-of select="@expected"/>
+            <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
+            <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
             <xsl:text>);
 </xsl:text>
-            <xsl:if test="*">
-                <xsl:text>if (!equals(</xsl:text>
-                <xsl:value-of select="@expected"/>
-                <xsl:text>, </xsl:text>
-                <xsl:value-of select="@actual"/>
-                <xsl:text>)) {
-</xsl:text>
-                <xsl:apply-templates mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>}
-</xsl:text>
-            </xsl:if>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -1755,7 +1711,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:value-of select="@var"/>
     <xsl:text> = getResourceURI(</xsl:text>
     <xsl:value-of select="@href"/>
-    <xsl:text>,"</xsl:text>
+    <xsl:text>, "</xsl:text>
     <xsl:choose>
     	<xsl:when test="@scheme">
     		<xsl:value-of select="@scheme"/>
@@ -1764,7 +1720,18 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     		<xsl:text>file</xsl:text>
     	</xsl:otherwise>
     </xsl:choose>
-    <xsl:text>");
+    <xsl:text>", </xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@contentType">
+    		<xsl:text>"</xsl:text>
+    		<xsl:value-of select="@contentType"/>
+    		<xsl:text>"</xsl:text>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>null</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>);
       </xsl:text>
 </xsl:template>
 
@@ -2264,7 +2231,11 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:text>equals(</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
-    <xsl:value-of select="@expected"/>, <xsl:value-of select="@actual"/>
+    <xsl:value-of select="@expected"/>
+    <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
+    <xsl:text>, </xsl:text>
+    <xsl:value-of select="@actual"/>
+    <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
     <xsl:text>)</xsl:text>
 </xsl:template>
 
@@ -2277,7 +2248,11 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:text>!equals(</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
-    <xsl:value-of select="@expected"/>, <xsl:value-of select="@actual"/>
+    <xsl:value-of select="@expected"/>
+    <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
+	<xsl:text>, </xsl:text>     
+    <xsl:value-of select="@actual"/>
+    <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
     <xsl:text>)</xsl:text>
 </xsl:template>
 

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: clover.xml,v $
-Revision 1.4  2003-12-22 17:39:46  dom-ts-4
+Revision 1.5  2004-01-05 08:27:14  dom-ts-4
+XHTML compatible L3 Core tests  (bug 455)
+
+Revision 1.4  2003/12/22 17:39:46  dom-ts-4
 Modified to use Xalan's XPath implementation (bug 397)
 
 Revision 1.3  2003/12/06 06:50:29  dom-ts-4
@@ -151,8 +154,9 @@ generates a coverage report
 </target>
 
 
+<target name="all-tests" depends="dom1-core, dom2-core, dom2-events"/>
 
-<target name="all-tests" depends="dom1-core, dom2-core, dom2-events, dom3-core, dom3-ls, dom3-xpath"/>
+<!-- target name="all-tests" depends="dom1-core, dom2-core, dom2-events, dom3-core, dom3-ls, dom3-xpath"/ -->
 
 
 <target name="report" depends="init">

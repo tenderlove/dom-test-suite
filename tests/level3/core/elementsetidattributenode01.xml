@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <title>elementsetidattributenode01</title>
     <creator>IBM</creator>
     <description>
-     Invoke setIdAttributeNode on the 3rd employee element using the domestic attribute as a parameter .  Verify by calling
+     Invoke setIdAttributeNode on the 3rd p element using the title attribute as a parameter .  Verify by calling
      isID on the attribute node and getElementById on document node. Call setIdAttributeNode again with isId=false
      to reset.  Invoke isId on the attribute node should return false.
     </description>
@@ -37,8 +37,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="id" type="boolean" value="false"/>
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
-  <load var="doc" href="staffNS" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
+  <load var="doc" href="hc_staff" willBeModified="true"/>
+  <getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
   <item var="employeeElem" obj="elemList" index="2" interface="NodeList"/>
   <attributes var="attributesMap" obj="employeeElem"/>
   <getNamedItem var="attr" obj="attributesMap" name='"xmlns:dmstc"'/>
@@ -47,7 +47,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <assertTrue actual="id" id="elementsetidattributenodeIsIdTrue01"/>
   <getElementById obj="doc" var="elem" elementId='"http://www.netzero.com"'/>
   <tagName obj="elem" var="elemName"/>
-  <assertEquals actual="elemName" expected='"employee"' id="elementsetidattributenodeGetElementById01" ignoreCase="false"/>
+  <assertEquals actual="elemName" expected='"p"' id="elementsetidattributenodeGetElementById01" ignoreCase="false"/>
   <setIdAttributeNode obj="elem" idAttr="attr" isId="false"/>
   <isId var="id" obj="attr"/>
   <assertFalse actual="id" id="elementsetidattributenodeIsIdFalse01"/>

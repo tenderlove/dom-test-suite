@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupprefix18</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Invoke lookupPrefix on the default attribute node of the employee node with
-	a namsepaceURI and a node prefix and check if the value of the prefix returned by 
+	Invoke lookupPrefix on the default attribute node of the p node with
+	a namespaceURI and a node prefix and check if the value of the prefix returned by 
 	using its namespaceURI as a parameter is valid.
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -39,13 +36,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <var name="prefix" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <attributes var="attributesMap" obj="elem"/>
-<getNamedItem var="attr" obj="attributesMap" name='"defaultAttr"'/>
-<lookupPrefix var="prefix" obj="attr" namespaceURI='"http://www.nist.gov"'/>
-<assertEquals  actual="prefix" expected='"emp"' id="nodelookupprefixA18" ignoreCase="false"/>
+<getNamedItem var="attr" obj="attributesMap" name='"dir"'/>
+<lookupPrefix var="prefix" obj="attr" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
+<assertNull  actual="prefix" id="xhtmlPrefixIsNull"/>
 <lookupPrefix var="prefix" obj="attr" namespaceURI='"http://www.altavista.com"'/>
 <assertEquals  actual="prefix" expected='"nm"' id="nodelookupprefixB18" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -43,9 +43,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="success" type="boolean"/>
 <var name="retUserData" type="DOMUserData"/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
-<createEntityReference name='"ent4"' obj="doc" var="entRef"/>
+<createEntityReference name='"delta"' obj="doc" var="entRef"/>
 <createCDATASection var="cData" obj="doc" data='"CDATASection"' />
 <setUserData obj="entRef" var="retUserData" key='"Key1"' data="doc" handler="nullHandler"/>
 <setUserData  obj="cData" var="retUserData" key='"Key2"' data="docElem" handler="nullHandler"/>

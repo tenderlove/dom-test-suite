@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 Append an entity reference and a text node after to the content of the
-first name element.  Then call replaceWholeText on initial content
+first strong element.  Then call replaceWholeText on initial content
 of that element.  Since the entity reference does not contain any 
 logically-adjacent text content, only the initial text element should
 be replaced. 
@@ -44,8 +44,8 @@ be replaced.
 <var name="node" type="Node"/>
 <var name="nodeValue" type="DOMString"/>
 <var name="nodeType" type="int"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"name"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"strong"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <createEntityReference var="erefNode" obj="doc" name='"ent4"'/>
 <createTextNode var="textNode" obj="doc" data='"New Text"'/>

@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.10  2003-12-23 03:27:25  dom-ts-4
+ Revision 1.11  2004-01-05 08:27:15  dom-ts-4
+ XHTML compatible L3 Core tests  (bug 455)
+
+ Revision 1.10  2003/12/23 03:27:25  dom-ts-4
  Adds fail construct (bug 445)
 
  Revision 1.9  2003/12/19 22:21:04  dom-ts-4
@@ -143,7 +146,9 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
   }
 
   public void assertEqualsIgnoreCase(DOMTestCase test, String assertID, String expected, String actual) {
-    assertTrue(assertID,expected.equalsIgnoreCase(actual));
+  	if (!expected.equalsIgnoreCase(actual)) {
+  		assertEquals(assertID,expected, actual);
+  	}
   }
 
   public void assertEqualsIgnoreCase(DOMTestCase test, String assertID, Collection expected, Collection actual) {

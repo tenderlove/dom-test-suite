@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 	Using compareDocumentPosition check the document position of the EntityReference node ent4's
 	first child and last child.  Invoke compareDocumentPositon on first child with last child as a parameter
-	should return FOLLOWING, and should return PRECEDING vice versa.
+	should return FOLLOWING, and should return PRECEEDING vice versa.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-20</date>
@@ -39,10 +39,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefChild2" type="ProcessingInstruction"/>
 <var name="entRefChild1Position" type="int"/>
 <var name="entRefChild2Position" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <if>
 <implementationAttribute name="expandEntityReferences" value="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
 <item var="elemName" obj="elemList" index="2" interface="NodeList"/>
 <childNodes obj="elemName" var="gender2List"/>
 <item interface="NodeList" obj="gender2List" var="entRef" index="0"/>
@@ -55,5 +55,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRefChild2"/>
 <assertEquals  actual="entRefChild1Position" expected="4" id="nodecomparedocumentpositionFollowing28" ignoreCase="false"/>
 <compareDocumentPosition var="entRefChild2Position" obj="entRefChild2" other="entRefChild1"/>
-<assertEquals  actual="entRefChild2Position" expected="2" id="nodecomparedocumentpositionPreceding28" ignoreCase="false"/>
+<assertEquals  actual="entRefChild2Position" expected="2" id="nodecomparedocumentpositionPRECEEDING28" ignoreCase="false"/>
 </test>

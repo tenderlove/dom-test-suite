@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <title>elementsetidattributenode04</title>
     <creator>IBM</creator>
     <description>
-     Create a new namespace attribute on the second Name element.  Invoke setIdAttributeNode on a newly created 
+     Create a new namespace attribute on the second strong element.  Invoke setIdAttributeNode on a newly created 
      attribute node.  Verify by calling isID on the attribute node and getElementById on document node. 
      Call setIdAttributeNode again with isId=false to reset.  Invoke isId on the attribute node should return false.
     </description>
@@ -38,8 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="id" type="boolean" value="false"/>
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
-  <load var="doc" href="staffNS" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
+  <load var="doc" href="hc_staff" willBeModified="true"/>
+  <getElementsByTagNameNS var="elemList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
   <item var="nameElem" obj="elemList" index="1" interface="NodeList"/>
   <setAttributeNS obj="nameElem" namespaceURI='"http://www.w3.org/2000/xmlns/"' qualifiedName='"xmlns:middle"'  value='"http://www.middleName.com"'/>
   <attributes var="attributesMap" obj="nameElem"/>
@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <assertTrue actual="id" id="elementsetidattributenodeIsIdTrue04"/>
   <getElementById obj="doc" var="elem" elementId='"http://www.middleName.com"'/>
   <tagName obj="elem" var="elemName"/>
-  <assertEquals actual="elemName" expected='"name"' id="elementsetidattributenodeGetElementById04" ignoreCase="false"/>
+  <assertEquals actual="elemName" expected='"strong"' id="elementsetidattributenodeGetElementById04" ignoreCase="false"/>
   <setIdAttributeNode obj="elem" idAttr="attr" isId="false"/>
   <isId var="id" obj="attr"/>
   <assertFalse actual="id" id="elementsetidattributenodeIsIdFalse04"/>

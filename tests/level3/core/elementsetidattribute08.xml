@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>elementsetidattribute08</title>
 <creator>IBM</creator>
 <description>
-	Invoke setIdAttribute street attribute on the second, thrid, and the fifth address element. 
+	Invoke setIdAttribute class attribute on the second, third, and the fifth acronym element. 
 	Verify by calling isID on the attributes and getElementById with the unique value "No" on document.
 	</description>
 <contributor>Jenny Hsu</contributor>
@@ -31,35 +31,35 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
-<var name="addressElem1" type="Element"/>
-<var name="addressElem2" type="Element"/>
-<var name="addressElem3" type="Element"/>
+<var name="acronymElem1" type="Element"/>
+<var name="acronymElem2" type="Element"/>
+<var name="acronymElem3" type="Element"/>
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <var name="id" type="boolean" value="false"/>
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-<item var="addressElem1" obj="elemList" index="1" interface="NodeList"/>
-<item var="addressElem2" obj="elemList" index="2" interface="NodeList"/>
-<item var="addressElem3" obj="elemList" index="4" interface="NodeList"/>
-<setIdAttribute obj="addressElem1" name='"street"' isId="true"/>
-<setIdAttribute obj="addressElem2" name='"street"' isId="true"/>
-<setIdAttribute obj="addressElem3" name='"street"' isId="true"/>
-<attributes var="attributesMap" obj="addressElem1"/>
-<getNamedItem var="attr" obj="attributesMap" name='"street"'/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<item var="acronymElem1" obj="elemList" index="1" interface="NodeList"/>
+<item var="acronymElem2" obj="elemList" index="2" interface="NodeList"/>
+<item var="acronymElem3" obj="elemList" index="4" interface="NodeList"/>
+<setIdAttribute obj="acronymElem1" name='"class"' isId="true"/>
+<setIdAttribute obj="acronymElem2" name='"class"' isId="true"/>
+<setIdAttribute obj="acronymElem3" name='"class"' isId="true"/>
+<attributes var="attributesMap" obj="acronymElem1"/>
+<getNamedItem var="attr" obj="attributesMap" name='"class"'/>
 <isId var="id" obj="attr"/>
 <assertTrue actual="id" id="elementsetidattributeIsId1True08"/>
-<attributes var="attributesMap" obj="addressElem2"/>
-<getNamedItem var="attr" obj="attributesMap" name='"street"'/>
+<attributes var="attributesMap" obj="acronymElem2"/>
+<getNamedItem var="attr" obj="attributesMap" name='"class"'/>
 <isId var="id" obj="attr"/>
 <assertTrue actual="id" id="elementsetidattributeIsId2True08"/>
-<attributes var="attributesMap" obj="addressElem3"/>
-<getNamedItem var="attr" obj="attributesMap" name='"street"'/>
+<attributes var="attributesMap" obj="acronymElem3"/>
+<getNamedItem var="attr" obj="attributesMap" name='"class"'/>
 <isId var="id" obj="attr"/>
 <assertTrue actual="id"  id="elementsetidattributeIsId3True08"/>
 <getElementById obj="doc" var="elem" elementId='"No"'/>
 <tagName obj="elem" var="elemName"/>
-<assertEquals actual="elemName" expected='"address"' id="elementsetidattributeGetElementById08" ignoreCase="false"/>
+<assertEquals actual="elemName" expected='"acronym"' id="elementsetidattributeGetElementById08" ignoreCase="false"/>
 </test>

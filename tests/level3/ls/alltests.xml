@@ -82,4 +82,6 @@
    <suite.member href="LSSerializerConfig8.xml"/>
    <suite.member href="LSSerializerConfig9.xml"/>
    <suite.member href="LSSerializerConfig10.xml"/>
+   <suite.member href="writeToURI1.xml"/>
+   <suite.member href="writeToURI2.xml"/>
 </suite>

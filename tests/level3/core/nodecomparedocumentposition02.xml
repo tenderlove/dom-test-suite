@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nullPubId" type="DOMString" isNull="true"/>
 <var name="nullSysId" type="DOMString" isNull="true"/>
 <var name="replaced" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <doctype var="docType" obj="doc"/>
 <createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
@@ -45,6 +45,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="documentPositionDoc" obj="doc" other="newDocType"/>
 <assertEquals  actual="documentPositionDoc" expected="20" id="nodecomparedocumentpositionIsContainedFollowing02" ignoreCase="false"/>
 <compareDocumentPosition var="documentPositionDocType" obj="newDocType" other="doc"/>
-<assertEquals  actual="documentPositionDocType" expected="10" id="nodecomparedocumentpositionContainsPreceding02" ignoreCase="false"/>
+<assertEquals  actual="documentPositionDocType" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING02" ignoreCase="false"/>
 
 </test>

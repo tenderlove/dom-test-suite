@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="paramList" type="DOMStringList"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="listSize" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <parameterNames obj="domConfig" var="paramList"/>
 <assertNotNull actual="paramList" id="domstringlistgetlength01_notNull"/>

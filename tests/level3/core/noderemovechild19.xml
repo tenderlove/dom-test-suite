@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild19</title>
 <creator>IBM</creator>
 <description>
-	Using removeChild on the first 'employee' Element node attempt to remove a EntityReference 
+	Using removeChild on the first 'p' Element node attempt to remove a EntityReference 
 	node child and verify the nodeName of the returned node that was removed.  Attempt
 	to remove a non-child from an entity reference and expect either a NOT_FOUND_ERR or
 	a NO_MODIFICATION_ALLOWED_ERR.  Renove a child from an entity reference and expect
@@ -41,13 +41,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedName" type="DOMString"/>
 <var name="removedNode" type="Node"/>
 <var name="entRefChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"address"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
 <item var="parent" obj="parentList" index="1" interface="NodeList"/>
 <firstChild var="child" obj="parent" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeName obj="removed" var="removedName"/>
-<assertEquals actual="removedName" expected='"ent2"' id="noderemovechild19" ignoreCase="false"/>
+<assertEquals actual="removedName" expected='"beta"' id="noderemovechild19" ignoreCase="false"/>
 <!--  
    Remove a non-member of the entity reference,
    expect either a NO_MODIFICATION_ALLOWED_ERR or a NOT_FOUND_ERR

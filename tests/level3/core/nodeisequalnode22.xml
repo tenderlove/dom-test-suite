@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -39,8 +39,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullPubId" type="DOMString" isNull="true"/>
 <var name="nullSysId" type="DOMString" isNull="true"/>
-<load var="doc1" href="staffNS" willBeModified="false"/>
-<load var="doc2" href="staffNS" willBeModified="false"/>
+<load var="doc1" href="hc_staff" willBeModified="false"/>
+<load var="doc2" href="hc_staff" willBeModified="false"/>
 <implementation var="domImpl1" obj="doc1"/>
 <implementation var="domImpl2" obj="doc2"/>
 <createDocumentType var="docType1" obj="domImpl1" qualifiedName='"docTyp"' publicId="nullPubId" systemId="nullSysId"/>

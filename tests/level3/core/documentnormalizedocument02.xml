@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -42,8 +42,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="userData" type="DOMUserData" />
 -->
 <var name="domConfig" type="DOMConfiguration"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="cdata" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="cdata"/>
@@ -51,14 +51,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
 <normalizeDocument obj="doc"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="cdata" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="cdata"/>
 <assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument02_true" ignoreCase="false"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
 <normalizeDocument obj="doc"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="text" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="text"/>

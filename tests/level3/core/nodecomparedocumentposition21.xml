@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 	Using compareDocumentPosition check the document position of the text node of the fist and second elements 
 	whose localName is name.  The first text node should return FOLLOWING and the second text node should
-	return PRECEDING when compareDocumentPosition is invoked with the other node as a parameter. 
+	return PRECEEDING when compareDocumentPosition is invoked with the other node as a parameter. 
 	
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -40,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txt2" type="Text"/>
 <var name="txt1Position" type="int"/>
 <var name="txt2Position" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"name"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
 <item var="elemName1" obj="elemList" index="0" interface="NodeList"/>
 <item var="elemName2" obj="elemList" index="1" interface="NodeList"/>
 <firstChild var="txt1" obj="elemName1" interface="Node"/>
@@ -49,5 +49,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="txt1Position" obj="txt1" other="txt2"/>
 <assertEquals  actual="txt1Position" expected="4" id="nodecomparedocumentpositionFollowing21" ignoreCase="false"/>
 <compareDocumentPosition var="txt2Position" obj="txt2" other="txt1"/>
-<assertEquals  actual="txt2Position" expected="2" id="nodecomparedocumentpositionPreceding21" ignoreCase="false"/>
+<assertEquals  actual="txt2Position" expected="2" id="nodecomparedocumentpositionPRECEEDING21" ignoreCase="false"/>
 </test>

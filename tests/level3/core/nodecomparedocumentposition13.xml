@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -36,13 +36,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="documentPosition" type="int"/>
 <var name="commentPosition" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createComment var="comment" obj="doc" data='"Another Comment"'/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
-<item var="elem" obj="elemList" index="1" interface="NodeList"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <appendChild obj="elem" var="appendedChild" newChild="comment"/>
 <compareDocumentPosition var="documentPosition" obj="doc" other="comment"/>
 <assertEquals  actual="documentPosition" expected="20" id="nodecomparedocumentpositionIsContainedFollowing13" ignoreCase="false"/>
 <compareDocumentPosition var="commentPosition" obj="comment" other="doc"/>
-<assertEquals  actual="commentPosition" expected="10" id="nodecomparedocumentpositionContainsPreceding13" ignoreCase="false"/>
+<assertEquals  actual="commentPosition" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING13" ignoreCase="false"/>
 </test>

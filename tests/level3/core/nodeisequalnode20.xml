@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr1" type="Attr"/>
 <var name="elem1" type="Element"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <createElementNS var="elem1" obj="doc" namespaceURI='"http://www.domtest.org"' qualifiedName='"dom:root"'/>
 <createAttributeNS var="attr1" obj="doc" namespaceURI='"http://www.domtest.org"' qualifiedName='"dom:root"'/>
 <isEqualNode var="isEqual" obj="attr1" arg="elem1"/>

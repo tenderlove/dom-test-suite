@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -35,12 +35,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr" type="Attr"/>
 <var name="elementPosition" type="int"/>
 <var name="attrPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
-<getAttributeNode var="attr" obj="elem" name='"defaultAttr"'/>
+<getAttributeNode var="attr" obj="elem" name='"dir"'/>
 <compareDocumentPosition var="elementPosition" obj="elem" other="attr"/>
 <assertEquals  actual="elementPosition" expected="20" id="nodecomparedocumentpositionIsContainedFollowing35" ignoreCase="false"/>
 <compareDocumentPosition var="attrPosition" obj="attr" other="elem"/>
-<assertEquals  actual="attrPosition" expected="10" id="nodecomparedocumentpositionPrecedingContains35" ignoreCase="false"/>
+<assertEquals  actual="attrPosition" expected="10" id="nodecomparedocumentpositionPRECEEDINGContains35" ignoreCase="false"/>
 </test>

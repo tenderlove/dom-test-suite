@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -41,13 +41,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newChild" type="EntityReference"/>
 <var name="replaced" type="Node"/>
 <var name="nodeValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<createEntityReference var="newChild" obj="doc" name='"ent4"' />
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<createEntityReference var="newChild" obj="doc" name='"delta"' />
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
 <item var="elem" obj="childList" index="3" interface="NodeList"/>
-<getAttributeNode var="parent" obj="elem" name='"defaultAttr"'/>
+<getAttributeNode var="parent" obj="elem" name='"dir"'/>
 <lastChild var="oldChild" obj="parent" interface="Node"/>
 <replaceChild var="replaced" obj="parent" oldChild="oldChild" newChild="newChild"/>
 <nodeValue var="nodeValue" obj="replaced" />
-<assertEquals actual="nodeValue" expected='"defaultVal"' id="nodereplacechild33" ignoreCase="false"/>
+<assertEquals actual="nodeValue" expected='"rtl"' id="nodereplacechild33" ignoreCase="false"/>
 </test>

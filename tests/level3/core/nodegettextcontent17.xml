@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegettextcontent17</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Invoke the method getTextContent on a new EntityReference node and check if the 
 	value returned is the EntityReference's content.
 </description>
@@ -35,10 +33,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="EntityReference"/>
 <var name="textContent" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="elem" obj="doc"/>
-<createEntityReference var="entRef" obj="doc" name='"ent2"' />
+<createEntityReference var="entRef" obj="doc" name='"beta"' />
 <appendChild obj="elem" var="appendedChild" newChild="entRef"/>
 <textContent var="textContent" obj="entRef"/>
-<assertEquals  actual="textContent" expected='"1900 Dallas Road"' id="nodegettextcontent17" ignoreCase="false"/>
+<assertEquals  actual="textContent" expected='"&#946;"' id="nodegettextcontent17" ignoreCase="false"/>
 </test>

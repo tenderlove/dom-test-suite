@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefChild1Position" type="int"/>
 <var name="entRefChild2Position" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createEntityReference name='"ent4"' obj="doc" var="entRef1"/>
 <createEntityReference name='"ent4"' obj="doc" var="entRef2"/>
 <documentElement var="docElem" obj="doc"/>
@@ -49,5 +49,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRefChild2"/>
 <assertEquals  actual="entRefChild1Position" expected="4" id="nodecomparedocumentpositionFollowing29" ignoreCase="false"/>
 <compareDocumentPosition var="entRefChild2Position" obj="entRefChild2" other="entRefChild1"/>
-<assertEquals  actual="entRefChild2Position" expected="2" id="nodecomparedocumentpositionPreceding29" ignoreCase="false"/>
+<assertEquals  actual="entRefChild2Position" expected="2" id="nodecomparedocumentpositionPRECEEDING29" ignoreCase="false"/>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -42,10 +42,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="retUserData" type="DOMUserData"/>
 <var name="success" type="boolean"/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
-<getNamedItem var="entity" obj="entities" name='"ent4"'/>
+<getNamedItem var="entity" obj="entities" name='"delta"'/>
 <createComment var="comment" obj="doc" data='"COMMENT_NODE"' />
 <setUserData obj="comment" var="retUserData" key='"Key1"' data="entity" handler="nullHandler"/>
 <setUserData  var="returned" obj="comment" key='"Key1"' data="entity" handler="nullHandler"/>

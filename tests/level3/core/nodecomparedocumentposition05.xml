@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using compareDocumentPosition check if the document position of a Document and a new Document node
-	are disconnected, implementation-specific and preceding/following.
+	are disconnected, implementation-specific and PRECEEDING/following.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-19</date>
@@ -33,11 +33,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domImpl" type="DOMImplementation"/>
 <var name="documentPosition" type="int"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" qualifiedName='"dom3:doc"' namespaceURI='"http://www.w3.org/DOM/Test"' doctype="nullDocType"/>
 <compareDocumentPosition var="documentPosition" obj="doc" other="newDoc"/>
-<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentpositionDisconnectedImpSpecPreceding05" ignoreCase="false"/>
+<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentpositionDisconnectedImpSpecPRECEEDING05" ignoreCase="false"/>
 <compareDocumentPosition var="documentPosition" obj="newDoc" other="doc"/>
 <assertEquals  actual="documentPosition" expected="37" id="nodecomparedocumentpositionDisconnectedImpSpecFollowing05" ignoreCase="false"/>
 </test>

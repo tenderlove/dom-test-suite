@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -37,15 +37,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="notation" type="Notation"/>
 <var name="renamedEntityNode" type="Node"/>
 <var name="renamedNotationNode" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entityNodeMap" obj="docType"/>
 <notations var="notationNodeMap" obj="docType"/>
-<getNamedItem var="entity" obj="entityNodeMap" name='"ent1"'/>
+<getNamedItem var="entity" obj="entityNodeMap" name='"alpha"'/>
 <getNamedItem var="notation" obj="notationNodeMap" name='"notation1"'/>
 <assertDOMException id="documentrenamenode28_ENTITY_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>
-<renameNode var="renamedEntityNode" obj="doc" n="entity" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"ent2"'/>
+<renameNode var="renamedEntityNode" obj="doc" n="entity" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"beta"'/>
 </NOT_SUPPORTED_ERR>
 </assertDOMException>
 <assertDOMException id="documentrenamenode28_NOTATION_NOT_SUPPORTED_ERR">

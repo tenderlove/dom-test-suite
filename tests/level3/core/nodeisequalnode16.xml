@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="isEqual" type="boolean"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
-<item var="addrElement" obj="elementList" index="1" interface="NodeList"/>
-<getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI="nullNSURI" localName='"defaultAttr"'/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elementList" obj="doc" localName='"p"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="addrElement" obj="elementList" index="3" interface="NodeList"/>
+<getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI="nullNSURI" localName='"dir"'/>
 <cloneNode var="attr2" obj="attr1" deep="true"/>
 <isEqualNode var="isEqual" obj="attr1" arg="attr2"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode16"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,22 +21,32 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>entitygetinputencoding03</title>
 <creator>IBM</creator>
 <description>
-	Call the getInputEncoding method on a UTF-8 encoded document that contains an external
-	parsed entity encoded in UTF-8 and check if the value returned is UTF-8.
+Check the value of Entity.inputEncoding on an UTF-16 external entity 
+is either UTF-16 or UTF-16LE
 </description>
 <contributor>Neil Delima</contributor>
+<contributor>Curt Arnold</contributor>
 <date qualifier="created">2002-05-30</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Entity3-inputEncoding"/>
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Dec/0045.html"/>
 </metadata>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="entitiesMap" type="NamedNodeMap"/>
 <var name="entity" type="Entity"/>
 <var name="encodingName" type="DOMString"/>
-<load var="doc" href="staffNSExtEnt" willBeModified="false"/>
+<load var="doc" href="external_barfoo" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitiesMap" obj="docType"/>
-<getNamedItem var="entity" obj="entitiesMap" name='"ent7"'/>
+<getNamedItem var="entity" obj="entitiesMap" name='"ent1"'/>
 <inputEncoding obj="entity" var="encodingName" interface="Entity"/>
-<assertEquals expected='"UTF-8"' actual="encodingName" id="entitygetinputencoding03" ignoreCase="true"/>
+<!--  accept UTF-16LE and UTF-16 as encoding values -->
+<if>
+	<notEquals actual="encodingName" expected='"UTF-16LE"' ignoreCase="true"/>
+	<assertEquals id="entityIsUTF16orUTF16LE" actual="encodingName" expected='"UTF-16"' ignoreCase="true"/>
+</if>
+<!--  check that document's encoding is UTF-8   -->
+<inputEncoding obj="doc" var="encodingName" interface="Document"/>
+<assertEquals id="documentIsUTF8" actual="encodingName" expected='"UTF-8"' ignoreCase="true"/>
 </test>

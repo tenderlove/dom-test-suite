@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using the method adoptNode in a new Document, adopt a newly created DocumentFragment node populated with
-	with the first address element of this Document as its newChild.  Since the decendants of a documentFragment
+	with the first acronym element of this Document as its newChild.  Since the decendants of a documentFragment
 	are recursively adopted, check if the adopted node has children.
 </description>
 <contributor>Neil Delima</contributor>
@@ -37,12 +37,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docFragment" type="DocumentFragment"/>
 <var name="childList" type="NodeList"/>
 <var name="success" type="boolean"/>
-<var name="addressNode" type="Node"/>
+<var name="acronymNode" type="Node"/>
 <var name="adoptedDocFrag" type="Node"/>
 <var name="appendedChild" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="imported" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:doc"' doctype="nullDocType"/>
@@ -50,9 +50,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <importNode obj="newDoc" var="imported" importedNode="docElem" deep="true"/>
 <documentElement var="docElem" obj="newDoc"/>
 <appendChild obj="docElem" var="appendedChild" newChild="imported"/>
-<getElementsByTagNameNS var="childList" obj="newDoc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-<item var="addressNode" obj="childList" index="0" interface="NodeList"/>
-<appendChild obj="docFragment" var="appendedChild" newChild="addressNode"/>
+<getElementsByTagNameNS var="childList" obj="newDoc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<item var="acronymNode" obj="childList" index="0" interface="NodeList"/>
+<appendChild obj="docFragment" var="appendedChild" newChild="acronymNode"/>
 <adoptNode var="adoptedDocFrag" obj="newDoc" source="docFragment"/>
 <hasChildNodes var="success" obj="adoptedDocFrag"/>
 <assertTrue actual="success" id="documentadoptnode14"/>

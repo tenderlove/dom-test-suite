@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode15</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isEqualNode check if 2 Attr nodes having the same nodeName and a null namespaceURI 
 	attribute, one created using createAttributeNS and the other retreived from this document
 	are equal.
@@ -38,11 +36,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addrElement" type="Element"/>
 <var name="elementList" type="NodeList"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"emp:address"' var="elementList"/>
-<item interface="NodeList" obj="elementList" var="addrElement" index="0" />
-<getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI='"http://www.nist.gov"' localName='"domestic"'/>
-<createAttributeNS var="attr2" obj="doc" namespaceURI='"http://www.nist.gov"' qualifiedName='"emp:domestic"'/>
+<var name="nullNS" type="DOMString" isNull="true"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
+<item interface="NodeList" obj="elementList" var="addrElement" index="3" />
+<getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI='nullNS' localName='"title"'/>
+<createAttributeNS var="attr2" obj="doc" namespaceURI='nullNS' qualifiedName='"title"'/>
 <value obj="attr2" value='"Yes"'/>
 <isEqualNode var="isEqual" obj="attr1" arg="attr2"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode15"/>

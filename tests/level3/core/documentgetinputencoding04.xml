@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -31,9 +31,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="cloned" type="Document"/>
 <var name="encodingName" type="DOMString"/>
-<load var="doc" href="staffNS_UTF-8" willBeModified="false"/>
+<load var="doc" href="barfoo_utf8" willBeModified="false"/>
 <cloneNode var="cloned" obj="doc" deep="true"/>
-<xmlEncoding obj="cloned" var="encodingName" interface="Document"/>
+<inputEncoding obj="cloned" var="encodingName" interface="Document"/>
 <assertTrue id="documentgetinputencoding04">
 <or>
 <equals expected='"UTF-8"' actual="encodingName" ignoreCase="true"/>

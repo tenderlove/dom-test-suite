@@ -734,6 +734,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
 	ignoreCase (true|false|auto) "false"
+	bitmask CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT notEquals EMPTY&gt;
@@ -742,6 +743,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
 	ignoreCase (true|false|auto) "false"
+	bitmask CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT less EMPTY&gt;
@@ -983,6 +985,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	var CDATA #REQUIRED
     href CDATA #REQUIRED
     scheme (file|http) #IMPLIED
+    contentType CDATA #IMPLIED
 &gt;
 
 

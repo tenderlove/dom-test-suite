@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>elementsetidattributens06</title>
 <creator>IBM</creator>
 <description>
-     Invoke setIdAttributeNS on the third name element with a non-existing attribute name.  Verify that
+     Invoke setIdAttributeNS on the third strong element with a non-existing attribute name.  Verify that
      NOT_FOUND_ERR is raised.
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -32,8 +32,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="nameElem" type="Element"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
 <item var="nameElem" obj="elemList" index="2" interface="NodeList"/>
 <assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>

@@ -466,6 +466,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                             <xs:documentation>HTML</xs:documentation>
                         </xs:annotation>
                     </xs:enumeration>
+                    <xs:enumeration value="application/pdf">
+                        <xs:annotation>
+                            <xs:documentation>Portable Document Format</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
                 </xs:restriction>
             </xs:simpleType>
 
@@ -1109,6 +1114,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:attribute name="actual" type="variable" use="required"/>
 				<xs:attribute name="expected" type="variableOrLiteral" use="required"/>
 				<xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
+				<xs:attribute name="bitmask" use="optional" type="xs:integer"/>
 			</xs:complexType>
 			<xs:element name="equals" type="comparisonWithCase">
 				<xs:annotation>
@@ -1395,6 +1401,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             		<xs:attribute name="var" type="variable" use="required"/>
             		<xs:attribute name="href" type="variableOrStringLiteral" use="required"/>
             		<xs:attribute name="scheme" type="uriScheme" use="optional"/>
+            		<xs:attribute name="contentType" type="loadContentType" use="optional"/>
             	</xs:complexType>
             </xs:element>
             <xs:element name="createTempURI">

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="success" type="boolean"/>
 <var name="nullHandler" type="UserDataHandler" isNull="true"/>
 <var name="prevUserData" type="DOMUserData"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <setUserData obj="docType" var="prevUserData" key='"KeyDoc"' data="doc" handler="nullHandler"/>
 <getUserData var="retUserData" obj="docType" key='"KeyDoc"'/>

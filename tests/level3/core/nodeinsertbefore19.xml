@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeinsertbefore19</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using insertBefore on an Element node attempt to insert an EntityReference node, before 
 	another new EntityReference node and verify the name of the new first child node.
 </description>
@@ -34,19 +31,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
-<var name="element" type="Element"/>
 <var name="refNode" type="EntityReference"/>
 <var name="newNode" type="EntityReference"/>
 <var name="inserted" type="EntityReference"/>
 <var name="childList" type="NodeList"/>
 <var name="nodeName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<var name="element" type="Element"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
 <item var="element" obj="childList" index="2" interface="NodeList"/>
 <firstChild var="refNode" obj="element" interface="Node"/>
-<createEntityReference var="newNode" obj="doc" name='"ent1"'/>
+<createEntityReference var="newNode" obj="doc" name='"alpha"'/>
 <insertBefore obj="element" var="inserted" refChild="refNode" newChild="newNode"/>
-<firstChild var="inserted" obj="element" interface="Node"/>
 <nodeName var="nodeName" obj="inserted"/>
-<assertEquals actual="nodeName" expected='"ent1"' id="nodeinsertbefore19" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"alpha"' id="nodeinsertbefore19" ignoreCase="false"/>
 </test>

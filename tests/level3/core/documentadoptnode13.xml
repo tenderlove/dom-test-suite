@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using the method adoptNode, adopt a newly created DocumentFragment node populated with
-	with the first address element of this Document.  Since the decendants of a documentFragment
+	with the first acronym element of this Document.  Since the decendants of a documentFragment
 	are recursively adopted, check if the adopted node has children.
 </description>
 <contributor>Neil Delima</contributor>
@@ -34,14 +34,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docFragment" type="DocumentFragment"/>
 <var name="childList" type="NodeList"/>
 <var name="success" type="boolean"/>
-<var name="addressNode" type="Node"/>
+<var name="acronymNode" type="Node"/>
 <var name="appendedChild" type="Node"/>
 <var name="adoptedDocFrag" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFragment" obj="doc"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
-<item var="addressNode" obj="childList" index="0" interface="NodeList"/>
-<appendChild obj="docFragment" var="appendedChild" newChild="addressNode"/>
+<getElementsByTagNameNS var="childList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<item var="acronymNode" obj="childList" index="0" interface="NodeList"/>
+<appendChild obj="docFragment" var="appendedChild" newChild="acronymNode"/>
 <adoptNode var="adoptedDocFrag" obj="doc" source="docFragment"/>
 <hasChildNodes var="success" obj="adoptedDocFrag"/>
 <assertTrue actual="success" id="documentadoptnode13"/>

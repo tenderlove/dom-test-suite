@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="uTf-8"?>
+<!DOCTYPE html [
+<!ENTITY ent1 'foo'>
+<!ENTITY ent2 'foo<br/>'>
+<!ELEMENT html (head, body)>
+<!ATTLIST html xmlns CDATA #IMPLIED>
+<!ELEMENT head (title)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT body (p)>
+<!ELEMENT p (#PCDATA|br)*>
+<!ELEMENT br EMPTY>
+<!ENTITY ent5 PUBLIC "entityURI" "entityFile" NDATA notation1>
+<!NOTATION notation1 PUBLIC "notation1File">
+]>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>test file</title>
+</head>
+<body> 
+<p>bar</p>
+</body>
+</html>

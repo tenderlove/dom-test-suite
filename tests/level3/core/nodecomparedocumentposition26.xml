@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefChild1" type="Element"/>
 <var name="entRefPosition" type="int"/>
 <var name="entRefChild1Position" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <if>
 <implementationAttribute name="expandEntityReferences" value="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"gender"' interface="Document"/>
+<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"var"' interface="Document"/>
 <item var="elemName" obj="elemList" index="2" interface="NodeList"/>
 <childNodes obj="elemName" var="gender2List"/>
 <item interface="NodeList" obj="gender2List" var="entRef" index="0"/>
@@ -54,5 +54,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="entRefPosition" obj="entRef" other="entRefChild1"/>
 <assertEquals  actual="entRefPosition" expected="20" id="nodecomparedocumentpositionIsContainedFollowing26" ignoreCase="false"/>
 <compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRef"/>
-<assertEquals  actual="entRefChild1Position" expected="10" id="nodecomparedocumentpositionContainsPreceding26" ignoreCase="false"/>
+<assertEquals  actual="entRefChild1Position" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING26" ignoreCase="false"/>
 </test>

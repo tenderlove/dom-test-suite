@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <title>elementsetidattributens13</title>
     <creator>IBM</creator>
     <description>
-     Invoke setIdAttributeNS on newly added attribute on the third name element.  Verify by calling
+     Invoke setIdAttributeNS on newly added attribute on the third strong element.  Verify by calling
      isID on the attribute node and getElementById on document node.
      Call setIdAttributeNS on the same element to reset ID but with a non-existing attribute should generate
      NOT_FOUND_ERR
@@ -38,8 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="id" type="boolean" value="false"/>
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
-  <load var="doc" href="staffNS" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList" obj="doc" localName='"name"' namespaceURI='"*"' interface="Document"/>
+  <load var="doc" href="hc_staff" willBeModified="true"/>
+  <getElementsByTagNameNS var="elemList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
   <item var="nameElem" obj="elemList" index="2" interface="NodeList"/>
   <setAttributeNS obj="nameElem" qualifiedName='"dmstc:newAttr"' namespaceURI='"http://www.netzero.com"' value='"newValue"'/>
   <setIdAttributeNS obj="nameElem" localName='"newAttr"' namespaceURI='"http://www.netzero.com"' isId="true"/>
@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <assertTrue actual="id" id="elementsetidattributensIsIdTrue13"/>
   <getElementById obj="doc" var="elem" elementId='"newValue"'/>
   <tagName obj="elem" var="elemName"/>
-  <assertEquals actual="elemName" expected='"name"' id="elementsetidattributensGetElementById13" ignoreCase="false"/>
+  <assertEquals actual="elemName" expected='"strong"' id="elementsetidattributensGetElementById13" ignoreCase="false"/>
   <assertDOMException id="throw_NOT_FOUND_ERR">
   <NOT_FOUND_ERR>
   <setIdAttributeNS obj="nameElem" localName='"test"' namespaceURI='"http://www.test.com"' isId="false"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -36,12 +36,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr2" type="Attr"/>
 <var name="childList" type="NodeList"/>
 <var name="isSame" type="boolean"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
-<item var="element" obj="childList" index="1" interface="NodeList"/>
-<item var="element1" obj="childList" index="1" interface="NodeList"/>
-<getAttributeNode var="attr1" obj="element" name='"street"'/>
-<getAttributeNode var="attr2" obj="element1" name='"street"'/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="childList" obj="doc" localName='"acronym"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="element" obj="childList" index="2" interface="NodeList"/>
+<item var="element1" obj="childList" index="2" interface="NodeList"/>
+<getAttributeNode var="attr1" obj="element" name='"class"'/>
+<getAttributeNode var="attr2" obj="element1" name='"class"'/>
 <isSameNode var="isSame" obj="attr1" other="attr2"/>
 <assertTrue  actual="isSame"  id="nodeissamenode06"/>
 </test>

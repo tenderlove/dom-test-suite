@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegettextcontent18</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Invoke the method getTextContent on an Entity node and check if the value returned
 	is its replacement text.
 </description>
@@ -35,10 +33,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entity" type="Entity"/>
 <var name="entitymap" type="NamedNodeMap"/>
 <var name="textContent" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitymap" obj="docType"/>
-<getNamedItem var="entity" obj="entitymap" name='"ent4"'/>
+<getNamedItem var="entity" obj="entitymap" name='"delta"'/>
 <textContent var="textContent" obj="entity"/>
-<assertEquals  actual="textContent" expected='"Element data"' id="nodegettextcontent18" ignoreCase="false"/>
+<assertEquals  actual="textContent" expected='"&#948;"' id="nodegettextcontent18" ignoreCase="false"/>
 </test>

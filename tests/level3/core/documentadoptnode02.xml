@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode02</title>
 <creator>IBM</creator>
 <description>
-	Adopt the street attribute node of the second element whose localName is address and namespaceURI
-	is http://www.nist.gov using a new document object.  Check if this attribute has been adopted 
+	Adopt the class attribute node of the fourth acronym element.  Check if this attribute has been adopted 
 	successfully by verifying the nodeName, nodeType, ownerElement, specified attributes and child nodes 
 	of the adopted node.
 </description>
@@ -38,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="attr" type="Attr"/>
 <var name="childList" type="NodeList"/>
-<var name="adoptedStreet" type="Node"/>
+<var name="adoptedclass" type="Node"/>
 <var name="attrsParent" type="Node"/>
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
@@ -52,25 +51,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="secondChildName" type="DOMString"/>
 
 
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"htp://www.w3.org/DOM/Test"' qualifiedName='"dom:l3"' doctype="nullDocType"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
-<item var="element" obj="childList" index="1" interface="NodeList"/>
-<getAttributeNode var="attr" obj="element" name='"street"'/>
-<adoptNode var="adoptedStreet" obj="newDoc" source="attr"/>
-<nodeName var="nodeName" obj="adoptedStreet"/>
-<nodeValue var="nodeValue" obj="adoptedStreet"/>
-<nodeType var="nodeType" obj="adoptedStreet"/>
-<ownerElement var="attrOwnerElem" obj="adoptedStreet" interface="Attr"/>
-<specified var="isSpecified"  obj="adoptedStreet" />
-<assertEquals expected='"street"' actual="nodeName"  id="documentadoptnode02_nodeName" ignoreCase="false"/>
+<getElementsByTagNameNS var="childList" obj="doc" localName='"acronym"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="element" obj="childList" index="3" interface="NodeList"/>
+<getAttributeNode var="attr" obj="element" name='"class"'/>
+<adoptNode var="adoptedclass" obj="newDoc" source="attr"/>
+<nodeName var="nodeName" obj="adoptedclass"/>
+<nodeValue var="nodeValue" obj="adoptedclass"/>
+<nodeType var="nodeType" obj="adoptedclass"/>
+<ownerElement var="attrOwnerElem" obj="adoptedclass" interface="Attr"/>
+<specified var="isSpecified"  obj="adoptedclass" />
+<assertEquals expected='"class"' actual="nodeName"  id="documentadoptnode02_nodeName" ignoreCase="false"/>
 <assertEquals expected="2" actual="nodeType"  id="documentadoptnode02_nodeType" ignoreCase="false"/>
 <assertNull  actual="attrOwnerElem"  id="documentadoptnode02_ownerDoc"/>
 <assertTrue  actual="isSpecified"  id="documentadoptnode02_specified"/>
 <!--  The attribute's child list can either be a text node "Yes" or 
-          an text node "Y" and a entity reference to "ent1"  -->
-<firstChild var="firstChild" obj="adoptedStreet" interface="Node"/>
+          an text node "Y" and a entity reference to "alpha"  -->
+<firstChild var="firstChild" obj="adoptedclass" interface="Node"/>
 <assertNotNull actual="firstChild" id="firstChildNotNull"/>
 <nodeValue var="firstChildValue" obj="firstChild"/>
 <if>
@@ -81,10 +80,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<assertEquals actual="secondChildType" expected="5" 
 		id="secondChildIsEntityReference" ignoreCase="false"/>
 	<nodeName var="secondChildName" obj="secondChild"/>
-	<assertEquals actual="secondChildName" expected='"ent1"' 
+	<assertEquals actual="secondChildName" expected='"alpha"' 
 		id="secondChildIsEnt1Reference" ignoreCase="false"/>
 	<else>
-		<assertEquals expected='"Yes"' actual="nodeValue"  id="documentadoptnode02_nodeValue" ignoreCase="false"/>
+		<assertEquals expected='"Y&#945;"' actual="nodeValue"  id="documentadoptnode02_nodeValue" ignoreCase="false"/>
 	</else>
 </if>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition10</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using compareDocumentPosition check if the document node precedes and contains its default Attr node.
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -33,13 +30,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
-<var name="defaultAttr" type="Attr"/>
+<var name="dir" type="Attr"/>
 <var name="elemList" type="NodeList"/>
 <var name="attrPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
-<item var="elem" obj="elemList" index="1" interface="NodeList"/>
-<getAttributeNode var="defaultAttr" obj="elem" name='"defaultAttr"'/>
-<compareDocumentPosition var="attrPosition" obj="defaultAttr" other="doc"/>
-<assertEquals  actual="attrPosition" expected="10" id="nodecomparedocumentpositionPrecedingContains10" ignoreCase="false"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<item var="elem" obj="elemList" index="3" interface="NodeList"/>
+<getAttributeNode var="dir" obj="elem" name='"dir"'/>
+<compareDocumentPosition var="attrPosition" obj="dir" other="doc"/>
+<assertEquals  actual="attrPosition" expected="10" id="nodecomparedocumentpositionPRECEEDINGContains10" ignoreCase="false"/>
 </test>

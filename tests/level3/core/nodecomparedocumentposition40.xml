@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition40</title>
 <creator>IBM</creator>
 <description>
-	Using compareDocumentPosition to check if the document position of the street's attribute 
+	Using compareDocumentPosition to check if the document position of the class's attribute 
 	when compared with a new attribute node is implementation_specific
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -35,13 +35,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr1" type="Attr"/>
 <var name="attr2" type="Attr"/>
 <var name="attrPosition" type="int"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<var name="swappedPosition" type="int"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
-<getAttributeNode var="attr1" obj="elem" name='"street"'/>
+<getAttributeNode var="attr1" obj="elem" name='"class"'/>
 <setAttributeNS obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:att"' value='"blah"'/>
 <getAttributeNode var="attr2" obj="elem" name='"dom3:att"'/>
 <compareDocumentPosition var="attrPosition" obj="attr1" other="attr2"/>
-<assertEquals  actual="attrPosition" expected="34" id="nodecomparedocumentposition40" ignoreCase="false"/>
+<assertEquals actual="attrPosition" expected="32" bitmask="32" id="isImplementationSpecific" ignoreCase="false"/>
+<assertEquals actual="attrPosition" expected="0" bitmask="25" id="otherBitsZero" ignoreCase="false"/>
+<assertNotEquals actual="attrPosition" expected="0" bitmask="6" id="eitherFollowingOrPreceeding" ignoreCase="false"/>
+<compareDocumentPosition var="swappedPosition" obj="attr2" other="attr1"/>
+<assertNotEquals actual="attrPosition" expected="swappedPosition" bitmask="1" id="onlyOnePreceeding" ignoreCase="false"/>
+<assertNotEquals actual="attrPosition" expected="swappedPosition" bitmask="2" id="onlyOneFollowing" ignoreCase="false"/>
 </test>
  

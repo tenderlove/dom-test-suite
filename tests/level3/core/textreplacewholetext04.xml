@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="textNode" type="Text"/>
 <var name="replacedText" type="Text"/>
 <var name="wholeText" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createTextNode var="textNode" obj="doc" data='"New Text"'/>
 <replaceWholeText obj="textNode" var="replacedText" content='""'/>
 <wholeText var="wholeText" obj="replacedText"/>

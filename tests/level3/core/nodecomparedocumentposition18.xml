@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using compareDocumentPosition check if the document position of the first new Text node compared to the
-	second text node is PRECEDING and is FOLLOWING vice versa.
+	second text node is PRECEEDING and is FOLLOWING vice versa.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-19</date>
@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txt1Position" type="int"/>
 <var name="txt2Position" type="int"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createTextNode var="txt1" obj="doc" data='"T1"'/>
 <createTextNode var="txt2" obj="doc" data='"T2"'/>
@@ -44,5 +44,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="txt1Position" obj="txt1" other="txt2"/>
 <assertEquals  actual="txt1Position" expected="4" id="nodecomparedocumentpositionFollowing18" ignoreCase="false"/>
 <compareDocumentPosition var="txt2Position" obj="txt2" other="txt1"/>
-<assertEquals  actual="txt2Position" expected="2" id="nodecomparedocumentpositionPreceding18" ignoreCase="false"/>
+<assertEquals  actual="txt2Position" expected="2" id="nodecomparedocumentpositionPRECEEDING18" ignoreCase="false"/>
 </test>

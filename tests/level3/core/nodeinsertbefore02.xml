@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 	Using insertBefore on a new Document node attempt to insert a new Comment node before
-	this DocumentType node and verfiy the name of the inserted Comment node.  Now
+	this DocumentType node and verify the name of the inserted Comment node.  Now
 	attempt to insert a new Processing Instruction node before the new Comment and 
 	verify the target of the inserted ProcessingInstruction.
 </description>
@@ -46,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="target" type="DOMString"/>
 <var name="nullPubId" type="DOMString" isNull="true"/>
 <var name="nullSysId" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
 <createDocument var="newDoc" obj="domImpl"  qualifiedName='"dom3:docType"' namespaceURI='"http://www.w3.org/DOM/Test"' doctype="newDocType" />

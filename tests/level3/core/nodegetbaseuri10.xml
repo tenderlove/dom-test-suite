@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newPI" type="ProcessingInstruction"/>
 <var name="baseURI" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staffNSBaseURI" willBeModified="true"/>
+<load var="doc" href="barfoo_base" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createProcessingInstruction var="newPI" obj="doc" target='"TARGET"' data='"DATA"'/>
 <appendChild obj="docElem" var="appendedChild" newChild="newPI"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode04</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Create a new Element node in this Document.  return its ownerDocument and check if the
 	the ownerDocument is equal to this Document using isEqualNode.
 </description>
@@ -34,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="ownerDoc" type="Document"/>
 <var name="elem" type="Element"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc" href="staffNS_UTF-16" willBeModified="false"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
 <createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
 <ownerDocument var="ownerDoc" obj="elem"/>
 <isEqualNode var="isEqual" obj="doc" arg="ownerDoc"/>

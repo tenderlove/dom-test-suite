@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode23</title>
 <creator>IBM</creator>
 <description>
-	Invoke the adoptNode method on this document with the first address element node of this
+	Invoke the adoptNode method on this document with the first acronym element node of this
 	Document as the source.  Verify if the node has been adopted correctly by checking the 
 	length of the this elements childNode list before and after.
 </description>
@@ -33,18 +33,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
 <var name="adoptedNode" type="Node"/>
-<var name="addressElem" type="Node"/>
-<var name="addressElemLen" type="int"/>
+<var name="acronymElem" type="Node"/>
+<var name="acronymElemLen" type="int"/>
 <var name="adoptedLen" type="int"/>
-<var name="addressElemChild" type="NodeList"/>
+<var name="acronymElemChild" type="NodeList"/>
 <var name="adoptedNodeChild" type="NodeList"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"address"' interface="Document"/>
-<item var="addressElem" obj="childList" index="0" interface="NodeList"/>
-<adoptNode var="adoptedNode" obj="doc" source="addressElem"/>
-<childNodes var="addressElemChild" obj="addressElem"/>
-<length var="addressElemLen" obj="addressElemChild" interface="NodeList"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
+<item var="acronymElem" obj="childList" index="0" interface="NodeList"/>
+<adoptNode var="adoptedNode" obj="doc" source="acronymElem"/>
+<childNodes var="acronymElemChild" obj="acronymElem"/>
+<length var="acronymElemLen" obj="acronymElemChild" interface="NodeList"/>
 <childNodes var="adoptedNodeChild" obj="adoptedNode"/>
 <length var="adoptedLen" obj="adoptedNodeChild" interface="NodeList"/>
-<assertEquals actual="addressElemLen" expected="adoptedLen" id="documentadoptnode23" ignoreCase="false"/>
+<assertEquals actual="acronymElemLen" expected="adoptedLen" id="documentadoptnode23" ignoreCase="false"/>
 </test>

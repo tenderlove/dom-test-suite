@@ -11,7 +11,10 @@
 
 /*
  * $Log: DOMTest.java,v $
- * Revision 1.11  2003-12-30 06:17:08  dom-ts-4
+ * Revision 1.12  2004-01-05 08:27:14  dom-ts-4
+ * XHTML compatible L3 Core tests  (bug 455)
+ *
+ * Revision 1.11  2003/12/30 06:17:08  dom-ts-4
  * Miscellaneous L&S changes based on implementor feedback (bug 447)
  *
  * Revision 1.10  2003/12/19 22:21:04  dom-ts-4
@@ -156,7 +159,7 @@ public abstract class DOMTest /* wBM: implements EventListener */ {
 		return resolvedURI;
 	}
 
-	public String getResourceURI(String href, String scheme) throws DOMTestLoadException {
+	public String getResourceURI(String href, String scheme, String contentType) throws DOMTestLoadException {
 		if (scheme == null) {
 			throw new NullPointerException("scheme");
 		}
@@ -164,9 +167,16 @@ public abstract class DOMTest /* wBM: implements EventListener */ {
 			return resolveURI(href).toString();
 		}
 		if ("http".equals(scheme)) {
-			String httpBase = System.getProperty("org.w3c.domts.httpbase", 
-						"http://localhost:8080/webdav/");
-			return httpBase + href;
+			StringBuffer httpURL = new StringBuffer(
+					System.getProperty("org.w3c.domts.httpbase", 
+						"http://localhost:8080/webdav/"));
+			httpURL.append(href);
+			if ("application/pdf".equals(contentType)) {
+				httpURL.append(".pdf");
+			} else {
+				httpURL.append(".xml");
+			}
+			return httpURL.toString();
 		}
 		throw new DOMTestLoadException(new Exception("Unrecognized URI scheme " + scheme));
 	}

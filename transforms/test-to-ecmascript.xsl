@@ -1092,6 +1092,9 @@ function handleEvent(listener, event, userObj) {
 		<xsl:when test="@ignoreCase='true'">
 			<xsl:text>.toUpperCase() == </xsl:text>
 		</xsl:when>
+		<xsl:when test="@bitmask">
+			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text> == </xsl:text>
+		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text> == </xsl:text>
 		</xsl:otherwise>
@@ -1100,6 +1103,9 @@ function handleEvent(listener, event, userObj) {
 	<xsl:choose>
 		<xsl:when test="@ignoreCase='true'">
 			<xsl:text>.toUpperCase())</xsl:text>
+		</xsl:when>
+		<xsl:when test="@bitmask">
+			<xsl:text> &amp; <xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>)</xsl:text>
@@ -1114,6 +1120,9 @@ function handleEvent(listener, event, userObj) {
 		<xsl:when test="@ignoreCase='true'">
 			<xsl:text>.toUpperCase() != </xsl:text>
 		</xsl:when>
+		<xsl:when test="@bitmask">
+			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text> == </xsl:text>
+		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text> != </xsl:text>
 		</xsl:otherwise>
@@ -1122,6 +1131,9 @@ function handleEvent(listener, event, userObj) {
 	<xsl:choose>
 		<xsl:when test="@ignoreCase='true'">
 			<xsl:text>.toUpperCase())</xsl:text>
+		</xsl:when>
+		<xsl:when test="@bitmask">
+			<xsl:text> &amp; <xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>)</xsl:text>

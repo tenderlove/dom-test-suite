@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode28</title>
 <creator>IBM</creator>
 <description>
-	Invoke the adoptNode method on this document using the employee element with the default 
-	Attribute defaulAttr as the source.  Verify if the node has been adopted correctly by 
+	Invoke the adoptNode method on this document using the "p" element with the default 
+	Attribute "dir" as the source.  Verify if the node has been adopted correctly by 
 	checking the nodeName of the adopted Element and by checking if the attribute was adopted.
 	Note the default attribute should be adopted in this case.
 </description>
@@ -38,11 +38,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrImp" type="Attr"/>
 <var name="nodeName" type="DOMString"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
 <item var="employeeElem" obj="childList" index="3" interface="NodeList"/>
 <adoptNode var="adoptedNode" obj="doc" source="employeeElem"/>
-<getAttributeNode var="attrImp" obj="adoptedNode" name='"defaultAttr"'/>
+<getAttributeNode var="attrImp" obj="adoptedNode" name='"dir"'/>
 <nodeName var="nodeName" obj="attrImp"/>
-<assertEquals actual="nodeName" expected='"defaultAttr"' id="documentadoptnode28" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"dir"' id="documentadoptnode28" ignoreCase="false"/>
 </test>

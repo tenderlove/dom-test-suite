@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -39,8 +39,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="notation1" type="Notation"/>
 <var name="notation2" type="Notation"/>
 <var name="isEqual" type="boolean"/>
-<load var="doc1" href="staffNS" willBeModified="false"/>
-<load var="doc2" href="staffNS" willBeModified="false"/>
+<load var="doc1" href="hc_staff" willBeModified="false"/>
+<load var="doc2" href="hc_staff" willBeModified="false"/>
 <doctype var="docType1" obj="doc1"/>
 <doctype var="docType2" obj="doc2"/>
 <notations var="notationsMap1" obj="docType1"/>

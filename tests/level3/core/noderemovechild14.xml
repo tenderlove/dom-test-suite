@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild14</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on a new EntityReference node attempt to remove its last ProcessingInstruction 
 	child node and verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
 </description>
@@ -37,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="eRef" type="EntityReference"/>
 <var name="pi" type="ProcessingInstruction"/>
 <var name="entName" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createEntityReference var="eRef" obj="doc" name='"ent4"'/>
 <lastChild obj="eRef" var="pi" interface="Node"/>
 <assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_noderemovechild14">

@@ -2,7 +2,7 @@
 
 <!-- 
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -53,12 +53,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="firstChildType" type="int"/>
 <var name="firstChildName" type="DOMString"/>
 <var name="firstChildValue" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="true"/>
+<load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment var="docFragment" obj="doc"/>
 <createElement var="parent" obj="doc" tagName='"parent"'/>
 <createElement var="child" obj="doc" tagName='"child"'/>
 <createAttribute var="childsAttr" obj="doc" name='"state"'/>
-<createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+<createEntityReference var="entRef" obj="doc" name='"gamma"'/>
 <createTextNode var="textNode" obj="doc" data='"Test"'/>
 <appendChild obj="childsAttr" var="appendedChild" newChild="entRef"/>
 <setAttributeNode obj="child" var="attrNode" newAttr="childsAttr"/>
@@ -79,7 +79,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<!--  if first child of the attribute is an
 	        entity, then it should be for ent3  -->
 	<equals actual="firstChildType" expected="5"/>
-	<assertEquals actual="firstChildName" expected='"ent3"' 
+	<assertEquals actual="firstChildName" expected='"gamma"' 
 		ignoreCase="false" id="firstChildEnt3Ref"/>
 	<else>
 		<!--  otherwise the value should be expanded as Texas  -->
