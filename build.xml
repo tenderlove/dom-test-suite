@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.44  2002-02-13 08:01:15  dom-ts-4
+Revision 1.45  2002-02-13 08:32:31  dom-ts-4
+Copied jsunit/images and jsunit/tests to distribution
+
+Revision 1.44  2002/02/13 08:01:15  dom-ts-4
 Added dom1-core-dist target
 Relocated .jar files from dist/ to build/
 Patches JSUnit 1.2.6
@@ -330,7 +333,18 @@ All implementation conditions combined into implementationAttribute element
     <copy todir="${build.dir}/level1/core/ecmascript/app">
         <fileset dir="${lib.dir}/jsunit/app" excludes="*.bak"/>
     </copy>
-    <copy file="${lib.dir}/jsunit/docs/gnugpl.html" todir="${build.dir}/level1/core/ecmascript/docs"/>
+    <mkdir dir="${build.dir}/level1/core/ecmascript/images"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/images">
+        <fileset dir="${lib.dir}/jsunit/images" excludes="*.bak"/>
+    </copy>
+    <mkdir dir="${build.dir}/level1/core/ecmascript/docs"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/docs">
+        <fileset dir="${lib.dir}/jsunit/docs" excludes="*.bak"/>
+    </copy>
+    <mkdir dir="${build.dir}/level1/core/ecmascript/jsunit-self-tests"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/jsunit-self-tests">
+        <fileset dir="${lib.dir}/jsunit/tests" excludes="*.bak"/>
+    </copy>
     <copy file="${build.dir}/dom1-core-matrix.html" todir="${build.dir}/level1/core"/>
 
 
