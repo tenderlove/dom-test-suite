@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vform" type="DOMString" />
+<var name="vform" type="HTMLFormElement" />
 <var name="doc" type="Node"/>
 <load var="doc" href="button" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"button"'/>
