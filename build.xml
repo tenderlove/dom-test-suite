@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.109  2003-11-24 19:49:28  dom-ts-4
+Revision 1.110  2003-12-02 03:47:44  dom-ts-4
+Test matrices and load/save fixup (bug 395 and 396)
+
+Revision 1.109  2003/11/24 19:49:28  dom-ts-4
 DOXYGEN for L3 suites and other build issues (bug 390)
 
 Revision 1.108  2003/11/19 16:24:08  dom-ts-4
@@ -2128,7 +2131,9 @@ All implementation conditions combined into implementationAttribute element
 
 	<style in="${specs.dir}/Level-3/Core/xml-source.xml"
 	       out="${build.dir}/dom3-core-subjects.xml"
-	       style="${build.dir}/dom3-subjects.xsl"/>
+	       style="${build.dir}/dom3-subjects.xsl">
+	       <param name="specURI" expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core"/>
+    </style>
        <!-- bc temporarily remove due to problems 
 	<style in="${specs.dir}/Level-3/xml/views/dom-spec.xml"
 	       out="${build.dir}/dom3-views-subjects.xml"
@@ -2136,16 +2141,24 @@ All implementation conditions combined into implementationAttribute element
         bc -->
 	<style in="${specs.dir}/Level-3/Events/xml-source.xml"
 	       out="${build.dir}/dom3-events-subjects.xml"
-	       style="${build.dir}/dom3-subjects.xsl"/>
+	       style="${build.dir}/dom3-subjects.xsl">
+	       <param name="specURI" expression="http://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/events"/>
+    </style>
 	<style in="${specs.dir}/Level-3/XPath/xml-source.xml"
 	       out="${build.dir}/dom3-xpath-subjects.xml"
-	       style="${build.dir}/dom3-subjects.xsl"/>
+	       style="${build.dir}/dom3-subjects.xsl">
+	       <param name="specURI" expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-XPath-20030331/xpath"/>
+	</style>
 	<style in="${specs.dir}/Level-3/LS/xml-source.xml"
 	       out="${build.dir}/dom3-ls-subjects.xml"
-	       style="${build.dir}/dom3-subjects.xsl"/>
+	       style="${build.dir}/dom3-subjects.xsl">
+	       <param name="specURI" expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save"/>
+	</style>
 	<style in="${specs.dir}/Level-3/Val/xml-source.xml"
 	       out="${build.dir}/dom3-val-subjects.xml"
-	       style="${build.dir}/dom3-subjects.xsl"/>
+	       style="${build.dir}/dom3-subjects.xsl">
+	       <param name="specURI" expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation"/>
+	</style>       
 	<!--  remove DOM 3 version of subjects.xsl  -->
 	<delete file="{build.dir}/dom3-subjects.xsl"/>
 </target>
@@ -2458,8 +2471,7 @@ it would compile all DOM 3 java code
 		         includes="org/w3c/dom/ls/*"
 		         excludes="*.bak"/>
 
-        <!--  leave commented until we have some associated files  -->
-		<!-- fileset dir="tests/level3/ls/files" excludes="*.bak"/ -->
+		<fileset dir="tests/level3/ls/files" excludes="*.bak"/>
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
@@ -2618,6 +2630,17 @@ it would compile all DOM 3 java code
 	</style>
 </target>
 
+<target name="dom3-val-metadata" depends="dom3-schema">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level3/validation/alltests.xml" 
+		   out="${build.dir}/dom3-val-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/validation/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
 
 
 <target name="dom3-xpath-matrix" depends="dom3-xpath-metadata,dom3-subjects,dom3-interfaces">
@@ -2626,7 +2649,7 @@ it would compile all DOM 3 java code
 		   out="${build.dir}/dom3-xpath-matrix.html" 
 	       style="${transforms.dir}/test-matrix.xsl">
 		<param name="specURI"
-		       expression="http://www.w3.org/TR/DOM-Level-3-XPath/xpath#"/>
+		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-XPath-20030331/xpath#"/>
         <param name="interfacesURL" expression="dom3-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom3-xpath-subjects.xml"/>
         <param name="title" expression='DOM Level 3 XPath Test Suite Matrix'/>
@@ -2639,7 +2662,7 @@ it would compile all DOM 3 java code
 		   out="${build.dir}/dom3-core-matrix.html" 
 	       style="${transforms.dir}/test-matrix.xsl">
 		<param name="specURI"
-		       expression="http://www.w3.org/TR/DOM-Level-3-core/core#"/>
+		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#"/>
         <param name="interfacesURL" expression="dom3-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom3-core-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Core Test Suite Matrix'/>
@@ -2652,12 +2675,26 @@ it would compile all DOM 3 java code
 		   out="${build.dir}/dom3-ls-matrix.html" 
 	       style="${transforms.dir}/test-matrix.xsl">
 		<param name="specURI"
-		       expression="http://www.w3.org/TR/DOM-Level-3-ls/ls#"/>
+		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#"/>
         <param name="interfacesURL" expression="dom3-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom3-ls-subjects.xml"/>
         <param name="title" expression='DOM Level 3 LS Test Suite Matrix'/>
 	</style>
 </target>
+
+<target name="dom3-val-matrix" depends="dom3-val-metadata,dom3-subjects,dom3-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom3-val-metadata.rdf" 
+		   out="${build.dir}/dom3-val-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#"/>
+        <param name="interfacesURL" expression="dom3-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom3-val-subjects.xml"/>
+        <param name="title" expression='DOM Level 3 Validation Test Suite Matrix'/>
+	</style>
+</target>
+
 
 <target name="dom3-gump" depends="dom3-core-validate-tests, 
                                   dom3-ls-validate-tests, 
