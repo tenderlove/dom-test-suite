@@ -20,9 +20,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>namednodemapremovenameditemns05</title>
 <creator>IBM</creator>
 <description>
-	The method removeNamedItemNS removes a node using its namespaceURI and localName and 
-	raises a NO_MODIFICATION_ALLOWED_ERR if this map is readonly.
-	
 	Retreive an entity and notation node and remove the first notation from the 
 	entity node map and first entity node from the notation map.  Since both these
 	maps are readonly, a NO_MODIFICATION_ALLOWED_ERR should be raised.
@@ -31,30 +28,34 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-04-28</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=407"/>
+<subject resource="http://lists.w3.org/Archives/Member/w3c-dom-ig/2003Nov/0016.html"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="entities" type="NamedNodeMap"/>
 <var name="notations" type="NamedNodeMap"/>
-<var name="entity" type="Entity"/>
-<var name="notation" type="Notation"/>
 <var name="removedNode" type="Node"/>
 <var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <notations var="notations" obj="docType"/>
-<getNamedItemNS var="entity" obj="entities" namespaceURI="nullNS" localName='"ent1"'/>
-<getNamedItemNS var="notation" obj="notations" namespaceURI="nullNS" localName='"notation1"'/>
-<assertDOMException id="namednodemapremovenameditemns05_entities">
-<NO_MODIFICATION_ALLOWED_ERR>
-<removeNamedItemNS var="removedNode" obj="entities"  namespaceURI="nullNS" localName='"notation1"'/>
-</NO_MODIFICATION_ALLOWED_ERR>
-</assertDOMException>
-<assertDOMException id="namednodemapremovenameditemns05_notations">
-<NO_MODIFICATION_ALLOWED_ERR>
-<removeNamedItemNS var="removedNode" obj="notations"  namespaceURI="nullNS" localName='"ent1"'/>
-</NO_MODIFICATION_ALLOWED_ERR>
-</assertDOMException>
+<try>
+   <removeNamedItemNS var="removedNode" obj="entities"  namespaceURI="nullNS" localName='"ent1"'/>
+   <fail id="entity_throw_DOMException"/>
+   <catch>
+   		<DOMException code="NOT_FOUND_ERR"/>
+   		<DOMException code="NO_MODIFICATION_ALLOWED_ERR"/>
+   </catch>
+</try>
+<try>
+	<removeNamedItemNS var="removedNode" obj="notations"  namespaceURI="nullNS" localName='"notation1"'/>
+    <fail id="notation_throw_DOMException"/>
+    <catch>
+    	<DOMException code="NOT_FOUND_ERR"/>
+    	<DOMException code="NO_MODIFICATION_ALLOWED_ERR"/>
+    </catch>
+</try>
 </test>

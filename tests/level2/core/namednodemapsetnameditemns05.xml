@@ -20,17 +20,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>namednodemapsetnameditemns05</title>
 <creator>IBM</creator>
 <description>
-	The method setNamedItemNS adds a node using its namespaceURI and localName and 
-	raises a NO_MODIFICATION_ALLOWED_ERR if this map is readonly.
-	
 	Retreive an entity and notation node and add the first notation to the 
-	entity node map and first entity node to the notation map.  Since both these
+	notation node map and first entity node to the entity map.  Since both these
 	maps are for readonly node, a NO_MODIFICATION_ALLOWED_ERR should be raised.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-04-28</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=407"/>
+<subject resource="http://lists.w3.org/Archives/Member/w3c-dom-ig/2003Nov/0016.html"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -45,16 +44,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <notations var="notations" obj="docType"/>
-<getNamedItemNS var="entity" obj="entities" namespaceURI="nullNS" localName='"ent1"'/>
-<getNamedItemNS var="notation" obj="notations" namespaceURI="nullNS" localName='"notation1"'/>
+<getNamedItem var="entity" obj="entities" name='"ent1"'/>
+<getNamedItem var="notation" obj="notations" name='"notation1"'/>
 <assertDOMException id="namednodemapsetnameditemns05_entities">
 <NO_MODIFICATION_ALLOWED_ERR>
-<setNamedItemNS var="newNode" obj="entities" arg="notation"/>
+<setNamedItemNS var="newNode" obj="entities" arg="entity"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 <assertDOMException id="namednodemapsetnameditemns05_notations">
 <NO_MODIFICATION_ALLOWED_ERR>
-<setNamedItemNS var="newNode" obj="notations" arg="entity"/>
+<setNamedItemNS var="newNode" obj="notations" arg="notation"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

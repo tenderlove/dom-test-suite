@@ -20,16 +20,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>namednodemapgetnameditemns01</title>
 <creator>IBM</creator>
 <description>
-	The method getNamedItemNS retrieves a node specified by local name and namespace URI. 
-	
 	Using the method getNamedItemNS, retreive the entity "ent1" and notation "notation1" 
-	from a NamedNodeMap of this DocumentTypes entities and notations.  Verify if these
-	have been retreived correctly using the nodeName attribute.
+	from a NamedNodeMap of this DocumentTypes entities and notations.
+	Both should be null since entities and notations are not namespaced.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-04-28</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=407"/>
+<subject resource="http://lists.w3.org/Archives/Member/w3c-dom-ig/2003Nov/0016.html"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -46,9 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <entities var="entities" obj="docType"/>
 <notations var="notations" obj="docType"/>
 <getNamedItemNS var="entity" obj="entities" namespaceURI="nullNS" localName='"ent1"'/>
+<assertNull actual="entity" id="entityNull"/>
 <getNamedItemNS var="notation" obj="notations" namespaceURI="nullNS" localName='"notation1"'/>
-<nodeName var="entityName" obj="entity"/>
-<nodeName var="notationName" obj="notation"/>
-<assertEquals actual="entityName" expected='"ent1"' id="namednodemapgetnameditemns01_entityName" ignoreCase="false"/>
-<assertEquals actual="notationName" expected='"notation1"' id="namednodemapgetnameditemns01_notationName" ignoreCase="false"/>
+<assertNull actual="notation" id="notationNull"/>
 </test>
