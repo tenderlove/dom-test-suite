@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -70,7 +70,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"namespaceURI:a "</member>
 <member>"namespaceURI:\""</member>
 </var>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
 <for-each collection="illegalQNames" member="qualifiedName">
 <implementation obj="doc" var="domImpl"/>
 <assertDOMException id="throw_INVALID_CHARACTER_ERR">

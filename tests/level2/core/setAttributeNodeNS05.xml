@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -47,8 +47,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Node"/>
 <var name="setAttr1" type="Attr"/>
-<load var="doc1" href="staffNS.xml" willBeModified="true"/>
-<load var="doc2" href="staffNS.xml" willBeModified="true"/>
+<load var="doc1" href="staffNS" willBeModified="true"/>
+<load var="doc2" href="staffNS" willBeModified="true"/>
 <createAttributeNS obj="doc2" var="newAttr" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
 <getElementsByTagName interface="Document" obj="doc1" var="elementList" tagname="&quot;emp:address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributes" type="NamedNodeMap"/>
 <var name="retnode" type="Node"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staffNS.xml" willBeModified="true"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <createAttributeNS obj="doc" var="arg" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
 <nodeValue obj="arg" value="&quot;newValue&quot;"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>

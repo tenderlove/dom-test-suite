@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributes" type="NamedNodeMap"/>
 <var name="arg" type="Node"/>
 <var name="setNode" type="Node"/>
-<load var="doc" href="staffNS.xml" willBeModified="true"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <if>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;gender&quot;"/>

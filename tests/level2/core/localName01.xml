@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testAddr" type="Element"/>
 <var name="addrAttr" type="Attr"/>
 <var name="localName" type="DOMString"/>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"emp:address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <getAttributeNode obj="testAddr" name='"emp:domestic"' var="addrAttr"/>

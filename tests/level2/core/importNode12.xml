@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -45,8 +45,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityName" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS" willBeModified="false"/>
 <doctype obj="aNewDoc" var="doc1Type"/>
 <entities obj="doc1Type" var="entityList"/>
 <getNamedItem obj="entityList" var="entity2" name='"ent4"'/>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Node"/>
 <var name="employeeNamespace" type="DOMString"/>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <namespaceURI obj="testEmployee" var="employeeNamespace"/>

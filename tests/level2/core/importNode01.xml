@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -57,8 +57,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"elem:attr1"</member>
 <member>"importedText"</member>
 </var>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staffNS.xml" willBeModified="true"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS" willBeModified="true"/>
 <createAttribute obj="aNewDoc" var="newAttr" name='"elem:attr1"'/>
 <createTextNode obj="aNewDoc" var="importedChild" data='"importedText"'/>
 <appendChild obj="newAttr" var="aNode" newChild="importedChild"/>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="qualifiedName" type="DOMString" value="&quot;prefix:local&quot;"/>
 <var name="doc" type="Document"/>
 <var name="newAttr" type="Attr"/>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
 <assertDOMException id="throw_NAMESPACE_ERR">
 <NAMESPACE_ERR>
 <createAttributeNS obj="doc" var="newAttr" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>

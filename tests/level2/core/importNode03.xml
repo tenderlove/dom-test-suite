@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -42,8 +42,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="system" type="DOMString"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS" willBeModified="false"/>
 <createComment obj="aNewDoc" var="comment" data='"this is a comment"'/>
 <importNode obj="doc" var="aNode" importedNode="comment" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>

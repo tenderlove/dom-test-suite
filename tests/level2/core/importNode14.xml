@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 
 <!--
 
@@ -43,8 +43,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="target" type="DOMString"/>
 <var name="data" type="DOMString"/>
 <var name="result" type="List"/>
-<load var="doc" href="staffNS.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS" willBeModified="false"/>
 <createProcessingInstruction obj="aNewDoc" var="pi" target='"target1"' data='"data1"'/>
 <importNode obj="doc" var="aNode" importedNode="pi" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
