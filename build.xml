@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.35  2001-11-16 05:46:09  dom-ts-4
+Revision 1.36  2001-11-17 04:28:15  dom-ts-4
+Added dom2-core-gen-jsunit target
+
+Revision 1.35  2001/11/16 05:46:09  dom-ts-4
 Set debug="on" for java compilation.  Puts line numbers in tracebacks
 
 Revision 1.34  2001/11/14 08:47:46  dom-ts-4
@@ -694,6 +697,27 @@ All implementation conditions combined into implementationAttribute element
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
 	</style>
 </target>
+
+<target name="dom2-core-gen-jsunit" depends="jsunit-init,dom2-interfaces,dom2-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level1/core"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/core"/>
+    <copy todir="${build.dir}/ecmascript/level2/core">
+		<fileset dir="tests/level2/core/files" excludes="*.bak"/>
+    </copy>
+
+	<style basedir="${tests.dir}/level2/core" 
+		   destdir="${build.dir}/ecmascript/level2/core" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-jsunit.xsl" 
+	       extension=".html">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
+	</style>
+</target>
+
 
 <target name="dom2-core-javac" depends="common-javac,dom2-core-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/core" 
