@@ -19,8 +19,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The "insertBefore(newChild,refChild)" method inserts the
     node "newChild" before the node "refChild". 
     
-    Insert a newly created Element node before the eigth
-    child of the second employee and check the "newChild"
+    Insert a newly created Element node before the second
+    sup element in the document and check the "newChild"
     and "refChild" after insertion for correct placement.
 </description>
 
@@ -28,6 +28,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=261"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -50,10 +51,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </var>
 <var name="nodeType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
-<item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="7" var="refChild"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"sup"' var="elementList"/>
+<item interface="NodeList" obj="elementList" index="2" var="refChild"/>
+<parentNode interface="Node" var="employeeNode" obj="refChild"/>
+<childNodes var="childList" obj="employeeNode"/> 
 <createElement obj="doc" tagName='"br"' var="newChild"/>
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 <for-each collection="childList" member="child">
