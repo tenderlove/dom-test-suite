@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,6 +28,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -42,8 +43,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
 <item interface="NodeList" obj="childList" index="3" var="refChild"/>
-<createElement obj="doc" tagName='"newChild"' var="newChild"/>
+<createElement obj="doc" tagName='"br"' var="newChild"/>
 <insertBefore obj="employeeNode" newChild="newChild" refChild="refChild" var="insertedNode"/>
 <nodeName obj="insertedNode" var="childName"/>
-<assertEquals actual="childName" expected='"newChild"' id="nodeName" ignoreCase="auto"/>
+<assertEquals actual="childName" expected='"br"' id="nodeName" ignoreCase="auto"/>
 </test>

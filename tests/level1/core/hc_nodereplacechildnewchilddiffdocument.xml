@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -32,6 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc1" type="Document"/>
 <var name="doc2" type="Document"/>
@@ -42,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="replacedChild" type="Node"/>
 <load var="doc1" href="hc_staff" willBeModified="false"/>
 <load var="doc2" href="hc_staff" willBeModified="true"/>
-<createElement obj="doc1" tagName='"newChild"' var="newChild"/>
+<createElement obj="doc1" tagName='"br"' var="newChild"/>
 <getElementsByTagName interface="Document" obj="doc2" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
 <firstChild obj="elementNode" var="oldChild" interface="Node"/>

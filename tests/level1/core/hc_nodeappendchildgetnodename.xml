@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -21,12 +21,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     
     Append a newly created node to the child list of the 
     second employee and check the NodeName returned.   The
-    "getNodeName()" method should return "newChild".
+    "getNodeName()" method should return "br".
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -39,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<createElement obj="doc" tagName='"newChild"' var="newChild"/>
+<createElement obj="doc" tagName='"br"' var="newChild"/>
 <appendChild obj="employeeNode" newChild="newChild" var="appendNode"/>
 <nodeName obj="appendNode" var="childName"/>
-<assertEquals actual="childName" expected='"newChild"' id="nodeName" ignoreCase="auto"/>
+<assertEquals actual="childName" expected='"br"' id="nodeName" ignoreCase="auto"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -32,6 +32,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-952280727')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='HIERARCHY_REQUEST_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="rootNode" type="Element"/>
@@ -41,10 +43,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="insertedNode" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement obj="doc" var="rootNode"/>
-<createAttribute obj="doc" name='"newAttribute"' var="newChild"/>
+<createAttribute obj="doc" name='"title"' var="newChild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="refChild"/>
-<assertDOMException id="nodeInsertBeforeInvalidNodeTypeAssert1">
+<assertDOMException id="throw_HIERARCHY_REQUEST_ERR">
 <HIERARCHY_REQUEST_ERR>
 <insertBefore var="insertedNode" obj="rootNode" newChild="newChild" refChild="refChild"/>
 </HIERARCHY_REQUEST_ERR>
