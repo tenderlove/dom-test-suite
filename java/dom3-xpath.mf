@@ -1,6 +1,6 @@
 Manifest-Version: 2.0
 Main-Class: org.w3c.domts.level3.xpath.alltests
-Class-Path:  xmlParserAPIs.jar xercesImpl.jar xerces.jar xml4j.jar xmlparserv2.jar crimson.jar parser.jar jaxp.jar xml-apis.jar gnujaxp.jar dom4j-full.jar batik-svg-dom.jar crimson-parser.jar junit-run.jarxalan.jar
+Class-Path: xalan.jar dom3-xml-apis.jar dom3-xercesImpl.jar xmlParserAPIs.jar xercesImpl.jar xerces.jar xml4j.jar xmlparserv2.jar  xml-apis.jar gnujaxp.jar dom4j-full.jar batik-svg-dom.jar junit-run.jar
 
 Name: org/w3c/domts/level3/xpath
 Specification-Title: W3C/NIST Test Suite for DOM Level 3 XPath
