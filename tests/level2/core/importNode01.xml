@@ -67,7 +67,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
 <assertNotNull actual="aNode" id="aNode"/>
-<assertEquals actual="system" expected='"staffNS.dtd"' id="systemId" ignoreCase="false"/>
+<assertURIEquals actual="system" file='"staffNS.dtd"' id="systemId"/>
 <ownerElement obj="aNode" var="attrOwnerElement"/>
 <assertNull actual="attrOwnerElement" id="ownerElement"/>
 <specified obj="aNode" var="specified"/>

@@ -54,7 +54,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <ownerDocument obj="entity1" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected='"staffNS.dtd"' id="systemId" ignoreCase="false"/>
+<assertURIEquals actual="system" file='"staffNS.dtd"' id="systemId"/>
 <nodeName obj="entity1" var="entityName"/>
 <assertEquals actual="entityName" expected='"ent4"' id="entityName" ignoreCase="false"/>
 <firstChild interface="Node" obj="entity1" var="child"/>

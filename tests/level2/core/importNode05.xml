@@ -53,7 +53,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected='"staffNS.dtd"' id="dtdSystemId" ignoreCase="false"/>
+<assertURIEquals actual="system" file='"staffNS.dtd"' id="dtdSystemId"/>
 <nodeName obj="aNode" var="name"/>
 <assertEquals actual="name" expected='"emp:address"' id="nodeName" ignoreCase="false"/>
 </test>

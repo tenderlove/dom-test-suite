@@ -49,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected='"staffNS.dtd"' id="systemId" ignoreCase="false"/>
+<assertURIEquals actual="system" file='"staffNS.dtd"' id="systemId"/>
 <nodeValue obj="aNode" var="value"/>
 <assertEquals actual="value" expected='"this is a comment"' id="nodeValue" ignoreCase="false"/>
 </test>

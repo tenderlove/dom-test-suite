@@ -50,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected='"staffNS.dtd"' id="throw_Equals1" ignoreCase="false"/>
+<assertURIEquals actual="system" file='"staffNS.dtd"' id="systemId"/>
 <target interface="ProcessingInstruction" obj="aNode" var="target"/>
 <assertEquals actual="target" expected='"target1"' id="piTarget" ignoreCase="false"/>
 <data interface="ProcessingInstruction" obj="aNode" var="data"/>
