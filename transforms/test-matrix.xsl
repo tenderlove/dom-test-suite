@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -199,7 +199,7 @@ sorted alphabetically.
 href="resources/COPYRIGHT.html">W3C Software 
 Copyright Notice and License</a><xsl:text>:</xsl:text>
 			<br />
-			<xsl:text>Copyright (c) 2001 World Wide Web Consortium,
+			<xsl:text>Copyright (c) 2001-2003 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
 			Recherche en Informatique et en Automatique, Keio University). All
 			Rights Reserved. This program is distributed under the W3C's Software

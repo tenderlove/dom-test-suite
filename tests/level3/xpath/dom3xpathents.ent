@@ -1,5 +1,5 @@
 <!ENTITY level3      "http://www.w3.org/2001/DOM-Test-Suite/Level-3">
-<!ENTITY spec        "http://www.w3.org/TR/DOM-Level-3-XPath/xpath">
+<!ENTITY spec        "http://www.w3.org/TR/2003/CR-DOM-Level-3-XPath-20030331/xpath">
 
 <!ENTITY vars
  "

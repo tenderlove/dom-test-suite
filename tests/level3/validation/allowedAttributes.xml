@@ -26,7 +26,7 @@ PURPOSE.
 </description>
 <contributor>Oracle Corp.</contributor>
 <date qualifier="created">2003-03-01</date>
-<subject resource="http://www.w3.org/2003/05/WD-DOM-Level-3-Val-20030507/validation.html#ElementEditVAL-allowedAttributes"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#ElementEditVAL-allowedAttributes"/>
 </metadata>
 
 <var name="doc" type="Document"/>
