@@ -663,7 +663,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &gt;
 
 &lt;!ELEMENT contentType EMPTY&gt;
-&lt;!ATTLIST hasSize
+&lt;!ATTLIST contentType
 	id ID #IMPLIED
 	type CDATA #REQUIRED
 &gt;
