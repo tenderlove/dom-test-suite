@@ -40,5 +40,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="9" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="3"/>
 <align interface="HTMLInputElement" obj="testNode" var="valign"/>
-<assertEquals actual="valign" expected='"bottom"' id="alignLink" ignoreCase="false"/>
+<assertEquals actual="valign" expected='"bottom"' id="alignLink" ignoreCase="true"/>
 </test>
