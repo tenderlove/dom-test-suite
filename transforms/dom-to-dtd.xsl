@@ -973,15 +973,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 		<xsl:param name="use"/>
 		<xsl:text>    </xsl:text>
 		<xsl:value-of select="normalize-space($paramName)"/>
-		<xsl:choose>
-			<xsl:when test="$type='boolean'">
-				<xsl:text> (true | false) </xsl:text>
-			</xsl:when>
-
-			<xsl:otherwise>
-				<xsl:text> CDATA </xsl:text>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:text> CDATA </xsl:text>
 		<xsl:value-of select="$use"/>
 		<xsl:text>
 </xsl:text>
