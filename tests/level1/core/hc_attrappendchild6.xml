@@ -50,10 +50,10 @@ Creates an new attribute node and appends a text node.
 
 <!--  check that retval is the appended node  -->
 <nodeValue obj="retval" var="value"/>
-<assertEquals actual="value" expected='"terday"' id="retvalValue" ignoreCase="false"/>
+<assertEquals actual="value" expected='"Yesterday"' id="retvalValue" ignoreCase="false"/>
 
 <!--  check that lastChild is the appended node   -->
 <lastChild var="lastChild" obj="titleAttr" interface="Node"/>
 <nodeValue obj="lastChild" var="value"/>
-<assertEquals actual="value" expected='"terday"' id="lastChildValue" ignoreCase="false"/>
+<assertEquals actual="value" expected='"Yesterday"' id="lastChildValue" ignoreCase="false"/>
 </test>
