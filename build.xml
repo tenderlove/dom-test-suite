@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.74  2002-09-20 05:05:01  dom-ts-4
+Revision 1.75  2002-11-06 12:27:51  dom-ts-5
+Update for DOM Level 2 HTML CR
+xml-source.xml replaces dom-spec.xml in the DOM2-HTML.zip file
+
+Revision 1.74  2002/09/20 05:05:01  dom-ts-4
 Eliminated calls to SED (well except for SVG)
 
 Revision 1.73  2002/09/20 04:19:00  dom-ts-4
@@ -641,10 +645,10 @@ All implementation conditions combined into implementationAttribute element
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-2"/>
-	<get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20020605/DOM2-HTML.zip"
+	<get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20021007/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
 		usetimestamp="yes"/>
-    <get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20020605/java-binding.zip"
+    <get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20021007/java-binding.zip"
         dest="${specs.dir}/DOM2-HTML-Java-Binding.zip"
         usetimestamp="yes"/>
 </target>
@@ -706,8 +710,11 @@ All implementation conditions combined into implementationAttribute element
 	<!--  XML source has unusual ../../whatever paths,
 	        must put in several layers deep to prevent writing out
 			of build tree   -->
+        <!-- xml-source.zip file no longer exists xml-source.xml included in DOM2-HTML.zip  
 	<unzip src="${specs.dir}/Level-2/HTML/xml-source.zip"
 	       dest="${specs.dir}/Level-2/xml/html"/>
+        -->
+	<copy file="${specs.dir}/Level-2/HTML/xml-source.xml" tofile="${specs.dir}/Level-2/xml/html/dom-spec.xml"/>
 
 	<!--  zip file is missing two support files   -->
 	<echo file="${specs.dir}/Level-2/xml/options.xml"
