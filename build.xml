@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.10  2001-08-14 18:49:35  dom-ts-4
+Revision 1.11  2001-08-15 04:44:03  dom-ts-4
+Added dom1-gen-ecmascript target to build.xml
+Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
+
+Revision 1.10  2001/08/14 18:49:35  dom-ts-4
 Changed location of resource files
 Remove spurious required ID's from DTD
 Added xmlns:xsi and xsi:schema location to DTD
@@ -325,6 +329,21 @@ All implementation conditions combined into implementationAttribute element
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
 </target>
+
+<target name="dom1-core-gen-ecmascript" depends="dom1-interfaces">
+    <mkdir dir="${build.dir}/ecmascript/level1/core"/>
+	<style basedir="${tests.dir}/level1/core" 
+		   destdir="${build.dir}/ecmascript/level1/core" 
+		   includes="*.xml" 
+	       style="${transforms.dir}/test-to-ecmascript.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
+	</style>
+</target>
+
 
 <target name="common-javac" depends="init">
 	<mkdir dir="${java.build.dir}"/>

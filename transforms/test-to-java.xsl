@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.6  2001-08-14 18:49:35  dom-ts-4
+Revision 1.7  2001-08-15 04:44:03  dom-ts-4
+Added dom1-gen-ecmascript target to build.xml
+Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
+
+Revision 1.6  2001/08/14 18:49:35  dom-ts-4
 Changed location of resource files
 Remove spurious required ID's from DTD
 Added xmlns:xsi and xsi:schema location to DTD
@@ -271,7 +275,7 @@ import java.util.*;
     </xsl:for-each>
    }
    public String getTargetURI() {
-      return "<xsl:value-of select="@targetURI"/>";
+      return "<xsl:value-of select="concat($target-uri-base,@name)"/>";
    }
 }
 </xsl:template>

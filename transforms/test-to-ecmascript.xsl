@@ -21,14 +21,18 @@ specificiation.
 
 Usage:
 
-saxon -o someTest.js someTest.xml test-to-java.xsl
+saxon -o someTest.js someTest.xml test-to-ecmascript.xsl
 
 
 -->
 
 <!--
 $Log: test-to-ecmascript.xsl,v $
-Revision 1.1  2001-08-14 18:49:35  dom-ts-4
+Revision 1.2  2001-08-15 04:44:03  dom-ts-4
+Added dom1-gen-ecmascript target to build.xml
+Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
+
+Revision 1.1  2001/08/14 18:49:35  dom-ts-4
 Changed location of resource files
 Remove spurious required ID's from DTD
 Added xmlns:xsi and xsi:schema location to DTD
@@ -41,6 +45,8 @@ Removed package and targetURI attributes from Schema/DTD
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--  relative to transform   -->
 	<xsl:param name="interfaces-docname"/>
+    <xsl:param name="target-uri-base"/>
+
 
 <xsl:output method="text"/>
 <xsl:variable name="domspec" select="document($interfaces-docname)"/>
@@ -217,7 +223,7 @@ function </xsl:text>
   <xsl:value-of select="@name"/>
   <xsl:text>_runTest;
   this.targetURI = "</xsl:text>
-  <xsl:value-of select="@targetURI"/>
+  <xsl:value-of select="concat($target-uri-base,@name)"/>
   <xsl:text>";
 }
 </xsl:text>
@@ -275,7 +281,7 @@ import java.util.*;
     </xsl:for-each>
    }
    public String getTargetURI() {
-      return "<xsl:value-of select="@targetURI"/>";
+      return "<xsl:value-of select="concat($target-uri-base,@name)"/>";
    }
 }
 </xsl:template>
