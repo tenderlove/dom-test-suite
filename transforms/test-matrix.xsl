@@ -27,6 +27,7 @@ and combine-metadata.xsl
      <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
      <xsl:param name="buildPath">tests/</xsl:param>
      <xsl:param name="doxyPath">doxygen/html/class</xsl:param>
+     <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
 
 	<xsl:output method="html"/>
 
@@ -41,11 +42,11 @@ and combine-metadata.xsl
 	<xsl:template match="/">
         <html>
 		<head>
-			<title>DOM Level 1 Core Test Suite Matrix</title>
+			<title><xsl:value-of select="$title"/></title>
 			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
 		</head>
         	<body>
-		<h1>DOM Level 1 Core Test Suite Matrix</h1>
+		<h1><xsl:value-of select="$title"/></h1>
 		<p>Below you will find a description of and pointer to each test in the DOM TS categorized under interface, attribute and method, 
 sorted alphabetically. 
 </p>
