@@ -856,18 +856,7 @@ This target checks that the output of that implied transform is valid HTML
     </ant>
 </target>
 
-
-
-<target name="dom1-html-validate-files" depends="get-xhtml1-dtd">
-    <copy todir="${tests.dir}/level1/html/files">
-		<fileset dir="${lib.dir}/xhtml1-dtd"/>
-    </copy>
-
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml *.xhtml"/>  
-	</xmlvalidate>
-	
+<target name="dom1-html-validate-html-files" depends="init" if="jtidy-available">
 	<!--  JTidy complains about these files that the W3C validator accepts   -->
 	<delete dir="${build.dir}/files"/>
 	<mkdir dir="${build.dir}/files/level1/html"/>
@@ -885,6 +874,18 @@ This target checks that the output of that implied transform is valid HTML
     	<param name="dir" value="${build.dir}/files/level1/html"/>
     </antcall>	
 	<delete dir="${build.dir}/files"/>
+</target>	
+
+
+<target name="dom1-html-validate-files" depends="get-xhtml1-dtd, dom1-html-validate-html-files">
+    <copy todir="${tests.dir}/level1/html/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml *.xhtml"/>  
+	</xmlvalidate>
 	
 </target>
 
@@ -910,11 +911,23 @@ This target checks that the output of that implied transform is valid HTML
 
 
 <target name="dom1-html-gen-jsunit-base" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
-    <antcall target="gen-jsunit">
+    <antcall target="gen-jsunit-no-validation">
     	<param name="level" value="1"/>
     	<param name="module" value="html"/>
     	<param name="hideSVG" value="yes"/>    	
     </antcall>
+    
+    <!--  fix up tests which could be produced with <elt*> in string literals  -->
+    <replace dir="${build.dir}/ecmascript/level1/html" includes="HTMLDocument*.html" token='&gt;";' value='"&amp;gt;";'/>
+    <replace dir="${build.dir}/ecmascript/level1/html" includes="HTMLDocument*.html" token='("&lt;' value='("&amp;lt;'/>
+    <replace dir="${build.dir}/ecmascript/level1/html" includes="HTMLDocument*.html" token='Replacement&lt;/title' value='Replacement&amp;lt;/title'/>
+
+    <antcall target="validate-html">
+    	<param name="dir" value="${build.dir}/ecmascript/level1/html"/>
+    </antcall>
+
+
+
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
     <mkdir dir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts"/>
     <copy todir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts">
@@ -1462,6 +1475,7 @@ This target checks that the output of that implied transform is valid HTML
                      HTMLInputElement13.xml
                      HTMLObjectElement11.xml
                      HTMLObjectElement16.xml
+                     hasFeature00.xml
                      object08.xml
                      object13.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
@@ -1507,6 +1521,7 @@ This target checks that the output of that implied transform is valid HTML
                      HTMLInputElement13.xml
                      HTMLObjectElement11.xml
                      HTMLObjectElement16.xml
+                     hasFeature00.xml
                      object08.xml
                      object13.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -1518,12 +1533,23 @@ This target checks that the output of that implied transform is valid HTML
         <param name="testpath" expression="../level2/html/"/>
 	</style>
 
-
-    <antcall target="gen-jsunit">
+    <antcall target="gen-jsunit-no-validation">
     	<param name="level" value="2"/>
     	<param name="module" value="html"/>
     	<param name="hideSVG" value="yes"/>    	
     </antcall>
+    
+    <!--  fix up tests which could be produced with <elt*> in string literals  -->
+    <replace dir="${build.dir}/ecmascript/level2/html" includes="HTMLDocument*.html" token='&gt;";' value='"&amp;gt;";'/>
+    <replace dir="${build.dir}/ecmascript/level2/html" includes="HTMLDocument*.html" token='("&lt;' value='("&amp;lt;'/>
+    <replace dir="${build.dir}/ecmascript/level2/html" includes="HTMLDocument*.html" token='Replacement&lt;/title' value='Replacement&amp;lt;/title'/>
+
+    <antcall target="validate-html">
+    	<param name="dir" value="${build.dir}/ecmascript/level2/html"/>
+    </antcall>
+
+
+
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
     <copy todir="${build.dir}/ecmascript/level2/html/applets/org/w3c/domts">
         <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>

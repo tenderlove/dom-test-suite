@@ -250,13 +250,13 @@ function suite() {
 							Result ID: <input type="text" name="resultid" value="" disabled="disabled"/><br/>
                     </td>
                     <td valign="top">
-                            <input type="radio" name="contentType" id="contentTypeXML" value="text/xml" onclick="setContentType('text/xml')">XML</input><br/>
+                            <input type="radio" name="contentType" id="contentTypeXML" value="text/xml" onclick="setContentType('text/xml')"/>XML<br/>
                             <xsl:if test="$hideHTML = 'no'">
-                            	<input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="checked" onclick="setContentType('text/html')">HTML</input><br/>
+                            	<input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="checked" onclick="setContentType('text/html')"/>HTML<br/>
                             </xsl:if>
-                            <input type="radio" name="contentType" id="contentTypeXHTML" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input><br/>
+                            <input type="radio" name="contentType" id="contentTypeXHTML" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')"/>XHTML<br/>
                             <xsl:if test="$hideSVG = 'no'">
-                            	<input type="radio" name="contentType" id="contentTypeSVG" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input><br/>
+                            	<input type="radio" name="contentType" id="contentTypeSVG" value="image/svg+xml" onclick="setContentType('image/svg+xml')"/>SVG<br/>
                             </xsl:if>
                     </td>
                 </tr>

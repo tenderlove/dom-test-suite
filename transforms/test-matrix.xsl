@@ -196,6 +196,7 @@ sorted alphabetically.
                     </table>
                 </xsl:for-each>
 
+				<h2>All tests</h2>
                 <table border="1" summary="Subjects">
                     <xsl:for-each select="$descriptions">
                         <xsl:sort select="dc:title"/>
