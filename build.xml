@@ -55,7 +55,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<mkdir dir="${dist.dir}"/>
     <available property="junit-available" file="${lib.dir}/junit.zip"/>
     <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
-    <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
     <available property="jtidy-available" classname="org.w3c.tidy.Tidy"/>
     <available property="junit-in-classpath" classname="junit.framework.TestCase"/>
@@ -545,16 +544,8 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="jsunit-download" depends="init" unless="jsunit-available">
-	<!-- temporary download from Curt's personal branch   -->
-    <get src="http://home.houston.rr.com/curta/jsunit.zip"
-         dest="${lib.dir}/jsunit.zip"
-         usetimestamp="true"
-         ignoreerrors="${no-network}"/>
-</target>
-
-<target name="jsunit-get" depends="jsunit-download">
-    <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit.zip"/>
+<target name="jsunit-get" depends="init">
+    <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit20.zip"/>
 </target>
 
 

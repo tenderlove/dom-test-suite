@@ -1,6 +1,5 @@
 build
 dist
-lib
 .project
 .classpath
 xercesImpl.db*
