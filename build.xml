@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.46  2002-02-13 16:26:16  dom-ts-4
+Revision 1.47  2002-02-22 10:15:55  dom-ts-4
+Changed build directory for DOM L2 Core and HTML JSUnit tests to match DOM L1 Core
+
+Revision 1.46  2002/02/13 16:26:16  dom-ts-4
 Updated for move of doxygen config files to doxygen, svgfix.sed to patches
 
 Revision 1.45  2002/02/13 08:32:31  dom-ts-4
@@ -847,14 +850,14 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom2-core-gen-jsunit" depends="jsunit-init,dom2-interfaces,dom2-dtd">
-    <mkdir dir="${build.dir}/ecmascript/level1/core"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/core"/>
-    <copy todir="${build.dir}/ecmascript/level2/core">
+    <mkdir dir="${build.dir}/level2/core/ecmascript/tests"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/core/ecmascript/tests"/>
+    <copy todir="${build.dir}/level2/core/tests">
 		<fileset dir="tests/level2/core/files" excludes="*.bak"/>
     </copy>
 
 	<style basedir="${tests.dir}/level2/core" 
-		   destdir="${build.dir}/ecmascript/level2/core" 
+		   destdir="${build.dir}/level2/core/ecmascript/tests" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -885,9 +888,9 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="dom2-html-gen-ecmascript" depends="dom2-interfaces,dom2-dtd">
-    <mkdir dir="${build.dir}/ecmascript/level2/html"/>
+    <mkdir dir="${build.dir}/level2/html/ecmascript/tests"/>
 	<style basedir="${tests.dir}/level2/html" 
-		   destdir="${build.dir}/ecmascript/level2/html" 
+		   destdir="${build.dir}/level2/html/ecmascript/tests" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-ecmascript.xsl" 
@@ -900,14 +903,14 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom2-html-gen-jsunit" depends="jsunit-init,dom2-interfaces,dom2-dtd">
-    <mkdir dir="${build.dir}/ecmascript/level2/html"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/html"/>
-    <copy todir="${build.dir}/ecmascript/level2/html">
+    <mkdir dir="${build.dir}/level2/html/ecmascript/tests"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/html/ecmascript/tests"/>
+    <copy todir="${build.dir}/level2/html/ecmascript/tests">
 		<fileset dir="tests/level2/html/files" excludes="*.bak"/>
     </copy>
 
 	<style basedir="${tests.dir}/level2/html" 
-		   destdir="${build.dir}/ecmascript/level2/html" 
+		   destdir="${build.dir}/level2/html/ecmascript/tests" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
