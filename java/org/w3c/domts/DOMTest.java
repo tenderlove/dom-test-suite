@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.2  2002-02-03 04:22:35  dom-ts-4
+ Revision 1.3  2002-08-13 04:44:46  dom-ts-4
+ Added getImplementation()
+
+ Revision 1.2  2002/02/03 04:22:35  dom-ts-4
  DOM4J and Batik support added.
  Rework of parser settings
 
@@ -73,6 +76,10 @@ public abstract class DOMTest {
 
   protected DOMTestDocumentBuilderFactory getFactory() {
     return factory;
+  }
+
+  public DOMImplementation getImplementation() {
+    return factory.getDOMImplementation();
   }
 
   public Document load(String docURI) throws DOMTestLoadException {
