@@ -1,0 +1,4390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsd:schema PUBLIC "-//W3C//DTD XMLSCHEMA 200102//EN" "http://www.w3.org/2001/XMLSchema.dtd">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" targetNamespace="http://www.w3.org/2001/DOM-Test-Suite/Level-1">
+<!--
+Copyright (c) 2001 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+-->
+
+<!--This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001 by dom-to-xsd.xsl.-->
+
+<xsd:simpleType name="absoluteURI">
+<xsd:restriction base="xsd:anyURI">
+<xsd:pattern value="[a-zA-Z]*:.*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="variable">
+<xsd:annotation>
+<xsd:documentation>A variable name</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="[A-Za-z][A-Za-z0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="className">
+<xsd:annotation>
+<xsd:documentation>A class name</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="[A-Za-z][A-Za-z0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="packageName">
+<xsd:annotation>
+<xsd:documentation>A package name</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="[A-Za-z][A-Za-z0-9\.]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="stringLiteral">
+<xsd:annotation>
+<xsd:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="&quot;[^\&quot;]*&quot;"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="literal">
+<xsd:annotation>
+<xsd:documentation>The union of accepted literal types</xsd:documentation>
+</xsd:annotation>
+<xsd:union memberTypes="xsd:integer stringLiteral"/>
+</xsd:simpleType>
+<xsd:simpleType name="variableOrLiteral">
+<xsd:union memberTypes="literal variable"/>
+</xsd:simpleType>
+<xsd:simpleType name="variableOrStringLiteral">
+<xsd:union memberTypes="stringLiteral variable"/>
+</xsd:simpleType>
+<xsd:simpleType name="variableOrIntLiteral">
+<xsd:union memberTypes="xsd:integer variable"/>
+</xsd:simpleType>
+<xsd:simpleType name="variableOrBoolLiteral">
+<xsd:union memberTypes="xsd:boolean variable"/>
+</xsd:simpleType>
+<xsd:simpleType name="feature">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="XML"/>
+<xsd:enumeration value="Core"/>
+<xsd:enumeration value="Events"/>
+<xsd:enumeration value="MutationEvents"/>
+<xsd:enumeration value="Traversal"/>
+<xsd:enumeration value="Range"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="version">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="1.0"/>
+<xsd:enumeration value="2.0"/>
+<xsd:enumeration value="3.0"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="variableType">
+<xsd:annotation>
+<xsd:documentation>All known DOM interfaces plus int, DOMString maybe some others.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="int"/>
+<xsd:enumeration value="DOMString"/>
+<xsd:enumeration value="List">
+<xsd:annotation>
+<xsd:documentation>A List variable is used to compare two ordered collections, such as the expected and actual child element names.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Collection">
+<xsd:annotation>
+<xsd:documentation>A collection variable is used to compare two unordered collections, such as the expected and actual attribute names.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="EventMonitor">
+<xsd:annotation>
+<xsd:documentation>An implementation of EventListener that will capture and store all events encountered.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Attr"/>
+<xsd:enumeration value="CDATASection"/>
+<xsd:enumeration value="CharacterData"/>
+<xsd:enumeration value="Comment"/>
+<xsd:enumeration value="Document"/>
+<xsd:enumeration value="DocumentFragment"/>
+<xsd:enumeration value="DocumentType"/>
+<xsd:enumeration value="DOMImplementation"/>
+<xsd:enumeration value="Element"/>
+<xsd:enumeration value="Entity"/>
+<xsd:enumeration value="EntityReference"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+<xsd:enumeration value="HTMLBaseElement"/>
+<xsd:enumeration value="HTMLBaseFontElement"/>
+<xsd:enumeration value="HTMLBlockquoteElement"/>
+<xsd:enumeration value="HTMLBodyElement"/>
+<xsd:enumeration value="HTMLBRElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLCollection"/>
+<xsd:enumeration value="HTMLDirectoryElement"/>
+<xsd:enumeration value="HTMLDivElement"/>
+<xsd:enumeration value="HTMLDListElement"/>
+<xsd:enumeration value="HTMLDocument"/>
+<xsd:enumeration value="HTMLElement"/>
+<xsd:enumeration value="HTMLFieldSetElement"/>
+<xsd:enumeration value="HTMLFontElement"/>
+<xsd:enumeration value="HTMLFormElement"/>
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLFrameSetElement"/>
+<xsd:enumeration value="HTMLHeadElement"/>
+<xsd:enumeration value="HTMLHeadingElement"/>
+<xsd:enumeration value="HTMLHRElement"/>
+<xsd:enumeration value="HTMLHtmlElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLIsIndexElement"/>
+<xsd:enumeration value="HTMLLabelElement"/>
+<xsd:enumeration value="HTMLLegendElement"/>
+<xsd:enumeration value="HTMLLIElement"/>
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLMapElement"/>
+<xsd:enumeration value="HTMLMenuElement"/>
+<xsd:enumeration value="HTMLMetaElement"/>
+<xsd:enumeration value="HTMLModElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLOListElement"/>
+<xsd:enumeration value="HTMLOptGroupElement"/>
+<xsd:enumeration value="HTMLOptionElement"/>
+<xsd:enumeration value="HTMLParagraphElement"/>
+<xsd:enumeration value="HTMLParamElement"/>
+<xsd:enumeration value="HTMLPreElement"/>
+<xsd:enumeration value="HTMLQuoteElement"/>
+<xsd:enumeration value="HTMLScriptElement"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLStyleElement"/>
+<xsd:enumeration value="HTMLTableCaptionElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+<xsd:enumeration value="HTMLTableColElement"/>
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableRowElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLTitleElement"/>
+<xsd:enumeration value="HTMLUListElement"/>
+<xsd:enumeration value="NamedNodeMap"/>
+<xsd:enumeration value="Node"/>
+<xsd:enumeration value="NodeList"/>
+<xsd:enumeration value="Notation"/>
+<xsd:enumeration value="ProcessingInstruction"/>
+<xsd:enumeration value="Text"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:element name="test">
+<xsd:annotation>
+<xsd:documentation>A test.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:choice maxOccurs="unbounded" minOccurs="0">
+<xsd:element ref="hasFeature"/>
+<xsd:element ref="implementationAttribute"/>
+</xsd:choice>
+<xsd:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+<xsd:choice>
+<xsd:element ref="load"/>
+<xsd:element ref="implementation"/>
+</xsd:choice>
+<xsd:group maxOccurs="unbounded" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="className" name="name">
+<xsd:annotation>
+<xsd:documentation>Used in method name in generated code.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="suite.member">
+<xsd:annotation>
+<xsd:documentation>A member of a test suite, either a individual test or another suite.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="required" type="xsd:anyURI" name="href"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="suite">
+<xsd:annotation>
+<xsd:documentation>A suite of tests</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:choice maxOccurs="unbounded" minOccurs="0">
+<xsd:element ref="hasFeature"/>
+<xsd:element ref="implementationAttribute"/>
+</xsd:choice>
+<xsd:choice maxOccurs="unbounded" minOccurs="0">
+<xsd:element ref="suite.member"/>
+</xsd:choice>
+</xsd:sequence>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="className" name="name">
+<xsd:annotation>
+<xsd:documentation>Used in method name in generated code.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="package">
+<xsd:annotation>
+<xsd:documentation>A package of tests in one resource</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:choice maxOccurs="unbounded" minOccurs="0">
+<xsd:element ref="test"/>
+<xsd:element ref="suite"/>
+</xsd:choice>
+</xsd:sequence>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="comment">
+<xsd:annotation>
+<xsd:documentation>Injects comment into generated code.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="wait">
+<xsd:annotation>
+<xsd:documentation>Attempts to pause for a specified period</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="xsd:positiveInteger" name="milliseconds"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="append">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="collection"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="unaryAssignment">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="value"/>
+</xsd:complexType>
+<xsd:element name="assign">
+<xsd:annotation>
+<xsd:documentation>Assigns the specified value or condition to the a variable.  If both are specified, the value will be AND'd with the condition.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:group minOccurs="0" ref="condition"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrLiteral" name="value"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element type="unaryAssignment" name="increment"/>
+<xsd:element type="unaryAssignment" name="decrement"/>
+<xsd:complexType name="binaryAssignment">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="op1"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="op2"/>
+</xsd:complexType>
+<xsd:element type="binaryAssignment" name="plus"/>
+<xsd:element type="binaryAssignment" name="subtract"/>
+<xsd:element type="binaryAssignment" name="mult"/>
+<xsd:element type="binaryAssignment" name="divide"/>
+<xsd:element name="var">
+<xsd:annotation>
+<xsd:documentation>Declare and optionally initialize a variable.  [Tenative] All variables must be declared.  Use instanceOf for type assertions.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:choice minOccurs="0">
+<xsd:element maxOccurs="unbounded" ref="member"/>
+<xsd:element ref="handleEvent"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="name"/>
+<xsd:attribute use="required" type="variableType" name="type"/>
+<xsd:attribute use="optional" type="literal" name="value"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element type="literal" name="member">
+<xsd:annotation>
+<xsd:documentation>Member children are used to initialize List and Collection types.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="handleEvent">
+<xsd:annotation>
+<xsd:documentation>Defines the event handler for a EventMonitor with parameters "listener", "event", "currentTarget" and "userObj".</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+<xsd:group maxOccurs="unbounded" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="optional" type="variable" name="return">
+<xsd:annotation>
+<xsd:documentation>Declares and initializes to true a boolean variable that if false will prevent handleEvent being called on future events.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="load">
+<xsd:annotation>
+<xsd:documentation>Loads the document declared in the corresponding document element.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="xsd:anyURI" name="href"/>
+<xsd:attribute use="required" type="xsd:boolean" name="willBeModified">
+<xsd:annotation>
+<xsd:documentation>If true then this test may modify the document, so a fresh copy should be loaded instead of a cached copy.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute use="optional" type="variable" name="documentElementTagName"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="implementation">
+<xsd:annotation>
+<xsd:documentation>Gets a DOMImplementation.  If the obj attribute is not specified, it creates a default implementation as determined by the test framework.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variable" name="obj"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="metadata">
+<xsd:complexType>
+<xsd:choice maxOccurs="unbounded" minOccurs="0">
+<xsd:element ref="metadata"/>
+<xsd:element type="rdf-statement" name="title">
+<xsd:annotation>
+<xsd:documentation>Name given to the test.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element ref="creator"/>
+<xsd:element ref="subject"/>
+<xsd:element ref="description"/>
+<xsd:element ref="contributor"/>
+<xsd:element ref="date"/>
+<xsd:element ref="source"/>
+<xsd:element ref="relation"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="optional" type="xsd:anyURI" name="about"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="rdf-statement">
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="optional" type="absoluteURI" name="resource"/>
+<xsd:attribute use="optional" type="absoluteURI" name="type"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:element type="rdf-statement" name="creator">
+<xsd:annotation>
+<xsd:documentation>Entity primarily responsible for making the test definition.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="rdf-statement" name="subject">
+<xsd:annotation>
+<xsd:documentation>One topic of the test.  May be repeated.  Preferably, a URI identifing a particular section of the DOM specification.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="rdf-statement" name="description">
+<xsd:annotation>
+<xsd:documentation>A free-text account of the test.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="rdf-statement" name="contributor">
+<xsd:annotation>
+<xsd:documentation>An entity responsible for making contributions to the test.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:simpleType name="dateQualifier">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="created"/>
+<xsd:enumeration value="valid"/>
+<xsd:enumeration value="available"/>
+<xsd:enumeration value="issued"/>
+<xsd:enumeration value="modified"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:element name="date">
+<xsd:annotation>
+<xsd:documentation>A reference to a rest from which the current test is derived.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:date">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute type="dateQualifier" use="required" name="qualifier"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element type="rdf-statement" name="source">
+<xsd:annotation>
+<xsd:documentation>A reference to a rest from which the current test is derived.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:simpleType name="relationQualifier">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="isVersionOf"/>
+<xsd:enumeration value="hasVersion"/>
+<xsd:enumeration value="isReplacedBy"/>
+<xsd:enumeration value="isRequiredBy"/>
+<xsd:enumeration value="requires"/>
+<xsd:enumeration value="isPartOf"/>
+<xsd:enumeration value="hasPart"/>
+<xsd:enumeration value="isReferenceBy"/>
+<xsd:enumeration value="references"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:element name="relation">
+<xsd:annotation>
+<xsd:documentation>A reference to a rest from which the current test is derived.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="optional" type="absoluteURI" name="resource"/>
+<xsd:attribute use="optional" type="absoluteURI" name="type"/>
+<xsd:attribute type="relationQualifier" use="required" name="qualifier"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="assertTrueFalse">
+<xsd:sequence>
+<xsd:group minOccurs="0" ref="condition"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+<xsd:attribute use="optional" type="variable" name="actual"/>
+</xsd:complexType>
+<xsd:element type="assertTrueFalse" name="assertTrue">
+<xsd:annotation>
+<xsd:documentation>Will result in the test failing unless the condition expression content and  the value of the variable specified in the "actual" attribute are either absent or true.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="assertTrueFalse" name="assertFalse">
+<xsd:annotation>
+<xsd:documentation>Will result in the test failing unless the condition expression content or the value of the variable specified in the "actual" attribute is false.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="unaryAssertion">
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+<xsd:element type="unaryAssertion" name="assertNull"/>
+<xsd:element type="unaryAssertion" name="assertNotNull"/>
+<xsd:complexType name="comparisonAssertion">
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="expected"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+<xsd:element name="assertSame">
+<xsd:annotation>
+<xsd:documentation>This asserts that the parameters reference the same object.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="variable" name="expected"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="assertInstanceOf">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableType" name="type"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="assertSize">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="variable" name="collection"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="size"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="comparisonAssertionWithCase">
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="expected"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="xsd:boolean" name="ignoreCase"/>
+</xsd:complexType>
+<xsd:element type="comparisonAssertionWithCase" name="assertEquals"/>
+<xsd:element type="comparisonAssertionWithCase" name="assertNotEquals"/>
+<xsd:element name="assertEventCount">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="atCount"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="captureCount"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="bubbleCount"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="totalCount"/>
+<xsd:attribute use="required" type="variable" name="monitor"/>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:group name="framework-assertion">
+<xsd:choice>
+<xsd:element ref="assertTrue"/>
+<xsd:element ref="assertFalse"/>
+<xsd:element ref="assertNull"/>
+<xsd:element ref="assertNotNull"/>
+<xsd:element ref="assertEquals"/>
+<xsd:element ref="assertNotEquals"/>
+<xsd:element ref="assertSame"/>
+<xsd:element ref="assertInstanceOf"/>
+<xsd:element ref="assertSize"/>
+<xsd:element ref="assertEventCount"/>
+</xsd:choice>
+</xsd:group>
+<xsd:group name="framework-statement">
+<xsd:choice>
+<xsd:element ref="assign"/>
+<xsd:element ref="increment"/>
+<xsd:element ref="decrement"/>
+<xsd:element ref="append"/>
+<xsd:element ref="plus"/>
+<xsd:element ref="subtract"/>
+<xsd:element ref="mult"/>
+<xsd:element ref="divide"/>
+<xsd:element ref="load"/>
+<xsd:element ref="implementation"/>
+<xsd:element ref="hasFeature"/>
+<xsd:element ref="if"/>
+<xsd:element ref="while"/>
+<xsd:element ref="for-each"/>
+<xsd:element ref="comment"/>
+<xsd:element ref="EventMonitor.setUserObj"/>
+<xsd:element ref="EventMonitor.getAtEvents"/>
+<xsd:element ref="EventMonitor.getCaptureEvents"/>
+<xsd:element ref="EventMonitor.getBubbleEvents"/>
+<xsd:element ref="EventMonitor.getAllEvents"/>
+<xsd:element ref="wait"/>
+</xsd:choice>
+</xsd:group>
+<xsd:complexType name="comparison">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="expected"/>
+</xsd:complexType>
+<xsd:element name="same">
+<xsd:annotation>
+<xsd:documentation>Object identity comparison</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="variable" name="expected"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="comparisonWithCase">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="actual"/>
+<xsd:attribute use="required" type="variableOrLiteral" name="expected"/>
+<xsd:attribute use="required" type="xsd:boolean" name="ignoreCase"/>
+</xsd:complexType>
+<xsd:element type="comparisonWithCase" name="equals">
+<xsd:annotation>
+<xsd:documentation>Value comparison, element-wise on collections.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="comparisonWithCase" name="notEquals"/>
+<xsd:element type="comparison" name="less">
+<xsd:annotation>
+<xsd:documentation>Actual is less than to expected.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="comparison" name="lessOrEquals">
+<xsd:annotation>
+<xsd:documentation>Actual is less than or equal to expected.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="comparison" name="greaterOrEquals">
+<xsd:annotation>
+<xsd:documentation>Actual is greater than or equal to expected.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element type="comparison" name="greater">
+<xsd:annotation>
+<xsd:documentation>Actual is greater than expected.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="unaryComparison">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+</xsd:complexType>
+<xsd:element type="unaryComparison" name="isNull"/>
+<xsd:element type="unaryComparison" name="notNull"/>
+<xsd:element name="instanceOf">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableType" name="type"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="hasSize">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="expected"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="implementationAttribute">
+<xsd:complexType>
+<xsd:attribute use="required" name="name">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration>validating</xsd:enumeration>
+<xsd:enumeration>coalescing</xsd:enumeration>
+<xsd:enumeration>expandEntityReferences</xsd:enumeration>
+<xsd:enumeration>namespaceAware</xsd:enumeration>
+<xsd:enumeration>ignoreElementContentWhitespace</xsd:enumeration>
+<xsd:enumeration>signed</xsd:enumeration>
+<xsd:enumeration>hasNullString</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+<xsd:attribute type="xsd:boolean" use="required" name="value"/>
+<xsd:attribute type="xsd:ID" use="optional" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="hasFeature">
+<xsd:annotation>
+<xsd:documentation>hasFeature is used both as a property of a DOMImplementation (when obj and var attributes are provided) and as a implementationCondition.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="feature" name="feature"/>
+<xsd:attribute use="optional" type="version" name="version"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variable" name="obj"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="not">
+<xsd:complexType>
+<xsd:group ref="condition"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="isTrue">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="value"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="isFalse">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="value"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="or">
+<xsd:complexType>
+<xsd:group maxOccurs="unbounded" minOccurs="2" ref="condition"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="and">
+<xsd:complexType>
+<xsd:group maxOccurs="unbounded" minOccurs="2" ref="condition"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="xor">
+<xsd:complexType>
+<xsd:group maxOccurs="2" minOccurs="2" ref="condition"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:group name="condition">
+<xsd:choice>
+<xsd:element ref="same"/>
+<xsd:element ref="equals"/>
+<xsd:element ref="notEquals"/>
+<xsd:element ref="less"/>
+<xsd:element ref="lessOrEquals"/>
+<xsd:element ref="greater"/>
+<xsd:element ref="greaterOrEquals"/>
+<xsd:element ref="isNull"/>
+<xsd:element ref="notNull"/>
+<xsd:element ref="and"/>
+<xsd:element ref="or"/>
+<xsd:element ref="xor"/>
+<xsd:element ref="instanceOf"/>
+<xsd:element ref="isTrue"/>
+<xsd:element ref="isFalse"/>
+<xsd:element ref="hasSize"/>
+<xsd:element ref="hasFeature"/>
+<xsd:element ref="implementationAttribute"/>
+</xsd:choice>
+</xsd:group>
+<xsd:element name="else">
+<xsd:complexType>
+<xsd:group maxOccurs="unbounded" ref="statement"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="if">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:group ref="condition"/>
+<xsd:group maxOccurs="unbounded" ref="statement"/>
+<xsd:element minOccurs="0" ref="else"/>
+</xsd:sequence>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="while">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:group ref="condition"/>
+<xsd:group maxOccurs="unbounded" ref="statement"/>
+</xsd:sequence>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="for-each">
+<xsd:complexType>
+<xsd:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+<xsd:attribute use="required" type="variable" name="collection"/>
+<xsd:attribute use="required" type="variable" name="member"/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="EventMonitor.setUserObj">
+<xsd:annotation>
+<xsd:documentation>Assignes an object to a userObj variable that is accessible from the handleEvent handler of the specified EventMonitor.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="userObj"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="EventMonitorAccessor">
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="monitor"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+</xsd:complexType>
+<xsd:element type="EventMonitorAccessor" name="EventMonitor.getAtEvents"/>
+<xsd:element type="EventMonitorAccessor" name="EventMonitor.getCaptureEvents"/>
+<xsd:element type="EventMonitorAccessor" name="EventMonitor.getBubbleEvents"/>
+<xsd:element type="EventMonitorAccessor" name="EventMonitor.getAllEvents"/>
+<xsd:group name="statement">
+<xsd:choice>
+<xsd:group ref="framework-statement"/>
+<xsd:group ref="assertion"/>
+<xsd:element ref="abbr"/>
+<xsd:element ref="accept"/>
+<xsd:element ref="acceptCharset"/>
+<xsd:element ref="accessKey"/>
+<xsd:element ref="action"/>
+<xsd:element ref="align"/>
+<xsd:element ref="aLink"/>
+<xsd:element ref="alt"/>
+<xsd:element ref="anchors"/>
+<xsd:element ref="applets"/>
+<xsd:element ref="archive"/>
+<xsd:element ref="areas"/>
+<xsd:element ref="attributes"/>
+<xsd:element ref="axis"/>
+<xsd:element ref="background"/>
+<xsd:element ref="bgColor"/>
+<xsd:element ref="body"/>
+<xsd:element ref="border"/>
+<xsd:element ref="caption"/>
+<xsd:element ref="cellIndex"/>
+<xsd:element ref="cellPadding"/>
+<xsd:element ref="cells"/>
+<xsd:element ref="cellSpacing"/>
+<xsd:element ref="ch"/>
+<xsd:element ref="charset"/>
+<xsd:element ref="checked"/>
+<xsd:element ref="childNodes"/>
+<xsd:element ref="chOff"/>
+<xsd:element ref="cite"/>
+<xsd:element ref="className"/>
+<xsd:element ref="clear"/>
+<xsd:element ref="code"/>
+<xsd:element ref="codeBase"/>
+<xsd:element ref="codeType"/>
+<xsd:element ref="color"/>
+<xsd:element ref="cols"/>
+<xsd:element ref="colSpan"/>
+<xsd:element ref="compact"/>
+<xsd:element ref="content"/>
+<xsd:element ref="cookie"/>
+<xsd:element ref="coords"/>
+<xsd:element ref="data"/>
+<xsd:element ref="dateTime"/>
+<xsd:element ref="declare"/>
+<xsd:element ref="defaultChecked"/>
+<xsd:element ref="defaultSelected"/>
+<xsd:element ref="defaultValue"/>
+<xsd:element ref="defer"/>
+<xsd:element ref="dir"/>
+<xsd:element ref="disabled"/>
+<xsd:element ref="doctype"/>
+<xsd:element ref="documentElement"/>
+<xsd:element ref="domain"/>
+<xsd:element ref="elements"/>
+<xsd:element ref="enctype"/>
+<xsd:element ref="entities"/>
+<xsd:element ref="event"/>
+<xsd:element ref="face"/>
+<xsd:element ref="firstChild"/>
+<xsd:element ref="form"/>
+<xsd:element ref="forms"/>
+<xsd:element ref="frame"/>
+<xsd:element ref="frameBorder"/>
+<xsd:element ref="headers"/>
+<xsd:element ref="height"/>
+<xsd:element ref="href"/>
+<xsd:element ref="hreflang"/>
+<xsd:element ref="hspace"/>
+<xsd:element ref="htmlFor"/>
+<xsd:element ref="httpEquiv"/>
+<xsd:element ref="id"/>
+<xsd:element ref="images"/>
+<xsd:element ref="index"/>
+<xsd:element ref="isMap"/>
+<xsd:element ref="label"/>
+<xsd:element ref="lang"/>
+<xsd:element ref="lastChild"/>
+<xsd:element ref="length"/>
+<xsd:element ref="link"/>
+<xsd:element ref="links"/>
+<xsd:element ref="longDesc"/>
+<xsd:element ref="lowSrc"/>
+<xsd:element ref="marginHeight"/>
+<xsd:element ref="marginWidth"/>
+<xsd:element ref="maxLength"/>
+<xsd:element ref="media"/>
+<xsd:element ref="method"/>
+<xsd:element ref="multiple"/>
+<xsd:element ref="name"/>
+<xsd:element ref="nextSibling"/>
+<xsd:element ref="nodeName"/>
+<xsd:element ref="nodeType"/>
+<xsd:element ref="nodeValue"/>
+<xsd:element ref="noHref"/>
+<xsd:element ref="noResize"/>
+<xsd:element ref="noShade"/>
+<xsd:element ref="notationName"/>
+<xsd:element ref="notations"/>
+<xsd:element ref="noWrap"/>
+<xsd:element ref="object"/>
+<xsd:element ref="options"/>
+<xsd:element ref="ownerDocument"/>
+<xsd:element ref="parentNode"/>
+<xsd:element ref="previousSibling"/>
+<xsd:element ref="profile"/>
+<xsd:element ref="prompt"/>
+<xsd:element ref="publicId"/>
+<xsd:element ref="readOnly"/>
+<xsd:element ref="referrer"/>
+<xsd:element ref="rel"/>
+<xsd:element ref="rev"/>
+<xsd:element ref="rowIndex"/>
+<xsd:element ref="rows"/>
+<xsd:element ref="rowSpan"/>
+<xsd:element ref="rules"/>
+<xsd:element ref="scheme"/>
+<xsd:element ref="scope"/>
+<xsd:element ref="scrolling"/>
+<xsd:element ref="sectionRowIndex"/>
+<xsd:element ref="selected"/>
+<xsd:element ref="selectedIndex"/>
+<xsd:element ref="shape"/>
+<xsd:element ref="size"/>
+<xsd:element ref="span"/>
+<xsd:element ref="specified"/>
+<xsd:element ref="src"/>
+<xsd:element ref="standby"/>
+<xsd:element ref="start"/>
+<xsd:element ref="summary"/>
+<xsd:element ref="systemId"/>
+<xsd:element ref="tabIndex"/>
+<xsd:element ref="tagName"/>
+<xsd:element ref="target"/>
+<xsd:element ref="tBodies"/>
+<xsd:element ref="text"/>
+<xsd:element ref="tFoot"/>
+<xsd:element ref="tHead"/>
+<xsd:element ref="title"/>
+<xsd:element ref="type"/>
+<xsd:element ref="URL"/>
+<xsd:element ref="useMap"/>
+<xsd:element ref="vAlign"/>
+<xsd:element ref="value"/>
+<xsd:element ref="valueType"/>
+<xsd:element ref="version"/>
+<xsd:element ref="vLink"/>
+<xsd:element ref="vspace"/>
+<xsd:element ref="width"/>
+<xsd:element ref="add"/>
+<xsd:element ref="appendChild"/>
+<xsd:element ref="appendData"/>
+<xsd:element ref="blur"/>
+<xsd:element ref="click"/>
+<xsd:element ref="cloneNode"/>
+<xsd:element ref="close"/>
+<xsd:element ref="createAttribute"/>
+<xsd:element ref="createCaption"/>
+<xsd:element ref="createCDATASection"/>
+<xsd:element ref="createComment"/>
+<xsd:element ref="createDocumentFragment"/>
+<xsd:element ref="createElement"/>
+<xsd:element ref="createEntityReference"/>
+<xsd:element ref="createProcessingInstruction"/>
+<xsd:element ref="createTextNode"/>
+<xsd:element ref="createTFoot"/>
+<xsd:element ref="createTHead"/>
+<xsd:element ref="deleteCaption"/>
+<xsd:element ref="deleteCell"/>
+<xsd:element ref="deleteData"/>
+<xsd:element ref="deleteRow"/>
+<xsd:element ref="deleteTFoot"/>
+<xsd:element ref="deleteTHead"/>
+<xsd:element ref="focus"/>
+<xsd:element ref="getAttribute"/>
+<xsd:element ref="getAttributeNode"/>
+<xsd:element ref="getElementById"/>
+<xsd:element ref="getElementsByName"/>
+<xsd:element ref="getElementsByTagName"/>
+<xsd:element ref="getNamedItem"/>
+<xsd:element ref="hasChildNodes"/>
+<xsd:element ref="insertBefore"/>
+<xsd:element ref="insertCell"/>
+<xsd:element ref="insertData"/>
+<xsd:element ref="insertRow"/>
+<xsd:element ref="item"/>
+<xsd:element ref="namedItem"/>
+<xsd:element ref="normalize"/>
+<xsd:element ref="open"/>
+<xsd:element ref="remove"/>
+<xsd:element ref="removeAttribute"/>
+<xsd:element ref="removeAttributeNode"/>
+<xsd:element ref="removeChild"/>
+<xsd:element ref="removeNamedItem"/>
+<xsd:element ref="replaceChild"/>
+<xsd:element ref="replaceData"/>
+<xsd:element ref="reset"/>
+<xsd:element ref="select"/>
+<xsd:element ref="setAttribute"/>
+<xsd:element ref="setAttributeNode"/>
+<xsd:element ref="setNamedItem"/>
+<xsd:element ref="splitText"/>
+<xsd:element ref="submit"/>
+<xsd:element ref="substringData"/>
+<xsd:element ref="write"/>
+<xsd:element ref="writeln"/>
+</xsd:choice>
+</xsd:group>
+<xsd:element name="assertDOMException">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element minOccurs="0" ref="metadata"/>
+<xsd:choice>
+<xsd:element ref="INDEX_SIZE_ERR"/>
+<xsd:element ref="DOMSTRING_SIZE_ERR"/>
+<xsd:element ref="HIERARCHY_REQUEST_ERR"/>
+<xsd:element ref="WRONG_DOCUMENT_ERR"/>
+<xsd:element ref="INVALID_CHARACTER_ERR"/>
+<xsd:element ref="NO_DATA_ALLOWED_ERR"/>
+<xsd:element ref="NO_MODIFICATION_ALLOWED_ERR"/>
+<xsd:element ref="NOT_FOUND_ERR"/>
+<xsd:element ref="NOT_SUPPORTED_ERR"/>
+<xsd:element ref="INUSE_ATTRIBUTE_ERR"/>
+</xsd:choice>
+</xsd:sequence>
+<xsd:attribute use="required" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="INDEX_SIZE_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="substringData"/>
+<xsd:element ref="insertData"/>
+<xsd:element ref="deleteData"/>
+<xsd:element ref="replaceData"/>
+<xsd:element ref="splitText"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DOMSTRING_SIZE_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="nodeValue"/>
+<xsd:element ref="data"/>
+<xsd:element ref="substringData"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="HIERARCHY_REQUEST_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="insertBefore"/>
+<xsd:element ref="replaceChild"/>
+<xsd:element ref="appendChild"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="WRONG_DOCUMENT_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="insertBefore"/>
+<xsd:element ref="replaceChild"/>
+<xsd:element ref="appendChild"/>
+<xsd:element ref="setNamedItem"/>
+<xsd:element ref="setAttributeNode"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="INVALID_CHARACTER_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="createElement"/>
+<xsd:element ref="createProcessingInstruction"/>
+<xsd:element ref="createAttribute"/>
+<xsd:element ref="createEntityReference"/>
+<xsd:element ref="setAttribute"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NO_DATA_ALLOWED_ERR">
+<xsd:complexType>
+<xsd:choice/>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NO_MODIFICATION_ALLOWED_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="nodeValue"/>
+<xsd:element ref="data"/>
+<xsd:element ref="data"/>
+<xsd:element ref="insertBefore"/>
+<xsd:element ref="replaceChild"/>
+<xsd:element ref="removeChild"/>
+<xsd:element ref="appendChild"/>
+<xsd:element ref="setNamedItem"/>
+<xsd:element ref="appendData"/>
+<xsd:element ref="insertData"/>
+<xsd:element ref="deleteData"/>
+<xsd:element ref="replaceData"/>
+<xsd:element ref="setAttribute"/>
+<xsd:element ref="removeAttribute"/>
+<xsd:element ref="setAttributeNode"/>
+<xsd:element ref="removeAttributeNode"/>
+<xsd:element ref="splitText"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NOT_FOUND_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="insertBefore"/>
+<xsd:element ref="replaceChild"/>
+<xsd:element ref="removeChild"/>
+<xsd:element ref="removeNamedItem"/>
+<xsd:element ref="removeAttributeNode"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NOT_SUPPORTED_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="createCDATASection"/>
+<xsd:element ref="createProcessingInstruction"/>
+<xsd:element ref="createEntityReference"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="INUSE_ATTRIBUTE_ERR">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element ref="setNamedItem"/>
+<xsd:element ref="setAttributeNode"/>
+</xsd:choice>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:group name="assertion">
+<xsd:choice>
+<xsd:group ref="framework-assertion"/>
+<xsd:element ref="assertDOMException"/>
+</xsd:choice>
+</xsd:group>
+<xsd:element name="abbr">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="accept">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="acceptCharset">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="accessKey">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLLabelElement"/>
+<xsd:enumeration value="HTMLLegendElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="action">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="align">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLLegendElement"/>
+<xsd:enumeration value="HTMLDivElement"/>
+<xsd:enumeration value="HTMLParagraphElement"/>
+<xsd:enumeration value="HTMLHeadingElement"/>
+<xsd:enumeration value="HTMLHRElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableCaptionElement"/>
+<xsd:enumeration value="HTMLTableColElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+<xsd:enumeration value="HTMLTableRowElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="aLink">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBodyElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="alt">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="anchors">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="applets">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="archive">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="areas">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLMapElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="attributes">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="axis">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="background">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBodyElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="bgColor">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBodyElement"/>
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableRowElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="body">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<!--type = HTMLElement-->
+<xsd:attribute use="optional" type="variable" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="border">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="caption">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<!--type = HTMLTableCaptionElement-->
+<xsd:attribute use="optional" type="variable" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cellIndex">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cellPadding">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cells">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<!--type = HTMLCollection-->
+<xsd:attribute use="optional" type="variable" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableRowElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cellSpacing">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ch">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableColElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+<xsd:enumeration value="HTMLTableRowElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="charset">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLScriptElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="checked">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="childNodes">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="chOff">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableColElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+<xsd:enumeration value="HTMLTableRowElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cite">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBlockquoteElement"/>
+<xsd:enumeration value="HTMLQuoteElement"/>
+<xsd:enumeration value="HTMLModElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="className">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="clear">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBRElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="code">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="codeBase">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="codeType">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLObjectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="color">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBaseFontElement"/>
+<xsd:enumeration value="HTMLFontElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cols">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLFrameSetElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="colSpan">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="compact">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLUListElement"/>
+<xsd:enumeration value="HTMLOListElement"/>
+<xsd:enumeration value="HTMLDListElement"/>
+<xsd:enumeration value="HTMLDirectoryElement"/>
+<xsd:enumeration value="HTMLMenuElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="content">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLMetaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cookie">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="coords">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="data">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CharacterData"/>
+<xsd:enumeration value="ProcessingInstruction"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="dateTime">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLModElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="declare">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLObjectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="defaultChecked">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="defaultSelected">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLOptionElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="defaultValue">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="defer">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLScriptElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="dir">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="disabled">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLStyleElement"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLOptGroupElement"/>
+<xsd:enumeration value="HTMLOptionElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="doctype">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="documentElement">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="domain">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="elements">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="enctype">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="entities">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="DocumentType"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="event">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLScriptElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="face">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBaseFontElement"/>
+<xsd:enumeration value="HTMLFontElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="firstChild">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="form">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLIsIndexElement"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLOptionElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLLabelElement"/>
+<xsd:enumeration value="HTMLFieldSetElement"/>
+<xsd:enumeration value="HTMLLegendElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="forms">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="frame">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="frameBorder">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="headers">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="height">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="href">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLBaseElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="hreflang">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="hspace">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="htmlFor">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLabelElement"/>
+<xsd:enumeration value="HTMLScriptElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="httpEquiv">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLMetaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="id">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="images">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="index">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLOptionElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="isMap">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="label">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLOptGroupElement"/>
+<xsd:enumeration value="HTMLOptionElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="lang">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="lastChild">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="length">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="NodeList"/>
+<xsd:enumeration value="NamedNodeMap"/>
+<xsd:enumeration value="CharacterData"/>
+<xsd:enumeration value="HTMLCollection"/>
+<xsd:enumeration value="HTMLFormElement"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="link">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBodyElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="links">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="longDesc">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="lowSrc">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="marginHeight">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="marginWidth">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="maxLength">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="media">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLStyleElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="method">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="multiple">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="name">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Attr"/>
+<xsd:enumeration value="DocumentType"/>
+<xsd:enumeration value="HTMLMetaElement"/>
+<xsd:enumeration value="HTMLFormElement"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLParamElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+<xsd:enumeration value="HTMLMapElement"/>
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="nextSibling">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="nodeName">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="nodeType">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="nodeValue">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="noHref">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="noResize">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="noShade">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLHRElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="notationName">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Entity"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="notations">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="DocumentType"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="noWrap">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="object">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLAppletElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="options">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ownerDocument">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="parentNode">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="previousSibling">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="profile">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLHeadElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="prompt">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLIsIndexElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="publicId">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Notation"/>
+<xsd:enumeration value="Entity"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="readOnly">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrBoolLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="referrer">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="rel">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="rev">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="rowIndex">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableRowElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="rows">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+<xsd:enumeration value="HTMLFrameSetElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="rowSpan">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="rules">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="scheme">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLMetaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="scope">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="scrolling">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="sectionRowIndex">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableRowElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="selected">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLOptionElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="selectedIndex">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="shape">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="size">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLBaseFontElement"/>
+<xsd:enumeration value="HTMLFontElement"/>
+<xsd:enumeration value="HTMLHRElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="span">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableColElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="specified">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Attr"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="src">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLScriptElement"/>
+<xsd:enumeration value="HTMLFrameElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="standby">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLObjectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="start">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLOListElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="summary">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="systemId">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Notation"/>
+<xsd:enumeration value="Entity"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="tabIndex">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="tagName">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="target">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="ProcessingInstruction"/>
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLBaseElement"/>
+<xsd:enumeration value="HTMLFormElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="tBodies">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="text">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTitleElement"/>
+<xsd:enumeration value="HTMLBodyElement"/>
+<xsd:enumeration value="HTMLOptionElement"/>
+<xsd:enumeration value="HTMLScriptElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="tFoot">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<!--type = HTMLTableSectionElement-->
+<xsd:attribute use="optional" type="variable" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="tHead">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<!--type = HTMLTableSectionElement-->
+<xsd:attribute use="optional" type="variable" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="title">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+<xsd:enumeration value="HTMLElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="type">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLLinkElement"/>
+<xsd:enumeration value="HTMLStyleElement"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLUListElement"/>
+<xsd:enumeration value="HTMLOListElement"/>
+<xsd:enumeration value="HTMLLIElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLParamElement"/>
+<xsd:enumeration value="HTMLScriptElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="URL">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="useMap">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="vAlign">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableColElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+<xsd:enumeration value="HTMLTableRowElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="value">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Attr"/>
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLOptionElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLButtonElement"/>
+<xsd:enumeration value="HTMLLIElement"/>
+<xsd:enumeration value="HTMLParamElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="valueType">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLParamElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="version">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLHtmlElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="vLink">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLBodyElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="vspace">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="width">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="optional" type="variable" name="var"/>
+<xsd:attribute use="optional" type="variableOrIntLiteral" name="value"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLPreElement"/>
+<xsd:enumeration value="HTMLHRElement"/>
+<xsd:enumeration value="HTMLImageElement"/>
+<xsd:enumeration value="HTMLObjectElement"/>
+<xsd:enumeration value="HTMLAppletElement"/>
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableColElement"/>
+<xsd:enumeration value="HTMLTableCellElement"/>
+<xsd:enumeration value="HTMLIFrameElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="add">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<!--type = HTMLElement-->
+<xsd:attribute use="required" type="variable" name="element"/>
+<!--type = HTMLElement-->
+<xsd:attribute use="required" type="variable" name="before"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="appendChild">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="newChild"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="appendData">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="arg"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CharacterData"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="blur">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="click">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="cloneNode">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrBoolLiteral" name="deep"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="close">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createAttribute">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createCaption">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createCDATASection">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="data"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createComment">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="data"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createDocumentFragment">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createElement">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="tagName"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createEntityReference">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createProcessingInstruction">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="target"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="data"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createTextNode">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="data"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createTFoot">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="createTHead">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deleteCaption">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deleteCell">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="index"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableRowElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deleteData">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="offset"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="count"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CharacterData"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deleteRow">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="index"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deleteTFoot">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deleteTHead">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="focus">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+<xsd:enumeration value="HTMLAnchorElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getAttribute">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getAttributeNode">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getElementById">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="elementId"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getElementsByName">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="elementName"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getElementsByTagName">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="tagname"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Document"/>
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getNamedItem">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="NamedNodeMap"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="hasChildNodes">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="insertBefore">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="newChild"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="refChild"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="insertCell">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="index"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableRowElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="insertData">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="offset"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="arg"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CharacterData"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="insertRow">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="index"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLTableElement"/>
+<xsd:enumeration value="HTMLTableSectionElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="item">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="index"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="NodeList"/>
+<xsd:enumeration value="NamedNodeMap"/>
+<xsd:enumeration value="HTMLCollection"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="namedItem">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLCollection"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="normalize">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="open">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="remove">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="index"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLSelectElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="removeAttribute">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="removeAttributeNode">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Attr-->
+<xsd:attribute use="required" type="variable" name="oldAttr"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="removeChild">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="oldChild"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="removeNamedItem">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="NamedNodeMap"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="replaceChild">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="newChild"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="oldChild"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Node"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="replaceData">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="offset"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="count"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="arg"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CharacterData"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="reset">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="select">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLInputElement"/>
+<xsd:enumeration value="HTMLTextAreaElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="setAttribute">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="name"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="value"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="setAttributeNode">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Attr-->
+<xsd:attribute use="required" type="variable" name="newAttr"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Element"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="setNamedItem">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<!--type = Node-->
+<xsd:attribute use="required" type="variable" name="arg"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="NamedNodeMap"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="splitText">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="offset"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Text"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="submit">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLFormElement"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="substringData">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variable" name="var"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="offset"/>
+<xsd:attribute use="required" type="variableOrIntLiteral" name="count"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CharacterData"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="write">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="text"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="writeln">
+<xsd:complexType>
+<xsd:attribute use="optional" type="xsd:ID" name="id"/>
+<xsd:attribute use="required" type="variable" name="obj"/>
+<xsd:attribute use="required" type="variableOrStringLiteral" name="text"/>
+<xsd:attribute name="interface" use="optional">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="HTMLDocument"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>

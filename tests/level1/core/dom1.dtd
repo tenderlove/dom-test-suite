@@ -1,0 +1,2322 @@
+
+<!--
+ Copyright (c) 2001 World Wide Web Consortium,
+ (Massachusetts Institute of Technology, Institut National de
+ Recherche en Informatique et en Automatique, Keio University). All
+ Rights Reserved. This program is distributed under the W3C's Software
+ Intellectual Property License. This program is distributed in the
+ hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.
+ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001 by dom-to-xsd.dtd.
+
+-->
+
+<!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount">
+
+<!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait">
+
+<!ENTITY % implementation-condition "hasFeature | implementationAttribute">
+
+<!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize| %implementation-condition;">
+
+<!ENTITY % assertion "%framework-assertion;| assertDOMException" >
+<!ENTITY % variable-type "int|DOMString|List|Collection|EventMonitor|Attr|CDATASection|CharacterData|Comment|Document|DocumentFragment|DocumentType|DOMImplementation|Element|Entity|EntityReference|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBlockquoteElement|HTMLBodyElement|HTMLBRElement|HTMLButtonElement|HTMLCollection|HTMLDirectoryElement|HTMLDivElement|HTMLDListElement|HTMLDocument|HTMLElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHeadElement|HTMLHeadingElement|HTMLHRElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLIsIndexElement|HTMLLabelElement|HTMLLegendElement|HTMLLIElement|HTMLLinkElement|HTMLMapElement|HTMLMenuElement|HTMLMetaElement|HTMLModElement|HTMLObjectElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLUListElement|NamedNodeMap|Node|NodeList|Notation|ProcessingInstruction|Text">
+<!ENTITY % statement "%framework-statement;|%assertion; | abbr | accept | acceptCharset | accessKey | action | align | aLink | alt | anchors | applets | archive | areas | attributes | axis | background | bgColor | body | border | caption | cellIndex | cellPadding | cells | cellSpacing | ch | charset | checked | childNodes | chOff | cite | className | clear | code | codeBase | codeType | color | cols | colSpan | compact | content | cookie | coords | data | dateTime | declare | defaultChecked | defaultSelected | defaultValue | defer | dir | disabled | doctype | documentElement | domain | elements | enctype | entities | event | face | firstChild | form | forms | frame | frameBorder | headers | height | href | hreflang | hspace | htmlFor | httpEquiv | id | images | implementation | index | isMap | label | lang | lastChild | length | link | links | longDesc | lowSrc | marginHeight | marginWidth | maxLength | media | method | multiple | name | nextSibling | nodeName | nodeType | nodeValue | noHref | noResize | noShade | notationName | notations | noWrap | object | options | ownerDocument | parentNode | previousSibling | profile | prompt | publicId | readOnly | referrer | rel | rev | rowIndex | rows | rowSpan | rules | scheme | scope | scrolling | sectionRowIndex | selected | selectedIndex | shape | size | span | specified | src | standby | start | summary | systemId | tabIndex | tagName | target | tBodies | text | tFoot | tHead | title | type | URL | useMap | vAlign | value | valueType | version | vLink | vspace | width | add | appendChild | appendData | blur | click | cloneNode | close | createAttribute | createCaption | createCDATASection | createComment | createDocumentFragment | createElement | createEntityReference | createProcessingInstruction | createTextNode | createTFoot | createTHead | deleteCaption | deleteCell | deleteData | deleteRow | deleteTFoot | deleteTHead | focus | getAttribute | getAttributeNode | getElementById | getElementsByName | getElementsByTagName | getNamedItem | hasChildNodes | hasFeature | insertBefore | insertCell | insertData | insertRow | item | namedItem | normalize | open | remove | removeAttribute | removeAttributeNode | removeChild | removeNamedItem | replaceChild | replaceData | reset | select | setAttribute | setAttributeNode | setNamedItem | splitText | submit | substringData | write | writeln ">
+<!ELEMENT assertDOMException (metadata?,(INDEX_SIZE_ERR|DOMSTRING_SIZE_ERR|HIERARCHY_REQUEST_ERR|WRONG_DOCUMENT_ERR|INVALID_CHARACTER_ERR|NO_DATA_ALLOWED_ERR|NO_MODIFICATION_ALLOWED_ERR|NOT_FOUND_ERR|NOT_SUPPORTED_ERR|INUSE_ATTRIBUTE_ERR))>
+<!ATTLIST assertDOMException id ID #REQUIRED>
+<!ELEMENT INDEX_SIZE_ERR ( substringData | insertData | deleteData | replaceData | splitText )  >
+<!ELEMENT DOMSTRING_SIZE_ERR ( nodeValue | data | substringData )  >
+<!ELEMENT HIERARCHY_REQUEST_ERR ( insertBefore | replaceChild | appendChild )  >
+<!ELEMENT WRONG_DOCUMENT_ERR ( insertBefore | replaceChild | appendChild | setNamedItem | setAttributeNode )  >
+<!ELEMENT INVALID_CHARACTER_ERR ( createElement | createProcessingInstruction | createAttribute | createEntityReference | setAttribute )  >
+<!ELEMENT NO_DATA_ALLOWED_ERR EMPTY  >
+<!ELEMENT NO_MODIFICATION_ALLOWED_ERR ( nodeValue | data | data | insertBefore | replaceChild | removeChild | appendChild | setNamedItem | appendData | insertData | deleteData | replaceData | setAttribute | removeAttribute | setAttributeNode | removeAttributeNode | splitText )  >
+<!ELEMENT NOT_FOUND_ERR ( insertBefore | replaceChild | removeChild | removeNamedItem | removeAttributeNode )  >
+<!ELEMENT NOT_SUPPORTED_ERR ( createCDATASection | createProcessingInstruction | createEntityReference )  >
+<!ELEMENT INUSE_ATTRIBUTE_ERR ( setNamedItem | setAttributeNode )  >
+
+
+					
+<!ELEMENT abbr EMPTY>
+<!ATTLIST abbr
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT accept EMPTY>
+<!ATTLIST accept
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement ) #IMPLIED>
+
+					
+<!ELEMENT acceptCharset EMPTY>
+<!ATTLIST acceptCharset
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFormElement ) #IMPLIED>
+
+					
+<!ELEMENT accessKey EMPTY>
+<!ATTLIST accessKey
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLLabelElement | HTMLLegendElement | HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT action EMPTY>
+<!ATTLIST action
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFormElement ) #IMPLIED>
+
+					
+<!ELEMENT align EMPTY>
+<!ATTLIST align
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement | HTMLLegendElement | HTMLDivElement | HTMLParagraphElement | HTMLHeadingElement | HTMLHRElement | HTMLImageElement | HTMLObjectElement | HTMLAppletElement | HTMLTableElement | HTMLTableCaptionElement | HTMLTableColElement | HTMLTableSectionElement | HTMLTableRowElement | HTMLTableCellElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT aLink EMPTY>
+<!ATTLIST aLink
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBodyElement ) #IMPLIED>
+
+					
+<!ELEMENT alt EMPTY>
+<!ATTLIST alt
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement | HTMLImageElement | HTMLAppletElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT anchors EMPTY>
+<!ATTLIST anchors
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT applets EMPTY>
+<!ATTLIST applets
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT archive EMPTY>
+<!ATTLIST archive
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLObjectElement | HTMLAppletElement ) #REQUIRED>
+
+					
+<!ELEMENT areas EMPTY>
+<!ATTLIST areas
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLMapElement ) #IMPLIED>
+
+					
+<!ELEMENT attributes EMPTY>
+<!ATTLIST attributes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT axis EMPTY>
+<!ATTLIST axis
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT background EMPTY>
+<!ATTLIST background
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBodyElement ) #IMPLIED>
+
+					
+<!ELEMENT bgColor EMPTY>
+<!ATTLIST bgColor
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBodyElement | HTMLTableElement | HTMLTableRowElement | HTMLTableCellElement ) #REQUIRED>
+
+					
+<!ELEMENT body EMPTY>
+<!ATTLIST body
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT border EMPTY>
+<!ATTLIST border
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLImageElement | HTMLObjectElement | HTMLTableElement ) #REQUIRED>
+
+					
+<!ELEMENT caption EMPTY>
+<!ATTLIST caption
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT cellIndex EMPTY>
+<!ATTLIST cellIndex
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT cellPadding EMPTY>
+<!ATTLIST cellPadding
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT cells EMPTY>
+<!ATTLIST cells
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableRowElement ) #IMPLIED>
+
+					
+<!ELEMENT cellSpacing EMPTY>
+<!ATTLIST cellSpacing
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT ch EMPTY>
+<!ATTLIST ch
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableColElement | HTMLTableSectionElement | HTMLTableRowElement | HTMLTableCellElement ) #REQUIRED>
+
+					
+<!ELEMENT charset EMPTY>
+<!ATTLIST charset
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLAnchorElement | HTMLScriptElement ) #REQUIRED>
+
+					
+<!ELEMENT checked EMPTY>
+<!ATTLIST checked
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLInputElement ) #IMPLIED>
+
+					
+<!ELEMENT childNodes EMPTY>
+<!ATTLIST childNodes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT chOff EMPTY>
+<!ATTLIST chOff
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableColElement | HTMLTableSectionElement | HTMLTableRowElement | HTMLTableCellElement ) #REQUIRED>
+
+					
+<!ELEMENT cite EMPTY>
+<!ATTLIST cite
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBlockquoteElement | HTMLQuoteElement | HTMLModElement ) #REQUIRED>
+
+					
+<!ELEMENT className EMPTY>
+<!ATTLIST className
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLElement ) #IMPLIED>
+
+					
+<!ELEMENT clear EMPTY>
+<!ATTLIST clear
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBRElement ) #IMPLIED>
+
+					
+<!ELEMENT code EMPTY>
+<!ATTLIST code
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLObjectElement | HTMLAppletElement ) #REQUIRED>
+
+					
+<!ELEMENT codeBase EMPTY>
+<!ATTLIST codeBase
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLObjectElement | HTMLAppletElement ) #REQUIRED>
+
+					
+<!ELEMENT codeType EMPTY>
+<!ATTLIST codeType
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLObjectElement ) #IMPLIED>
+
+					
+<!ELEMENT color EMPTY>
+<!ATTLIST color
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBaseFontElement | HTMLFontElement ) #REQUIRED>
+
+					
+<!ELEMENT cols EMPTY>
+<!ATTLIST cols
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTextAreaElement | HTMLFrameSetElement ) #REQUIRED>
+
+					
+<!ELEMENT colSpan EMPTY>
+<!ATTLIST colSpan
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT compact EMPTY>
+<!ATTLIST compact
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLUListElement | HTMLOListElement | HTMLDListElement | HTMLDirectoryElement | HTMLMenuElement ) #REQUIRED>
+
+					
+<!ELEMENT content EMPTY>
+<!ATTLIST content
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLMetaElement ) #IMPLIED>
+
+					
+<!ELEMENT cookie EMPTY>
+<!ATTLIST cookie
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT coords EMPTY>
+<!ATTLIST coords
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT data EMPTY>
+<!ATTLIST data
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( CharacterData | ProcessingInstruction | HTMLObjectElement ) #REQUIRED>
+
+					
+<!ELEMENT dateTime EMPTY>
+<!ATTLIST dateTime
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLModElement ) #IMPLIED>
+
+					
+<!ELEMENT declare EMPTY>
+<!ATTLIST declare
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLObjectElement ) #IMPLIED>
+
+					
+<!ELEMENT defaultChecked EMPTY>
+<!ATTLIST defaultChecked
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLInputElement ) #IMPLIED>
+
+					
+<!ELEMENT defaultSelected EMPTY>
+<!ATTLIST defaultSelected
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLOptionElement ) #IMPLIED>
+
+					
+<!ELEMENT defaultValue EMPTY>
+<!ATTLIST defaultValue
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement | HTMLTextAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT defer EMPTY>
+<!ATTLIST defer
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLScriptElement ) #IMPLIED>
+
+					
+<!ELEMENT dir EMPTY>
+<!ATTLIST dir
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLElement ) #IMPLIED>
+
+					
+<!ELEMENT disabled EMPTY>
+<!ATTLIST disabled
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLLinkElement | HTMLStyleElement | HTMLSelectElement | HTMLOptGroupElement | HTMLOptionElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement ) #REQUIRED>
+
+					
+<!ELEMENT doctype EMPTY>
+<!ATTLIST doctype
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT documentElement EMPTY>
+<!ATTLIST documentElement
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Document ) #IMPLIED>
+
+					
+<!ELEMENT domain EMPTY>
+<!ATTLIST domain
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT elements EMPTY>
+<!ATTLIST elements
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLFormElement ) #IMPLIED>
+
+					
+<!ELEMENT enctype EMPTY>
+<!ATTLIST enctype
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFormElement ) #IMPLIED>
+
+					
+<!ELEMENT entities EMPTY>
+<!ATTLIST entities
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType ) #IMPLIED>
+
+					
+<!ELEMENT event EMPTY>
+<!ATTLIST event
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLScriptElement ) #IMPLIED>
+
+					
+<!ELEMENT face EMPTY>
+<!ATTLIST face
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBaseFontElement | HTMLFontElement ) #REQUIRED>
+
+					
+<!ELEMENT firstChild EMPTY>
+<!ATTLIST firstChild
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT form EMPTY>
+<!ATTLIST form
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLIsIndexElement | HTMLSelectElement | HTMLOptionElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLLabelElement | HTMLFieldSetElement | HTMLLegendElement | HTMLObjectElement ) #REQUIRED>
+
+					
+<!ELEMENT forms EMPTY>
+<!ATTLIST forms
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT frame EMPTY>
+<!ATTLIST frame
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT frameBorder EMPTY>
+<!ATTLIST frameBorder
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT headers EMPTY>
+<!ATTLIST headers
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT height EMPTY>
+<!ATTLIST height
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLImageElement | HTMLObjectElement | HTMLAppletElement | HTMLTableCellElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT href EMPTY>
+<!ATTLIST href
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLBaseElement | HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT hreflang EMPTY>
+<!ATTLIST hreflang
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLAnchorElement ) #REQUIRED>
+
+					
+<!ELEMENT hspace EMPTY>
+<!ATTLIST hspace
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLImageElement | HTMLObjectElement | HTMLAppletElement ) #REQUIRED>
+
+					
+<!ELEMENT htmlFor EMPTY>
+<!ATTLIST htmlFor
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLabelElement | HTMLScriptElement ) #REQUIRED>
+
+					
+<!ELEMENT httpEquiv EMPTY>
+<!ATTLIST httpEquiv
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLMetaElement ) #IMPLIED>
+
+					
+<!ELEMENT id EMPTY>
+<!ATTLIST id
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLElement ) #IMPLIED>
+
+					
+<!ELEMENT images EMPTY>
+<!ATTLIST images
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT index EMPTY>
+<!ATTLIST index
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLOptionElement ) #IMPLIED>
+
+					
+<!ELEMENT isMap EMPTY>
+<!ATTLIST isMap
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLImageElement ) #IMPLIED>
+
+					
+<!ELEMENT label EMPTY>
+<!ATTLIST label
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLOptGroupElement | HTMLOptionElement ) #REQUIRED>
+
+					
+<!ELEMENT lang EMPTY>
+<!ATTLIST lang
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLElement ) #IMPLIED>
+
+					
+<!ELEMENT lastChild EMPTY>
+<!ATTLIST lastChild
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT length EMPTY>
+<!ATTLIST length
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( NodeList | NamedNodeMap | CharacterData | HTMLCollection | HTMLFormElement | HTMLSelectElement ) #REQUIRED>
+
+					
+<!ELEMENT link EMPTY>
+<!ATTLIST link
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBodyElement ) #IMPLIED>
+
+					
+<!ELEMENT links EMPTY>
+<!ATTLIST links
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT longDesc EMPTY>
+<!ATTLIST longDesc
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLImageElement | HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT lowSrc EMPTY>
+<!ATTLIST lowSrc
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLImageElement ) #IMPLIED>
+
+					
+<!ELEMENT marginHeight EMPTY>
+<!ATTLIST marginHeight
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT marginWidth EMPTY>
+<!ATTLIST marginWidth
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT maxLength EMPTY>
+<!ATTLIST maxLength
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement ) #IMPLIED>
+
+					
+<!ELEMENT media EMPTY>
+<!ATTLIST media
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLStyleElement ) #REQUIRED>
+
+					
+<!ELEMENT method EMPTY>
+<!ATTLIST method
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFormElement ) #IMPLIED>
+
+					
+<!ELEMENT multiple EMPTY>
+<!ATTLIST multiple
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLSelectElement ) #IMPLIED>
+
+					
+<!ELEMENT name EMPTY>
+<!ATTLIST name
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Attr | DocumentType | HTMLMetaElement | HTMLFormElement | HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLAnchorElement | HTMLImageElement | HTMLObjectElement | HTMLParamElement | HTMLAppletElement | HTMLMapElement | HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT nextSibling EMPTY>
+<!ATTLIST nextSibling
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nodeName EMPTY>
+<!ATTLIST nodeName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nodeType EMPTY>
+<!ATTLIST nodeType
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT nodeValue EMPTY>
+<!ATTLIST nodeValue
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT noHref EMPTY>
+<!ATTLIST noHref
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLAreaElement ) #IMPLIED>
+
+					
+<!ELEMENT noResize EMPTY>
+<!ATTLIST noResize
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLFrameElement ) #IMPLIED>
+
+					
+<!ELEMENT noShade EMPTY>
+<!ATTLIST noShade
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLHRElement ) #IMPLIED>
+
+					
+<!ELEMENT notationName EMPTY>
+<!ATTLIST notationName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Entity ) #IMPLIED>
+
+					
+<!ELEMENT notations EMPTY>
+<!ATTLIST notations
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( DocumentType ) #IMPLIED>
+
+					
+<!ELEMENT noWrap EMPTY>
+<!ATTLIST noWrap
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT object EMPTY>
+<!ATTLIST object
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLAppletElement ) #IMPLIED>
+
+					
+<!ELEMENT options EMPTY>
+<!ATTLIST options
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLSelectElement ) #IMPLIED>
+
+					
+<!ELEMENT ownerDocument EMPTY>
+<!ATTLIST ownerDocument
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT parentNode EMPTY>
+<!ATTLIST parentNode
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT previousSibling EMPTY>
+<!ATTLIST previousSibling
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Node ) #IMPLIED>
+
+					
+<!ELEMENT profile EMPTY>
+<!ATTLIST profile
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLHeadElement ) #IMPLIED>
+
+					
+<!ELEMENT prompt EMPTY>
+<!ATTLIST prompt
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLIsIndexElement ) #IMPLIED>
+
+					
+<!ELEMENT publicId EMPTY>
+<!ATTLIST publicId
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Notation | Entity ) #REQUIRED>
+
+					
+<!ELEMENT readOnly EMPTY>
+<!ATTLIST readOnly
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value (true | false) #IMPLIED
+    interface ( HTMLInputElement | HTMLTextAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT referrer EMPTY>
+<!ATTLIST referrer
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT rel EMPTY>
+<!ATTLIST rel
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLAnchorElement ) #REQUIRED>
+
+					
+<!ELEMENT rev EMPTY>
+<!ATTLIST rev
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLAnchorElement ) #REQUIRED>
+
+					
+<!ELEMENT rowIndex EMPTY>
+<!ATTLIST rowIndex
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableRowElement ) #IMPLIED>
+
+					
+<!ELEMENT rows EMPTY>
+<!ATTLIST rows
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTextAreaElement | HTMLTableElement | HTMLTableSectionElement | HTMLFrameSetElement ) #REQUIRED>
+
+					
+<!ELEMENT rowSpan EMPTY>
+<!ATTLIST rowSpan
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT rules EMPTY>
+<!ATTLIST rules
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT scheme EMPTY>
+<!ATTLIST scheme
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLMetaElement ) #IMPLIED>
+
+					
+<!ELEMENT scope EMPTY>
+<!ATTLIST scope
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableCellElement ) #IMPLIED>
+
+					
+<!ELEMENT scrolling EMPTY>
+<!ATTLIST scrolling
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT sectionRowIndex EMPTY>
+<!ATTLIST sectionRowIndex
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableRowElement ) #IMPLIED>
+
+					
+<!ELEMENT selected EMPTY>
+<!ATTLIST selected
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLOptionElement ) #IMPLIED>
+
+					
+<!ELEMENT selectedIndex EMPTY>
+<!ATTLIST selectedIndex
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLSelectElement ) #IMPLIED>
+
+					
+<!ELEMENT shape EMPTY>
+<!ATTLIST shape
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT size EMPTY>
+<!ATTLIST size
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLSelectElement | HTMLInputElement | HTMLBaseFontElement | HTMLFontElement | HTMLHRElement ) #REQUIRED>
+
+					
+<!ELEMENT span EMPTY>
+<!ATTLIST span
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableColElement ) #IMPLIED>
+
+					
+<!ELEMENT specified EMPTY>
+<!ATTLIST specified
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Attr ) #IMPLIED>
+
+					
+<!ELEMENT src EMPTY>
+<!ATTLIST src
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement | HTMLImageElement | HTMLScriptElement | HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
+
+					
+<!ELEMENT standby EMPTY>
+<!ATTLIST standby
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLObjectElement ) #IMPLIED>
+
+					
+<!ELEMENT start EMPTY>
+<!ATTLIST start
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLOListElement ) #IMPLIED>
+
+					
+<!ELEMENT summary EMPTY>
+<!ATTLIST summary
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT systemId EMPTY>
+<!ATTLIST systemId
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Notation | Entity ) #REQUIRED>
+
+					
+<!ELEMENT tabIndex EMPTY>
+<!ATTLIST tabIndex
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLAnchorElement | HTMLObjectElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT tagName EMPTY>
+<!ATTLIST tagName
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( Element ) #IMPLIED>
+
+					
+<!ELEMENT target EMPTY>
+<!ATTLIST target
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ProcessingInstruction | HTMLLinkElement | HTMLBaseElement | HTMLFormElement | HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
+
+					
+<!ELEMENT tBodies EMPTY>
+<!ATTLIST tBodies
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT text EMPTY>
+<!ATTLIST text
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTitleElement | HTMLBodyElement | HTMLOptionElement | HTMLScriptElement ) #REQUIRED>
+
+					
+<!ELEMENT tFoot EMPTY>
+<!ATTLIST tFoot
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT tHead EMPTY>
+<!ATTLIST tHead
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableElement ) #IMPLIED>
+
+					
+<!ELEMENT type EMPTY>
+<!ATTLIST type
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLLinkElement | HTMLStyleElement | HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLUListElement | HTMLOListElement | HTMLLIElement | HTMLAnchorElement | HTMLObjectElement | HTMLParamElement | HTMLScriptElement ) #REQUIRED>
+
+					
+<!ELEMENT URL EMPTY>
+<!ATTLIST URL
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( HTMLDocument ) #IMPLIED>
+
+					
+<!ELEMENT useMap EMPTY>
+<!ATTLIST useMap
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLInputElement | HTMLImageElement | HTMLObjectElement ) #REQUIRED>
+
+					
+<!ELEMENT vAlign EMPTY>
+<!ATTLIST vAlign
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLTableColElement | HTMLTableSectionElement | HTMLTableRowElement | HTMLTableCellElement ) #REQUIRED>
+
+					
+<!ELEMENT value EMPTY>
+<!ATTLIST value
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( Attr | HTMLSelectElement | HTMLOptionElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLLIElement | HTMLParamElement ) #REQUIRED>
+
+					
+<!ELEMENT valueType EMPTY>
+<!ATTLIST valueType
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLParamElement ) #IMPLIED>
+
+					
+<!ELEMENT version EMPTY>
+<!ATTLIST version
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLHtmlElement ) #IMPLIED>
+
+					
+<!ELEMENT vLink EMPTY>
+<!ATTLIST vLink
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLBodyElement ) #IMPLIED>
+
+					
+<!ELEMENT vspace EMPTY>
+<!ATTLIST vspace
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLImageElement | HTMLObjectElement | HTMLAppletElement ) #REQUIRED>
+
+					
+<!ELEMENT width EMPTY>
+<!ATTLIST width
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
+    interface ( HTMLPreElement | HTMLHRElement | HTMLImageElement | HTMLObjectElement | HTMLAppletElement | HTMLTableElement | HTMLTableColElement | HTMLTableCellElement | HTMLIFrameElement ) #REQUIRED>
+<!ELEMENT add EMPTY >
+<!ATTLIST add
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    element CDATA #REQUIRED
+    before CDATA #REQUIRED
+    interface (HTMLSelectElement) #IMPLIED
+>
+
+
+<!ELEMENT appendChild EMPTY >
+<!ATTLIST appendChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT appendData EMPTY >
+<!ATTLIST appendData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT blur EMPTY >
+<!ATTLIST blur
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLSelectElement|HTMLInputElement|HTMLTextAreaElement|HTMLAnchorElement) #REQUIRED
+>
+
+
+<!ELEMENT click EMPTY >
+<!ATTLIST click
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLInputElement) #IMPLIED
+>
+
+
+<!ELEMENT cloneNode EMPTY >
+<!ATTLIST cloneNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    deep (true | false) #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT close EMPTY >
+<!ATTLIST close
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLDocument) #IMPLIED
+>
+
+
+<!ELEMENT createAttribute EMPTY >
+<!ATTLIST createAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createCaption EMPTY >
+<!ATTLIST createCaption
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (HTMLTableElement) #IMPLIED
+>
+
+
+<!ELEMENT createCDATASection EMPTY >
+<!ATTLIST createCDATASection
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createComment EMPTY >
+<!ATTLIST createComment
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createDocumentFragment EMPTY >
+<!ATTLIST createDocumentFragment
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createElement EMPTY >
+<!ATTLIST createElement
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    tagName CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createEntityReference EMPTY >
+<!ATTLIST createEntityReference
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createProcessingInstruction EMPTY >
+<!ATTLIST createProcessingInstruction
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    target CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createTextNode EMPTY >
+<!ATTLIST createTextNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    data CDATA #REQUIRED
+    interface (Document) #IMPLIED
+>
+
+
+<!ELEMENT createTFoot EMPTY >
+<!ATTLIST createTFoot
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (HTMLTableElement) #IMPLIED
+>
+
+
+<!ELEMENT createTHead EMPTY >
+<!ATTLIST createTHead
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (HTMLTableElement) #IMPLIED
+>
+
+
+<!ELEMENT deleteCaption EMPTY >
+<!ATTLIST deleteCaption
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLTableElement) #IMPLIED
+>
+
+
+<!ELEMENT deleteCell EMPTY >
+<!ATTLIST deleteCell
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (HTMLTableRowElement) #IMPLIED
+>
+
+
+<!ELEMENT deleteData EMPTY >
+<!ATTLIST deleteData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT deleteRow EMPTY >
+<!ATTLIST deleteRow
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (HTMLTableElement|HTMLTableSectionElement) #REQUIRED
+>
+
+
+<!ELEMENT deleteTFoot EMPTY >
+<!ATTLIST deleteTFoot
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLTableElement) #IMPLIED
+>
+
+
+<!ELEMENT deleteTHead EMPTY >
+<!ATTLIST deleteTHead
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLTableElement) #IMPLIED
+>
+
+
+<!ELEMENT focus EMPTY >
+<!ATTLIST focus
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLSelectElement|HTMLInputElement|HTMLTextAreaElement|HTMLAnchorElement) #REQUIRED
+>
+
+
+<!ELEMENT getAttribute EMPTY >
+<!ATTLIST getAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT getAttributeNode EMPTY >
+<!ATTLIST getAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT getElementById EMPTY >
+<!ATTLIST getElementById
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    elementId CDATA #REQUIRED
+    interface (HTMLDocument) #IMPLIED
+>
+
+
+<!ELEMENT getElementsByName EMPTY >
+<!ATTLIST getElementsByName
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    elementName CDATA #REQUIRED
+    interface (HTMLDocument) #IMPLIED
+>
+
+
+<!ELEMENT getElementsByTagName EMPTY >
+<!ATTLIST getElementsByTagName
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    tagname CDATA #REQUIRED
+    interface (Document|Element) #REQUIRED
+>
+
+
+<!ELEMENT getNamedItem EMPTY >
+<!ATTLIST getNamedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT hasChildNodes EMPTY >
+<!ATTLIST hasChildNodes
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT insertBefore EMPTY >
+<!ATTLIST insertBefore
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    refChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT insertCell EMPTY >
+<!ATTLIST insertCell
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (HTMLTableRowElement) #IMPLIED
+>
+
+
+<!ELEMENT insertData EMPTY >
+<!ATTLIST insertData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT insertRow EMPTY >
+<!ATTLIST insertRow
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (HTMLTableElement|HTMLTableSectionElement) #REQUIRED
+>
+
+
+<!ELEMENT item EMPTY >
+<!ATTLIST item
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (NodeList|NamedNodeMap|HTMLCollection) #REQUIRED
+>
+
+
+<!ELEMENT namedItem EMPTY >
+<!ATTLIST namedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (HTMLCollection) #IMPLIED
+>
+
+
+<!ELEMENT normalize EMPTY >
+<!ATTLIST normalize
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT open EMPTY >
+<!ATTLIST open
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLDocument) #IMPLIED
+>
+
+
+<!ELEMENT remove EMPTY >
+<!ATTLIST remove
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    index CDATA #REQUIRED
+    interface (HTMLSelectElement) #IMPLIED
+>
+
+
+<!ELEMENT removeAttribute EMPTY >
+<!ATTLIST removeAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT removeAttributeNode EMPTY >
+<!ATTLIST removeAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    oldAttr CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT removeChild EMPTY >
+<!ATTLIST removeChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    oldChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT removeNamedItem EMPTY >
+<!ATTLIST removeNamedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    name CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT replaceChild EMPTY >
+<!ATTLIST replaceChild
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newChild CDATA #REQUIRED
+    oldChild CDATA #REQUIRED
+    interface (Node) #IMPLIED
+>
+
+
+<!ELEMENT replaceData EMPTY >
+<!ATTLIST replaceData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT reset EMPTY >
+<!ATTLIST reset
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLFormElement) #IMPLIED
+>
+
+
+<!ELEMENT select EMPTY >
+<!ATTLIST select
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLInputElement|HTMLTextAreaElement) #REQUIRED
+>
+
+
+<!ELEMENT setAttribute EMPTY >
+<!ATTLIST setAttribute
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setAttributeNode EMPTY >
+<!ATTLIST setAttributeNode
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    newAttr CDATA #REQUIRED
+    interface (Element) #IMPLIED
+>
+
+
+<!ELEMENT setNamedItem EMPTY >
+<!ATTLIST setNamedItem
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    arg CDATA #REQUIRED
+    interface (NamedNodeMap) #IMPLIED
+>
+
+
+<!ELEMENT splitText EMPTY >
+<!ATTLIST splitText
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    interface (Text) #IMPLIED
+>
+
+
+<!ELEMENT submit EMPTY >
+<!ATTLIST submit
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    interface (HTMLFormElement) #IMPLIED
+>
+
+
+<!ELEMENT substringData EMPTY >
+<!ATTLIST substringData
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    offset CDATA #REQUIRED
+    count CDATA #REQUIRED
+    interface (CharacterData) #IMPLIED
+>
+
+
+<!ELEMENT write EMPTY >
+<!ATTLIST write
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    text CDATA #REQUIRED
+    interface (HTMLDocument) #IMPLIED
+>
+
+
+<!ELEMENT writeln EMPTY >
+<!ATTLIST writeln
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    text CDATA #REQUIRED
+    interface (HTMLDocument) #IMPLIED
+>
+
+
+
+
+<!ELEMENT test (metadata?,(%implementation-condition;)*,var*,(load|implementation),(%statement;)*) >
+<!ATTLIST test 
+   xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-1"
+   id ID #IMPLIED
+   name CDATA #REQUIRED
+   xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation CDATA #IMPLIED
+>
+
+<!ELEMENT package (metadata?, (test|suite)*)>
+<!ATTLIST package
+   xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-1"
+	id ID #IMPLIED
+>
+
+<!ELEMENT suite (metadata?,(%implementation-condition;)*,(suite.member)*)>
+<!ATTLIST suite
+   xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-1"
+   id ID #IMPLIED
+   name CDATA #REQUIRED
+   xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation CDATA #IMPLIED
+>
+
+<!ELEMENT suite.member EMPTY>
+<!ATTLIST suite.member
+   href CDATA #REQUIRED
+>
+
+
+<!ELEMENT comment (#PCDATA)>
+<!ATTLIST comment
+	id ID #IMPLIED
+>
+
+<!ELEMENT wait EMPTY>
+<!ATTLIST wait
+	id ID #IMPLIED
+	milliseconds CDATA #REQUIRED
+>
+
+<!ELEMENT append EMPTY>
+<!ATTLIST append
+	id ID #IMPLIED
+	collection CDATA #REQUIRED
+	obj CDATA #REQUIRED
+>
+
+<!ELEMENT assign ((%condition;)?)?>
+<!ATTLIST assign
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	value CDATA #IMPLIED
+>
+
+<!ELEMENT increment EMPTY>
+<!ATTLIST increment
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT decrement EMPTY>
+<!ATTLIST decrement
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT plus EMPTY>
+<!ATTLIST plus
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT subtract EMPTY>
+<!ATTLIST subtract
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT mult EMPTY>
+<!ATTLIST mult
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT divide EMPTY>
+<!ATTLIST divide
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	op1 CDATA #REQUIRED
+	op2 CDATA #REQUIRED
+>
+
+<!ELEMENT var (member+ | handleEvent)?>
+<!ATTLIST var
+	id ID #IMPLIED
+	name CDATA #REQUIRED
+	type (%variable-type;) #REQUIRED
+	value CDATA #IMPLIED
+>
+
+<!ELEMENT member (#PCDATA)>
+
+<!ELEMENT handleEvent (var*, (%statement;)+)>
+<!ATTLIST handleEvent
+	return CDATA #IMPLIED
+>
+
+<!ELEMENT load EMPTY>
+<!ATTLIST load
+	var CDATA #REQUIRED
+	href CDATA #REQUIRED
+	willBeModified CDATA #REQUIRED
+	documentElementTagName CDATA #IMPLIED
+>
+
+<!ELEMENT implementation EMPTY>
+<!ATTLIST implementation
+	var CDATA #REQUIRED
+	obj CDATA #IMPLIED
+>
+
+
+<!--  since title is used both as a metadata element and
+            a read-write attribute, it is hard coded here   -->
+<!ELEMENT title (#PCDATA)>
+<!ATTLIST title
+    id ID #IMPLIED
+	obj CDATA #IMPLIED					
+    var CDATA #IMPLIED
+	value CDATA #IMPLIED
+    interface CDATA #IMPLIED
+>
+
+
+<!ELEMENT metadata (metadata | title | creator | subject | description | contributor | date | source | relation)*>
+<!ATTLIST metadata
+	id ID #IMPLIED
+	about CDATA #IMPLIED
+>
+
+<!ELEMENT creator (#PCDATA)>
+<!ATTLIST creator
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT subject (#PCDATA)>
+<!ATTLIST subject
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT description (#PCDATA)>
+<!ATTLIST description
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT contributor (#PCDATA)>
+<!ATTLIST contributor
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT date (#PCDATA)>
+<!ATTLIST date
+	id ID #IMPLIED
+	qualifier (created | valid | available | issued | modified) #REQUIRED
+>
+
+<!ELEMENT source (#PCDATA)>
+<!ATTLIST source
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT relation (#PCDATA)>
+<!ATTLIST relation
+	id ID #IMPLIED
+	resource CDATA #IMPLIED
+	type CDATA #IMPLIED
+	qualifier (isVersionOf | hasVersion | isReplacedBy | isRequiredBy | requires | isPartOf | hasPart | isReferenceBy | references) #REQUIRED
+>
+					
+<!ELEMENT assertTrue ((%condition;),(%statement;)*)>
+<!ATTLIST assertTrue
+	id ID #REQUIRED
+	actual CDATA #IMPLIED
+>
+							
+<!ELEMENT assertFalse ((%condition;),(%statement;)*)>
+<!ATTLIST assertFalse
+	id ID #REQUIRED
+	actual CDATA #IMPLIED
+>
+
+<!ELEMENT assertNull (metadata?, (%statement;)*)>
+<!ATTLIST assertNull
+	actual CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertNotNull (metadata?, (%statement;)*)>
+<!ATTLIST assertNotNull
+	actual CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertSame (metadata?, (%statement;)*)>
+<!ATTLIST assertSame
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertInstanceOf (metadata?, (%statement;)*)>
+<!ATTLIST assertInstanceOf
+	obj CDATA #REQUIRED
+	type (%variable-type;) #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertSize (metadata?, (%statement;)*)>
+<!ATTLIST assertSize
+	collection CDATA #REQUIRED
+	size CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT assertEquals (metadata?, (%statement;)*)>
+<!ATTLIST assertEquals
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	id ID #REQUIRED
+	ignoreCase CDATA #REQUIRED
+>
+
+<!ELEMENT assertNotEquals (metadata?, (%statement;)*)>
+<!ATTLIST assertNotEquals
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	id ID #REQUIRED
+	ignoreCase CDATA #REQUIRED
+>
+
+<!ELEMENT assertEventCount (metadata?, (%statement;)*)>
+<!ATTLIST assertEventCount
+	atCount CDATA #IMPLIED
+	captureCount CDATA #IMPLIED
+	bubbleCount CDATA #IMPLIED
+	totalCount CDATA #IMPLIED
+	monitor CDATA #REQUIRED
+	id ID #REQUIRED
+>
+
+<!ELEMENT same EMPTY>
+<!ATTLIST same
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT equals EMPTY>
+<!ATTLIST equals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	ignoreCase (true|false) "false"
+>
+
+<!ELEMENT notEquals EMPTY>
+<!ATTLIST equals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+	ignoreCase (true|false) "false"
+>
+
+<!ELEMENT less EMPTY>
+<!ATTLIST less
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT lessOrEquals EMPTY>
+<!ATTLIST lessOrEquals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT greater EMPTY>
+<!ATTLIST greater
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT greaterOrEquals EMPTY>
+<!ATTLIST greaterOrEquals
+	id ID #IMPLIED
+	actual CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT isNull EMPTY>
+<!ATTLIST isNull
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+>
+
+<!ELEMENT notNull EMPTY>
+<!ATTLIST notNull
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+>
+
+<!ELEMENT instanceOf EMPTY>
+<!ATTLIST instanceOf
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	type (%variable-type;) #REQUIRED
+>
+
+<!ELEMENT hasSize EMPTY>
+<!ATTLIST hasSize
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	expected CDATA #REQUIRED
+>
+
+<!ELEMENT implementationAttribute EMPTY>
+<!ATTLIST implementationAttribute
+	id ID #IMPLIED
+	value (true|false) #REQUIRED
+	name (validating|coalescing|expandEntityReferences|namespaceAware|ignoreElementContentWhitespace|signed|hasNullString) #REQUIRED
+>
+
+
+<!ELEMENT hasFeature EMPTY>
+<!ATTLIST hasFeature
+	id ID #IMPLIED
+	feature (XML | Core | Events | MutationEvents | Traversal | Range) #REQUIRED
+	version (1.0 | 2.0 | 3.0) #IMPLIED
+	var CDATA #IMPLIED
+	obj CDATA #IMPLIED
+>
+
+<!ELEMENT not ((%condition;))>
+<!ATTLIST not
+	id ID #IMPLIED
+>
+
+<!ELEMENT isTrue EMPTY>
+<!ATTLIST isTrue
+	id ID #IMPLIED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT isFalse EMPTY>
+<!ATTLIST isFalse
+	id ID #IMPLIED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT or ((%condition;),(%condition;)+)>
+<!ATTLIST or
+	id ID #IMPLIED
+>
+
+<!ELEMENT and ((%condition;),(%condition;)+)>
+<!ATTLIST and
+	id ID #IMPLIED
+>
+
+<!ELEMENT xor ((%condition;),(%condition;))>
+<!ATTLIST xor
+	id ID #IMPLIED
+>
+
+<!ELEMENT else ((%statement;)+)>
+<!ATTLIST else
+	id ID #IMPLIED
+>
+
+<!ELEMENT if ((%condition;), (%statement;)+, else?)>
+<!ATTLIST if
+	id ID #IMPLIED
+>
+
+<!ELEMENT while ((%condition;),(%statement;)+)>
+<!ATTLIST while
+	id ID #IMPLIED
+>
+
+<!ELEMENT for-each ((%statement;)*)>
+<!ATTLIST for-each
+	collection CDATA #REQUIRED
+	member CDATA #REQUIRED
+	id ID #IMPLIED
+>
+
+<!ELEMENT EventMonitor.setUserObj EMPTY>
+<!ATTLIST EventMonitor.setUserObj
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	userObj CDATA #REQUIRED
+>
+
+<!ELEMENT EventMonitor.getAtEvents EMPTY>
+<!ATTLIST EventMonitor.getAtEvents
+	id ID #IMPLIED
+	monitor CDATA #REQUIRED
+	var CDATA #REQUIRED
+>
+
+<!ELEMENT EventMonitor.getBubbleEvents EMPTY>
+<!ATTLIST EventMonitor.getBubbleEvents
+	id ID #IMPLIED
+	monitor CDATA #REQUIRED
+	var CDATA #REQUIRED
+>
+
+<!ELEMENT EventMonitor.getCaptureEvents EMPTY>
+<!ATTLIST EventMonitor.getCaptureEvents
+	id ID #IMPLIED
+	monitor CDATA #REQUIRED
+	var CDATA #REQUIRED
+>
+
+
+<!ELEMENT EventMonitor.getAllEvents EMPTY>
+<!ATTLIST EventMonitor.getAllEvents
+	id ID #IMPLIED
+	monitor CDATA #REQUIRED
+	var CDATA #REQUIRED
+>
+
+	
