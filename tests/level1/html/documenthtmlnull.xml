@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test SYSTEM "dom1.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documenthtmlnull">
+<metadata>
+<title>documentHTMLNull</title>
+<creator>NIST</creator>
+<description>
+    The "getDoctype()" method returns null for HTML documents. 
+   Retrieve the HTML based DOM document and invoke its
+   "getDoctype()" method. It should return null.
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="docType" type="DocumentType"/>
+<load var="doc" href="staff.html" willBeModified="false"/>
+<doctype obj="doc" var="docType"/>
+<assertNull actual="docType" id="documentHTMLNullAssert"/>
+</test>
