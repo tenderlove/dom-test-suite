@@ -37,12 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <notations obj="docType" var="notations"/>
-<getNamedItem obj="notations" var="notationNode" name="&quot;notation2&quot;"/>
+<getNamedItem obj="notations" var="notationNode" name='"notation2"'/>
 <systemId interface="Notation" obj="notationNode" var="systemId"/>
 <assertURIEquals actual="systemId" file='"notation2File"' id="uriEquals"/>
-<!--  
-      ISSUE:  Some processors will absolutize the URI others don't.  
-      Leaving both assertions in until a resolution
--->
-<assertEquals actual="systemId" expected='"notation2File"' id="exactEquals" ignoreCase="false"/>
 </test>
