@@ -21,25 +21,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode10</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Retreive 2 element nodes of this Document having the nodeName employeeId and 
-	namespaceURI http://www.nist.gov and different child nodeLists.  Using isEqualNode 
+	Retreive 2 different "em" nodes of this Document   Use isEqualNode 
 	check if nodes are not equal.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elem1" type="Element"/>
 <var name="elem2" type="Element"/>
 <var name="employeeList" type="NodeList"/>
 <var name="isEqual" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"em"' interface="Document"/>
+<getElementsByTagName var="employeeList" obj="doc" tagname='"em"' interface="Document"/>
 <item var="elem1" obj="employeeList" index="0" interface="NodeList"/>
 <item var="elem2" obj="employeeList" index="1" interface="NodeList"/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>

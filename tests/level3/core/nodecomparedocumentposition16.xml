@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-20</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docFrag" type="DocumentFragment"/>
 <var name="attr" type="Attr"/>

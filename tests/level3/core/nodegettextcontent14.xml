@@ -29,13 +29,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
 <var name="textContent" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="2" interface="NodeList"/>
 <textContent var="textContent" obj="elem"/>
 <assertEquals  actual="textContent" expected='"\n  EMP0003\n  Roger\n Jones\n  Department Manager\n  100,000\n  Element data\n  PO Box 27 Irving, texas 98553\n "' id="nodegettextcontent13" ignoreCase="false"/>

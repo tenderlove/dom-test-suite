@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docElem" type="Element"/>
 <load var="doc" href="barfoo" willBeModified="false"/>
 <documentElement var="docElem" obj="doc"/>
-<localName var="rootName" obj="docElem"/>
+<tagName var="rootName" obj="docElem"/>
 <namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" qualifiedName='rootName' namespaceURI='rootNS' doctype="nullDocType"/>

@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Cretae a new DocumentType node whose systemId is StaffNS.DTD.  Create a new Document 
-	node.  Check if the value of the standalone attribute on the new Documet is false.
+	node.  Check if the value of the standalone attribute on the new Document is false.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -34,10 +34,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domImpl" type="DOMImplementation"/>
 <var name="standalone" type="boolean"/>
 <var name="nullPubId" type="DOMString" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<var name="docType" type="DocumentType"/>
+<var name="sysId" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
+<doctype var="docType" obj="doc"/>
+<systemId var="sysId" obj="docType"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocumentType var="newDocType" obj="domImpl" qualifiedName='"staff"' publicId="nullPubId" systemId='"staffNS.dtd"'/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:core"' doctype="newDocType"/>
+<createDocumentType var="newDocType" obj="domImpl" qualifiedName="rootName" publicId="nullPubId" systemId="sysId"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="newDocType"/>
 <xmlStandalone  var="standalone" obj="newDoc" />
 <assertFalse actual="standalone" id="documentgetxmlstandalone05"/>
 </test>

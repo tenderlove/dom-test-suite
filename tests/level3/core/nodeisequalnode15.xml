@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="attr1" type="Attr"/>
 <var name="attr2" type="Attr"/>
@@ -41,7 +40,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" var="addrElement" index="3" />
 <getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI='nullNS' localName='"title"'/>
-<createAttributeNS var="attr2" obj="doc" namespaceURI='nullNS' qualifiedName='"title"'/>
+<if><implementationAttribute name="namespaceAware" value="true"/>
+	<createAttributeNS var="attr2" obj="doc" namespaceURI='nullNS' qualifiedName='"title"'/>
+	<else>
+		<createAttribute var="attr2" obj="doc" name='"title"'/>
+	</else>
+</if>
 <value obj="attr2" value='"Yes"'/>
 <isEqualNode var="isEqual" obj="attr1" arg="attr2"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode15"/>

@@ -34,9 +34,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newDoc" type="Document"/>
 <var name="textContent" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootName" type="DOMString"/>
+<var name="rootNS" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:doctype"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <textContent var="textContent" obj="newDoc"/>
 <assertNull  actual="textContent" id="nodegettextcontent02"/>
 </test>

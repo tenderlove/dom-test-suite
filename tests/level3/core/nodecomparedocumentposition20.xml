@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
 <implementationAttribute name="coalescing" value="false"/>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elemName" type="Element"/>
@@ -39,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txtPosition" type="int"/>
 <var name="cdataPosition" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <firstChild var="txt" obj="elemName" interface="Node"/>
 <lastChild var="cdata" obj="elemName" interface="Node"/>

@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeinsertbefore02</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using insertBefore on a new Document node attempt to insert a new Comment node before
 	this DocumentType node and verify the name of the inserted Comment node.  Now
 	attempt to insert a new Processing Instruction node before the new Comment and 
@@ -33,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
@@ -46,10 +42,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="target" type="DOMString"/>
 <var name="nullPubId" type="DOMString" isNull="true"/>
 <var name="nullSysId" type="DOMString" isNull="true"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<var name="docElem" type="Element"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
-<createDocument var="newDoc" obj="domImpl"  qualifiedName='"dom3:docType"' namespaceURI='"http://www.w3.org/DOM/Test"' doctype="newDocType" />
+<createDocumentType var="newDocType" obj="domImpl" qualifiedName="rootName" publicId="nullPubId" systemId="nullSysId"/>
+<createDocument var="newDoc" obj="domImpl"  qualifiedName="rootName" namespaceURI="rootNS" doctype="newDocType" />
 <createComment var="newComment" obj="newDoc" data='"Comment"' />
 <createProcessingInstruction var="newPI" obj="newDoc" target='"PITarget"' data='"PIData"' />
 <insertBefore var="insertedComment" obj="newDoc" newChild="newComment" refChild="newDocType"/>

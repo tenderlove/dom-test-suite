@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-05-30</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-wholeText"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="itemList" type="NodeList"/>
 <var name="elementName" type="Element"/>
@@ -37,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="WholeText" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"strong"' interface="Document"/>
+<getElementsByTagName var="itemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <createTextNode var="newTextNode" obj="doc" data='"New Text"'/>
 <appendChild obj="elementName" var="appendedChild" newChild="newTextNode"/>

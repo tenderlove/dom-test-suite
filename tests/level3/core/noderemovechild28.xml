@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="parentList" type="NodeList"/>
 <var name="attrsMap" type="NamedNodeMap"/>
@@ -40,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedName" type="DOMString"/>
 <var name="removedNode" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
+<getElementsByTagName var="parentList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="elem" obj="parentList" index="0" interface="NodeList"/>
 <attributes var="attrsMap" obj="elem"/>
 <getNamedItem var="parent" obj="attrsMap" name='"xsi:noNamespaceSchemaLocation"'/>

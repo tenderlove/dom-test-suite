@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisdefaultnamespace05</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using isDefaultNamespace on a DocumentElement of a new Document node with the value of the 
-	namespaceURI parameter equal to the namespaceURI of the newly createdd Document and check if the 
+	namespaceURI parameter equal to the namespaceURI of the newly created Document and check if the 
 	value returned is false.
 </description>
 <contributor>Neil Delima</contributor>
@@ -40,11 +37,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isDefault" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<localName var="rootName" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"document"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <documentElement var="elem" obj="newDoc"/>
-<isDefaultNamespace var="isDefault" obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<isDefaultNamespace var="isDefault" obj="elem" namespaceURI="rootNS"/>
 <assertTrue  actual="isDefault" id="nodeisdefaultnamespace05_1"/>
 <isDefaultNamespace var="isDefault" obj="elem" namespaceURI="nullNSURI"/>
 <assertFalse  actual="isDefault" id="nodeisdefaultnamespace05_2"/>

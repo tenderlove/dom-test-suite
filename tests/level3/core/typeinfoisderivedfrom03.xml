@@ -26,7 +26,6 @@ Check that isDerivedFrom does considers xsd:string to be derived from anySimpleT
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="schemaValidating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>

@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisdefaultnamespace09</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using isDefaultNamespace on a new Child of a new Element node with a namespace URI
 	and prefix and using the parents namespace URI as an argument, verify if the 
 	value returned is false.
@@ -39,11 +36,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isDefault" type="boolean"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:parent"'/>
-<createElement var="child" obj="doc" tagName='"dom3:child"'/>
+<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:body"'/>
+<!--  shouldn't be mixing L1 and L2 calls  -->
+<createElement var="child" obj="doc" tagName='"xhtml:p"'/>
 <appendChild obj="parent" var="appendedChild" newChild="child"/>
-<isDefaultNamespace var="isDefault" obj="parent" namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<isDefaultNamespace var="isDefault" obj="parent" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <assertFalse  actual="isDefault" id="nodeisdefaultnamespace09_1"/>
-<isDefaultNamespace var="isDefault" obj="child" namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<isDefaultNamespace var="isDefault" obj="child" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <assertFalse  actual="isDefault" id="nodeisdefaultnamespace09_2"/>
 </test>

@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="attr1" type="Attr"/>
 <var name="attr2" type="Attr"/>
@@ -39,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" localName='"p"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<getElementsByTagName var="elementList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="addrElement" obj="elementList" index="3" interface="NodeList"/>
 <getAttributeNodeNS obj="addrElement" var="attr1" namespaceURI="nullNSURI" localName='"dir"'/>
 <cloneNode var="attr2" obj="attr1" deep="true"/>

@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-21</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
@@ -36,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementPosition" type="int"/>
 <var name="attrPosition" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <getAttributeNode var="attr" obj="elem" name='"dir"'/>
 <compareDocumentPosition var="elementPosition" obj="elem" other="attr"/>

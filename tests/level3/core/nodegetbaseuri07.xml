@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Element"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newElement" type="Element"/>
 <var name="baseURI" type="DOMString"/>
@@ -39,9 +38,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="bodyElem" type="Element"/>
 <var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
 <load var="doc" href="barfoo_base" willBeModified="true"/>
-<getElementsByTagNameNS var="bodyList" obj="doc" 
-    namespaceURI='htmlNS'
-    localName='"body"' interface="Document"/>
+<getElementsByTagName var="bodyList" obj="doc" 
+    tagname='"body"' interface="Document"/>
 <item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
 <createElementNS var="newElement" obj="doc" namespaceURI='htmlNS' qualifiedName='"meta"'/>
 <setAttribute obj="newElement" name='"content"' value='"text/xml"'/>

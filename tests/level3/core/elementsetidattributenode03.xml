@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <date qualifier="created">2003-02-27</date>
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode"/>
   </metadata>
-  <implementationAttribute name="namespaceAware" value="true"/>
   <var name="doc" type="Document"/>
   <var name="elemList" type="NodeList"/>
   <var name="nameElem" type="Element"/>
@@ -39,11 +38,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
   <load var="doc" href="hc_staff" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+  <getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
   <item var="nameElem" obj="elemList" index="1" interface="NodeList"/>
-  <setAttribute obj="nameElem" name='"middle"' value='"Karen"'/>
+  <setAttribute obj="nameElem" name='"title"' value='"Karen"'/>
   <attributes var="attributesMap" obj="nameElem"/>
-  <getNamedItem var="attr" obj="attributesMap" name='"middle"'/>
+  <getNamedItem var="attr" obj="attributesMap" name='"title"'/>
   <setIdAttributeNode obj="nameElem" idAttr="attr" isId="true"/>
   <isId var="id" obj="attr"/>
   <assertTrue actual="id" id="elementsetidattributenodeIsIdTrue03"/>

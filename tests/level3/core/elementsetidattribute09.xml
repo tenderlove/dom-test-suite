@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-25</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList1" type="NodeList"/>
 <var name="elemList2" type="NodeList"/>
@@ -41,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList1" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
-<getElementsByTagNameNS var="elemList2" obj="doc" localName='"sup"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList1" obj="doc" tagname='"strong"' interface="Document"/>
+<getElementsByTagName var="elemList2" obj="doc" tagname='"sup"' interface="Document"/>
 <item var="nameElem" obj="elemList1" index="2" interface="NodeList"/>
 <item var="salaryElem" obj="elemList2" index="2" interface="NodeList"/>
 <setAttribute obj="nameElem" name= '"hasMiddleName"' value='"Antoine"'/>

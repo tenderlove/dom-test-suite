@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
@@ -39,10 +38,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="namespaceURI" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"newD"' doctype="nullDocType"/>
-<createAttributeNS var="attr" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<createAttributeNS var="attr" obj="newDoc" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:lang"'/>
 <renameNode var="renamedNode" obj="newDoc" n="attr" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:dom"'/>
 <nodeName var="nodeName" obj="renamedNode"/>
 <namespaceURI var="namespaceURI" obj="renamedNode" interface="Node"/>

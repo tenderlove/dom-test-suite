@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-21</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
@@ -39,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrPosition" type="int"/>
 <var name="elemFollowsPosition" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <getAttributeNode var="attr" obj="elem" name='"dir"'/>
-<getElementsByTagNameNS var="elemListFollows" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemListFollows" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elemFollows" obj="elemListFollows" index="3" interface="NodeList"/>
 <compareDocumentPosition var="attrPosition" obj="attr" other="elemFollows"/>
 <assertEquals  actual="attrPosition" expected="4" id="nodecomparedocumentpositionFollowing36" ignoreCase="false"/>

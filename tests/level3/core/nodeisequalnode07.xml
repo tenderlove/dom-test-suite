@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode07</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isEqualNode check if 2 Element nodes having the same nodeName and namespaceURI attribute
 	created by two different Document objects obtained by parsing the same xml document are equal.
 </description>
@@ -37,8 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <load var="doc1" href="hc_staff" willBeModified="false"/>
 <load var="doc2" href="hc_staff" willBeModified="false"/>
-<createElementNS var="elem1" obj="doc1" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
-<createElementNS var="elem2" obj="doc2" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
+<createElementNS var="elem1" obj="doc1" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
+<createElementNS var="elem2" obj="doc2" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode07"/>
 </test>

@@ -35,8 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem2" type="Element"/>
 <var name="isEqual" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="elem1" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
-<createElementNS var="elem2" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:root"'/>
+<createElementNS var="elem1" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
+<createElementNS var="elem2" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>
 <assertTrue  actual="isEqual"  id="nodeisequalnode06"/>
 </test>

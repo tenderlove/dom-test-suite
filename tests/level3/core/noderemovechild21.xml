@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild21</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on a new Element node attempt to remove a new Element child 
-	and verify the name of the rturned node that was removed.  Now append the parent
+	and verify the name of the returned node that was removed.  Now append the parent
 	to the documentElement and attempt to remove the child using removeChild on the
 	documentElement and verify if a NOT_FOUND_ERR is thrown.
 </description>
@@ -33,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="parent" type="Element"/>
@@ -45,16 +41,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
-<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:parent"'/>
-<createElementNS var="child" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:child"'/>
+<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"dom3:p"'/>
+<createElementNS var="child" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"dom3:br"'/>
 <appendChild obj="parent" var="appendedChild" newChild="child"/>
 <appendChild obj="docElem" var="appendedChild" newChild="parent"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeName obj="removed" var="removedName"/>
-<assertEquals actual="removedName" expected='"dom3:child"' id="noderemovechild21" ignoreCase="false"/>
-<assertDOMException id="NOT_FOUND_ERR_noderemovechild21">
-<NOT_FOUND_ERR>
-<removeChild obj="docElem" var="removedNode" oldChild="child" />
-</NOT_FOUND_ERR>
+<assertEquals actual="removedName" expected='"dom3:br"' id="noderemovechild21" ignoreCase="false"/>
+<assertDOMException id="throw_NOT_FOUND_ERR">
+	<NOT_FOUND_ERR>
+		<removeChild obj="docElem" var="removedNode" oldChild="child" />
+	</NOT_FOUND_ERR>
 </assertDOMException>
 </test>

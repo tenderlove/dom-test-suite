@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupnamespaceuri10</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Invoke lookupNamespaceURI on a new Child of a new Element node with a namespace URI
 	and prefix and using the parents prefix as an argument, verify if the namespaceURI
 	returned is a valid namespaceURI for the parent.
@@ -39,9 +36,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="namespaceURI" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:parent"'/>
-<createElement var="child" obj="doc" tagName='"child"'/>
+<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:body"'/>
+<createElement var="child" obj="doc" tagName='"p"'/>
 <appendChild obj="parent" var="appendedChild" newChild="child"/>
-<lookupNamespaceURI var="namespaceURI" obj="child" prefix='"dom3"' interface="Node"/>
-<assertEquals  actual="namespaceURI" expected='"http://www.w3.org/DOM/Test"' id="nodelookupnamespaceuri10" ignoreCase="false"/>
+<lookupNamespaceURI var="namespaceURI" obj="child" prefix='"xhtml"' interface="Node"/>
+<assertEquals  actual="namespaceURI" expected='"http://www.w3.org/1999/xhtml"' id="nodelookupnamespaceuri10" ignoreCase="false"/>
 </test>

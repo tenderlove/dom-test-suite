@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <date qualifier="created">2003-02-26</date>
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS"/>
   </metadata>
-  <implementationAttribute name="namespaceAware" value="true"/>
   <var name="doc" type="Document"/>
   <var name="elemList" type="NodeList"/>
   <var name="nameElem" type="Element"/>
@@ -39,20 +38,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
   <load var="doc" href="hc_staff" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+  <getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
   <item var="nameElem" obj="elemList" index="2" interface="NodeList"/>
-  <setAttributeNS obj="nameElem" qualifiedName='"dmstc:newAttr"' namespaceURI='"http://www.netzero.com"' value='"newValue"'/>
-  <setIdAttributeNS obj="nameElem" localName='"newAttr"' namespaceURI='"http://www.netzero.com"' isId="true"/>
+  <setAttributeNS obj="nameElem" qualifiedName='"xmlns:newAttr"' namespaceURI='"http://www.w3.org/2000/xmlns/"' value='"newValue"'/>
+  <setIdAttributeNS obj="nameElem" localName='"newAttr"' namespaceURI='"http://www.w3.org/2000/xmlns/"' isId="true"/>
   <attributes var="attributesMap" obj="nameElem"/>
-  <getNamedItem var="attr" obj="attributesMap" name='"dmstc:newAttr"'/>
+  <getNamedItem var="attr" obj="attributesMap" name='"xmlns:newAttr"'/>
   <isId var="id" obj="attr"/>
   <assertTrue actual="id" id="elementsetidattributensIsIdTrue13"/>
   <getElementById obj="doc" var="elem" elementId='"newValue"'/>
   <tagName obj="elem" var="elemName"/>
   <assertEquals actual="elemName" expected='"strong"' id="elementsetidattributensGetElementById13" ignoreCase="false"/>
   <assertDOMException id="throw_NOT_FOUND_ERR">
-  <NOT_FOUND_ERR>
-  <setIdAttributeNS obj="nameElem" localName='"test"' namespaceURI='"http://www.test.com"' isId="false"/>
-  </NOT_FOUND_ERR>
+  	<NOT_FOUND_ERR>
+  		<setIdAttributeNS obj="nameElem" localName='"lang"' namespaceURI='"http://www.w3.org/XML/1998/namespace"' isId="false"/>
+  	</NOT_FOUND_ERR>
   </assertDOMException>
 </test>

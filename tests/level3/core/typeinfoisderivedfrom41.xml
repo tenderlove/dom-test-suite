@@ -27,7 +27,6 @@ Check if emType is derived from xsd:ID by any method other than union or restric
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>

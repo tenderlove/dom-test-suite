@@ -28,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-03-03</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="true"/>
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <var name="positionList" type="NodeList"/>
@@ -37,9 +35,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="code" type="Element"/>
 <var name="namePosition" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="nameList" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="nameList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="strong" obj="nameList" index="0" interface="NodeList"/>
-<getElementsByTagNameNS var="positionList" obj="doc" localName='"code"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="positionList" obj="doc" tagname='"code"' interface="Document"/>
 <item var="code" obj="positionList" index="0" interface="NodeList"/>
 <compareDocumentPosition var="namePosition" obj="code" other="strong"/>
 <assertEquals  actual="namePosition" expected="2" id="nodecomparedocumentpositionFollowing30" ignoreCase="false"/>

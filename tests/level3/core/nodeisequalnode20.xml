@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode20</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isEqualNode check if an Element and an Attr nodes having the same nodeName 
 	and namsepaceURI are not equal.
 </description>
@@ -35,8 +33,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem1" type="Element"/>
 <var name="isEqual" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="elem1" obj="doc" namespaceURI='"http://www.domtest.org"' qualifiedName='"dom:root"'/>
-<createAttributeNS var="attr1" obj="doc" namespaceURI='"http://www.domtest.org"' qualifiedName='"dom:root"'/>
+<createElementNS var="elem1" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
+<createAttributeNS var="attr1" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:html"'/>
 <isEqualNode var="isEqual" obj="attr1" arg="elem1"/>
 <assertFalse  actual="isEqual"  id="nodeisequalnode20"/>
 </test>

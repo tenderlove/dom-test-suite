@@ -29,7 +29,6 @@ Node.getBaseURI for an EntityReference to should be the baseURI where the entity
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
 <var name="node" type="Node"/>
@@ -37,9 +36,8 @@ Node.getBaseURI for an EntityReference to should be the baseURI where the entity
 <var name="pElem" type="Element"/>
 <var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
 <load var="doc" href="external_barfoo" willBeModified="true"/>
-<getElementsByTagNameNS var="pList" obj="doc" 
-    namespaceURI='htmlNS'
-    localName='"p"' interface="Document"/>
+<getElementsByTagName var="pList" obj="doc" 
+    tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
 <!--  either a entity reference to ent1 or a text node    -->
 <lastChild var="node" obj="pElem" interface="Node"/>

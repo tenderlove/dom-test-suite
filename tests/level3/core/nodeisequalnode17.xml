@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode17</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isEqualNode check if a new Attr node created in this Document is equal to 
 	the imported node returned when it is imported into a new Document.
 </description>
@@ -38,9 +36,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument  var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom:doc"' doctype="nullDocType"/>
+<createDocument  var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <createAttributeNS var="attr1" obj="doc" namespaceURI="nullNSURI" qualifiedName='"root"'/>
 <importNode var="attr2" obj="newDoc" importedNode="attr1"  deep="true"/>
 <isEqualNode var="isEqual" obj="attr1" arg="attr2"/>

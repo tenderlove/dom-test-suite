@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild03</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on this DocumentElement node attempt to remove this Document node and
 	verify if the DocumentElement is null.  Now try the reverse and a NOT_FOUND_ERR should be
 	thrown.
@@ -32,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="removedChild" type="Element"/>
@@ -42,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <removeChild obj="doc" var="removed" oldChild="docElem" />
 <documentElement var="removedChild" obj="doc"/>
 <assertNull actual="removedChild" id="noderemovechild03"/>
-<assertDOMException id="NOT_FOUND_ERR_noderemovechild03">
+<assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>
 <removeChild obj="docElem" var="removed" oldChild="doc" />
 </NOT_FOUND_ERR>

@@ -21,11 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisdefaultnamespace11</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using isDefaultNamespace on an imported new Element node with a namespace URI and prefix 
-	in a new Document and using the parents namespace URI as an argument, verify if the 
+	in a new Document and using the parent's namespace URI as an argument, verify if the 
 	value returned is true.
 </description>
 <contributor>Neil Delima</contributor>
@@ -40,11 +37,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="importedNode" type="Element"/>
 <var name="isDefault" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test/DOC"' qualifiedName='"dom3doc:document"' doctype="nullDocType"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"parent"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"p"'/>
 <importNode var="importedNode" obj="newDoc" importedNode="elem" deep="true"/>
-<isDefaultNamespace var="isDefault" obj="importedNode" namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<isDefaultNamespace var="isDefault" obj="importedNode" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <assertTrue  actual="isDefault" id="nodeisdefaultnamespace11"/>
 </test>

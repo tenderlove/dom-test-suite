@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="parentList" type="NodeList"/>
@@ -45,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <var name="entRefChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
+<getElementsByTagName var="parentList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="elem" obj="parentList" index="3" interface="NodeList"/>
 <attributes var="attrsMap" obj="elem"/>
 <getNamedItem var="parent" obj="attrsMap" name='"class"'/>

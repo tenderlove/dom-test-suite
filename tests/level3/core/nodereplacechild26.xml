@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild26</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on an Element node attempt to replace a Text child node with an Element
 	node that is an ancestor of this Element node and verify if a HIERARCHY_REQUEST_ERR gets thrown.
 </description>
@@ -31,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
 <var name="docElem" type="Element"/>
@@ -42,10 +37,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="replaced" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="childList" index="0" interface="NodeList"/>
 <firstChild var="firstChild" obj="elem" interface="Node"/>
-<assertDOMException id="HIERARCHY_REQUEST_ERR_nodereplacechild26">
+<assertDOMException id="throw_HIERARCHY_REQUEST_ERR">
 <HIERARCHY_REQUEST_ERR>
 <replaceChild obj="elem" var="replaced" oldChild="firstChild" newChild="docElem"/>
 </HIERARCHY_REQUEST_ERR>

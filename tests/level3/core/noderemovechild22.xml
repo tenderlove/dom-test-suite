@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>noderemovechild22</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using removeChild on a new Element node attempt to remove a new Comment child 
 	and verify the name of the rturned node that was removed.  Now to remove the child 
 	using removeChild on the parent and verify if a NOT_FOUND_ERR is thrown.
@@ -32,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="parent" type="Element"/>
 <var name="child" type="Comment"/>
@@ -41,15 +37,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedNode" type="Node"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:parent"'/>
+<createElementNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"dom3:p"'/>
 <createComment var="child" obj="doc" data='"DATA"' />
 <appendChild obj="parent" var="appendedChild" newChild="child"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeValue obj="removed" var="removedName"/>
 <assertEquals actual="removedName" expected='"DATA"' id="noderemovechild22" ignoreCase="false"/>
-<assertDOMException id="NOT_FOUND_ERR_noderemovechild22">
-<NOT_FOUND_ERR>
-<removeChild obj="parent" var="removedNode" oldChild="child" />
-</NOT_FOUND_ERR>
+<assertDOMException id="throw_NOT_FOUND_ERR">
+	<NOT_FOUND_ERR>
+		<removeChild obj="parent" var="removedNode" oldChild="child" />
+	</NOT_FOUND_ERR>
 </assertDOMException>
 </test>

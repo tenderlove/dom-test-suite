@@ -19,7 +19,7 @@
 ]>
 <svg xmlns="http://www.w3.org/2000/svg"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.w3.org/2000/svg misc_typeinfo.svg.xsd">
+	xsi:schemaLocation="http://www.w3.org/2000/svg typeinfo.svg.xsd">
 <rect x="0" y="0" width="100" height="100"/><script type="text/ecmascript">&svgtest;&svgunit;</script><body xmlns="http://www.w3.org/1999/xhtml">
  		<p id="foo1"><strong>foo1 foo2</strong></p>
  		<p id="foo2"><code>1</code><code>unbounded</code></p>

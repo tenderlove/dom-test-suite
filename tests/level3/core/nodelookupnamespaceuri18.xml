@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr" type="Attr"/>
 <var name="namespaceURI" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <attributes var="attributesMap" obj="elem"/>
 <getNamedItem var="attr" obj="attributesMap" name='"dir"'/>

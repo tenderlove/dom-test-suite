@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullNSURI" type="DOMString" isNull="true"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createAttributeNS var="attr1" obj="doc" namespaceURI='"http://www.domtest.org"' qualifiedName='"root"'/>
-<createAttributeNS var="attr2" obj="doc" namespaceURI="nullNSURI" qualifiedName='"root"'/>
+<createAttributeNS var="attr1" obj="doc" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"lang"'/>
+<createAttributeNS var="attr2" obj="doc" namespaceURI="nullNSURI" qualifiedName='"lang"'/>
 <isEqualNode var="isEqual" obj="attr1" arg="attr2"/>
 <assertFalse  actual="isEqual"  id="nodeisequalnode19"/>
 </test>

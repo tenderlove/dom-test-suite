@@ -31,7 +31,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="attr" type="Attr"/>
@@ -41,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeType" type="int"/>
 <var name="namespaceURI" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"acronym"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"acronym"'  interface="Document"/>
 <item var="element" obj="childList" index="1" interface="NodeList"/>
 <getAttributeNode var="attr" obj="element" name='"class"'/>
 <renameNode var="renamedclass" obj="doc" n="attr" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"renamedNode"'/>

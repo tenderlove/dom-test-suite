@@ -21,9 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode13</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Retreive the first element node whose localName is employee.  Import it into a new
+	Retreive the first element node whose localName is "p".  Import it into a new
 	Document with deep=false.  Using isEqualNode check if the original and the imported
 	Element Node are not equal.  Now import it once more with deep=true and using isEqual
 	verify if they are now equal.
@@ -32,8 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 <var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="newDoc" type="Document"/>
@@ -43,10 +39,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem3" type="Element"/>
 <var name="isEqual" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument  var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:doc"' doctype="nullDocType"/>
-<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<createDocument  var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<getElementsByTagName var="employeeList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem1" obj="employeeList" index="0" interface="NodeList"/>
 <cloneNode var="elem2" obj="elem1" deep="false"/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>

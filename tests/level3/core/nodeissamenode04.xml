@@ -21,9 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeissamenode04</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Using isSameNode check if 2 Element nodes that are euals but do not reference the 
+	Using isSameNode check if 2 Element nodes that are equal but do not reference the 
 	same object are not the same.
 </description>
 <contributor>Neil Delima</contributor>
@@ -35,8 +33,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element2" type="Element"/>
 <var name="isSame" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="element1" obj="doc" qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
-<createElementNS var="element2" obj="doc" qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<createElementNS var="element1" obj="doc" qualifiedName='"xhtml:br"' namespaceURI='"http://www.w3.org/1999/xhtml"'/>
+<createElementNS var="element2" obj="doc" qualifiedName='"xhtml:br"' namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <isSameNode var="isSame" obj="element2" other="element1"/>
 <assertFalse  actual="isSame"  id="nodeissamenode04"/>
 </test>

@@ -26,7 +26,7 @@ be a general purpose schema for SVG
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="misc_typeinfo.xsd"/>
+  <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="typeinfo.xsd"/>
 
   <xsd:element name="svg">
   	 <xsd:complexType>

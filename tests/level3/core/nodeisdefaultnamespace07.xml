@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elemList" type="NodeList"/>
 <var name="isDefault" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <isDefaultNamespace var="isDefault" obj="elem" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <assertTrue  actual="isDefault" id="nodeisdefaultnamespace07_1"/>

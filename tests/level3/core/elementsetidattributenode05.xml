@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-27</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList1" type="NodeList"/>
 <var name="elemList2" type="NodeList"/>
@@ -37,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributesMap" type="NamedNodeMap"/>
 <var name="attr" type="Attr"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList1" obj="doc" localName='"strong"' namespaceURI='"*"' interface="Document"/>
-<getElementsByTagNameNS var="elemList2" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList1" obj="doc" tagname='"strong"' interface="Document"/>
+<getElementsByTagName var="elemList2" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="nameElem" obj="elemList1" index="1" interface="NodeList"/>
 <item var="acronymElem" obj="elemList2" index="1" interface="NodeList"/>
 <attributes var="attributesMap" obj="acronymElem"/>

@@ -28,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="newElem" type="Element"/>
@@ -40,13 +38,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="inserted" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="element" obj="childList" index="0" interface="NodeList"/>
 <firstChild var="firstChild" obj="element" interface="Node"/>
 <nextSibling var="refElem" obj="firstChild" interface="Node"/>
 <createElementNS var="newElem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:br"'/>
 <insertBefore obj="element" var="inserted" refChild="refElem" newChild="newElem"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="element" obj="childList" index="0" interface="NodeList"/>
 <firstChild var="firstChild" obj="element" interface="Node"/>
 <nextSibling var="insertedElem" obj="firstChild" interface="Node"/>

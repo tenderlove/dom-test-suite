@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=415"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
@@ -43,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <documentElement var="docElem" obj="doc"/>
 <namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <tagName var="rootTagname" obj="docElem"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="1" interface="NodeList"/>
 <createElementNS var="newElem" obj="doc"  qualifiedName='rootTagname' namespaceURI='rootNS'/>
 <try>

@@ -29,10 +29,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData"/>
 </metadata>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
-<var name="entRef" type="EntityReference"/>
+<!-- could also be Text   -->
+<var name="entRef" type="Node"/>
 <var name="cData" type="CDATASection"/>
 <var name="varList" type="NodeList"/>
 <var name="varElem" type="Element"/>

@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
@@ -44,35 +43,41 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="renamedPi" type="Node"/>
 <var name="renamedEntRef" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:newD"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <createTextNode var="text" obj="newDoc" data='"text"'/>
 <createComment var="comment" obj="newDoc" data='"comment"'/>
 <createCDATASection var="cdata" obj="newDoc" data='"cdata"'/>
 <createProcessingInstruction var="pi" obj="newDoc" target='"pit"' data='"pid"'/>
 <createEntityReference var="entref" obj="newDoc" name='"alpha"'/>
-<assertDOMException id="documentrenamenode27_Text_NOT_SUPPORTED_ERR">
+<assertDOMException id="throw_NOT_SUPPORTED_ERR_1">
 <NOT_SUPPORTED_ERR>
 <renameNode var="renamedTxt" obj="newDoc" n="text" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"text"'/>
 </NOT_SUPPORTED_ERR>
 </assertDOMException>
-<assertDOMException id="documentrenamenode27_Comment_NOT_SUPPORTED_ERR">
+<assertDOMException id="throw_NOT_SUPPORTED_ERR_2">
 <NOT_SUPPORTED_ERR>
 <renameNode var="renamedComment" obj="newDoc" n="comment" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"comment"'/>
 </NOT_SUPPORTED_ERR>
 </assertDOMException>
-<assertDOMException id="documentrenamenode27_CDATASection_NOT_SUPPORTED_ERR">
+<assertDOMException id="throw_NOT_SUPPORTED_ERR_3">
 <NOT_SUPPORTED_ERR>
 <renameNode var="renamedCdata" obj="newDoc" n="cdata" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"cdata"'/>
 </NOT_SUPPORTED_ERR>
 </assertDOMException>
-<assertDOMException id="documentrenamenode27_ProcessingInstruction_NOT_SUPPORTED_ERR">
+<assertDOMException id="throw_NOT_SUPPORTED_ERR_4">
 <NOT_SUPPORTED_ERR>
 <renameNode var="renamedPi" obj="newDoc" n="pi" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"pi"'/>
 </NOT_SUPPORTED_ERR>
 </assertDOMException>
-<assertDOMException id="documentrenamenode27_EntityReference_NOT_SUPPORTED_ERR">
+<assertDOMException id="throw_NOT_SUPPORTED_ERR_5">
 <NOT_SUPPORTED_ERR>
 <renameNode var="renamedEntRef" obj="newDoc" n="entref" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"entref"'/>
 </NOT_SUPPORTED_ERR>

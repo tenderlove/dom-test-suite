@@ -29,13 +29,12 @@ Get the baseURI value on an element with an explicit xml:base attribute.
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Element"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="bodyElem" type="Element"/>
 <var name="bodyList" type="NodeList"/>
 <var name="baseURI" type="DOMString"/>
 <load var="doc" href="barfoo_base" willBeModified="false"/>
-<getElementsByTagNameNS var="bodyList" obj="doc" localName='"body"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 <item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
 <baseURI var="baseURI" obj="bodyElem" interface="Node"/>
 <assertEquals  actual="baseURI" expected='"http://www.w3.org/DOM/EmployeeID"' id="nodegetbaseuri09" ignoreCase="false"/>

@@ -28,17 +28,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
 <var name="attr" type="Attr"/>
 <var name="textContent" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
-<setAttributeNS obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"' value='"NA"'/>
-<getAttributeNodeNS var="attr" obj="elem" namespaceURI='"http://www.w3.org/DOM/Test"' localName='"attr"'/>
+<setAttributeNS obj="elem" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:lang"' value='"en-US"'/>
+<getAttributeNodeNS var="attr" obj="elem" namespaceURI='"http://www.w3.org/XML/1998/namespace"' localName='"lang"'/>
 <textContent var="textContent" obj="attr"/>
-<assertEquals  actual="textContent" expected='"NA"' id="nodegettextcontent07" ignoreCase="false"/>
+<assertEquals  actual="textContent" expected='"en-US"' id="nodegettextcontent07" ignoreCase="false"/>
 </test>

@@ -31,17 +31,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
-<var name="docElem" type="Element"/>
+<var name="bodyElem" type="Element"/>
 <var name="elem" type="Element"/>
 <var name="txt" type="Text"/>
 <var name="prefix" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
+<var name="bodyList" type="NodeList"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<documentElement var="docElem" obj="doc"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:Text"'/>
+<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
+<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/> 
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"dom3:p"'/>
 <createTextNode var="txt" obj="doc" data='"Text"'/>
 <appendChild obj="elem" var="appendedChild" newChild="txt"/>
-<appendChild obj="docElem" var="appendedChild" newChild="elem"/>
-<lookupPrefix var="prefix" obj="txt" namespaceURI='"http://www.w3.org/DOM"'/>
+<appendChild obj="bodyElem" var="appendedChild" newChild="elem"/>
+<lookupPrefix var="prefix" obj="txt" namespaceURI='"http://www.w3.org/1999/xhtml"'/>
 <assertEquals  actual="prefix" expected='"dom3"' id="nodelookupprefix13" ignoreCase="false"/>
 </test>

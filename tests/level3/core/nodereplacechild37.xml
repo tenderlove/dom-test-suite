@@ -21,19 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild37</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on a new Attr node, replace its new Text node with a 
-	new EntityRefernec Node created by another document and verify if a 
+	new EntityReference Node created by another document and verify if a 
 	WRONG_DOCUMENT_ERR is raised.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="doc2" type="Document"/>
 <var name="parent" type="Attr"/>
@@ -44,11 +39,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <load var="doc2" href="hc_staff" willBeModified="true"/>
-<createAttributeNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:attr"'/>
+<createAttributeNS var="parent" obj="doc" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:lang"'/>
 <createTextNode var="oldChild" obj="doc" data='"Text"' />
 <createEntityReference var="newChild" obj="doc2" name='"delta"' />
 <appendChild obj="parent" var="appendedChild" newChild="oldChild"/>
-<assertDOMException id="WRONG_DOCUMENT_ERR_nodereplacechild37">
+<assertDOMException id="throw_WRONG_DOCUMENT_ERR">
 <WRONG_DOCUMENT_ERR>
 <replaceChild obj="parent" var="replaced" oldChild="oldChild" newChild="newChild"/>
 </WRONG_DOCUMENT_ERR>

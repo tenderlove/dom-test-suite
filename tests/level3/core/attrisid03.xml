@@ -27,7 +27,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-03-04</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="acronymElem" type="Element"/>
@@ -38,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elemName" type="DOMString"/>
 <var name="xmlNS" type="DOMString" value='"http://www.w3.org/XML/1998/namespace"'/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
 <setAttributeNS obj="acronymElem" namespaceURI='xmlNS' qualifiedName='"xml:lang"' value='"FR-fr"'/>
 <setIdAttributeNS obj="acronymElem" localName='"lang"' namespaceURI='xmlNS' isId="false"/>

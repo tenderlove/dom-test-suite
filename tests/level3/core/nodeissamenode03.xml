@@ -28,14 +28,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="element1" type="Element"/>
 <var name="element2" type="Element"/>
 <var name="childList" type="NodeList"/>
 <var name="isSame" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"p"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="element1" obj="childList" index="0" interface="NodeList"/>
 <item var="element2" obj="childList" index="0" interface="NodeList"/>
 <isSameNode var="isSame" obj="element2" other="element1"/>

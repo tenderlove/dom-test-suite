@@ -27,7 +27,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-19</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
 <var name="newAttr" type="Attr"/>
@@ -36,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrPosition" type ="int"/>
 <var name="replacedAttr" type="Attr"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"p"' namespaceURI='"http://www.w3.org/1999/xhtml"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="elemList" index="3" interface="NodeList"/>
 <createAttributeNS var="newAttr" obj="doc" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:lang"'/>
 <setAttributeNodeNS obj="elem" var="replacedAttr" newAttr="newAttr"/>

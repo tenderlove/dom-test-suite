@@ -32,13 +32,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:core"' doctype="nullDocType"/>
-<assertDOMException id="documentsetversion05">
-<NOT_SUPPORTED_ERR>
-<xmlVersion  obj="newDoc" value='"-"' interface="Document"/>
-</NOT_SUPPORTED_ERR>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<assertDOMException id="throw_NOT_SUPPORTED_ERR">
+	<NOT_SUPPORTED_ERR>
+		<xmlVersion  obj="newDoc" value='"-"' interface="Document"/>
+	</NOT_SUPPORTED_ERR>
 </assertDOMException>
 </test>
 

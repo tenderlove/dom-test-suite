@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild16</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on a DocumentFragment node attempt to replace an Element node with 
 	another Element and verify the name of the replaced Element node.
 </description>
@@ -31,23 +28,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docFrag" type="DocumentFragment"/>
 <var name="elem" type="Element"/>
 <var name="txt" type="Text"/>
 <var name="replaced" type="Element"/>
-<var name="domImpl" type="DOMImplementation"/>
 <var name="nodeName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:doc1elem"'/>
-<implementation var="domImpl" obj="doc"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"dom3:p"'/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <createTextNode var="txt" obj="doc" data='"Comment"'/>
 <appendChild obj="docFrag" var="appendedChild" newChild="txt"/>
 <appendChild obj="docFrag" var="appendedChild" newChild="elem"/>
 <replaceChild var="replaced" obj="docFrag" oldChild="elem" newChild="txt"/>
 <nodeName var="nodeName" obj="replaced"/>
-<assertEquals actual="nodeName" expected='"dom3:doc1elem"' id="nodereplacechild16" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='"dom3:p"' id="nodereplacechild16" ignoreCase="false"/>
 </test>

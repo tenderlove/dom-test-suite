@@ -45,7 +45,7 @@ be replaced.
 <var name="nodeValue" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"strong"' interface="Document"/>
+<getElementsByTagName var="itemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elementName" obj="itemList" index="0" interface="NodeList"/>
 <createEntityReference var="erefNode" obj="doc" name='"ent4"'/>
 <createTextNode var="textNode" obj="doc" data='"New Text"'/>

@@ -28,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <date qualifier="created">2003-02-26</date>
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS"/>
   </metadata>
-  <implementationAttribute name="namespaceAware" value="true"/>
   <var name="doc" type="Document"/>
   <var name="elemList" type="NodeList"/>
   <var name="employeeIdElem" type="Element"/>
@@ -38,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="elem" type="Element"/>
   <var name="elemName" type="DOMString"/>
   <load var="doc" href="hc_staff" willBeModified="true"/>
-  <getElementsByTagNameNS var="elemList" obj="doc" localName='"em"' namespaceURI='"*"' interface="Document"/>
+  <getElementsByTagName var="elemList" obj="doc" tagname='"em"' interface="Document"/>
   <item var="employeeIdElem" obj="elemList" index="0" interface="NodeList"/>
   <setAttributeNS obj="employeeIdElem" qualifiedName='"xmlns:newAttr"' namespaceURI='"http://www.w3.org/2000/xmlns/"' value='"newValue"'/>
   <setIdAttributeNS obj="employeeIdElem" localName='"newAttr"' namespaceURI='"http://www.w3.org/2000/xmlns/"' isId="true"/>

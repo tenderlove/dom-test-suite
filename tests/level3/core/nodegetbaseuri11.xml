@@ -30,7 +30,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
@@ -42,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <load var="doc" href="barfoo_base" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"meta"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"html"' doctype="nullDocType"/>
 <createProcessingInstruction var="newPI" obj="newDoc" target='"TARGET"' data='"DATA"'/>
 <importNode var="imported" obj="doc" importedNode="newPI" deep="true"/>
 <appendChild obj="doc" var="appendedChild" newChild="imported"/>

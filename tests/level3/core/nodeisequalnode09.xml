@@ -49,7 +49,7 @@ returns true.
 <localName var="rootName" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootName' doctype="nullDocType"/>
-<getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"em"' interface="Document"/>
+<getElementsByTagName var="employeeList" obj="doc" tagname='"em"' interface="Document"/>
 <item var="elem1" obj="employeeList" index="0" interface="NodeList"/>
 <createElementNS var="elem2" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"em"'/>
 <createTextNode var="text" obj="newDoc" data='"EMP0001"'/>

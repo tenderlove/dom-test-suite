@@ -29,7 +29,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2003-02-25</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="acronymElem" type="Element"/>
@@ -39,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="elemName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"acronym"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
 <setAttribute obj="acronymElem" name= '"class"' value='"Maybe"'/>
 <setIdAttribute obj="acronymElem" name='"class"'  isId="true"/>

@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild18</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on a DocumentFragment node attempt to replace a CDATASection node with 
 	a EntityReference and vice versa verify the data of the replaced nodes.
 </description>
@@ -31,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="docFrag" type="DocumentFragment"/>
 <var name="entRef" type="EntityReference"/>

@@ -21,8 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeissamenode10</title>
 <creator>IBM</creator>
 <description>
-
-	
 	Using isSameNode check if an new Document and a new Element node are not the same.
 </description>
 <contributor>Neil Delima</contributor>
@@ -35,10 +33,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="isSame" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http:www.w3.org/DOM/Test"' qualifiedName='"dom3:doc"' doctype="nullDocType"/>
-<createElementNS var="element" obj="newDoc" namespaceURI='"http:www.w3.org/DOM/Test"' qualifiedName='"dom3:elem"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<createElementNS var="element" obj="newDoc" namespaceURI="rootNS" qualifiedName="rootName"/>
 <isSameNode var="isSame" obj="newDoc" other="element"/>
 <assertFalse  actual="isSame"  id="nodeissamenode10"/>
 </test>

@@ -32,7 +32,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="parentList" type="NodeList"/>
 <var name="parent" type="Element"/>
@@ -41,13 +40,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedValue" type="DOMString"/>
 <var name="removedNode" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="parentList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document" />
+<getElementsByTagName var="parentList" obj="doc" tagname='"strong"' interface="Document" />
 <item var="parent" obj="parentList" index="1" interface="NodeList"/>
 <lastChild var="child" obj="parent" interface="Node"/>
 <removeChild var="removed"  obj="parent" oldChild="child" />
 <nodeValue obj="removed" var="removedValue"/>
 <assertEquals actual="removedValue" expected='"This is an adjacent CDATASection with a reference to a tab &amp;tab;"' id="noderemovechild18" ignoreCase="false"/>
-<assertDOMException id="NOT_FOUND_ERR_noderemovechild18">
+<assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>
 <removeChild obj="child" var="removedNode" oldChild="parent" />
 </NOT_FOUND_ERR>

@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeinsertbefore24</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using insertBefore on an Element node attempt to insert a Comment node before 
 	a CDATASection node that is not a child and verify if a NOT_FOUND_ERR is raised.
 </description>
@@ -31,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="element" type="Element"/>
 <var name="refNode" type="CDATASection"/>
@@ -40,10 +35,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childList" type="NodeList"/>
 <var name="inserted" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:elem"'/>
+<createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"xhtml:p"'/>
 <createCDATASection var="refNode" obj="doc" data='"CDATASection"' />
 <createComment var="newNode" obj="doc" data='"Comment"' />
-<assertDOMException id="NOT_FOUND_ERR_nodeinsertbefore24">
+<assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>
 <insertBefore obj="element" var="inserted" refChild="refNode" newChild="newNode"/>
 </NOT_FOUND_ERR>

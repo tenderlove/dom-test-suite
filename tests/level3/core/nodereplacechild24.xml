@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild24</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on an EntityReference node attempt to replace an Element node with 
 	an EntityReference node verify if a NO_MODIFICATION_ALLOWED_ERR gets thrown.
 </description>
@@ -31,7 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
@@ -40,10 +36,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="replaced" type="Element"/>
 <var name="nodeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="elem" obj="childList" index="1" interface="NodeList"/>
 <firstChild var="entRef" obj="elem" interface="Node"/>
-<assertDOMException id="NO_MODIFICATION_ALLOWED_ERR_nodereplacechild24">
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <replaceChild var="replaced" obj="entRef" oldChild="elem" newChild="entRef"/>
 </NO_MODIFICATION_ALLOWED_ERR>

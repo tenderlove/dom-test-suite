@@ -21,24 +21,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild25</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Using replaceChild on an Element node attempt to replace an EntityReference child node 
+	Using replaceChild on an Element node attempt to replace an 
+	EntityReference or Text child node 
 	with an Entity node and with itself and verify if a HIERARCHY_REQUEST_ERR gets thrown.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="entities" type="NamedNodeMap"/>
 <var name="entity" type="Entity"/>
 <var name="childList" type="NodeList"/>
-<var name="entRef" type="EntityReference"/>
+<var name="entRef" type="Node"/>
 <var name="elem" type="Element"/>
 <var name="replaced" type="Element"/>
 <var name="nodeName" type="DOMString"/>
@@ -46,15 +42,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <getNamedItem var="entity" obj="entities" name='"alpha"'/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"acronym"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="elem" obj="childList" index="1" interface="NodeList"/>
 <firstChild var="entRef" obj="elem" interface="Node"/>
-<assertDOMException id="HIERARCHY_REQUEST_ERR1_nodereplacechild25">
+<assertDOMException id="throw_HIERARCHY_REQUEST_ERR_1">
 <HIERARCHY_REQUEST_ERR>
 <replaceChild var="replaced" obj="elem" oldChild="entRef" newChild="entity"/>
 </HIERARCHY_REQUEST_ERR>
 </assertDOMException>
-<assertDOMException id="HIERARCHY_REQUEST_ERR2_nodereplacechild25">
+<assertDOMException id="throw_HIERARCHY_REQUEST_ERR_2">
 <HIERARCHY_REQUEST_ERR>
 <replaceChild var="replaced" obj="elem" oldChild="entRef" newChild="elem"/>
 </HIERARCHY_REQUEST_ERR>

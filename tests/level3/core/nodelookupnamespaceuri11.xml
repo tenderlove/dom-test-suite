@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupnamespaceuri11</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Invoke lookupNamespaceURI on an imported new Element node with a namespace URI and prefix 
 	in a new Document and using the parents prefix as an argument, verify if the namespaceURI
 	returned is a valid namespaceURI of the parent.
@@ -40,11 +37,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="importedNode" type="Element"/>
 <var name="namespaceURI" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test/DOC"' qualifiedName='"dom3doc:document"' doctype="nullDocType"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:parent"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"dom3:p"'/>
 <importNode var="importedNode" obj="newDoc" importedNode="elem" deep="true"/>
 <lookupNamespaceURI var="namespaceURI" obj="importedNode" prefix='"dom3"' interface="Node"/>
-<assertEquals  actual="namespaceURI" expected='"http://www.w3.org/DOM/Test"' id="nodelookupnamespaceuri11" ignoreCase="false"/>
+<assertEquals  actual="namespaceURI" expected='"http://www.w3.org/1999/xhtml"' id="nodelookupnamespaceuri11" ignoreCase="false"/>
 </test>

@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="errorMonitor" type="DOMErrorMonitor"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="cdata" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="cdata"/>
@@ -50,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <normalizeDocument obj="doc"/>
 <assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR" id="normalizationError"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="cdata" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="cdata"/>
@@ -58,7 +58,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
 <normalizeDocument obj="doc"/>
 <assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR" id="normalization2Error"/>
-<getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"strong"' interface="Document"/>
 <item var="elemName" obj="elemList" index="1" interface="NodeList"/>
 <lastChild var="text" obj="elemName" interface="Node"/>
 <nodeName var="nodeName" obj="text"/>

@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild33</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on a default Attr node to replace its Text Child with a 
 	new EntityReference Node and verify the value of the replaced child.
 </description>
@@ -31,8 +28,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
 <var name="elem" type="Element"/>
@@ -43,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeValue" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createEntityReference var="newChild" obj="doc" name='"delta"' />
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="childList" index="3" interface="NodeList"/>
 <getAttributeNode var="parent" obj="elem" name='"dir"'/>
 <lastChild var="oldChild" obj="parent" interface="Node"/>

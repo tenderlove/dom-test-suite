@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodelookupprefix02</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using lookupPrefix on a new Document node with a namespaceURI and prefix
 	and check if the value returned is the same prefix.
 </description>
@@ -37,9 +34,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newDoc" type="Document"/>
 <var name="prefix" type="DOMString"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<var name="qname" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:document"' doctype="nullDocType"/>
-<lookupPrefix var="prefix" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"'/>
+<plus var="qname" op1='"dom3:"' op2="rootName"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="qname" doctype="nullDocType"/>
+<lookupPrefix var="prefix" obj="newDoc" namespaceURI="rootNS"/>
 <assertEquals  actual="prefix" expected='"dom3"' id="nodelookupprefix02" ignoreCase="false"/>
 </test>

@@ -33,9 +33,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="versionValue" type="DOMString"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<load var="doc" href="barfoo" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"level3:core"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="nullDocType"/>
 <xmlVersion  var="versionValue" obj="newDoc" interface="Document"/>
 <assertEquals actual="versionValue" expected='"1.0"' id="documentgetxmlversion02" ignoreCase="true"/>
 </test>
