@@ -17,7 +17,7 @@
 <label accesskey="b" for="input1">Enter Your Password:</label>
 </td>
 <td>
-<input dir="ltr" id="input1" tabindex="8" type="password" name="Password" size="25" maxlength="5" alt="Password entry" readonly="readonly" onblur="newId(this)" onfocus="newDir(this)"/>
+<input dir="ltr" id="input1" tabindex="8" value="Password" type="password" name="Password" size="25" maxlength="5" alt="Password entry" readonly="readonly" onblur="newId(this)" onfocus="newDir(this)"/>
 </td>
 </tr>
 <tr>
