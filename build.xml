@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.119  2004-01-05 08:27:14  dom-ts-4
+Revision 1.120  2004-01-06 08:07:48  dom-ts-4
+Support for no-network builds (L3 only) and validation spec update (bug 457)
+
+Revision 1.119  2004/01/05 08:27:14  dom-ts-4
 XHTML compatible L3 Core tests  (bug 455)
 
 Revision 1.118  2003/12/19 06:25:24  dom-ts-4
@@ -1207,7 +1210,29 @@ All implementation conditions combined into implementationAttribute element
 <target name="get-dom2" depends="get-dom2-core,get-dom2-events,get-xmlspec-v22-dom-dtd,get-dom2-html,get-dom2-views,get-dom2-traversal,get-dom2-style">
 </target>
 
-<target name="dom2-init" depends="get-dom2">
+
+<target name="dom2-missing-files" depends="init">
+	<mkdir dir="${specs.dir}/Level-2/xml"/>
+
+	<!--  zip file is missing two support files   -->
+	<echo file="${specs.dir}/Level-2/xml/options.xml"
+	      message="&lt;?xml version='1.0' encoding='UTF-8'?&gt;"/>
+	<echo file="${specs.dir}/Level-2/xml/status.xml"
+	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+
+</target>
+
+<target name="dom2-traversal-init" depends="get-dom2-traversal, dom2-missing-files">
+	<unzip src="${specs.dir}/DOM2-Traversal-Range.zip"
+	       dest="${specs.dir}/Level-2/Traversal-Range"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/Traversal-Range/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/traversal-range"/>
+</target>
+
+<target name="dom2-init" depends="get-dom2, dom2-traversal-init">
 
 	<unzip src="${specs.dir}/DOM2-Core.zip"
 	       dest="${specs.dir}/Level-2/Core"/>
@@ -1246,14 +1271,6 @@ All implementation conditions combined into implementationAttribute element
 	       dest="${specs.dir}/Level-2/xml/style"/>
 
 
-	<unzip src="${specs.dir}/DOM2-Traversal-Range.zip"
-	       dest="${specs.dir}/Level-2/Traversal-Range"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-2/Traversal-Range/xml-source.zip"
-	       dest="${specs.dir}/Level-2/xml/traversal-range"/>
-
 
 
 	<unzip src="${specs.dir}/DOM2-HTML.zip"
@@ -1267,12 +1284,6 @@ All implementation conditions combined into implementationAttribute element
     </replace>
 
 	<copy file="${specs.dir}/Level-2/HTML/xml-source.xml" tofile="${specs.dir}/Level-2/xml/html/dom-spec.xml"/>
-
-	<!--  zip file is missing two support files   -->
-	<echo file="${specs.dir}/Level-2/xml/options.xml"
-	      message="&lt;?xml version='1.0' encoding='UTF-8'?&gt;"/>
-	<echo file="${specs.dir}/Level-2/xml/status.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
 
 	<unzip src="${specs.dir}/DOM2-HTML-Java-Binding.zip"
@@ -1790,7 +1801,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom3-val" depends="dom3-available"><!-- unless="dom3-val-available"-->
-	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/DOM3-Val.zip"
+	<get src="http://www.w3.org/TR/2003/PR-DOM-Level-3-Val-20031215/DOM3-Val.zip"
 		dest="${specs.dir}/DOM3-Val.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
@@ -1823,7 +1834,29 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-init" depends="init,get-dom3,get-xhtml1-dtd">
+<target name="spec-unzip">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	
+	<unzip src="${specs.dir}/DOM${level}-${module}.zip"
+	       dest="${specs.dir}/Level-${level}/${module}"/>
+	       
+	<copy file="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"
+		todir="${specs.dir}/Level-${level}/${module}"/>
+		
+	<replace file="${specs.dir}/Level-${level}/${module}/xml-source.xml"
+		token="http://www.w3.org/2002/08/xmlspec-v22-dom.dtd"
+		value="xmlspec-v22-dom.dtd"/>
+
+    <delete dir="${specs.dir}/Level-${level}/${module}/java"/>
+	<unzip src="${specs.dir}/Level-${level}/${module}/java-binding.zip"
+	       dest="${specs.dir}/Level-${level}/${module}/java"/>
+
+</target>
+	
+	
+
+<target name="dom3-init" depends="init,get-dom3,get-xhtml1-dtd, dom2-traversal-init">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-3"/>
 
@@ -1835,58 +1868,42 @@ All implementation conditions combined into implementationAttribute element
 	<!--unzip src="${specs.dir}/Level-3/Views/xml-source.zip"
 	       dest="${specs.dir}/Level-3/xml/views"/-->
 
-	<unzip src="${specs.dir}/DOM3-XPath.zip"
-	       dest="${specs.dir}/Level-3/XPath"/>
+	<antcall target="spec-unzip">
+		<param name="level" value="3"/>
+		<param name="module" value="XPath"/>
+	</antcall>
+
+	<antcall target="spec-unzip">
+		<param name="level" value="3"/>
+		<param name="module" value="Events"/>
+	</antcall>
+	
+	<antcall target="spec-unzip">
+		<param name="level" value="3"/>
+		<param name="module" value="Core"/>
+	</antcall>
+
+	<antcall target="spec-unzip">
+		<param name="level" value="3"/>
+		<param name="module" value="LS"/>
+	</antcall>
+
+	<antcall target="spec-unzip">
+		<param name="level" value="3"/>
+		<param name="module" value="Val"/>
+	</antcall>
 
 
-	<unzip src="${specs.dir}/DOM3-Events.zip"
-	       dest="${specs.dir}/Level-3/Events"/>
-
-
-	<unzip src="${specs.dir}/DOM3-Core.zip"
-	       dest="${specs.dir}/Level-3/Core"/>
-
-	<unzip src="${specs.dir}/DOM3-LS.zip"
-	       dest="${specs.dir}/Level-3/LS"/>
-
-
-	<unzip src="${specs.dir}/DOM3-Val.zip"
-	       dest="${specs.dir}/Level-3/Val"/>
-
-    <replace file="${specs.dir}/Level-3/Val/xml-source.xml"
-        token='http://www.w3.org/2002/08/xmlspec-v22-dom.dtd'
-            value='../../pubtext/xmlspec-v22-dom.dtd'/>
-
-
-    <delete dir="${specs.dir}/Level-3/Core/java"/>
-	<unzip src="${specs.dir}/Level-3/Core/java-binding.zip"
-	       dest="${specs.dir}/Level-3/Core/java"/>
-
-    <delete dir="${specs.dir}/Level-3/Events/java"/>
-	<unzip src="${specs.dir}/Level-3/Events/java-binding.zip"
-	       dest="${specs.dir}/Level-3/Events/java"/>
-
-    <delete dir="${specs.dir}/Level-3/LS/java"/>
-	<unzip src="${specs.dir}/Level-3/LS/java-binding.zip"
-	       dest="${specs.dir}/Level-3/LS/java"/>
-
-    <delete dir="${specs.dir}/Level-3/Val/java"/>
-	<unzip src="${specs.dir}/Level-3/Val/java-binding.zip"
-	       dest="${specs.dir}/Level-3/Val/java"/>
-
-
-    <delete dir="${specs.dir}/Level-3/XPath/java"/>
-	<unzip src="${specs.dir}/Level-3/XPath/java-binding.zip"
-	       dest="${specs.dir}/Level-3/XPath/java"/>
 
     <property name="dom3-core-java-src" location="${specs.dir}/Level-3/Core/java"/>
     <property name="dom3-ls-java-src" location="${specs.dir}/Level-3/LS/java"/>
     <property name="dom3-xpath-java-src" location="${specs.dir}/Level-3/XPath/java"/>
     <property name="dom3-val-java-src" location="${specs.dir}/Level-3/Val/java"/>
+    <property name="dom3-events-java-src" location="${specs.dir}/Level-3/Events/java"/>
 
 </target>
 
-<target name="dom3-interfaces" depends="dom3-init,dom2-init">
+<target name="dom3-interfaces" depends="dom3-init">
     <delete file="${build.dir}/dom3-interfaces.xml"/>
 
 	<style in="${specs.dir}/Level-3/Core/xml-source.xml"
