@@ -31,12 +31,15 @@ and combine-metadata.xsl
 
 	<xsl:output method="html"/>
 
+    <!--   filter subjects by specification    -->
+    <xsl:variable name="subjects" select="document($specMetadataURL,.)/rdf:RDF/rdf:Description[contains(@rdf:about,$specURI)]"/>
+
     <xsl:variable name="interfacesDoc" select="document($interfacesURL,.)"/>
-    <xsl:variable name="interfaces" select="$interfacesDoc//interface[not(starts-with(@name,'HTML'))]"/>
+
+    <xsl:variable name="interfaces" select="$interfacesDoc//interface[concat($specURI,@id) = $subjects/@rdf:about]"/>
     <xsl:variable name="methods" select="$interfaces/method"/>
     <xsl:variable name="attributes" select="$interfaces/attribute"/>
     <xsl:variable name="descriptions" select="/rdf:RDF/rdf:Description"/>
-    <xsl:variable name="subjects" select="document($specMetadataURL,.)/rdf:RDF/rdf:Description"/>
 
 	<!--  match document root    -->
 	<xsl:template match="/">
@@ -77,6 +80,7 @@ sorted alphabetically.
 
                 <xsl:for-each select="$interfaces">
                     <xsl:sort select="@name"/>
+                     <xsl:variable name="interface" select="."/>
 			<h2>Interface <xsl:value-of select="@name" /></h2>
 			<table border="1" cols="2">
                         <!-- tests which have the interface as a subject  -->
