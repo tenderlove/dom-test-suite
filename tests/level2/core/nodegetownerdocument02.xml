@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="ownerDocElem" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="docType" type="DocumentType"/>
-<var name="nullID" type="DOMString" isNull="true"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="docType" obj="domImpl" qualifiedName='"mydoc"' publicId="nullNS" systemId="nullNS"/>
