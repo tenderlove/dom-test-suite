@@ -58,7 +58,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -135,6 +135,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
                             concat(' ',concat(parent::interface/@name,' ')))">
                         <xsl:call-template name="produce-property">
                             <xsl:with-param name="required">#IMPLIED</xsl:with-param>
+                            <xsl:with-param name="content">(var*, (%statement;)* )</xsl:with-param>
                         </xsl:call-template>
                     </xsl:when>
 
@@ -148,6 +149,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
     <xsl:template name="produce-property">
         <xsl:param name="required">#REQUIRED</xsl:param>
+        <xsl:param name="content">EMPTY</xsl:param>
 			  <!--  suppress creation of title element since it is also used
 			          as metadata, hardcoded version that can do both appears
 					  elsewhere   -->
@@ -162,10 +164,10 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				<xsl:if test="not(preceding::attribute[@name=$current/@name]) and @name != 'implementation'">
 
 					<!--  create an element whose tag name is the same as the attribute  -->
-&lt;!ELEMENT <xsl:value-of select="@name"/> EMPTY&gt;
+&lt;!ELEMENT <xsl:value-of select="concat(concat(@name,' '),$content)"/>&gt;
 &lt;!ATTLIST <xsl:value-of select="@name"/><xsl:text>
     id ID #IMPLIED
-	obj CDATA #REQUIRED
+	obj CDATA </xsl:text><xsl:value-of select="$required"/><xsl:text>
 </xsl:text>
 					<xsl:choose>
 						<xsl:when test="key('featureByName',@name)[not(@readonly) or @readonly!='yes']">
@@ -180,7 +182,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 							</xsl:call-template>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:text>    var CDATA #REQUIRED
+							<xsl:text>    var CDATA </xsl:text><xsl:value-of select="$required"/><xsl:text>
 </xsl:text>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -205,10 +207,10 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 						         on number of interfaces method is introduced by  -->
 						<xsl:choose>
 							<xsl:when test="@name='length'">
-								<xsl:text>#REQUIRED</xsl:text>
+								<xsl:value-of select="$required"/>
 							</xsl:when>
 							<xsl:when test="count($dups) &gt; 1">
-								<xsl:text>#REQUIRED</xsl:text>
+								<xsl:value-of select="$required"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:text>#IMPLIED</xsl:text>
