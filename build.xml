@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.135  2004-03-09 07:46:24  dom-ts-4
+Revision 1.136  2004-03-09 21:16:41  dom-ts-4
+LS test loader by reflection, now can be used for L1/L2 tests (bug 571)
+
+Revision 1.135  2004/03/09 07:46:24  dom-ts-4
 Integration of Netscape HTML test submission (bug 255)
 
 Revision 1.134  2004/03/09 04:31:04  dom-ts-4
@@ -683,14 +686,11 @@ All implementation conditions combined into implementationAttribute element
         value="SETUPPAGE_INTERVAL"/>
 </target>
 
-
-
-
 <target name="common-javac" depends="init">
 	<mkdir dir="${java.build.dir}"/>
 	<javac srcdir="java"
 		   includes="org/w3c/domts/*.java"
-		   excludes="org/w3c/domts/UserData*.java org/w3c/domts/LS*.java org/w3c/domts/DOMError*.java org/w3c/domts/DOMLocator*.java"
+		   excludes="org/w3c/domts/UserData*.java org/w3c/domts/DOMError*.java org/w3c/domts/DOMLocator*.java"
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"
 		   target="1.1"

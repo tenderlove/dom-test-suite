@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.9  2004-02-25 06:30:29  dom-ts-4
+Revision 1.10  2004-03-09 21:16:41  dom-ts-4
+LS test loader by reflection, now can be used for L1/L2 tests (bug 571)
+
+Revision 1.9  2004/02/25 06:30:29  dom-ts-4
 Add support for java test framework use of DOM L3 LS (bug 571)
 
 Revision 1.8  2004/02/17 05:22:01  dom-ts-4
@@ -512,6 +515,22 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</antcall>
 </target>
 
+<target name="dom1-core-xerces_ls">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="1"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
+
+<target name="dom1-core-xerces_ls-alt">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="1"/>
+		<param name="module" value="core"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+
 <target name="dom1-core-all"
 	depends="dom1-core-xerces1, 
 		     dom1-core-xerces1-alt,
@@ -695,6 +714,22 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 		<param name="module" value="core"/>
 	</antcall>
 </target>
+
+<target name="dom2-core-xerces_ls">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="2"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
+
+<target name="dom2-core-xerces_ls-alt">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="2"/>
+		<param name="module" value="core"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
 
 <target name="dom2-core-all"
 	depends="dom2-core-xerces1, 

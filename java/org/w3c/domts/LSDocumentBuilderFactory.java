@@ -12,7 +12,10 @@
 
 /*
 $Log: LSDocumentBuilderFactory.java,v $
-Revision 1.1  2004-02-25 06:31:18  dom-ts-4
+Revision 1.2  2004-03-09 21:16:41  dom-ts-4
+LS test loader by reflection, now can be used for L1/L2 tests (bug 571)
+
+Revision 1.1  2004/02/25 06:31:18  dom-ts-4
 Add support for java test framework use of DOM L3 LS (bug 571)
 
 
@@ -20,13 +23,13 @@ Add support for java test framework use of DOM L3 LS (bug 571)
 
 package org.w3c.domts;
 
-import org.w3c.dom.DOMException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.bootstrap.DOMImplementationRegistry;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSParser;
-import java.util.*;
 
 /**
  *   This class implements the generic parser and configuation
@@ -37,7 +40,8 @@ import java.util.*;
 public class LSDocumentBuilderFactory
     extends DOMTestDocumentBuilderFactory {
 
-	private final LSParser parser;
+	private final Object parser;
+	private final Method parseURIMethod;
 	private final DOMImplementation impl;
 
 	/**
@@ -60,7 +64,7 @@ public class LSDocumentBuilderFactory
 		 * @param parser parser
 		 * @throws DOMTestIncompatibleException if parser does not support setting
 		 */
-		public abstract void applySetting(DocumentBuilderSetting setting, LSParser parser)
+		public abstract void applySetting(DocumentBuilderSetting setting, Object parser)
 			throws DOMTestIncompatibleException;
 		/**
 		 * Gets state of setting for parser
@@ -68,7 +72,7 @@ public class LSDocumentBuilderFactory
 		 * @param parser parser
 		 * @return state of setting
 		 */
-		public abstract boolean hasSetting(LSParser parser);
+		public abstract boolean hasSetting(Object parser);
 		
 	}
 	
@@ -94,7 +98,7 @@ public class LSDocumentBuilderFactory
 		 * Apply setting.  Throws exception if requested setting
 		 * does not match fixed value.
 		 */
-		public void applySetting(DocumentBuilderSetting setting, LSParser parser) 
+		public void applySetting(DocumentBuilderSetting setting, Object parser) 
 			throws DOMTestIncompatibleException {
 			if (setting.getValue() != fixedValue) {
 				throw new DOMTestIncompatibleException(null, setting);
@@ -103,7 +107,7 @@ public class LSDocumentBuilderFactory
 		/**
 		 * Gets fixed value for setting
 		 */
-		public boolean hasSetting(LSParser parser) {
+		public boolean hasSetting(Object parser) {
 			return fixedValue;
 		}
 	}
@@ -130,42 +134,60 @@ public class LSDocumentBuilderFactory
 			this.inverse = inverse;
 		}
 		
+		protected static void setParameter(DocumentBuilderSetting setting, 
+		        Object parser,
+		        String parameter,
+		        Object value) throws DOMTestIncompatibleException {
+		    try {
+		        Method domConfigMethod = parser.getClass().getMethod("getDomConfig", new Class[0]);
+		        Object domConfig = domConfigMethod.invoke(parser, new Object[0]);
+		        Method setParameterMethod = domConfig.getClass().getMethod("setParameter", new Class[] { String.class, Object.class });
+		        setParameterMethod.invoke(domConfig, new Object[] { parameter, value });
+		        
+		    } catch(InvocationTargetException ex) {
+		        throw new DOMTestIncompatibleException(ex.getTargetException(), setting);		        
+		    } catch(Exception ex) {
+		        throw new DOMTestIncompatibleException(ex, setting);
+		    }
+		}
+
+		
+		
+		protected static Object getParameter(Object parser,
+		        String parameter) throws Exception {
+	        Method domConfigMethod = parser.getClass().getMethod("getDomConfig", new Class[0]);
+	        Object domConfig = domConfigMethod.invoke(parser, new Object[0]);
+	        Method getParameterMethod = domConfig.getClass().getMethod("getParameter", new Class[] { String.class});
+	        return getParameterMethod.invoke(domConfig, new Object[] { parameter });		        
+		}
+		
+		
 		/**
 		 * Apply setting
 		 */
-		public void applySetting(DocumentBuilderSetting setting, LSParser parser)
+		public void applySetting(DocumentBuilderSetting setting, Object parser)
 			throws DOMTestIncompatibleException {
-			try {
-				boolean lsValue = setting.getValue();
-				if (inverse) {
-					lsValue = !lsValue;
-				}
-				parser.getDomConfig().setParameter(lsParameter, new Boolean(lsValue));
-			} catch(DOMException ex) {
-				throw new DOMTestIncompatibleException(ex, setting);
-			}
+		    if (inverse) {
+		        setParameter(setting, parser, lsParameter, new Boolean(!setting.getValue()));
+		    } else {
+		        setParameter(setting, parser, lsParameter, new Boolean(setting.getValue()));
+		    }
 		}
 		
 		/**
 		 * Get value of setting
 		 */
-		public boolean hasSetting(LSParser parser) {
-			try {
-				Boolean parameter = (Boolean) parser.getDomConfig().getParameter(lsParameter);
-				if (parameter.booleanValue()) {
-					if (inverse) {
-						return false;
-					}
-				} else {
-					if (!inverse) {
-						return false;
-					}
-				}
-				return true;
-			} catch (DOMException ex) {
-				return false;
-			}
-		}		
+		public boolean hasSetting(Object parser) {
+		    try {
+		        if (inverse) {
+		            return !((Boolean) getParameter(parser, lsParameter)).booleanValue();
+		        } else {
+		            return ((Boolean) getParameter(parser, lsParameter)).booleanValue();
+		        }
+		    } catch(Exception ex) {
+		        return false;
+		    }
+		}
 	}
 	
 
@@ -189,26 +211,22 @@ public class LSDocumentBuilderFactory
 		/**
 		 * Apply setting
 		 */
-		public void applySetting(DocumentBuilderSetting setting, LSParser parser)
+		public void applySetting(DocumentBuilderSetting setting, Object parser)
 			throws DOMTestIncompatibleException {
 			super.applySetting(setting, parser);
-			try {
-				parser.getDomConfig().setParameter("schema-type", schemaType);
-			} catch(DOMException ex) {
-				throw new DOMTestIncompatibleException(ex, setting);
-			}
+			setParameter(null, parser, "schema-type", schemaType);
 		}
 		/**
 		 * Get setting value
 		 */
-		public boolean hasSetting(LSParser parser) {
+		public boolean hasSetting(Object parser) {
 			if (super.hasSetting(parser)) {
 				try {
-					String parserSchemaType = (String) parser.getDomConfig().getParameter("schema-type");
+					String parserSchemaType = (String) getParameter(parser, "schema-type");
 					if (schemaType == null || schemaType.equals(parserSchemaType)) {
 						return true;
 					}
-				} catch(DOMException ex) {
+				} catch(Exception ex) {
 				}
 			}
 			return false;
@@ -247,14 +265,19 @@ public class LSDocumentBuilderFactory
         super(settings);
 
         try {
-        	DOMImplementationRegistry domRegistry = DOMImplementationRegistry.newInstance();
-            impl = domRegistry.getDOMImplementation("LS");
+            Class domImplRegistryClass = Class.forName("org.w3c.dom.bootstrap.DOMImplementationRegistry");
+            Method newInstanceMethod = domImplRegistryClass.getMethod("newInstance", null);
+            Object domRegistry = newInstanceMethod.invoke(null, null);
+            Method getDOMImplementationMethod = domImplRegistryClass.getMethod("getDOMImplementation", new Class[] { String.class });
+            impl = (DOMImplementation) getDOMImplementationMethod.invoke(domRegistry, new Object[] { "LS" });
+            Method createLSParserMethod = impl.getClass().getMethod("createLSParser", new Class[] { short.class, String.class });
+            parser = createLSParserMethod.invoke(impl, new Object[] { new Short((short) 1), null });
+            parseURIMethod = parser.getClass().getMethod("parseURI", new Class[] { String.class });
+        } catch (InvocationTargetException ex) {
+        	throw new DOMTestIncompatibleException(ex.getTargetException(), null);
         } catch (Exception ex) {
         	throw new DOMTestIncompatibleException(ex, null);
         }
-        DOMImplementationLS factory = (DOMImplementationLS) impl;
-        
-        parser = factory.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
 
         if (settings != null) {
         	for(int i = 0; i < settings.length; i++) {
@@ -294,7 +317,9 @@ public class LSDocumentBuilderFactory
      */
     public Document load(java.net.URL url) throws DOMTestLoadException {
         try {
-        	return parser.parseURI(url.toString());
+        	return (Document) parseURIMethod.invoke(parser, new Object[] { url.toString()} );
+        } catch (InvocationTargetException ex) {
+            throw new DOMTestLoadException(ex.getTargetException());
         } catch (Exception ex) {
             throw new DOMTestLoadException(ex);
         }
@@ -321,8 +346,8 @@ public class LSDocumentBuilderFactory
     
     private boolean hasProperty(String parameter) {
     	try {
-    		return ((Boolean) parser.getDomConfig().getParameter(parameter)).booleanValue();
-    	} catch (DOMException ex) {
+    		return ((Boolean) LSParameterStrategy.getParameter(parser, parameter)).booleanValue();
+    	} catch (Exception ex) {
     		return true;
     	}
     	
