@@ -35,17 +35,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])"/>
 </metadata>
+<!--   this test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="addrNode" type="Element"/>
 <var name="addrAttr" type="Attr"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="addrNode"/>
-<getAttributeNode obj="addrNode" name="&quot;xmlns&quot;" var="addrAttr"/>
+<getAttributeNode obj="addrNode" name='"xmlns"' var="addrAttr"/>
 <assertDOMException id="throw_NAMESPACE_ERR">
 <NAMESPACE_ERR>
-<prefix obj="addrAttr" value="&quot;xxx&quot;"/>
+<prefix obj="addrAttr" value='"xxx"'/>
 </NAMESPACE_ERR>
 </assertDOMException>
 </test>
