@@ -13,7 +13,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE metadata SYSTEM "dom3.dtd">
 
-<!--   This file contains additional metadata about DOM L3 Core tests.  
+<!--   This file contains additional metadata about DOM L3 Events tests.  
        Allowing additional documentation without modifying the tests themselves.   -->
 <metadata xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3">
 </metadata>

@@ -6,7 +6,7 @@ xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <meta http-equiv="Content-Type" content="text/html; 
 charset=us-ascii" />
 <title>Document Object Model (DOM) Conformance Test 
-Suites, Level 2 HTML Working Draft</title>
+Suites, Level 3 Core</title>
 <link type="text/css" rel="stylesheet" href="resources/activity-home.css" />
 <script type="text/javascript" 
 src="resources/toc.js">
@@ -33,14 +33,14 @@ Lists</a><br />
 Members only resource: <a href="http://www.w3.org/DOM/Group/">DOM Working 
 Group</a></small></p>
 
-<h1>DOM Conformance Test Suite, Level 2 HTML Working Draft</h1>
+<h1>DOM Conformance Test Suite, Level 3 Core Working Draft</h1>
 
 <div id="thisdoc">
 <h2>This document</h2>
 </div>
 
 <p>
-This document describes how to run the DOM Level 2 HTML Test Suite. It also includes pointers to relevant software as well as relevant resources.
+This document describes how to run the DOM Level 3 Core Test Suite. It also includes pointers to relevant software as well as relevant resources.
 </p>
 <p>The DOM TS has been developed in accordance with the <a 
 href="http://www.w3.org/DOM/DOMTS-Process">DOM Conformance Test Suites Process Document</a>. For 
@@ -57,14 +57,14 @@ bindings, Java and ECMA. In order to run the test suite, we have provided  the p
 tests using the <a href="http://www.junit.org">JUnit</a> and <a href="http://www.jsunit.net">JsUnit</a> testing frameworks, both included in this 
 distribution.
 </p>
-<p>The DOM Level 2 HTML TS was released on TBD.</p>
+<p>The DOM Level 3 Core test suite has not been released.</p>
 
 <div id="latestVersion">
 <h2>Latest Version</h2>
 </div>
 <p>Download the <a 
-href="http://www.w3.org/DOM/Test/Downloads/DOMTSL2Core">latest version</a> 
-of the DOM Level 2 HTML Test Suite.</p>
+href="http://www.w3.org/DOM/Test/Downloads/DOMTSL3Core">latest version</a> 
+of the DOM Level 3 Core Test Suite.</p>
 
 <div id="distribution">
 <h2>Distribution</h2>
@@ -75,8 +75,8 @@ of the DOM Level 2 HTML Test Suite.</p>
     <td width="20%">index.html</td><td>This file</td>
 </tr>
 <tr>
-    <td><a href="dom2-html-matrix.html">dom2-html-matrix.html</a></td>
-    <td>A cross reference of the tests to the DOM 2 HTML Recommendation, pointers to the tests and documentation.</td>
+    <td><a href="dom3-core-matrix.html">dom3-core-matrix.html</a></td>
+    <td>A cross reference of the tests to the DOM 3 Core Recommendation, pointers to the tests and documentation.</td>
 </tr>
 <tr>
     <td><a href="ecmascript/jsunit/testRunner.html">ecmascript/jsunit/testRunner.html</a></td>
@@ -87,16 +87,16 @@ of the DOM Level 2 HTML Test Suite.</p>
     <td>JSUnit support files</td>
 </tr>
 <tr>
-    <td>ecmascript/level2/html</td>
+    <td>ecmascript/jsunit/tests</td>
     <td>DOM tests for use with JSUnit</td>
 </tr>
 <tr>
-    <td>java/dom2-html.jar</td>
+    <td>java/dom1-core.jar</td>
     <td>DOM tests for Java implementations, includes source code.</td>
 </tr>
 <tr>
     <td>java/junit-run.jar</td>
-    <td>A test framework adapter that supports running dom2-html.jar with the JUnit 3.7 test framework.</td>
+    <td>A test framework adapter that supports running dom1-core.jar with the JUnit 3.7 test framework.</td>
 </tr>
 <tr>
     <td>java/junit.jar</td>
@@ -107,12 +107,12 @@ of the DOM Level 2 HTML Test Suite.</p>
     <td>Test definitions in XML.</td>
 </tr>
 <tr>
-    <td><a href="tests/dom2.dtd">tests/dom2.dtd</a></td>
-    <td>Document Type Definition for DOM 2 HTML tests.</td>
+    <td><a href="tests/dom3.dtd">tests/dom1.dtd</a></td>
+    <td>Document Type Definition for DOM Level 3 tests.</td>
 </tr>
 <tr>
-    <td><a href="tests/dom2.xsd">tests/dom2.xsd</a></td>
-    <td>XML Schema for DOM 2 HTML tests.</td>
+    <td><a href="tests/dom1.xsd">tests/dom3.xsd</a></td>
+    <td>XML Schema for DOM Level 3 tests.</td>
 </tr>
 <tr>
     <td>tests/files/</td>
@@ -128,21 +128,22 @@ of the DOM Level 2 HTML Test Suite.</p>
 <div id="runningECMA">
 <h2>Running the ECMAScript tests</h2>
 </div>
-<p>The DOM TS currently tests XML and SVG implementations of DOM Level 2 HTML. Later revisions will provide testing of HTML implementation conformance with DOM Level 
-2.</p>
+<p>The DOM TS currently tests XML and SVG implementations of DOM Level 1 Core. Later revisions will provide testing of HTML implementation conformance with DOM Level 
+1.</p>
 <p>To run the ECMAScript tests, open the <a 
-	href="ecmascript/level2/html/alltests.html">ecmascript/level2/html/alltests.html</a> in the browser 
-you want to test, make your selections then click Load JsUnit.
-After that,  press Run to run all DOM 2 tests compatible 
+href="ecmascript/jsunit/testRunner.html">JsUnit test runner</a> in the browser 
+you want to test, press the browse button and look for the file 
+"ecmascript/level1/core/alltests.html". 
+After that,  press Run to run all DOM 1 tests compatible 
 with the implementation.  If you choose to run individual tests, the 
 above procedure works similarly, just browse for the test you want to 
-run in the "ecmascript/level2/html" directory.</p>
+run in the "ecmascript/level1/core" directory.</p>
 <p>These tests have been run with Microsoft 
 Internet Explorer 5.0 and later for Microsoft Windows and 
 Mozilla 0.9.8 and Netscape Navigator 6.2 and later for Microsoft Windows, Linux and Apple OS X.  
 Use on Apple OS X required replacing colon (:) in the test case name with slashes (/).</p>
 <p>To test the DOM implementation of the <a href="http://www.adobe.com/svg">Adobe SVG Viewer</a>, select 
-"ecmascript/level2/html/svg-alltests.html" and press Run.</p>
+"ecmascript/level1/core/svg-alltests.html" and press Run.</p>
 <p>For JsUnit reference, please visit the <a href="http://www.jsunit.net">JsUnit 
 home page</a>.  JsUnit will provide output with indication on how many tests that were run, how many failed and 
 how many errors were found while running. The error log points to the actual test, so identifying 
@@ -153,16 +154,16 @@ what you need to do in your implementation is simplified.</p>
 </div>
 <p>Running the Java tests will require placing a JAXP 1.1 compatible parser on the classpath or
 placing a common JAXP 1.1 parser (<a href="http://xml.apache.org/crimson/index.html">Apache Xerces</a>, <a href="http://xml.apache.org/crimson/index.html">Apache Crimson</a>, <a href="http://otn.oracle.com/software/tech/xml/xdk_java/content.html">Oracle XML Developer Kit</a>, or <a href="http://www.gnu.org/software/classpathx/jaxp/">GNUJAXP</a>) in the java/ directory.</p>
-<p>Running "java -jar dom2-core.jar" from the java/ directory will write to the console a summary of the parser under
+<p>Running "java -jar dom1-core.jar" from the java/ directory will write to the console a summary of the parser under
 test and the results of the tests run in two distinct configurations.  The parser under test can
 be selected by any mechanism supported by JAXP 1.1.</p>
 
 <p>The Java tests may also be run using from JUnit TestRunner's.   To run
 all tests against the default JAXP parser in a default configuration from the JUnit text user interface, run "
-java -classpath dom2-core.jar junit.textui.TestRunner org.w3c.domts.level2.core.TestDefaultParser".  
+java -classpath dom1-core.jar junit.textui.TestRunner org.w3c.domts.level3.core.TestDefaultParser".  
 The run the Swing or AWT user interfaces, replace "textui" with "swingui" or "awtui" and add "-noloading" before the 
-test case to not use JUnit's custom ClassLoader, for example, "java -classpath dom2-core.jar 
-junit.swingui.TestRunner -noloading org.w3c.domts.level2.core.TestDefaultParser"</p>
+test case to not use JUnit's custom ClassLoader, for example, "java -classpath dom1-core.jar 
+junit.swingui.TestRunner -noloading org.w3c.domts.level3.core.TestDefaultParser"</p>
 
 <p>Running "java -jar junit-run.jar" will launch the JUnit SwingUI without the custom ClassLoader.</p>
 
@@ -170,18 +171,18 @@ junit.swingui.TestRunner -noloading org.w3c.domts.level2.core.TestDefaultParser"
 the only mechanism for testing implementations that do not support JAXP 1.1 such as Batik or
 DOM4J.</p>
 <table border="0" width="100%">
-<tr><td width="20%">org.w3c.domts.level2.core.TestBatik</td><td>Tests the <a href="http://xml.apache.org/batik">Apache Batik</a> SVG project (currently fails loading test documents).</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestCrimson</td><td>Tests the Apache Crimson Parser in the default configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestCrimsonAltConfig</td><td>Tests the Apache Crimson Parser in an alternative configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestDefaultParser</td><td>Tests the current JAXP 1.1 Parser in the default configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestDefaultParserAltConfig</td><td>Tests the current JAXP 1.1 Parser in an alternative configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestDOM4J</td><td>Tests <a href="http://www.dom4j.org">DOM4J</a>.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestGNUJAXP</td><td>Tests the GNUJAXP Parser in the default configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestGNUJAXPAltConfig</td><td>Tests the GNUJAXP Parser in an alternative configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestOracle</td><td>Tests the Oracle XML Parser in the default configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestOracleAltConfig</td><td>Tests the Oracle XML Parser in an alternative configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestXerces</td><td>Tests the Apache Xerces Parser in the default configuration.</td></tr>
-<tr><td>org.w3c.domts.level2.core.TestXercesAltConfig</td><td>Tests the Apache Xerces Parser in an alternative configuration.</td></tr>
+<tr><td width="20%">org.w3c.domts.level3.core.TestBatik</td><td>Tests the <a href="http://xml.apache.org/batik">Apache Batik</a> SVG project (currently fails loading test documents).</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestCrimson</td><td>Tests the Apache Crimson Parser in the default configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestCrimsonAltConfig</td><td>Tests the Apache Crimson Parser in an alternative configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestDefaultParser</td><td>Tests the current JAXP 1.1 Parser in the default configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestDefaultParserAltConfig</td><td>Tests the current JAXP 1.1 Parser in an alternative configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestDOM4J</td><td>Tests <a href="http://www.dom4j.org">DOM4J</a>.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestGNUJAXP</td><td>Tests the GNUJAXP Parser in the default configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestGNUJAXPAltConfig</td><td>Tests the GNUJAXP Parser in an alternative configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestOracle</td><td>Tests the Oracle XML Parser in the default configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestOracleAltConfig</td><td>Tests the Oracle XML Parser in an alternative configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestXerces</td><td>Tests the Apache Xerces Parser in the default configuration.</td></tr>
+<tr><td>org.w3c.domts.level3.core.TestXercesAltConfig</td><td>Tests the Apache Xerces Parser in an alternative configuration.</td></tr>
 </table>
 
 
@@ -200,7 +201,7 @@ href="http://lists.w3.org/Archives/Public/www-dom-ts/">archive</a>).</p>
 href="http://www.w3.org/Consortium/Legal/copyright-software-19980720.html">W3C 
 Software Copyright Notice and license</a>:<br /><a 
 href="resources/COPYRIGHT.html">Copyright</a> (c) 
-2002 World Wide Web Consortium,
+2003 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
 			Recherche en Informatique et en Automatique, Keio University). All
 			Rights Reserved. This program is distributed under the W3C's Software
