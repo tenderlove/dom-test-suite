@@ -39,7 +39,7 @@ It should return null.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="elementList" index="1" var="cdataName"/>
-<lastChild obj="cdataName" var="cdataNode"/>
+<lastChild interface="Node" obj="cdataName" var="cdataNode"/>
 <attributes obj="cdataNode" var="attrList"/>
 <assertNull actual="attrList" id="nodeCDATASectionNodeAttributesAssert1"/>
 </test>

@@ -38,7 +38,7 @@ CDATA content.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nameList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="nameList" var="child" index="1"/>
-<lastChild obj="child" var="lastChild"/>
+<lastChild interface="Node" obj="child" var="lastChild"/>
 <data interface="CharacterData" obj="lastChild" var="data"/>
 <assertEquals actual="data" expected="&quot;This is an adjacent CDATASection with a reference to a tab &amp;tab;&quot;" id="cdatasectionGetDataAssert" ignoreCase="false"/>
 </test>

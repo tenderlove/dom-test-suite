@@ -43,9 +43,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="childNode"/>
 <firstChild interface="Node" obj="childNode" var="newChild"/>
 <appendChild var="appendedChild" obj="childNode" newChild="newChild"/>
-<firstChild obj="childNode" var="fchild"/>
+<firstChild interface="Node" obj="childNode" var="fchild"/>
 <nodeName obj="fchild" var="fchildName"/>
-<lastChild obj="childNode" var="lchild"/>
+<lastChild interface="Node"  obj="childNode" var="lchild"/>
 <nodeName obj="lchild" var="lchildName"/>
 <if>
 <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>

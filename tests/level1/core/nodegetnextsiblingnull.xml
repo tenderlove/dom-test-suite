@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<lastChild obj="employeeNode" var="lcNode"/>
-<nextSibling obj="lcNode" var="nsNode"/>
+<lastChild interface="Node" obj="employeeNode" var="lcNode"/>
+<nextSibling interface="Node" obj="lcNode" var="nsNode"/>
 <assertNull actual="nsNode" id="nodeGetNextSiblingNullAssert1"/>
 </test>

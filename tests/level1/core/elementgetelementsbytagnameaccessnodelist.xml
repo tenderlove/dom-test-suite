@@ -42,7 +42,7 @@ element should be "#text".
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
-<firstChild obj="testEmployee" var="firstC"/>
+<firstChild interface="Node" obj="testEmployee" var="firstC"/>
 <nodeName obj="firstC" var="childName"/>
 <if>
 <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>

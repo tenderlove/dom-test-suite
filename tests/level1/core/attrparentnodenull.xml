@@ -39,6 +39,6 @@ method from the NamedNodeMap interface.
 <item interface="NodeList" obj="addressList" var="testNode" index="0"/>
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="domesticAttr" name="&quot;domestic&quot;"/>
-<parentNode obj="domesticAttr" var="s"/>
+<parentNode interface="Node" obj="domesticAttr" var="s"/>
 <assertNull actual="s" id="attrParentNodeNullAssert"/>
 </test>

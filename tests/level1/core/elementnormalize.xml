@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <normalize obj="root"/>
 <getElementsByTagName interface="Element" obj="root" tagname="&quot;name&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testName"/>
-<firstChild obj="testName" var="firstChild"/>
+<firstChild interface="Node" obj="testName" var="firstChild"/>
 <nodeValue obj="firstChild" var="childValue"/>
 <assertEquals actual="childValue" expected="&quot;Roger\n Jones&quot;" id="elementNormalizeAssert" ignoreCase="false"/>
 </test>

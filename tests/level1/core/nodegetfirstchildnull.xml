@@ -46,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="0" var="employeeNode"/>
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" index="1" var="secondChildNode"/>
-<firstChild obj="secondChildNode" var="textNode"/>
-<firstChild obj="textNode" var="noChildNode"/>
+<firstChild interface="Node" obj="secondChildNode" var="textNode"/>
+<firstChild interface="Node" obj="textNode" var="noChildNode"/>
 <assertNull actual="noChildNode" id="nodeGetFirstChildNullAssert1"/>
 </test>

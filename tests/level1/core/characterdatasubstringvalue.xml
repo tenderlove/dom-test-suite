@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;name&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
-<firstChild obj="nameNode" var="child"/>
+<firstChild interface="Node" obj="nameNode" var="child"/>
 <substringData obj="child" var="substring" offset="0" count="8"/>
 <assertEquals actual="substring" expected="&quot;Margaret&quot;" id="characterdataSubStringValueAssert" ignoreCase="false"/>
 </test>

@@ -59,7 +59,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeValue obj="child" var="value"/>
 <if>
 <isNull obj="value"/>
-<firstChild obj="child" var="grandChild"/>
+<firstChild interface="Node" obj="child" var="grandChild"/>
 <nodeValue obj="grandChild" var="value"/>
 <append collection="result" obj="value"/>
 <else>

@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
-<firstChild var="entReference" obj="genderNode"/>
+<firstChild interface="Node" var="entReference" obj="genderNode"/>
 <firstChild var="entElement" obj="entReference" interface="Node"/>
 <firstChild var="entElementContent" obj="entElement" interface="Node"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

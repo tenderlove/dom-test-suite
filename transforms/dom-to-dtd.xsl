@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * Copyright (c) 2001 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -500,13 +499,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	qualifier (isVersionOf | hasVersion | isReplacedBy | isRequiredBy | requires | isPartOf | hasPart | isReferenceBy | references) #REQUIRED
 &gt;
 					
-&lt;!ELEMENT assertTrue ((%condition;)?,(%statement;)*)&gt;
+&lt;!ELEMENT assertTrue ((%condition;)?)&gt;
 &lt;!ATTLIST assertTrue
 	id ID #REQUIRED
 	actual CDATA #IMPLIED
 &gt;
 							
-&lt;!ELEMENT assertFalse ((%condition;)?,(%statement;)*)&gt;
+&lt;!ELEMENT assertFalse ((%condition;)?)&gt;
 &lt;!ATTLIST assertFalse
 	id ID #REQUIRED
 	actual CDATA #IMPLIED
@@ -791,10 +790,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				<xsl:value-of select="@name"/>
 				<xsl:variable name="code" select="@name"/>
 				<xsl:variable name="code-colon"><xsl:value-of select="@name"/>:</xsl:variable>
-				<xsl:variable name="getraises" select="$attributes/getraises/exception[@name=$exception and contains(string(.),$code-colon)]"/>
-				<xsl:variable name="setraises" select="$attributes/setraises/exception[@name=$exception and contains(string(.),$code-colon)]"/>
+				<xsl:variable name="attrraises" select="$attributes/*[name() = 'getraises' or name() = 'setraises']/exception[@name=$exception and contains(string(.),$code-colon)]"/>
 				<xsl:variable name="methodraises" select="$methods/raises/exception[@name=$exception and contains(string(.),$code-colon)]"/>
-				<xsl:variable name="total" select="count($getraises) + count($setraises) + count($methodraises)"/>
+				<xsl:variable name="total" select="count($attrraises) + count($methodraises)"/>
 				<xsl:choose>
 					<xsl:when test="$total = 0">
 						<xsl:text> EMPTY </xsl:text>
@@ -802,10 +800,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 					<xsl:when test="$total = 1">
 						<xsl:text> ( </xsl:text>
-						<xsl:for-each select="$getraises">
-							<xsl:value-of select="ancestor::attribute/@name"/>
-						</xsl:for-each>
-						<xsl:for-each select="$setraises">
+						<xsl:for-each select="$attrraises">
 							<xsl:value-of select="ancestor::attribute/@name"/>
 						</xsl:for-each>
 						<xsl:for-each select="$methodraises">
@@ -815,7 +810,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 </xsl:text>
 					</xsl:when>
 
-					<xsl:when test="count($getraises) + count($setraises) = 0">
+					<xsl:when test="count($attrraises) = 0">
 						<xsl:text> ( </xsl:text>
 						<xsl:for-each select="$methodraises[1]">
 							<xsl:value-of select="ancestor::method/@name"/>
@@ -827,32 +822,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 						<xsl:text> ) </xsl:text>
 					</xsl:when>
 
-					<xsl:when test="count($getraises) = 0">
-						<xsl:text> ( </xsl:text>
-						<xsl:for-each select="$setraises[1]">
-							<xsl:value-of select="ancestor::attribute/@name"/>
-						</xsl:for-each>
-						<xsl:for-each select="$setraises[position() &gt; 1]">
-							<xsl:text> | </xsl:text>
-							<xsl:value-of select="ancestor::attribute/@name"/>
-						</xsl:for-each>
-						<xsl:for-each select="$methodraises">
-							<xsl:text> | </xsl:text>
-							<xsl:value-of select="ancestor::method/@name"/>
-						</xsl:for-each>
-						<xsl:text> ) </xsl:text>
-					</xsl:when>
 
 					<xsl:otherwise>
 						<xsl:text> ( </xsl:text>
-						<xsl:for-each select="$getraises[1]">
+						<xsl:for-each select="$attrraises[1]">
 							<xsl:value-of select="ancestor::attribute/@name"/>
 						</xsl:for-each>
-						<xsl:for-each select="$getraises[position() &gt; 1]">
-							<xsl:text> | </xsl:text>
-							<xsl:value-of select="ancestor::attribute/@name"/>
-						</xsl:for-each>
-						<xsl:for-each select="$setraises">
+						<xsl:for-each select="$attrraises[position() &gt; 1]">
 							<xsl:text> | </xsl:text>
 							<xsl:value-of select="ancestor::attribute/@name"/>
 						</xsl:for-each>
@@ -870,19 +846,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 	</xsl:template>
 
-	<xsl:template name="produce-feature-if-raises-code">
-		<!--   this is the exception block in a raises, setraises or getraises element  -->
-		<xsl:param name="exception"/>
-		<xsl:param name="constant"/>
-		<xsl:if test="contains(string($exception),concat($constant/@name,':'))">
-			<!--  change context to parent (which could be raises, setraises or getraises  -->
-			<xsl:for-each select="parent::*">												  
-				<xsl:text>|</xsl:text>
-				<xsl:value-of select="parent::*/@name"/>
-			</xsl:for-each>
-		</xsl:if>
-	</xsl:template>
-			
 	<!--  generate element that depend on the source document   -->				
     <xsl:template name="dynamic-elements">
 

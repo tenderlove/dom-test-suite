@@ -50,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
 <item interface="NodeList" obj="childList" index="1" var="secondCNode"/>
-<firstChild obj="secondCNode" var="textNode"/>
+<firstChild interface="Node" obj="secondCNode" var="textNode"/>
 <childNodes obj="textNode" var="CNodeList"/>
 <assertSize collection="CNodeList" size="0" id="nodeChildNodesEmptyAssert1"/>
 </test>

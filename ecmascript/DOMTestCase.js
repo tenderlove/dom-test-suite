@@ -341,10 +341,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //
   //
 
-//  if(navigator.appName.indexOf("Microsoft") != -1) {
-//    asvDefaultBuilder = new ASVDocumentBuilder(null,null);
-//    factory = new ASVDocumentBuilderFactory();
-//  }
+  if(navigator.appName.indexOf("Microsoft") != -1) {
+    asvDefaultBuilder = new ASVDocumentBuilder(null,null);
+    factory = new ASVDocumentBuilderFactory();
+  }
 
 
 

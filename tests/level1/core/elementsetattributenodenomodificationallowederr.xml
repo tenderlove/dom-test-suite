@@ -43,8 +43,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
-<firstChild var="entRef" obj="gender"/>
-<firstChild var="entElement" obj="entRef"/>
+<firstChild interface="Node" var="entRef" obj="gender"/>
+<firstChild interface="Node" var="entElement" obj="entRef"/>
 <createAttribute obj="doc" var="newAttr" name="&quot;newAttr&quot;"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>

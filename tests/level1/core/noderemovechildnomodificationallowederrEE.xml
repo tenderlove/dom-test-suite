@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="removedNode" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
-<firstChild var="entText" obj="entRef"/>
+<firstChild interface="Node" var="entText" obj="entRef"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <removeChild var="removedNode" obj="entRef" oldChild="entText"/>

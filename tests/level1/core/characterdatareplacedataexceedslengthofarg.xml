@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
-<firstChild obj="nameNode" var="child"/>
+<firstChild interface="Node" obj="nameNode" var="child"/>
 <replaceData obj="child" offset="0" count="4" arg="&quot;260030&quot;"/>
 <data interface="CharacterData" obj="child" var="childData"/>
 <assertEquals actual="childData" expected="&quot;260030 North Ave. Dallas, Texas 98551&quot;" id="characterdataReplaceDataExceedsLengthOfArgAssert" ignoreCase="false"/>

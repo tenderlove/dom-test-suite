@@ -38,7 +38,7 @@ should be "Dallas, Texas 98551".
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
-<firstChild obj="nameNode" var="child"/>
+<firstChild interface="Node" obj="nameNode" var="child"/>
 <deleteData obj="child" offset="0" count="16"/>
 <data interface="CharacterData" obj="child" var="childData"/>
 <assertEquals actual="childData" expected="&quot;Dallas, Texas 98551&quot;" id="characterdataDeleteDataBeginingAssert" ignoreCase="false"/>

@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="childList"/>
 <createElement obj="doc" tagName="&quot;newChild&quot;" var="createdNode"/>
 <appendChild var="appendedChild" obj="employeeNode" newChild="createdNode"/>
-<lastChild obj="employeeNode" var="lchild"/>
+<lastChild interface="Node" obj="employeeNode" var="lchild"/>
 <nodeName obj="lchild" var="childName"/>
 <assertEquals actual="childName" expected="&quot;newChild&quot;" id="nodeAppendChildAssert1" ignoreCase="false"/>
 </test>

@@ -39,6 +39,6 @@ first employee and examine its NextSibling node.  This test uses the
 <item interface="NodeList" obj="addressList" var="testNode" index="0"/>
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="domesticAttr" name="&quot;domestic&quot;"/>
-<nextSibling obj="domesticAttr" var="s"/>
+<nextSibling interface="Node" obj="domesticAttr" var="s"/>
 <assertNull actual="s" id="attrNextSiblingNullAssert"/>
 </test>

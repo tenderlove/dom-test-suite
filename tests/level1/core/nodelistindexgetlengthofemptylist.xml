@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" var="childNode" index="1"/>
-<firstChild obj="childNode" var="textNode"/>
+<firstChild interface="Node" obj="childNode" var="textNode"/>
 <childNodes obj="textNode" var="textList"/>
 <assertSize collection="textList" size="0" id="nodelistIndexGetLengthOfEmptyListAssert"/>
 </test>

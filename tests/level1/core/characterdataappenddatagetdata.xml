@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;name&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
-<firstChild obj="nameNode" var="child"/>
+<firstChild interface="Node" obj="nameNode" var="child"/>
 <appendData obj="child" arg="&quot;, Esquire&quot;"/>
 <data interface="CharacterData" obj="child" var="childData"/>
 <assertEquals actual="childData" expected="&quot;Margaret Martin, Esquire&quot;" id="characterdataAppendDataGetDataAssert" ignoreCase="false"/>

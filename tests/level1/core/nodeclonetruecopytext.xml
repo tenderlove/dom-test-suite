@@ -48,7 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </else>
 </if>
 <cloneNode obj="childNode" deep="true" var="clonedNode"/>
-<lastChild obj="clonedNode" var="lastChildNode"/>
+<lastChild interface="Node" obj="clonedNode" var="lastChildNode"/>
 <nodeValue obj="lastChildNode" var="childValue"/>
 <assertEquals actual="childValue" expected="&quot;35,000&quot;" id="nodeCloneTrueCopyTextAssert1" ignoreCase="false"/>
 </test>

@@ -39,7 +39,7 @@ The new value of the character data should be
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;name&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
-<firstChild obj="nameNode" var="child"/>
+<firstChild interface="Node" obj="nameNode" var="child"/>
 <insertData obj="child" offset="0" arg="&quot;Mss. &quot;"/>
 <data interface="CharacterData" obj="child" var="childData"/>
 <assertEquals actual="childData" expected="&quot;Mss. Margaret Martin&quot;" id="characterdataInsertDataBeginningAssert" ignoreCase="false"/>

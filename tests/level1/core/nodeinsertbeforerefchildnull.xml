@@ -46,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="childList"/>
 <createElement obj="doc" tagName="&quot;newChild&quot;" var="newChild"/>
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
-<lastChild obj="employeeNode" var="child"/>
+<lastChild interface="Node" obj="employeeNode" var="child"/>
 <nodeName obj="child" var="childName"/>
 <assertEquals actual="childName" expected="&quot;newChild&quot;" id="nodeInsertBeforeRefChildNullAssert1" ignoreCase="false"/>
 </test>

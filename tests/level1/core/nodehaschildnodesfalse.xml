@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="child"/>
 <childNodes obj="child" var="employeeIdList"/>
 <item interface="NodeList" obj="employeeIdList" index="1" var="employeeNode"/>
-<firstChild obj="employeeNode" var="textNode"/>
+<firstChild interface="Node" obj="employeeNode" var="textNode"/>
 <hasChildNodes obj="textNode" var="state"/>
 <assertFalse actual="state" id="nodeHasChildFalseAssert1"/>
 </test>

@@ -44,8 +44,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <createEntityReference var="entRef" obj="doc" name="&quot;ent4&quot;"/>
 <appendChild var="appendedChild" obj="gender" newChild="entRef"/>
-<firstChild var="entRef" obj="gender"/>
-<lastChild var="piNode" obj="entRef"/>
+<firstChild interface="Node" var="entRef" obj="gender"/>
+<lastChild interface="Node" var="piNode" obj="entRef"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <data interface="ProcessingInstruction" obj="piNode" value="&quot;newData&quot;"/>

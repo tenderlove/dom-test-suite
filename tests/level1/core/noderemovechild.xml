@@ -40,6 +40,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="rootNode" var="childList"/>
 <item interface="NodeList" obj="childList" index="1" var="childToRemove"/>
 <removeChild obj="rootNode" var="removedChild" oldChild="childToRemove"/>
-<parentNode obj="removedChild" var="parentNode"/>
+<parentNode interface="Node" obj="removedChild" var="parentNode"/>
 <assertNull actual="parentNode" id="nodeRemoveChildAssert1"/>
 </test>

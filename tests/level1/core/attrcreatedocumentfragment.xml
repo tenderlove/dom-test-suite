@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createElement obj="doc" var="newOne" tagName="&quot;newElement&quot;"/>
 <setAttribute obj="newOne" name="&quot;newdomestic&quot;" value="&quot;Yes&quot;"/>
 <appendChild var="appendedChild" obj="docFragment" newChild="newOne"/>
-<firstChild obj="docFragment" var="domesticNode"/>
+<firstChild interface="Node" obj="docFragment" var="domesticNode"/>
 <attributes obj="domesticNode" var="domesticAttr"/>
 <item interface="NamedNodeMap" obj="domesticAttr" var="attrs" index="0"/>
 <name interface="Attr" obj="attrs" var="attrName"/>

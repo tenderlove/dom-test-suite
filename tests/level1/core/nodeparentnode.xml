@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<parentNode obj="employeeNode" var="parentNode"/>
+<parentNode interface="Node" obj="employeeNode" var="parentNode"/>
 <nodeName obj="parentNode" var="parentName"/>
 <assertEquals actual="parentName" expected="&quot;staff&quot;" id="nodeParentNodeAssert1" ignoreCase="false"/>
 </test>
