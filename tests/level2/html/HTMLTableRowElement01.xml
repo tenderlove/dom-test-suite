@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>NIST</creator>
 <description>
     The rowIndex attribute specifies the index of the row, relative to the   
-    entire table, starting from 0.  This is in document tree order and
-    not display order.  The rowIndex does not take into account sections
+    entire table, starting from 0.  This is in logical order and
+    not in document order. The rowIndex does take into account sections
     (THEAD, TFOOT, or TBODY) within the table.
 
     Retrieve the third TR element within the document and examine 
