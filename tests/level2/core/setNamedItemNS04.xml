@@ -36,6 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-setNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 </metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="namespaceURI" type="DOMString" value="&quot;http://www.xyz.com&quot;"/>
 <var name="localName" type="DOMString" value="&quot;local1&quot;"/>
 <var name="doc" type="Document"/>
@@ -49,12 +50,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="arg" type="Node"/>
 <var name="setNode" type="Node"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
+<if>
+<implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="2"/>
 <childNodes obj="testAddress" var="nList"/>
 <item interface="NodeList" obj="nList" var="child" index="0"/>
+<else>
+<createEntityReference var="child" name='"ent4"' obj="doc"/>
+</else>
+</if>
 <childNodes obj="child" var="n2List"/>
 <item interface="NodeList" obj="n2List" var="child2" index="0"/>
+<assertNotNull actual="child2" id="notnull"/>
 <attributes obj="child2" var="attributes"/>
 <getNamedItemNS obj="attributes" var="arg" namespaceURI="namespaceURI" localName="localName"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
