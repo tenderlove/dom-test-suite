@@ -33,7 +33,7 @@ of element content whitespace requires validation.
 <var name="elem" type="Element"/>
 <var name="textContent" type="DOMString"/>
 <load var="doc" href="barfoo" willBeModified="false"/>
-<getElementsByTagNameNS var="elemList" obj="doc" localName='"body"' namespaceURI='"*"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"body"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <textContent var="textContent" obj="elem"/>
 <if>
