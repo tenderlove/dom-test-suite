@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="0" var="employeeNode"/>
 <assertDOMException id="throw_INVALID_CHARACTER_ERR">
 <INVALID_CHARACTER_ERR>
-<prefix obj="employeeNode" value="&quot;pre^fix xmlns='http://www.nist.gov'&quot;"/>
+<prefix obj="employeeNode" value="&quot;pre^fix xmlns='http//www.nist.gov'&quot;"/>
 </INVALID_CHARACTER_ERR>
 </assertDOMException>
 </test>
