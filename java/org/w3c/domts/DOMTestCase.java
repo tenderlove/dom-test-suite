@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.3  2001-08-20 06:56:35  dom-ts-4
+ Revision 1.4  2001-08-22 06:22:46  dom-ts-4
+ Updated resource path for IDE debugging
+
+ Revision 1.3  2001/08/20 06:56:35  dom-ts-4
  Full compile (-2 files that lock up Xalan 2.1)
 
  Revision 1.2  2001/07/23 04:52:20  dom-ts-4
@@ -91,7 +94,7 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
             //  try the files/level?/spec directory
             //
             String filename = getClass().getPackage().getName();
-            filename = "../files/" + filename.substring(14).replace('.','/') + "/" + docURI;
+            filename = "tests/" + filename.substring(14).replace('.','/') + "/files/" + docURI;
             resolvedURI = new java.io.File(filename).toURL();
         }
     }
