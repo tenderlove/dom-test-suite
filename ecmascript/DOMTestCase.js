@@ -16,30 +16,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     assertEquals(descr, expected, actualSize);
   }
   
-  function assertStringEquals(descr, expected, actual, ignoreCase) {
-	if(expected != actual) {
-		if(ignoreCase && actual != null) {
-			if(expected.toLowerCase() != actual.toLowerCase()) {
-				assertEquals(descr,expected,actual);
-			}
-		}
-		else {
-			assertEquals(descr,expected,actual);
-		}
-	}
-  }
-			
-
-  function assertStringNotEquals(descr, expected, actual, ignoreCase) {
-	if(expected == actual) {
-		assertNotEquals(descr,expected,actual);
-	}
-	if(ignoreCase && actual != null && expected.toLowerCase() == actual.toLowerCase()) {
-		assertNotEquals(descr,expected,actual);
-	}
-  }
-  
-  function assertEqualsCollection(descr, expected, actual,ignoreCase) {
+  function assertEqualsCollection(descr, expected, actual) {
     //
     //  if they aren't the same size, they aren't equal
     assertEquals(descr, expected.length, actual.length);
@@ -59,11 +36,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             if(expectedValue == actual[j]) {
                 matches++;
             }
-            else {
-				if(ignoreCase && expectedValue.toLowerCase() == actual[j].toLowerCase()) {
-					matches++;
-				}
-			}
         }
         if(matches == 0) {
             assert(descr + ": No match found for " + expectedValue,false);
@@ -75,7 +47,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
 
 
-  function assertEqualsList(descr, expected, actual, ignoreCase) {
+  function assertEqualsList(descr, expected, actual) {
     //
     //  if they aren't the same size, they aren't equal
     assertEquals(descr, expected.length, actual.length);
@@ -84,9 +56,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     var i;
     for(i = 0; i < actualLen; i++) {
         if(expected[i] != actual[i]) {
-			if(!ignoreCase || (expected[i].toLowerCase() != actual[i].toLowerCase())) {
-				assertEquals(descr, expected[i], actual[i]);
-			}
+			assertEquals(descr, expected[i], actual[i]);
         }
     }
   }
@@ -193,6 +163,34 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
        
   var factory = null;
   var defaultContentType = "text/xml";
+
+  function XMLToAutoCase(expected) {
+    return expected;
+  }
+
+  function HTMLToAutoCase(expected) {
+    return expected.toUpperCase();
+  }
+
+  function XMLToAutoCaseArray(expected) {
+    return expected;
+  }
+
+  function HTMLToAutoCaseArray(expected) {
+    var upper = new Array(expected.length);
+    for(var i = 0; i < expected.length; i++) {
+        upper[i] = expected[i].toUpperCase();
+    }
+    return upper;
+  }
+
+  function toLowerCaseArray(strarray) {
+    var lower = new Array(strarray.length);
+    for(var i = 0; i < strarray.length; i++) {
+        lower[i] = strarray[i].toLowerCase();
+    }
+    return lower;
+  }
 
   //
   //   used by both HTML and SVG loaders
@@ -338,7 +336,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.close = MozHTMLDocumentBuilder_close;
     this.checkAttributes = MozHTMLDocumentBuilder_checkAttributes;
     this.hasFeature = MozHTMLDocumentBuilder_hasFeature;
-    this.ignoreCase = true;
+    this.toAutoCase = HTMLToAutoCase;
+    this.toAutoCaseArray = HTMLToAutoCaseArray;
     this.MozLoadBrowserDocument = MozLoadBrowserDocument;
   }
 
@@ -359,7 +358,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.getImplementationAttribute = MozXMLDocumentBuilder_getImplementationAttribute;
     this.checkAttributes = MozXMLDocumentBuilder_checkAttributes;
     this.hasFeature = MozXMLDocumentBuilder_hasFeature;
-    this.ignoreCase = false;
+    this.toAutoCase = XMLToAutoCase;
+    this.toAutoCaseArray = XMLToAutoCaseArray;
     this.MozLoadBrowserDocument = MozLoadBrowserDocument;
   }
 
@@ -417,7 +417,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    }
 
   function MozXMLDocumentBuilder_isDOMExceptionCode(ex, code) {
-    return (ex.code = code);
+    return (ex.code == code);
   }
 
   function MozXMLDocumentBuilder_getImplementationAttribute(attr) {
@@ -473,7 +473,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.checkAvailability = MozXMLDocumentBuilder_checkAvailability;
     this.close = MozXMLDocumentBuilder_close;
     this.hasFeature = MozXMLDocumentBuilder_hasFeature;
-    this.ignoreCase = false;
+    this.toAutoCase = XMLToAutoCase;
+    this.toAutoCaseArray = XMLToAutoCaseArray;
     //
     //   check if expandEntityReferences is false
     //     and throw an excpetion since that behavior is not supported
@@ -706,7 +707,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.checkAvailability = ASVDocumentBuilder_checkAvailability;
     this.close = ASVDocumentBuilder_close;
     this.hasFeature = ASVDocumentBuilder_hasFeature;
-    this.ignoreCase = false;
+    this.toAutoCase = XMLToAutoCase;
+    this.toAutoCaseArray = XMLToAutoCaseArray;
     if(attrNames != null) {
         for(var i = 0; i < attrNames.length; i++) {
             if(attrNames[i] == "expandEntityReferences" && attrValues[i] == false) {
@@ -902,7 +904,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.close = MSXMLDocumentBuilder_close;
     this.checkAttributes = MSXMLDocumentBuilder_checkAttributes;
     this.hasFeature = MSXMLDocumentBuilder_hasFeature;
-    this.ignoreCase = false;
+    this.toAutoCase = XMLToAutoCase;
+    this.toAutoCaseArray = XMLToAutoCaseArray;
     
     this.parser = new ActiveXObject("MSXML2.DOMDocument.3.0");
     this.parser.async = false;
@@ -1025,7 +1028,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.close = MSHTMLDocumentBuilder_close;
     this.checkAttributes = MSHTMLDocumentBuilder_checkAttributes;
     this.hasFeature = MSHTMLDocumentBuilder_hasFeature;
-    this.ignoreCase = true;
+    this.toAutoCase = HTMLToAutoCase;
+    this.toAutoCaseArray = HTMLToAutoCaseArray;
   }
 
   var defaultMSHTMLDocumentBuilder = null;
