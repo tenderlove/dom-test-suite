@@ -37,10 +37,19 @@ be a general purpose schema for XHTML
   <xsd:element name="head">
   	<xsd:complexType>
   		<xsd:sequence>
+  			<xsd:element ref="meta"/>
   			<xsd:element ref="title"/>
   		</xsd:sequence>
   	</xsd:complexType>
   </xsd:element>
+  
+  <xsd:element name="meta">
+  	<xsd:complexType>
+  		<xsd:attribute name="http-equiv" type="xsd:string" use="required"/>
+  		<xsd:attribute name="content" type="xsd:string" use="required"/>
+  	</xsd:complexType>
+  </xsd:element>
+  
   
   <xsd:element name="title" type="xsd:string"/>
   
@@ -49,6 +58,7 @@ be a general purpose schema for XHTML
   		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
   			<xsd:element ref="p"/>
   		</xsd:sequence>
+  		<xsd:attribute name="onload" type="xsd:string" use="optional"/>
   	</xsd:complexType>
   </xsd:element>
   

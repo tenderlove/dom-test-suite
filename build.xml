@@ -2057,7 +2057,7 @@ This target checks that the output of that implied transform is valid HTML
 <target name="dom3-core-schema-validate-files" unless="ant-15" depends="init">
     <ant antfile="schemavalidate.ant">
     	<property name="validate.dir" location="${tests.dir}/level3/core/files"/>  
-    	<property name="includes" value="datatype_normalization*.xml datatype_normalization*.svg datatype_normalization*.xhtml typeinfo.xml typeinfo.svg typeinfo.xhtml"/>
+    	<property name="includes" value="datatype_normalization*.xml datatype_normalization*.svg datatype_normalization*.xhtml typeinfo.xml typeinfo.svg typeinfo.xhtml hc_staff.xml hc_staff.xhtml hc_staff.svg"/>
     </ant>
 
 </target>
