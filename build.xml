@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.58  2002-04-21 23:13:30  dom-ts-4
+Revision 1.59  2002-05-23 13:35:35  dom-ts-4
+Changed depenencies for -validate-tests tasks
+
+Revision 1.58  2002/04/21 23:13:30  dom-ts-4
 Update for April 2002 L3 public working drafts
 
 Revision 1.57  2002/04/19 05:17:42  dom-ts-4
@@ -379,7 +382,8 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${specs.dir}/Level-1/xml"
 	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
 	       out="${build.dir}/dom1-interfaces.xml"
-	       style="${transforms.dir}/extract.xsl"/>
+	       style="${transforms.dir}/extract.xsl"
+	       processor="trax"/>
 </target>
 
 <target name="dom1-core-dist" depends="dom1-core-jar,dom1-core-gen-jsunit,dom1-core-matrix,dom1-core-doxygen,junit-run,get-junit-license,dom1-schema">
@@ -731,7 +735,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="dom1-core-validate-tests" depends="init">
+<target name="dom1-core-validate-tests" depends="dom1-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/core" includes="*.xml" 
@@ -963,7 +967,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-core-validate-tests" depends="init">
+<target name="dom2-core-validate-tests" depends="dom2-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/core" includes="*.xml"/>  
