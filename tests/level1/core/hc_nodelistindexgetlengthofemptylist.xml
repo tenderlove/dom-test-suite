@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,20 +28,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <!--length attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="elementList" type="NodeList"/>
-<var name="employeeNode" type="Node"/>
-<var name="employeeList" type="NodeList"/>
-<var name="childNode" type="Node"/>
+<var name="emList" type="NodeList"/>
+<var name="emNode" type="Node"/>
 <var name="textNode" type="Node"/>
 <var name="textList" type="NodeList"/>
+<var name="length" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"p"'/>
-<item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
-<childNodes obj="employeeNode" var="employeeList"/>
-<item interface="NodeList" obj="employeeList" var="childNode" index="1"/>
-<firstChild interface="Node" obj="childNode" var="textNode"/>
-<childNodes obj="textNode" var="textList"/>
-<assertSize collection="textList" size="0" id="nodelistIndexGetLengthOfEmptyListAssert"/>
+<getElementsByTagName interface="Document" obj="doc" var="emList" tagname='"em"'/>
+<item interface="NodeList" obj="emList" var="emNode" index="2"/>
+<firstChild var="textNode" obj="emNode"/>
+<childNodes var="textList" obj="textNode"/>
+<length var="length" obj="textList" interface="NodeList"/>
+<assertEquals actual="length" expected="0" id="length" ignoreCase="false"/>
 </test>

@@ -22,27 +22,39 @@ were encountered in a pre order traversal of the element
 tree.
 
 Create a NodeList of all the descendant elements
-using the string "employee" as the tagName.
+using the string "p" as the tagName.
 The method should return a NodeList whose length is
 "5" in the order the children were encountered.
 Access the FOURTH element in the NodeList.  The FOURTH
-element also has children and the first child of this
-element should be "#text".
+element, the first or second should be an "em" node with
+the content "EMP0004".
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <!--getElementsByTagName-->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1938918D"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Element"/>
 <var name="firstC" type="Node"/>
 <var name="childName" type="DOMString"/>
+<var name="nodeType" type="int"/>
+<var name="employeeIDNode" type="CharacterData"/>
+<var name="employeeID" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
 <firstChild interface="Node" obj="testEmployee" var="firstC"/>
+<nodeType var="nodeType" obj="testEmployee"/>
+<!--   if a text node, get the next sibling  -->
+<if><equals actual="nodeType" expected="3"/>
+<nextSibling interface="Node" var="testEmployee" obj="testEmployee"/>
+</if> 
 <nodeName obj="firstC" var="childName"/>
-<assertEquals actual="childName" expected='"#text"' id="nodename_whitespace" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"em"' id="childName" ignoreCase="auto"/>
+<firstChild interface="Node" var="employeeIDNode" obj="firstC"/>
+<nodeValue var="employeeID" obj="employeeIDNode"/>
+<assertEquals actual="employeeID" expected='"EMP0004"' ignoreCase="false" id="employeeID"/> 
 </test>

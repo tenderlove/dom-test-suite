@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -19,7 +19,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     If the "newChild" is already in the tree, it is first
     removed before the new one is appended.
     
-    Retrieve the first child of the second employee and   
+    Retrieve the "em" second employee and   
     append the first child to the end of the list.   After
     the "appendChild(newChild)" method is invoked the first 
     child should be the one that was second and the last
@@ -28,25 +28,45 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
+<var name="childList" type="NodeList"/>
 <var name="childNode" type="Node"/>
 <var name="newChild" type="Node"/>
-<var name="lchild" type="Node"/>
-<var name="fchild" type="Node"/>
-<var name="lchildName" type="DOMString"/>
-<var name="fchildName" type="DOMString"/>
+<var name="memberNode" type="Node"/>
+<var name="memberName" type="DOMString"/>
+<var name="refreshedActual" type="List"/>
+<var name="actual" type="List"/>
+<var name="nodeType" type="int"/>
+<var name="expected" type="List">
+<member>"strong"</member>
+<member>"code"</member>
+<member>"sup"</member>
+<member>"var"</member>
+<member>"acronym"</member>
+<member>"em"</member>
+</var>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="childNode"/>
-<firstChild interface="Node" obj="childNode" var="newChild"/>
+<getElementsByTagName interface="Element" obj="childNode" var="childList" tagname='"*"'/>
+<item interface="NodeList" obj="childList" index="0" var="newChild"/>
 <appendChild var="appendedChild" obj="childNode" newChild="newChild"/>
-<firstChild interface="Node" obj="childNode" var="fchild"/>
-<nodeName obj="fchild" var="fchildName"/>
-<lastChild interface="Node"  obj="childNode" var="lchild"/>
-<nodeName obj="lchild" var="lchildName"/>
-<assertEquals id="assert1" actual="fchildName" expected='"em"' ignoreCase="auto"/>
-<assertEquals id="assert2" actual="lchildName" expected='"#text"' ignoreCase="false"/>
+<for-each collection="childList" member="memberNode">
+    <nodeName var="memberName" obj="memberNode"/>
+    <append collection="actual" obj="memberName"/>
+</for-each>
+<assertEquals id="liveByTagName" actual="actual" expected='expected' ignoreCase="auto"/>
+<childNodes var="childList" obj="childNode"/>
+<for-each collection="childList" member="memberNode">
+    <nodeType var="nodeType" obj="memberNode"/>
+    <if><equals actual="nodeType" expected="1"/>
+        <nodeName var="memberName" obj="memberNode"/>
+        <append collection="refreshedActual" obj="memberName"/>
+    </if>
+</for-each>
+<assertEquals id="refreshedChildNodes" actual="refreshedActual" expected='expected' ignoreCase="auto"/>
 </test>

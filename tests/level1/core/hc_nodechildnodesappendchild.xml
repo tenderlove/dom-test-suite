@@ -31,18 +31,43 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <var name="childList" type="NodeList"/>
 <var name="createdNode" type="Node"/>
+<var name="childNode" type="Node"/>
+<var name="childName" type="DOMString"/>
+<var name="childType" type="int"/>
 <var name="textNode" type="Node"/>
+<var name="actual" type="List"/>
+<var name="expected" type="List">
+<member>"em"</member>
+<member>"strong"</member>
+<member>"code"</member>
+<member>"sup"</member>
+<member>"var"</member>
+<member>"acronym"</member>
+<member>"br"</member>
+</var>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<createElement obj="doc" var="createdNode" tagName='"text3"'/>
+<createElement obj="doc" var="createdNode" tagName='"br"'/>
 <appendChild obj="employeeNode" newChild="createdNode" var="employeeNode"/>
-<assertSize collection="childList" size="14" id="elementCountWhitespace"/>
+<for-each collection="childList" member="childNode">
+    <nodeName var="childName" obj="childNode"/>
+    <nodeType var="childType" obj="childNode"/>
+    <if><equals actual="childType" expected="1"/>
+        <append collection="actual" obj="childName"/>
+        <else>
+            <assertEquals id="textNodeType" actual="childType" expected="3" ignoreCase="false"/>
+        </else>
+    </if>
+</for-each> 
+<assertEquals actual="actual" expected="expected" id="childElements" ignoreCase="auto"/>
 </test>

@@ -28,6 +28,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -40,36 +42,33 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childName" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="appendedChild" type="Node"/>
+<var name="nodeType" type="int"/>
 <var name="expected" type="List">
-<member>"#text"</member>
 <member>"em"</member>
-<member>"#text"</member>
 <member>"strong"</member>
-<member>"#text"</member>
 <member>"code"</member>
-<member>"#text"</member>
 <member>"sup"</member>
-<member>"#text"</member>
 <member>"var"</member>
-<member>"#text"</member>
 <member>"acronym"</member>
-<member>"#text"</member>
-<member>"newChild1"</member>
-<member>"newChild2"</member>
+<member>"br"</member>
+<member>"b"</member>
 </var>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
 <createDocumentFragment obj="doc" var="newdocFragment"/>
-<createElement obj="doc" tagName='"newChild1"' var="newChild1"/>
-<createElement obj="doc" tagName='"newChild2"' var="newChild2"/>
+<createElement obj="doc" tagName='"br"' var="newChild1"/>
+<createElement obj="doc" tagName='"b"' var="newChild2"/>
 <appendChild var="appendedChild" obj="newdocFragment" newChild="newChild1"/>
 <appendChild var="appendedChild" obj="newdocFragment" newChild="newChild2"/>
 <appendChild var="appendedChild" obj="employeeNode" newChild="newdocFragment"/>
 <for-each collection="childList" member="child">
+<nodeType var="nodeType" obj="child"/>
+<if><equals actual="nodeType" expected="1"/>
 <nodeName var="childName" obj="child"/>
 <append collection="result" obj="childName"/>
+</if>
 </for-each>
 <assertEquals actual="result" expected="expected" ignoreCase="auto" id="nodeNames"/>
 </test>

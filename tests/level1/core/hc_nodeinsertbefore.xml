@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -26,6 +26,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -38,31 +40,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="insertedNode" type="Node"/>
 <var name="actual" type="List"/>
 <var name="expected" type="List">
-<member>"#text"</member>
 <member>"em"</member>
-<member>"#text"</member>
 <member>"strong"</member>
-<member>"#text"</member>
 <member>"code"</member>
-<member>"#text"</member>
-<member>"newChild"</member>
+<member>"br"</member>
 <member>"sup"</member>
-<member>"#text"</member>
 <member>"var"</member>
-<member>"#text"</member>
 <member>"acronym"</member>
-<member>"#text"</member>
 </var>
+<var name="nodeType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
 <item interface="NodeList" obj="childList" index="7" var="refChild"/>
-<createElement obj="doc" tagName='"newChild"' var="newChild"/>
+<createElement obj="doc" tagName='"br"' var="newChild"/>
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 <for-each collection="childList" member="child">
+<nodeType var="nodeType" obj="child"/>
+<if><equals actual="nodeType" expected="1"/>
 <nodeName obj="child" var="childName"/>
 <append collection="actual" obj="childName"/>
+</if>
 </for-each>
 <assertEquals actual="actual" expected="expected" id="nodeNames" ignoreCase="auto"/>
 </test>

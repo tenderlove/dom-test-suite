@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -22,15 +22,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    
    Create a list of all the children elements of the third
    employee and access its fourth child by using an index
-   of 3.  This should result in "strong" being
-   selected.  Further we evaluate its content(by using
-   the "getNodeName()" method) to ensure the proper
-   element was accessed.
+   of 3 and calling getNodeName() which should return
+   "strong" (no whitespace)  or "#text" (with whitespace).
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <!--item-->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -44,5 +43,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" var="child" index="3"/>
 <nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected='"strong"' id="nodeName" ignoreCase="auto"/>
+<if><equals expected='"#text"' actual="childName"/>
+<assertEquals id="childName_space" actual="childName" expected='"#text"' ignoreCase="false"/>
+<else>
+<assertEquals id="childName_space" actual="childName" expected='"strong"' ignoreCase="auto"/>
+</else>
+</if>
 </test>

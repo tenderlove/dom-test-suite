@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -18,35 +18,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 
     If there is not a last child then the "getLastChild()"
-
     method returns null.
 
-    
-
-    Retrieve the Text node from the second child of the first
-
-    employee and invoke the "getLastChild()" method.   It
-
+  Retrieve the text of the first "em" element and invoke the "getFirstChild()" method.   It
     should return null.
-
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="elementList" type="NodeList"/>
-<var name="employeeNode" type="Node"/>
-<var name="employeeList" type="NodeList"/>
-<var name="secondChildNode" type="Node"/>
-<var name="textNode" type="Node"/>
-<var name="noChildNode" type="Node"/>
+<var name="emList" type="NodeList"/>
+<var name="emNode" type="Node"/>
+<var name="emText" type="CharacterData"/>
+<var name="nullChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
-<item interface="NodeList" obj="elementList" index="0" var="employeeNode"/>
-<childNodes obj="employeeNode" var="employeeList"/>
-<item interface="NodeList" obj="employeeList" index="1" var="secondChildNode"/>
-<firstChild interface="Node" obj="secondChildNode" var="textNode"/>
-<lastChild interface="Node" obj="textNode" var="noChildNode"/>
-<assertNull actual="noChildNode" id="nodeGetLastChildNullAssert1"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"em"' var="emList"/>
+<item interface="NodeList" obj="emList" index="0" var="emNode"/>
+<firstChild var="emText" obj="emNode" interface="Node"/>
+<lastChild var="nullChild" obj="emText" interface="Node"/>
+<assertNull actual="nullChild" id="nullChild"/> 
 </test>

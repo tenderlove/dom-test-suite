@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,41 +16,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_nodeChildNodesEmpty</title>
 <creator>Curt Arnold</creator>
 <description>
-
     The "getChildNodes()" method returns a NodeList
-
     that contains all children of this node.   If there
-
     are not any children, this is a NodeList that does not 
-
     contain any nodes. 
 
-    
-
-    Retrieve the Text node from the second child of the second
-
-    employee and invoke the "getChildNodes()" method.   The
-
+    Retrieve the character data of the second "em" node and
+    invoke the "getChildNodes()" method.   The
     NodeList returned should not have any nodes.
-
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
-<var name="employeeNode" type="Node"/>
 <var name="childList" type="NodeList"/>
-<var name="secondCNode" type="Node"/>
+<var name="employeeNode" type="Node"/>
 <var name="textNode" type="Node"/>
-<var name="CNodeList" type="NodeList"/>
+<var name="length" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"em"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="1" var="secondCNode"/>
-<firstChild interface="Node" obj="secondCNode" var="textNode"/>
-<childNodes obj="textNode" var="CNodeList"/>
-<assertSize collection="CNodeList" size="0" id="nodeChildNodesEmptyAssert1"/>
+<firstChild var="textNode" obj="employeeNode"/>
+<childNodes var="childList" obj="textNode"/>
+<length var="length" obj="childList" interface="NodeList"/>
+<assertEquals expected="0" actual="length" id="length_zero" ignoreCase="false"/>
 </test>

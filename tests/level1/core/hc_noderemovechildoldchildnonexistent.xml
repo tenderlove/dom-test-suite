@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-1734834066')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="oldChild" type="Node"/>
@@ -37,10 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementNode" type="Node"/>
 <var name="removedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElement obj="doc" tagName='"oldChild"' var="oldChild"/>
+<createElement obj="doc" tagName='"br"' var="oldChild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
-<assertDOMException id="nodeRemoveChildOldChildNonexistentAssert1">
+<assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>
 <removeChild var="removedChild" obj="elementNode" oldChild="oldChild"/>
 </NOT_FOUND_ERR>

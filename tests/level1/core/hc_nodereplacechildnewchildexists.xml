@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -18,16 +18,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     If the "newChild" is already in the tree, it is first
     removed before the new one is added.
-    
-    Retrieve the second "p" and replace its TWELFTH 
-    child("acronym") with its SECOND child(em).   After the
-    replacement the second child should now be the one that used   
-    to be at the third position and the TWELFTH child should be the
-    one that used to be at the SECOND position.
+   
+    Retrieve the second "p" and replace "acronym" with its "em".
 </description>
-
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -40,31 +36,32 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childNode" type="Node"/>
 <var name="actual" type="List"/>
 <var name="expected" type="List">
-<member>"#text"</member>
-<member>"#text"</member>
 <member>"strong"</member>
-<member>"#text"</member>
 <member>"code"</member>
-<member>"#text"</member>
 <member>"sup"</member>
-<member>"#text"</member>
 <member>"var"</member>
-<member>"#text"</member>
 <member>"em"</member>
-<member>"#text"</member>
 </var>
 <var name="replacedChild" type="Node"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="1" var="newChild"/>
-<item interface="NodeList" obj="childList" index="11" var="oldChild"/>
+<getElementsByTagName interface="Element" obj="employeeNode" var="childList" tagname='"*"'/>
+<item interface="NodeList" obj="childList" index="0" var="newChild"/>
+<item interface="NodeList" obj="childList" index="5" var="oldChild"/>
 <replaceChild var="replacedChild" obj="employeeNode" newChild="newChild" oldChild="oldChild"/>
 <assertSame actual="replacedChild" expected="oldChild" id="return_value_same"/>
 <for-each collection="childList" member="childNode">
 <nodeName var="childName" obj="childNode"/>
+<nodeType var="nodeType" obj="childNode"/>
+<if><equals actual="nodeType" expected="1"/>
 <append collection="actual" obj="childName"/>
+<else>
+<assertEquals actual="nodeType" expected="3" id="textNodeType" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"#text"' id="textNodeName" ignoreCase="false"/>
+</else>
+</if>
 </for-each>
 <assertEquals actual="actual" expected="expected" id="childNames" ignoreCase="auto"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,20 +16,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_nodelistReturnFirstItem</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "item(index)" method returns the indexth item in the
-   collection.
-   
    Create a list of all the children elements of the third
    employee and access its first child by invoking the 
    "item(index)" method with an index=0.  This should
-   result in "#text" being returned.
-   Further we evaluate its content(by using
-   the "getNodeName()" method) to ensure the proper
-   element was accessed.
+   result in node with a nodeName of "#text" or "em".
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -43,5 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" var="child" index="0"/>
 <nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected='"#text"' id="item0_Whitespace" ignoreCase="false"/>
+<if><equals actual="childName" expected='"#text"'/>
+<assertEquals actual="childName" expected='"#text"' ignoreCase="false" id="nodeName_w_space"/>
+<else>
+<assertEquals actual="childName" expected='"em"' ignoreCase="auto" id="nodeName_wo_space"/>
+</else>
+</if>
 </test>
