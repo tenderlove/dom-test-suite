@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.130  2004-02-26 15:08:08  dom-ts-4
+Revision 1.131  2004-02-26 22:53:16  dom-ts-4
+Add 'canonical-form' parameter tests (bug 577)
+
+Revision 1.130  2004/02/26 15:08:08  dom-ts-4
 Enabling GUMP automated builds (bug 377)
 
 Revision 1.129  2004/02/26 05:14:49  dom-ts-4
@@ -2042,7 +2045,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom3-core-validate-files" depends="init">
 	<xmlvalidate lenient="no" failonerror="no"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.*"/>  
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* canonicalform*.*"/>  
 	</xmlvalidate>
 </target>
 

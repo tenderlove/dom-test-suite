@@ -23,10 +23,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="attrgetschematypeinfo06.xml"/>
 
     <suite.member href="cdatasections01.xml"/>
+
+	<suite.member href="canonicalform01.xml"/>
+	<suite.member href="canonicalform02.xml"/>
+	<suite.member href="canonicalform03.xml"/>
+	<suite.member href="canonicalform04.xml"/>
+	<suite.member href="canonicalform05.xml"/>
+	<suite.member href="canonicalform06.xml"/>
+	<suite.member href="canonicalform07.xml"/>
+	<suite.member href="canonicalform08.xml"/>
+	<suite.member href="canonicalform09.xml"/>
+	<suite.member href="canonicalform10.xml"/>
+	<suite.member href="canonicalform11.xml"/>
+
     
 	<suite.member href="checkcharacternormalization01.xml"/>
 	<suite.member href="checkcharacternormalization02.xml"/>
 	<suite.member href="checkcharacternormalization03.xml"/>
+
+
     
     <suite.member href="comments01.xml"/>
 
