@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.51  2002-03-01 08:12:34  dom-ts-4
+Revision 1.52  2002-03-02 08:27:27  dom-ts-4
+Added dom1-html-jar to build DOM1 HTML jar, more DOM L1 HTML to come
+
+Revision 1.51  2002/03/01 08:12:34  dom-ts-4
 Added dom2-core-matrix back into dom2-core-dist
 
 Revision 1.50  2002/03/01 07:29:42  dom-ts-4
@@ -276,6 +279,7 @@ All implementation conditions combined into implementationAttribute element
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
 	</style>
 	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/core"/>
+	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/html"/>
 </target>
 
 <target name="dom1-subjects" depends="dom1-init">
@@ -719,6 +723,46 @@ All implementation conditions combined into implementationAttribute element
 
 
 </target>
+
+<target name="dom1-html-gen-java" depends="dom1-interfaces,dom1-dtd">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level1/html"/>
+	<style basedir="${tests.dir}/level1/html" 
+		   destdir="${java.build.dir}/org/w3c/domts/level1/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level1.html"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
+	</style>
+</target>
+
+<target name="dom1-html-javac" depends="common-javac,dom1-html-gen-java">
+	<javac srcdir="${java.build.dir}/org/w3c/domts/level1/html" 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8"/>
+</target>
+
+<target name="dom1-html-jar" depends="dom1-html-javac">
+	<!--  will need to provide a manifest    -->
+	<jar jarfile="${build.dir}/dom1-html.jar"  manifest="java/dom1-html.mf">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level1/html/*"
+		         excludes="*.bak"/>
+		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
+</target>
+
 
 <target name="jsunit-get" depends="init" unless="jsunit-available">
 	<get src="http://www.edwardh.com/jsunit/jsunit.zip"
