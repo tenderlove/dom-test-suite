@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.41  2003-06-27 05:37:30  dom-ts-4
+Revision 1.42  2003-07-11 08:05:49  plehegar
+The test-to-java.xsl incorrectly transformed DOMStringList to Java String.
+
+Revision 1.41  2003/06/27 05:37:30  dom-ts-4
 contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
 
 Revision 1.40  2003/04/23 05:48:24  dom-ts-4
@@ -1457,7 +1460,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 <xsl:template name="produce-type">
     <xsl:param name="type"/>
     <xsl:choose>
-        <xsl:when test="contains($type, 'DOMString')">String</xsl:when>
+        <xsl:when test="$type='DOMString'">String</xsl:when>
         <xsl:when test="contains($type, 'DOMObject')">Object</xsl:when>
         <xsl:when test="contains($type, 'DOMUserData')">Object</xsl:when>
         <xsl:when test="contains($type, 'DOMInputStream')">java.io.InputStream</xsl:when>
