@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.53  2002-03-02 22:55:09  dom-ts-4
+Revision 1.54  2002-03-04 14:17:13  dom-ts-4
+Added dom1-core-gen-browser that builds (currently non-functional)
+HTML test runner
+
+Revision 1.53  2002/03/02 22:55:09  dom-ts-4
 Added dom1-html-matrix
 
 Revision 1.52  2002/03/02 08:27:27  dom-ts-4
@@ -835,6 +839,27 @@ All implementation conditions combined into implementationAttribute element
 		   includes="*.xml" 
            excludes="metadata.xml,documentcreatecdatasection.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
+	       extension=".html">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
+	</style>
+</target>
+
+
+<target name="dom1-core-gen-browser" depends="dom1-interfaces,dom1-dtd">
+    <mkdir dir="${build.dir}/level1/core/ecmascript/browser"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/core/ecmascript/browser"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/browser">
+		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
+    </copy>
+
+	<style basedir="${tests.dir}/level1/core" 
+		   destdir="${build.dir}/level1/core/ecmascript/browser" 
+		   includes="attrcreatedocumentfragment.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-browser.xsl" 
 	       extension=".html">
 		<param name="interfaces-docname"
 		       expression="../${build.dir}/dom1-interfaces.xml"/>
