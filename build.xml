@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.84  2003-02-06 05:58:30  dom-ts-4
+Revision 1.85  2003-02-10 07:08:12  dom-ts-4
+Change to JSUnit 1.3.3
+
+Revision 1.84  2003/02/06 05:58:30  dom-ts-4
 Updated for DOM 3 Val 02/05 working draft
 
 Revision 1.83  2003/01/28 06:07:45  dom-ts-4
@@ -296,8 +299,6 @@ All implementation conditions combined into implementationAttribute element
     <echo message="dom1-core-matrix     builds test matrix for DOM Level 1 Core"/>
     <echo message="dom1-core-validate-tests"/>
     <echo message="                     validates DOM Level 1 Core tests against DTD"/>
-    <echo message="dom1-core-gen-ecmascript"/>
-    <echo message="                     builds DOM Level 1 Core tests for ECMAScript"/>
     <echo message="dom1-core-gen-jsunit"/>
     <echo message="                     builds JSUnit adapters for DOM Level 1 Core"/>
     <echo message="dom1-core-doxygen    builds documentation for DOM Level 1 Core"/>
@@ -933,26 +934,27 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-html-gen-jsunit" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
-    <mkdir dir="${build.dir}/level1/html/ecmascript/tests/applets/org/w3c/domts"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/html/ecmascript/tests"/>
-    <copy todir="${build.dir}/level1/html/ecmascript/tests">
+    <mkdir dir="${build.dir}/ecmascript/level1/html/files"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level1/html"/>
+    <copy todir="${build.dir}ecmascript/level1/html/files">
 		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
     </copy>
     <!--  copy XHTML 1.0 DTD's to output directory   -->
-    <copy todir="${build.dir}/level1/html/ecmascript/tests">
+    <copy todir="${build.dir}/ecmascript/level1/html">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
-    <copy todir="${build.dir}/level1/html/ecmascript/tests/applets/org/w3c/domts">
+    <mkdir dir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts"/>
+    <copy todir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts">
         <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
     </copy>
-    <copy todir="${build.dir}/level1/html/ecmascript/tests/applets">
+    <copy todir="${build.dir}/ecmascript/level1/html/applets">
         <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
     </copy>
        
 
 	<style basedir="${tests.dir}/level1/html" 
-		   destdir="${build.dir}/level1/html/ecmascript/tests" 
+		   destdir="${build.dir}/ecmascript/level1/html" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -961,30 +963,30 @@ All implementation conditions combined into implementationAttribute element
 		       expression="../${build.dir}/dom1-interfaces.xml"/>
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/html/"/>
+        <param name="testpath" expression="../level1/html/"/>
 	</style>
 </target>
 
 
 
 <target name="jsunit-get" depends="init" unless="jsunit-available">
-	<get src="http://www.edwardh.com/jsunit/jsunit.zip"
-		dest="${lib.dir}/jsunit.zip"
-		usetimestamp="yes"/>
+    <fail message="download jsunit.zip from http://www.jsunit.net and place in lib directory"/>
 </target>
 
 
-<target name="dom1-core-gen-jsunit" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
-    <mkdir dir="${build.dir}/level1/core/ecmascript/tests"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/core/ecmascript/tests"/>
-    <copy todir="${build.dir}/level1/core/ecmascript/tests">
+<target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level1/core/files"/>
+    <unzip src="${lib.dir}/jsunit.zip" dest="${build.dir}/ecmascript"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level1/core"/>
+    <copy todir="${build.dir}/ecmascript/level1/core/files">
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
     </copy>
-    <copy todir="${build.dir}/level1/core/ecmascript/tests">
+    <copy todir="${build.dir}/ecmascript/level1/core">
         <fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
 
 	<style basedir="${tests.dir}/level1/core" 
-		   destdir="${build.dir}/level1/core/ecmascript/tests" 
+		   destdir="${build.dir}/ecmascript/level1/core" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -1018,27 +1020,6 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom1-core-gen-ecmascript" depends="dom1-interfaces">
-    <mkdir dir="${build.dir}/ecmascript/level1/core"/>
-
-    <!--  a prefabricated documentcreatecdatasection.js
-             is provided since some versions of Xalan-J
-                   will stall when processing it    -->
-    <copy file="${tests.dir}/level1/core/documentcreatecdatasection.js" 
-            todir="${build.dir}/ecmascript/level1/core"/>
-
-	<style basedir="${tests.dir}/level1/core" 
-		   destdir="${build.dir}/ecmascript/level1/core" 
-		   includes="*.xml" 
-           excludes="metadata.xml,documentcreatecdatasection.xml"
-	       style="${transforms.dir}/test-to-ecmascript.xsl" 
-	       extension=".js">
-		<param name="interfaces-docname"
-		       expression="../${build.dir}/dom1-interfaces.xml"/>
-		<param name="target-uri-base"
-		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
-	</style>
-</target>
 
 
 <target name="common-javac" depends="init">
@@ -1185,30 +1166,17 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom2-core-gen-ecmascript" depends="dom2-interfaces,dom2-dtd">
-    <mkdir dir="${build.dir}/ecmascript/level2/core"/>
-	<style basedir="${tests.dir}/level2/core" 
-		   destdir="${build.dir}/ecmascript/level2/core" 
-		   includes="*.xml" 
-           excludes="metadata.xml"
-	       style="${transforms.dir}/test-to-ecmascript.xsl" 
-	       extension=".js">
-		<param name="interfaces-docname"
-		       expression="../${build.dir}/dom2-interfaces.xml"/>
-		<param name="target-uri-base"
-		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
-	</style>
-</target>
 
 <target name="dom2-core-gen-jsunit" depends="dom2-interfaces,dom2-dtd">
-    <mkdir dir="${build.dir}/level2/core/ecmascript/tests"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/core/ecmascript/tests"/>
-    <copy todir="${build.dir}/level2/core/tests">
+    <mkdir dir="${build.dir}/ecmascript/level2/core/files"/>
+    <unzip src="${lib.dir}/jsunit.zip" dest="${build.dir}/ecmascript"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/core"/>
+    <copy todir="${build.dir}/ecmascript/level2/core/files">
 		<fileset dir="tests/level2/core/files" excludes="*.bak"/>
     </copy>
 
 	<style basedir="${tests.dir}/level2/core" 
-		   destdir="${build.dir}/level2/core/ecmascript/tests" 
+		   destdir="${build.dir}/ecmascript/level2/core" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -1217,6 +1185,7 @@ All implementation conditions combined into implementationAttribute element
 		       expression="../${build.dir}/dom2-interfaces.xml"/>
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
+        <param name="testpath" expression="../level2/core/"/>
 	</style>
 </target>
 
@@ -1239,43 +1208,28 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-html-gen-ecmascript" depends="dom2-interfaces,dom2-dtd">
-    <mkdir dir="${build.dir}/level2/html/ecmascript/tests"/>
-	<style basedir="${tests.dir}/level2/html" 
-		   destdir="${build.dir}/level2/html/ecmascript/tests" 
-		   includes="*.xml" 
-           excludes="metadata.xml"
-	       style="${transforms.dir}/test-to-ecmascript.xsl" 
-	       extension=".js">
-		<param name="interfaces-docname"
-		       expression="../${build.dir}/dom2-interfaces.xml"/>
-		<param name="target-uri-base"
-		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
-	</style>
-</target>
-
 <target name="dom2-html-gen-jsunit" depends="dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
-    <mkdir dir="${build.dir}/level2/html/ecmascript/tests"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level2/html/ecmascript/tests"/>
-    <copy todir="${build.dir}/level2/html/ecmascript/tests">
+    <mkdir dir="${build.dir}/ecmascript/level2/html/files"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/html"/>
+    <copy todir="${build.dir}/ecmascript/level2/html/files">
 		<fileset dir="tests/level2/html/files" excludes="*.bak"/>
     </copy>
 
     <!--  copy XHTML 1.0 DTD's to output directory   -->
-    <copy todir="${build.dir}/level2/html/ecmascript/tests">
+    <copy todir="${build.dir}/ecmascript/level2/html/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
-    <copy todir="${build.dir}/level2/html/ecmascript/tests/applets/org/w3c/domts">
+    <copy todir="${build.dir}/ecmascript/level2/html/applets/org/w3c/domts">
         <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
     </copy>
-    <copy todir="${build.dir}/level2/html/ecmascript/tests/applets">
+    <copy todir="${build.dir}/ecmascript/level2/html/applets">
         <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
     </copy>
 
 
 	<style basedir="${tests.dir}/level2/html" 
-		   destdir="${build.dir}/level2/html/ecmascript/tests" 
+		   destdir="${build.dir}/ecmascript/level2/html" 
 		   includes="*.xml" 
            excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -1284,6 +1238,7 @@ All implementation conditions combined into implementationAttribute element
 		       expression="../${build.dir}/dom2-interfaces.xml"/>
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+        <param name="testpath" expression="../level2/html/"/>
 	</style>
 </target>
 

@@ -100,99 +100,9 @@ The source document contained the following notice:
    <xsl:text>function </xsl:text>
    <xsl:value-of select="@name"/>
    <xsl:text>() {
-   this.domtest = DOMTestCase;
-   this.domtest("</xsl:text>
-   <xsl:value-of select="@name"/>
-   <xsl:text>");
-}
-</xsl:text>
-   <xsl:value-of select="@name"/>
-   <xsl:text>.prototype = new DOMTestCase();
-
-</xsl:text>
-
-   <xsl:value-of select="@name"/>
-   <xsl:text>.prototype.runTest = function()  {
     </xsl:text>
 <xsl:apply-templates mode="body"/>
     <xsl:text>
-}
-
-</xsl:text>
-
-    <xsl:value-of select="@name"/>
-    <xsl:text>.prototype.setUp = function() {
-</xsl:text>
-    <xsl:variable name="implAttrs" select="*[local-name() = 'implementationAttribute']"/>
-    <xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
-    <xsl:variable name="contentConditions" select="*[local-name() = 'contentType' and not(preceding-sibling::*[local-name()='var'])]"/>
-
-    <xsl:text>    var attrs = [ </xsl:text>
-    <xsl:for-each select="$implAttrs">
-        <xsl:if test="position() &gt; 1">, </xsl:if>
-        <xsl:text>[ "</xsl:text>
-        <xsl:value-of select="@name"/>
-        <xsl:text>" ,</xsl:text>
-        <xsl:value-of select="@value"/>
-        <xsl:text> ] </xsl:text>
-    </xsl:for-each>
-    <xsl:text> ];
-    var features = [ </xsl:text>
-    <xsl:for-each select="$featureConditions">
-        <xsl:if test="position() &gt; 1">, </xsl:if>
-        <xsl:text>[ "</xsl:text>
-        <xsl:value-of select="@feature"/>
-        <xsl:text>", "</xsl:text>
-        <xsl:value-of select="@version"/>
-        <xsl:text>", </xsl:text>
-        <xsl:choose>
-            <xsl:when test="@value='false'">
-                <xsl:text>false</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>true</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-        <xsl:text> ] </xsl:text>
-    </xsl:for-each>
-    <xsl:text> ];
-    this.builder = getBuilder(this, null, attrs, features);
-    if (!this.ignored) {
-        this.ready = this.ready &amp;&amp; !this.builder.async;
-</xsl:text>
-    <xsl:for-each select="*[local-name() = 'load' and @href]">
-        <xsl:text>        this.</xsl:text>
-        <xsl:value-of select="@var"/>
-        <xsl:text> = this.builder.startLoad("</xsl:text>
-        <xsl:value-of select="@var"/>
-        <xsl:text>", "</xsl:text>
-        <xsl:value-of select="@href"/>
-        <xsl:text>");
-</xsl:text>
-    </xsl:for-each>
-    <xsl:text>    }
-}
-
-
-</xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>.prototype.tearDown = function() { 
-</xsl:text>
-    <xsl:for-each select="*[local-name() = 'load' and @href]">
-        <xsl:text>    this.builder.close(this.</xsl:text>
-        <xsl:value-of select="@var"/>
-        <xsl:text>);
-    this.</xsl:text>
-        <xsl:value-of select="@var"/>
-        <xsl:text> = null;
-</xsl:text>
-    </xsl:for-each>
-    <xsl:text>}
-
-function suite() {
-    return new </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>();
 }
 
 </xsl:text>
@@ -705,7 +615,7 @@ function suite() {
     <xsl:text>",</xsl:text>
     <xsl:choose>
         <xsl:when test="@ignoreCase='auto'">
-            <xsl:text>this.builder.toAutoCase</xsl:text>
+            <xsl:text>toAutoCase</xsl:text>
             <xsl:if test="$expectedType = 'Collection' or $expectedType = 'List'">
                 <xsl:text>Array</xsl:text>
             </xsl:if>
@@ -899,9 +809,9 @@ function handleEvent(listener, event, userObj) {
 }
 </xsl:template>
 
-<xsl:template match="*[local-name()='load']" mode="body">
+<xsl:template match="*[local-name()='load' and not(@interface)]" mode="body">
 	<xsl:value-of select="@var"/>
-	<xsl:text> = this.builder.load(this.</xsl:text>
+	<xsl:text> = load(this.</xsl:text>
     <xsl:value-of select="@var"/>
     <xsl:text>, "</xsl:text>
     <xsl:value-of select="@var"/>
@@ -1193,12 +1103,12 @@ function handleEvent(listener, event, userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='contentType']" mode="condition">
-	(this.builder.contentType == <xsl:value-of select="@type"/>)
+	(contentType == <xsl:value-of select="@type"/>)
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">
-	<xsl:text>(this.builder.getImplementationAttribute("</xsl:text>
+	<xsl:text>(getImplementationAttribute("</xsl:text>
 	<xsl:value-of select="@name"/>
     <xsl:text>") == </xsl:text>
     <xsl:value-of select="@value"/>
