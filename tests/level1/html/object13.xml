@@ -33,7 +33,7 @@ The value of attribute vspace of the object element is read and checked against 
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vvspace" type="DOMString" />
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="hasHTML2" type="boolean"/>
 <load var="doc" href="object" willBeModified="false"/>
