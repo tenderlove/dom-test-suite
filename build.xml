@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.104  2003-11-12 06:59:02  dom-ts-4
+Revision 1.105  2003-11-14 16:11:15  dom-ts-4
+Preparations for automated builds/schema validation targets (bug 377)Eliminated requirement for Ant 1.6 or later when not schema validating
+
+Revision 1.104  2003/11/12 06:59:02  dom-ts-4
 Preparations for automated builds/schema validation targets (bug 377, phase 1)
 
 Revision 1.101  2003/11/10 07:34:13  dom-ts-4
@@ -895,14 +898,17 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom1-core-schema-validate-tests" depends="dom1-dtd, dom1-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/core" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="check-schema-support">
+	<condition property="ant-15" value="true">
+		<contains string="${ant.version}" substring="1.5"/>
+	</condition>
+	<fail if="ant-15" message="Schema validation requires Ant 1.6 or later."/>
+</target>
+
+<target name="dom1-core-schema-validate-tests" depends="check-schema-support, dom1-dtd, dom1-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level1/core"/>  
+    </ant>
 </target>
 
 
@@ -947,14 +953,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom1-html-schema-validate-tests" depends="dom1-dtd, dom1-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/html" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom1-html-schema-validate-tests" depends="check-schema-support, dom1-dtd, dom1-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level1/html"/>  
+    </ant>
 </target>
 
 
@@ -1226,14 +1228,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom2-core-schema-validate-tests" depends="dom2-dtd, dom2-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/core" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom2-core-schema-validate-tests" depends="check-schema-support, dom2-dtd, dom2-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level2/core"/>  
+    </ant>
 </target>
 
 
@@ -1245,14 +1243,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom2-html-schema-validate-tests" depends="dom2-dtd, dom2-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/html" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom2-html-schema-validate-tests" depends="check-schema-support, dom2-dtd, dom2-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level2/html"/>  
+    </ant>
 </target>
 
 <target name="dom2-events-validate-tests" depends="dom2-dtd">
@@ -1262,14 +1256,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom2-events-schema-validate-tests" depends="dom2-dtd, dom2-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/events" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom2-events-schema-validate-tests" depends="check-schema-support, dom2-dtd, dom2-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level2/events"/>  
+    </ant>
 </target>
 
 
@@ -2021,14 +2011,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom3-ls-schema-validate-tests" depends="dom3-dtd, dom3-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/ls" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom3-ls-schema-validate-tests" depends="check-schema-support, dom3-dtd, dom3-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level3/ls"/>  
+    </ant>
 </target>
 
 <target name="dom3-xpath-validate-tests" depends="dom3-dtd">
@@ -2038,14 +2024,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom3-xpath-schema-validate-tests" depends="dom3-dtd, dom3-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/xpath" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom3-xpath-schema-validate-tests" depends="check-schema-support, dom3-dtd, dom3-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level3/xpath"/>  
+    </ant>
 </target>
 
 <target name="dom3-core-validate-tests" depends="dom3-dtd">
@@ -2055,14 +2037,10 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
-<target name="dom3-core-schema-validate-tests" depends="dom3-dtd, dom3-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom3-core-schema-validate-tests" depends="check-schema-support, dom3-dtd, dom3-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level3/core"/>  
+    </ant>
 </target>
 
 
@@ -2074,14 +2052,10 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-val-schema-validate-tests" depends="dom3-dtd, dom3-schema">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/validation" includes="*.xml"/>  
-		<attribute name="http://xml.org/sax/features/validation" value="true"/>
-  		<attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>	
-  		<attribute name="http://apache.org/xml/features/validation/schema-full-checking"  value="true"/>	
-  </xmlvalidate>
+<target name="dom3-val-schema-validate-tests" depends="check-schema-support, dom3-dtd, dom3-schema">
+    <ant antfile="schemavalidate.ant">
+    	<property name="validate.dir" location="${tests.dir}/level3/validation"/>  
+    </ant>
 </target>
 
 
