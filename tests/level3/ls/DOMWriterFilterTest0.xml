@@ -39,15 +39,15 @@
         <nodeName obj="n" var="name"/>
         <if>
           <equals actual="name" expected='"elt1"' ignoreCase="false"/>
-          <return value="FILTER_ACCEPT"/>            
+          <return value="&FILTER_ACCEPT;"/>            
         </if>
 
-        <return value="FILTER_REJECT"/>            
+        <return value="&FILTER_REJECT;"/>            
      </acceptNode>
 
      <whatToShow>            
        <get>
-        <return value="SHOW_ALL"/>
+        <return value="&SHOW_ALL;"/>
        </get>
      </whatToShow>
 

@@ -35,12 +35,12 @@
      &filterVars;
 
      <acceptNode>
-        <return value="FILTER_REJECT"/>            
+        <return value="&FILTER_REJECT;"/>            
      </acceptNode>
 
      <whatToShow>            
        <get>
-        <return value="SHOW_TEXT"/>
+        <return value="&SHOW_TEXT;"/>
        </get>
      </whatToShow>
 

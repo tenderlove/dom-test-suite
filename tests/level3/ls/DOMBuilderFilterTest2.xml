@@ -43,16 +43,16 @@
             <assertTrue actual="hasattribute" id="default_content_check"/> 
         </if>
 
-        <return value="FILTER_ACCEPT"/>            
+        <return value="&FILTER_ACCEPT;"/>            
      </startElement>
 
      <acceptNode>
-        <return value="FILTER_ACCEPT"/>            
+        <return value="&FILTER_ACCEPT;"/>            
      </acceptNode>
 
      <whatToShow>            
        <get>
-        <return value="SHOW_ALL"/>
+        <return value="&SHOW_ALL;"/>
        </get>
      </whatToShow>
 

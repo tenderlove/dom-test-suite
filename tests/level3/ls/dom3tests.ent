@@ -42,16 +42,7 @@
                       <assign var='lsImplementation' value='implementation'/> 
                       ">
 
-<!ENTITY filterVars  "
-                      <var name='SHOW_ELEMENT'      type='int'    value='1'/>
-                      <var name='SHOW_TEXT'         type='int'    value='4'/>
-                      <var name='SHOW_ALL'          type='int'    value='65535'/>
-                      <var name='SHOW_ATTRIBUTE'      type='int'    value='2'/>
-                      <var name='SHOW_COMMENT'      type='int'    value='128'/>
-                      <var name='FILTER_ACCEPT'     type='short'  value='1'/>
-                      <var name='FILTER_REJECT'     type='short'  value='2'/>
-                      <var name='FILTER_SKIP'       type='short'  value='3'/>
-                      ">
+<!ENTITY filterVars  "">
 
 <!ENTITY errorHandlerVars  "
                       <var name='error'            type='DOMError'/>
@@ -75,5 +66,13 @@
 
 <!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='LSParser'/>">
 
+<!ENTITY SHOW_ELEMENT  "1">
+<!ENTITY SHOW_TEXT '4'>
+<!ENTITY SHOW_ALL '65535'>
+<!ENTITY SHOW_ATTRIBUTE '2'>
+<!ENTITY SHOW_COMMENT '128'>
+<!ENTITY FILTER_ACCEPT '1'>
+<!ENTITY FILTER_REJECT '2'>
+<!ENTITY FILTER_SKIP '3'>
 
 

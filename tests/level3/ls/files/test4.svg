@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE elt0 SYSTEM 'testsvg.dtd' [
+
+  <!ELEMENT elt0 (elt1+,elt2?)>
+
+  <!ELEMENT elt1 (#PCDATA)>
+  <!ELEMENT elt2 EMPTY>
+  <!ENTITY ref SYSTEM "test5.xml">
+  <!ENTITY svgunit SYSTEM "svgunit.js">   
+  <!ENTITY svgtest SYSTEM "svgtest.js">     
+]>
+<svg xmlns='http://www.w3.org/2000/svg'><rect x="0" y="0" width="100" height="100"/><script type="text/ecmascript">&svgtest;&svgunit;</script>
+   <elt0 xmlns="http://www.example.org">
+      <elt1>first elt1</elt1>
+      &ref;
+   </elt0>
+</svg>

@@ -1604,7 +1604,8 @@ function </xsl:text>
 
             <!--  not method, possibly an attribute   -->
             <xsl:when test="$interface/attribute[@name = $method-name]">
-            	<xsl:message terminate="yes">No production for inner class attributes</xsl:message>
+<xsl:value-of select="$className"/>.prototype.<xsl:value-of select="$method-name"/> = <xsl:value-of select="*[local-name() = 'get']/*[local-name() = 'return']/@value"/><xsl:text>;
+</xsl:text>            
             </xsl:when>
 
             <xsl:when test="$interface/@inherits">

@@ -33,12 +33,12 @@
   <var name="myfilter" type="LSSerializerFilter"> 
      &filterVars;
      <acceptNode>
-        <return value="FILTER_REJECT"/>            
+        <return value="&FILTER_REJECT;"/>            
      </acceptNode>
 
      <whatToShow>            
        <get>
-        <return value="SHOW_ATTRIBUTE"/>
+        <return value="&SHOW_ATTRIBUTE;"/>
        </get>
      </whatToShow>
 

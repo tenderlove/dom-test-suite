@@ -38,20 +38,20 @@
         <nodeName var="name" obj="elementArg"/>
         <if>
             <equals actual="name" expected='"elt1"' ignoreCase="false"/>
-            <return value="FILTER_REJECT"/>            
+            <return value="&FILTER_REJECT;"/>            
           <else>
-            <return value="FILTER_ACCEPT"/>            
+            <return value="&FILTER_ACCEPT;"/>            
           </else>
         </if>
      </startElement>
 
      <acceptNode>
-            <return value="FILTER_ACCEPT"/>            
+            <return value="&FILTER_ACCEPT;"/>            
      </acceptNode>
 
      <whatToShow>            
        <get>
-        <return value="SHOW_ELEMENT"/>
+        <return value="&SHOW_ELEMENT;"/>
        </get>
      </whatToShow>
 
