@@ -36,7 +36,6 @@ recieve only one handleEvent call.
 <var name="bubbledEvents" type="List"/>
 <var name="capturedEvents" type="List"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createEventMonitor var="monitor"/>
 <addEventListener obj="doc" type='"foo"' listener="monitor" useCapture="false"/>
 <addEventListener obj="doc" type='"foo"' listener="monitor" useCapture="false"/>
 <createEvent var="evt" obj="doc" eventType='"Events"'/>

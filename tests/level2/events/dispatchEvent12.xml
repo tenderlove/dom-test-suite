@@ -36,8 +36,6 @@ The monitor should recieve handleEvent calls.
 <var name="other" type="EventMonitor"/>
 <var name="events" type="List"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createEventMonitor var="monitor"/>
-<createEventMonitor var="other"/>
 <addEventListener obj="doc" type='"foo"' listener="monitor" useCapture="false"/>
 <removeEventListener obj="doc" type='"foo"' listener="monitor" useCapture="true"/>
 <removeEventListener obj="doc" type='"food"' listener="monitor" useCapture="false"/>
