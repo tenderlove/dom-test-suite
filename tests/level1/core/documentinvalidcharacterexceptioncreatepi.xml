@@ -27,12 +27,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-135944439')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
+<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="badPI" type="ProcessingInstruction"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<if><contentType type="text/html"/>
+<assertDOMException id="throw_NOT_SUPPORTED_ERR">
+<NOT_SUPPORTED_ERR>
+<createProcessingInstruction var="badPI" obj="doc" target='"foo"' data='"data"'/>
+</NOT_SUPPORTED_ERR>
+</assertDOMException>
+<else>
 <assertDOMException id="throw_INVALID_CHARACTER_ERR">
 <INVALID_CHARACTER_ERR>
 <createProcessingInstruction var="badPI" obj="doc" target="&quot;invalid^Name&quot;" data="&quot;data&quot;"/>
 </INVALID_CHARACTER_ERR>
 </assertDOMException>
+</else>
+</if>
 </test>

@@ -39,7 +39,7 @@ be a general purpose schema for XHTML
   		<xsd:sequence>
   			<xsd:element ref="meta"/>
   			<xsd:element ref="title"/>
-  			<xsd:element ref="script" minOccurs="3" maxOccurs="3"/>
+  			<xsd:element ref="script" minOccurs="0" maxOccurs="unbounded"/>
   		</xsd:sequence>
   	</xsd:complexType>
   </xsd:element>
@@ -53,9 +53,13 @@ be a general purpose schema for XHTML
   
   <xsd:element name="script">
   	<xsd:complexType>
-  		<xsd:extension base="xsd:string">
-  			<xsd:attribute name="src" type="xsd:string" use="optional"/>
-  		</xsd:extension>
+  		<xsd:simpleContent>
+  			<xsd:extension base="xsd:string">
+  				<xsd:attribute name="src" type="xsd:string" use="optional"/>
+  				<xsd:attribute name="charset" type="xsd:string" use="optional"/>
+  				<xsd:attribute name="type" type="xsd:string" use="required"/>
+  			</xsd:extension>
+  		</xsd:simpleContent>
   	</xsd:complexType>
   </xsd:element>
   

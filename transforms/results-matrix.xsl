@@ -23,27 +23,18 @@ and combine-metadata.xsl
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      exclude-result-prefixes="rdf dc">
-     <xsl:param name="interfacesURL">../build/dom1-interfaces.xml</xsl:param>
      <xsl:param name="specURI">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#</xsl:param>
-     <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
-     <xsl:param name="buildPath">tests/</xsl:param>
+     <xsl:param name="testPath">tests</xsl:param>
      <xsl:param name="doxyPath">doxygen/html/</xsl:param>
      <xsl:param name="doxySuffix">_8java-source.html</xsl:param>
      <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
      <xsl:param name="resultsURL">../transforms/dom1-core-results.xml</xsl:param>
+     <xsl:param name="testBaseURI">http://www.w3.org/2001/DOM-Test-Suite/level1/core/</xsl:param>
 	<xsl:output method="html" 
 		doctype-public="-//W3C//DTD HTML 4.01//EN" 
 		doctype-system="http://www.w3.org/TR/html4/strict.dtd"
 		encoding="US-ASCII"/>
 
-    <!--   filter subjects by specification    -->
-    <xsl:variable name="subjects" select="document($specMetadataURL,.)/rdf:RDF/rdf:Description[contains(@rdf:about,$specURI)]"/>
-
-    <xsl:variable name="interfacesDoc" select="document($interfacesURL,.)"/>
-
-    <xsl:variable name="interfaces" select="$interfacesDoc//interface[concat($specURI,@id) = $subjects/@rdf:about]"/>
-    <xsl:variable name="methods" select="$interfaces/method"/>
-    <xsl:variable name="attributes" select="$interfaces/attribute"/>
     <xsl:variable name="descriptions" select="/rdf:RDF/rdf:Description"/>
     <xsl:variable name="results" select="document($resultsURL,.)//testsuite"/>
     <xsl:variable name="tests" select="$descriptions[not(contains(@rdf:about, 'alltests')) and substring(@rdf-about, string-length(@rdf:about)) != '/']"/>
@@ -58,109 +49,160 @@ and combine-metadata.xsl
 		</head>
         	<body>
 		<h1><xsl:value-of select="$title"/></h1>
-		<p> 
-</p>
-				
-
-        <table border="1" cols="{2 + count($results)}" width="100%">
-        	<thead>Tests with failures</thead>
+        <h2>Summary</h2>
+        <xsl:variable name="testCount" select="count($tests)"/>
+		<table border="1" width="100%" cols="5" summary="Summary">
+			<thead><tr><th>Implementation</th><th>Run</th><th>Not run</th><th>Failures</th><th>Errors</th></tr></thead>
+			<tbody>
+                 <xsl:for-each select="$results">
+                 	<tr>
+                 		<td><xsl:value-of select="ancestor::implementation/@name"/></td>
+                 		<td><xsl:value-of select="count(testcase)"/></td>
+                 		<td><xsl:value-of select="$testCount - count(testcase)"/></td>
+                 		<td><xsl:value-of select="count(testcase/failure)"/></td>
+                 		<td><xsl:value-of select="count(testcase/error)"/></td>
+                 	</tr>
+                 </xsl:for-each>
+			</tbody>
+		</table>
+        <h2>Tests with failures or errors</h2>
+        <table border="1" cols="2" width="100%" summary="Tests with failures or errors">
+        	<thead>
             <tr>
             	<th>Test</th>
-            	<th>Description</th>
-            	<xsl:for-each select="$results">
-            		<th><xsl:value-of select="ancestor::implementation/@name"/></th>
-            	</xsl:for-each>
+            	<th>Details</th>
             </tr>
+            </thead>
+            <tbody>
             <xsl:for-each select="$descriptions">
-                <xsl:sort select="dc:title"/>
-                
-                <xsl:choose>
-                	<xsl:when test="contains(@rdf:about, 'alltests')"/>
-                	<xsl:when test="substring(@rdf:about, string-length(@rdf:about)) = '/'"/> 
-                
-                <!--  if there aren't the same number of successes and implementations   -->
-                <xsl:when test="count($results) != count($results/testcase[@name = current()/@rdf:about and not(failure) and not(error)])">
-
+                <xsl:sort select="ancestor::*[local-name() = 'test']/@name"/>
                 <xsl:variable name="test" select="."/>
-                <tr>
-                    <td width="25%">
-                    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>                             
-                    <xsl:call-template name="emit-title"/>
-                    <xsl:text> (</xsl:text> 
-        		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
-                    <xsl:text> </xsl:text>
-        		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
-                    <xsl:text>)</xsl:text>
-                    </td>
-                    <td>
-                    	<xsl:value-of select="dc:description"/>
-                    </td>
-                    <xsl:for-each select="$results">
-                    	<td>
-                    		<xsl:variable name="test-result" select="testcase[@name = $test/@rdf:about]"/>
-                    		<xsl:choose>
-                    			<xsl:when test="$test-result/failure">
-                    				<div title="{$test-result/failure[@message]}">Failure</div>
-                    			</xsl:when>
-                    			
-                    			<xsl:when test="$test-result/error">
-                    				<div title="{$test-result/error[@message]}">Error</div>
-                    			</xsl:when>
-                    			
-                    			<xsl:when test="$test-result">
-                    				<xsl:text>Success</xsl:text>
-                    			</xsl:when>
-                    			
-                    			<xsl:otherwise>
-                    				<xsl:text>Not run</xsl:text>
-                    			</xsl:otherwise>
-                    		</xsl:choose>
-                    	</td>
-                    </xsl:for-each>
-                    	
-                </tr>
-                </xsl:when>
-                <xsl:otherwise/>
-                </xsl:choose>
-            </xsl:for-each>
-        </table>     
-
-
-
-        <table border="1" cols="2" width="100%">
-        	<thead>Tests passed by all implementations</thead>
-            <tr>
-            	<th>Test</th>
-            	<th>Description</th>
-            </tr>
-            <xsl:for-each select="$descriptions">
-                <xsl:sort select="dc:title"/>
+                <xsl:variable name="testName" select="$test/@rdf:about"/>
+                <xsl:variable name="shortName" select="substring($test/@rdf:about, string-length($testBaseURI) + 1)"/>
                 
                 <xsl:choose>
                 	<xsl:when test="contains(@rdf:about, 'alltests')"/>
                 	<xsl:when test="substring(@rdf:about, string-length(@rdf:about)) = '/'"/> 
                 
                 <!--  if there aren't the same number of successes and implementations   -->
-                <xsl:when test="count($results) = count($results/testcase[@name = current()/@rdf:about and not(failure) and not(error)])">
+                <xsl:when test="$results/testcase[(@name = $testName or substring(@name, string-length(@name) - string-length($shortName)) = concat(':', $shortName))  and (failure or error)]">
+
                 <tr>
                     <td width="25%">
-                    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>                             
+                    <xsl:variable name="testName"><xsl:value-of select="ancestor::*[local-name() = 'test']/@name" /></xsl:variable>                             
                     <xsl:call-template name="emit-title"/>
                     <xsl:text> (</xsl:text> 
-        		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+        		    <a href="{concat($testPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="XML Test Definition">XML</a>
                     <xsl:text> </xsl:text>
-        		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
+        		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="Java Source">Java</a>
                     <xsl:text>)</xsl:text>
                     </td>
                     <td>
-                    <xsl:value-of select="dc:description"/>
+                    	<xsl:for-each select="$results">
+                    		<xsl:variable name="test-result" select="testcase[@name = $testName or substring(@name, string-length(@name) - string-length($shortName)) = concat(':', $shortName)]"/>
+                    		<xsl:variable name="implName" select="ancestor::implementation/@name"/>
+                    		<xsl:choose>
+                    			<xsl:when test="contains(normalize-space($test-result/failure/@message), ' ')">
+                    				<xsl:value-of select="$implName"/>
+                    				<xsl:text> Failure:</xsl:text>
+                    				<xsl:value-of select="substring-before(normalize-space($test-result/failure/@message), ' ')"/>
+                    				<br/>
+                    			</xsl:when>
+                    			<xsl:when test="$test-result/failure/@message">
+                    				<xsl:value-of select="$implName"/>
+                    				<xsl:text> Failure:</xsl:text>
+									<xsl:value-of select="$test-result/failure/@message"/>
+                    				<br/>
+								</xsl:when>
+								<xsl:when test="$test-result/failure">
+                    				<xsl:value-of select="$implName"/>
+                    				<xsl:text> Failure</xsl:text>
+                    				<br/>
+								</xsl:when>                    				
+
+                    			<xsl:when test="$test-result/error/@message">
+                    				<xsl:value-of select="$implName"/>
+                    				<xsl:text> Error:</xsl:text>
+                    				<xsl:value-of select="substring($test-result/error/@message, 1, 80)"/>
+                    				<br/>
+                    			</xsl:when>
+                    			<xsl:when test="$test-result/error/@type">
+                    				<xsl:value-of select="$implName"/>
+                    				<xsl:text> Error:</xsl:text>
+                    				<xsl:value-of select="$test-result/error/@type"/>
+                    				<br/>
+                    			</xsl:when>
+                    			<xsl:when test="$test-result/error">
+                    				<xsl:value-of select="$implName"/>
+                    				<xsl:text> Error</xsl:text>
+                    				<br/>
+                    			</xsl:when>
+                    		</xsl:choose>
+                    	</xsl:for-each>
                     </td>
                 </tr>
                 </xsl:when>
                 <xsl:otherwise/>
                 </xsl:choose>
             </xsl:for-each>
+            </tbody>
         </table>     
+
+
+
+        <h2>Tests skipped</h2>
+        <table border="1" cols="2" width="100%" summary="Tests skipped">
+        	<thead>
+            <tr>
+            	<th>Test</th>
+            	<th>Implementations</th>
+            </tr>
+            </thead>
+            <tbody>
+            <xsl:variable name="implCount" select="count($results)"/>
+            <xsl:for-each select="$descriptions">
+                <xsl:sort select="ancestor::*[local-name() = 'test']/@name"/>
+                <xsl:variable name="test" select="."/>
+                <xsl:variable name="testName" select="$test/@rdf:about"/>
+                <xsl:variable name="shortName" select="substring($test/@rdf:about, string-length($testBaseURI) + 1)"/>
+                <xsl:variable name="reportCount" select="count($results/testcase[(@name = $testName or substring(@name, string-length(@name) - string-length($shortName)) = concat(':', $shortName))])"/>
+                
+                <xsl:choose>
+                	<xsl:when test="contains(@rdf:about, 'alltests')"/>
+                	<xsl:when test="substring(@rdf:about, string-length(@rdf:about)) = '/'"/> 
+                
+                <!--  if there aren't the same number of reports   -->
+                <xsl:when test="$implCount != $reportCount">
+
+                <tr>
+                    <td width="25%">
+                    <xsl:variable name="testName"><xsl:value-of select="ancestor::*[local-name() = 'test']/@name" /></xsl:variable>                             
+                    <xsl:call-template name="emit-title"/>
+                    <xsl:text> (</xsl:text> 
+        		    <a href="{concat($testPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="XML Test Definition">XML</a>
+                    <xsl:text> </xsl:text>
+        		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="Java Source">Java</a>
+                    <xsl:text>)</xsl:text>
+                    </td>
+                    <td>
+                    	<xsl:for-each select="$results">
+                    		<xsl:if test="not(testcase[(@name = $testName or substring(@name, string-length(@name) - string-length($shortName)) = concat(':', $shortName))])">
+                    			<xsl:variable name="implName" select="ancestor::implementation/@name"/>
+                    			<xsl:value-of select="$implName"/>
+                    			<br/>
+                    		</xsl:if>
+                    	</xsl:for-each>
+                    </td>
+                </tr>
+                </xsl:when>
+                </xsl:choose>
+            </xsl:for-each>
+            </tbody>
+        </table>     
+
+
+
+
 
                 <!--  the copyright notice placed in the output file.    -->
 		
@@ -193,7 +235,7 @@ Copyright Notice and License</a><xsl:text>:</xsl:text>
         <tr>
             <xsl:for-each select="$methods[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
-                    <a href="{concat($specURI,@id)}" title="{descr}">
+                    <a href="{concat($specURI,@id)}">
                         <xsl:value-of select="ancestor::interface/@name"/>
                         <xsl:text>.</xsl:text>
                         <xsl:value-of select="@name"/>
@@ -218,12 +260,12 @@ Copyright Notice and License</a><xsl:text>:</xsl:text>
         <tr>
             <xsl:for-each select="$tests[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
-		    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>
+		    <xsl:variable name="testName"><xsl:value-of select="ancestor::*[local-name() = 'test']/@name" /></xsl:variable>
             <xsl:call-template name="emit-title"/>
             <xsl:text> (</xsl:text>
-		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+		    <a href="{concat($testPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="XML Test Definition">XML</a>
             <xsl:text> </xsl:text>
-		    <a href="{concat($doxyPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
+		    <a href="{concat($doxyPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="Java Source">Java</a>
             <xsl:text>) </xsl:text>
 			<xsl:value-of select="dc:description" />
                 </td>
@@ -247,7 +289,7 @@ Copyright Notice and License</a><xsl:text>:</xsl:text>
         <tr>
             <xsl:for-each select="$subjects[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
-                    <a title="{dc:description}">
+                    <a title="{normalize-space(dc:description)}">
 						<xsl:call-template name="emit-href"/>
                         <xsl:call-template name="emit-title"/>
                     </a>

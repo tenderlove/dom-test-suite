@@ -41,10 +41,19 @@ in a HIERARCHY_REQUEST_ERR.
 <item interface="NodeList" obj="acronymList" var="testNode" index="3"/>
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="titleAttr" name='"title"'/>
+<if><contentType type="text/html"/>
+	<assertDOMException id="throw_NOT_SUPPORTED_ERR">
+		<NOT_SUPPORTED_ERR>
+			<createCDATASection var="textNode" obj="doc" data='"terday"'/>
+		</NOT_SUPPORTED_ERR>
+	</assertDOMException>
+<else>
 <createCDATASection var="textNode" obj="doc" data='"terday"'/>
 <assertDOMException id="throw_HIERARCHY_REQUEST_ERR">
 	<HIERARCHY_REQUEST_ERR>
 		<appendChild var="retval" obj="titleAttr" newChild="textNode"/>
 	</HIERARCHY_REQUEST_ERR>
 </assertDOMException>
+</else>
+</if>
 </test>

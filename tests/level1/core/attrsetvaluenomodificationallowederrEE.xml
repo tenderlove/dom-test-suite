@@ -45,7 +45,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <assertNotNull actual="gender" id="genderNotNull"/>
-<createEntityReference obj="doc" var="entRef" name="&quot;ent4&quot;"/>
+<createEntityReference obj="doc" var="entRef" name='"ent4"'/>
+<assertNotNull actual="entRef" id="entRefNotNull"/>
 <appendChild obj="gender" newChild="entRef" var="appendedChild"/>
 <firstChild obj="entRef" var="entElement" interface="Node"/>
 <assertNotNull actual="entElement" id="entElementNotNull"/>

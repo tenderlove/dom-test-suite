@@ -5,8 +5,13 @@
 <!ATTLIST html 
     xmlns CDATA #IMPLIED
     xml:base CDATA #IMPLIED>
-<!ELEMENT head (title)>
+<!ELEMENT head (title,script*)>
 <!ELEMENT title (#PCDATA)>
+<!ELEMENT script (#PCDATA)>
+<!ATTLIST script 
+     src CDATA #IMPLIED
+     type CDATA #IMPLIED
+     charset CDATA #IMPLIED>
 <!ELEMENT body (p)>
 <!ATTLIST body xml:base CDATA #IMPLIED
                id ID #IMPLIED

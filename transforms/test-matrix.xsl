@@ -120,7 +120,7 @@ sorted alphabetically.
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="{$featureURI}" title="{normalize-space(descr)}">
+                                        <a href="{$featureURI}">
                                             <xsl:value-of select="@name"/>
                                         </a>
                                     </td>
@@ -146,7 +146,7 @@ sorted alphabetically.
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="{$featureURI}" title="{normalize-space(descr)}">
+                                        <a href="{$featureURI}">
                                             <xsl:value-of select="@name"/>
                                         </a>
                                     </td>
@@ -174,7 +174,7 @@ sorted alphabetically.
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="{$featureURI}" title="normalize-space({code/text()})">
+                                        <a href="{$featureURI}">
                                             <xsl:value-of select="code/text()"/>
                                         </a>
                                     </td>
@@ -259,7 +259,7 @@ Copyright Notice and License</a>:
         <xsl:param name="index"/>
         <xsl:param name="columns"/>
             <xsl:for-each select="$methods[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
-                    <a href="{concat($specURI,@id)}" title="{normalize-space(descr)}">
+                    <a href="{concat($specURI,@id)}">
                         <xsl:value-of select="ancestor::interface/@name"/>
                         <xsl:text>.</xsl:text>
                         <xsl:value-of select="@name"/>
@@ -308,7 +308,7 @@ Copyright Notice and License</a>:
         <xsl:param name="index"/>
         <xsl:param name="columns"/>
             <xsl:for-each select="$subjects[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
-                    <a title="{substring(normalize-space(dc:description), 1, 80)})">
+                    <a>
 						<xsl:call-template name="emit-href"/>
                         <xsl:call-template name="emit-title"/>
                     </a>

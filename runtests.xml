@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.11  2004-03-10 07:34:01  dom-ts-4
+Revision 1.12  2004-03-28 07:12:33  dom-ts-4
+Refinement of self-hosting, improved L1 Core diagnostics (bug 638)
+
+Revision 1.11  2004/03/10 07:34:01  dom-ts-4
 ECMAScript support for Events test suite (bug 483)
 
 Revision 1.10  2004/03/09 21:16:41  dom-ts-4
@@ -52,27 +55,46 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 
 -->
 <project default="usage" basedir=".">
-	<property name="home.dir" value=""/>
+    <property name="implbase.dir" value="${user.home}"/>
 	<property name="test.dir" location="build"/>
 	<property name="transforms.dir" location="transforms"/>
 	<property name="results.dir" location="build"/>
-    <property name="xdk.lib.dir" location="${home.dir}/xdk_java_9_2_0_5_0/lib"/>
-    <property name="xerces1.lib.dir" location="${home.dir}/xerces-1_4_4"/>
-    <property name="xerces2.lib.dir" location="${home.dir}/xerces-2_6_0"/>
-    <property name="xerces_dom3.lib.dir" location="../xerces/java/build"/>
-    <property name="batik.lib.dir" location="${home.dir}/batik-1.5/lib"/>
-    <property name="crimson.lib.dir" location="${home.dir}/crimson-1.1.6"/>
-    <property name="dom4j.lib.dir" location="${home.dir}/dom4j-1.4"/>
-    <property name="gnujaxp.lib.dir" location="${home.dir}/gnujaxp-1.0beta1"/>
-    <property name="jtidy.lib.dir" location="../jtidy2/build"/>
-    
+    <property name="xdk.lib.dir" location="${implbase.dir}/xdk_java_9_2_0_5_0/lib"/>
+    <property name="xerces1.lib.dir" location="${implbase.dir}/xerces-1_4_4"/>
+    <property name="xerces2.lib.dir" location="${implbase.dir}/xerces-2_6_2"/>
+    <property name="xerces_dom3.lib.dir" location="../xml-xerces/java/build"/>
+    <property name="batik.lib.dir" location="${implbase.dir}/batik-1.5.1/lib"/>
+    <property name="crimson.lib.dir" location="${implbase.dir}/crimson-1.1.3"/>
+    <property name="dom4j.lib.dir" location="${implbase.dir}/dom4j-1.4"/>
+    <property name="gnujaxp.lib.dir" location="${implbase.dir}/gnujaxp-1.0beta1"/>
+    <property name="testsrc.dir" location="tests"/>
+    <property name="doxygensrc.dir" location="build"/>
+
+<target name="init">
+	<available property="xdk-available" file="${xdk.lib.dir}/xmlparserv2.jar"/>
+	<available property="xerces1-available" file="${xerces1.lib.dir}/xerces.jar"/>
+	<available property="xerces2-available" file="${xerces2.lib.dir}/xercesImpl.jar"/>
+	<available property="xerces_dom3-available" file="${xerces_dom3.lib.dir}/dom3-xercesImpl.jar"/>
+	<available property="batik-available" file="${batik.lib.dir}/batik-svg-dom.jar"/>
+	<available property="crimson-available" file="${crimson.lib.dir}/crimson.jar"/>
+	<available property="dom4j-available" file="${dom4j.lib.dir}/dom4j.jar"/>
+	<available property="gnujaxp-available" file="${gnujaxp.lib.dir}/gnujaxp.jar"/>
+	<available property="dom1-core-available" file="${test.dir}/dom1-core.jar"/>
+	<available property="dom1-core-metadata-available" file="${test.dir}/dom1-core-metadata.rdf"/>
+	<available property="junit-run-available" file="${test.dir}/junit-run.jar"/>
+    <available property="jtidy-available" classname="org.w3c.tidy.Tidy"/>	
+</target>    
     
 <target name="usage">
 	<echo message="common targets:"/>
     <echo message="TODO"/>
 </target>
 
-<target name="run-xerces1">
+<target name="check-xerces1" depends="init" unless="xerces1-available">
+	<fail message="${xerces1.lib.dir}/xerces.jar was not located, specify -Dxerces1.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
+
+<target name="run-xerces1" depends="check-xerces1">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -91,9 +113,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
+<target name="check-xerces2" depends="init" unless="xerces2-available">
+	<fail message="${xerces2.lib.dir}/xercesImpl.jar was not located, specify -Dxerces2.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
 
 
-<target name="run-xerces2">
+<target name="run-xerces2" depends="check-xerces2">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -114,7 +139,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="run-xerces2_svg">
+<target name="run-xerces2_svg" depends="check-xerces2">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -136,7 +161,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="run-xerces2_xhtml">
+<target name="run-xerces2_xhtml" depends="check-xerces2">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -157,8 +182,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
+<target name="check-xerces_dom3" depends="init" unless="xerces_dom3-available">
+	<fail message="${xerces_dom3.lib.dir}/dom3-xercesImpl.jar was not located, specify -Dxerces_dom3.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
 
-<target name="run-xerces_dom3">
+
+<target name="run-xerces_dom3" depends="check-xerces_dom3">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -180,7 +209,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="run-xerces_dom3_svg">
+<target name="run-xerces_dom3_svg" depends="check-xerces_dom3">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -203,7 +232,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="run-xerces_dom3_xhtml">
+<target name="run-xerces_dom3_xhtml" depends="check-xerces_dom3">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -225,7 +254,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
-<target name="run-xerces_ls">
+<target name="run-xerces_ls" depends="check-xerces_dom3">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -246,9 +275,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
+<target name="check-oracle" depends="init" unless="xdk-available">
+	<fail message="${xdk.lib.dir}/xmlparserv2.jar was not located, specify -Dxdk.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
 
 
-<target name="run-oracle">
+
+
+<target name="run-oracle" depends="check-oracle">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="jarname" value="dom${level}-${module}.jar"/>
@@ -265,7 +299,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
-<target name="run-batik">
+<target name="check-batik" depends="init" unless="batik-available">
+	<fail message="${batik.lib.dir}/batik-svg-dom.jar was not located, specify -Dbatik.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
+
+
+<target name="run-batik" depends="check-batik">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -291,7 +330,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="run-gnujaxp">
+<target name="check-gnujaxp" depends="init" unless="gnujaxp-available">
+	<fail message="${gnujaxp.lib.dir}/gnujaxp.jar was not located, specify -Dgnujaxp.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
+
+
+<target name="run-gnujaxp" depends="check-gnujaxp">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -309,8 +353,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
+<target name="check-dom4j" depends="init" unless="dom4j-available">
+	<fail message="${dom4j.lib.dir}/dom4j.jar was not located, specify -Ddom4j.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
 
-<target name="run-dom4j">
+
+<target name="run-dom4j" depends="check-dom4j">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -328,7 +376,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
-<target name="run-crimson">
+<target name="check-crimson" depends="init" unless="crimson-available">
+	<fail message="${crimson.lib.dir}/crimson.jar was not located, specify -Dcrimson.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
+
+
+<target name="run-crimson" depends="check-crimson">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -346,8 +399,12 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
+<target name="check-jtidy" depends="init" unless="jtidy-available">
+	<fail message="${jtidy.lib.dir}/Tidy.jar was not located, specify -Djtidy.lib.dir or -Dimplbase.dir to change location"/> 
+</target>
 
-<target name="run-jtidy">
+
+<target name="run-jtidy" depends="check-jtidy">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
 	<property name="config" value=""/>
@@ -365,15 +422,28 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</junit>
 </target>
 
+<target name="check-junit-run" depends="init" unless="junit-run-available">
+	<fail message="${test.dir}/junit-run.jar was not located, specify -Dtest.dir to change location"/> 
+</target>
 
-<target name="dom1-core-oracle">
+
+<target name="check-dom1-core" depends="check-junit-run" unless="dom1-core-available">
+	<fail message="${test.dir}/dom1-core.jar was not located, specify -Dtest.dir to change location"/> 
+</target>
+
+<target name="check-dom1-core-metadata" depends="init" unless="dom1-core-metadata-available">
+	<fail message="${test.dir}/dom1-core-metadata.rdf was not located, specify -Dtest.dir to change location"/> 
+</target>
+
+
+<target name="dom1-core-oracle" depends="check-dom1-core, check-oracle">
 	<antcall target="run-oracle">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-oracle-alt">
+<target name="dom1-core-oracle-alt" depends="check-dom1-core, check-oracle">
 	<antcall target="run-oracle">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -382,14 +452,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-xerces1">
+<target name="dom1-core-xerces1" depends="check-dom1-core, check-xerces1">
 	<antcall target="run-xerces1">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces1-alt">
+<target name="dom1-core-xerces1-alt" depends="check-dom1-core, check-xerces1">
 	<antcall target="run-xerces1">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -399,14 +469,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 
 
 
-<target name="dom1-core-xerces2">
+<target name="dom1-core-xerces2" depends="check-dom1-core, check-xerces2">
 	<antcall target="run-xerces2">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces2-alt">
+<target name="dom1-core-xerces2-alt" depends="check-dom1-core, check-xerces2">
 	<antcall target="run-xerces2">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -415,14 +485,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-xerces2_svg">
+<target name="dom1-core-xerces2_svg" depends="check-dom1-core, check-xerces2">
 	<antcall target="run-xerces2_svg">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces2_svg-alt">
+<target name="dom1-core-xerces2_svg-alt"  depends="check-dom1-core, check-xerces2">
 	<antcall target="run-xerces2_svg">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -431,14 +501,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-xerces2_xhtml">
+<target name="dom1-core-xerces2_xhtml"  depends="check-dom1-core, check-xerces2">
 	<antcall target="run-xerces2_xhtml">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces2_xhtml-alt">
+<target name="dom1-core-xerces2_xhtml-alt" depends="check-dom1-core, check-xerces2">
 	<antcall target="run-xerces2_xhtml">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -448,14 +518,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 
 
 
-<target name="dom1-core-xerces_dom3">
+<target name="dom1-core-xerces_dom3" depends="check-dom1-core, check-xerces_dom3">
 	<antcall target="run-xerces_dom3">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces_dom3-alt">
+<target name="dom1-core-xerces_dom3-alt" depends="check-dom1-core, check-xerces_dom3">
 	<antcall target="run-xerces_dom3">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -463,14 +533,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</antcall>
 </target>
 
-<target name="dom1-core-crimson">
+<target name="dom1-core-crimson" depends="check-dom1-core, check-crimson">
 	<antcall target="run-crimson">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-crimson-alt">
+<target name="dom1-core-crimson-alt" depends="check-dom1-core, check-crimson">
 	<antcall target="run-crimson">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -479,14 +549,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-gnujaxp">
+<target name="dom1-core-gnujaxp" depends="check-dom1-core, check-gnujaxp">
 	<antcall target="run-gnujaxp">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-gnujaxp-alt">
+<target name="dom1-core-gnujaxp-alt" depends="check-dom1-core, check-gnujaxp">
 	<antcall target="run-gnujaxp">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -495,7 +565,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-dom4j">
+<target name="dom1-core-dom4j" depends="check-dom1-core, check-dom4j">
 	<antcall target="run-dom4j">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -503,7 +573,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-batik">
+<target name="dom1-core-batik" depends="check-dom1-core, check-batik">
 	<antcall target="run-batik">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -511,21 +581,21 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-jtidy">
+<target name="dom1-core-jtidy" depends="check-dom1-core, check-jtidy">
 	<antcall target="run-jtidy">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces_ls">
+<target name="dom1-core-xerces_ls" depends="check-dom1-core, check-xerces_dom3">
 	<antcall target="run-xerces_ls">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom1-core-xerces_ls-alt">
+<target name="dom1-core-xerces_ls-alt" depends="check-dom1-core, check-xerces_dom3">
 	<antcall target="run-xerces_ls">
 		<param name="level" value="1"/>
 		<param name="module" value="core"/>
@@ -534,7 +604,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 
-<target name="dom1-core-all"
+<target name="dom1-core-java"
 	depends="dom1-core-xerces1, 
 		     dom1-core-xerces1-alt,
 		     dom1-core-xerces2,
@@ -552,22 +622,43 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	         dom1-core-xerces2_xhtml-alt,
 	         dom1-core-gnujaxp,
 	         dom1-core-gnujaxp-alt,
-	         dom1-core-dom4j,
-	         dom1-core-jtidy"/>
+	         dom1-core-dom4j"/>
 	         
-<target name="dom1-core-results" depends="dom1-core-all">	         
+<target name="dom1-core-results" depends="check-dom1-core-metadata">	         
 	<copy file="${transforms.dir}/dom1-core-results.xml" todir="${results.dir}"/>
 	<style in="${test.dir}/dom1-core-metadata.rdf" 
 		   out="${results.dir}/dom1-core-results.html" 
 	       style="transforms/results-matrix.xsl" force="true">
 		<param name="specURI"
 		       expression="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-        <param name="interfacesURL" expression="dom1-interfaces.xml"/>
-        <param name="specMetadataURL" expression="dom1-subjects.xml"/>
         <param name="title" expression='DOM Level 1 Core Test Results'/>
         <param name="resultsURL" expression="${results.dir}/dom1-core-results.xml"/>
+        <param name="testPath" expression="${testsrc.dir}/level1/core/"/>
+        <param name="doxyPath" expression="${doxygensrc.dir}/level1/core/doxygen/html/"/>
 	</style>
+	
+	<antcall target="validate-html">
+		<param name="file" location="${results.dir}/dom1-core-results.html"/>
+	</antcall>
 </target>
+
+
+<target name="warn-jtidy" depends="init" unless="jtidy-available">
+    <echo message="JTidy is not available, no HTML validation performed."/>
+</target>
+
+<target name="validate-html" depends="warn-jtidy" if="jtidy-available">
+	<property name="file" value="build/dom1-core-results.html"/>
+	<java classname="org.w3c.tidy.Tidy" 
+		failonerror="yes" 
+		fork="yes" 
+		classpath="${java.class.path}">
+		<arg value="-e"/>
+		<arg value="-q"/>
+		<arg value="${file}"/>
+	</java> 
+</target>
+
 
 
 
@@ -748,8 +839,6 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	         dom2-core-batik,
 	         dom2-core-xerces2_svg,
 	         dom2-core-xerces2_svg-alt,
-	         dom2-core-xerces2_xhtml,
-	         dom2-core-xerces2_xhtml-alt,
 	         dom2-core-gnujaxp,
 	         dom2-core-gnujaxp-alt,
 	         dom2-core-dom4j,

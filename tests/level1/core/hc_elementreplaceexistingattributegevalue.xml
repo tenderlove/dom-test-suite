@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -43,6 +43,7 @@ from the Document interface.
 <item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
 <createAttribute obj="doc" var="newAttribute" name='"class"'/>
 <setAttributeNode obj="testEmployee" var="streetAttr" newAttr="newAttribute"/>
+<assertNotNull actual="streetAttr" id="previousAttrNotNull"/>
 <value interface="Attr" obj="streetAttr" var="value"/>
-<assertEquals actual="value" expected='"No"' id="elementReplaceExistingAttributeGeValueAssert" ignoreCase="false"/>
+<assertEquals actual="value" expected='"No"' id="previousAttrValue" ignoreCase="false"/>
 </test>

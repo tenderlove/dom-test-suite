@@ -23,16 +23,25 @@ should still return null.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-11C98490"/>
 </metadata>
-<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="newNode" type="Node"/>
 <var name="newValue" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<if><contentType type="text/html"/>
+	<assertDOMException id="throw_NOT_SUPPORTED_ERR">
+		<NOT_SUPPORTED_ERR>
+			<createEntityReference obj="doc" var="newNode" name='"ent1"'/>
+		</NOT_SUPPORTED_ERR>
+	</assertDOMException>
+<else>
 <createEntityReference obj="doc" var="newNode" name='"ent1"'/>
+<assertNotNull actual="newNode" id="entRefNotNull"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>
 <!--   attempt to change the value and make sure that it stays null  -->
 <nodeValue obj="newNode" value='"This should have no effect"'/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="nullAfterAttemptedChange"/>
+</else>
+</if>
 </test>

@@ -35,7 +35,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 	method="html" 
 	doctype-public="-//W3C//DTD HTML 4.01//EN" 
 	doctype-system="http://www.w3.org/TR/html4/strict.dtd"
-	encoding="US-ASCII"/>
+	encoding="UTF-8"/>
 
 <xsl:template match="/">
     <xsl:apply-templates mode="jsunit"/>
@@ -46,7 +46,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
     <html>
         <head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-            <title><xsl:value-of select="concat($target-uri-base, @name)"/></title>
+			<title><xsl:value-of select="concat($target-uri-base, @name)"/></title>
 			<link href="http://www.w3.org/StyleSheets/activity-home.css" rel="stylesheet" type="text/css" />
             <script type="text/javascript" src="../../jsunit/app/jsUnitCore.js"></script>
             <script type="text/javascript" src="DOMTestCase.js"></script>
@@ -282,6 +282,8 @@ function suite() {
 			<option value="{substring-before($href,'.xml')}.html"><xsl:value-of select="substring-before($href, '.')"/></option>
 		</xsl:otherwise>
 	</xsl:choose>
+	<xsl:text>
+</xsl:text>
 </xsl:template>
 	
 

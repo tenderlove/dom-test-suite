@@ -41,6 +41,13 @@ Checks the value of an attribute that contains entity references.
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="titleAttr" name='"class"'/>
 
+<if><contentType type="text/html"/>
+	<assertDOMException id="throw_NOT_SUPPORTED_ERR">
+		<NOT_SUPPORTED_ERR>
+			<createEntityReference var="alphaRef" obj="doc" name='"alpha"'/>
+		</NOT_SUPPORTED_ERR>
+	</assertDOMException>
+<else>
 <!--  create an alpha entity reference and place it first -->
 <createEntityReference var="alphaRef" obj="doc" name='"alpha"'/>
 <firstChild var="firstChild" obj="titleAttr" interface="Node"/>
@@ -49,4 +56,6 @@ Checks the value of an attribute that contains entity references.
 <!--  check that Attr.value gives expected result   -->
 <value interface="Attr" obj="titleAttr" var="value"/>
 <assertEquals actual="value" expected='"&#945;Y&#945;"' id="attrValue1" ignoreCase="false"/>
+</else>
+</if>
 </test>

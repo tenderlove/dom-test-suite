@@ -57,5 +57,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName obj="clonedChild" var="clonedChildName"/>
 <append collection="result" item="clonedChildName"/>
 </for-each>
-<assertEquals actual="result" expected="expected" id="clone" ignoreCase="auto"/>
+<assertEquals actual="result" expected="expected" id="clone" ignoreCase="false"/>
 </test>

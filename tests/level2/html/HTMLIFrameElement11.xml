@@ -20,11 +20,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>HTMLIFrameElement11</title>
 <creator>NIST</creator>
 <description>
-    The contentDocument attribute specifies the document this frame contains,
-    if there is any and it is available, or null otherwise.
-
-    Retrieve the contentDocument attribute of the first IFRAME element
-    and examine it's value.  
+    Retrieve the contentDocument attribute of the second IFRAME element
+    and examine its title.  
 </description>
 <contributor>Rick Rivello</contributor>
 <date qualifier="created">2002-07-03</date>
@@ -38,5 +35,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementById interface="Document" obj="doc" var="testNode" elementId='"Iframe2"'/>
 <contentDocument interface="HTMLIFrameElement" obj="testNode" var="cd"/>
 <title interface="HTMLDocument" obj="cd" var="vtitle"/>
-<assertEquals actual="vtitle" expected='"NIST DOM HTML Test - FRAMESET"' id="titleLink" ignoreCase="false" />
+<assertEquals actual="vtitle" expected='"NIST DOM HTML Test - FRAME"' id="titleLink" ignoreCase="false" />
 </test>

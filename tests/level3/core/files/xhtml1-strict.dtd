@@ -30,8 +30,6 @@ this DTD can be replaced by the normal DTD for XHTML.
 <!ATTLIST meta 
 	http-equiv CDATA #IMPLIED
 	content CDATA #IMPLIED>
-<!ELEMENT script (#PCDATA)>	
-<!ATTLIST script src CDATA #IMPLIED>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT body (p*)>
 <!ATTLIST body onload CDATA #IMPLIED>
@@ -63,4 +61,5 @@ this DTD can be replaced by the normal DTD for XHTML.
 <!ELEMENT script (#PCDATA)>
 <!ATTLIST script 
  type CDATA #IMPLIED
- src CDATA #IMPLIED>          
+ src CDATA #IMPLIED
+ charset CDATA #IMPLIED>          

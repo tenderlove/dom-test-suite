@@ -61,4 +61,5 @@ this DTD can be replaced by the normal DTD for XHTML.
 <!ELEMENT script (#PCDATA)>
 <!ATTLIST script 
  type CDATA #IMPLIED
- src CDATA #IMPLIED>          
+ src CDATA #IMPLIED
+ charset CDATA #IMPLIED>          

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,8 +16,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_elementAssociatedAttribute</title>
 <creator>Curt Arnold</creator>
 <description>
-    Elements may have attributes associated with them.
-   
    Retrieve the first attribute from the last child of
    the first employee and invoke the "getSpecified()" 
    method.  This test is only intended to show that   
@@ -42,5 +40,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="testEmployee" var="attributes"/>
 <getNamedItem obj="attributes" var="domesticAttr" name='"title"'/>
 <specified obj="domesticAttr" var="specified"/>
-<assertTrue actual="specified" id="elementAssociatedAttributeAssert"/>
+<assertTrue actual="specified" id="acronymTitleSpecified"/>
 </test>

@@ -17,14 +17,33 @@
 <!ENTITY dom1-core-gnujaxp-alt SYSTEM 'dom1-core-gnujaxpAltConfig.xml'>
 <!ENTITY dom1-core-dom4j SYSTEM 'dom1-core-dom4j.xml'>
 <!ENTITY dom1-core-batik SYSTEM 'dom1-core-batik.xml'>
-<!ENTITY dom1-core-jtidy SYSTEM 'dom1-core-jtidy.xml'>
+<!ENTITY dom1-core-ie6_html SYSTEM 'dom1-core-ie6_html.xml'>
+<!ENTITY dom1-core-mozilla_html SYSTEM 'dom1-core-mozilla_html.xml'>
+<!ENTITY dom1-core-mozilla_xml SYSTEM 'dom1-core-mozilla_xml.xml'>
+<!ENTITY dom1-core-mozilla_xhtml SYSTEM 'dom1-core-mozilla_xhtml.xml'>
+<!ENTITY dom1-core-msxml3 SYSTEM 'dom1-core-msxml3.xml'>
+<!ENTITY dom1-core-msxml3-alt SYSTEM 'dom1-core-msxml3-alt.xml'>
+<!ENTITY dom1-core-msxml4 SYSTEM 'dom1-core-msxml4.xml'>
+<!ENTITY dom1-core-msxml4-alt SYSTEM 'dom1-core-msxml4-alt.xml'>
 ]>
 <results>
-<implementation name="Xerces-J 2.6.0">
+<implementation name="Xerces-J 2.6.2">
 &dom1-core-xerces2;
 </implementation>
-<implementation name="Xerces-J 2.6.0 Alt">
+<implementation name="Xerces-J 2.6.2 Alt">
 &dom1-core-xerces2-alt;
+</implementation>
+<implementation name="Xerces-J 2.6.2 SVG">
+&dom1-core-xerces2_svg;
+</implementation>
+<implementation name="Xerces-J 2.6.2 SVG Alt">
+&dom1-core-xerces2_svg-alt;
+</implementation>
+<implementation name="Xerces-J 2.6.2 XHTML">
+&dom1-core-xerces2_xhtml;
+</implementation>
+<implementation name="Xerces-J 2.6.2 XHTML Alt">
+&dom1-core-xerces2_xhtml-alt;
 </implementation>
 <implementation name="Oracle XDK 9.2.0.5.0">
 &dom1-core-oracle;
@@ -47,21 +66,6 @@
 <implementation name="DOM4J 1.4">
 &dom1-core-dom4j;
 </implementation>
-<implementation name="DOM4J 1.4 Alt">
-&dom1-core-batik;
-</implementation>
-<implementation name="Xerces-J 2.6.0 SVG">
-&dom1-core-xerces2_svg;
-</implementation>
-<implementation name="Xerces-J 2.6.0 SVG Alt">
-&dom1-core-xerces2_svg-alt;
-</implementation>
-<implementation name="Xerces-J 2.6.0 XHTML">
-&dom1-core-xerces2_xhtml;
-</implementation>
-<implementation name="Xerces-J 2.6.0 XHTML Alt">
-&dom1-core-xerces2_xhtml-alt;
-</implementation>
 <implementation name="Xerces-J 1.4.4">
 &dom1-core-xerces1;
 </implementation>
@@ -74,7 +78,31 @@
 <implementation name="Xerces-J CVS DOM3">
 &dom1-core-xerces_dom3-alt;
 </implementation>
-<implementation name="JTidy2 CVS">
-&dom1-core-jtidy;
+<implementation name="Batik 1.5.1">
+&dom1-core-batik;
+</implementation>
+<implementation name="Internet Explorer 6">
+&dom1-core-ie6_html;
+</implementation>
+<implementation name="Mozilla 1.7 beta 1 HTML">
+&dom1-core-mozilla_html;
+</implementation>
+<implementation name="Mozilla 1.7 beta 1 XML">
+&dom1-core-mozilla_xml;
+</implementation>
+<implementation name="Mozilla 1.7 beta 1 XHTML">
+&dom1-core-mozilla_xml;
+</implementation>
+<implementation name="MSXML3">
+&dom1-core-msxml3;
+</implementation>
+<implementation name="MSXML3 Alt">
+&dom1-core-msxml3-alt;
+</implementation>
+<implementation name="MSXML4">
+&dom1-core-msxml4;
+</implementation>
+<implementation name="MSXML4 Alt">
+&dom1-core-msxml4-alt;
 </implementation>
 </results>

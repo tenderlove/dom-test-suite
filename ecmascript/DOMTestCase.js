@@ -11,6 +11,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 */
   function assertSize(descr, expected, actual) {
     var actualSize;
+    assertNotNull(descr, actual);
     actualSize = actual.length;
     assertEquals(descr, expected, actualSize);
   }
@@ -260,7 +261,7 @@ function getSuffix(contentType) {
 
 function equalsAutoCase(context, expected, actual) {
 	if (builder.contentType == "text/html") {
-		if (content == "attribute") {
+		if (context == "attribute") {
 			return expected.toLowerCase() == actual;
 		}
 		return expected.toUpperCase() == actual;
@@ -369,10 +370,7 @@ UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
 function IFrameBuilder() {
     this.contentType = "text/html";
     this.supportedContentTypes = [ "text/html", 
-        "text/xml", 
-        "image/svg+xml", 
-        "application/xhtml+xml",
-        "text/mathml" ];    
+        "application/xhtml+xml" ];    
 
     this.supportsAsyncChange = false;
     this.async = true;
@@ -1097,6 +1095,14 @@ function createXPathEvaluator(doc) {
     return doc;
 }
 
+function toLowerArray(src) {
+   var newArray = new Array();
+   var i;
+   for (i = 0; i < src.length; i++) {
+      newArray[i] = src[i].toLowerCase();
+   }
+   return newArray;
+}
 
 function MSXMLBuilder_onreadystatechange() {
     if (builder.parser.readyState == 4) {

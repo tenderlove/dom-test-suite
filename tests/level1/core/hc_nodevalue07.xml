@@ -31,6 +31,7 @@ should still return null.
 <var name="docType" type="DocumentType"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype obj="doc" var="docType"/>
+<if><not><contentType type="text/html"/></not>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="nodeMap"/>
 <assertNotNull actual="nodeMap" id="entitiesNotNull"/>
@@ -42,4 +43,5 @@ should still return null.
 <nodeValue obj="newNode" value='"This should have no effect"'/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="nullAfterAttemptedChange"/>
+</if>
 </test>

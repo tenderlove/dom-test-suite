@@ -54,6 +54,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <doctype obj="doc" var="docType"/>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="entityList"/>
+<assertNotNull actual="entityList" id="entitiesNotNull"/>
 <for-each collection="entityList" member="entity">
 	<nodeName obj="entity" var="name"/>
 	<append collection="nameList" item="name"/>

@@ -246,7 +246,7 @@ function getSuffix(contentType) {
 
 function equalsAutoCase(context, expected, actual) {
 	if (builder.contentType == "text/html") {
-		if (content == "attribute") {
+		if (context == "attribute") {
 			return expected.toLowerCase() == actual;
 		}
 		return expected.toUpperCase() == actual;
@@ -411,6 +411,15 @@ function createConfiguredBuilder() {
 function catchInitializationError(buildr, ex) {
    buildr.initializationError = ex;
    buildr.initializationFatalError = ex;
+}
+
+function toLowerArray(src) {
+   var newArray = new Array();
+   var i;
+   for (i = 0; i < src.length; i++) {
+      newArray[i] = src[i].toLowerCase();
+   }
+   return newArray;
 }
 
 

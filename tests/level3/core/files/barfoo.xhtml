@@ -3,7 +3,12 @@
 <!ENTITY ent2 'foo<br/>'>
 <!ELEMENT html (head, body)>
 <!ATTLIST html xmlns CDATA #IMPLIED>
-<!ELEMENT head (title)>
+<!ELEMENT head (title,script*)>
+<!ELEMENT script (#PCDATA)>
+<!ATTLIST script 
+     src CDATA #IMPLIED
+     type CDATA #IMPLIED
+     charset CDATA #IMPLIED>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT body (p)>
 <!ATTLIST body onload CDATA #IMPLIED>

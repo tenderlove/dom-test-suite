@@ -47,6 +47,13 @@ Appends a document fragment containing a CDATASection to an attribute.
 <getNamedItem obj="attributes" var="titleAttr" name='"title"'/>
 
 <createTextNode var="terNode" obj="doc" data='"ter"'/>
+<if><contentType type="text/html"/>
+	<assertDOMException id="throw_NOT_SUPPORTED_ERR">
+		<NOT_SUPPORTED_ERR>
+			<createCDATASection var="dayNode" obj="doc" data='"day"'/>
+		</NOT_SUPPORTED_ERR>
+	</assertDOMException>
+<else>
 <createCDATASection var="dayNode" obj="doc" data='"day"'/>
 <createDocumentFragment var="docFrag" obj="doc"/>
 <appendChild var="retval" obj="docFrag" newChild="terNode"/>
@@ -57,5 +64,6 @@ Appends a document fragment containing a CDATASection to an attribute.
 		<insertBefore var="retval" obj="titleAttr" newChild="docFrag" refChild="refChild"/>
 	</HIERARCHY_REQUEST_ERR>
 </assertDOMException>
-
+</else>
+</if>
 </test>

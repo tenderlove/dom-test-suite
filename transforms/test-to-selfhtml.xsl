@@ -30,7 +30,7 @@ saxon -o someTest.js someTest.xml test-to-selfhtml.xsl
     <xsl:param name="target-uri-base">http://www.w3.org/2001/DOM-Test-Suite/tests/Level-1/</xsl:param>
     
 
-	<xsl:output method="text"/> 
+	<xsl:output method="text" encoding="UTF-8"/> 
 
 <xsl:template match="/">
     <xsl:apply-templates mode="jsunit"/>

@@ -31,6 +31,7 @@ An attempt to add remove an notation should result in a NO_MODIFICATION_ERR.
 <var name="retval" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
+<if><not><contentType type="text/html"/></not>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
 <notations var="notations" obj="docType"/>
 <assertNotNull actual="notations" id="notationsNotNull"/>
@@ -39,4 +40,5 @@ An attempt to add remove an notation should result in a NO_MODIFICATION_ERR.
 		<removeNamedItem var="retval" obj="notations" name='"notation1"'/>
 	</NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
+</if>
 </test>

@@ -246,12 +246,21 @@ function getSuffix(contentType) {
 
 function equalsAutoCase(context, expected, actual) {
 	if (builder.contentType == "text/html") {
-		if (content == "attribute") {
+		if (context == "attribute") {
 			return expected.toLowerCase() == actual;
 		}
 		return expected.toUpperCase() == actual;
 	}
 	return expected == actual;
+}
+
+function toLowerArray(src) {
+   var newArray = new Array();
+   var i;
+   for (i = 0; i < src.length; i++) {
+      newArray[i] = src[i].toLowerCase();
+   }
+   return newArray;
 }
 
 
@@ -431,47 +440,39 @@ function setResult(resultType, message) {
    var xhtmlNS = "http://www.w3.org/1999/xhtml"; 
    var newBody = document.createElementNS(xhtmlNS, "body");
    var newTable = document.createElementNS(xhtmlNS, "table");
-   newTable.setAttributeNS(null, "width", "100%");
-   newTable.setAttributeNS(null, "border", "1");
+   newTable.width = "100%";
+   newTable.border = "1";
    newBody.appendChild(newTable);
-   var testRow = document.createElementNS(xhtmlNS, "tr");
-   var testDiv1 = document.createElementNS(xhtmlNS, "td");
-   testRow.appendChild(testDiv1);
+   var testRow = newTable.insertRow(-1);
+   var testDiv1 = testRow.insertCell(-1);
    testDiv1.appendChild(document.createTextNode("Test"));
-   var testDiv2 = document.createElementNS(xhtmlNS, "td");
-   testRow.appendChild(testDiv2);
+   var testDiv2 = testRow.insertCell(-1);
    testDiv2.appendChild(document.createTextNode(testName));
-   newTable.appendChild(testRow);
-   var statusRow = document.createElementNS(xhtmlNS, "tr");
-   var statusDiv1 = document.createElementNS(xhtmlNS, "td");
-   statusRow.appendChild(statusDiv1);
+   var statusRow = newTable.insertRow(-1);
+   var statusDiv1 = statusRow.insertCell(-1);
    statusDiv1.appendChild(document.createTextNode("Status"));
-   var statusDiv2 = document.createElementNS(xhtmlNS, "td");
-   statusRow.appendChild(statusDiv2);
+   var statusDiv2 = statusRow.insertCell(-1);
+   var style = "color:green";
    if (resultType == null) {
    		statusDiv2.appendChild(document.createTextNode("Success"));
-   		newTable.setAttributeNS(null, "style", "color:green");
    } else {
    		statusDiv2.appendChild(document.createTextNode(resultType));
    		if (resultType == "skip") {
-   			newTable.setAttributeNS(null, "style", "color:blue");
+   		    style = "color:blue";
    		} else {
-   			newTable.setAttributeNS(null, "style", "color:red");
+   		    style = "color:red";
    		}
    }
-   newTable.appendChild(statusRow);
+   newTable.setAttributeNS(null, "style", style);
    if (message != null) {
-      var messageRow = document.createElementNS(xhtmlNS, "tr");
-   	  var messageDiv1 = document.createElementNS(xhtmlNS, "td");
-      messageRow.appendChild(messageDiv1);
+      var messageRow = newTable.insertRow(-1);
+   	  var messageDiv1 = messageRow.insertCell(-1);
       messageDiv1.appendChild(document.createTextNode("Message"));
-      var messageDiv2 = document.createElementNS(xhtmlNS, "td");
-      messageRow.appendChild(messageDiv2);
+      var messageDiv2 = messageRow.insertCell(-1);
       messageDiv2.appendChild(document.createTextNode(message));
-      newTable.appendChild(messageRow);
    }
    document.body.parentNode.replaceChild(newBody, document.body);
-   if (parent != window) {
+   if (parent != window && typeof(parent.setResult) != 'undefined') {
        parent.setResult(testName, resultType, message);
    }   
 }

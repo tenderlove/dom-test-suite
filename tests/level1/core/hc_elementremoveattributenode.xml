@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -38,6 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
 <getAttributeNode obj="testEmployee" var="streetAttr" name='"class"'/>
 <removeAttributeNode obj="testEmployee" var="removedAttr" oldAttr="streetAttr"/>
+<assertNotNull actual="removedAttr" id="removedAttrNotNull"/>
 <value interface="Attr" obj="removedAttr" var="removedValue"/>
 <assertEquals actual="removedValue" expected='"No"' id="elementRemoveAttributeNodeAssert" ignoreCase="false"/>
 </test>

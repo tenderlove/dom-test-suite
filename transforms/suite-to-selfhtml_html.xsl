@@ -47,9 +47,6 @@ The transform generates a list of links to members of the test suite
                     <xsl:variable name="testName" select="$test/*/@name"/>
                     <xsl:variable name="loads" select="$test/*/*[local-name() = 'load']"/>
                     <xsl:choose>
-    					<xsl:when test="$test/*/*[local-name() = 'hasFeature' and @feature='&quot;XML&quot;' and not(preceding-sibling::*[local-name() = 'var'])]">
-    						<xsl:comment><xsl:value-of select="$testName"/> requires hasFeature('XML') = true</xsl:comment>
-    					</xsl:when>
     					<xsl:when test="count($loads) &gt; 1 and $loads[@href != $loads[1]/@href]">
     						<xsl:comment><xsl:value-of select="$testName"/> loads multiple test documents</xsl:comment>
     					</xsl:when>

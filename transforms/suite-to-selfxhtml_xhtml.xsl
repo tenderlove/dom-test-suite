@@ -18,7 +18,7 @@ The transform generates a list of links to members of the test suite
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns="http://www.w3.org/1999/xhtml">
-     <xsl:param name="title">DOM Level 1 Core Test Suite - HTML</xsl:param>
+     <xsl:param name="title">DOM Level 1 Core Test Suite - XHTML</xsl:param>
      
 	
 	<xsl:output method="xml"
@@ -32,7 +32,6 @@ The transform generates a list of links to members of the test suite
 <xsl:template match="/">
     <html>
         <head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 			<xsl:call-template name="copyright-comment"/>
 			<title><xsl:value-of select="$title"/></title>        
         </head>

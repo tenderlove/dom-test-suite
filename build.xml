@@ -239,13 +239,15 @@ This target checks that the output of that implied transform is valid HTML
 	
     <mkdir dir="${dst.dir}"/>
 	<copy todir="${dst.dir}">
-        <fileset dir="ecmascript" includes="selfhtml.js alltests.html alltests.js"/>
+        <fileset dir="ecmascript" includes="selfhtml.js alltests.html alltests_html.js alltests.js"/>
     </copy>
     <replace file="${dst.dir}/alltests.html"
          token="SuiteName" value="DOM Level ${level} ${module} - HTML"/>
 	<copy todir="${dst.dir}">
         <fileset dir="docs/resources" includes="COPYRIGHT.html"/>
     </copy>
+    <replace file="${dst.dir}/COPYRIGHT.html"
+         token="Level 1 Core" value="Level ${level} ${module}"/>
     <copy todir="${dst.dir}">
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak *.html *.xml *.xhtml *.svg *.js"/>
     </copy>
@@ -277,6 +279,7 @@ This target checks that the output of that implied transform is valid HTML
 		   includes="alltests.xml" 
 	       style="${transforms.dir}/suite-to-selfhtml_html.xsl" 
 	       extension=".frame.html">
+     	<param name="title" expression="DOM Level ${level} ${module} Test Suite - HTML"/>
 	</style>
 	
 	<!--  a suite creates an Ant file that is executed to fixup the filenames  -->
@@ -301,13 +304,15 @@ This target checks that the output of that implied transform is valid HTML
 	
     <mkdir dir="${dst.dir}"/>
 	<copy todir="${dst.dir}">
-        <fileset dir="ecmascript" includes="selfxhtml.js alltests.xhtml alltests.js"/>
+        <fileset dir="ecmascript" includes="selfxhtml.js alltests.xhtml alltests_xhtml.js alltests.js"/>
     </copy>
     <replace file="${dst.dir}/alltests.xhtml"
          token="SuiteName" value="DOM Level ${level} ${module} - XHTML"/>
 	<copy todir="${dst.dir}">
         <fileset dir="docs/resources" includes="COPYRIGHT.html"/>
     </copy>
+    <replace file="${dst.dir}/COPYRIGHT.html"
+         token="Level 1 Core" value="Level ${level} ${module}"/>
     <copy todir="${dst.dir}">
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak *.html *.xml *.xhtml *.svg *.js xhtml*.dtd"/>
     </copy>
@@ -342,6 +347,7 @@ This target checks that the output of that implied transform is valid HTML
 		   includes="alltests.xml" 
 	       style="${transforms.dir}/suite-to-selfxhtml_xhtml.xsl" 
 	       extension=".frame.xhtml">
+     	<param name="title" expression="DOM Level ${level} ${module} Test Suite - XHTML"/>
 	</style>
 	
 	<!--  a suite creates an Ant file that is executed to fixup the filenames  -->
@@ -353,8 +359,16 @@ This target checks that the output of that implied transform is valid HTML
 	
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${dst.dir}" 
-			includes="*.xhtml *.xhtm" excludes="documentgetdoctypenodtd.xhtml"/>  
+		<fileset dir="${dst.dir}" includes="*.xhtml">
+ 			<exclude name="documentgetdoctypenodtd.xhtml"/>
+ 			<exclude name="attrgetschematypeinfo06.xhtml"/>
+ 			<exclude name="elementgetschematypeinfo03.xhtml"/>
+ 			<exclude name="canonicalform08.xhtml"/>  			
+ 			<exclude name="canonicalform09.xhtml"/>  			
+ 			<exclude name="canonicalform10.xhtml"/>  			
+ 			<exclude name="canonicalform11.xhtml"/>  			
+ 			<exclude name="documentgetxmlstandalone04.xhtml"/>
+		</fileset>
 	</xmlvalidate>
 	
 	
@@ -410,6 +424,7 @@ This target checks that the output of that implied transform is valid HTML
 		classpath="${java.class.path}">
 		<arg value="-e"/>
 		<arg value="-q"/>
+		<arg value="-utf8"/>
 		<arg value="${file}"/>
 	</java> 
 </target>
@@ -529,14 +544,20 @@ This target checks that the output of that implied transform is valid HTML
     <tar tarfile="${dist.dir}/dom${level}-${module}.tar.gz" basedir="${build.dir}/level${level}/${module}" compression="gzip"/>
 </target>
 
-<target name="jsunit-get" depends="init">
+
+<target name="jsunit-download" depends="init" unless="jsunit-available">
 	<!-- temporary download from Curt's personal branch   -->
     <get src="http://home.houston.rr.com/curta/jsunit.zip"
          dest="${lib.dir}/jsunit.zip"
          usetimestamp="true"
          ignoreerrors="${no-network}"/>
+</target>
+
+<target name="jsunit-get" depends="jsunit-download">
     <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit.zip"/>
 </target>
+
+
 
 <target name="common-javac" depends="init">
 	<mkdir dir="${java.build.dir}"/>

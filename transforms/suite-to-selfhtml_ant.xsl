@@ -48,10 +48,6 @@ saxon -o alltests.ant alltests.xml suite-to-svgunit.xsl
 		    <xsl:variable name="testdst" select="concat('${html.dir}/', concat($testname, $extension))"/>
 		    <xsl:variable name="testjs" select="concat('${html.dir}/', concat($testname, '.js'))"/>
     		<xsl:choose>
-    			<xsl:when test="$extension != '.xhtml' and $test/*/*[local-name() = 'hasFeature' and @feature='&quot;XML&quot;' and not(preceding-sibling::*[local-name() = 'var'])]">
-    				<xsl:comment><xsl:value-of select="$testname"/> requires hasFeature('XML')</xsl:comment>
-    				<delete file="{$testjs}"/>
-    			</xsl:when>
     			<xsl:when test="count($loads) &gt; 1 and $loads[@href != $loads[1]/@href]">
     				<xsl:comment><xsl:value-of select="$testname"/> loads multiple test files</xsl:comment>
     				<delete file="{$testjs}"/>    				
@@ -90,7 +86,7 @@ saxon -o alltests.ant alltests.xml suite-to-svgunit.xsl
 	    							<xsl:attribute name="value">
 	    								<xsl:text>&lt;script type='text/javascript' src='self</xsl:text>
 	    								<xsl:value-of select="substring($extension, 2)"/>
-	    								<xsl:text>.js'&gt;&lt;/script&gt;&lt;script type='text/javascript' src='</xsl:text>
+	    								<xsl:text>.js'&gt;&lt;/script&gt;&lt;script charset='UTF-8' type='text/javascript' src='</xsl:text>
 	    								<xsl:value-of select="$testname"/>
 	    								<xsl:text>.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt;function loadComplete() { startTest(); }&lt;/script&gt;&lt;/head&gt;</xsl:text>
 	    							</xsl:attribute>
@@ -99,7 +95,7 @@ saxon -o alltests.ant alltests.xml suite-to-svgunit.xsl
 	    							<xsl:attribute name="value">
 	    								<xsl:text>&lt;script type='text/javascript' src='self</xsl:text>
 	    								<xsl:value-of select="substring($extension, 2)"/>
-	    								<xsl:text>.js'&gt;&lt;/script&gt;&lt;script type='text/javascript' src='</xsl:text>
+	    								<xsl:text>.js'&gt;&lt;/script&gt;&lt;script charset='UTF-8' type='text/javascript' src='</xsl:text>
 	    								<xsl:value-of select="$testname"/>
 	    								<xsl:text>.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt;function loadComplete() { startTest(); }&lt;/script&gt;&lt;/HEAD&gt;</xsl:text>
 	    							</xsl:attribute>
@@ -119,7 +115,6 @@ saxon -o alltests.ant alltests.xml suite-to-svgunit.xsl
     </target>
     </project>
 </xsl:template>
-
 
 
 <xsl:template name="copyright-comment">
