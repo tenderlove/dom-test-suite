@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.33  2001-11-14 02:08:36  dom-ts-4
+Revision 1.34  2001-11-14 08:47:46  dom-ts-4
+Added pre-generated documentcreatecdatasection.js and .html to
+avoid Xalan-J lock ups with some versions
+
+Revision 1.33  2001/11/14 02:08:36  dom-ts-4
 Added pre-generated copy of documentcreatecdatasection.java
 to avoid lockups with some versions of Xalan-J
 
@@ -525,10 +529,17 @@ All implementation conditions combined into implementationAttribute element
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
     </copy>
 
+    <!--  a prefabricated documentcreatecdatasection.html
+             is provided since some versions of Xalan-J
+                   will stall when processing it    -->
+    <copy file="${tests.dir}/level1/core/documentcreatecdatasection.html" 
+            todir="${build.dir}/ecmascript/level1/core"/>
+
+
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${build.dir}/ecmascript/level1/core" 
 		   includes="*.xml" 
-           excludes="metadata.xml"
+           excludes="metadata.xml,documentcreatecdatasection.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
 	       extension=".html">
 		<param name="interfaces-docname"
@@ -549,10 +560,17 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-core-gen-ecmascript" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/ecmascript/level1/core"/>
+
+    <!--  a prefabricated documentcreatecdatasection.js
+             is provided since some versions of Xalan-J
+                   will stall when processing it    -->
+    <copy file="${tests.dir}/level1/core/documentcreatecdatasection.js" 
+            todir="${build.dir}/ecmascript/level1/core"/>
+
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${build.dir}/ecmascript/level1/core" 
 		   includes="*.xml" 
-           excludes="metadata.xml"
+           excludes="metadata.xml,documentcreatecdatasection.xml"
 	       style="${transforms.dir}/test-to-ecmascript.xsl" 
 	       extension=".js">
 		<param name="interfaces-docname"
