@@ -31,28 +31,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=184"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docFragment" type="DocumentFragment"/>
 <var name="newOne" type="Element"/>
 <var name="domesticNode" type="Node"/>
-<var name="domesticAttr" type="NamedNodeMap"/>
-<var name="attrs" type="Attr"/>
+<var name="attributes" type="NamedNodeMap"/>
+<var name="attribute" type="Attr"/>
 <var name="attrName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
+<var name="langAttrCount" type="int" value="0"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="docFragment"/>
 <createElement obj="doc" var="newOne" tagName='"html"'/>
 <setAttribute obj="newOne" name='"lang"' value='"EN"'/>
 <appendChild var="appendedChild" obj="docFragment" newChild="newOne"/>
 <firstChild interface="Node" obj="docFragment" var="domesticNode"/>
-<attributes obj="domesticNode" var="domesticAttr"/>
-<item interface="NamedNodeMap" obj="domesticAttr" var="attrs" index="0"/>
-<name interface="Attr" obj="attrs" var="attrName"/>
-<if><contentType type="text/html"/>
-<assertEquals actual="attrName" expected='"lang"' id="attrName_html" ignoreCase="true"/>
-<else>
-<assertEquals actual="attrName" expected='"lang"' id="attrName" ignoreCase="false"/>
-</else>
-</if>
+<attributes obj="domesticNode" var="attributes"/>
+<for-each collection="attributes" member="attribute">
+    <nodeName var="attrName" obj="attribute"/>
+    <if><equals expected='"lang"' actual="attrName" ignoreCase="true"/>
+        <increment var="langAttrCount" value="1"/>
+    </if>
+</for-each>
+<assertEquals expected="1" actual="langAttrCount" id="hasLangAttr" ignoreCase="false"/> 
 </test>
