@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname='"code"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="testEmployee"/>
 <nodeName obj="testEmployee" var="strong"/>
-<assertEquals actual="strong" expected='"code"' id="nodename" ignoreCase="false"/>
+<assertEquals actual="strong" expected='"code"' id="nodename" ignoreCase="auto"/>
 <tagName obj="testEmployee" var="strong"/>
-<assertEquals actual="strong" expected='"code"' id="tagname" ignoreCase="false"/>
+<assertEquals actual="strong" expected='"code"' id="tagname" ignoreCase="auto"/>
 </test>

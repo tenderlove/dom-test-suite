@@ -56,8 +56,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newdocFragment" refChild="refChild"/>
 <item interface="NodeList" obj="childList" index="3" var="child"/>
 <nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected='"newChild1"' ignoreCase="false" id="childName3"/>
+<assertEquals actual="childName" expected='"newChild1"' ignoreCase="auto" id="childName3"/>
 <item interface="NodeList" obj="childList" index="4" var="child"/>
 <nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected='"newChild2"' ignoreCase="false" id="childName4"/>
+<assertEquals actual="childName" expected='"newChild2"' ignoreCase="auto" id="childName4"/>
 </test>

@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createElement obj="doc" var="newElement" tagName='"abbr"'/>
 <nodeName obj="newElement" var="newElementName"/>
-<assertEquals actual="newElementName" expected='"abbr"' ignoreCase="false" id="strong"/>
+<assertEquals actual="newElementName" expected='"abbr"' ignoreCase="auto" id="strong"/>
 <nodeType obj="newElement" var="newElementType"/>
 <assertEquals actual="newElementType" expected="1" ignoreCase="false" id="type"/>
 <nodeValue obj="newElement" var="newElementValue"/>

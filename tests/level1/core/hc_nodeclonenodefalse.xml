@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <cloneNode obj="employeeNode" deep="false" var="clonedNode"/>
 <nodeName obj="clonedNode" var="cloneName"/>
-<assertEquals actual="cloneName" expected='"p"' ignoreCase="false" id="strong"/>
+<assertEquals actual="cloneName" expected='"p"' ignoreCase="auto" id="strong"/>
 <childNodes obj="clonedNode" var="cloneChildren"/>
 <length interface="NodeList" obj="cloneChildren" var="length"/>
 <assertEquals actual="length" expected="0" ignoreCase="false" id="length"/>

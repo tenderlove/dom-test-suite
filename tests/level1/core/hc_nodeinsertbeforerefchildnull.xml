@@ -48,5 +48,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <insertBefore var="insertedNode" obj="employeeNode" newChild="newChild" refChild="refChild"/>
 <lastChild interface="Node" obj="employeeNode" var="child"/>
 <nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected='"newChild"' id="nodeInsertBeforeRefChildNullAssert1" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"newChild"' id="nodeName" ignoreCase="auto"/>
 </test>

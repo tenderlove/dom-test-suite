@@ -52,5 +52,5 @@ in the order the children were encountered.
 <nodeName obj="child" var="childName"/>
 <append collection="result" obj="childName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedResult" id="elementGetElementsByTagNameSpecialValueAssert" ignoreCase="false"/>
+<assertEquals actual="result" expected="expectedResult" id="elementGetElementsByTagNameSpecialValueAssert" ignoreCase="auto"/>
 </test>

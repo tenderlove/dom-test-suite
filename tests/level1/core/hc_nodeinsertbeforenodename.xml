@@ -45,5 +45,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createElement obj="doc" tagName='"newChild"' var="newChild"/>
 <insertBefore obj="employeeNode" newChild="newChild" refChild="refChild" var="insertedNode"/>
 <nodeName obj="insertedNode" var="childName"/>
-<assertEquals actual="childName" expected='"newChild"' id="nodeInsertBeforeNodeNameAssert1" ignoreCase="false"/>
+<assertEquals actual="childName" expected='"newChild"' id="nodeName" ignoreCase="auto"/>
 </test>
