@@ -37,7 +37,7 @@ PURPOSE.
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elemList" tagname='"edition"'/>
 <item interface="NodeList" obj="elemList" index="0" var="elem"/>
-<firstChild obj="elem" var="chars"/>
+<firstChild interface="Node" obj="elem" var="chars"/>
 <assign var="valchar" value="chars"/>
 <canReplaceData obj="valchar"  offset="0" count="6" arg='"First"' var="valboolean"/>
 <assertEquals actual="valboolean" expected="5" ignoreCase="false" id="canReplaceDataTrue"/>

@@ -37,11 +37,12 @@ PURPOSE.
 <var name="refchild" type="Node"/>
 <var name="nlist" type="NodeList"/>
 <var name="newchild" type="Element"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"ISBN"' var="nlist"/>
 <item obj="nlist" index="0" var="refchild" interface="NodeList"/>
 <documentElement obj="doc"  var="root"/>
-<createElementNS obj="doc" namespaceURI="null" qualifiedName='"editor"' var="newchild"/>
+<createElementNS obj="doc" namespaceURI="nullNS" qualifiedName='"editor"' var="newchild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"author"' var="nlist"/>
 <item obj="nlist" index="0" var="oldchild" interface="NodeList"/>
 <removeChild obj="root" oldChild="oldchild" var="oldchild"/>

@@ -33,9 +33,10 @@ PURPOSE.
 <var name="valboolean" type="short"/>
 <var name="elemVAL" type="ElementEditVAL"/>
 <var name="newchild" type="Element"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
-<createElementNS obj="doc" interface="Document" namespaceURI="null" qualifiedName='"editor"' var="newchild"/>
+<createElementNS obj="doc" interface="Document" namespaceURI="nullNS" qualifiedName='"editor"' var="newchild"/>
 <assign var="elemVAL" value="root"/>
 <canAppendChild obj="elemVAL" newChild="newchild" var="valboolean"/>
 <assertEquals actual="valboolean" expected="6" ignoreCase="false" id="canAppendChildFalse"/>

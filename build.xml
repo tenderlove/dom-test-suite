@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.97  2003-06-30 03:49:43  dom-ts-4
+Revision 1.98  2003-07-18 03:20:52  dom-ts-4
+Bug 277: Schema validation fixups for DOM L3 Validation tests
+
+Revision 1.97  2003/06/30 03:49:43  dom-ts-4
 L2 Core schema invalid tests: http://www.w3.org/Bugs/Public/show_bug.cgi?id=260
 
 Revision 1.96  2003/06/28 19:35:59  dom-ts-4
@@ -1891,6 +1894,13 @@ All implementation conditions combined into implementationAttribute element
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level3/core" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
+<target name="dom3-val-validate-tests" depends="dom3-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/validation" includes="*.xml"/>  
 	</xmlvalidate>
 </target>
 

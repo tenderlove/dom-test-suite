@@ -32,11 +32,11 @@ PURPOSE.
 <var name="root" type="Element"/>
 <var name="valboolean" type="short"/>
 <var name="elemVAL" type="ElementEditVAL"/>
-
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc"  var="root"/>
 <assign var="elemVAL" value="root"/>
-<canRemoveAttributeNS obj="elemVAL" namespaceURI="null" localName='"inStock"' var="valboolean"/>
+<canRemoveAttributeNS obj="elemVAL" namespaceURI="nullNS" localName='"inStock"' var="valboolean"/>
 <assertEquals actual="valboolean" expected="6" ignoreCase="false" id="canRemoveAttributeNS"/>
 </test>
 

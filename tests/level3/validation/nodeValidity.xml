@@ -32,7 +32,7 @@ PURPOSE.
 <var name="elem" type="Element"/>
 <var name="result" type="short"/>
 <var name="checkLevel" type="short" value="4"/>
-<load var="doc" href="book" willBeModified="false"/>\
+<load var="doc" href="book" willBeModified="false"/>
 <documentElement obj="doc" var="elem"/>
 <assign var="elemVAL" value="elem"/>
 <nodeValidity obj="elemVAL" valType="checkLevel" var="result"/>

@@ -36,11 +36,12 @@ PURPOSE.
 <var name="oldchild" type="Node"/>
 <var name="nlist" type="NodeList"/>
 <var name="newchild" type="Element"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="book" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"ISBN"' var="nlist"/>
 <item obj="nlist" index="0" var="oldchild" interface="NodeList"/>
 <documentElement obj="doc"  var="root"/>
-<createElementNS obj="doc" namespaceURI="null" qualifiedName='"editor"' var="newchild"/>
+<createElementNS obj="doc" namespaceURI="nullNS" qualifiedName='"editor"' var="newchild"/>
 <assign var="elemVAL" value="root"/>
 <canInsertBefore obj="elemVAL" newChild="newchild" refChild="oldchild" var="valboolean"/>
 <assertEquals actual="valboolean" expected="6" ignoreCase="false" id="canInsertBeforeFalse"/>

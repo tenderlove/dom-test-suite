@@ -41,5 +41,5 @@ PURPOSE.
 <assign var="elemVAL" value="elem"/>
 <allowedPreviousSiblings obj="elemVAL" var="nlist"/>
 <getName interface="NameList" obj="nlist" index="0" var="childname"/>
-<assertEquals actual="childname" expected='"title"' id="allowedPreviousSiblings"/>
+<assertEquals actual="childname" expected='"title"' id="allowedPreviousSiblings" ignoreCase="false"/>
 </test>
