@@ -12,7 +12,10 @@
 
 /*
 $Log: AvalonRunner.java,v $
-Revision 1.3  2002-01-11 17:07:10  plehegar
+Revision 1.4  2002-01-30 07:08:44  dom-ts-4
+Update for GNUJAXP
+
+Revision 1.3  2002/01/11 17:07:10  plehegar
 cleaned the DOMImplementation features to match the recommendations.
 Note that DOM Level 3 is still a WD
 
@@ -64,10 +67,10 @@ public class AvalonRunner extends TextTestEngine {
       boolean[] attrValues2 = { false, true, true, true, true };
 
     DOMTestDocumentBuilderFactory factory1 =
-      new DOMTestDocumentBuilderFactory(attrNames, attrValues1);
+      new DOMTestDocumentBuilderFactory(null,attrNames, attrValues1);
 
     DOMTestDocumentBuilderFactory factory2 =
-      new DOMTestDocumentBuilderFactory(attrNames, attrValues2);
+      new DOMTestDocumentBuilderFactory(null,attrNames, attrValues2);
 
     printPrologue();
     printImplementation(factory1);

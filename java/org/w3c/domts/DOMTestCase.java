@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.9  2001-12-10 05:37:21  dom-ts-4
+ Revision 1.10  2002-01-30 07:08:44  dom-ts-4
+ Update for GNUJAXP
+
+ Revision 1.9  2001/12/10 05:37:21  dom-ts-4
  Added xml_alltests, svg_alltests, and html_alltests suites to run all tests
  using a particular content type.
 
@@ -73,7 +76,7 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
     //   Attempt to load JUnitRunner
     //
     Class runnerClass = null;
-    ClassLoader loader = testClass.getClassLoader();
+    ClassLoader loader = ClassLoader.getSystemClassLoader();
     Exception classException = null;
     Constructor runnerFactory = null;
     try {
