@@ -36,7 +36,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
-<var name="genList" type="NodeList"/>
 <var name="entRef" type="EntityReference"/>
 <var name="entElement" type="Element"/>
 <var name="attrList" type="NamedNodeMap"/>

@@ -35,7 +35,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childList" type="NodeList"/>
 <var name="oldChild" type="Node" isNull="true"/>
 <var name="newChild" type="Node" isNull="true"/>
-<var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
 <var name="childNode" type="Node"/>
 <var name="actual" type="List"/>

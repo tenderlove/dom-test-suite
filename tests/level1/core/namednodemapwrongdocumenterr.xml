@@ -40,7 +40,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testAddress" type="Node"/>
 <var name="attributes" type="NamedNodeMap"/>
 <var name="newAttribute" type="Node"/>
-<var name="name" type="DOMString"/>
 <var name="setNode" type="Node"/>
 <load var="doc1" href="staff" willBeModified="true"/>
 <load var="doc2" href="staff" willBeModified="true"/>

@@ -33,7 +33,6 @@ inadvertanly made this test.
 <var name="testEmployee" type="Element"/>
 <var name="streetAttr" type="Attr"/>
 <var name="replacedAttr" type="Attr"/>
-<var name="value" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
