@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.23  2002-06-06 05:09:33  dom-ts-4
+Revision 1.24  2002-07-01 03:57:06  dom-ts-4
+Added name parameter to assertURIEquals
+
+Revision 1.23  2002/06/06 05:09:33  dom-ts-4
 Parameterized 'import org.w3c.dom.html.*' so that L2 tests can import org.w3c.dom.html2.*
 
 Revision 1.22  2002/06/04 05:03:22  dom-ts-4
@@ -972,6 +975,10 @@ import java.util.*;
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
+        <xsl:when test="@name"><xsl:value-of select="@name"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
         <xsl:when test="@query"><xsl:value-of select="@query"/>,</xsl:when>
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
@@ -980,9 +987,9 @@ import java.util.*;
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
-        <xsl:when test="@isAbsolute=true">Boolean.TRUE,</xsl:when>
-        <xsl:when test="@isAbsolute=false">Boolean.FALSE,</xsl:when>
-        <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/></xsl:when>
+        <xsl:when test="@isAbsolute='true'">Boolean.TRUE,</xsl:when>
+        <xsl:when test="@isAbsolute='false'">Boolean.FALSE,</xsl:when>
+        <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/>,</xsl:when>
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
     <xsl:value-of select="@actual"/>

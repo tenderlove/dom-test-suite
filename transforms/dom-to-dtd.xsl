@@ -662,6 +662,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
     path CDATA #IMPLIED
     host CDATA #IMPLIED
     file CDATA #IMPLIED
+    name CDATA #IMPLIED
     query CDATA #IMPLIED
     fragment CDATA #IMPLIED
     isAbsolute CDATA #IMPLIED
@@ -749,12 +750,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 	obj CDATA #REQUIRED
 	expected CDATA #REQUIRED
-&gt;
-
-&lt;!ELEMENT contentType EMPTY&gt;
-&lt;!ATTLIST contentType
-	id ID #IMPLIED
-	type CDATA #REQUIRED
 &gt;
 
 

@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.12  2002-06-03 23:48:48  dom-ts-4
+ Revision 1.13  2002-07-01 03:57:31  dom-ts-4
+ Added name parameter to assertURIEquals
+
+ Revision 1.12  2002/06/03 23:48:48  dom-ts-4
  Support for Events tests
 
  Revision 1.11  2002/02/03 04:22:35  dom-ts-4
@@ -250,8 +253,8 @@ public abstract class DOMTestCase extends DOMTest  {
     framework.assertNotEquals(this, assertID,expected,actual);
   }
 
-  public void assertURIEquals(String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
-    framework.assertURIEquals(this, assertID, scheme, path, host, file, query, fragment, isAbsolute, actual);
+  public void assertURIEquals(String assertID, String scheme, String path, String host, String file, String name, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
+    framework.assertURIEquals(this, assertID, scheme, path, host, file, name, query, fragment, isAbsolute, actual);
   }
 
 

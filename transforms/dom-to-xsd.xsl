@@ -907,6 +907,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     <xs:attribute name="path" type="variableOrStringLiteral" use="optional"/>
                     <xs:attribute name="host" type="variableOrStringLiteral" use="optional"/>
                     <xs:attribute name="file" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="name" type="variableOrStringLiteral" use="optional"/>
                     <xs:attribute name="query" type="variableOrStringLiteral" use="optional"/>
                     <xs:attribute name="fragment" type="variableOrStringLiteral" use="optional"/>
                     <xs:attribute name="isAbsolute" type="variableOrBoolLiteral" use="optional"/>

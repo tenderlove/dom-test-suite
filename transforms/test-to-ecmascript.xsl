@@ -97,21 +97,35 @@ The source document contained the following notice:
           produce documentation comments    -->
     <xsl:apply-templates select="*[local-name()='metadata']"/>
 
-    <xsl:text>
-   function </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>_runTest()  {
+   <xsl:text>function </xsl:text>
+   <xsl:value-of select="@name"/>
+   <xsl:text>() {
+   this.domtest = DOMTestCase;
+   this.domtest("</xsl:text>
+   <xsl:value-of select="@name"/>
+   <xsl:text>");
+}
+</xsl:text>
+   <xsl:value-of select="@name"/>
+   <xsl:text>.prototype = new DOMTestCase();
+
+</xsl:text>
+
+   <xsl:value-of select="@name"/>
+   <xsl:text>.prototype.runTest = function()  {
     </xsl:text>
 <xsl:apply-templates mode="body"/>
     <xsl:text>
 }
 
-function </xsl:text>
+</xsl:text>
+
     <xsl:value-of select="@name"/>
-    <xsl:text>_setUp() {
+    <xsl:text>.prototype.setUp = function() {
 </xsl:text>
     <xsl:variable name="implAttrs" select="*[local-name() = 'implementationAttribute']"/>
     <xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
+    <xsl:variable name="contentConditions" select="*[local-name() = 'contentType' and not(preceding-sibling::*[local-name()='var'])]"/>
 
     <xsl:text>    var attrs = [ </xsl:text>
     <xsl:for-each select="$implAttrs">
@@ -160,9 +174,9 @@ function </xsl:text>
 }
 
 
-function </xsl:text>
+</xsl:text>
     <xsl:value-of select="@name"/>
-    <xsl:text>_tearDown() { 
+    <xsl:text>.prototype.tearDown = function() { 
 </xsl:text>
     <xsl:for-each select="*[local-name() = 'load' and @href]">
         <xsl:text>    this.builder.close(this.</xsl:text>
@@ -176,19 +190,9 @@ function </xsl:text>
     <xsl:text>}
 
 function suite() {
-    var test = new DOMTestCase("</xsl:text>
+    return new </xsl:text>
     <xsl:value-of select="@name"/>
-    <xsl:text>");
-    test.runTest = </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>_runTest;
-    test.tearDown = </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>_tearDown;
-    test.setUp = </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>_setUp;
-    return test;
+    <xsl:text>();
 }
 
 </xsl:text>
@@ -667,6 +671,10 @@ function suite() {
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
+        <xsl:when test="@name"><xsl:value-of select="@name"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
         <xsl:when test="@query"><xsl:value-of select="@query"/>,</xsl:when>
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
@@ -675,9 +683,7 @@ function suite() {
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
-        <xsl:when test="@isAbsolute=true">Boolean.TRUE,</xsl:when>
-        <xsl:when test="@isAbsolute=false">Boolean.FALSE,</xsl:when>
-        <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/></xsl:when>
+        <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/>,</xsl:when>
         <xsl:otherwise>null,</xsl:otherwise>
     </xsl:choose>
     <xsl:value-of select="@actual"/>
