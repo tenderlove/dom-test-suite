@@ -21,10 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentnormalizedocument02</title>
 <creator>IBM</creator>
 <description>
-	Retreive a CDATASection node and verify the nodeName of this node.  Invoke the 
-	setNormalizationFeature method on this document to set the "cdata-sections"  feature
-	to false.  Invoke the normalizeDocument method and verify if the CDATASection node
-	has been transformed to a Text node.
+Normalize a document with the 'cdata-sections' parameter set to false and
+check if the CDATASection has been preserved.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -32,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elemName" type="Element"/>

@@ -16,17 +16,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="elementcontentwhitespace01">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="infoset08">
 <metadata>
-<title>elementcontentwhitespace01</title>
+<title>infoset08</title>
 <creator>Curt Arnold</creator>
 <description>
-Normalize document with element-content-whitespace set to true and validation set to true, check that
+Normalize document with infoset and validation set to true, check that
 whitespace in element content is preserved.
 </description>
 <date qualifier="created">2004-02-24</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -41,7 +41,7 @@ whitespace in element content is preserved.
 <var name="text" type="Text"/>
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
-<setParameter obj="domConfig" name='"element-content-whitespace"' value="true"/>
+<setParameter obj="domConfig" name='"infoset"' value="true"/>
 <!-- if we discarded whitespace on parse, add some back  -->
 <if><implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 	<getElementsByTagName 

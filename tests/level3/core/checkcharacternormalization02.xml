@@ -46,6 +46,7 @@ non-normalized characters are signaled.
 <var name="locator" type="DOMLocator"/>
 <var name="relatedNode" type="Node"/>
 <var name="errorCount" type="int" value="0"/>
+<var name="errorType" type="DOMString"/>
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <canSetParameter var="canSet" obj="domConfig" name='"check-character-normalization"' value="true"/>
@@ -63,9 +64,13 @@ non-normalized characters are signaled.
 	<severity var="severity" obj="error"/>
 	<if><equals actual="severity" expected="2" ignoreCase="false"/>
 		<increment var="errorCount" value="1"/>
+		<type var="errorType" obj="error" interface="DOMError"/>
+		<!-- type name is specified in LS spec -->
+		<assertEquals actual="errorType" expected='"check-character-normalization-failure"' 
+			ignoreCase="false" id="errorType"/>
 		<location var="locator" obj="error"/>
 		<relatedNode var="relatedNode" obj="locator" interface="DOMLocator"/>
-		<assertSame actual="relatedNode" expected="text" id="relatedNodeSame"/>
+		<assertSame actual="relatedNode" expected="text" id="relatedNodeSame"/>        
 	</if>
 </for-each>
 <assertEquals actual="errorCount" expected="1" ignoreCase="false" id="oneError"/>
