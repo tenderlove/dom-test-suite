@@ -52,7 +52,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <rows interface="HTMLTableElement" obj="testNode" var="rowsnodeList"/>
 <length interface="NodeList" obj="rowsnodeList" var="rowLength1"/>
 <append collection="result" obj="rowLength1"/>
-<insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="'4'"/>
+<insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="4"/>
 <length interface="NodeList" obj="rowsnodeList" var="rowLength2"/>
 <append collection="result" obj="rowLength2"/>
 <assertEquals actual="result" expected="expectedResult" id="rowIndexLink" ignoreCase="false"/>

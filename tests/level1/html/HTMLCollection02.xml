@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <elements interface="HTMLFormElement" obj="testNode" var="formsnodeList"/>
-<namedItem obj="formsnodeList" var="formNode" name="'select1'"/>
+<namedItem obj="formsnodeList" var="formNode" name='"select1"'/>
 <nodeName obj="formNode" var="vname"/>
-<assertEquals actual="vname" expected="'SELECT'" id="nameIndexLink" ignoreCase="false"/>
+<assertEquals actual="vname" expected='"SELECT"' id="nameIndexLink" ignoreCase="false"/>
 </test>
