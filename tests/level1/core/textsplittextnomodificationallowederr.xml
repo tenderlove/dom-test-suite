@@ -29,7 +29,7 @@
 	<var name="gn" type="Node"/>
 	<var name="gList" type="NodeList"/>
 	<var name="textNode" type="Text"/>
-	<var name="splitStr" type="DOMString"/>
+	<var name="splitNode" type="Text"/>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
 	<getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 	<item interface="NodeList" obj="genderList" var="gender" index="2"/>
@@ -41,7 +41,7 @@
 	<item interface="NodeList" obj="gList" var="textNode" index="0"/>
 	<assertDOMException id="textSplitTextNoModificationAllowedErrAssert">
 		<NO_MODIFICATION_ALLOWED_ERR>
-			<splitText var="splitStr" obj="textNode" offset="2"/>
+			<splitText var="splitNode" obj="textNode" offset="2"/>
 		</NO_MODIFICATION_ALLOWED_ERR>
 	</assertDOMException>
 </test>

@@ -41,16 +41,16 @@ saxon -o subjects.xml wd-dom.xml subjects.xsl
  -->
 <xsl:stylesheet version="1.0" 
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-     xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1">
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
-	<xsl:output method="xml" indent="yes" doctype-system="dom1.dtd"/>
+	<xsl:output method="xml" indent="yes"/>
 
 	<xsl:variable name="specURI" select="/spec/header/publoc/loc[1]/@href"/>
 	<xsl:variable name="specTitle" select="/spec/header/title"/>
 
 	<!--  match document root    -->
 	<xsl:template match="/">
-		<metadata>
 		<!--  the copyright notice placed in the output file.    -->
 		<xsl:comment>
 Copyright (c) 2001 World Wide Web Consortium,
@@ -63,6 +63,7 @@ the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:comment>
+		<rdf:RDF>
 		<xsl:comment>This file is an list of potential test subjects generated from <xsl:value-of select="$specTitle"/></xsl:comment>
 			<xsl:for-each select="descendant::interface">
 				<xsl:choose>
@@ -86,7 +87,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xsl:choose>
 			</xsl:for-each>
 
-		</metadata>
+		</rdf:RDF>
 	</xsl:template>
 	
 	<!--   if unrecognized element, apply templates to children  -->	       
@@ -98,29 +99,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	          produce <interface> element    -->	
 	<xsl:template match="interface">
 		<xsl:param name="subspecURI"/>
-		<metadata about="{concat($subspecURI,concat('#',@id))}">
-			<title><xsl:value-of select="@name"/></title>
-			<description><xsl:value-of select="normalize-space(descr/p[1])"/></description>
+		<rdf:Description about="{concat($subspecURI,concat('#',@id))}">
+			<dc:title><xsl:value-of select="@name"/></dc:title>
+			<dc:description><xsl:value-of select="normalize-space(descr/p[1])"/></dc:description>
 			<xsl:text>
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="$specTitle"/> </xsl:comment><xsl:text>
 		</xsl:text>
-			<relation qualifier="isPartOf" resource="{$subspecURI}"/>
+			<dc:relation qualifier="isPartOf" resource="{$subspecURI}"/>
 			<xsl:for-each select="method">
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="@name"/></xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="hasPart" resource="{concat($subspecURI,concat('#',@id))}"/>
+				<dc:relation qualifier="hasPart" resource="{concat($subspecURI,concat('#',@id))}"/>
 			</xsl:for-each>
 			<xsl:for-each select="attribute">
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="@name"/> attribute </xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="hasPart" resource="{concat($subspecURI,concat('#',@id))}"/>
+				<dc:relation qualifier="hasPart" resource="{concat($subspecURI,concat('#',@id))}"/>
 			</xsl:for-each>
-		</metadata>
+		</rdf:Description>
 		<xsl:apply-templates select="*" mode="interface">
 			<xsl:with-param name="subspecURI" select="$subspecURI"/>
 		</xsl:apply-templates>
@@ -137,14 +138,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:variable name="methodURI" select="concat($subspecURI,concat('#',@id))"/>
 		<xsl:variable name="methodName" select="concat(parent::interface/@name,concat('.',concat(@name,' method')))"/>
 		<xsl:variable name="baseXPointer"><xsl:value-of select="$subspecURI"/>#xpointer(id('<xsl:value-of select="@id"/>')/</xsl:variable>
-		<metadata about="{$methodURI}">
-			<title><xsl:value-of select="$methodName"/></title>
-			<description><xsl:value-of select="normalize-space(descr)"/></description>
+		<rdf:Description about="{$methodURI}">
+			<dc:title><xsl:value-of select="$methodName"/></dc:title>
+			<dc:description><xsl:value-of select="normalize-space(descr)"/></dc:description>
 			<xsl:text>
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="parent::interface/@name"/> interface </xsl:comment><xsl:text>
 </xsl:text>
-			<relation qualifier="isPartOf" resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
+			<dc:relation qualifier="isPartOf" resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
 
 			<!--  produce relations for parameters   -->
 			<xsl:for-each select="parameters/param">
@@ -152,7 +153,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="@name"/> parameter</xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="hasPart" resource="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}"/>
+				<dc:relation qualifier="hasPart" resource="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}"/>
 			</xsl:for-each>
 
 			<!--  produce relation for return value   -->
@@ -161,7 +162,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:text>
 				<xsl:comment> return value </xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="hasPart" resource="{concat($baseXPointer,'returns)')}"/>
+				<dc:relation qualifier="hasPart" resource="{concat($baseXPointer,'returns)')}"/>
 			</xsl:if>
 
 			<!--  produce metadata for exceptions  -->
@@ -171,32 +172,32 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xsl:call-template>
 			</xsl:for-each>
 
-		</metadata>
+		</rdf:Description>
 
 		<!--    produce metadata for parameters  -->
 		<xsl:for-each select="parameters/param">
-			<metadata about="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}">
-				<title><xsl:value-of select="@name"/> parameter</title>
-				<description><xsl:value-of select="normalize-space(descr/p[1])"/></description>
+			<rdf:Description about="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}">
+				<dc:title><xsl:value-of select="@name"/> parameter</dc:title>
+				<dc:description><xsl:value-of select="normalize-space(descr/p[1])"/></dc:description>
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="$methodName"/></xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="isPartOf" resource="{$methodURI}"/>
-			</metadata>
+				<dc:relation qualifier="isPartOf" resource="{$methodURI}"/>
+			</rdf:Description>
 		</xsl:for-each>
 
 		<!--  produce metadata for return value   -->
 		<xsl:if test="returns[@type != 'void']">
-			<metadata about="{concat($baseXPointer,'returns)')}">
-				<title><xsl:value-of select="$methodName"/> return value</title>
-				<description><xsl:value-of select="normalize-space(descr)"/></description>
+			<rdf:Description about="{concat($baseXPointer,'returns)')}">
+				<dc:title><xsl:value-of select="$methodName"/> return value</dc:title>
+				<dc:description><xsl:value-of select="normalize-space(descr)"/></dc:description>
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="$methodName"/></xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="isPartOf" resource="{$methodURI}"/>
-			</metadata>
+				<dc:relation qualifier="isPartOf" resource="{$methodURI}"/>
+			</rdf:Description>
 		</xsl:if>
 
 		<!--  produce metadata for exceptions  -->
@@ -215,15 +216,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:param name="featureURI"/>
 		<xsl:variable name="exceptionURI"><xsl:value-of select="$baseXPointer"/>exception[@name='<xsl:value-of select="@name"/>']/descr/p[</xsl:variable>
 		<xsl:for-each select="descr/p">
-			<metadata>
+			<rdf:Description>
 				<xsl:attribute name="about"><xsl:value-of select="$exceptionURI"/>substring-before(.,':')='<xsl:value-of select="substring-before(.,':')"/>'])</xsl:attribute>
-				<description><xsl:value-of select="normalize-space(.)"/></description>
+				<dc:description><xsl:value-of select="normalize-space(.)"/></dc:description>
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="$featureName"/> </xsl:comment><xsl:text>
 </xsl:text>
-				<relation qualifier="isPartOf" resource="{$featureURI}"/>
-			</metadata>
+				<dc:relation qualifier="isPartOf" resource="{$featureURI}"/>
+			</rdf:Description>
 		</xsl:for-each>
 	</xsl:template>
 
@@ -235,9 +236,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="normalize-space(.)"/> </xsl:comment><xsl:text>
 </xsl:text>
-			<relation qualifier="hasPart">
+			<dc:relation qualifier="hasPart">
 				<xsl:attribute name="resource"><xsl:value-of select="$exceptionURI"/>substring-before(.,':')='<xsl:value-of select="substring-before(.,':')"/>'])</xsl:attribute>
-			</relation>
+			</dc:relation>
 		</xsl:for-each>
 	</xsl:template>
 
@@ -246,14 +247,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:variable name="attrURI" select="concat($subspecURI,concat('#',@id))"/>
 		<xsl:variable name="attrName" select="concat(parent::interface/@name,concat('.',@name))"/>
 		<xsl:variable name="baseXPointer"><xsl:value-of select="$subspecURI"/>#xpointer(id('<xsl:value-of select="@id"/>')/</xsl:variable>
-		<metadata about="{$attrURI}">
-			<title><xsl:value-of select="$attrName"/> attribute</title>
-			<description><xsl:value-of select="normalize-space(descr)"/></description>
+		<rdf:Description about="{$attrURI}">
+			<dc:title><xsl:value-of select="$attrName"/> attribute</dc:title>
+			<dc:description><xsl:value-of select="normalize-space(descr)"/></dc:description>
 			<xsl:text>
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="parent::interface/@name"/> interface </xsl:comment><xsl:text>
 </xsl:text>
-			<relation qualifier="isPartOf" resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
+			<dc:relation qualifier="isPartOf" resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
 
 			<!--  produce about for set exceptions  -->
 			<xsl:for-each select="setraises/exception">
@@ -269,7 +270,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xsl:call-template>
 			</xsl:for-each>
 
-		</metadata>
+		</rdf:Description>
 
 		<!--  produce about for set exceptions  -->
 		<xsl:for-each select="setraises/exception">

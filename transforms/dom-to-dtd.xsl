@@ -246,7 +246,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 					</xsl:for-each>
 
 					<!--  produce interface attribute   -->
-					<xsl:variable name="dups" select="key('methodByName',@name)"/>
+					<xsl:variable name="dups" select="key('featureByName',@name)"/>
 					<xsl:text>    interface (</xsl:text>
 					<xsl:for-each select="$dups[1]">
 						<xsl:value-of select="parent::interface/@name"/>

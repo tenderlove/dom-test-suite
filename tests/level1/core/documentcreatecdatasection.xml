@@ -27,7 +27,7 @@
 	<nodeValue obj="newCDATASectionNode" var="newCDATASectionValue"/>
 	<assertEquals id="nodeValue" actual="newCDATASectionValue" expected="&quot;This is a new CDATASection node&quot;" ignoreCase="false"/>
 	<nodeName obj="newCDATASectionNode" var="newCDATASectionName"/>
-	<assertEquals id="nodeName" actual="newCDATASectionNode" expected="&quot;#cdata-section&quot;" ignoreCase="false"/>
+	<assertEquals id="nodeName" actual="newCDATASectionName" expected="&quot;#cdata-section&quot;" ignoreCase="false"/>
 	<nodeType obj="newCDATASectionNode" var="newCDATASectionType"/>
 	<assertEquals id="nodeType" actual="newCDATASectionType" expected="4" ignoreCase="false"/>
 </test>

@@ -58,6 +58,8 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<xsl:key name="attrByName" match="//attribute[@name]" use="@name"/>
 	<!--  methods keyed by name           -->
 	<xsl:key name="methodByName" match="//method[@name]" use="@name"/>
+	<!--  attributes and methods keyed by name        -->
+	<xsl:key name="featureByName" match="//*[(name()='attribute' or name()='method') and @name]" use="@name"/>
 
 
 	<!--   match document root   -->
@@ -144,7 +146,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							</xsl:choose>
 
 							<!--  collect all attributes with this name   -->
-							<xsl:variable name="dups" select="key('attrByName',@name)"/>
+							<xsl:variable name="dups" select="key('featureByName',@name)"/>
 
 							<!--  produce the "interface" attribute       -->
 							<xsd:attribute name="interface">
@@ -192,12 +194,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<xsl:template name="produce-methods">
 
 			<!--  produce an element for all methods  -->
-			<xsl:for-each select="$methods">
+			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'handleEvent']">
 				<xsl:sort select="@name"/>
 				<xsl:variable name="current" select="."/>
 
 				<!--   for only the first occurance of the name   -->
-				<xsl:if test="not(preceding::method[@name=$current/@name]) and @name != 'hasFeature'">
+				<xsl:if test="not(preceding::method[@name=$current/@name]) and @name != 'hasFeature' and not(@name = $attributes/@name)">
 					
 					<!--   create an element whose tag name is the same as the method   -->
 					<xsd:element name="{@name}">

@@ -13,7 +13,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.13  2001-08-20 06:56:35  dom-ts-4
+Revision 1.14  2001-08-21 06:06:12  dom-ts-4
+DOM 1 SE targets
+Fixed cases that locked Xalan
+org.w3c.domts.level1.core.alltests
+DOM2 DTD/Schema
+
+Revision 1.13  2001/08/20 06:56:35  dom-ts-4
 Full compile (-2 files that lock up Xalan 2.1)
 
 Revision 1.12  2001/08/19 20:51:19  dom-ts-4
@@ -136,9 +142,6 @@ All implementation conditions combined into implementationAttribute element
 	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
 	       out="${build.dir}/dom1-subjects.xml"
 	       style="${transforms.dir}/subjects.xsl"/>
-	<xmlvalidate file="${build.dir}/dom1-subjects.xml"
-	             lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser"/>
 </target>
 
 <target name="dom1-interfaces" depends="dom1-init">
@@ -147,6 +150,66 @@ All implementation conditions combined into implementationAttribute element
 	       out="${build.dir}/dom1-interfaces.xml"
 	       style="${transforms.dir}/extract.xsl"/>
 </target>
+
+<!--  this target downloads the DOM Level 1 Second Edition Working Draft  -->
+<target name="dom1SE-init" depends="init">
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/Level-1SE"/>
+	<!--   download DOM 1 spec to specs directory   -->
+	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/DOM.zip"
+	     dest="${specs.dir}/DOM1SE.zip"
+	     usetimestamp="yes"/>
+
+	<unzip src="${specs.dir}/DOM1SE.zip" dest="${specs.dir}/Level-1SE"/>
+	<unzip src="${specs.dir}/Level-1SE/xml-source.zip" dest="${specs.dir}/Level-1SE"/>
+
+</target>
+
+
+<target name="dom1SE-schema" depends="dom1SE-init">
+	<style basedir="${specs.dir}/Level-1SE"
+	       in="${specs.dir}/Level-1SE/wd-dom.xml"
+	       out="${build.dir}/_dom1SE.xsd"
+	       style="${transforms.dir}/dom-to-xsd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
+	</style>
+
+	<!--  remove leading underscore from _xmlns attribute    -->
+	<exec executable="sed" output="${build.dir}/dom1SE.xsd">
+		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1SE.xsd"/>
+	</exec>
+	<delete file="${build.dir}/_dom1SE.xsd"/>
+	<copy file="${build.dir}/dom1SE.xsd" todir="${tests.dir}/level1/core"/>
+
+</target>
+
+
+<target name="dom1SE-dtd" depends="dom1SE-init">
+	<style basedir="${specs.dir}/Level-1SE"
+	       in="${specs.dir}/Level-1SE/wd-dom.xml"
+	       out="${build.dir}/dom1SE.dtd"
+	       style="${transforms.dir}/dom-to-dtd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
+	</style>
+	<copy file="${build.dir}/dom1SE.dtd" todir="${tests.dir}/level1/core"/>
+</target>
+
+<target name="dom1SE-subjects" depends="dom1SE-init">
+	<style basedir="${specs.dir}/Level-1SE"
+	       in="${specs.dir}/Level-1SE/wd-dom.xml"
+	       out="${build.dir}/dom1SE-subjects.xml"
+	       style="${transforms.dir}/subjects.xsl"/>
+</target>
+
+<target name="dom1SE-interfaces" depends="dom1SE-init">
+	<style basedir="${specs.dir}/Level-1SE"
+	       in="${specs.dir}/Level-1SE/wd-dom.xml"
+	       out="${build.dir}/dom1SE-interfaces.xml"
+	       style="${transforms.dir}/extract.xsl"/>
+</target>
+
 
 <target name="dom2-init" depends="init">
 	<mkdir dir="${specs.dir}"/>
@@ -267,33 +330,18 @@ All implementation conditions combined into implementationAttribute element
 	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
 	       out="${build.dir}/dom2-core-subjects.xml"
 	       style="${build.dir}/dom2-subjects.xsl"/>
-	<xmlvalidate file="${build.dir}/dom2-core-subjects.xml"
-	             lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser"/>
 	<style in="${specs.dir}/Level-2/xml/views/dom-spec.xml"
 	       out="${build.dir}/dom2-views-subjects.xml"
 	       style="${build.dir}/dom2-subjects.xsl"/>
-	<xmlvalidate file="${build.dir}/dom2-views-subjects.xml"
-	             lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser"/>
 	<style in="${specs.dir}/Level-2/xml/events/dom-spec.xml"
 	       out="${build.dir}/dom2-events-subjects.xml"
 	       style="${build.dir}/dom2-subjects.xsl"/>
-	<xmlvalidate file="${build.dir}/dom2-events-subjects.xml"
-	             lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser"/>
 	<style in="${specs.dir}/Level-2/xml/traversal-range/dom-spec.xml"
 	       out="${build.dir}/dom2-traversal-range-subjects.xml"
 	       style="${build.dir}/dom2-subjects.xsl"/>
-	<xmlvalidate file="${build.dir}/dom2-traversal-range-subjects.xml"
-	     lenient="no" failonerror="yes"
-	     classname="org.apache.xerces.parsers.SAXParser"/>
 	<style in="${specs.dir}/Level-2/xml/html/dom-spec.xml"
 	       out="${build.dir}/dom2-html-subjects.xml"
 	       style="${build.dir}/dom2-subjects.xsl"/>
-	<xmlvalidate file="${build.dir}/dom2-html-subjects.xml"
-	             lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser"/>
 	<!--  remove DOM 2 version of subjects.xsl  -->
 	<delete file="{build.dir}/dom2-subjects.xsl"/>
 </target>
@@ -314,29 +362,20 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom1-core-validate-tests" depends="init">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/core" includes="*.xml"/>  
+		<fileset dir="${tests.dir}/level1/core" includes="*.xml" 
+		    excludes="attrsetvaluenomodificationallowederr.xml"/>  
 	</xmlvalidate>
 </target>
-
-
-<!--  this lowercases the test names.  Should be a one shot deal  -->
-<target name="dom1-core-lcase-names" depends="dom1-init">
-	<style basedir="${tests.dir}/level1/core" 
-		   destdir="build/lcase/level1/core" 
-		   includes="*.xml" 
-	       style="${transforms.dir}/lcase-test-names.xsl"
-	       extension=".xml"/>
-</target>
-
 
 
 <target name="dom1-core-gen-java" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
     <!-- TODO: explicitly excludes tests that Xalan 2.1 has problems with  -->
+<!--           excludes="**/documentcreatecdatasection.xml,**/textsplittextnomodificationallowederr.xml" -->
+
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
-           excludes="**/documentcreatecdatasection.xml,**/textsplittextnomodificationallowederr.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -346,6 +385,15 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
+    <!--  and pull a Julia Child (or Martha Stewart) and pull the completed
+                tests out of the other oven   
+    <get src="http://home.houston.rr.com/curta/documentcreatecdatasection.java"
+         dest="${java.build.dir}/org/w3c/domts/level1/core/documentcreatecdatasection.java"
+         usetimestamp="yes"/>
+    <get src="http://home.houston.rr.com/curta/textsplittextnomodificationallowederr.java"
+         dest="${java.build.dir}/org/w3c/domts/level1/core/textsplittextnomodificationallowederr.java"
+         usetimestamp="yes"/>
+         -->
 </target>
 
 <target name="dom1-core-gen-ecmascript" depends="dom1-interfaces">
@@ -378,7 +426,7 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-core-jar" depends="dom1-core-javac">
 	<!--  will need to provide a manifest    -->
-	<jar jarfile="${dist.dir}/dom1-core.jar">
+	<jar jarfile="${dist.dir}/dom1-core.jar" manifest="java/dom1-core.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 		<fileset dir="${java.build.dir}"
@@ -389,6 +437,69 @@ All implementation conditions combined into implementationAttribute element
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
 </target>
+
+<target name="dom2-core-validate-tests" depends="init">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/core" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
+
+<target name="dom2-core-gen-java" depends="dom1-interfaces">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level2/core"/>
+    <!-- TODO: explicitly excludes tests that Xalan 2.1 has problems with  -->
+	<style basedir="${tests.dir}/level2/core" 
+		   destdir="${java.build.dir}/org/w3c/domts/level2/core" 
+		   includes="*.xml" 
+           excludes="**/documentcreatecdatasection.xml,**/textsplittextnomodificationallowederr.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level2.core"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
+	</style>
+</target>
+
+<target name="dom2-core-gen-ecmascript" depends="dom2-interfaces">
+    <mkdir dir="${build.dir}/ecmascript/level2/core"/>
+	<style basedir="${tests.dir}/level2/core" 
+		   destdir="${build.dir}/ecmascript/level2/core" 
+		   includes="*.xml" 
+	       style="${transforms.dir}/test-to-ecmascript.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
+	</style>
+</target>
+
+<target name="dom2-core-javac" depends="common-javac,dom2-core-gen-java">
+	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/core" 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"/>
+</target>
+
+<target name="dom2-core-jar" depends="dom2-core-javac">
+	<!--  will need to provide a manifest    -->
+	<jar jarfile="${dist.dir}/dom2-core.jar">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level2/core/*"
+		         excludes="*.bak"/>
+		<fileset dir="tests/level2/core/files" excludes="*.bak"/>
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
+</target>
+
+
+
 
 <target name="junit-run" depends="common-javac">
 	<!--  get JUnit 3.7 into lib directory  -->

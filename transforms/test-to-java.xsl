@@ -28,7 +28,13 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.8  2001-08-20 06:56:38  dom-ts-4
+Revision 1.9  2001-08-21 06:06:12  dom-ts-4
+DOM 1 SE targets
+Fixed cases that locked Xalan
+org.w3c.domts.level1.core.alltests
+DOM2 DTD/Schema
+
+Revision 1.8  2001/08/20 06:56:38  dom-ts-4
 Full compile (-2 files that lock up Xalan 2.1)
 
 Revision 1.7  2001/08/15 04:44:03  dom-ts-4
@@ -238,6 +244,8 @@ import java.util.*;
 <!--   when encountering a test   -->
 <xsl:template match="*[local-name()='suite']">
 package <xsl:value-of select="$package"/>;
+
+import <xsl:value-of select="$package"/>.*;
 
 import org.w3c.dom.*;
 <xsl:if test="*[local-name() = 'hasFeature' and @feature='&quot;Events&quot;']">
