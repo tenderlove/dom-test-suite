@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.21  2002-06-03 23:45:22  dom-ts-4
+Revision 1.22  2002-06-04 05:03:22  dom-ts-4
+Added support for [return], automatic constructor of EventMonitor
+
+Revision 1.21  2002/06/03 23:45:22  dom-ts-4
 Updates for Events tests
 
 Revision 1.20  2002/02/26 05:25:52  dom-ts-4
@@ -526,6 +529,13 @@ import java.util.*;
 
 		<!--  explict value, just add it  -->
 		<xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
+
+        <!--  event monitor type implies constructor    -->
+        <xsl:when test="@type='EventMonitor'">
+            <xsl:text> = new EventMonitor();
+      </xsl:text>
+        </xsl:when>
+
 		<!--  member, allocate collection or list and populate it  -->
 		<xsl:when test="@type='List' or @type='Collection'">
 			<xsl:text> = new ArrayList();
@@ -643,6 +653,15 @@ import java.util.*;
 		</xsl:otherwise>
 	</xsl:choose>	
 </xsl:template>
+
+<xsl:template match="*[local-name()='return']" mode="body">
+    <xsl:param name="vardefs"/>
+	<xsl:text>        return </xsl:text>
+	<xsl:value-of select="@value"/>
+	<xsl:text>;
+</xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='increment']" mode="body">
     <xsl:param name="vardefs"/>
@@ -1126,6 +1145,8 @@ import java.util.*;
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
+
+
 <xsl:template match="*[local-name()='if']" mode="body">
     <xsl:param name="vardefs"/>
 	if(
@@ -1221,11 +1242,6 @@ import java.util.*;
 <xsl:template match="*[local-name()='allEvents']" mode="body">
 	<xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllEvents();
 </xsl:template>
-
-<xsl:template match="*[local-name()='createEventMonitor']" mode="body">
-	<xsl:value-of select="@var"/> = new EventMonitor();
-</xsl:template>
-
 
 <xsl:template name="produce-type">
 	<xsl:param name="type"/>
