@@ -18,12 +18,13 @@
 ]>
 
 
-<test xmlns="&level3;" name="DOMEntityResolverTest0">
+<test xmlns="&level3;" name="DOMEntityResolverTest2">
   <metadata>
-    <title>DOMEntityResolverTest0</title>
+    <title>DOMEntityResolverTest2</title>
     &creator; 
-    <description>Checks parameters on call to resolve resource are
-       as expected and redirects to parse a different resource.</description> 
+    <description>Resource resolvers do not participate in resolving the top-level document entity.
+    This test attempts to redirect any resource and then checks that the
+    requested document was not affected.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-LSParser-parseURI"/>
     <subject resource="&spec;#LS-LSResourceResolver"/>
@@ -31,27 +32,22 @@
   </metadata>
 
   <var name="resourceURI" type="DOMString"/>
-  <var name="elt2List" type="NodeList"/>
-  <var name="elt2Count" type="int"/>
+  <var name="docElem" type="Element"/>
+  <var name="docElemName" type="DOMString"/>
   <var name="myentityresolver" type="LSResourceResolver"> 
      <resolveResource>
      	<var name="domImplLS" type="DOMImplementationLS"/>
      	<var name="redirectedInput" type="LSInput"/>
-     	<var name="resourceURI" type="DOMString"/>
-     	<var name="source" type="DOMString" value='"&lt;elt2/&gt;"'/>
+     	<var name="source" type="DOMString" value='"&lt;!DOCTYPE failure [&lt;!ELEMENT failure EMPTY&gt;]&gt;&lt;failure/&gt;"'/>
 
-		<!--  check that parameters on call to resolveSource are correct  -->
-        <assertNull actual="publicId"  ignoreCase="false" id="rr_publicId"/>
-        <assertEquals actual="systemId"  expected='"test5.xml"' ignoreCase="false" id="rr_systemId"/>
-        <assertURIEquals actual="baseURI" isAbsolute='true' name='"test4"' id="rr_baseURI"/>
-        
-        <!--  redirect so that test5 is loaded  -->
+        <!--  
+            The resolveResource should not be invoked, 
+               but if it is substitute a failure document   -->
         <implementation var="domImplLS"/>
         <createLSInput var="redirectedInput" obj="domImplLS"/>
         <stringData obj="redirectedInput" value="source" interface="LSInput"/>
         <return value="redirectedInput"/>            
      </resolveResource>
-
   </var>
 
   <var name="configuration" type="DOMConfiguration"/>
@@ -62,11 +58,12 @@
   <config var="configuration" obj="builder" interface="LSParser"/> 
   <setParameter obj="configuration" name='"resource-resolver"' value="myentityresolver"/>
   
-  <getResourceURI var="resourceURI" href="TEST4"/>
+  <getResourceURI var="resourceURI" href="TEST0"/>
   <parseURI var="document" obj="builder" uri="resourceURI"/>
-  <getElementsByTagName var="elt2List" obj="document" tagname='"elt2"'/>
-  <length var="elt2Count" obj="elt2List" interface="NodeList"/>
-  <assertEquals actual="elt2Count" expected="1" id="elt2Count"/>
+  <assertNotNull actual="document" id="documentNotNull"/>
+  <documentElement var="docElem" obj="document"/>
+  <nodeName var="docElemName" obj="docElem"/>
+  <assertEquals actual="docElemName" expected='"elt0"' id="docElemName"/> 
 </test>
 
 
