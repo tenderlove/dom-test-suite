@@ -8,7 +8,7 @@
 </head>
 <body> 
 <p>
-<map name="html-map" id="mapid">
+<map name="mapid" id="mapid">
 <area href="./files/dletter.html" alt="Domain" target="dynamic"/>
 </map>
 </p>

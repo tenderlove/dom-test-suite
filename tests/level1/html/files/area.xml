@@ -8,7 +8,7 @@
 </head>
 <body> 
 <p>
-<map name="html-map" id="mapid">
+<map name="mapid" id="mapid">
 <area tabindex="10" accesskey="a" shape="rect" alt="Domain" coords="0,2,45,45" href="./files/dletter.html" title="Domain"/>
 </map>
 </p>
