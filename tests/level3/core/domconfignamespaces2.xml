@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <metadata>
     <title>domconfignamespaces2</title>
     <creator>Curt Arnold</creator>
-    <description>Document.getParameter("namespaces") should be true if the
-    parse that created the document was namespace aware and false if not.</description>
+    <description>Document.getParameter("namespaces") should be true regardles if the
+    parse that created the document was namespace aware.</description>
 	<date qualifier="created">2004-02-24</date>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration"/>
@@ -33,12 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <load var="doc" href="barfoo" willBeModified="false"/>
   <domConfig var="domConfig" obj="doc" interface="Document"/>
   <getParameter var="state" obj="domConfig" name='"namespaces"'/>
-  <if><implementationAttribute name="namespaceAware" value="true"/>
-  	  <assertTrue actual="state" id="trueIfNamespaceAware"/>
-      <else>
-      	  <assertFalse actual="state" id="falseIfNotNamespaceAware"/>
-      </else>
-  </if>
+  <assertTrue actual="state" id="namespacesTrue"/>
 </test>
 
 
