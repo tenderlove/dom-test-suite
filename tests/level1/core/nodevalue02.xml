@@ -30,8 +30,9 @@ should still return null.
 <createComment obj="doc" var="newNode" data="&quot;This is a new Comment node&quot;"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertEquals actual="newValue" expected='"This is a new Comment node"' ignoreCase="false" id="initial"/>
-<!--   attempt to change the value and make sure that it stays null  -->
+<!--   attempt to change the value -->
 <nodeValue obj="newNode" value='"This should have an effect"'/>
+<!--   retrieve the value   -->
 <nodeValue obj="newNode" var="newValue"/>
-<assertEquals actual="newValue" expected='"This should have an effect"' id="afterChange"/>
+<assertEquals actual="newValue" expected='"This should have an effect"' id="afterChange" ignoreCase="false"/>
 </test>
