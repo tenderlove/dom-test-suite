@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="document" willBeModified="false"/>
 <applets interface="HTMLDocument" obj="doc" var="vapplets" />
 <length interface="HTMLCollection" obj="vapplets" var="vlength" />
-<assertEquals actual="vlength" expected='2' id="lengthLink" ignoreCase="false" />
+<assertEquals actual="vlength" expected='4' id="length" ignoreCase="false" />
 </test>
