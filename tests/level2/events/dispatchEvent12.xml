@@ -2,7 +2,7 @@
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2005 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -33,7 +33,9 @@ The monitor should recieve handleEvent calls.
 <var name="evt" type="Event"/>
 <var name="preventDefault" type="boolean"/>
 <var name="monitor" type="EventMonitor"/>
-<var name="other" type="EventMonitor"/>
+<var name="other" type="EventListener">
+   <handleEvent/>
+</var>
 <var name="events" type="List"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <addEventListener obj="doc" type='"foo"' listener="monitor" useCapture="false"/>
