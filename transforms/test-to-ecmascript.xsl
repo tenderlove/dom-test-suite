@@ -381,7 +381,7 @@ The source document contained the following notice:
 		<xsl:value-of select="@obj"/>
 		<xsl:text>.</xsl:text>
 	</xsl:if>
-	<xsl:text>getImplementation();
+	<xsl:text>implementation;
 </xsl:text>
 </xsl:template>
 
