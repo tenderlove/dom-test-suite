@@ -32,13 +32,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN"/>
 </metadata>
+<!--  this test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Node"/>
 <var name="employeeLocalName" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <localName obj="testEmployee" var="employeeLocalName"/>
-<assertEquals actual="employeeLocalName" expected="&quot;employee&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="employeeLocalName" expected='"employee"' id="lname" ignoreCase="false"/>
 </test>
