@@ -99,7 +99,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
   }
 
-  function assertURIEquals(assertID, scheme, path, host, file, query, fragment, isAbsolute, actual) {
+  function assertURIEquals(assertID, scheme, path, host, file, name, query, fragment, isAbsolute, actual) {
     //
     //  URI must be non-null
     top.assertNotNull(assertID, actual);
@@ -147,24 +147,34 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     if(host != null) {
         var actualHost = "";
-        if(actualPath.startsWith("//")) {
+        if(actualPath.substring(0,2) == "//") {
             var termSlash = actualPath.substring(2).indexOf("/") + 2;
             actualHost = actualPath.substring(0,termSlash);
         }
         top.assertEquals(assertID, host, actualHost);
     }
 
-    if(file != null) {
+    if(file != null || name != null) {
         var actualFile = actualPath;
         var finalSlash = actualPath.lastIndexOf("/");
         if(finalSlash != -1) {
             actualFile = actualPath.substring(finalSlash+1);
         }
-        top.assertEquals(assertID, file, actualFile);
+        if (file != null) {
+            top.assertEquals(assertID, file, actualFile);
+        }
+        if (name != null) {
+            var actualName = actualFile;
+            var finalDot = actualFile.lastIndexOf(".");
+            if (finalDot != -1) {
+                actualName = actualName.substring(0, finalDot);
+            }
+            top.assertEquals(assertID, name, actualName);
+        }
     }
 
     if(isAbsolute != null) {
-        top.assertEquals(assertID, isAbsolute.booleanValue(), actualPath.startsWith("/"));
+        top.assertEquals(assertID, isAbsolute, actualPath.substring(0,1) == "/");
     }
   }
 
@@ -537,7 +547,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     var iframe = document.getElementById(varname + extension);
     var doc = iframe.contentDocument;
     if (doc == undefined || doc == null) {
-        doc = iframe.document;
+        doc = iframe.contentWindow.window.document;
     }
     return doc;
   }
@@ -599,25 +609,39 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
       return new IFrameBuilder(test, "text/html", attributes, features);
   }  
 
-function DOMTestCase_onLoadComplete(doc) {
+function DOMTestCase(name) {
+    this.deferredDocs = 0;
+    this.jstest = top.jsUnitTestCase;
+    this.jstest(name);
+}
+
+DOMTestCase.prototype = new top.jsUnitTestCase;
+
+
+DOMTestCase.prototype.onLoadComplete = function(doc) {
     if(--this.deferredDocs == 0) {
         this.setReady(true);
     }
 }
 
-function DOMTestCase_onLoadError(error) {
+DOMTestCase.prototype.onLoadError = function(error) {
     this.deferredDocs = -1;
     this.fail(error);
 }
         
-
-function DOMTestCase(name) {
-    var test = new top.jsUnitTestCase(name);
-    test.deferredDocs = 0;
-    test.onLoadComplete = DOMTestCase_onLoadComplete;
-    test.onLoadError = DOMTestCase_onLoadError;
-    return test;
+DOMTestCase.prototype.runTest = function() {
+    throw "runTest() not overriden";
 }
+
+DOMTestCase.prototype.attemptTest = function() {
+    try {
+        this.runTest();
+    } catch (e1) {
+        return e1;
+    }
+    return null;
+}
+
 
 
 
