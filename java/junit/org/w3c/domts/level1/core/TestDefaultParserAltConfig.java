@@ -21,7 +21,7 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 import org.w3c.domts.*;
 
-public class TestDefaultParser extends TestSuite {
+public class TestDefaultParserAltConfig extends TestSuite {
 
   public static TestSuite suite() throws Exception
   {
@@ -34,7 +34,7 @@ public class TestDefaultParser extends TestSuite {
         "ignoringElementContentWhitespace",
         "namespaceAware",
         "validating" };
-    boolean[] attrValues = { false, false, false, false, false };
+    boolean[] attrValues = { false, true, true, true, true };
 
     DOMTestDocumentBuilderFactory factory =
         new DOMTestDocumentBuilderFactory(null, attrNames, attrValues);

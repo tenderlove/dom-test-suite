@@ -21,7 +21,7 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 import org.w3c.domts.*;
 
-public class TestDefaultParser extends TestSuite {
+public class TestCrimson extends TestSuite {
 
   public static TestSuite suite() throws Exception
   {
@@ -36,8 +36,10 @@ public class TestDefaultParser extends TestSuite {
         "validating" };
     boolean[] attrValues = { false, false, false, false, false };
 
+    Class parserClass = ClassLoader.getSystemClassLoader().loadClass("org.apache.crimson.jaxp.DocumentBuilderFactoryImpl");
+
     DOMTestDocumentBuilderFactory factory =
-        new DOMTestDocumentBuilderFactory(null, attrNames, attrValues);
+        new DOMTestDocumentBuilderFactory(parserClass, attrNames, attrValues);
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 
