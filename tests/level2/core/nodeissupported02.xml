@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -60,8 +60,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <for-each collection="featuresCore" member="featureCore">
 <isSupported obj="attribute" var="success" feature="featureCore" version="version"/>
 <assertTrue actual="success" id="nodeissupported02_Core1"/>
+
+<!--   isSupported("Core", "1.0") is unspecified since "Core" was not defined in L1  -->
 <isSupported obj="attribute" var="success" feature="featureCore" version="version1"/>
-<assertTrue actual="success" id="nodeissupported02_Core2"/>
+
 <isSupported obj="attribute" var="success" feature="featureCore" version="version2"/>
 <assertTrue actual="success" id="nodeissupported02_Core3"/>
 </for-each>
