@@ -40,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertTrue actual="param" id="domconfigurationgetparameter01_2"/>
 <getParameter obj="domConfig" var="param" name='"entities"'/>
 <assertTrue actual="param" id="domconfigurationgetparameter01_3"/>
-<getParameter obj="domConfig" var="param" name='"namespace-declaration"'/>
+<getParameter obj="domConfig" var="param" name='"namespace-declarations"'/>
 <assertTrue actual="param" id="domconfigurationgetparameter01_4"/>
 <getParameter obj="domConfig" var="param" name='"infoset"'/>
-<assertTrue actual="param" id="domconfigurationgetparameter01_5"/>
+<assertFalse actual="param" id="domconfigurationgetparameter01_5"/>
 </test> 
