@@ -42,14 +42,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="ownerDocument" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="system" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
 <createDocumentFragment obj="aNewDoc" var="docFrag"/>
 <importNode obj="doc" var="aNode" importedNode="docFrag" deep="false"/>
 <hasChildNodes obj="aNode" var="hasChild"/>
-<assertFalse actual="hasChild" id="throw_False"/>
+<assertFalse actual="hasChild" id="hasChild"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="system" ignoreCase="false"/>
 </test>

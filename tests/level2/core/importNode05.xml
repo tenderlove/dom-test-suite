@@ -44,16 +44,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="system" type="DOMString"/>
 <var name="name" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
-<getElementById interface="Document" obj="aNewDoc" var="element" elementId="&quot;CANADA&quot;"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<getElementById interface="Document" obj="aNewDoc" var="element" elementId='"CANADA"'/>
 <importNode obj="doc" var="aNode" importedNode="element" deep="false"/>
 <hasChildNodes obj="aNode" var="hasChild"/>
-<assertFalse actual="hasChild" id="throw_False"/>
+<assertFalse actual="hasChild" id="hasChild"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="dtdSystemId" ignoreCase="false"/>
 <nodeName obj="aNode" var="name"/>
-<assertEquals actual="name" expected="&quot;emp:address&quot;" id="throw_Equals2" ignoreCase="false"/>
+<assertEquals actual="name" expected='"emp:address"' id="nodeName" ignoreCase="false"/>
 </test>
