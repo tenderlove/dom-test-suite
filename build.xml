@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.22  2001-09-05 17:33:42  dom-ts-4
+Revision 1.23  2001-09-06 02:00:04  dom-ts-4
+Now supporting Mozilla 0.9.3
+
+Revision 1.22  2001/09/05 17:33:42  dom-ts-4
 IE5 support.
 
 Revision 1.21  2001/09/05 16:41:04  dom-ts-4
@@ -457,6 +460,10 @@ All implementation conditions combined into implementationAttribute element
 		dest="${lib.dir}/jsunit.zip"
 		usetimestamp="yes"/>
 	<unzip src="${lib.dir}/jsunit.zip" dest="${lib.dir}"/>
+    <!--  Mozilla had an issue with .replace("\\","/")   -->
+	<patch patchfile="jsUnitRunner.patch"
+	       originalfile="${lib.dir}/jsunit/app/jsUnitRunner.js"/>
+
 </target>
 
 <target name="dom1-core-gen-jsunit" depends="jsunit-init,dom1-interfaces,dom1-dtd">
