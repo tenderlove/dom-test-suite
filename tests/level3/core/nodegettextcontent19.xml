@@ -22,12 +22,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>Curt Arnold</creator>
 <description>
 Checks that element content whitespace is not added to textContent.  Determination
-of element content whitespace requires validation.
+of element content whitespace is only assured if validating.
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=538"/>
 </metadata>
 <implementationAttribute name="ignoringElementContentWhitespace" value="false"/>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
@@ -36,11 +38,5 @@ of element content whitespace requires validation.
 <getElementsByTagName var="elemList" obj="doc" tagname='"body"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <textContent var="textContent" obj="elem"/>
-<if>
-	<implementationAttribute name="validating" value="true"/>
-	<assertEquals  actual="textContent" expected='"bar"' id="ifValidating" ignoreCase="false"/>
-	<else>
-		<assertEquals  actual="textContent" expected='"\nbar\n"' id="ifNotValidating" ignoreCase="false"/>
-	</else>
-</if>
+<assertEquals  actual="textContent" expected='"bar"' id="textContent" ignoreCase="false"/>
 </test>
