@@ -97,7 +97,7 @@ The source document contained the following notice:
 		<xsl:text>//EventMonitor's require a document level variable named monitor
 var monitor;
 	 </xsl:text>
-	</xsl:if>
+	 </xsl:if>
 
 	<!--   create anonymous inner classes  -->	
 <xsl:apply-templates mode="innerClass" select="*[local-name() = 'var'  and *[local-name() != 'member']]"/>
@@ -273,19 +273,23 @@ var monitor;
 		
         <!--  event monitor type implies constructor    -->
         <xsl:when test="@type='EventMonitor'">
-        	<xsl:if test="@var != 'monitor'">
-        		<xsl:message>EventMonitors must be named monitor</xsl:message>
-        		<xsl:text>; fail("EventMonitors must be named monitor");
+        	<xsl:choose>
+        		<xsl:when test="@var != 'monitor'">
+        			<xsl:message>EventMonitors must be named monitor</xsl:message>
+        			<xsl:text>; fail("EventMonitors must be named monitor");
       </xsl:text>
-        	</xsl:if>
-            <xsl:text> = new EventMonitor();
+        		</xsl:when>
+        		<xsl:otherwise>
+            		<xsl:text> = new EventMonitor();
       </xsl:text>
+      			</xsl:otherwise>
+      		</xsl:choose>
         </xsl:when>
 
 
         <!--  DOMErrorMonitor type implies constructor    -->
         <xsl:when test="@type='DOMErrorMonitor'">
-            <xsl:text> = new DOMErrorMonitor();
+            		<xsl:text> = new DOMErrorMonitor();
       </xsl:text>
         </xsl:when>
 
@@ -918,7 +922,7 @@ var monitor;
 
 <xsl:template match="*[local-name()='assertLowerSeverity']" mode="body">
     <xsl:value-of select="@obj"/>
-    <xsl:text>.assertLowerSeverity(this, "</xsl:text>
+    <xsl:text>.assertLowerSeverity("</xsl:text>
     <xsl:value-of select="@id"/>
     <xsl:choose>
     	<xsl:when test="@severity = 'SEVERITY_WARNING'">", 1</xsl:when>
@@ -934,12 +938,7 @@ var monitor;
     <xsl:param name="vardefs"/>
     <xsl:value-of select="@var"/>
     <xsl:text> = </xsl:text>
-    <xsl:call-template name="retval-cast">
-        <xsl:with-param name="variable" select="@var"/>
-        <xsl:with-param name="vartype" select="$vardefs[@name = current()/@var]/@type"/>
-        <xsl:with-param name="rettype" select="'DOMUserData'"/>
-    </xsl:call-template>
-    <xsl:value-of select="@obj"/>.getData();
+    <xsl:value-of select="@obj"/>.data;
 </xsl:template>
 
 

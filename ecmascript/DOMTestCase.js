@@ -319,6 +319,51 @@ EventMonitor.prototype.handleEvent = function(evt) {
     monitor.allEvents[monitor.allEvents.length] = evt;
 }
 
+function DOMErrorImpl(err) {
+  this.severity = err.severity;
+  this.message = err.message;
+  this.type = err.type;
+  this.relatedException = err.relatedException;
+  this.relatedData = err.relatedData;
+  this.location = err.location;
+}
+
+
+
+function DOMErrorMonitor() {
+  this.allErrors = new Array();
+}
+
+DOMErrorMonitor.prototype.handleError = function(err) {
+    this.allErrors[this.allErrors.length] = new DOMErrorImpl(err);
+}
+
+DOMErrorMonitor.prototype.assertLowerSeverity = function(id, severity) {
+    var i;
+    for (i = 0; i < this.allErrors.length; i++) {
+        if (this.allErrors[i].severity >= severity) {
+           assertEquals(id, severity - 1, this.allErrors[i].severity);
+        }
+    }
+}
+
+function UserDataNotification(operation, key, data, src, dst) {
+    this.operation = operation;
+    this.key = key;
+    this.data = data;
+    this.src = src;
+    this.dst = dst;
+}
+
+function UserDataMonitor() {
+	this.allNotifications = new Array();
+}
+
+UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
+    this.allNotifications[this.allNotifications.length] =
+         new UserDataNotification(operation, key, data, src, dst);
+}
+
 
 
 function IFrameBuilder() {

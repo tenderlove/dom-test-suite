@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.142  2004-03-11 01:44:21  dom-ts-4
+Revision 1.143  2004-03-11 04:50:41  dom-ts-4
+ECMAScript support for UserDataMonitor, DOMErrorMonitor (bug 526)
+
+Revision 1.142  2004/03/11 01:44:21  dom-ts-4
 Checkstyle fixes (bug 592)
 
 Revision 1.141  2004/03/10 22:09:00  dom-ts-4
@@ -558,6 +561,8 @@ All implementation conditions combined into implementationAttribute element
 <target name="gen-jsunit">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
+    <property name="hideHTML" value="no"/>
+	
     <mkdir dir="${build.dir}/ecmascript/level${level}/${module}/files"/>
 	<copy todir="${build.dir}/ecmascript/level${level}/${module}">
         <fileset dir="ecmascript" includes="*.js"/>
@@ -581,6 +586,7 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level${level}/${module}/"/>
         <param name="testpath" expression="../level${level}/${module}/"/>
+        <param name="hideHTML" expression="${hideHTML}"/>
 	</style>
 </target>
 
@@ -2184,6 +2190,7 @@ All implementation conditions combined into implementationAttribute element
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="core"/>
+    	<param name="hideHTML" value="yes"/>
     </antcall>
 </target>
 
@@ -2304,6 +2311,7 @@ All implementation conditions combined into implementationAttribute element
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="events"/>
+    	<param name="hideHTML" value="yes"/>
     </antcall>
 </target>
 
@@ -2414,6 +2422,7 @@ All implementation conditions combined into implementationAttribute element
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="ls"/>
+    	<param name="hideHTML" value="yes"/>
     </antcall>
 </target>
 
@@ -2521,6 +2530,7 @@ All implementation conditions combined into implementationAttribute element
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="xpath"/>
+    	<param name="hideHTML" value=".xhtml"/>
     </antcall>
 </target>
 
@@ -2633,6 +2643,7 @@ All implementation conditions combined into implementationAttribute element
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="validation"/>
+    	<param name="hideHTML" value="yes"/>
     </antcall>
 </target>
 

@@ -27,7 +27,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:import href="test-to-ecmascript.xsl"/>
     <xsl:param name="testpath">../level1/core/</xsl:param>
-
+    <xsl:param name="hideHTML">no</xsl:param>
 
 <xsl:output method="html"/>
 
@@ -145,7 +145,16 @@ function loadComplete() {
             		<xsl:when test="@href = 'staffNS'"/>
             		
             		<xsl:otherwise>
-                		<iframe name="{@var}" src='files/{@href}.html'></iframe>
+                		<iframe name="{@var}">
+                			<xsl:attribute name="src">
+                				<xsl:text>files/</xsl:text>
+                				<xsl:value-of select="@href"/>
+                				<xsl:choose>
+                					<xsl:when test="$hideHTML = 'no'">.html</xsl:when>
+                					<xsl:otherwise>.xhtml</xsl:otherwise>
+                				</xsl:choose>
+                			</xsl:attribute>
+                		</iframe>
                 		<br/>
                 	</xsl:otherwise>
                 </xsl:choose>
@@ -244,7 +253,9 @@ function suite() {
                     </td>
                     <td valign="top">
                             <input type="radio" name="contentType" id="contentTypeXML" value="text/xml" onclick="setContentType('text/xml')">XML</input><br/>
-                            <input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input><br/>
+                            <xsl:if test="$hideHTML = 'no'">
+                            	<input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input><br/>
+                            </xsl:if>
                             <input type="radio" name="contentType" id="contentTypeXHTML" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input><br/>
                             <input type="radio" name="contentType" id="contentTypeSVG" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input><br/>
                     </td>
