@@ -27,7 +27,11 @@ saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.5  2003-01-20 06:14:46  dom-ts-4
+Revision 1.6  2003-01-28 06:08:15  dom-ts-4
+Combines DOM L2 traversal/range
+Removes :: from inherits attribute
+
+Revision 1.5  2003/01/20 06:14:46  dom-ts-4
 Move change of Element.getElementByTagName from patch file to here.
 
 Revision 1.4  2003/01/16 06:40:47  dom-ts-4
@@ -80,6 +84,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<xsl:apply-templates select="document('../ls/dom-spec.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../../Val/xml-source.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../xpath/dom-spec.xml',.)/spec/*"/>
+            <!--  traversal range from DOM 2   -->
+			<xsl:apply-templates select="document('../../../Level-2/xml/traversal-range/dom-spec.xml',.)/spec/*"/>
+
 		</library>
 	</xsl:template>
 	
@@ -148,4 +155,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<xsl:apply-templates select="*|text()" mode="interface"/>
 		</param>
     </xsl:template>
+
+    <!--  strip out any namespace scoping in base class names   -->
+    <xsl:template match="@inherits">
+        <xsl:choose>
+            <xsl:when test="contains(., '::')">
+                <xsl:attribute name="inherits"><xsl:value-of select="substring-after(., '::')"/></xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="inherits"><xsl:value-of select="."/></xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 </xsl:stylesheet>
