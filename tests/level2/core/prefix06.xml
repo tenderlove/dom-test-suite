@@ -34,15 +34,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
 </metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="employeeNode"/>
 <assertDOMException id="throw_INVALID_CHARACTER_ERR">
 <INVALID_CHARACTER_ERR>
-<prefix obj="employeeNode" value="&quot;pre^fix:employee xmlns='http://www.nist.gov'&quot;"/>
+<prefix obj="employeeNode" value='"pre^fix:employee xmlns='http://www.nist.gov'"'/>
 </INVALID_CHARACTER_ERR>
 </assertDOMException>
 </test>
