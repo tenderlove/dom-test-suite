@@ -35,12 +35,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attribute1" type="DOMString"/>
 <var name="attribute2" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElement obj="doc" var="newElement1" tagName='"ADDRESS"'/>
+<createElement obj="doc" var="newElement1" tagName='"ABBR"'/>
 <createElement obj="doc" var="newElement2" tagName='"abbr"'/>
 <setAttribute obj="newElement1" name='"style"' value='"Fort Worth"'/>
-<setAttribute obj="newElement2" name='"county"' value='"Dallas"'/>
+<setAttribute obj="newElement2" name='"title"' value='"Dallas"'/>
 <getAttribute obj="newElement1" var="attribute1" name='"style"'/>
-<getAttribute obj="newElement2" var="attribute2" name='"county"'/>
+<getAttribute obj="newElement2" var="attribute2" name='"title"'/>
 <assertEquals actual="attribute1" expected='"Fort Worth"' ignoreCase="false" id="attrib1"/>
 <assertEquals actual="attribute2" expected='"Dallas"' ignoreCase="false" id="attrib2"/>
 </test>
