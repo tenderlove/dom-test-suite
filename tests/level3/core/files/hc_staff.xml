@@ -15,13 +15,17 @@
         xmlns:dmstc CDATA #IMPLIED   
         xmlns:nm CDATA #IMPLIED 
         xmlns:emp2 CDATA #IMPLIED>   
-   <!ATTLIST html xmlns:xsi CDATA #IMPLIED>
+   <!ATTLIST html 
+   		xmlns:xsi CDATA #IMPLIED
+   		xsi:schemaLocation CDATA #IMPLIED>
    <!ATTLIST acronym xsi:noNamespaceSchemaLocation CDATA #IMPLIED>
    <!ENTITY ent4 "<span xmlns='http://www.w3.org/1999/xhtml'>Element data</span><?PItarget PIdata?>">   
    <!ATTLIST span xmlns CDATA #IMPLIED>
 ]>
 <!-- This is comment number 1.-->
-<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><head><title>hc_staff</title></head><body>
+<html xmlns='http://www.w3.org/1999/xhtml' 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml hc_staff.xsd"><head><title>hc_staff</title></head><body>
  <p xmlns:dmstc="http://www.usa.com">
   <em>EMP0001</em>
   <strong>Margaret Martin</strong>
