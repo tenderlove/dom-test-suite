@@ -36,6 +36,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:param name="schema-namespace">http://www.w3.org/2001/DOM-Test-Suite/Level-X</xsl:param>
     <xsl:param name="additional-types"/>
+    <xsl:param name="schema-location">domX.xsd</xsl:param>
 
 	<!--   symbolic constant for schema namespace   -->
 	<xsl:variable name="source" select="/spec/header/publoc/loc[1]/@href"/>
@@ -376,7 +377,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
    id ID #IMPLIED
    name CDATA #REQUIRED
    xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation CDATA #IMPLIED
+   xsi:schemaLocation CDATA "<xsl:value-of select="concat($schema-namespace, concat(' ',$schema-location))"/>"
    contentType CDATA #IMPLIED
 &gt;
 
@@ -392,7 +393,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
    id ID #IMPLIED
    name CDATA #REQUIRED
    xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation CDATA #IMPLIED
+   xsi:schemaLocation CDATA "<xsl:value-of select="concat($schema-namespace, concat(' ',$schema-location))"/>"
    contentType CDATA #IMPLIED
 &gt;
 

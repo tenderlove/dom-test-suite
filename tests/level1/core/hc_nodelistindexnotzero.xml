@@ -46,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <if><equals expected='"#text"' actual="childName"/>
 <assertEquals id="childName_space" actual="childName" expected='"#text"' ignoreCase="false"/>
 <else>
-<assertEquals id="childName_space" actual="childName" expected='"strong"' ignoreCase="auto"/>
+<assertEquals id="childName_strong" actual="childName" expected='"strong"' ignoreCase="auto"/>
 </else>
 </if>
 </test>

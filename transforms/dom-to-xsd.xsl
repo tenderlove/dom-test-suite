@@ -113,6 +113,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xs:element name="{@name}">
 			<xs:complexType>
 				<xs:attribute name="id" type="xs:ID" use="optional"/>
+				<xsl:choose>
+					<xsl:when test="@name = 'contentType'">
+						<xs:attribute name="obj" type="variable" use="optional"/>
+						<xs:attribute name="type" type="loadContentType" use="optional"/>
+						<xs:attribute name="var" type="variable" use="optional"/>
+					</xsl:when>
+					
+					<xsl:otherwise>
+				    
 				<xs:attribute name="obj" type="variable" use="required"/>
 				<!--  if readonly, only the "var" attribute is produced.
 					  Otherwise both a "var" and "value" attribute are produced  -->
@@ -132,6 +141,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xs:attribute name="var" type="variable" use="required"/>
 					</xsl:otherwise>
 				</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
 
 				<!--  collect all attributes with this name   -->
 				<xsl:variable name="dups" select="key('featureByName',@name)"/>
@@ -144,6 +155,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xsl:when test="@name='length'">
 							<xsl:attribute name="use">required</xsl:attribute>
 						</xsl:when>
+						<xsl:when test="@name = 'contentType'">
+							<xsl:attribute name="use">optional</xsl:attribute>
+						</xsl:when>
+							
 						<xsl:when test="count($dups) &gt; 1">
 							<xsl:attribute name="use">required</xsl:attribute>
 						</xsl:when>
@@ -215,11 +230,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xs:complexType>
 							<xs:attribute name="id" type="xs:ID" use="optional"/>
 
-							<!--  If the method has a (non-void) return value then
-							      the var attribute is required to receive the return value  -->
-							<xsl:if test="returns[@type!='void']">
-								<xs:attribute name="var" type="variable" use="required"/>
-							</xsl:if>
 
                             <xsl:choose>
                                 <!--  if the method name is load,
@@ -227,6 +237,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                       with the DOM method and the framework method 
                                 -->
                                 <xsl:when test="@name = 'load'">
+									<xs:attribute name="var" type="variable" use="required"/>
 							        <!--  the invocation target attribute is required   -->
 							        <xs:attribute name="obj" type="variable" use="optional"/>
                                     <!--  all framework parameters are optional    -->
@@ -247,8 +258,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 								        </xsl:call-template>
 							        </xsl:for-each>
                                 </xsl:when>
+                                
+                                <xsl:when test="@name = 'contains'">
+									<xs:attribute name="var" type="variable" use="optional"/>
+                       				<xs:attribute name="obj" type="variable" use="required"/>
+                       				<xs:attribute name="substring" type="variableOrStringLiteral" use="optional"/>
+                                    <xs:attribute name="str" type="variableOrStringLiteral" use="optional"/>
+                                </xsl:when>
 
                                 <xsl:otherwise>
+									<!--  If the method has a (non-void) return value then
+							      		the var attribute is required to receive the return value  -->
+									<xsl:if test="returns[@type!='void']">
+										<xs:attribute name="var" type="variable" use="required"/>
+									</xsl:if>
 							        <!--  the invocation target attribute is required   -->
 							        <xs:attribute name="obj" type="variable" use="required"/>
 							        <!--  for each parameter    -->
@@ -268,7 +291,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xsl:variable name="dups" select="key('methodByName',@name)"/>
 							<xs:attribute name="interface">
 								<xsl:choose>
-									<xsl:when test="count($dups) &gt; 1 and @name != 'load'">
+									<xsl:when test="count($dups) &gt; 1 and @name != 'load' and @name != 'contains'">
 										<xsl:attribute name="use">required</xsl:attribute>
 									</xsl:when>
 									<xsl:otherwise>
@@ -617,7 +640,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                             <xs:sequence>
                                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
                                 <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
-                                <xs:element ref="return"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
@@ -639,7 +661,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                             <xs:sequence>
                                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
                                 <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
-                                <xs:element ref="return"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
@@ -667,11 +688,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                 <!--  define elements for every method in user implemented interfaces
                                     used like anonymous inner class definitions  -->
                                 <xs:choice>
-                                    <xsl:for-each select="$sinks">
+                                    <xsl:for-each select="$sinks[not(@inherits)]">
                                         <xs:sequence>
                                             <xsl:call-template name="produce-sink">
                                                 <xsl:with-param name="sinks" select="$sinks"/>
-                                                <xsl:with-param name="interface" select="@name"/>
                                             </xsl:call-template>
                                         </xs:sequence>
                                     </xsl:for-each>
@@ -1177,27 +1197,38 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="hasSize"/>
 					<xs:element ref="hasFeature"/>
 					<xs:element ref="implementationAttribute"/>
-                    <!--  defined locally since there is a contentType method in
-                                 ElementEditAs    -->
-	                <xs:element name="contentType">
-                        <xs:annotation>
-                            <xs:documentation>This condition will evaluate to true if the default
-                            content type for this test matches the specified type.</xs:documentation>
-                        </xs:annotation>
-		                <xs:complexType>
-			                <xs:attribute name="id" type="xs:ID" use="optional"/>
-			                <xs:attribute name="type" type="loadContentType" use="required"/>
-		                </xs:complexType>
-	                </xs:element>
-            		<xs:element name="contains">
-                		<xs:complexType>
-                    		<xs:attribute name="id" type="xs:ID" use="optional"/>
-                    		<xs:attribute name="obj" type="variable" use="required"/>
-                    		<xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
-                		</xs:complexType>
-            		</xs:element>
+					<xs:element ref="contentType"/>
+					<xs:element ref="contains"/>
 				</xs:choice>
 			</xs:group>
+
+			<!-- if the spec does not contain a contentType attribute (L1 & L2)
+			          then create the stock contentType condition element  -->
+			<xsl:if test="not($features[@name = 'contentType'])">
+	        	<xs:element name="contentType">
+                	 <xs:annotation>
+                       	<xs:documentation>This condition will evaluate to true if the default
+                            content type for this test matches the specified type.</xs:documentation>
+                 	  </xs:annotation>
+		              <xs:complexType>
+			     	     <xs:attribute name="id" type="xs:ID" use="optional"/>
+			             <xs:attribute name="type" type="loadContentType" use="required"/>
+		               </xs:complexType>
+	            </xs:element>
+	         </xsl:if>
+	         
+			<!-- if the spec does not contain a contains method (L1 & L2)
+			          then create the stock contains condition element  -->
+	         <xsl:if test="not($features[@name = 'contains'])">
+                <xs:element name="contains">
+             	    <xs:complexType>
+                 	   <xs:attribute name="id" type="xs:ID" use="optional"/>
+                       <xs:attribute name="obj" type="variable" use="required"/>
+                       <xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
+                     </xs:complexType>
+                </xs:element>
+             </xsl:if>
+			
 			<xs:element name="else">
 				<xs:complexType>
 					<xs:group ref="statement" maxOccurs="unbounded"/>
@@ -1369,9 +1400,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xsl:sort select="@name"/>
 						<xsl:variable name="current" select="."/>
 						<xsl:if test="not(preceding::method[@name=$current/@name])">
-							<xsl:if test="@name != 'hasFeature'">
-								<xs:element ref="{@name}"/>
-							</xsl:if>
+							<xsl:choose>
+								<xsl:when test="@name = 'hasFeature'"/>
+								<!--  firstChild and lastChild are both an attribute on Node
+								        and a method on TreeWalker.   
+								        Suppress the entry for the method to 
+								        avoid entering it twice in the statements group  -->
+								<xsl:when test="$attributes[@name = current()/@name]"/>
+								
+								
+								<xsl:otherwise>
+									<xs:element ref="{@name}"/>
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:if>
 					</xsl:for-each>
 				</xs:choice>
@@ -1416,23 +1457,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     <xsl:template name="produce-sink">
         <xsl:param name="sinks"/>
-        <xsl:param name="interface"/>
-        <xsl:for-each select="$sinks[@name=$interface]">
-            <!-- produce methods and attributes of superclass, if any   -->
-            <xsl:choose>
-                <xsl:when test="contains(@inherits, '::')">
-                    <xsl:call-template name="produce-sink">
-                        <xsl:with-param name="sinks" select="$sinks"/>
-                        <xsl:with-param name="interface" select="substring-after(@inherits, '::')"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:when test="@inherits">
-                    <xsl:call-template name="produce-sink">
-                        <xsl:with-param name="sinks" select="$sinks"/>
-                        <xsl:with-param name="interface" select="@inherits"/>
-                    </xsl:call-template>
-                </xsl:when>
-            </xsl:choose>
+        	<xs:sequence>
             <!--  produce methods and attributes of this class  -->
             <xsl:for-each select="method|attribute">
                 <xsl:choose>
@@ -1447,7 +1472,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each>
-        </xsl:for-each>
+            <xsl:variable name="derivedSinks" select="$sinks[contains(@inherits, current()/@name)]"/>
+            <xsl:if test="count($derivedSinks) != 0">
+            	<xs:choice minOccurs="0">
+            		<xsl:for-each select="$derivedSinks">
+            			<xsl:call-template name="produce-sink">
+            				<xsl:with-param name="sinks" select="$sinks"/>
+            			</xsl:call-template>
+            		</xsl:for-each>
+            	</xs:choice>
+            </xsl:if>
+        </xs:sequence>
     </xsl:template>
 
 </xsl:stylesheet>
