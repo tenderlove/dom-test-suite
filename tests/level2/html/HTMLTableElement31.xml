@@ -59,7 +59,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="testNode" var="tableList"/>
 -->
 <createElement obj="doc" var="table" tagName='"table"'/>
-<appendChild obj="testNode" newChild="table" var="tableNode"/>
+<appendChild obj="testNode.parentNode" newChild="table" var="tableNode"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
 <assertSize collection="nodeList" size="2" id="tableSize2"/>
 <tBodies interface="HTMLTableElement" obj="tableNode" var="tbodiesnodeList"/>
