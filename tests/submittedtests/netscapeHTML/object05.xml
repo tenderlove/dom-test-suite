@@ -36,5 +36,5 @@ The value of attribute codebase of the object element is read and checked agains
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <codeBase interface="HTMLObjectElement" obj="testNode" var="vcodebase"/>
-<assertEquals actual="vcodebase" expected='""http://xw2k.sdct.itl.nist.gov/brady/dom/"' id="codebaseLink" ignoreCase="false"/>
+<assertEquals actual="vcodebase" expected='"http://xw2k.sdct.itl.nist.gov/brady/dom/"' id="codebaseLink" ignoreCase="false"/>
 </test>
