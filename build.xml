@@ -13,7 +13,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.8  2001-08-02 04:44:15  dom-ts-4
+Revision 1.9  2001-08-10 18:53:25  dom-ts-3
+
+Attempt to make indentation more consistent, and limit line length to about
+80 characters, for those of us who still need to live in an 80-column world
+(if only due to geek social convention).
+
+This only changes whitespace, not content or structure.
+
+Revision 1.8  2001/08/02 04:44:15  dom-ts-4
 Adapter for Avalon test framework.
 
 Revision 1.7  2001/07/23 04:52:20  dom-ts-4
@@ -26,204 +34,268 @@ All implementation conditions combined into implementationAttribute element
 -->
 <project default="usage" basedir=".">
 
-	<target name="usage">
-		<echo message="domconftest build"/>
-		<echo message=""/>
-		<echo message="available targets:"/>
-		<echo message=""/>
-		<echo message="init"/>
-		<echo message="dom1-init, -schema, -dtd, -subjects, -interfaces"/>
-		<echo message="dom2-init, -schema, -dtd, -subjects, -interfaces"/>
-		<echo message="dom3-init, -schema, -dtd, -subjects, -interfaces"/>
-		<echo message="transform"/>
-		<echo message="compile"/>
-		<echo message="dist"/>
-	</target>
+<target name="usage">
+	<echo message="domconftest build"/>
+	<echo message=""/>
+	<echo message="available targets:"/>
+	<echo message=""/>
+	<echo message="init"/>
+	<echo message="dom1-init, -schema, -dtd, -subjects, -interfaces"/>
+	<echo message="dom2-init, -schema, -dtd, -subjects, -interfaces"/>
+	<echo message="dom3-init, -schema, -dtd, -subjects, -interfaces"/>
+	<echo message="transform"/>
+	<echo message="compile"/>
+	<echo message="dist"/>
+</target>
 
-	<target name="init">
-		<property name="specs.dir" value="./lib/specs"/>
-		<property name="transforms.dir" value="./transforms"/>
-		<property name="build.dir" value="./build"/>
-		<property name="java.build.dir" value="./build/java"/>
-		<property name="tests.dir" value="./tests"/>
-		<property name="metadata.dir" value="./build/metadata"/>
-        <property name="dist.dir" value="./dist"/>
-        <property name="lib.dir" value="./lib"/>
-		<!--  any jar that contains org.w3c.dom and javax.xml.parsers classes  -->
-		<property name="jaxp.jar" value="d:/ant1.4/lib/xerces.jar"/>
-		<mkdir dir="${build.dir}"/>
-        <mkdir dir="${lib.dir}"/>
-		<mkdir dir="${specs.dir}"/>
-        <mkdir dir="${dist.dir}"/>
-	</target>
+<target name="init">
+	<property name="specs.dir" value="./lib/specs"/>
+	<property name="transforms.dir" value="./transforms"/>
+	<property name="build.dir" value="./build"/>
+	<property name="java.build.dir" value="./build/java"/>
+	<property name="tests.dir" value="./tests"/>
+	<property name="metadata.dir" value="./build/metadata"/>
+	<property name="dist.dir" value="./dist"/>
+	<property name="lib.dir" value="./lib"/>
+	<!--  any jar that contains org.w3c.dom and javax.xml.parsers classes  -->
+	<property name="jaxp.jar" value="d:/ant1.4/lib/xerces.jar"/>
+	<mkdir dir="${build.dir}"/>
+	<mkdir dir="${lib.dir}"/>
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${dist.dir}"/>
+</target>
 
-	<target name="dom1-init" depends="init">
-		<mkdir dir="${specs.dir}"/>
-		<mkdir dir="${specs.dir}/Level-1"/>
-		<!--   download DOM 1 spec to specs directory   -->
-		<get src="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/DOM.zip"
-			dest="${specs.dir}/DOM.zip"
-			usetimestamp="yes"/>
+<target name="dom1-init" depends="init">
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/Level-1"/>
+	<!--   download DOM 1 spec to specs directory   -->
+	<get src="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/DOM.zip"
+	     dest="${specs.dir}/DOM.zip"
+	     usetimestamp="yes"/>
 
-		<unzip src="${specs.dir}/DOM.zip" dest="${specs.dir}/Level-1"/>
-		<unzip src="${specs.dir}/Level-1/xml-source.zip" dest="${specs.dir}/Level-1"/>
+	<unzip src="${specs.dir}/DOM.zip" dest="${specs.dir}/Level-1"/>
+	<unzip src="${specs.dir}/Level-1/xml-source.zip" dest="${specs.dir}/Level-1"/>
 
-		<!--  patch wd-dom file to add missing xmlns:xlink attribute  -->
-		<patch patchfile="./wd-dom.patch" originalfile="${specs.dir}/Level-1/xml/wd-dom.xml"/>
-		<patch patchfile="./level-1-element.patch" originalfile="${specs.dir}/Level-1/xml/definitions/level-one-core/element.xml"/>
+	<!--  patch wd-dom file to add missing xmlns:xlink attribute  -->
+	<patch patchfile="./wd-dom.patch"
+	       originalfile="${specs.dir}/Level-1/xml/wd-dom.xml"/>
+	<patch patchfile="./level-1-element.patch"
+	       originalfile="${specs.dir}/Level-1/xml/definitions/level-one-core/element.xml"/>
+</target>
 
-	</target>
+<target name="dom1-schema" depends="dom1-init">
+	<style basedir="${specs.dir}/Level-1/xml"
+	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
+	       out="${build.dir}/_dom1.xsd"
+	       style="${transforms.dir}/dom-to-xsd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
+	</style>
 
-	<target name="dom1-schema" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/_dom1.xsd" style="${transforms.dir}/dom-to-xsd.xsl">
-			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
-		</style>
+	<!--  remove leading underscore from _xmlns attribute    -->
+	<exec executable="sed" output="${build.dir}/dom1.xsd">
+		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1.xsd"/>
+	</exec>
+	<delete file="${build.dir}/_dom1.xsd"/>
+	<!-- xmlvalidate file="${build.dir}/dom1.xsd" lenient="no"
+	     failonerror="yes"
+	     classname="org.apache.xerces.parsers.SAXParser"/ -->
+</target>
 
-		<!--  remove leading underscore from _xmlns attribute    -->
-   		<exec executable="sed" output="${build.dir}/dom1.xsd">
-			<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1.xsd"/>
-   		</exec>
-		<delete file="${build.dir}/_dom1.xsd"/>
-		<!-- xmlvalidate file="${build.dir}/dom1.xsd" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/ -->
-	</target>
+<target name="dom1-dtd" depends="dom1-init">
+	<style basedir="${specs.dir}/Level-1/xml"
+	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
+	       out="${build.dir}/dom1.dtd"
+	       style="${transforms.dir}/dom-to-dtd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
+	</style>
+	<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/core"/>
+</target>
 
-	<target name="dom1-dtd" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
-			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
-		</style>
-		<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/core"/>
-	</target>
+<target name="dom1-subjects" depends="dom1-init">
+	<style basedir="${specs.dir}/Level-1/xml"
+	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
+	       out="${build.dir}/dom1-subjects.xml"
+	       style="${transforms.dir}/subjects.xsl"/>
+	<xmlvalidate file="${build.dir}/dom1-subjects.xml"
+	             lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+</target>
 
-	<target name="dom1-subjects" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-subjects.xml" style="${transforms.dir}/subjects.xsl"/>
-		<xmlvalidate file="${build.dir}/dom1-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-	</target>
+<target name="dom1-interfaces" depends="dom1-init">
+	<style basedir="${specs.dir}/Level-1/xml"
+	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
+	       out="${build.dir}/dom1-interfaces.xml"
+	       style="${transforms.dir}/extract.xsl"/>
+</target>
 
-	<target name="dom1-interfaces" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-interfaces.xml" style="${transforms.dir}/extract.xsl"/>
-	</target>
+<target name="dom2-init" depends="init">
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/Level-2"/>
+	<!--   download DOM 1 spec to specs directory   -->
+	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/DOM2-Core.zip"
+		dest="${specs.dir}/DOM2-Core.zip"
+		usetimestamp="yes"/>
 
-	<target name="dom2-init" depends="init">
-		<mkdir dir="${specs.dir}"/>
-		<mkdir dir="${specs.dir}/Level-2"/>
-		<!--   download DOM 1 spec to specs directory   -->
-		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/DOM2-Core.zip"
-			dest="${specs.dir}/DOM2-Core.zip"
-			usetimestamp="yes"/>
+	<unzip src="${specs.dir}/DOM2-Core.zip"
+	       dest="${specs.dir}/Level-2/Core"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/Core/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/core"/>
 
-		<unzip src="${specs.dir}/DOM2-Core.zip" dest="${specs.dir}/Level-2/Core"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-2/Core/xml-source.zip" dest="${specs.dir}/Level-2/xml/core"/>
+	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/DOM2-Views.zip"
+		dest="${specs.dir}/DOM2-Views.zip"
+		usetimestamp="yes"/>
 
-		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/DOM2-Views.zip"
-			dest="${specs.dir}/DOM2-Views.zip"
-			usetimestamp="yes"/>
-
-		<unzip src="${specs.dir}/DOM2-Views.zip" dest="${specs.dir}/Level-2/Views"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-2/Views/xml-source.zip" dest="${specs.dir}/Level-2/xml/views"/>
-
-
-		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/DOM2-Events.zip"
-			dest="${specs.dir}/DOM2-Events.zip"
-			usetimestamp="yes"/>
-
-		<unzip src="${specs.dir}/DOM2-Events.zip" dest="${specs.dir}/Level-2/Events"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-2/Events/xml-source.zip" dest="${specs.dir}/Level-2/xml/events"/>
-
-		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/DOM2-Style.zip"
-			dest="${specs.dir}/DOM2-Style.zip"
-			usetimestamp="yes"/>
-
-		<unzip src="${specs.dir}/DOM2-Style.zip" dest="${specs.dir}/Level-2/Style"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-2/Style/xml-source.zip" dest="${specs.dir}/Level-2/xml/style"/>
-
-		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/DOM2-Traversal-Range.zip"
-			dest="${specs.dir}/DOM2-Traversal-Range.zip"
-			usetimestamp="yes"/>
-
-		<unzip src="${specs.dir}/DOM2-Traversal-Range.zip" dest="${specs.dir}/Level-2/Traversal-Range"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-2/Traversal-Range/xml-source.zip" dest="${specs.dir}/Level-2/xml/traversal-range"/>
+	<unzip src="${specs.dir}/DOM2-Views.zip"
+	       dest="${specs.dir}/Level-2/Views"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/Views/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/views"/>
 
 
-		<get src="http://www.w3.org/TR/2000/WD-DOM-Level-2-HTML-20001113/DOM2-HTML.zip"
-			dest="${specs.dir}/DOM2-HTML.zip"
-			usetimestamp="yes"/>
+	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/DOM2-Events.zip"
+		dest="${specs.dir}/DOM2-Events.zip"
+		usetimestamp="yes"/>
 
-		<unzip src="${specs.dir}/DOM2-HTML.zip" dest="${specs.dir}/Level-2/HTML"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-2/HTML/xml-source.zip" dest="${specs.dir}/Level-2/xml/html"/>
+	<unzip src="${specs.dir}/DOM2-Events.zip"
+	       dest="${specs.dir}/Level-2/Events"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/Events/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/events"/>
 
-		<!--  zip file is missing two support files   -->
-		<echo file="${specs.dir}/Level-2/xml/options.xml" message="&lt;?xml version='1.0' encoding='UTF-8'?&gt;"/>
-		<echo file="${specs.dir}/Level-2/xml/status.xml" message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/DOM2-Style.zip"
+		dest="${specs.dir}/DOM2-Style.zip"
+		usetimestamp="yes"/>
+
+	<unzip src="${specs.dir}/DOM2-Style.zip"
+	       dest="${specs.dir}/Level-2/Style"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/Style/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/style"/>
+
+	<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/DOM2-Traversal-Range.zip"
+		dest="${specs.dir}/DOM2-Traversal-Range.zip"
+		usetimestamp="yes"/>
+
+	<unzip src="${specs.dir}/DOM2-Traversal-Range.zip"
+	       dest="${specs.dir}/Level-2/Traversal-Range"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/Traversal-Range/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/traversal-range"/>
 
 
-	</target>
+	<get src="http://www.w3.org/TR/2000/WD-DOM-Level-2-HTML-20001113/DOM2-HTML.zip"
+		dest="${specs.dir}/DOM2-HTML.zip"
+		usetimestamp="yes"/>
 
-	<target name="dom2-schema" depends="dom2-interfaces">
-		<style in="${build.dir}/dom2-interfaces.xml" out="${build.dir}/_dom2.xsd" style="${transforms.dir}/dom-to-xsd.xsl">
-			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
-		</style>
+	<unzip src="${specs.dir}/DOM2-HTML.zip"
+	       dest="${specs.dir}/Level-2/HTML"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-2/HTML/xml-source.zip"
+	       dest="${specs.dir}/Level-2/xml/html"/>
 
-		<!--  remove leading underscore from _xmlns attribute    -->
-   		<exec executable="sed" output="${build.dir}/dom2.xsd">
-			<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom2.xsd"/>
-   		</exec>
-		<delete file="${build.dir}/_dom2.xsd"/>
-	</target>
+	<!--  zip file is missing two support files   -->
+	<echo file="${specs.dir}/Level-2/xml/options.xml"
+	      message="&lt;?xml version='1.0' encoding='UTF-8'?&gt;"/>
+	<echo file="${specs.dir}/Level-2/xml/status.xml"
+	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+</target>
 
-	<target name="dom2-dtd" depends="dom2-interfaces">
-		<style in="${build.dir}/dom2-interfaces.xml" out="${build.dir}/dom2.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
-			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
-		</style>
-		<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/core"/>
-	</target>
+<target name="dom2-schema" depends="dom2-interfaces">
+	<style in="${build.dir}/dom2-interfaces.xml"
+	       out="${build.dir}/_dom2.xsd"
+	       style="${transforms.dir}/dom-to-xsd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
+	</style>
 
-	<target name="dom2-subjects" depends="dom2-init">
-		<!--  create a DOM 2 version of subjects.xsl  -->
-   		<exec executable="sed" output="${build.dir}/dom2-subjects.xsl">
-			<arg line="'{s/dom1.dtd/dom2.dtd/;s/Level-1/Level-2/;}' ${transforms.dir}/subjects.xsl"/>
-   		</exec>
+	<!--  remove leading underscore from _xmlns attribute    -->
+	<exec executable="sed" output="${build.dir}/dom2.xsd">
+		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom2.xsd"/>
+	</exec>
+	<delete file="${build.dir}/_dom2.xsd"/>
+</target>
 
-		<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml" out="${build.dir}/dom2-core-subjects.xml" style="${build.dir}/dom2-subjects.xsl"/>
-		<xmlvalidate file="${build.dir}/dom2-core-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-		<style in="${specs.dir}/Level-2/xml/views/dom-spec.xml" out="${build.dir}/dom2-views-subjects.xml" style="${build.dir}/dom2-subjects.xsl"/>
-		<xmlvalidate file="${build.dir}/dom2-views-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-		<style in="${specs.dir}/Level-2/xml/events/dom-spec.xml" out="${build.dir}/dom2-events-subjects.xml" style="${build.dir}/dom2-subjects.xsl"/>
-		<xmlvalidate file="${build.dir}/dom2-events-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-		<style in="${specs.dir}/Level-2/xml/traversal-range/dom-spec.xml" out="${build.dir}/dom2-traversal-range-subjects.xml" style="${build.dir}/dom2-subjects.xsl"/>
-		<xmlvalidate file="${build.dir}/dom2-traversal-range-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-		<style in="${specs.dir}/Level-2/xml/html/dom-spec.xml" out="${build.dir}/dom2-html-subjects.xml" style="${build.dir}/dom2-subjects.xsl"/>
-		<xmlvalidate file="${build.dir}/dom2-html-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-		<!--  remove DOM 2 version of subjects.xsl  -->
-		<delete file="{build.dir}/dom2-subjects.xsl"/>
-	</target>
+<target name="dom2-dtd" depends="dom2-interfaces">
+	<style in="${build.dir}/dom2-interfaces.xml"
+	       out="${build.dir}/dom2.dtd"
+	       style="${transforms.dir}/dom-to-dtd.xsl">
+		<param name="schema-namespace"
+		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
+	</style>
+	<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/core"/>
+</target>
 
-	<target name="dom2-interfaces" depends="dom2-init">
-		<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml" out="${build.dir}/dom2-interfaces.xml" style="${transforms.dir}/dom2-combine.xsl"/>
-		<xmlvalidate file="${build.dir}/dom2-interfaces.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-	</target>
+<target name="dom2-subjects" depends="dom2-init">
+	<!--  create a DOM 2 version of subjects.xsl  -->
+	<exec executable="sed" output="${build.dir}/dom2-subjects.xsl">
+		<arg line="'{s/dom1.dtd/dom2.dtd/;s/Level-1/Level-2/;}' ${transforms.dir}/subjects.xsl"/>
+	</exec>
+
+	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
+	       out="${build.dir}/dom2-core-subjects.xml"
+	       style="${build.dir}/dom2-subjects.xsl"/>
+	<xmlvalidate file="${build.dir}/dom2-core-subjects.xml"
+	             lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+	<style in="${specs.dir}/Level-2/xml/views/dom-spec.xml"
+	       out="${build.dir}/dom2-views-subjects.xml"
+	       style="${build.dir}/dom2-subjects.xsl"/>
+	<xmlvalidate file="${build.dir}/dom2-views-subjects.xml"
+	             lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+	<style in="${specs.dir}/Level-2/xml/events/dom-spec.xml"
+	       out="${build.dir}/dom2-events-subjects.xml"
+	       style="${build.dir}/dom2-subjects.xsl"/>
+	<xmlvalidate file="${build.dir}/dom2-events-subjects.xml"
+	             lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+	<style in="${specs.dir}/Level-2/xml/traversal-range/dom-spec.xml"
+	       out="${build.dir}/dom2-traversal-range-subjects.xml"
+	       style="${build.dir}/dom2-subjects.xsl"/>
+	<xmlvalidate file="${build.dir}/dom2-traversal-range-subjects.xml"
+	     lenient="no" failonerror="yes"
+	     classname="org.apache.xerces.parsers.SAXParser"/>
+	<style in="${specs.dir}/Level-2/xml/html/dom-spec.xml"
+	       out="${build.dir}/dom2-html-subjects.xml"
+	       style="${build.dir}/dom2-subjects.xsl"/>
+	<xmlvalidate file="${build.dir}/dom2-html-subjects.xml"
+	             lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+	<!--  remove DOM 2 version of subjects.xsl  -->
+	<delete file="{build.dir}/dom2-subjects.xsl"/>
+</target>
+
+
+
+<target name="dom2-interfaces" depends="dom2-init">
+	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
+	       out="${build.dir}/dom2-interfaces.xml"
+	       style="${transforms.dir}/dom2-combine.xsl"/>
+	<xmlvalidate file="${build.dir}/dom2-interfaces.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+</target>
 
 
 
 <target name="dom1-core-validate-tests" depends="init">
-	<xmlvalidate lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/core" includes="*.xml"/>  
 	</xmlvalidate>
 </target>
@@ -237,12 +309,13 @@ All implementation conditions combined into implementationAttribute element
 		   includes="*.xml" 
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
-		<param name="interfaces-docname" expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
 	</style>
 </target>
 
 <target name="common-javac" depends="init">
-    <mkdir dir="${java.build.dir}"/>
+	<mkdir dir="${java.build.dir}"/>
 	<javac srcdir="java/org/w3c/domts" 
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"/>
@@ -255,17 +328,21 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-core-jar" depends="dom1-core-javac">
-    <!--  will need to provide a manifest    -->
-    <jar jarfile="${dist.dir}/dom1-core.jar">
-        <fileset dir="${java.build.dir}" includes="org/w3c/domts/*" excludes="*.bak"/>
-        <fileset dir="${java.build.dir}" includes="org/w3c/domts/level1/core/*" excludes="*.bak"/>
-        <fileset dir="files/level1/core" excludes="*.bak"/>
-        <fileset dir="java" includes="org/w3c/domts/*" excludes="*.bak"/>
-    </jar>
+	<!--  will need to provide a manifest    -->
+	<jar jarfile="${dist.dir}/dom1-core.jar">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level1/core/*"
+		         excludes="*.bak"/>
+		<fileset dir="files/level1/core" excludes="*.bak"/>
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
 </target>
 
 <target name="junit-run" depends="common-javac">
-    <!--  get JUnit 3.7 into lib directory  -->
+	<!--  get JUnit 3.7 into lib directory  -->
 	<get src="http://download.sourceforge.net/junit/junit3.7.zip"
 		dest="${lib.dir}/junit.zip"
 		usetimestamp="yes"/>
@@ -280,199 +357,249 @@ All implementation conditions combined into implementationAttribute element
 
     <jar jarfile="${dist.dir}/junit-run.jar"
         manifest="java/junit/junit-run.mf">
-        <fileset dir="${java.build.dir}/junit" includes="org/w3c/domts/*" excludes="*.bak"/>
+        <fileset dir="${java.build.dir}/junit"
+	         includes="org/w3c/domts/*" excludes="*.bak"/>
     </jar>
-    
-
 </target>
 
 
 <target name="avalon-run" depends="common-javac">
-    <!--  get Avalon into lib directory  -->
-    <mkdir dir="${java.build.dir}/avalon"/>
+	<!--  get Avalon into lib directory  -->
+	<mkdir dir="${java.build.dir}/avalon"/>
 
-    <javac srcdir="java/avalon/org/w3c/domts"
-           destdir="${java.build.dir}/avalon"
-           classpath="${lib.dir}/testlet.jar;${java.build.dir}"/>
+	<javac srcdir="java/avalon/org/w3c/domts"
+	       destdir="${java.build.dir}/avalon"
+	       classpath="${lib.dir}/testlet.jar;${java.build.dir}"/>
 
-
-    <jar jarfile="${dist.dir}/avalon-run.jar"
-        manifest="java/avalon/avalon-run.mf">
-        <fileset dir="${java.build.dir}/avalon" includes="org/w3c/domts/*" excludes="*.bak"/>
-    </jar>
-
+	<jar jarfile="${dist.dir}/avalon-run.jar"
+	     manifest="java/avalon/avalon-run.mf">
+		<fileset dir="${java.build.dir}/avalon"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
 </target>
 
 
 <target name="clean" depends="init">
-    <delete dir="${build.dir}"/>
+	<delete dir="${build.dir}"/>
 </target>
 
-	<target name="dom3-init" depends="init">
-		<mkdir dir="${specs.dir}"/>
-		<mkdir dir="${specs.dir}/Level-3"/>
-		<!--   download DOM 1 spec to specs directory   -->
-		<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010605/DOM3-Core.zip"
-			dest="${specs.dir}/DOM3-Core.zip"
-			usetimestamp="yes"/>
+<target name="dom3-init" depends="init">
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/Level-3"/>
+	<!--   download DOM 1 spec to specs directory   -->
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010605/DOM3-Core.zip"
+		dest="${specs.dir}/DOM3-Core.zip"
+		usetimestamp="yes"/>
 
-		<unzip src="${specs.dir}/DOM3-Core.zip" dest="${specs.dir}/Level-3/Core"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-3/Core/xml-source.zip" dest="${specs.dir}/Level-3/xml/core"/>
+	<unzip src="${specs.dir}/DOM3-Core.zip"
+	       dest="${specs.dir}/Level-3/Core"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/Core/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/core"/>
 
-		<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20010607/DOM3-ASLS.zip"
-			dest="${specs.dir}/DOM3-ASLS.zip"
-			usetimestamp="yes"/>
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20010607/DOM3-ASLS.zip"
+		dest="${specs.dir}/DOM3-ASLS.zip"
+		usetimestamp="yes"/>
 
-		<unzip src="${specs.dir}/DOM3-ASLS.zip" dest="${specs.dir}/Level-3/ASLS"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-3/ASLS/xml-source.zip" dest="${specs.dir}/Level-3/xml/asls"/>
-
-
-		<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20010618/DOM3-XPath.zip"
-			dest="${specs.dir}/DOM3-XPath.zip"
-			usetimestamp="yes"/>
-
-		<unzip src="${specs.dir}/DOM3-XPath.zip" dest="${specs.dir}/Level-3/XPath"/>
-		<!--  XML source has unusual ../../whatever paths,
-		        must put in several layers deep to prevent writing out
-				of build tree   -->
-		<unzip src="${specs.dir}/Level-3/XPath/xml-source.zip" dest="${specs.dir}/Level-3/xml/xpath"/>
-
-	</target>
-
-	<target name="svg-init" depends="init">
-		<mkdir dir="${specs.dir}"/>
-		<mkdir dir="${specs.dir}/SVG1.0"/>
-		<!--   download SVG 1.0 Proposed Recommendation to specs directory   -->
-		<get src="http://www.w3.org/TR/2001/PR-SVG-20010719/PR-SVG-20010719.zip"
-			dest="${specs.dir}/SVG.zip"
-			usetimestamp="yes"/>
+	<unzip src="${specs.dir}/DOM3-ASLS.zip"
+	       dest="${specs.dir}/Level-3/ASLS"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/ASLS/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/asls"/>
 
 
-		<unzip src="${specs.dir}/SVG.zip" dest="${specs.dir}/SVG1.0"/>
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20010618/DOM3-XPath.zip"
+		dest="${specs.dir}/DOM3-XPath.zip"
+		usetimestamp="yes"/>
 
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/coords.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/coords.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/coords.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+	<unzip src="${specs.dir}/DOM3-XPath.zip"
+	       dest="${specs.dir}/Level-3/XPath"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/XPath/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/xpath"/>
 
+</target>
 
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/animate.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/animate.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/animate.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/color.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/color.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/color.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/extend.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/extend.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/extend.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/interact.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/interact.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/interact.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/linking.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/linking.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/linking.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/masking.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/masking.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/masking.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/painting.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/painting.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/painting.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/paths.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/paths.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/paths.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/pservers.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/pservers.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/pservers.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/script.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/script.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/script.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/shapes.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/shapes.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/shapes.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/struct.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/struct.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/struct.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-
-    	<exec executable="sed" output="${specs.dir}/SVG1.0/types.xml">
-			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/types.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/types.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+<target name="svg-init" depends="init">
+	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/SVG1.0"/>
+	<!--   download SVG 1.0 Proposed Recommendation to specs directory   -->
+	<get src="http://www.w3.org/TR/2001/PR-SVG-20010719/PR-SVG-20010719.zip"
+		dest="${specs.dir}/SVG.zip"
+		usetimestamp="yes"/>
 
 
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/text.xml">
-			<arg line="-e'23,5269d' -f svgfix.sed ${specs.dir}/SVG1.0/text.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/text.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+	<unzip src="${specs.dir}/SVG.zip" dest="${specs.dir}/SVG1.0"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/coords.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/coords.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/coords.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/animate.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/animate.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/animate.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/color.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/color.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/color.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/extend.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/extend.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/extend.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/filters.xml">
-			<arg line="-e'24,4785d' -f svgfix.sed ${specs.dir}/SVG1.0/filters.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/filters.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/interact.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/interact.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/interact.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
-   		<exec executable="sed" output="${specs.dir}/SVG1.0/styling.xml">
-			<arg line="-e'23,1563d' -f svgfix.sed ${specs.dir}/SVG1.0/styling.html"/>
-   		</exec>
-		<xmlvalidate file="${specs.dir}/SVG1.0/styling.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/linking.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/linking.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/linking.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
-	</target>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/masking.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/masking.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/masking.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
-	<target name="svg-interfaces" depends="svg-init,dom2-interfaces">
-		<style basedir="${specs.dir}/SVG1.0" in="${specs.dir}/SVG1.0/coords.xml" out="${build.dir}/svg-interfaces.xml" style="${transforms.dir}/svg-to-interface.xsl">
-			<param name="dom2-interfaces" expression="../${build.dir}/dom2-interfaces.xml"/>
-		</style>
-		<xmlvalidate file="${build.dir}/svg-interfaces.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-	</target>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/painting.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/painting.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/painting.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
-	<target name="svg-schema" depends="svg-interfaces">
-		<style in="${build.dir}/svg-interfaces.xml" out="${build.dir}/_svg.xsd" style="${transforms.dir}/dom-to-xsd.xsl">
-			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/SVG"/>
-		</style>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/paths.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/paths.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/paths.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
-		<!--  remove leading underscore from _xmlns attribute    -->
-   		<exec executable="sed" output="${build.dir}/svg.xsd">
-			<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_svg.xsd"/>
-   		</exec>
-		<delete file="${build.dir}/_svg.xsd"/>
-		<xmlvalidate file="${build.dir}/svg.xsd" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
-	</target>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/pservers.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/pservers.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/pservers.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
 
-	<target name="svg-dtd" depends="svg-interfaces">
-		<style in="${build.dir}/svg-interfaces.xml" out="${build.dir}/svg.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
-			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/SVG"/>
-		</style>
-		<!-- copy file="${build.dir}/svg.dtd" todir="${tests.dir}/svg"/ -->
-	</target>
+	<exec executable="sed" output="${specs.dir}/SVG1.0/script.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/script.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/script.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/shapes.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/shapes.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/shapes.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/struct.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/struct.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/struct.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+<exec executable="sed" output="${specs.dir}/SVG1.0/types.xml">
+		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/types.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/types.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/text.xml">
+		<arg line="-e'23,5269d' -f svgfix.sed ${specs.dir}/SVG1.0/text.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/text.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/filters.xml">
+		<arg line="-e'24,4785d' -f svgfix.sed ${specs.dir}/SVG1.0/filters.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/filters.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<exec executable="sed" output="${specs.dir}/SVG1.0/styling.xml">
+		<arg line="-e'23,1563d' -f svgfix.sed ${specs.dir}/SVG1.0/styling.html"/>
+	</exec>
+	<xmlvalidate file="${specs.dir}/SVG1.0/styling.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+</target>
+
+<target name="svg-interfaces" depends="svg-init,dom2-interfaces">
+	<style basedir="${specs.dir}/SVG1.0"
+	       in="${specs.dir}/SVG1.0/coords.xml"
+	       out="${build.dir}/svg-interfaces.xml"
+	       style="${transforms.dir}/svg-to-interface.xsl">
+		<param name="dom2-interfaces" expression="../${build.dir}/dom2-interfaces.xml"/>
+	</style>
+	<xmlvalidate file="${build.dir}/svg-interfaces.xml"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+</target>
+
+<target name="svg-schema" depends="svg-interfaces">
+	<style in="${build.dir}/svg-interfaces.xml"
+	       out="${build.dir}/_svg.xsd"
+	       style="${transforms.dir}/dom-to-xsd.xsl">
+		<param name="schema-namespace"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/SVG"/>
+	</style>
+
+	<!--  remove leading underscore from _xmlns attribute    -->
+	<exec executable="sed" output="${build.dir}/svg.xsd">
+		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_svg.xsd"/>
+	</exec>
+	<delete file="${build.dir}/_svg.xsd"/>
+	<xmlvalidate file="${build.dir}/svg.xsd"
+	             lenient="yes" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser"/>
+</target>
+
+<target name="svg-dtd" depends="svg-interfaces">
+	<style in="${build.dir}/svg-interfaces.xml"
+	       out="${build.dir}/svg.dtd"
+	       style="${transforms.dir}/dom-to-dtd.xsl">
+		<param name="schema-namespace"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/SVG"/>
+	</style>
+	<!-- copy file="${build.dir}/svg.dtd" todir="${tests.dir}/svg"/ -->
+</target>
 
 
 </project> 
