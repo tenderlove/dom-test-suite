@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+<!DOCTYPE test SYSTEM "dom2.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLTableSectionElement14">
+<metadata>
+<title>HTMLTableSectionElement14</title>
+<creator>NIST</creator>
+<description>
+    The rows attribute specifies the collection of rows in this table section. 
+
+    Retrieve the first TFOOT element and examine the value of
+    the rows length attribute.
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2002-01-18</date>
+</metadata>
+<var name="nodeList" type="NodeList"/>
+<var name="rowsnodeList" type="HTMLCollection"/>
+<var name="testNode" type="Node"/>
+<var name="vrows" type="int" />
+<var name="doc" type="Node"/>
+<load var="doc" href="tablesection" willBeModified="false"/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"tfoot"'/>
+<assertSize collection="nodeList" size="1" id="Asize"/>
+<item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
+<rows interface="HTMLTableSectionElement" obj="testNode" var="rowsnodeList"/>
+<length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
+<assertEquals actual="vrows" expected="1" id="rowsLink" ignoreCase="auto"/>
+</test>
