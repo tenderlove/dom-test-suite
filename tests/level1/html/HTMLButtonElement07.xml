@@ -26,7 +26,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     Retrieve the type attribute and examine its value.  
 </description>
 <contributor>Mary Brady</contributor>
-<date qualifier="created">2002-02-22</date>
+<date qualifier="created"2002-02-22</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#ID-27430092"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
