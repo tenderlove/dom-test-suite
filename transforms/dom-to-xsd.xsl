@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>							  
-<!--
+<!--                                                                 
  * Copyright (c) 2001 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
@@ -335,7 +335,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:annotation>
 					<xs:documentation>The union of accepted literal types</xs:documentation>
 				</xs:annotation>
-				<xs:union memberTypes="xs:integer stringLiteral"/>
+				<xs:union memberTypes="xs:integer xs:boolean stringLiteral"/>
 			</xs:simpleType>
 			<xs:simpleType name="variableOrLiteral">
 				<xs:union memberTypes="literal variable"/>
