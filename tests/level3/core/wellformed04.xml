@@ -37,7 +37,9 @@ normalize document with well-formed set to false.
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="errorMonitor" type="DOMErrorMonitor"/>
 <var name="errors" type="List"/>
+<var name="error" type="DOMError"/>
 <var name="canSet" type="boolean"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <implementation var="domImpl"/>
 <createDocument var="doc" obj="domImpl"
 	namespaceURI='"http://www.w3.org/1999/xhtml"' 
@@ -46,8 +48,9 @@ normalize document with well-formed set to false.
 <documentElement var="docElem" obj="doc"/>	
 <assertDOMException id="xml10InvalidName">
 	<INVALID_CHARACTER_ERR>
-		<createAttribute var="attr" obj="doc" 
-			name='"LegalName&#2190;"'/>
+		<createAttributeNS var="attr" obj="doc" 
+		    namespaceURI="nullNS"
+			qualifiedName='"LegalName&#2190;"'/>
 	</INVALID_CHARACTER_ERR>
 </assertDOMException>
 <try>
@@ -58,7 +61,7 @@ normalize document with well-formed set to false.
 		</DOMException>
 	</catch>
 </try> 
-<setAttribute obj="docElem" name='"LegalName&#2190;"' value='"foo"'/>
+<setAttributeNS obj="docElem" namespaceURI="nullNS" qualifiedName='"LegalName&#2190;"' value='"foo"'/>
 <xmlVersion obj="doc" value='"1.0"' interface="Document"/>
 <domConfig var="domConfig" obj="doc" interface="Document"/>
 <canSetParameter var="canSet" obj="domConfig" name='"well-formed"' value="false"/>
@@ -67,7 +70,9 @@ normalize document with well-formed set to false.
 <setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <normalizeDocument obj="doc"/>
 <allErrors var="errors" obj="errorMonitor"/>
-<assertSize size="0" collection="errors" id="noError"/>
+<for-each member="error" collection="errors">
+	<assertNull actual="error" id="noErrorsExpected"/>
+</for-each>
 </if>		
 </test> 
  
