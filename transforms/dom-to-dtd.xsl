@@ -70,7 +70,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
  PURPOSE.
  See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
-This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:text> by dom-to-xsd.dtd.
+This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:text> by dom-to-xsd.xsl.
 
 --&gt;
 
