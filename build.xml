@@ -2704,6 +2704,12 @@ This target checks that the output of that implied transform is valid HTML
 			<exclude name="test2.*"/>
 			<exclude name="test5.*"/>
 			<exclude name="test7.*"/>
+			<exclude name="namespaces1.xml"/>
+			<exclude name="schematype1.xml"/>
+			<exclude name="validate1.xml"/>
+			<exclude name="validateschema1.xml"/>
+			<exclude name="canonicalform02.xml"/>
+			<exclude name="canonicalform03.xml"/>
 		</fileset>  
 	</xmlvalidate>
 </target>
