@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.48  2002-02-26 07:18:21  dom-ts-4
+Revision 1.49  2002-02-28 06:52:48  dom-ts-4
+Added dom2-core-dist
+
+Revision 1.48  2002/02/26 07:18:21  dom-ts-4
 Copy test-to-html.xsl to distribution tests directory
 
 Revision 1.47  2002/02/22 10:15:55  dom-ts-4
@@ -248,7 +251,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<!--  remove leading underscore from _xmlns attribute    -->
 	<exec executable="sed" output="${build.dir}/dom1.xsd">
-		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1.xsd"/>
+		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g' ${build.dir}/_dom1.xsd"/>
 	</exec>
 	<delete file="${build.dir}/_dom1.xsd"/>
 	<copy file="${build.dir}/dom1.xsd" todir="${tests.dir}/level1/core"/>
@@ -326,7 +329,6 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-core-dist" depends="dom1-core-jar,dom1-core-gen-jsunit,dom1-core-matrix,dom1-core-doxygen,junit-run,get-junit-license,dom1-schema">
-    <mkdir dir="${build.dir}/level1/core"/>
     <mkdir dir="${build.dir}/level1/core/resources"/>
     <mkdir dir="${build.dir}/level1/core/java"/>
     <copy file="docs/level1/core/index.htm" todir="${build.dir}/level1/core"/>
@@ -411,7 +413,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<!--  remove leading underscore from _xmlns attribute    -->
 	<exec executable="sed" output="${build.dir}/dom1SE.xsd">
-		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1SE.xsd"/>
+		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g' ${build.dir}/_dom1SE.xsd"/>
 	</exec>
 	<delete file="${build.dir}/_dom1SE.xsd"/>
 	<copy file="${build.dir}/dom1SE.xsd" todir="${tests.dir}/level1/core"/>
@@ -587,7 +589,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<!--  remove leading underscore from _xmlns attribute    -->
 	<exec executable="sed" output="${build.dir}/dom2.xsd">
-		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom2.xsd"/>
+		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g'  ${build.dir}/_dom2.xsd"/>
 	</exec>
 	<delete file="${build.dir}/_dom2.xsd"/>
 </target>
@@ -822,11 +824,20 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-core-gen-java" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level2/core"/>
-    <!-- TODO: explicitly excludes tests that Xalan 2.1 has problems with  -->
+
+    <!--  a prefabricated importNode02.java and others
+             are provided since some versions of Xalan-J
+                   will stall when processing it    -->
+    <copy file="${tests.dir}/level2/core/importNode02.java" 
+            todir="${java.build.dir}/org/w3c/domts/level2/core"/>
+
+    <copy file="${tests.dir}/level2/core/ownerDocument01.java" 
+            todir="${java.build.dir}/org/w3c/domts/level2/core"/>
+
 	<style basedir="${tests.dir}/level2/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level2/core" 
 		   includes="*.xml" 
-           excludes="metadata.xml"
+           excludes="metadata.xml,importNode02.xml,ownerDocument01.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -1051,6 +1062,81 @@ All implementation conditions combined into implementationAttribute element
 	</jar>
 </target>
 
+<target name="dom2-core-metadata" depends="dom2-init">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level2/core/alltests.xml" 
+		   out="${build.dir}/dom2-core-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
+
+<target name="dom2-core-matrix" depends="dom2-core-metadata,dom2-subjects,dom2-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom2-core-metadata.rdf" 
+		   out="${build.dir}/dom2-core-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
+        <param name="interfacesURL" expression="dom2-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom2-subjects.xml"/>
+	</style>
+</target>
+
+
+<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-matrix,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema">
+    <mkdir dir="${build.dir}/level2/core/resources"/>
+    <mkdir dir="${build.dir}/level2/core/java"/>
+    <copy file="docs/level2/core/index.htm" todir="${build.dir}/level2/core"/>
+    <copy todir="${build.dir}/level2/core/resources">
+        <fileset dir="docs/level2/core/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom2-core.jar" todir="${build.dir}/level2/core/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level2/core/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level2/core/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level2/core/java"/>
+    <copy file="${lib.dir}/jsunit/testRunner.html" todir="${build.dir}/level2/core/ecmascript"/>
+    <mkdir dir="${build.dir}/level2/core/ecmascript/app"/>
+    <copy todir="${build.dir}/level2/core/ecmascript/app">
+        <fileset dir="${lib.dir}/jsunit/app" excludes="*.bak"/>
+    </copy>
+    <mkdir dir="${build.dir}/level2/core/ecmascript/images"/>
+    <copy todir="${build.dir}/level2/core/ecmascript/images">
+        <fileset dir="${lib.dir}/jsunit/images" excludes="*.bak"/>
+    </copy>
+    <mkdir dir="${build.dir}/level2/core/ecmascript/docs"/>
+    <copy todir="${build.dir}/level2/core/ecmascript/docs">
+        <fileset dir="${lib.dir}/jsunit/docs" excludes="*.bak"/>
+    </copy>
+    <mkdir dir="${build.dir}/level2/core/ecmascript/jsunit-self-tests"/>
+    <copy todir="${build.dir}/level2/core/ecmascript/jsunit-self-tests">
+        <fileset dir="${lib.dir}/jsunit/tests" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom2-core-matrix.html" todir="${build.dir}/level2/core"/>
+
+
+    <mkdir dir="${build.dir}/level2/core/tests/files"/>
+    <copy todir="${build.dir}/level2/core/tests">
+        <fileset dir="${tests.dir}/level2/core" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom2.dtd"/>
+        <fileset dir="${build.dir}" includes="dom2.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level2/core/tests/files">
+        <fileset dir="${tests.dir}/level2/core/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom2-core.zip" basedir="${build.dir}/level2/core"/>
+    <tar tarfile="${dist.dir}/dom2-core.tar" basedir="${build.dir}/level2/core"/>
+    <gzip src="${dist.dir}/dom2-core.tar" zipfile="${dist.dir}/dom2-core.tar.gz"/>
+        
+        
+</target>
+
 
 <target name="clean" depends="init">
 	<delete dir="${build.dir}"/>
@@ -1206,7 +1292,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<!--  remove leading underscore from _xmlns attribute    -->
 	<exec executable="sed" output="${build.dir}/dom3.xsd">
-		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom3.xsd"/>
+		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g'  ${build.dir}/_dom3.xsd"/>
 	</exec>
 	<delete file="${build.dir}/_dom3.xsd"/>
 </target>
@@ -1411,7 +1497,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<!--  remove leading underscore from _xmlns attribute    -->
 	<exec executable="sed" output="${build.dir}/svg.xsd">
-		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_svg.xsd"/>
+		<arg line="-e 's/_xmlns/xmlns/g' -e 's/xmlns_test/xmlns:test/g'  ${build.dir}/_svg.xsd"/>
 	</exec>
 	<delete file="${build.dir}/_svg.xsd"/>
 	<xmlvalidate file="${build.dir}/svg.xsd"
