@@ -26,7 +26,8 @@ and combine-metadata.xsl
      <xsl:param name="specURI">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#</xsl:param>
      <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
      <xsl:param name="buildPath">tests/</xsl:param>
-     <xsl:param name="doxyPath">doxygen/html/class</xsl:param>
+     <xsl:param name="doxyPath">doxygen/html/</xsl:param>
+     <xsl:param name="doxySuffix">_8java-source.html</xsl:param>
      <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
 
 	<xsl:output method="html"/>
@@ -169,7 +170,7 @@ sorted alphabetically.
                             <xsl:text> (</xsl:text> 
                 		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
                             <xsl:text> </xsl:text>
-                		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.html'))}" title="{dc:description}">Java</a>
+                		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
                             <xsl:text>)</xsl:text>
                             </td>
                             <td>

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.110  2003-12-02 03:47:44  dom-ts-4
+Revision 1.111  2003-12-03 21:27:47  dom-ts-4
+Added dom3-val-dist target (bug 398)
+
+Revision 1.110  2003/12/02 03:47:44  dom-ts-4
 Test matrices and load/save fixup (bug 395 and 396)
 
 Revision 1.109  2003/11/24 19:49:28  dom-ts-4
@@ -2307,6 +2310,29 @@ All implementation conditions combined into implementationAttribute element
     </style>
 </target>
 
+<target name="dom3-val-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level3/validation/files"/>
+    <copy todir="${build.dir}/ecmascript/level3/validation">
+      <fileset dir="ecmascript" includes="*.js"/>
+    </copy>
+    <copy todir="${build.dir}/ecmascript/level3/validation/files">
+      <fileset dir="tests/level3/validation/files" excludes="*.bak"/>
+    </copy>
+    
+    <style basedir="${tests.dir}/level3/validation" 
+      destdir="${build.dir}/ecmascript/level3/validation" 
+      includes="*.xml" 
+      excludes="metadata.xml"
+      style="${transforms.dir}/test-to-jsunit.xsl" 
+      extension=".html">
+      <param name="interfaces-docname"
+	expression="../${build.dir}/dom3-interfaces.xml"/>
+      <param name="target-uri-base"
+	expression="http://www.w3.org/2001/DOM-Test-Suite/level3/validation/"/>
+      <param name="testpath" expression="../level3/validation/"/>
+    </style>
+</target>
+
 <!--  
 
 This target generates Java code for one DOM 3 test
@@ -2574,7 +2600,7 @@ it would compile all DOM 3 java code
 
 
 <target name="dom3-val-jar" depends="dom3-val-javac">
-	<jar jarfile="${build.dir}/dom3-val.jar"  manifest="java/dom3-val.mf">
+	<jar jarfile="${build.dir}/dom3-validation.jar"  manifest="java/dom3-val.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 		<fileset dir="${java.build.dir}"
@@ -2630,7 +2656,7 @@ it would compile all DOM 3 java code
 	</style>
 </target>
 
-<target name="dom3-val-metadata" depends="dom3-schema">
+<target name="dom3-val-metadata" depends="dom3-dtd, dom3-schema">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/validation/alltests.xml" 
 		   out="${build.dir}/dom3-val-metadata.rdf" 
@@ -2685,7 +2711,7 @@ it would compile all DOM 3 java code
 <target name="dom3-val-matrix" depends="dom3-val-metadata,dom3-subjects,dom3-interfaces">
     <mkdir dir="${build.dir}"/>
 	<style in="${build.dir}/dom3-val-metadata.rdf" 
-		   out="${build.dir}/dom3-val-matrix.html" 
+		   out="${build.dir}/dom3-validation-matrix.html" 
 	       style="${transforms.dir}/test-matrix.xsl">
 		<param name="specURI"
 		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-Val-20030730/validation#"/>
@@ -2915,6 +2941,17 @@ it would compile all DOM 3 java code
 
 </target>
 
+<target name="dom3-val-doxygen" depends="dom3-val-gen-java">
+    <mkdir dir="${build.dir}/level3/validation/doxygen"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="doxygen/dom3-val.doxygen"/>
+    </exec>
+
+</target>
+
 <target name="dom3-xpath-doxygen" depends="dom3-xpath-gen-java">
     <mkdir dir="${build.dir}/level3/xpath/doxygen"/>
 
@@ -3004,6 +3041,48 @@ it would compile all DOM 3 java code
     <zip  zipfile="${dist.dir}/dom3-ls.zip" basedir="${build.dir}/level3/ls"/>
     <tar tarfile="${dist.dir}/dom3-ls.tar" basedir="${build.dir}/level3/ls"/>
     <gzip src="${dist.dir}/dom3-ls.tar" zipfile="${dist.dir}/dom3-ls.tar.gz"/>
+        
+        
+</target>
+
+
+<target name="dom3-val-dist" depends="dom3-val-jar,dom3-val-gen-jsunit,dom3-val-matrix,dom3-val-doxygen,junit-run,get-junit-license,dom3-schema">
+    <mkdir dir="${build.dir}/level3/validation/resources"/>
+    <mkdir dir="${build.dir}/level3/validation/java"/>
+    <copy file="docs/level3/validation/index.htm" todir="${build.dir}/level3/validation"/>
+    <copy todir="${build.dir}/level3/validation/resources">
+        <fileset dir="docs/level3/validation/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-validation.jar" todir="${build.dir}/level3/validation/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level3/validation/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level3/validation/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level3/validation/java"/>
+
+    <copy todir="${build.dir}/level3/validation/ecmascript/jsunit">
+        <fileset dir="${build.dir}/ecmascript/jsunit" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom3-validation-matrix.html" todir="${build.dir}/level3/validation"/>
+
+    <mkdir dir="${build.dir}/level3/validation/ecmascript/level3/validation"/>
+    <copy todir="${build.dir}/level3/validation/ecmascript/level3/validation">
+        <fileset dir="${build.dir}/ecmascript/level3/validation"/>
+    </copy>
+
+    <mkdir dir="${build.dir}/level3/validation/tests/files"/>
+    <copy todir="${build.dir}/level3/validation/tests">
+        <fileset dir="${tests.dir}/level3/validation" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom3.dtd"/>
+        <fileset dir="${build.dir}" includes="dom3.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
+    </copy>
+    <copy todir="${build.dir}/level3/validation/tests/files">
+        <fileset dir="${tests.dir}/level3/validation/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom3-validation.zip" basedir="${build.dir}/level3/validation"/>
+    <tar tarfile="${dist.dir}/dom3-validation.tar" basedir="${build.dir}/level3/validation"/>
+    <gzip src="${dist.dir}/dom3-validation.tar" zipfile="${dist.dir}/dom3-validation.tar.gz"/>
         
         
 </target>
