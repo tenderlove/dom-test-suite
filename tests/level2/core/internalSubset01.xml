@@ -21,20 +21,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>NIST</creator>
 <description>
     The "getInternalSubset()" method returns 
-   the internal subset as a string.
+   the internal subset as a string or null if there is none.
+   This does not contain the delimiting brackets.
    
    Retrieve the documenttype.
-   Apply the "getInternalSubset()" method.  The string "" should be
-   returned.
+   Apply the "getInternalSubset()" method.  Null is returned since there 
+   is not an internal subset.
 </description>
 <contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
+<date qualifier="created">2001-07-02</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="internal" type="DOMString"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staff2" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <internalSubset obj="docType" var="internal"/>
+<assertNull actual="internal" id="throw_Null"/>
 </test>
