@@ -25,7 +25,8 @@ and combine-metadata.xsl
      <xsl:param name="interfacesURL">../build/dom1-interfaces.xml</xsl:param>
      <xsl:param name="specURI">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#</xsl:param>
      <xsl:param name="specMetadataURL">../build/dom1-subjects.xml</xsl:param>
-     <xsl:param name="buildPath">../tests/level1/core/</xsl:param>
+     <xsl:param name="buildPath">tests/</xsl:param>
+     <xsl:param name="doxyPath">doxygen/html/class</xsl:param>
 
 	<xsl:output method="html"/>
 
@@ -159,9 +160,12 @@ sorted alphabetically.
                         <tr>
                             <td width="25%">
 		                    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>                             
-                		    <a href="{concat($buildPath,$testName,'.xml')}" title="{dc:description}">
-                                    <xsl:call-template name="emit-title"/>
-                                </a>
+                            <xsl:call-template name="emit-title"/>
+                            <xsl:text> (</xsl:text> 
+                		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+                            <xsl:text> </xsl:text>
+                		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.html'))}" title="{dc:description}">Java</a>
+                            <xsl:text>)</xsl:text>
                             </td>
                             <td>
                                 <xsl:variable name="testsubjects" select="$subjects[@rdf:about = $test/dc:subject/@rdf:resource]"/>
@@ -238,9 +242,12 @@ sorted alphabetically.
             <xsl:for-each select="$tests[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
 		    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>
-		    <a href="{concat($buildPath,$testName,'.xml')}" title="{dc:description}">
-                          <xsl:call-template name="emit-title"/>
-                    </a>
+            <xsl:call-template name="emit-title"/>
+            <xsl:text> (</xsl:text>
+		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+            <xsl:text> </xsl:text>
+		    <a href="{concat($doxyPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.html'))}" title="{dc:description}">Java</a>
+            <xsl:text>) </xsl:text>
 			<xsl:value-of select="dc:description" />
                 </td>
             </xsl:for-each>
