@@ -7,7 +7,7 @@
 <title>NIST DOM HTML Test - LEGEND</title>
 </head>
 <body> 
-<form name="form1" action="./files/getData.pl" method="post">
+<form id="form1" action="./files/getData.pl" method="post">
 <fieldset>
 <legend accesskey="b" align="top">Enter Password1:</legend>
 <input id="input1" type="password" name="Password1"/>

@@ -7,7 +7,7 @@
 <title>NIST DOM HTML Test - ISINDEX</title>
 </head>
 <body> 
-<form name="form1" action="./files/getData.pl" method="post">
+<form id="form1" action="./files/getData.pl" method="post">
 <isindex prompt="New Employee: "/>
 </form>
 <isindex prompt="Old Employee: "/>
