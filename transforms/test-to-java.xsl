@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.17  2001-12-10 05:37:22  dom-ts-4
+Revision 1.18  2002-01-04 08:09:47  dom-ts-4
+Added import org.w3c.dom.html.* and .events.*;
+
+Revision 1.17  2001/12/10 05:37:22  dom-ts-4
 Added xml_alltests, svg_alltests, and html_alltests suites to run all tests
 using a particular content type.
 
@@ -222,9 +225,8 @@ The source document contained the following notice:
 package <xsl:value-of select="$package"/>;
 
 import org.w3c.dom.*;
-<xsl:if test="*[local-name() = 'hasFeature' and @feature='&quot;Events&quot;']">
-import org.w3c.dom.events;
-</xsl:if>
+import org.w3c.dom.html.*;
+import org.w3c.dom.events.*;
 import org.w3c.domts.*;
 import javax.xml.parsers.*;
 import java.util.*;
