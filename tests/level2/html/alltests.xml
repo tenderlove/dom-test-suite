@@ -253,6 +253,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLFrameElement06.xml"/>
      <suite.member href="HTMLFrameElement07.xml"/>
      <suite.member href="HTMLFrameElement08.xml"/>
+     <suite.member href="HTMLFrameElement09.xml"/>
      <suite.member href="HTMLFrameSetElement01.xml"/>
      <suite.member href="HTMLFrameSetElement02.xml"/>
      <suite.member href="HTMLHeadElement01.xml"/>
@@ -277,6 +278,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLIFrameElement08.xml"/>
      <suite.member href="HTMLIFrameElement09.xml"/>
      <suite.member href="HTMLIFrameElement10.xml"/>
+     <suite.member href="HTMLIFrameElement11.xml"/>
      <suite.member href="HTMLImageElement01.xml"/>
      <suite.member href="HTMLImageElement02.xml"/>
      <suite.member href="HTMLImageElement03.xml"/>
@@ -357,6 +359,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLObjectElement16.xml"/>
      <suite.member href="HTMLObjectElement17.xml"/>
      <suite.member href="HTMLObjectElement18.xml"/>
+     <suite.member href="HTMLObjectElement19.xml"/>
      <suite.member href="HTMLOListElement01.xml"/>
      <suite.member href="HTMLOListElement02.xml"/>
      <suite.member href="HTMLOListElement03.xml"/>
