@@ -31,7 +31,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="domImplLS" type="DOMImplementationLS"/>
   <var name="output" type="LSOutput"/>
   <implementation var="domImpl"/>
-  <getFeature var="domImplLS" obj="domImpl" feature='"LS"' version='"3.0"'/>
+  <getFeature var="domImplLS" obj="domImpl" 
+  	feature='"LS"' version='"3.0"' interface="DOMImplementation"/>
   <assertNotNull actual="domImplLS" id="domImplLSNotNull"/>
   <createLSOutput var="output" obj="domImplLS"/>
   <assertNotNull actual="output" id="outputNotNull"/>
