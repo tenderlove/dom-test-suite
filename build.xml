@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.40  2001-12-10 17:15:20  dom-ts-4
+Revision 1.41  2002-01-04 07:59:14  dom-ts-4
+Added dom2-html-gen-java, dom2-html-javac targets
+
+Revision 1.40  2001/12/10 17:15:20  dom-ts-4
 URL for DOM Level 2 HTML updated
 
 Revision 1.39  2001/12/10 05:37:20  dom-ts-4
@@ -790,6 +793,24 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
+<target name="dom2-html-gen-java" depends="dom2-interfaces,dom2-dtd">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level2/html"/>
+	<style basedir="${tests.dir}/level2/html" 
+		   destdir="${java.build.dir}/org/w3c/domts/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level2.html"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+	</style>
+</target>
+
+
 <target name="dom2-html-gen-ecmascript" depends="dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/ecmascript/level2/html"/>
 	<style basedir="${tests.dir}/level2/html" 
@@ -833,6 +854,15 @@ All implementation conditions combined into implementationAttribute element
         debug="on"
 		encoding="UTF8"/>
 </target>
+
+<target name="dom2-html-javac" depends="common-javac,dom2-html-gen-java">
+	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/html" 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8"/>
+</target>
+
 
 <target name="dom2-core-jar" depends="dom2-core-javac">
 	<!--  will need to provide a manifest    -->
