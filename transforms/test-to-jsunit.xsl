@@ -28,7 +28,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 	<!--  relative to transform   -->
 
     <xsl:import href="test-to-ecmascript.xsl"/>
-    <xsl:variable name="jsunitapp">../../../../lib/jsunit/app/</xsl:variable>
+    <xsl:variable name="jsunitapp">../../../lib/jsunit/app/</xsl:variable>
 
 
 <xsl:output method="html"/>
