@@ -29,10 +29,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<!--  relative to transform   -->
+	<xsl:param name="interfaces-docname"/>
 
-
-<xsl:output method="text" indent="yes"/>
-<xsl:variable name="domspec" select="document('interfaces.xml')"/>
+<xsl:output method="text"/>
+<xsl:variable name="domspec" select="document($interfaces-docname)"/>
 
 <xsl:template match="/">
 	<xsl:apply-templates/>
@@ -53,7 +54,7 @@ import org.w3c.dom.*;
 <xsl:if test="*[local-name() = 'hasFeature' and @feature='Events']">
 import org.w3c.dom.events;
 </xsl:if>
-import org.w3c.dom.testing.*;
+import org.w3c.domts.*;
 import javax.xml.parsers.*;
 import java.util.*;
 
