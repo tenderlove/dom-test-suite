@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -210,4 +210,35 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="hc_textsplittextthree.xml"/>
 <suite.member href="hc_textsplittexttwo.xml"/>
 <suite.member href="hc_textwithnomarkup.xml"/>
+
+<suite.member href="hc_attrappendchild1.xml"/>
+<suite.member href="hc_attrappendchild2.xml"/>
+<suite.member href="hc_attrappendchild3.xml"/>
+<suite.member href="hc_attrappendchild4.xml"/>
+<suite.member href="hc_attrappendchild5.xml"/>
+<suite.member href="hc_attrappendchild6.xml"/>
+<suite.member href="hc_attrchildnodes1.xml"/>
+<suite.member href="hc_attrchildnodes2.xml"/>
+<suite.member href="hc_attrclonenode1.xml"/>
+<suite.member href="hc_attrfirstchild.xml"/>
+<suite.member href="hc_attrgetvalue1.xml"/>
+<suite.member href="hc_attrgetvalue2.xml"/>
+<suite.member href="hc_attrhaschildnodes.xml"/>
+<suite.member href="hc_attrinsertbefore1.xml"/>
+<suite.member href="hc_attrinsertbefore2.xml"/>
+<suite.member href="hc_attrinsertbefore3.xml"/>
+<suite.member href="hc_attrinsertbefore4.xml"/>
+<suite.member href="hc_attrinsertbefore5.xml"/>
+<suite.member href="hc_attrinsertbefore6.xml"/>
+<suite.member href="hc_attrinsertbefore7.xml"/>
+<suite.member href="hc_attrlastchild.xml"/>
+<suite.member href="hc_attrnormalize.xml"/>
+<suite.member href="hc_attrremovechild1.xml"/>
+<suite.member href="hc_attrremovechild2.xml"/>
+<suite.member href="hc_attrreplacechild1.xml"/>
+<suite.member href="hc_attrreplacechild2.xml"/>
+<suite.member href="hc_attrsetvalue1.xml"/>
+<suite.member href="hc_attrsetvalue2.xml"/>
+<suite.member href="attrremovechild1.xml"/>
+<suite.member href="attrreplacechild1.xml"/>
 </suite>
