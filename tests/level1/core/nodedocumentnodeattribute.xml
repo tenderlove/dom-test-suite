@@ -32,7 +32,7 @@ It should return null.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="attrList" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <attributes obj="doc" var="attrList"/>
 <assertNull actual="attrList" id="nodeDocumentNodeAttributesAssert1"/>
 </test>

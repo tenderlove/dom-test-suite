@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributes" type="NamedNodeMap"/>
 <var name="domesticAttr" type="Attr"/>
 <var name="specified" type="boolean"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <attributes obj="testEmployee" var="attributes"/>

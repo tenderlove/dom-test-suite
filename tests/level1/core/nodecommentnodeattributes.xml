@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="commentNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <childNodes obj="doc" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="commentNode"/>
 <attributes obj="commentNode" var="attrList"/>

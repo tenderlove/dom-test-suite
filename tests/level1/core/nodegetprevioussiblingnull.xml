@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeNode" type="Node"/>
 <var name="fcNode" type="Node"/>
 <var name="psNode" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="employeeNode"/>
 <firstChild interface="Node" obj="employeeNode" var="fcNode"/>

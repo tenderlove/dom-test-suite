@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"notation1"</member>
 <member>"notation2"</member>
 </var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <notations obj="docType" var="notationList"/>
 <for-each collection="notationList" member="notation">

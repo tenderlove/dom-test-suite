@@ -30,7 +30,7 @@ Calls isSupported("Core",null) should return true for all implementations (by ex
 <var name="rootNode" type="Node"/>
 <var name="state" type="boolean"/>
 <var name="nullString" type="DOMString" isNull="true"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="rootNode"/>
 <isSupported obj="rootNode" feature='"Core"' version="nullString" var="state"/>
 <assertTrue actual="state" id="Core"/>

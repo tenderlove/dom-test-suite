@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="textNode" type="Text"/>
 <var name="splitNode" type="Text"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="elementList" var="nameNode" index="2"/>
 <firstChild interface="Node" obj="nameNode" var="textNode"/>

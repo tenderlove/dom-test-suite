@@ -29,7 +29,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="rootNode" type="Element"/>
 <var name="nodeType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="rootNode"/>
 <nodeType obj="rootNode" var="nodeType"/>
 <assertEquals actual="nodeType" expected="1" id="nodeElementNodeTypeAssert1" ignoreCase="false"/>

@@ -28,7 +28,7 @@ should still return null.
 <var name="newNode" type="Node"/>
 <var name="newValue" type="DOMString"/>
 <var name="nodeMap" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <doctype obj="doc" var="docType"/>
 <notations obj="docType" var="nodeMap"/>
 <getNamedItem obj="nodeMap" name='"notation1"' var="newNode"/>

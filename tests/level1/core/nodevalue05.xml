@@ -26,7 +26,7 @@ should still return null.
 <var name="doc" type="Document"/>
 <var name="newNode" type="Node"/>
 <var name="newValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="newNode"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>

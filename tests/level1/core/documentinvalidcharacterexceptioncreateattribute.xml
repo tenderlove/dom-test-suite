@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="createdAttr" type="Attr"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <assertDOMException id="documentInvalidCharacterExceptionCreateAttributeAssert">
 <INVALID_CHARACTER_ERR>
 <createAttribute var="createdAttr" obj="doc" name="&quot;invalid^Name&quot;"/>

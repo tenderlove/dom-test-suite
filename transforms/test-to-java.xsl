@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.16  2001-11-16 08:23:20  dom-ts-4
+Revision 1.17  2001-12-10 05:37:22  dom-ts-4
+Added xml_alltests, svg_alltests, and html_alltests suites to run all tests
+using a particular content type.
+
+Revision 1.16  2001/11/16 08:23:20  dom-ts-4
 Eliminated spurious casts on method parameters
 
 Revision 1.15  2001/10/25 09:29:28  dom-ts-4
@@ -85,7 +89,7 @@ All implementation conditions combined into implementationAttribute element
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--  relative to transform   -->
-	<xsl:param name="interfaces-docname">../build/dom2-interfaces.xml</xsl:param>
+	<xsl:param name="interfaces-docname">../build/dom1-interfaces.xml</xsl:param>
     <xsl:param name="package">org.w3.domts.level1.core</xsl:param>
     <xsl:param name="target-uri-base">http://www.w3.org/2001/DOM-Test-Suite/tests/Level-1/</xsl:param>
 <xsl:output method="text" encoding="UTF-8"/>

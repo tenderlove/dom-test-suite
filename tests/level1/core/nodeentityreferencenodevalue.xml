@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefAddr" type="Element"/>
 <var name="entRefNode" type="Node"/>
 <var name="entRefValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <if>
 <implementationAttribute name="expandEntityReferences" value="true"/>
 <createEntityReference var="entRefNode" obj="doc" name="&quot;ent2&quot;"/>

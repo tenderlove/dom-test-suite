@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="testAddress" type="Element"/>
 <var name="attrValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testAddress"/>
 <getAttribute obj="testAddress" var="attrValue" name="&quot;street&quot;"/>

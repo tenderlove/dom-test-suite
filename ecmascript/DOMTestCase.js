@@ -15,8 +15,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     actualSize = actual.length;
     assertEquals(descr, expected, actualSize);
   }
- 
-  function assertEqualsCollection(descr, expected, actual) {
+  
+  function assertStringEquals(descr, expected, actual, ignoreCase) {
+	if(expected != actual) {
+		if(ignoreCase && actual != null) {
+			if(expected.toLowerCase() != actual.toLowerCase()) {
+				assertEquals(descr,expected,actual);
+			}
+		}
+		else {
+			assertEquals(descr,expected,actual);
+		}
+	}
+  }
+			
+
+  function assertStringNotEquals(descr, expected, actual, ignoreCase) {
+	if(expected == actual) {
+		assertNotEquals(descr,expected,actual);
+	}
+	if(ignoreCase && actual != null && expected.toLowerCase() == actual.toLowerCase()) {
+		assertNotEquals(descr,expected,actual);
+	}
+  }
+  
+  function assertEqualsCollection(descr, expected, actual,ignoreCase) {
     //
     //  if they aren't the same size, they aren't equal
     assertEquals(descr, expected.length, actual.length);
@@ -36,6 +59,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             if(expectedValue == actual[j]) {
                 matches++;
             }
+            else {
+				if(ignoreCase && expectedValue.toLowerCase() == actual[j].toLowerCase()) {
+					matches++;
+				}
+			}
         }
         if(matches == 0) {
             assert(descr + ": No match found for " + expectedValue,false);
@@ -47,7 +75,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
 
 
-  function assertEqualsList(descr, expected, actual) {
+  function assertEqualsList(descr, expected, actual, ignoreCase) {
     //
     //  if they aren't the same size, they aren't equal
     assertEquals(descr, expected.length, actual.length);
@@ -56,7 +84,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     var i;
     for(i = 0; i < actualLen; i++) {
         if(expected[i] != actual[i]) {
-            assertEquals(descr, expected[i], actual[i]);
+			if(!ignoreCase || (expected[i].toLowerCase() != actual[i].toLowerCase())) {
+				assertEquals(descr, expected[i], actual[i]);
+			}
         }
     }
   }
@@ -146,97 +176,238 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
   var factory = null;
+  var defaultContentType = "text/xml";
 
 
-  function MozApplyParserAttributes(parser, attrNames, attrValues) {
+  function MozHTMLApplyParserAttributes(parser, attrNames, attrValues) {
+	if(attrNames != null) {
+	    var i;
+		for(i = 0; i < attrNames.length; i++) {
+			if(attrNames[i] == "expandEntityReferences") {
+				if(attrValues[i] == true) {
+					throw "Mozilla does not support expanding entity references";
+				}
+			}
+		}
+	 }
+  }
+
+  function MozHTMLDocumentBuilder_checkAvailability(sourceURL) {
+	switch(sourceURL)
+	{
+		case "staff":
+		case "staffNS":
+		case "staff.xml":
+		case "staffNS.xml":
+		throw sourceURL + " not available for HTML";
+	}
+  }
+
+
+  function MozHTMLDocumentBuilder_load(sourceURL, willBeModified) {
+    //
+    //   resolve full URL
+    //
+	var absURL = location.href;
+	absURL = absURL.substring(0,absURL.lastIndexOf("/")+1) + sourceURL + ".html";
+	//
+	//      see if there is an available copy around
+	//
+	var newDoc = checkCache(willBeModified, this.cache, absURL);
+	//
+	//   if not create a new window
+	//
+	if(newDoc == null) {
+		var newWindow = window.open(absURL);
+		newDoc = newWindow.document;
+		if(!willBeModified) {
+		   this.cache[this.cache.length] = new DocumentBuilderCacheEntry(absURL, newDoc);
+		}
+	}
+	return newDoc; 
+  }
+
+   function MozHTMLDocumentBuilder_getDOMImplementation() {
+		return document.implementation;
+   }
+
+  //
+  //   This function checks the exception raised in the test
+  //   If this function returns true, then the exception is 
+  //      consistent with the exception code parameter
+  //
+  //   This code attempts to determine the reason for the exception
+  //      to reduce the chance that an unrelated exception causes
+  //      the test to pass.
+  function MozHTMLDocumentBuilder_isDOMExceptionCode(ex, code) {
+    return true;
+  }
+
+  function MozHTMLDocumentBuilder_getImplementationAttribute(attr) {
+    return false;
+  }
+  
+  function MozHTMLDocumentBuilder_close(testdoc) {
+      testdoc.close();
+  }
+  
+  function MozHTMLDocumentBuilder_checkAttributes(attrNames, attrValues) {
+     //
+     //    if no attributes were specified,
+     //        the document builder can be reused
+     if(this.attrNames == null) {
+		if(attrNames == null) {
+			return true;
+		}
+     }
+     return false;
+     
+  }
+  
+  function MozHTMLDocumentBuilder_hasFeature(feature, version) {
+    var upfeature = feature.toUpperCase();
+    switch(upfeature) {
+		case "HTML":
+		case "CORE":
+		case "EVENTS":
+		return true;
+	}		
+	return false;
+  }
+  
+
+  function MozHTMLDocumentBuilder(attrNames, attrValues) {
+    this.attrNames = attrNames;
+    this.attrValues = attrValues;
+    this.cache = new Array();
+    this.load = MozHTMLDocumentBuilder_load;
+    this.checkAvailability = MozHTMLDocumentBuilder_checkAvailability;
+    this.isDOMExceptionCode = MozHTMLDocumentBuilder_isDOMExceptionCode;
+    this.getDOMImplementation = MozHTMLDocumentBuilder_getDOMImplementation;
+    this.getImplementationAttribute = MozHTMLDocumentBuilder_getImplementationAttribute;
+    this.close = MozHTMLDocumentBuilder_close;
+    this.checkAttributes = MozHTMLDocumentBuilder_checkAttributes;
+    this.hasFeature = MozHTMLDocumentBuilder_hasFeature;
+    this.ignoreCase = true;
+  }
+
+
+  function MozXMLApplyParserAttributes(parser, attrNames, attrValues) {
   }
  
-  var mozStaffDocs = new Array(); 
-
-  var docsStarted = 0;
-  var docsLoaded = 0;
-
-  function documentLoaded(e) {
-      docsLoaded++;
-  }
-
 
   //
   //   get a document ready for the next test
   //
-  function MozAdvanceLoad(sourceURL) {
+  function MozXMLLoad(sourceURL) {
     var doc = document.implementation.createDocument("","temp",null);
-    doc.load(sourceURL);
-    for(var i = 0; i <= mozStaffDocs.length; i++) {
-        if(i == mozStaffDocs.length || mozStaffDocs[i] == null) {
-            mozStaffDocs[i] = doc;
-            break;
-        }
-    }
-  }
-
-  function MozDocumentBuilder_load(sourceURL, willBeModified) {
-    if(sourceURL == 'staff.xml' && this.attrNames == null && this.attrValues == null) {
-        var doc = null;
-        for(var i = 0; i < mozStaffDocs.length; i++) {
-            doc = mozStaffDocs[i];
-            if(doc != null && doc.documentElement.nodeName == "staff") {
-                if(willBeModified) {
-                    mozStaffDocs[i] = null;
-                    MozAdvanceLoad(sourceURL);
-                }
-                return doc;
-            }
-        }
-    }
-    doc = document.implementation.createDocument("","temp",null);
-    //
-    //  never seems to fire
-    //
-    doc.addEventListener("load",documentLoaded,false);
-    //
-    //   need to add listener and wait
-    docsStarted++;
-    doc.load(sourceURL);
-    for(var i = 0; i < 5; i++) {
-        if(docsLoaded >= docsStarted) break;
-        alert("Load attempt " + docsStarted.toString() + ": Press OK continue.");
-        if(doc.documentElement.nodeName != "temp") break;
-    }
-
-    if(sourceURL == "staff.xml") {
-        if(willBeModified) {
-            MozAdvanceLoad(sourceURL);
-        }
-        else {
-            mozStaffDocs[mozStaffDocs.length] = doc;
-        }
-    }
+    doc.load(sourceURL + ".xml");
     return doc;
   }
 
-   function MozDocumentBuilder_getDOMImplementation() {
+  function MozXMLDocumentBuilder_load(sourceURL, willBeModified) {
+	for(i = 0; i < this.cache.length; i++) {
+		if(this.cache[i].url == sourceURL) {
+			var testdoc = this.cache[i].testdoc;
+			if(testdoc.documentElement.nodeName != "temp") {
+				//
+				//  if it will be modified, start loading its replacement
+				//
+				if(willBeModified) {
+					this.cache[i].testdoc = MozXMLLoad(sourceURL);
+				}
+				return testdoc;
+			}
+		}
+	}
+    doc = document.implementation.createDocument("","temp",null);
+    doc.load(sourceURL + ".xml");
+    for(var i = 0; i < 5; i++) {
+		alert("doc.documentElement is null " + (doc.documentElement == null).toString());
+		if(doc.documentElement != null) {
+			alert("docElement=" + doc.documentElement.nodeName);
+		}
+        if(doc.documentElement != null && doc.documentElement.nodeName != "temp") break;
+        alert("Load attempt " + i.toString() + ": Press OK continue.");
+    }
+    
+    if(willBeModified) {
+		//
+		//   if it will be modified, get another copy started
+		//
+		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL, MozLoad(sourceURL));
+	}
+	//
+	//   if not going to be modified, then we can keep this around
+	//      for another iteration
+	else {
+		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL,doc);
+	}
+
+    return doc;
+  }
+
+   function MozXMLDocumentBuilder_getDOMImplementation() {
         return document.implementation;
    }
 
-  function MozDocumentBuilder_isDOMExceptionCode(ex, code) {
+  function MozXMLDocumentBuilder_isDOMExceptionCode(ex, code) {
     return true;
   }
 
-  function MozDocumentBuilder_getImplementationAttribute(attr) {
+  function MozXMLDocumentBuilder_getImplementationAttribute(attr) {
     if(attr == "expandEntityReferences") {
         return true;
     }
     return false;
   }
 
-  function MozDocumentBuilder(attrNames, attrValues) {
+  function MozXMLDocumentBuilder_checkAttributes(attrNames, attrValues) {
+      if(this.attrNames == null) {
+         if(attrNames == null) {
+            return true;
+         }
+      }
+      return false;
+  }
+  
+    function MozXMLDocumentBuilder_checkAvailability(sourceURL) {
+        return true;
+    }
+
+  function MozXMLDocumentBuilder_hasFeature(feature, version) {
+    var upfeature = feature.toUpperCase();
+    if(version == null) {
+		switch(upfeature) {
+			case "XML":
+			case "ORG.W3C.DOM":
+			case "CORE":
+			case "EVENTS":
+			case "HTML":
+			return true;
+			
+		}
+	}
+	return this.getDOMImplementation().hasFeature(feature,version);
+  }
+  
+  function MozXMLDocumentBuilder_close(testdoc) {
+  }
+  
+
+  function MozXMLDocumentBuilder(attrNames, attrValues) {
     this.attrNames = attrNames;
     this.attrValues = attrValues;
-    this.load = MozDocumentBuilder_load;
-    this.isDOMExceptionCode = MozDocumentBuilder_isDOMExceptionCode;
-    this.getDOMImplementation = MozDocumentBuilder_getDOMImplementation;
-    this.getImplementationAttribute = MozDocumentBuilder_getImplementationAttribute;
+    this.cache = new Array();
+    this.load = MozXMLDocumentBuilder_load;
+    this.isDOMExceptionCode = MozXMLDocumentBuilder_isDOMExceptionCode;
+    this.getDOMImplementation = MozXMLDocumentBuilder_getDOMImplementation;
+    this.getImplementationAttribute = MozXMLDocumentBuilder_getImplementationAttribute;
+    this.checkAttributes = MozXMLDocumentBuilder_checkAttributes;
+    this.checkAvailability = MozXMLDocumentBuilder_checkAvailability;
+    this.close = MozXMLDocumentBuilder_close;
+    this.hasFeature = MozXMLDocumentBuilder_hasFeature;
+    this.ignoreCase = false;
     //
     //   check if expandEntityReferences is false
     //     and throw an excpetion since that behavior is not supported
@@ -250,27 +421,48 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
   }
 
-  var mozDefaultBuilder = null;
+  var defaultMozHTMLDocumentBuilder = null;
+  var defaultMozXMLDocumentBuilder = null;
+  var defaultMozSVGDocumentBuilder = null;
 
-  function MozDocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues) {
-    if(attrNames == null && attrValues == null) {
-        return mozDefaultBuilder;
+  function MozDocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues,contentType) {
+    if(contentType != null) {
+	    switch(contentType)
+	    {
+		    case "image/xml+svg":
+		    if(defaultMozSVGDocumentBuilder.checkAttributes(attrNames, attrValues)) {
+			    return defaultMozSVGDocumentBuilder;
+		    }
+		    return new ASVDocumentBuilder(attrNames, attrValues);
+
+		    case "text/html":
+		    if(defaultMozHTMLDocumentBuilder.checkAttributes(attrNames, attrValues)) {
+			    return defaultMozHTMLDocumentBuilder;
+		    }
+		    return new MozHTMLDocumentBuilder(attrNames, attrValues);
+		
+	    }
     }
-    return new MozDocumentBuilder(attrNames, attrValues);
+	if(defaultMozXMLDocumentBuilder.checkAttributes(attrNames, attrValues)) {
+		return defaultMozXMLDocumentBuilder;
+	}
+	return new MozXMLDocumentBuilder(attrNames, attrValues);
   }
 
   function MozDocumentBuilderFactory() {
     this.newDocumentBuilder = MozDocumentBuilderFactory_newDocumentBuilder;
   }
 
+  //
+  //   If application name contains Netscape
+  //       set up Mozilla factories
+  //
   if(navigator.appName.indexOf("Netscape") != -1) {
-    mozDefaultBuilder = new MozDocumentBuilder(null,null);
+	defaultMozXMLDocumentBuilder = new MozXMLDocumentBuilder(null,null);
+	defaultMozHTMLDocumentBuilder = new MozHTMLDocumentBuilder(null, null);
+	defaultMozSVGDocumentBuilder = new ASVDocumentBuilder(null,null);
+	defaultContentType = "image/xml";
     factory = new MozDocumentBuilderFactory();
-    //
-    //  preload a couple of staff.xml documents
-    //
-    MozAdvanceLoad("staff.xml");
-    MozAdvanceLoad("staff.xml");
   }
 
 
@@ -280,14 +472,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //
   //
     
-  function ASVApplyParserAttributes(parser, attrNames, attrValues) {
-  }
- 
-  //
-  //   actually, array of <EMBED> elements
-  //
-  var asvStaffDocs = new Array();
-
   //
   //   get a document ready for the next test
   //
@@ -313,52 +497,59 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
 
   function ASVDocumentBuilder_load(sourceURL, willBeModified) {
-    if(sourceURL == 'staff.xml' && this.attrNames == null && this.attrValues == null) {
-        var embed = null;
-        for(var i = 0; i < asvStaffDocs.length; i++) {
-            embed = asvStaffDocs[i];
-            if(embed != null && embed.readyState == "complete") {
-                if(willBeModified) {
-                    asvStaffDocs[i] = ASVStartLoad(sourceURL);
-                }
-                return embed.getSVGDocument();
-            }
+    var embed = null;
+    for(var i = 0; i < this.cache.length; i++) {
+        if(this.cache[i].URL == sourceURL) {
+			embed = this.cache[i].testdoc;
+			if(embed != null && embed.readyState == "complete") {
+				if(willBeModified) {
+					this.cache[i].testdoc = ASVStartLoad(sourceURL);
+				}
+				return embed.getSVGDocument();
+			}
         }
     }
-    var embed = ASVStartLoad(sourceURL);
+    embed = ASVStartLoad(sourceURL);
+    //
+    //  if the current doc will be modified, start loading another
+    //
+    if(willBeModified) {
+	    this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL, ASVStartLoad(sourceURL));
+    }
     for(var i = 0; i < 5; i++) {
+
         alert("Document loading: Press OK continue.");
         if(embed.readyState == "complete") break;
     }
 
 	doc = embed.getSVGDocument();
 
-    if(sourceURL == "staff.xml") {
-        if(willBeModified) {
-            for(var i = 0; i <= asvStaffDocs.length; i++) {
-                if(i == asvStaffDocs.length || asvStaffDocs[i] == null) {
-                    asvStaffDocs[i] = ASVStartLoad(sourceURL);
-                    break;
-                }
-            }
-        }
-        else {
-            asvStaffDocs[asvStaffDocs.length] = embed;
-        }
-    }
+	//
+	//   if the document will be modified
+	//	     start another SVG load on the same document
+	//       to be ready for next time
+	if(willBeModified) {
+	    this.dirty[this.dirty.length] = embed;
+	}
+	//
+	//   if this document will not be modified
+	//      add it to the cache
+	else {
+		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL, embed);
+	}
+
     return doc;
   }
 
    function ASVDocumentBuilder_getDOMImplementation() {
-        for(var i = 0; i < asvStaffDocs.length; i++) {
-            if(asvStaffDocs[i] != null && asvStaffDocs[i].readyState == "complete") {
-                return asvStaffDocs[i].getSVGDocument().implementation;
-            }
-        }
-        var embed = ASVStaffLoad("staff.xml");
-        asvStaffDocs[asvStaffDocs.length] = embed;
-        return embed.getSVGDocument().implementation;
-   }
+		for(var i = 0; i < this.cache.length; i++) {
+		    if(this.cache[i].testdoc.readyState == "complete") {
+		       return this.cache[i].testdoc.getSVGDocument().implementation;
+		    }
+		}
+		var testdoc = load("staff",false);
+		return testdoc.implementation;
+	}
 
   function ASVDocumentBuilder_isDOMExceptionCode(ex, code) {
     return true;
@@ -370,14 +561,66 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
     return false;
   }
+  
+  //
+  //   dispose of modified documents by removing their 
+  //       embed section
+  //
+  function ASVDocumentBuilder_close(testdoc) {
+	for(i = 0; i < this.dirty.length; i++) {
+	  var embed = this.dirty[i];
+	  if(embed.getSVGDocument() == testdoc) {
+		embed.parentNode.removeChild(embed);
+		break;
+	  }
+	}
+  }
+  
+  function ASVDocumentBuilder_checkAttributes(attrNames, attrValues) {
+      if(this.attrNames == null) {
+         if(attrNames == null) {
+            return true;
+         }
+      }
+      return false;
+  }
+  
+    function ASVDocumentBuilder_checkAvailability(sourceURL) {
+        return true;
+    }
+
+  function ASVDocumentBuilder_hasFeature(feature, version) {
+    var upfeature = feature.toUpperCase();
+    if(version == null) {
+		switch(upfeature) {
+			case "XML":
+			case "ORG.W3C.DOM":
+			case "CORE":
+			case "EVENTS":
+			return true;
+			
+			case "HTML":
+			return false;
+		}
+	}
+	return this.getDOMImplementation().hasFeature(feature,version);
+  }
+  
 
   function ASVDocumentBuilder(attrNames, attrValues) {
     this.attrNames = attrNames;
     this.attrValues = attrValues;
+    this.cache = new Array();
+    this.dirty = new Array();
     this.load = ASVDocumentBuilder_load;
     this.isDOMExceptionCode = ASVDocumentBuilder_isDOMExceptionCode;
     this.getDOMImplementation = ASVDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = ASVDocumentBuilder_getImplementationAttribute;
+    this.checkAttributes = ASVDocumentBuilder_checkAttributes;
+    this.checkAvailability = ASVDocumentBuilder_checkAvailability;
+    this.close = ASVDocumentBuilder_close;
+    this.hasFeature = ASVDocumentBuilder_hasFeature;
+    this.ignoreCase = false;
     if(attrNames != null) {
         for(var i = 0; i < attrNames.length; i++) {
             if(attrNames[i] == "expandEntityReferences" && attrValues[i] == false) {
@@ -390,35 +633,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
   }
 
-  var asvDefaultBuilder = null;
-
-  function ASVDocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues) {
-    if(attrNames == null && attrValues == null) {
-        return asvDefaultBuilder;
-    }
-    return new ASVDocumentBuilder(attrNames, attrValues);
-  }
-
-  function ASVDocumentBuilderFactory() {
-    this.newDocumentBuilder = ASVDocumentBuilderFactory_newDocumentBuilder;
-  }
-
-
-  //
-  //
-  //    Uncomment the following 4 lines to test Adobe SVG Viewer
-  //
-  //
-  //
-
-//  if(navigator.appName.indexOf("Microsoft") != -1) {
-//    asvDefaultBuilder = new ASVDocumentBuilder(null,null);
-//    factory = new ASVDocumentBuilderFactory();
-//  }
 
 
 
-  function IE5ApplyParserAttributes(parser, attrNames, attrValues) {
+  function MSXMLApplyParserAttributes(parser, attrNames, attrValues) {
 	if(attrNames != null) {
 	    var i;
 		for(i = 0; i < attrNames.length; i++) {
@@ -437,9 +655,36 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	 }
   }
 
-  function IE5DocumentBuilder_load(sourceURL, willBeModified) {
-	var actualURL = sourceURL;
-	if(!this.parser.load(actualURL)) {
+  function MSXMLDocumentBuilder_checkAvailability(sourceURL) {
+    return true;
+  }
+
+  function DocumentBuilderCacheEntry(url, testdoc) {
+      this.url = url;
+      this.testdoc = testdoc;
+  }
+
+  function checkCache(willBeModified,cache, sourceURL) {  
+    //
+    //       return any previously loaded instance
+		for(i = 0; i < cache.length; i++) {
+			if(cache[i] != null && cache[i].url == sourceURL) {
+			    var testdoc = cache[i].testdoc;
+			    //
+			    //   if it will be modified then
+			    //       remove it from the cache
+			    if(willBeModified) {
+			       cache[i] = null;
+			    }
+				return testdoc;
+			}
+		}
+	   return null;
+    }
+  
+
+  function MSXMLDocumentBuilder_load(sourceURL, willBeModified) {
+	if(!this.parser.load(sourceURL + ".xml")) {
 		throw this.parser.parseError.reason;
 	}
     //
@@ -447,7 +692,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     //      the XML Declaration, remove it from the tree.
     //
     //   According to the DOM FAQ, this behavior is not wrong,
-    //      but the tests are written assumming that it is not there.
+    //      but the tests are written assuming that it is not there.
     //
     var xmlDecl = this.parser.firstChild;
     if(xmlDecl.nodeType == 7 && xmlDecl.target.toLowerCase() == "xml") {
@@ -456,7 +701,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	return this.parser;
   }
 
-   function IE5DocumentBuilder_getDOMImplementation() {
+   function MSXMLDocumentBuilder_getDOMImplementation() {
         return this.parser.domImplementation;
    }
 
@@ -468,7 +713,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //   This code attempts to determine the reason for the exception
   //      to reduce the chance that an unrelated exception causes
   //      the test to pass.
-  function IE5DocumentBuilder_isDOMExceptionCode(ex, code) {
+  function MSXMLDocumentBuilder_isDOMExceptionCode(ex, code) {
 	var retval;
     switch(code) {
         //
@@ -512,33 +757,216 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	return retval;
   }
 
-  function IE5DocumentBuilder_getImplementationAttribute(attr) {
+  function MSXMLDocumentBuilder_getImplementationAttribute(attr) {
     if(attr == "ignoringElementContentWhitespace") {
         return !this.parser.preserveWhiteSpace;
     }
     return false;
   }
+  
+  function MSXMLDocumentBuilder_close(testdoc) {
+  }
+  
+  function MSXMLDocumentBuilder_checkAttributes(attrNames, attrValues) {
+     if(this.attrNames == null) {
+        if(attrNames == null) {
+           return true;
+        }
+     }
+     return false;
+  }
+  
+  function MSXMLDocumentBuilder_hasFeature(feature, version) {
+    //
+    //   MSXML will take null, unfortunately 
+    //      there is no way to get it to there from script
+    //      without a type mismatch error
+    if(version == null) {
+		switch(feature.toUpperCase()) {
+		   case "XML":
+		   case "CORE":
+		   return true;
+		   
+		   case "HTML":
+		   case "ORG.W3C.DOM":
+		   return false;
+		}
+		if(this.getDOMImplementation().hasFeature(feature,"1.0")) {
+		   return true;
+		}
+		if(this.getDOMImplementation().hasFeature(feature,"2.0")) {
+		   return true;
+		}
+		if(this.getDOMImplementation().hasFeature(feature,"3.0")) {
+		   return true;
+		}
+    }
+	return this.getDOMImplementation().hasFeature(feature,version);
+  }
 
-  function IE5DocumentBuilder(attrNames, attrValues) {
+  function MSXMLDocumentBuilder(attrNames, attrValues) {
     this.attrNames = attrNames;
     this.attrValues = attrValues;
-    this.load = IE5DocumentBuilder_load;
-    this.isDOMExceptionCode = IE5DocumentBuilder_isDOMExceptionCode;
-    this.getDOMImplementation = IE5DocumentBuilder_getDOMImplementation;
-    this.getImplementationAttribute = IE5DocumentBuilder_getImplementationAttribute;
+    
+    this.load = MSXMLDocumentBuilder_load;
+    this.checkAvailability = MSXMLDocumentBuilder_checkAvailability;
+    this.isDOMExceptionCode = MSXMLDocumentBuilder_isDOMExceptionCode;
+    this.getDOMImplementation = MSXMLDocumentBuilder_getDOMImplementation;
+    this.getImplementationAttribute = MSXMLDocumentBuilder_getImplementationAttribute;
+    this.close = MSXMLDocumentBuilder_close;
+    this.checkAttributes = MSXMLDocumentBuilder_checkAttributes;
+    this.hasFeature = MSXMLDocumentBuilder_hasFeature;
+    this.ignoreCase = false;
+    
     this.parser = new ActiveXObject("MSXML2.DOMDocument.3.0");
     this.parser.async = false;
     this.parser.preserveWhiteSpace = true;
-    IE5ApplyParserAttributes(this.parser,this.attrNames, this.attrValues);    
+    MSXMLApplyParserAttributes(this.parser,this.attrNames, this.attrValues);    
+  }
+  
+
+  function MSHTMLApplyParserAttributes(parser, attrNames, attrValues) {
+	if(attrNames != null) {
+	    var i;
+		for(i = 0; i < attrNames.length; i++) {
+			if(attrNames[i] == "expandEntityReferences") {
+				if(attrValues[i] == true) {
+					throw "MSHTML does not support expanding entity references";
+				}
+			}
+			if(attrNames[i] == "validate") {
+				parser.validateOnParse = attrValues[i];
+			}
+			if(attrNames[i] == "ignoreElementContentWhitespace") {
+				parser.preserveWhiteSpace = !attrValues[i];
+			}
+		}
+	 }
   }
 
-  var IE5DefaultBuilder = new IE5DocumentBuilder(null,null);
+  function MSHTMLDocumentBuilder_checkAvailability(sourceURL) {
+	switch(sourceURL)
+	{
+		case "staff":
+		case "staffNS":
+		case "staff.xml":
+		case "staffNS.xml":
+		throw sourceURL + " not available for HTML";
+	}
+  }
 
-  function IE5DocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues) {
-    if(attrNames == null && attrValues == null) {
-        return IE5DefaultBuilder;
-    }
-    return new IE5DocumentBuilder(attrNames, attrValues);
+
+  function MSHTMLDocumentBuilder_load(sourceURL, willBeModified) {
+    //
+    //   resolve full URL
+    //
+	var absURL = location.href;
+	absURL = absURL.substring(0,absURL.lastIndexOf("/")+1) + sourceURL + ".html";
+	//
+	//      see if there is an available copy around
+	//
+	var newDoc = checkCache(willBeModified, this.cache, absURL);
+	//
+	//   if not create a new window
+	//
+	if(newDoc == null) {
+		var newWindow = window.open(absURL);
+		newDoc = newWindow.document;
+		if(!willBeModified) {
+		   this.cache[this.cache.length] = new DocumentBuilderCacheEntry(absURL, newDoc);
+		}
+	}
+	return newDoc; 
+  }
+
+   function MSHTMLDocumentBuilder_getDOMImplementation() {
+		return document.implementation;
+   }
+
+  //
+  //   This function checks the exception raised in the test
+  //   If this function returns true, then the exception is 
+  //      consistent with the exception code parameter
+  //
+  //   This code attempts to determine the reason for the exception
+  //      to reduce the chance that an unrelated exception causes
+  //      the test to pass.
+  function MSHTMLDocumentBuilder_isDOMExceptionCode(ex, code) {
+    return true;
+  }
+
+  function MSHTMLDocumentBuilder_getImplementationAttribute(attr) {
+    return false;
+  }
+  
+  function MSHTMLDocumentBuilder_close(testdoc) {
+      testdoc.close();
+  }
+  
+  function MSHTMLDocumentBuilder_checkAttributes(attrNames, attrValues) {
+     //
+     //    if no attributes were specified,
+     //        the document builder can be reused
+     if(this.attrNames == null) {
+		if(attrNames == null) {
+			return true;
+		}
+     }
+     return false;
+     
+  }
+  
+  function MSHTMLDocumentBuilder_hasFeature(feature, version) {
+    var upfeature = feature.toUpperCase();
+    switch(upfeature) {
+		case "HTML":
+		case "CORE":
+		return true;
+	}		
+	return false;
+  }
+  
+
+  function MSHTMLDocumentBuilder(attrNames, attrValues) {
+    this.attrNames = attrNames;
+    this.attrValues = attrValues;
+    this.cache = new Array();
+    this.load = MSHTMLDocumentBuilder_load;
+    this.checkAvailability = MSHTMLDocumentBuilder_checkAvailability;
+    this.isDOMExceptionCode = MSHTMLDocumentBuilder_isDOMExceptionCode;
+    this.getDOMImplementation = MSHTMLDocumentBuilder_getDOMImplementation;
+    this.getImplementationAttribute = MSHTMLDocumentBuilder_getImplementationAttribute;
+    this.close = MSHTMLDocumentBuilder_close;
+    this.checkAttributes = MSHTMLDocumentBuilder_checkAttributes;
+    this.hasFeature = MSHTMLDocumentBuilder_hasFeature;
+    this.ignoreCase = true;
+  }
+
+  var defaultMSHTMLDocumentBuilder = null;
+  var defaultMSXMLDocumentBuilder = null;
+  var defaultASVDocumentBuilder = null;
+
+
+  function IE5DocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues,contentType) {
+    if(contentType != null) {
+        switch(contentType) {
+            case "image/xml+svg":
+            if(defaultASVDocumentBuilder.checkAttributes(attrNames,attrValues)) {
+                return defaultASVDocumentBuilder;
+            }
+            return new ASVDocumentBuilder(attrNames, attrValues);
+
+            case "text/html":
+            if(defaultMSHTMLDocumentBuilder.checkAttributes(attrNames, attrValues)) {
+                return defaultMSHTMLDocumentBuilder;
+            }
+            return new MSHTMLDocumentBuilder(attrNames, attrValues);
+         }
+      }
+      if(defaultMSXMLDocumentBuilder.checkAttributes(attrNames, attrValues)) {
+          return defaultMSXMLDocumentBuilder;
+      }
+      return new MSXMLDocumentBuilder(attrNames, attrValues);
   }
 
   function IE5DocumentBuilderFactory() {
@@ -547,5 +975,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
   if(factory == null && navigator.appName.indexOf("Microsoft") != -1) {
     factory = new IE5DocumentBuilderFactory();
+    defaultContentType = "text/xml";
+    defaultMSXMLDocumentBuilder = new MSXMLDocumentBuilder(null,null);
+    defaultMSHTMLDocumentBuilder = new MSHTMLDocumentBuilder(null,null);
+    defaultASVDocumentBuilder = new ASVDocumentBuilder(null,null);
+  }
+  
+  if(factory == null) {
+	alert("Unrecognized browser: " + navigator.appName);
   }
 

@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.8  2001-11-01 15:02:50  dom-ts-4
+ Revision 1.9  2001-12-10 05:37:21  dom-ts-4
+ Added xml_alltests, svg_alltests, and html_alltests suites to run all tests
+ using a particular content type.
+
+ Revision 1.8  2001/11/01 15:02:50  dom-ts-4
  Doxygen and Avalon support
 
  Revision 1.7  2001/10/18 07:58:17  dom-ts-4
@@ -164,6 +168,7 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
   public Document load(String docURI)
     throws SAXException, java.io.IOException {
 
+    docURI = docURI + ".xml";
     //
     //   build a URL for a test file in the JAR
     //

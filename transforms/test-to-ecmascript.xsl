@@ -128,30 +128,38 @@ The source document contained the following notice:
             <xsl:text>;</xsl:text>
        </xsl:for-each>
        <xsl:text>
-      this.builder = factory.newDocumentBuilder(attrNames,attrValues);
+      this.builder = factory.newDocumentBuilder(attrNames,attrValues,contentType);
 </xsl:text>
 	</xsl:when>
 	<xsl:otherwise>
-		<xsl:text>      this.builder = factory.newDocumentBuilder(null,null);
+		<xsl:text>      this.builder = factory.newDocumentBuilder(null,null,contentType);
 </xsl:text>
 	</xsl:otherwise>
 </xsl:choose>
 
+<!--  for each <load> in the body of the test, 
+          check to see if the file is available for the selected content type  -->
+<xsl:for-each select="descendant::*[local-name() = 'load']">
+    <xsl:text>     this.builder.checkAvailability("</xsl:text>
+    <xsl:value-of select="@href"/>
+    <xsl:text>");
+</xsl:text>
+</xsl:for-each>
+
 <xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
 
 <xsl:if test="$featureConditions">
-    <xsl:text>      var domImpl = builder.getDOMImplementation();
-</xsl:text>
     <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(!domImpl.hasFeature(</xsl:text>
+	    <xsl:text>      if(!this.builder.hasFeature("</xsl:text>
 	    <xsl:value-of select="@feature"/>
-	    <xsl:text>,</xsl:text>
 	    <xsl:choose>
 		    <xsl:when test="@version">
+                <xsl:text>","</xsl:text>
 			    <xsl:value-of select="@version"/>
+                <xsl:text>"</xsl:text>
 		    </xsl:when>
 		    <xsl:otherwise>
-			    <xsl:text>null</xsl:text>
+			    <xsl:text>",null</xsl:text>
 		    </xsl:otherwise>
 	    </xsl:choose>
 	    <xsl:text>)) {
@@ -189,12 +197,19 @@ The source document contained the following notice:
     <xsl:text>_runTest()  {
     </xsl:text>
 <xsl:apply-templates mode="body"/>
+    <!--  now close all modified documents   -->
+    <xsl:for-each select="*[local-name() = 'load' and @willBeModified = 'true']">
+        <xsl:text>     this.builder.close(</xsl:text>
+        <xsl:value-of select="@var"/>
+        <xsl:text>);
+</xsl:text>
+    </xsl:for-each>
     <xsl:text>
 }
 
 function </xsl:text>
     <xsl:value-of select="@name"/>
-    <xsl:text>(factory) {
+    <xsl:text>(factory,contentType) {
 </xsl:text>
 <xsl:call-template name="implCheck"/>
 <xsl:text>
@@ -215,6 +230,7 @@ function </xsl:text>
 <!--  if there is a metadata child element then
           produce documentation comments    -->
     <xsl:apply-templates select="*[local-name()='metadata']"/>
+
     <xsl:for-each select="*[local-name() = 'suite.member']">
         <xsl:apply-templates select="document(@href,.)/*"/>
     </xsl:for-each>
@@ -691,10 +707,20 @@ function </xsl:text>
                 <xsl:with-param name="type">List</xsl:with-param>
             </xsl:call-template>
         </xsl:when>
-        <xsl:otherwise>
+        <xsl:when test="$expectedType = 'DOMString'">
             <xsl:call-template name="assertEquals">
-                <xsl:with-param name="type"/>
+                <xsl:with-param name="type">String</xsl:with-param>
             </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text>assertEquals("</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text>",</xsl:text>
+            <xsl:value-of select="@expected"/>
+            <xsl:text>,</xsl:text>
+            <xsl:value-of select="@actual"/>
+            <xsl:text>);
+   </xsl:text>
         </xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
@@ -705,102 +731,67 @@ function </xsl:text>
     <xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
-            <xsl:text>      assertEquals</xsl:text>
-            <xsl:value-of select="$type"/>
-			<xsl:text>IgnoreCase("</xsl:text>
-			<xsl:value-of select="@id"/>
-			<xsl:text>",</xsl:text>
-			<xsl:value-of select="@expected"/>
-			<xsl:text>,</xsl:text>
-			<xsl:value-of select="@actual"/>
-			<xsl:text>);
-</xsl:text>
-			<xsl:if test="*">
-				<xsl:text>      if(equals</xsl:text>
-                <xsl:value-of select="$type"/>
-                <xsl:text>IgnoreCase(</xsl:text>
-				<xsl:value-of select="@expected"/>
-				<xsl:text>,</xsl:text>
-				<xsl:value-of select="@actual"/>
-				<xsl:text>)) {
-      </xsl:text>
-				<xsl:apply-templates mode="body"/>
-				<xsl:text>      }
-      </xsl:text>
-			</xsl:if>
+            <xsl:call-template name="emitAssertEquals">
+                <xsl:with-param name="type" select="$type"/>
+                <xsl:with-param name="ignoreCase">true</xsl:with-param>
+            </xsl:call-template>
 		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>      assertEquals</xsl:text>
-            <xsl:value-of select="$type"/>
-            <xsl:text>("</xsl:text>
-			<xsl:value-of select="@id"/>
-			<xsl:text>",</xsl:text>
-			<xsl:value-of select="@expected"/>
-			<xsl:text>,</xsl:text>
-			<xsl:value-of select="@actual"/>
-			<xsl:text>);
-      </xsl:text>
-			<xsl:if test="*">
-				<xsl:text>if(equals</xsl:text>
-                <xsl:value-of select="$type"/>
-                <xsl:text>(</xsl:text>
-				<xsl:value-of select="@expected"/>
-                <xsl:text>,</xsl:text>
-				<xsl:value-of select="@actual"/>
-				<xsl:text>)) {
-</xsl:text>
-				<xsl:apply-templates mode="body"/>
-				<xsl:text>      }
-      </xsl:text>
-			</xsl:if>
-		</xsl:otherwise>
+        <xsl:when test="@ignoreCase = 'auto'">
+            <xsl:call-template name="emitAssertEquals">
+                <xsl:with-param name="type" select="$type"/>
+                <xsl:with-param name="ignoreCase">this.builder.ignoreCase</xsl:with-param>
+            </xsl:call-template>
+		</xsl:when>
+        <xsl:otherwise>
+            <xsl:call-template name="emitAssertEquals">
+                <xsl:with-param name="type" select="$type"/>
+                <xsl:with-param name="ignoreCase">false</xsl:with-param>
+            </xsl:call-template>
+        </xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
+<xsl:template name="emitAssertEquals">
+    <xsl:param name="ignoreCase"/>
+    <xsl:param name="type"/>
+    <xsl:param name="emptyOrNot"/>
+	<xsl:text>assert</xsl:text>
+    <xsl:value-of select="$emptyOrNot"/>
+	<xsl:text>Equals</xsl:text>
+    <xsl:value-of select="$type"/>
+	<xsl:text>("</xsl:text>
+	<xsl:value-of select="@id"/>
+	<xsl:text>",</xsl:text>
+	<xsl:value-of select="@expected"/>
+	<xsl:text>,</xsl:text>
+	<xsl:value-of select="@actual"/>
+    <xsl:text>,</xsl:text>
+    <xsl:value-of select="$ignoreCase"/>
+	<xsl:text>);
+</xsl:text>
+</xsl:template>
 
 <xsl:template match="*[local-name()='assertNotEquals']" mode="body">
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
-			<xsl:text>assertNotEqualsIgnoreCase("</xsl:text>
-			<xsl:value-of select="@id"/>
-			<xsl:text>",</xsl:text>
-			<xsl:value-of select="@expected"/>,
-			<xsl:value-of select="@actual"/>
-			<xsl:text>);
-</xsl:text>
-			<xsl:if test="*">
-				<xsl:text>if(</xsl:text>
-				<xsl:value-of select="@expected"/>
-				<xsl:text>.toUpperCase() != </xsl:text>
-				<xsl:value-of select="@actual"/>
-				<xsl:text>.toUpperCase()) {
-</xsl:text>
-				<xsl:apply-templates mode="body"/>
-				<xsl:text>}
-</xsl:text>
-			</xsl:if>
+            <xsl:call-template name="emitAssertEquals">
+                <xsl:with-param name="emptyOrNot">Not</xsl:with-param>
+                <xsl:with-param name="ignoreCase">true</xsl:with-param>
+            </xsl:call-template>
 		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>assertNotEquals("</xsl:text>
-			<xsl:value-of select="@id"/>
-			<xsl:text>",</xsl:text>
-			<xsl:value-of select="@expected"/>
-			<xsl:text>,</xsl:text>
-			<xsl:value-of select="@actual"/>
-			<xsl:text>);
-</xsl:text>
-			<xsl:if test="*">
-				<xsl:text>if(</xsl:text>
-				<xsl:value-of select="@expected"/>
-				<xsl:text> != </xsl:text>
-				<xsl:value-of select="@actual"/>
-				<xsl:text>) {
-</xsl:text>
-				<xsl:apply-templates mode="body"/>
-				<xsl:text>}
-</xsl:text>
-			</xsl:if>
-		</xsl:otherwise>
+        <xsl:when test="@ignoreCase = 'auto'">
+            <xsl:call-template name="emitAssertEquals">
+                <xsl:with-param name="emptyOrNot">Not</xsl:with-param>
+                <xsl:with-param name="ignoreCase">Auto</xsl:with-param>
+                <xsl:with-param name="contentType">this.builder.ignoreCase</xsl:with-param>
+            </xsl:call-template>
+		</xsl:when>
+        <xsl:otherwise>
+            <xsl:call-template name="emitAssertEquals">
+                <xsl:with-param name="emptyOrNot">Not</xsl:with-param>
+                <xsl:with-param name="ignoreCase">false</xsl:with-param>
+            </xsl:call-template>
+        </xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
@@ -1233,6 +1224,11 @@ function handleEvent(listener, event, userObj) {
 <xsl:template match="*[local-name()='hasSize']" mode="condition">
 	(<xsl:value-of select="@obj"/>.length == <xsl:value-of select="@expected"/>)
 </xsl:template>
+
+<xsl:template match="*[local-name()='contentType']" mode="condition">
+	(this.builder.contentType == <xsl:value-of select="@type"/>)
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">
 	<xsl:text>(this.builder.getImplementationAttribute("</xsl:text>

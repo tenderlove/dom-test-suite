@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addressList" type="NodeList"/>
 <var name="testAddress" type="Node"/>
 <var name="attributes" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="addressList"/>
 <item interface="NodeList" obj="addressList" index="0" var="testAddress"/>
 <attributes obj="testAddress" var="attributes"/>

@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrList" type="NamedNodeMap"/>
 <var name="attrNode" type="Node"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <createEntityReference obj="doc" var="entRef" name="&quot;ent4&quot;"/>

@@ -7,6 +7,6 @@
 <title>NIST DOM HTML Test - Anchor</title>
 </head>
 <body> 
-<a id="old_id" href="mary.html" accessKey="g">Here's some text.</a>
+<p><a id="old_id" href="mary.html">Here's some text.</a></p>
 </body>
 </html>

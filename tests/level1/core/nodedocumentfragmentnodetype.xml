@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="documentFragmentNode" type="DocumentFragment"/>
 <var name="nodeType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="documentFragmentNode"/>
 <nodeType obj="documentFragmentNode" var="nodeType"/>
 <assertEquals actual="nodeType" expected="11" id="nodeDocumentFragmentNodeTypeAssert1" ignoreCase="false"/>

@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newCDATASectionValue" type="DOMString"/>
 <var name="newCDATASectionName" type="DOMString"/>
 <var name="newCDATASectionType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <createCDATASection obj="doc" var="newCDATASectionNode" data="&quot;This is a new CDATASection node&quot;"/>
 <nodeValue obj="newCDATASectionNode" var="newCDATASectionValue"/>
 <assertEquals id="nodeValue" actual="newCDATASectionValue" expected="&quot;This is a new CDATASection node&quot;" ignoreCase="false"/>

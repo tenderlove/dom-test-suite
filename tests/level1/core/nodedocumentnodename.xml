@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="documentName" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <nodeName obj="doc" var="documentName"/>
 <assertEquals actual="documentName" expected="&quot;#document&quot;" id="nodeDocumentNodeNameAssert1" ignoreCase="false"/>
 </test>

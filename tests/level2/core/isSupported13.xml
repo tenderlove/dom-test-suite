@@ -29,7 +29,7 @@ Calls isSupported("Core","") should return true for all implementations (by exte
 <var name="doc" type="Document"/>
 <var name="rootNode" type="Node"/>
 <var name="state" type="boolean"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="rootNode"/>
 <isSupported obj="rootNode" feature='"Core"' version='""' var="state"/>
 <assertTrue actual="state" id="Core"/>

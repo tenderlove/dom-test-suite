@@ -25,7 +25,7 @@ should still return null.
 </metadata>
 <var name="newNode" type="Document"/>
 <var name="newValue" type="DOMString"/>
-<load var="newNode" href="staff.xml" willBeModified="true"/>
+<load var="newNode" href="staff" willBeModified="true"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>
 <!--   attempt to change the value and make sure that it stays null  -->

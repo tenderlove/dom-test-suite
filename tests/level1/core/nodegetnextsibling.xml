@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeIdNode" type="Node"/>
 <var name="nsNode" type="Node"/>
 <var name="nsName" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employeeId&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeIdNode"/>
 <nextSibling interface="Node" obj="employeeIdNode" var="nsNode"/>

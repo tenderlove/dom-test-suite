@@ -26,7 +26,7 @@ should still return null.
 <var name="doc" type="Document"/>
 <var name="newNode" type="Node"/>
 <var name="newValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <createComment obj="doc" var="newNode" data="&quot;This is a new Comment node&quot;"/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertEquals actual="newValue" expected='"This is a new Comment node"' ignoreCase="false" id="initial"/>

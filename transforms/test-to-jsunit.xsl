@@ -28,7 +28,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 	<!--  relative to transform   -->
 
     <xsl:import href="test-to-ecmascript.xsl"/>
-    <xsl:variable name="jsunitapp">../../../lib/jsunit/app/</xsl:variable>
+    <xsl:variable name="jsunitapp">../../../../lib/jsunit/app/</xsl:variable>
 
 
 <xsl:output method="html"/>
@@ -54,23 +54,51 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 </xsl:template>
 
 <xsl:template match="*[local-name() = 'test']" mode="jsunit">
+   <xsl:param name="contentType"/>
    function test<xsl:value-of select="@name"/>() {
        var test = null;
        try {
-           test = new <xsl:value-of select="@name"/>(factory);
+           test = new <xsl:value-of select="@name"/><xsl:text>(factory,</xsl:text>
+           <xsl:value-of select="$contentType"/>
+           <xsl:if test="not($contentType)">null</xsl:if>);
        }
        catch(ex) {
        }
        if(test != null) {
            test.runTest();
-       }
+       } 
    }
 </xsl:template>
 
 <xsl:template match="*[local-name() = 'suite']" mode="jsunit">
-    <xsl:for-each select="*[local-name() = 'suite.member']">
-        <xsl:apply-templates select="document(@href,.)/*" mode="jsunit"/>
-    </xsl:for-each>
+    <xsl:param name="contentType"/>
+    <xsl:choose>
+        <!--  if a content type was specified at this level, use it   -->
+        <xsl:when test="string-length(@contentType) &gt; 0">
+            <xsl:variable name="suiteContentType" select="@contentType"/>
+            <xsl:for-each select="*[local-name() = 'suite.member']">
+                <xsl:apply-templates select="document(@href,.)/*" mode="jsunit">
+                    <xsl:with-param name="contentType" select="concat(concat('&quot;',$suiteContentType),'&quot;')"/>
+                </xsl:apply-templates>
+            </xsl:for-each>
+        </xsl:when>
+        <!--  if specified by an enclosing suite, use its specification   -->
+        <xsl:when test="$contentType">
+            <xsl:for-each select="*[local-name() = 'suite.member']">
+                <xsl:apply-templates select="document(@href,.)/*" mode="jsunit">
+                    <xsl:with-param name="contentType" select="$contentType"/>
+                </xsl:apply-templates>
+            </xsl:for-each>
+        </xsl:when>
+        <!--  use the processors default    -->
+        <xsl:otherwise>
+            <xsl:for-each select="*[local-name() = 'suite.member']">
+                <xsl:apply-templates select="document(@href,.)/*" mode="jsunit">
+                    <xsl:with-param name="contentType">null</xsl:with-param>
+                </xsl:apply-templates>
+            </xsl:for-each>
+        </xsl:otherwise>
+    </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>

@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testEmployee" type="Element"/>
 <var name="domesticAttr" type="Attr"/>
 <var name="name" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <getAttributeNode obj="testEmployee" var="domesticAttr" name="&quot;domestic&quot;"/>

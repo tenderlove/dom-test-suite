@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="commentNode" type="Node"/>
 <var name="commentNodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <childNodes obj="doc" var="testList"/>
 <for-each collection="testList" member="commentNode">
 <nodeName obj="commentNode" var="commentNodeName"/>

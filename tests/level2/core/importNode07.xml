@@ -45,7 +45,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attr" type="Node"/>
 <var name="lname" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staff" willBeModified="false"/>
 <createElement obj="aNewDoc" var="element" tagName='"emp:employee"'/>
 <importNode obj="doc" var="aNode" importedNode="element" deep="false"/>
 <attributes obj="aNode" var="attributes"/>

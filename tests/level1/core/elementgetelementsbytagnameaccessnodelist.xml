@@ -39,7 +39,7 @@ element should be "#text".
 <var name="testEmployee" type="Element"/>
 <var name="firstC" type="Node"/>
 <var name="childName" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
 <firstChild interface="Node" obj="testEmployee" var="firstC"/>

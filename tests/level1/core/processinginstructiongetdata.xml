@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childNodes" type="NodeList"/>
 <var name="piNode" type="ProcessingInstruction"/>
 <var name="data" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <childNodes obj="doc" var="childNodes"/>
 <item interface="NodeList" obj="childNodes" var="piNode" index="0"/>
 <data interface="ProcessingInstruction" obj="piNode" var="data"/>

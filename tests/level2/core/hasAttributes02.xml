@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addrList" type="NodeList"/>
 <var name="addrNode" type="Node"/>
 <var name="state" type="boolean"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="addrList"/>
 <item interface="NodeList" obj="addrList" index="0" var="addrNode"/>
 <hasAttributes obj="addrNode" var="state"/>

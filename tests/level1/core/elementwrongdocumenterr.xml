@@ -54,8 +54,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addressElementList" type="NodeList"/>
 <var name="testAddress" type="Element"/>
 <var name="attrAddress" type="Attr"/>
-<load var="doc1" href="staff.xml" willBeModified="true"/>
-<load var="doc2" href="staff.xml" willBeModified="false"/>
+<load var="doc1" href="staff" willBeModified="true"/>
+<load var="doc2" href="staff" willBeModified="false"/>
 <createAttribute obj="doc2" var="newAttribute" name="&quot;newAttribute&quot;"/>
 <getElementsByTagName interface="Document" obj="doc1" tagname="&quot;address&quot;" var="addressElementList"/>
 <item interface="NodeList" obj="addressElementList" index="4" var="testAddress"/>

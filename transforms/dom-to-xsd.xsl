@@ -351,6 +351,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		   elements are <test>, <var>, <assign>, etc.
 	-->
     <xsl:template name="static-elements">
+            <xs:simpleType name="loadContentType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="text/xml">
+                        <xs:annotation>
+                            <xs:documentation>Generic XML</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="image/xml+svg">
+                        <xs:annotation>
+                            <xs:documentation>SVG</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="text/html">
+                        <xs:annotation>
+                            <xs:documentation>HTML</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+
 			<xs:element name="test">
 				<xs:annotation>
 					<xs:documentation>A test.</xs:documentation>
@@ -448,6 +468,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>Used in method name in generated code.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
+                    <xs:attribute name="contentType" type="loadContentType" use="optional">
+                        <xs:annotation>
+                            <xs:documentation>Content type used to select the appropriate test documents.  Value propagates from enclosing suites.
+                            For example, loading "file1" when contextType="text/xml" should load "staff.xml".  If contentType="image/xsl+svg", file1.svg would be loaded.
+                         </xs:documentation>
+                         </xs:annotation>
+                    </xs:attribute>
 				</xs:complexType>
 			</xs:element>
 
@@ -574,7 +601,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>If true then this test may modify the document, so a fresh copy should be loaded instead of a cached copy.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
-					<xs:attribute name="documentElementTagName" type="variable" use="optional"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="implementation">
@@ -779,14 +805,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:complexType>
 			</xs:element>
 			<xs:complexType name="comparisonAssertionWithCase">
-				<xs:sequence>
-					<xs:element ref="metadata" minOccurs="0"/>
-					<xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
-				</xs:sequence>
 				<xs:attribute name="actual" type="variable" use="required"/>
 				<xs:attribute name="expected" type="variableOrLiteral" use="required"/>
 				<xs:attribute name="id" type="xs:ID" use="required"/>
-				<xs:attribute name="ignoreCase" type="xs:boolean" use="required"/>
+				<xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
 			</xs:complexType>
 			<xs:element name="assertEquals" type="comparisonAssertionWithCase"/>
 			<xs:element name="assertNotEquals" type="comparisonAssertionWithCase"/>
@@ -877,11 +899,24 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="expected" type="variable" use="required"/>
 				</xs:complexType>
 			</xs:element>
+            <xs:simpleType name="ignoreCaseEnum">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="true"/>
+                    <xs:enumeration value="false"/>
+                    <xs:enumeration value="auto">
+                        <xs:annotation>
+                            <xs:documentation>If auto, the comparision will perform case folding 
+                            as appropriate for the content type.  Case insensitive for contentType="text/html",
+                            case sensitive for all others.</xsl:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
 			<xs:complexType name="comparisonWithCase">
 				<xs:attribute name="id" type="xs:ID" use="optional"/>
 				<xs:attribute name="actual" type="variable" use="required"/>
 				<xs:attribute name="expected" type="variableOrLiteral" use="required"/>
-				<xs:attribute name="ignoreCase" type="xs:boolean" use="required"/>
+				<xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
 			</xs:complexType>
 			<xs:element name="equals" type="comparisonWithCase">
 				<xs:annotation>
@@ -927,6 +962,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 					<xs:attribute name="obj" type="variable" use="required"/>
 					<xs:attribute name="expected" type="variableOrIntLiteral" use="required"/>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="contentType">
+                <xs:annotation>
+                    <xs:documentation>This condition will evaluate to true if the default
+                    content type for this test matches the specified type.</xs:documentation>
+                </xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+					<xs:attribute name="type" type="loadContentType" use="required"/>
 				</xs:complexType>
 			</xs:element>
 
@@ -1019,6 +1065,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="hasSize"/>
 					<xs:element ref="hasFeature"/>
 					<xs:element ref="implementationAttribute"/>
+                    <xs:element ref="contentType"/>
 				</xs:choice>
 			</xs:group>
 			<xs:element name="else">

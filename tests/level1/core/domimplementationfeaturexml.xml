@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="state" type="boolean"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <implementation obj="doc" var="domImpl"/>
 <hasFeature obj="domImpl" var="state" feature="&quot;xml&quot;" version="&quot;1.0&quot;"/>
 <assertTrue actual="state" id="domimplementationFeaturexmlAssert"/>

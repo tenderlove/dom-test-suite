@@ -44,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="districtNode" type="Attr"/>
 <var name="attrName" type="DOMString"/>
 <var name="setNode" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="1"/>
 <createAttribute obj="doc" var="newAttribute" name="&quot;district&quot;"/>

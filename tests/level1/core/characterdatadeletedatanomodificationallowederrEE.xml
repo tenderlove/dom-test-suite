@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entText" type="Node"/>
 <var name="entReference" type="EntityReference"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
 <createEntityReference obj="doc" var="entReference" name="&quot;ent3&quot;"/>

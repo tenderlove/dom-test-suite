@@ -38,7 +38,7 @@ from the Document interface.
 <var name="newAttribute" type="Attr"/>
 <var name="streetAttr" type="Attr"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
 <createAttribute obj="doc" var="newAttribute" name="&quot;street&quot;"/>

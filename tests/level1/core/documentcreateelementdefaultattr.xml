@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child" type="Node"/>
 <var name="name" type="DOMString"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
 <attributes obj="newElement" var="defaultAttr"/>
 <item obj="defaultAttr" var="child" index="0" interface="NamedNodeMap"/>

@@ -31,7 +31,7 @@ The method should return a NodeList whose length is
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;noMatch&quot;" var="elementList"/>
 <assertSize collection="elementList" size="0" id="elementGetElementsByTagNameNoMatchNoMatchAssert"/>
 </test>

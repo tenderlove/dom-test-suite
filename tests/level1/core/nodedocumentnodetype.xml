@@ -30,7 +30,7 @@ method.   The method should return 9.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="nodeType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <nodeType obj="doc" var="nodeType"/>
 <assertEquals actual="nodeType" expected="9" id="nodeDocumentNodeTypeAssert1" ignoreCase="false"/>
 </test>

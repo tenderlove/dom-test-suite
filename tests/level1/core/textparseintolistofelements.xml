@@ -51,7 +51,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="expectedExpanded" type="List">
 <member>"1900 Dallas Road Dallas, Texas\n 98554"</member>
 </var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="addressNode" index="1"/>
 <childNodes obj="addressNode" var="childList"/>

@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testName" type="NamedNodeMap"/>
 <var name="notationNode" type="Node"/>
 <var name="notationName" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <notations obj="docType" var="testName"/>
 <getNamedItem obj="testName" name="&quot;notation1&quot;" var="notationNode"/>

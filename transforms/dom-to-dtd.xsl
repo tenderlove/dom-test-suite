@@ -80,7 +80,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
-&lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize| %implementation-condition;"&gt;
+&lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType| %implementation-condition;"&gt;
 
 &lt;!ENTITY % assertion "%framework-assertion;</xsl:text>
 	<xsl:variable name="exceptions" select="//exception[@id]"/>
@@ -307,6 +307,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
    name CDATA #REQUIRED
    xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation CDATA #IMPLIED
+   contentType CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT package (metadata?, (test|suite)*)&gt;
@@ -322,6 +323,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
    name CDATA #REQUIRED
    xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation CDATA #IMPLIED
+   contentType CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT suite.member EMPTY&gt;
@@ -421,8 +423,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST load
 	var CDATA #REQUIRED
 	href CDATA #REQUIRED
-	willBeModified CDATA #REQUIRED
-	documentElementTagName CDATA #IMPLIED
+	willBeModified (true | false) #REQUIRED
 &gt;
 
 &lt;!ELEMENT implementation EMPTY&gt;
@@ -550,7 +551,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
 	id ID #REQUIRED
-	ignoreCase CDATA #REQUIRED
+	ignoreCase (true|false|auto) #REQUIRED
 &gt;
 
 &lt;!ELEMENT assertNotEquals (metadata?, (%statement;)*)&gt;
@@ -558,7 +559,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
 	id ID #REQUIRED
-	ignoreCase CDATA #REQUIRED
+	ignoreCase (true|false|auto) #REQUIRED
 &gt;
 
 &lt;!ELEMENT assertEventCount (metadata?, (%statement;)*)&gt;
@@ -596,7 +597,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
-	ignoreCase (true|false) "false"
+	ignoreCase (true|false|auto) "false"
 &gt;
 
 &lt;!ELEMENT notEquals EMPTY&gt;
@@ -604,7 +605,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
-	ignoreCase (true|false) "false"
+	ignoreCase (true|false|auto) "false"
 &gt;
 
 &lt;!ELEMENT less EMPTY&gt;
@@ -660,6 +661,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	obj CDATA #REQUIRED
 	expected CDATA #REQUIRED
 &gt;
+
+&lt;!ELEMENT contentType EMPTY&gt;
+&lt;!ATTLIST hasSize
+	id ID #IMPLIED
+	type CDATA #REQUIRED
+&gt;
+
 
 &lt;!ELEMENT implementationAttribute EMPTY&gt;
 &lt;!ATTLIST implementationAttribute

@@ -42,8 +42,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newAttribute" type="Node"/>
 <var name="name" type="DOMString"/>
 <var name="setNode" type="Node"/>
-<load var="doc1" href="staff.xml" willBeModified="true"/>
-<load var="doc2" href="staff.xml" willBeModified="true"/>
+<load var="doc1" href="staff" willBeModified="true"/>
+<load var="doc2" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc1" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="2"/>
 <createAttribute obj="doc2" var="newAttribute" name="&quot;newAttribute&quot;"/>

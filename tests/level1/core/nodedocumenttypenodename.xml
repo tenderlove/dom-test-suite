@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="documentTypeName" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <nodeName obj="docType" var="documentTypeName"/>
 <assertEquals actual="documentTypeName" expected="&quot;staff&quot;" id="nodeDocumentTypeNodeNameAssert1" ignoreCase="false"/>

@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childToRemove" type="Node"/>
 <var name="removedChild" type="Node"/>
 <var name="parentNode" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <documentElement obj="doc" var="rootNode"/>
 <childNodes obj="rootNode" var="childList"/>
 <item interface="NodeList" obj="childList" index="1" var="childToRemove"/>

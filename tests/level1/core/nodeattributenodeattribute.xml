@@ -36,7 +36,7 @@ on the Attribute Node.  It should return null.
 <var name="addrAttr" type="NamedNodeMap"/>
 <var name="attrNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <attributes obj="testAddr" var="addrAttr"/>

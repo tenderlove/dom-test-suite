@@ -59,7 +59,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="rootNode" type="Node"/>
 <var name="featureElement" type="DOMString"/>
 <var name="state" type="boolean"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <documentElement obj="doc" var="rootNode"/>
 <!---   All XML implementations must support core   -->
 <isSupported obj="rootNode" feature='"Core"' version='"2.0"' var="state"/>

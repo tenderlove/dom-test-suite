@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entityList" type="NamedNodeMap"/>
 <var name="entity" type="Node"/>
 <var name="entityType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <entities obj="docType" var="entityList"/>
 <for-each collection="entityList" member="entity">

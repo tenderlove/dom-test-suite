@@ -34,7 +34,7 @@ by the "normalize()" method.
 <var name="childNodes" type="NodeList"/>
 <var name="cdataN" type="CDATASection"/>
 <var name="data" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="nameList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="nameList" var="lChild" index="1"/>
 <normalize obj="lChild"/>

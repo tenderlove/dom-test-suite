@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="Node"/>
 <var name="createdNode" type="Node"/>
 <var name="appendedNode" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
 <createElement obj="doc" tagName="&quot;text3&quot;" var="createdNode"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

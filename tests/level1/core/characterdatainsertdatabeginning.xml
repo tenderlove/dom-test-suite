@@ -36,7 +36,7 @@ The new value of the character data should be
 <var name="nameNode" type="Node"/>
 <var name="child" type="CharacterData"/>
 <var name="childData" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;name&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
 <firstChild interface="Node" obj="nameNode" var="child"/>

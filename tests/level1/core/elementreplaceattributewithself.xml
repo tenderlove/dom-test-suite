@@ -34,7 +34,7 @@ inadvertanly made this test.
 <var name="streetAttr" type="Attr"/>
 <var name="replacedAttr" type="Attr"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
 <getAttributeNode var="streetAttr" obj="testEmployee" name='"street"'/>

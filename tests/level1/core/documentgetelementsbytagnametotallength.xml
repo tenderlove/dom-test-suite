@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nameList" tagname="&quot;*&quot;"/>
 <assertSize collection="nameList" size="37" id="documentGetElementsByTagNameTotalLengthAssert"/>
 </test>

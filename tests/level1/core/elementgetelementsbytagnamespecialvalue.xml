@@ -44,7 +44,7 @@ in the order the children were encountered.
 <member>"gender"</member>
 <member>"address"</member>
 </var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="4" var="lastEmployee"/>
 <getElementsByTagName interface="Element" obj="lastEmployee" var="lastempList" tagname="&quot;*&quot;"/>

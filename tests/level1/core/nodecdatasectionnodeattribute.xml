@@ -36,7 +36,7 @@ It should return null.
 <var name="cdataName" type="Element"/>
 <var name="cdataNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;name&quot;"/>
 <item interface="NodeList" obj="elementList" index="1" var="cdataName"/>
 <lastChild interface="Node" obj="cdataName" var="cdataNode"/>

@@ -43,8 +43,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="name" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="childValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
+<load var="aNewDoc" href="staff" willBeModified="false"/>
 <createEntityReference obj="aNewDoc" var="entRef" name='"ent3"'/>
 <importNode obj="doc" var="aNode" importedNode="entRef" deep="true"/>
 <nodeName obj="aNode" var="name"/>

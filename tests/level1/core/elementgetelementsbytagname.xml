@@ -33,7 +33,7 @@ that match the given tag name.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <assertSize collection="elementList" size="5" id="elementGetElementsByTagNameAssert"/>
 </test>

@@ -39,7 +39,7 @@ employee.  This should raise the desired exception.
 <var name="domesticAttr" type="Attr"/>
 <var name="setAttr" type="Attr"/>
 <var name="setNode" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
+<load var="doc" href="staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="firstNode" index="0"/>
 <createAttribute obj="doc" var="domesticAttr" name="&quot;domestic&quot;"/>
