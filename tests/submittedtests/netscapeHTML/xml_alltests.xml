@@ -11,6 +11,6 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE suite SYSTEM "dom1.dtd">
 
-<suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="xml_alltests" contentType="text/xml">
+<suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="xml_alltests">
      <suite.member href="alltests.xml"/>
 </suite>

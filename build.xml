@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.129  2004-02-26 05:14:49  dom-ts-4
+Revision 1.130  2004-02-26 15:08:08  dom-ts-4
+Enabling GUMP automated builds (bug 377)
+
+Revision 1.129  2004/02/26 05:14:49  dom-ts-4
 Add datatype_normalization back to dom3-core-validate-files  (bug 568)
 
 Revision 1.128  2004/02/25 06:30:17  dom-ts-4
@@ -1144,8 +1147,6 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-gump" depends="dom1-core-validate-tests, 
 								  dom1-html-validate-tests,
-								  dom1-core-schema-validate-tests, 
-								  dom1-html-schema-validate-tests,								   
 								  dom1-core-jar,
 								  dom1-html-jar"/>
 
@@ -1799,9 +1800,6 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom2-gump" depends="dom2-core-validate-tests, 
                                   dom2-events-validate-tests, 
 								  dom2-html-validate-tests,
-								  dom2-core-schema-validate-tests, 
-                                  dom2-events-schema-validate-tests, 
-								  dom2-html-schema-validate-tests,								   
 								  dom2-core-jar,
 								  dom2-events-jar,
 								  dom2-html-jar"/>
