@@ -601,7 +601,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &gt;
 
 &lt;!ELEMENT notEquals EMPTY&gt;
-&lt;!ATTLIST equals
+&lt;!ATTLIST notEquals
 	id ID #IMPLIED
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
