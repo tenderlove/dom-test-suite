@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The ch attribute specifies the alignment character for cells in a
     column.
 
-    Retrieve the char attribute of the first TBODY element and examine
+    Retrieve the char attribute of the second TBODY element and examine
     it's value.  
 </description>
 <contributor>Mary Brady</contributor>
@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Node"/>
 <load var="doc" href="tablesection" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;tbody&quot;"/>
-<assertSize collection="nodeList" size="1" id="Asize"/>
-<item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
+<assertSize collection="nodeList" size="2" id="Asize"/>
+<item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <ch interface="HTMLTableSectionElement" obj="testNode" var="vch"/>
 <assertEquals actual="vch" expected="&quot;$&quot;" id="chLink" ignoreCase="false"/>
 </test>

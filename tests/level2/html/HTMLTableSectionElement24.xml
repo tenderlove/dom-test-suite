@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     starts from 0 and is relative only to the rows contained inside
     this section, not all the rows in the table.
     
-    Retrieve the first TBODY element and invoke the deleteRow() method
+    Retrieve the second TBODY element and invoke the deleteRow() method
     with an index of 0.  The nuber of rows in the TBODY section before 
     the deletion of the row is two.  After the row is deleted the number 
     of rows in the TBODY section is one.
@@ -40,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <load var="doc" href="tablesection" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;tbody&quot;"/>
-<assertSize collection="nodeList" size="1" id="Asize"/>
-<item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
+<assertSize collection="nodeList" size="2" id="Asize"/>
+<item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <rows interface="HTMLTableSectionElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
 <assertEquals actual="vrows" expected="2" id="rowsLink1" ignoreCase="false"/>
