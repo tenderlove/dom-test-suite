@@ -21,10 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="attrgetschematypeinfo04.xml"/>
     <suite.member href="attrgetschematypeinfo05.xml"/>
     <suite.member href="attrgetschematypeinfo06.xml"/>
+
+    <suite.member href="cdatasections01.xml"/>
     
 	<suite.member href="checkcharacternormalization01.xml"/>
 	<suite.member href="checkcharacternormalization02.xml"/>
+	<suite.member href="checkcharacternormalization03.xml"/>
     
+    <suite.member href="comments01.xml"/>
 
 	<suite.member href="datatypenormalization01.xml"/>	
 	<suite.member href="datatypenormalization02.xml"/>	
@@ -43,6 +47,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="datatypenormalization15.xml"/>	
 	<suite.member href="datatypenormalization16.xml"/>	
 	<suite.member href="datatypenormalization17.xml"/>	
+	<suite.member href="datatypenormalization18.xml"/>	
+	<suite.member href="datatypenormalization19.xml"/>	
 
 	<!-- DOMImplementation tests -->
     <suite.member href="domimplementationgetfeature01.xml"/>
@@ -220,6 +226,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     <suite.member href="elementcontentwhitespace01.xml"/>
     <suite.member href="elementcontentwhitespace02.xml"/>
+    <suite.member href="elementcontentwhitespace03.xml"/>
 
     <suite.member href="elementgetschematypeinfo01.xml"/>
     <suite.member href="elementgetschematypeinfo02.xml"/>
@@ -228,6 +235,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="entities01.xml"/>
     <suite.member href="entities02.xml"/>
     <suite.member href="entities03.xml"/>
+    <suite.member href="entities04.xml"/>
 
     
     <suite.member href="hasFeature01.xml"/>
@@ -570,6 +578,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	
 	<suite.member href="normalizecharacters01.xml"/>
 	<suite.member href="normalizecharacters02.xml"/>
+	<suite.member href="normalizecharacters03.xml"/>
+	<suite.member href="normalizecharacters04.xml"/>
+	<suite.member href="normalizecharacters05.xml"/>
+	<suite.member href="normalizecharacters06.xml"/>
+	<suite.member href="normalizecharacters07.xml"/>
+	<suite.member href="normalizecharacters08.xml"/>
 	
 	<!-- Attr Tests -->
 	<!-- isID -->
@@ -614,6 +628,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="elementsetidattributens08.xml"/>
 	<suite.member href="elementsetidattributens13.xml"/>
 
+
+    <suite.member href="splitcdatasections01.xml"/>
 
 	<!-- Text Node tests -->
 	<!-- isElementcContentWhitespace -->
