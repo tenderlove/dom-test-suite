@@ -77,7 +77,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempFileURI|createTempHttpURI"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
@@ -927,6 +927,18 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	obj CDATA #REQUIRED
 	beginIndex CDATA #REQUIRED
 	endIndex CDATA #IMPLIED
+&gt;
+
+&lt;!ELEMENT createTempFileURI EMPTY&gt;
+&lt;!ATTLIST createTempFileURI
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+&gt;
+
+&lt;!ELEMENT createTempHttpURI EMPTY&gt;
+&lt;!ATTLIST createTempHttpURI
+	id ID #IMPLIED
+	var CDATA #REQUIRED
 &gt;
 
 	</xsl:template>

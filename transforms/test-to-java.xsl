@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.48  2003-12-08 07:50:50  dom-ts-4
+Revision 1.49  2003-12-09 08:22:27  dom-ts-4
+Additional L&S tests, mostly configuration (Bug 401)
+
+Revision 1.48  2003/12/08 07:50:50  dom-ts-4
 L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 396)
 
 Revision 1.47  2003/12/02 04:01:19  dom-ts-4
@@ -801,6 +804,10 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
            <xsl:text> = new java.io.ByteArrayOutputStream();</xsl:text>
         </xsl:when>
         
+        <xsl:when test="@type = 'LSWriter' and (not(@isNull) or @isNull='false')">
+           <xsl:text> = new java.io.StringWriter();</xsl:text>
+        </xsl:when>
+
         <!--  explict value, just add it  -->
         <xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 
@@ -922,6 +929,14 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         	<xsl:text> new java.io.ByteArrayInputStream(((java.io.ByteArrayOutputStream) </xsl:text>
         	<xsl:value-of select="@value"/>
         	<xsl:text>).toByteArray());
+       </xsl:text>
+        </xsl:when>
+
+        <!--  if the left hand side is LSReader and the right hand side is LSWriter  -->
+        <xsl:when test="$vardefs[@name = current()/@var]/@type = 'LSReader' and $vardefs[@name = current()/@value]/@type = 'LSWriter'">
+        	<xsl:text> new java.io.StringReader(((java.io.StringWriter) </xsl:text>
+        	<xsl:value-of select="@value"/>
+        	<xsl:text>).toString());
        </xsl:text>
         </xsl:when>
         
@@ -1563,15 +1578,25 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 </xsl:template>
 
 <xsl:template match="*[local-name()='getResourceURI']" mode="body">
-    <xsl:param name="vardefs"/>
-
-    <xsl:variable name="var" select="@var"/>
     <xsl:value-of select="@var"/>
     <xsl:text> = getResourceURI(</xsl:text>
     <xsl:value-of select="@href"/>
     <xsl:text>);
       </xsl:text>
 </xsl:template>
+
+<xsl:template match="*[local-name()='createTempFileURI']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = createTempFileURI();
+      </xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='createTempHttpURI']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = createTempHttpURI();
+      </xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='assertImplementationException']" mode="body">
     <xsl:param name="vardefs"/>
@@ -1634,6 +1659,40 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
          assertTrue("<xsl:value-of select="@id"/>", success);
       }
 </xsl:template>
+
+<xsl:template match="*[local-name()='getParameter']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:variable name="var" select="@var"/>
+    <xsl:value-of select="$var"/>
+    <xsl:text> = </xsl:text>
+    <xsl:variable name="vartype" select="$vardefs[@name = $var]/@type"/>
+    <xsl:choose>
+    	<xsl:when test="$vartype = 'boolean'">
+    		<xsl:text>((Boolean) </xsl:text>
+    		<xsl:value-of select="@obj"/>
+    		<xsl:text>.getParameter(</xsl:text>
+    		<xsl:value-of select="@name"/>
+    		<xsl:text>)).booleanValue();
+      </xsl:text>
+      	</xsl:when>
+      	
+      	<xsl:otherwise>
+      		<xsl:if test="$vartype != 'DOMUserData'">
+      			<xsl:text>(</xsl:text>
+				<xsl:call-template name="produce-type">
+    				<xsl:with-param name="type" select="$vartype"/>
+    			</xsl:call-template>
+      			<xsl:text>) </xsl:text>
+      		</xsl:if>
+      		<xsl:value-of select="@obj"/>
+      		<xsl:text>.getParameter(</xsl:text>
+      		<xsl:value-of select="@name"/>
+      		<xsl:text>);
+      </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>      	
+</xsl:template>
+
 
 <xsl:template match="text()" mode="body"/>
 
@@ -1719,6 +1778,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         </xsl:when>
         <!--  variable is already appropriate type, do nothing  -->
         <xsl:when test="$vartype = $rettype"/>
+        
         <!--  if the vartype inherits from another interface, see if it matches the required type  -->
         <xsl:when test="$domspec/library/interface[@name = $rettype and @inherits]">
             <xsl:call-template name="retval-cast">

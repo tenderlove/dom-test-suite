@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.114  2003-12-08 07:50:50  dom-ts-4
+Revision 1.115  2003-12-09 08:22:27  dom-ts-4
+Additional L&S tests, mostly configuration (Bug 401)
+
+Revision 1.114  2003/12/08 07:50:50  dom-ts-4
 L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 396)
 
 Revision 1.113  2003/12/06 06:50:30  dom-ts-4
@@ -378,7 +381,7 @@ All implementation conditions combined into implementationAttribute element
 
 -->
 <project default="usage" basedir=".">
-    <property name="xdk10.jar" location="lib/xmlparserv2.jar"/>
+    <property name="xdk10.lib.dir" location="/xdk_10/lib"/>
 
 <target name="usage">
 	<echo message="common targets:"/>
@@ -2141,6 +2144,7 @@ All implementation conditions combined into implementationAttribute element
 		<replacefilter token="LSParser " value="DOMBuilder "/>
 		<replacefilter token="LSInput " value="DOMInputSource "/>
 		<replacefilter token="LSResourceResolver " value="DOMEntityResolver "/>
+		<replacefilter token="(LSResourceResolver)" value="(DOMEntityResolver)"/>
 		<replacefilter token="LSParserFilter " value="DOMBuilderFilter "/>
 		<replacefilter token="LSSerializer " value="DOMWriter "/>
 		<replacefilter token="LSSerializerFilter " value="DOMWriterFilter "/>
@@ -2160,6 +2164,13 @@ All implementation conditions combined into implementationAttribute element
       <replacefilter token="sink.addTest(DOMBuilderTest5.class);" value="//sink.addTest(DOMBuilderTest5.class);"/>
       <replacefilter token="sink.addTest(DOMInputSourceTest3.class);" value="//sink.addTest(DOMInputSourceTest3.class);"/>
       <replacefilter token="sink.addTest(DOMWriterTest1.class);" value="//sink.addTest(DOMWriterTest1.class);"/>
+      <replacefilter token="sink.addTest(SystemId1.class);" value="//sink.addTest(SystemId1.class);"/>
+      <replacefilter token="sink.addTest(SystemId2.class);" value="//sink.addTest(SystemId2.class);"/>
+      <replacefilter token="sink.addTest(CertifiedText1.class);" value="//sink.addTest(CertifiedText1.class);"/>
+      <replacefilter token="sink.addTest(CharacterStream1.class);" value="//sink.addTest(CharacterStream1.class);"/>
+      <replacefilter token="sink.addTest(DOMWriterTest4.class);" value="//sink.addTest(DOMWriterTest4.class);"/>
+      <replacefilter token="sink.addTest(LSParserConfig2.class);" value="//sink.addTest(LSParserConfig2.class);"/>
+      <replacefilter token="sink.addTest(LSSerializerConfig2.class);" value="//sink.addTest(LSSerializerConfig2.class);"/>
 	</replace> 
 
 	<replace dir="${java.build.dir}" includes="org/w3c/domts/level3/ls/DOMWriterFilterTest*.java">
@@ -2174,7 +2185,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<javac 
 		destdir="${java.build.dir}" 
-		classpath="${xdk10.jar};${java.build.dir}"
+		classpath="${xdk10.lib.dir}/xmlparserv2.jar;${java.build.dir}"
         debug="on"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
@@ -2183,6 +2194,12 @@ All implementation conditions combined into implementationAttribute element
         <exclude name="org/w3c/domts/level3/ls/DOMBuilderTest5.java"/>
         <exclude name="org/w3c/domts/level3/ls/DOMInputSourceTest3.java"/>
         <exclude name="org/w3c/domts/level3/ls/DOMWriterTest1.java"/>
+        <exclude name="org/w3c/domts/level3/ls/SystemId*.java"/>
+        <exclude name="org/w3c/domts/level3/ls/CertifiedText*.java"/>
+        <exclude name="org/w3c/domts/level3/ls/CharacterStream*.java"/>
+        <exclude name="org/w3c/domts/level3/ls/DOMWriterTest4.java"/>
+        <exclude name="org/w3c/domts/level3/ls/LSParserConfig2.java"/>
+        <exclude name="org/w3c/domts/level3/ls/LSSerializerConfig2.java"/>        
     </javac>
 	<antcall target="jar">
 		<param name="level" value="3"/>

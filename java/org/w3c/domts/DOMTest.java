@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.8  2003-12-02 03:49:29  dom-ts-4
+ Revision 1.9  2003-12-09 08:22:27  dom-ts-4
+ Additional L&S tests, mostly configuration (Bug 401)
+
+ Revision 1.8  2003/12/02 03:49:29  dom-ts-4
  Load/save fixup (bug 396)
 
  Revision 1.7  2003/06/27 05:36:05  dom-ts-4
@@ -147,6 +150,18 @@ public abstract class DOMTest {
   
   public String getResourceURI(String href) throws DOMTestLoadException {
   	  return resolveURI(href).toString();
+  }
+  
+  public String createTempFileURI() throws DOMTestLoadException {
+  	try {
+  		return java.io.File.createTempFile("domts", ".xml").toURL().toExternalForm();
+  	} catch (IOException ex) {
+  		throw new DOMTestLoadException(ex);
+  	}
+  }
+  
+  public String createTempHttpURI() throws DOMTestLoadException {
+  	  return "http://localhost:8080/domts/temp/" + Integer.toString(new java.util.Random().nextInt()) + ".xml";
   }
 
   public Document load(String docURI) throws DOMTestLoadException {

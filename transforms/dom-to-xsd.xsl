@@ -1026,6 +1026,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="createXPathEvaluator"/>
 					<xs:element ref="getResourceURI"/>
 					<xs:element ref="substring"/>
+					<xs:element ref="createTempFileURI"/>
+					<xs:element ref="createTempHttpURI"/>
 				</xs:choice>
 			</xs:group>
 
@@ -1300,6 +1302,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             		<xs:attribute name="id" type="xs:ID" use="optional"/>
             		<xs:attribute name="var" type="variable" use="required"/>
             		<xs:attribute name="href" type="variableOrStringLiteral" use="required"/>
+            	</xs:complexType>
+            </xs:element>
+            <xs:element name="createTempFileURI">
+            	<xs:complexType>
+            		<xs:attribute name="id" type="xs:ID" use="optional"/>
+            		<xs:attribute name="var" type="variable" use="required"/>
+            	</xs:complexType>
+            </xs:element>
+            <xs:element name="createTempHttpURI">
+            	<xs:complexType>
+            		<xs:attribute name="id" type="xs:ID" use="optional"/>
+            		<xs:attribute name="var" type="variable" use="required"/>
             	</xs:complexType>
             </xs:element>
             <xs:element name="substring">

@@ -42,6 +42,7 @@ and combine-metadata.xsl
     <xsl:variable name="attributes" select="$interfaces/attribute"/>
     <xsl:variable name="descriptions" select="/rdf:RDF/rdf:Description"/>
     <xsl:variable name="results" select="document($resultsURL,.)//testsuite"/>
+    <xsl:variable name="tests" select="$descriptions[not(contains(@rdf:about, 'alltests')) and substring(@rdf-about, string-length(@rdf:about)) != '/']"/>
 
 	<!--  match document root    -->
 	<xsl:template match="/">
@@ -54,11 +55,13 @@ and combine-metadata.xsl
 		<h1><xsl:value-of select="$title"/></h1>
 		<p> 
 </p>
+				
 
-        <table border="1" cols="{1 + count($results)}" width="100%">
+        <table border="1" cols="{2 + count($results)}" width="100%">
         	<thead>Tests with failures</thead>
             <tr>
             	<th>Test</th>
+            	<th>Description</th>
             	<xsl:for-each select="$results">
             		<th><xsl:value-of select="substring-after(@name,'.Test')"/></th>
             	</xsl:for-each>
@@ -83,6 +86,9 @@ and combine-metadata.xsl
                     <xsl:text> </xsl:text>
         		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
                     <xsl:text>)</xsl:text>
+                    </td>
+                    <td>
+                    	<xsl:value-of select="dc:description"/>
                     </td>
                     <xsl:for-each select="$results">
                     	<td>
@@ -114,6 +120,42 @@ and combine-metadata.xsl
             </xsl:for-each>
         </table>     
 
+
+
+        <table border="1" cols="2" width="100%">
+        	<thead>Tests passed by all implementations</thead>
+            <tr>
+            	<th>Test</th>
+            	<th>Description</th>
+            </tr>
+            <xsl:for-each select="$descriptions">
+                <xsl:sort select="dc:title"/>
+                
+                <xsl:choose>
+                	<xsl:when test="contains(@rdf:about, 'alltests')"/>
+                	<xsl:when test="substring(@rdf:about, string-length(@rdf:about)) = '/'"/> 
+                
+                <!--  if there aren't the same number of successes and implementations   -->
+                <xsl:when test="count($results) = count($results/testcase[@name = current()/@rdf:about and not(failure) and not(error)])">
+                <tr>
+                    <td width="25%">
+                    <xsl:variable name="testName"><xsl:value-of select="dc:title" /></xsl:variable>                             
+                    <xsl:call-template name="emit-title"/>
+                    <xsl:text> (</xsl:text> 
+        		    <a href="{concat($buildPath,concat(translate($testName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'.xml'))}" title="{dc:description}">XML</a>
+                    <xsl:text> </xsl:text>
+        		    <a href="{concat($doxyPath,concat(translate($testName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),$doxySuffix))}" title="{dc:description}">Java</a>
+                    <xsl:text>)</xsl:text>
+                    </td>
+                    <td>
+                    <xsl:value-of select="dc:description"/>
+                    </td>
+                </tr>
+                </xsl:when>
+                <xsl:otherwise/>
+                </xsl:choose>
+            </xsl:for-each>
+        </table>     
 
                 <!--  the copyright notice placed in the output file.    -->
 		

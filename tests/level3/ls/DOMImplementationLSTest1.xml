@@ -29,10 +29,19 @@
   </metadata>
   <!-- temporarily commented out    -->
   <!-- hasFeature feature='"LS-Async"'/ -->
+  <var name="isAsync" type="boolean"/>
+  <var name="isBusy" type="boolean"/>
+  <var name="filter" type="LSParserFilter"/>  
   &vars;
   
   <createLSParser var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='NULL_SCHEMATYPE'/>
   <assertNotNull actual="builder" id="builderNotNull"/>
+  <async var="isAsync" obj="builder"/>
+  <assertTrue actual="isAsync" id="notAsync"/>
+  <busy var="isBusy" obj="builder"/>
+  <assertFalse actual="isBusy" id="notBusy"/>
+  <filter var="filter" obj="builder" interface="LSParser"/>
+  <assertNull actual="filter" id="nullFilter"/>
 </test>
 
 

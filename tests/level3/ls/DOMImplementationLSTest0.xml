@@ -26,10 +26,19 @@
     &contributor; &date;
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>
   </metadata>
+  <var name="isAsync" type="boolean"/>
+  <var name="isBusy" type="boolean"/>
+  <var name="filter" type="LSParserFilter"/>
   &vars;
   
   <createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='NULL_SCHEMATYPE'/>
   <assertNotNull actual="builder" id="builderNotNull"/>
+  <async var="isAsync" obj="builder"/>
+  <assertFalse actual="isAsync" id="notAsync"/>
+  <busy var="isBusy" obj="builder"/>
+  <assertFalse actual="isBusy" id="notBusy"/>
+  <filter var="filter" obj="builder" interface="LSParser"/>
+  <assertNull actual="filter" id="nullFilter"/>
 </test>
 
 
