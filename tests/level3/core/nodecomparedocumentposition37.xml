@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 	Using compareDocumentPosition to check if the document position of the first class attribute
 	of the element acronym when compared with the elements text content as a parameter is 
-	is FOLLOWING, and is PRECEEDING vice versa.
+	is FOLLOWING, and is PRECEDING vice versa.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -45,6 +45,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="attrPosition" obj="attr" other="txt"/>
 <assertEquals  actual="attrPosition" expected="4" id="nodecomparetreepositionFollowing37" ignoreCase="false"/>
 <compareDocumentPosition var="txtPosition" obj="txt" other="attr"/>
-<assertEquals  actual="txtPosition" expected="2" id="nodecomparetreepositionPRECEEDING37" ignoreCase="false"/>
+<assertEquals  actual="txtPosition" expected="2" id="nodecomparetreepositionPRECEDING37" ignoreCase="false"/>
 </test>
  

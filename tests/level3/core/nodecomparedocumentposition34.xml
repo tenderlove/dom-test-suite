@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition34</title>
 <creator>IBM</creator>
 <description>
-	Create a new Element node, add new Text, Element and Porcessing Instruction nodes to it.
+	Create a new Element node, add new Text, Element and Processing Instruction nodes to it.
 	Using compareDocumentPosition, compare the position of the Element with respect to the Text
 	and the Text with respect to the Processing Instruction.
 </description>
@@ -39,8 +39,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="txtToPiPosition" type="int"/>
 <var name="appendedChild" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="elemMain" obj="doc" namespaceURI='"http:www.w3.org/DOM/Test"' qualifiedName='"dom3:Element"'/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http:www.w3.org/DOM/Test"' qualifiedName='"dom3:Elem"'/>
+<createElementNS var="elemMain" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"p"'/>
+<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"br"'/>
 <createTextNode var="txt" obj="doc" data='"TEXT"'/>
 <createProcessingInstruction var="pi" obj="doc" data='"PID"' target='"PIT"'/>
 <appendChild obj="elemMain" var="appendedChild" newChild="txt"/>
@@ -49,5 +49,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="elementToTxtPosition" obj="txt" other="elem"/>
 <assertEquals  actual="elementToTxtPosition" expected="4" id="nodecomparedocumentpositionFollowing34" ignoreCase="false"/>
 <compareDocumentPosition var="txtToPiPosition" obj="pi" other="txt"/>
-<assertEquals  actual="txtToPiPosition" expected="2" id="nodecomparedocumentpositionPRECEEDING34" ignoreCase="false"/>
+<assertEquals  actual="txtToPiPosition" expected="2" id="nodecomparedocumentpositionPRECEDING34" ignoreCase="false"/>
 </test>

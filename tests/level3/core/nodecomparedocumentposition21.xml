@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 	Using compareDocumentPosition check the document position of the text node of the fist and second elements 
 	whose localName is name.  The first text node should return FOLLOWING and the second text node should
-	return PRECEEDING when compareDocumentPosition is invoked with the other node as a parameter. 
+	return PRECEDING when compareDocumentPosition is invoked with the other node as a parameter. 
 	
 </description>
 <contributor>Jenny Hsu</contributor>
@@ -49,5 +49,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="txt1Position" obj="txt1" other="txt2"/>
 <assertEquals  actual="txt1Position" expected="4" id="nodecomparedocumentpositionFollowing21" ignoreCase="false"/>
 <compareDocumentPosition var="txt2Position" obj="txt2" other="txt1"/>
-<assertEquals  actual="txt2Position" expected="2" id="nodecomparedocumentpositionPRECEEDING21" ignoreCase="false"/>
+<assertEquals  actual="txt2Position" expected="2" id="nodecomparedocumentpositionPRECEDING21" ignoreCase="false"/>
 </test>

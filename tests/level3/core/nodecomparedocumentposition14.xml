@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="docFrag" var="appendedChild" newChild="docElem" />
 <firstChild var="docFragChild" obj="docFrag" interface="Node"/>
 <compareDocumentPosition var="docFragPosition" obj="docFrag" other="docFragChild"/>
-<assertEquals  actual="docFragPosition" expected="20" id="nodecomparedocumentpositionContainsPRECEEDING14" ignoreCase="false"/>
+<assertEquals  actual="docFragPosition" expected="20" id="nodecomparedocumentpositionContainsPRECEDING14" ignoreCase="false"/>
 <compareDocumentPosition var="docFragChildPosition" obj="docFragChild" other="docFrag"/>
 <assertEquals  actual="docFragChildPosition" expected="10" id="nodecomparedocumentpositionIsContainedFollowing14" ignoreCase="false"/>
 </test>

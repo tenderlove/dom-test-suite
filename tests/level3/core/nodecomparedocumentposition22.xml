@@ -47,5 +47,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="entityPosition" obj="entity" other="notation"/>
 <assertEquals  actual="entityPosition" expected="4" id="nodecomparedocumentpositionFollowing22" ignoreCase="false"/>
 <compareDocumentPosition var="notationPosition" obj="notation" other="entity"/>
-<assertEquals  actual="notationPosition" expected="2" id="nodecomparedocumentpositionPRECEEDING22" ignoreCase="false"/>
+<assertEquals  actual="notationPosition" expected="2" id="nodecomparedocumentpositionPRECEDING22" ignoreCase="false"/>
 </test>

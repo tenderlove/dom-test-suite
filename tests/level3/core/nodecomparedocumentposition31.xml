@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using compareDocumentPosition to check if invoking the method on the first name node with
-	a new node appended to the second position node as a parameter is FOLLOWING, and is PRECEEDING vice versa
+	a new node appended to the second position node as a parameter is FOLLOWING, and is PRECEDING vice versa
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -44,10 +44,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item var="strong" obj="nameList" index="0" interface="NodeList"/>
 <getElementsByTagNameNS var="positionList" obj="doc" localName='"code"' namespaceURI='"*"' interface="Document"/>
 <item var="code" obj="positionList" index="1" interface="NodeList"/>
-<createElementNS var="newElem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:position"'/>
+<createElementNS var="newElem" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"br"'/>
 <appendChild obj="code" var="appendedChild" newChild="newElem"/>
 <compareDocumentPosition var="namePosition" obj="strong" other="newElem"/>
 <assertEquals  actual="namePosition" expected="4" id="nodecomparedocumentpositionFollowing31" ignoreCase="false"/>
 <compareDocumentPosition var="elemPosition" obj="newElem" other="strong"/>
-<assertEquals  actual="elemPosition" expected="2" id="nodecomparedocumentpositionPRECEEDING31" ignoreCase="false"/>
+<assertEquals  actual="elemPosition" expected="2" id="nodecomparedocumentpositionPRECEDING31" ignoreCase="false"/>
 </test>

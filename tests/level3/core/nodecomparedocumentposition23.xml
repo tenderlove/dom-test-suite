@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using compareDocumentPosition check if the document position of an Entity node compared to another
-	Entity node following it in DocumentType is implementation specific and PRECEEDING
+	Entity node following it in DocumentType is implementation specific.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-20</date>
@@ -34,12 +34,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entitiesMap" type="NamedNodeMap"/>
 <var name="entity" type="Entity"/>
 <var name="entity2" type="Entity"/>
-<var name="entityPosition" type="int"/>
+<var name="position1" type="int"/>
+<var name="position2" type="int"/>
+<var name="position3" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entitiesMap" obj="docType"/>
 <getNamedItem var="entity" obj="entitiesMap" name='"alpha"'/>
 <getNamedItem var="entity2" obj="entitiesMap" name='"delta"'/>
-<compareDocumentPosition var="entityPosition" obj="entity" other="entity2"/>
-<assertEquals  actual="entityPosition" expected="36" id="nodecomparedocumentpositionImpSpecificPRECEEDING23" ignoreCase="false"/>
+<compareDocumentPosition var="position1" obj="entity" other="entity2"/>
+<!--  bitmask blocks out preceding and following bits   -->
+<assertEquals bitmask="57" actual="position1" expected="32" id="isImplSpecificDisconnected1" ignoreCase="false"/>
+<compareDocumentPosition var="position2" obj="entity2" other="entity"/>
+<assertNotEquals bitmask="2" actual="position2" expected="position1" id="notBothPreceding" ignoreCase="false"/>
+<assertNotEquals bitmask="4" actual="position2" expected="position1" id="notBothFollowing" ignoreCase="false"/>
+<assertEquals bitmask="57" actual="position2" expected="32" id="isImplSpecificDisconnected2" ignoreCase="false"/>
+<!--  returned value should be consistent between invocations   -->
+<compareDocumentPosition var="position3" obj="entity" other="entity2"/>
+<assertEquals  actual="position3" expected="position1" id="isConsistent" ignoreCase="false"/>
 </test>

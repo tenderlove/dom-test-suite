@@ -44,9 +44,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="attrPosition" obj="attr1" other="attr2"/>
 <assertEquals actual="attrPosition" expected="32" bitmask="32" id="isImplementationSpecific" ignoreCase="false"/>
 <assertEquals actual="attrPosition" expected="0" bitmask="25" id="otherBitsZero" ignoreCase="false"/>
-<assertNotEquals actual="attrPosition" expected="0" bitmask="6" id="eitherFollowingOrPreceeding" ignoreCase="false"/>
+<assertNotEquals actual="attrPosition" expected="0" bitmask="6" id="eitherFollowingOrPreceding" ignoreCase="false"/>
 <compareDocumentPosition var="swappedPosition" obj="attr2" other="attr1"/>
-<assertNotEquals actual="attrPosition" expected="swappedPosition" bitmask="1" id="onlyOnePreceeding" ignoreCase="false"/>
+<assertNotEquals actual="attrPosition" expected="swappedPosition" bitmask="1" id="onlyOnePreceding" ignoreCase="false"/>
 <assertNotEquals actual="attrPosition" expected="swappedPosition" bitmask="2" id="onlyOneFollowing" ignoreCase="false"/>
 </test>
  

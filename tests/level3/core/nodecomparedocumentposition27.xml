@@ -52,5 +52,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="entRefPosition" obj="entRef" other="entRefChild1"/>
 <assertEquals  actual="entRefPosition" expected="20" id="nodecomparedocumentpositionIsContainedFollowing27" ignoreCase="false"/>
 <compareDocumentPosition var="entRefChild1Position" obj="entRefChild1" other="entRef"/>
-<assertEquals  actual="entRefChild1Position" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING" ignoreCase="false"/>
+<assertEquals  actual="entRefChild1Position" expected="10" id="nodecomparedocumentpositionContainsPRECEDING" ignoreCase="false"/>
 </test>

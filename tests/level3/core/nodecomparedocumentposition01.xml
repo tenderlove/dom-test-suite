@@ -40,5 +40,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="documentPositionDoc" obj="doc" other="docType"/>
 <assertEquals  actual="documentPositionDoc" expected="20" id="nodecomparedocumentpositionIsContainedFollowing01" ignoreCase="false"/>
 <compareDocumentPosition var="documentPositionDocType" obj="docType" other="doc"/>
-<assertEquals  actual="documentPositionDocType" expected="10" id="nodecomparetreepositionContainsPRECEEDING01" ignoreCase="false"/>
+<assertEquals  actual="documentPositionDocType" expected="10" id="nodecomparetreepositionContainsPRECEDING01" ignoreCase="false"/>
 </test>

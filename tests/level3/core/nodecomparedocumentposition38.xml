@@ -44,6 +44,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="attrPosition" obj="attr" other="txt"/>
 <assertEquals  actual="attrPosition" expected="20" id="nodecomparedocumentpositionIsContainsFollowing38" ignoreCase="false"/>
 <compareDocumentPosition var="attrChildPosition" obj="txt" other="attr"/>
-<assertEquals  actual="attrChildPosition" expected="10" id="nodecomparedocumentpositionContainsPRECEEDING38" ignoreCase="false"/>
+<assertEquals  actual="attrChildPosition" expected="10" id="nodecomparedocumentpositionContainsPRECEDING38" ignoreCase="false"/>
 </test>
  

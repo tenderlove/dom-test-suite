@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
 	Using compareDocumentPosition check if the document position of the first Text node
 	of the second element whose localName is name compared with the next CDATASection node
-	is PRECEEDING and FOLLOWING vice versa.
+	is PRECEDING and FOLLOWING vice versa.
 </description>
 <contributor>Jenny Hsu</contributor>
 <date qualifier="created">2003-02-20</date>
@@ -46,5 +46,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <compareDocumentPosition var="txtPosition" obj="txt" other="cdata"/>
 <assertEquals  actual="txtPosition" expected="4" id="nodecomparedocumentpositionFollowingg20" ignoreCase="false"/>
 <compareDocumentPosition var="cdataPosition" obj="cdata" other="txt"/>
-<assertEquals  actual="cdataPosition" expected="2" id="nodecomparedocumentpositionPRECEEDING20" ignoreCase="false"/>
+<assertEquals  actual="cdataPosition" expected="2" id="nodecomparedocumentpositionPRECEDING20" ignoreCase="false"/>
 </test>

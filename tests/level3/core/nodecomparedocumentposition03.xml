@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodecomparedocumentposition03</title>
 <creator>IBM</creator>
 <description>
-
-
-	
 	Using compareDocumentPosition check if the document position of two Document nodes obtained from the 
 	same xml document is disconnected, implementation specific, and that the order of these two documents
 	is reserved.
@@ -34,13 +31,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docComp" type="Document"/>
-<var name="documentPosition" type="int"/>
+<var name="documentPosition1" type="int"/>
+<var name="documentPosition2" type="int"/>
+<var name="documentPosition3" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <load var="docComp" href="hc_staff" willBeModified="false"/>
-<compareDocumentPosition var="documentPosition" obj="doc" other="docComp"/>
-<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentposition1DisconnectedImpSpecPRECEEDING03" ignoreCase="false"/>
-<compareDocumentPosition var="documentPosition" obj="docComp" other="doc"/>
-<assertEquals  actual="documentPosition" expected="37" id="nodecomparedocumentposition2DisconnectedImpSpecFollowing03" ignoreCase="false"/>
-<compareDocumentPosition var="documentPosition" obj="doc" other="docComp"/>
-<assertEquals  actual="documentPosition" expected="35" id="nodecomparedocumentposition3DisconnectedImpSpecPRECEEDING03" ignoreCase="false"/>
+<compareDocumentPosition var="documentPosition1" obj="doc" other="docComp"/>
+<!--  bitmask blocks out preceding and following bits   -->
+<assertEquals bitmask="57" actual="documentPosition1" expected="33" id="isImplSpecificDisconnected1" ignoreCase="false"/>
+<compareDocumentPosition var="documentPosition2" obj="docComp" other="doc"/>
+<assertNotEquals bitmask="2" actual="documentPosition2" expected="documentPosition1" id="notBothPreceding" ignoreCase="false"/>
+<assertNotEquals bitmask="4" actual="documentPosition2" expected="documentPosition1" id="notBothFollowing" ignoreCase="false"/>
+<assertEquals bitmask="57" actual="documentPosition2" expected="33" id="isImplSpecificDisconnected2" ignoreCase="false"/>
+<!--  returned value should be consistent between invocations   -->
+<compareDocumentPosition var="documentPosition3" obj="doc" other="docComp"/>
+<assertEquals  actual="documentPosition3" expected="documentPosition1" id="isConsistent" ignoreCase="false"/>
 </test>

@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Using compareDocumentPosition to check if the document position of an Attribute compared with
-	the element that follows its parent as a parameter is FOLLOWING, and is PRECEEDING
+	the element that follows its parent as a parameter is FOLLOWING, and is PRECEDING
 	vice versa.
 </description>
 <contributor>Jenny Hsu</contributor>
