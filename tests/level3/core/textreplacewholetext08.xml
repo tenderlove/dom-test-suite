@@ -26,17 +26,17 @@ A NO_MODIFICATION_ALLOWED_ERR should be thrown.
 <date qualifier="created">2003-12-18</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=540"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="itemList" type="NodeList"/>
 <var name="p" type="Element"/>
 <var name="entRef" type="EntityReference"/>
 <var name="node" type="Node"/>
 <load var="doc" href="barfoo" willBeModified="true"/>
-<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="itemList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="p" obj="itemList" index="0" interface="NodeList"/>
-<createEntityReference var="entRef" obj="doc" name='"beta"'/>
+<createEntityReference var="entRef" obj="doc" name='"ent2"'/>
 <appendChild obj="p" var="node" newChild="entRef"/>
 <firstChild var="node" obj="p" interface="Node"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
