@@ -46,6 +46,7 @@
      <suite.member href="XPathEvaluator_evaluate_NAMESPACE_ERR.xml"/>
      <suite.member href="XPathEvaluator_evaluate_WRONG_DOCUMENT_ERR.xml"/>
      <suite.member href="XPathEvaluator_evaluate_NOT_SUPPORTED_ERR.xml"/>
+     <suite.member href="XPathEvaluator_evaluate_TYPE_ERR.xml"/>
      <suite.member href="XPathExpression_evaluate_documentElement.xml"/>
      <suite.member href="XPathExpression_evaluate_document.xml"/>
      <suite.member href="XPathExpression_evaluate_WRONG_DOCUMENT_ERR.xml"/>
