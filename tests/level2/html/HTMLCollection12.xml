@@ -44,6 +44,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <elements interface="HTMLFormElement" obj="testNode" var="formsnodeList"/>
-<namedItem obj="formsnodeList" var="formNode" name="&quot;select9&quot;"/>
+<namedItem interface="HTMLCollection" obj="formsnodeList" var="formNode" name="&quot;select9&quot;"/>
 <assertNull actual="formNode" id="nameIndexLink"/>
 </test>
