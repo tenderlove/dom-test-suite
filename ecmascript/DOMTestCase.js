@@ -162,6 +162,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   }
 
   function MozDocumentBuilder_getImplementationAttribute(attr) {
+    if(attr == "expandEntityReferences") {
+        return true;
+    }
     return false;
   }
 
@@ -172,6 +175,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     this.isDOMExceptionCode = MozDocumentBuilder_isDOMExceptionCode;
     this.getDOMImplementation = MozDocumentBuilder_getDOMImplementation;
     this.getImplementationAttribute = MozDocumentBuilder_getImplementationAttribute;
+    //
+    //   check if expandEntityReferences is false
+    //     and throw an excpetion since that behavior is not supported
+    //
+    if(attrNames != null) {
+        for(var i = 0; i < attrNames.length; i++) {
+            if(attrNames[i] == "expandEntityReferences" && attrValues[i] == false) {
+                throw "Mozilla doesn't support entity preservation";
+            }
+        }
+    }
   }
 
   var mozDefaultBuilder = null;
