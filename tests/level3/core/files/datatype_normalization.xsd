@@ -180,4 +180,28 @@ be a general purpose schema for XHTML
   	  </xsd:complexType>
   </xsd:element>
 
+
+  <xsd:simpleType name="myUnion">
+  	<xsd:union memberTypes="xsd:integer xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="myUnionList">
+  	<xsd:list itemType="myUnion"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="myUnionUnion">
+  	<xsd:union memberTypes="myUnion xsd:anyURI"/>
+  </xsd:simpleType>
+
+  <xsd:element name="union">
+  	  <xsd:complexType>
+  	  	  <xsd:simpleContent>
+  	  	  	  <xsd:extension base="myUnionList">
+  	  	  	  		<xsd:attribute name="value" type="myUnion" use="required"/>
+  	  	  	  		<xsd:attribute name="union" type="myUnionUnion" use="required"/>
+  	  	  	  </xsd:extension>
+  	  	  </xsd:simpleContent>
+  	  </xsd:complexType>
+  </xsd:element>
+
 </xsd:schema>

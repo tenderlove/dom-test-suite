@@ -159,7 +159,7 @@ public final class DocumentBuilderSetting {
 		if (other == this) {
 			return true;
 		}
-		return strategy == other.strategy;
+		return strategy.hasConflict(other.strategy);
 	}
 
 	public final boolean hasSetting(DOMTestDocumentBuilderFactory factory) {

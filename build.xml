@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.125  2004-02-10 21:33:53  dom-ts-4
+Revision 1.126  2004-02-15 02:53:30  dom-ts-4
+Additional typeinfo tests, fix for schemaValidating implementation attribute (bug524)
+
+Revision 1.125  2004/02/10 21:33:53  dom-ts-4
 Exclude datatype_normalization.xml from dom3-core-validate-files (bug 520)
 
 Revision 1.124  2004/02/06 10:13:33  dom-ts-4
@@ -550,6 +553,7 @@ All implementation conditions combined into implementationAttribute element
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
 		<fileset dir="java" includes="org/w3c/domts/*.java"/>
         <fileset dir="${lib.dir}/xhtml1-dtd"/>
+        <fileset dir="java" includes="org/**/*.java"/>
 	</jar>
 </target>
 
@@ -696,8 +700,11 @@ All implementation conditions combined into implementationAttribute element
 
 
     <jar jarfile="${build.dir}/junit-run.jar"
-        manifest="java/junit/junit-run.mf"
-        basedir="${java.build.dir}/junit"/>
+        manifest="java/junit/junit-run.mf">
+        <fileset dir="${java.build.dir}/junit"/>
+        <!--  include source files for easier debugging  -->
+        <fileset dir="java/junit" includes="**/*.java"/>
+    </jar>
 </target>
 
 
@@ -2030,7 +2037,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="no"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="nodtdstaff.* datatype_normalization.*"/>  
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.* datatype_normalization.*"/>  
 	</xmlvalidate>
 </target>
 

@@ -20,6 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="attrgetschematypeinfo03.xml"/>
     <suite.member href="attrgetschematypeinfo04.xml"/>
     <suite.member href="attrgetschematypeinfo05.xml"/>
+    <suite.member href="attrgetschematypeinfo06.xml"/>
 
 	<suite.member href="datatypenormalization01.xml"/>	
 	<suite.member href="datatypenormalization02.xml"/>	
@@ -204,6 +205,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     <suite.member href="elementgetschematypeinfo01.xml"/>
     <suite.member href="elementgetschematypeinfo02.xml"/>
+    <suite.member href="elementgetschematypeinfo03.xml"/>
     
     <suite.member href="hasFeature01.xml"/>
     <suite.member href="hasFeature02.xml"/>
@@ -632,6 +634,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="typeinfoisderivedfrom46.xml"/>
 	<suite.member href="typeinfoisderivedfrom47.xml"/>
 	<suite.member href="typeinfoisderivedfrom48.xml"/>
+	<suite.member href="typeinfoisderivedfrom49.xml"/>
+	<suite.member href="typeinfoisderivedfrom50.xml"/>
+	<suite.member href="typeinfoisderivedfrom51.xml"/>
+	<suite.member href="typeinfoisderivedfrom52.xml"/>
+	<suite.member href="typeinfoisderivedfrom53.xml"/>
+	<suite.member href="typeinfoisderivedfrom54.xml"/>
+	<suite.member href="typeinfoisderivedfrom55.xml"/>
+	<suite.member href="typeinfoisderivedfrom56.xml"/>
+	<suite.member href="typeinfoisderivedfrom57.xml"/>
+	<suite.member href="typeinfoisderivedfrom58.xml"/>
+	<suite.member href="typeinfoisderivedfrom59.xml"/>
+	<suite.member href="typeinfoisderivedfrom60.xml"/>
+	<suite.member href="typeinfoisderivedfrom61.xml"/>
+	<suite.member href="typeinfoisderivedfrom62.xml"/>
 	
 	<!-- DOMConfiguration -->
 	<!-- canSetParameter -->

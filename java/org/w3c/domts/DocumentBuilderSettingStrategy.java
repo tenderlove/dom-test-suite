@@ -10,8 +10,9 @@
  */
 
 package org.w3c.domts;
+import java.lang.reflect.Method;
+
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.lang.reflect.*;
 
 /**
  * This class is a strategy that provides the mapping from an abstract setting
@@ -166,6 +167,20 @@ public abstract class DocumentBuilderSettingStrategy {
 			}
 			return false;
 		}
+
+		//
+		//   schema validating conflicts with namespaceAware
+		//        and validating 
+		//
+		public boolean hasConflict(DocumentBuilderSettingStrategy other) {
+			if (other == this || 
+					other == DocumentBuilderSettingStrategy.namespaceAware ||
+					other == DocumentBuilderSettingStrategy.validating) {
+				return true;
+			}
+			return false;
+		}
+
 	};
 	
 }

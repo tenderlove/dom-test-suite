@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2003 World Wide Web Consortium,
+ * Copyright (c) 2001-2004 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -12,7 +12,10 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.9  2003-11-10 07:34:13  dom-ts-4
+Revision 1.10  2004-02-15 02:53:29  dom-ts-4
+Additional typeinfo tests, fix for schemaValidating implementation attribute (bug524)
+
+Revision 1.9  2003/11/10 07:34:13  dom-ts-4
 Update for 2003-11-07 CRs (bug 375)
 
 Revision 1.8  2002/03/14 05:00:12  dom-ts-4
@@ -46,14 +49,13 @@ Initial test running using JUnit.
 
 package org.w3c.domts;
 
-import junit.framework.*;
-import java.lang.reflect.*;
-import javax.xml.parsers.*;
-import java.util.*;
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import org.w3c.domts.*;
-import junit.textui.*;
+import java.lang.reflect.Constructor;
+
+import junit.framework.TestResult;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
+
+import org.w3c.dom.DOMImplementation;
 
 public class JUnitRunner {
 
@@ -139,7 +141,7 @@ public class JUnitRunner {
 
   private static void printPrologue() {
     System.out.println("DOM Test Adapter for JUnit\n");
-    System.out.println("Copyright (c) 2001 World Wide Web Consortium,");
+    System.out.println("Copyright (c) 2001-2004 World Wide Web Consortium,");
     System.out.println("Massachusetts Institute of Technology, Institut National de");
     System.out.println("Recherche en Informatique et en Automatique, Keio University). All");
     System.out.println("Rights Reserved. This program is distributed under the W3C's Software");

@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.6  2004-02-09 19:02:51  dom-ts-4
+Revision 1.7  2004-02-15 02:53:29  dom-ts-4
+Additional typeinfo tests, fix for schemaValidating implementation attribute (bug524)
+
+Revision 1.6  2004/02/09 19:02:51  dom-ts-4
 Test results improvment (bug 446)
 
 Revision 1.5  2004/01/22 06:11:41  dom-ts-4
@@ -672,14 +675,14 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 </target>
 
 <target name="dom3-core-xerces">
-	<antcall target="run-xerces">
+	<antcall target="run-xerces_dom3">
 		<param name="level" value="3"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
 <target name="dom3-core-xerces-alt">
-	<antcall target="run-xerces">
+	<antcall target="run-xerces_dom3">
 		<param name="level" value="3"/>
 		<param name="module" value="core"/>
 		<param name="config" value="AltConfig"/>
