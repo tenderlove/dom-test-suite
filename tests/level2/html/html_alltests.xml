@@ -34,6 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLAppletElement08.xml"/>
      <suite.member href="HTMLAppletElement09.xml"/>
      <suite.member href="HTMLAppletElement10.xml"/>
+     <suite.member href="HTMLAppletElement11.xml"/>
      <suite.member href="HTMLAreaElement01.xml"/>
      <suite.member href="HTMLAreaElement02.xml"/>
      <suite.member href="HTMLAreaElement03.xml"/>
@@ -43,6 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLAreaElement07.xml"/>
      <suite.member href="HTMLAreaElement08.xml"/>
      <suite.member href="HTMLBaseElement01.xml"/>
+     <suite.member href="HTMLBaseElement02.xml"/>
      <suite.member href="HTMLBaseFontElement01.xml"/>
      <suite.member href="HTMLBaseFontElement02.xml"/>
      <suite.member href="HTMLBaseFontElement03.xml"/>
