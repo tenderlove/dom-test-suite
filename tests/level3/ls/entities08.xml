@@ -32,8 +32,26 @@ Entity references should be preserved when entities is true.
 <var name="domImplLS" type="DOMImplementationLS"/>
 <var name="lsSerializer" type="LSSerializer"/>
 <var name="output" type="DOMString"/>
+<var name="varList" type="NodeList"/>
+<var name="varNode" type="Node"/>
+<var name="child" type="Node"/>
+<var name="childType" type="int"/>
+<var name="entRef" type="EntityReference"/>
+<var name="retNode" type="Node"/>
 <implementation var="domImplLS"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
+<!--  entity references may be expanded on load
+         if so, create and insert an entity reference into the document -->
+<getElementsByTagName var="varList" obj="doc"
+       tagname='"var"' interface="Document"/>
+<item var="varNode" obj="varList" index="2" interface="NodeList"/>
+<firstChild var="child" obj="varNode" interface="Node"/>
+<nodeType var="childType" obj="child"/>
+<if><equals actual="childType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="entRef" obj="doc"
+		name='"ent4"'/>
+	<appendChild var="retNode" obj="varNode" newChild="entRef"/>
+</if>      
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
 <setParameter obj="domConfig" name='"entities"' value="true"/>
