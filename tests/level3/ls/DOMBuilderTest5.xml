@@ -32,7 +32,7 @@
   <var name="atrue" type="boolean" value="true"/>
 
   <var name="ERROR_HANDLER" type="DOMString" value='"error-handler"'/>
-  <var name="SUPPORTED_MEDIATYPES_ONLY" type="DOMString" value='"supported-mediatypes-only"'/>
+  <var name="SUPPORTED_MEDIATYPES_ONLY" type="DOMString" value='"supported-media-types-only"'/>
 
 
   <var name="errorHandler" type="DOMErrorHandler"> 

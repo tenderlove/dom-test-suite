@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: clover.xml,v $
-Revision 1.2  2003-12-05 07:09:12  dom-ts-4
+Revision 1.3  2003-12-06 06:50:29  dom-ts-4
+More fixes for L&S (Bug 396)
+
+Revision 1.2  2003/12/05 07:09:12  dom-ts-4
 build.xml refactoring and L3 distributions (bug 398)
 
 Revision 1.1  2003/12/02 04:08:22  dom-ts-4
@@ -35,7 +38,7 @@ generates a coverage report
 <property name="domts.build.dir" value="build"/>
 <property name="domts.lib.dir" value="lib"/>
 <property name="clover.build.dir" location="build/clover"/>
-<property name="clover.jar" location="/Applications/clover-1.2/lib/clover.jar"/>
+<property name="clover.jar" location="/clover-1.2/lib/clover.jar"/>
 <property name="xerces.java.dir" location="../xerces/java"/>
 <property name="xalan.java.dir" location="../xalan/java"/>
 <property name="junit.jar" location="${domts.lib.dir}/junit.jar"/>

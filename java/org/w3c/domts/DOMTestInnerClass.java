@@ -124,7 +124,7 @@ public class DOMTestInnerClass  {
     test.assertNotEquals(assertID,expected,actual);
   }
 
-  public void assertURIEquals(String assertID, String scheme, String path, String host, String file, String name, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
+  public void assertURIEquals(String assertID, String scheme, String path, String host, String file, String name, String query, String fragment, Boolean isAbsolute, String actual) {
     test.assertURIEquals(assertID, scheme, path, host, file, name, query, fragment, isAbsolute, actual);
   }
 

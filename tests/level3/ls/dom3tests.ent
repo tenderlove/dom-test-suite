@@ -11,13 +11,13 @@
                       <var name='document'         type='Document'/>            
                       <var name='writer'           type='LSSerializer'/>            
                       <var name='builder'          type='LSParser'/>
-                      <var name='schemaType'       type='DOMString' isNull='true'/>
                      
                       <!-- constants  -->
                       <var name='MODE_SYNCHRONOUS'  type='short'  value='1'/>
                       <var name='MODE_ASYNCHRONOUS' type='short'  value='2'/>
                       <var name='DTD_SCHEMATYPE'    type='DOMString' value='&quot;http://www.w3.org/TR/REC-xml&quot;'/>
                       <var name='SCHEMA_SCHEMATYPE' type='DOMString' value='&quot;http://www.w3.org/2001/XMLSchema&quot;'/>
+                      <var name='NULL_SCHEMATYPE'  type='DOMString' isNull='true'/>
 
                       <!-- action types DOMParser.parseWithContext -->
                       <var name='ACTION_REPLACE'             type='short' value='1'/>
@@ -66,7 +66,7 @@
                       ">
 
 
-<!ENTITY init        "<createLSParser      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+<!ENTITY init        "<createLSParser      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='NULL_SCHEMATYPE'/>
                       <createLSSerializer       var='writer'      obj='lsImplementation'/>
                       <createLSInput  var='inputSource' obj='lsImplementation'/>">
 

@@ -26,6 +26,7 @@
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
+  <hasFeature feature='"Core"' version='"3.0"'/>
 
   <var name="elementList" type="NodeList"/>
   <var name="myString" type="DOMString" value="&quot;&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;elt0&gt;elt0&lt;/elt0&gt;&quot;"/>
@@ -38,11 +39,6 @@
 
   &vars;
   &init;
-
-
-  
-
-
 
   <stringData obj="inputSource" value="myString" interface="LSInput"/> 
   <encoding   obj="inputSource" value="iso" interface="LSInput"/> 
@@ -58,6 +54,9 @@
   <encoding   obj="inputSource" value="iso" interface="LSInput"/> 
   <characterStream obj="inputSource" var="myReader" interface="LSInput"/> 
   <parse var="document" obj="builder" input="inputSource"/>
+
+  <!-- encoding should be changed for a DOMString inputsource -->
+  <inputEncoding var="encodingString" obj="document" interface="Document"/> 
   <assertEquals actual="encodingString" expected="utf" ignoreCase="false" id="encodingstringcheck1"/>
 
 </test>

@@ -12,7 +12,10 @@
 
 /*
 $Log: DOMTestFramework.java,v $
-Revision 1.9  2003-01-25 18:41:53  dom-ts-4
+Revision 1.10  2003-12-06 06:50:29  dom-ts-4
+More fixes for L&S (Bug 396)
+
+Revision 1.9  2003/01/25 18:41:53  dom-ts-4
 Removed tabs and other code cleanup
 
 Revision 1.8  2002/08/12 08:09:18  dom-ts-4
@@ -146,19 +149,6 @@ public interface DOMTestFramework {
 		String assertID,
 		double expected,
 		double actual);
-	void assertURIEquals(
-		DOMTestCase test,
-		String assertID,
-		String scheme,
-		String path,
-		String host,
-		String file,
-		String name,
-		String query,
-		String fragment,
-		Boolean isAbsolute,
-		String actual)
-		throws java.net.MalformedURLException;
 
 	boolean same(Object expected, Object actual);
 	boolean equalsIgnoreCase(String expected, String actual);

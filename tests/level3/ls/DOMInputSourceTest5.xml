@@ -42,7 +42,7 @@
 
   </var>
 
-  <var name="ENTITY_RESOLVER" type="DOMString" value='"entity-resolver"'/>
+  <var name="ENTITY_RESOLVER" type="DOMString" value='"resource-resolver"'/>
   <var name="configuration" type="DOMConfiguration"/>
 
   &vars;

@@ -20,7 +20,7 @@
 
 <test xmlns="&level3;" name="DOMEntityResolverTest1">
   <metadata>
-    <title>DOMEntityResolver</title>
+    <title>DOMEntityResolver1</title>
     &creator; 
     <description>Tests a custom entity resolver. The entity resolver creates an input source that supplies 2 elt1 elements. The original entity reference referes to 1 elt1</description> 
     &contributor; &date;
@@ -33,7 +33,7 @@
         <var name="erInputSource" type="LSInput"/>
         <var name='implementation'   type='DOMImplementation'/> 
         <var name='lsImplementation' type='DOMImplementationLS'/> 
-        <var name="substitute"       type="DOMString" value="&quot;&lt;elt1&gt;second elt1&lt;/elt1&gt;&lt;elt1&gt;third elt1&lt;/elt1&gt;&quot;"/>
+        <var name="substitute"       type="DOMString" value='"&lt;elt1&gt;second elt1&lt;/elt1&gt;&lt;elt1&gt;third elt1&lt;/elt1&gt;"'/>
 
         <implementation var='implementation'/> 
         <assign var='lsImplementation' value='implementation'/> 
@@ -46,7 +46,6 @@
 
   </var>
 
-  <var name="ENTITY_RESOLVER" type="DOMString" value='"entity-resolver"'/>
   <var name="elementList" type="NodeList"/>
   <var name="configuration" type="DOMConfiguration"/>
   <var name="resourceURI" type="DOMString"/>
@@ -63,7 +62,7 @@
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_before_applying_entity_resolver"/>
 
-  <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
+  <setParameter obj="configuration" name='"resource-resolver"' value="myentityresolver"/>
 
   <!-- after applying the entity resolver there should be 3 elt1 in this document -->
   <parseURI var="document" obj="builder" uri="resourceURI"/>

@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.6  2002-08-12 08:21:25  dom-ts-4
+ Revision 1.7  2003-12-06 06:50:30  dom-ts-4
+ More fixes for L&S (Bug 396)
+
+ Revision 1.6  2002/08/12 08:21:25  dom-ts-4
  Added name parameter to assertURIEquals (second try)
 
  Revision 1.5  2002/08/12 08:09:18  dom-ts-4
@@ -245,86 +248,6 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
     }
   }
 
-  public void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String name, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
-    //
-    //  URI must be non-null
-    assertNotNull(assertID, actual);
-
-    String uri = actual;
-
-    int lastPound = actual.lastIndexOf("#");
-    String actualFragment = "";
-    if(lastPound != -1) {
-        //
-        //   substring before pound
-        //
-        uri = actual.substring(0,lastPound);
-        actualFragment = actual.substring(lastPound+1);
-    }
-    if(fragment != null) assertEquals(assertID,fragment, actualFragment);
-
-    int lastQuestion = uri.lastIndexOf("?");
-    String actualQuery = "";
-    if(lastQuestion != -1) {
-        //
-        //   substring before pound
-        //
-        uri = actual.substring(0,lastQuestion);
-        actualQuery = actual.substring(lastQuestion+1);
-    }
-    if(query != null) assertEquals(assertID, query, actualQuery);
-
-    int firstColon = uri.indexOf(":");
-    int firstSlash = uri.indexOf("/");
-    String actualPath = uri;
-    String actualScheme = "";
-    if(firstColon != -1 && firstColon < firstSlash) {
-        actualScheme = uri.substring(0,firstColon);
-        actualPath = uri.substring(firstColon + 1);
-    }
-
-    if(scheme != null) {
-        assertEquals(assertID, scheme, actualScheme);
-    }
-
-    if(path != null) {
-        assertEquals(assertID, path, actualPath);
-    }
-
-    if(host != null) {
-        String actualHost = "";
-        if(actualPath.startsWith("//")) {
-            int termSlash = actualPath.indexOf("/",2);
-            actualHost = actualPath.substring(0,termSlash);
-        }
-        assertEquals(assertID, host, actualHost);
-    }
-
-    String actualFile = actualPath;
-    if(file != null || name != null) {
-        int finalSlash = actualPath.lastIndexOf("/");
-        if(finalSlash != -1) {
-            actualFile = actualPath.substring(finalSlash+1);
-        }
-        if (file != null) {
-            assertEquals(assertID, file, actualFile);
-        }
-    }
-
-    if(name != null) {
-        String actualName = actualFile;
-        int finalPeriod = actualFile.lastIndexOf(".");
-        if(finalPeriod != -1) {
-            actualName = actualFile.substring(0, finalPeriod);
-        }
-        assertEquals(assertID, name, actualName);
-    }
-
-
-    if(isAbsolute != null) {
-        assertEquals(assertID, isAbsolute.booleanValue(), actualPath.startsWith("/"));
-    }
-  }
 
   public boolean same(Object expected, Object actual) {
     boolean equals = (expected == actual);

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.112  2003-12-05 07:09:12  dom-ts-4
+Revision 1.113  2003-12-06 06:50:30  dom-ts-4
+More fixes for L&S (Bug 396)
+
+Revision 1.112  2003/12/05 07:09:12  dom-ts-4
 build.xml refactoring and L3 distributions (bug 398)
 
 Revision 1.111  2003/12/03 21:27:47  dom-ts-4
@@ -1718,7 +1721,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-init" depends="init,get-dom3">
+<target name="dom3-init" depends="init,get-dom3,get-xhtml1-dtd">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-3"/>
 
