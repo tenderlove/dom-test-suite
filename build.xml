@@ -28,11 +28,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</target>
 
 	<target name="init">
-		<property name="specs.dir" value="./specs"/>
-		<property name="transforms.dir" value="."/>
+		<property name="specs.dir" value="./build/specs"/>
+		<property name="transforms.dir" value="./transforms"/>
 		<property name="build.dir" value="./build"/>
 		<property name="java.build.dir" value="./build/java"/>
 		<property name="tests.dir" value="./tests"/>
+		<property name="metadata.dir" value="./build/metadata"/>
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${specs.dir}"/>
 	</target>
@@ -53,26 +54,142 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</target>
 
 	<target name="dom1-schema" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/_dom1.xsd" style="dom-to-xsd.xsl"/>
-		<!--  rename Level-X to Level 1   -->
+		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/_dom1.xsd" style="${transforms.dir}/dom-to-xsd.xsl">
+			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
+		</style>
+
+		<!--  remove leading underscore from _xmlns attribute    -->
    		<exec executable="sed" output="${build.dir}/dom1.xsd">
-			<arg line="'{s/Level-X/Level-1/g;s/_xmlns/xmlns/g;}' ${build.dir}/_dom1.xsd"/>
+			<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1.xsd"/>
    		</exec>
 		<delete file="${build.dir}/_dom1.xsd"/>
+		<!-- xmlvalidate file="${build.dir}/dom1.xsd" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/ -->
 	</target>
 
 	<target name="dom1-dtd" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1.dtd" style="dom-to-dtd.xsl"/>
-		<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/Level-1/Core"/>
+		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
+			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-1"/>
+		</style>
+		<copy file="${build.dir}/dom1.dtd" todir="${tests.dir}/level1/core"/>
 	</target>
 
 	<target name="dom1-subjects" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-subjects.rdf" style="subjects.xsl"/>
+		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-subjects.xml" style="${transforms.dir}/subjects.xsl"/>
+		<xmlvalidate file="${build.dir}/dom1-subjects.xml" lenient="no" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
 	</target>
 
 	<target name="dom1-interfaces" depends="dom1-init">
-		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-interfaces.xml" style="extract.xsl"/>
+		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-interfaces.xml" style="${transforms.dir}/extract.xsl"/>
+		<xmlvalidate file="${build.dir}/dom1-interfaces.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
 	</target>
+
+	<target name="dom2-init" depends="init">
+		<mkdir dir="${specs.dir}"/>
+		<mkdir dir="${specs.dir}/Level-1"/>
+		<!--   download DOM 1 spec to specs directory   -->
+		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/DOM2-Core.zip"
+			dest="${specs.dir}/DOM2-Core.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM2-Core.zip" dest="${specs.dir}/Level-2/Core"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-2/Core/xml-source.zip" dest="${specs.dir}/Level-2/xml/core"/>
+
+		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Views-20001113/DOM2-Views.zip"
+			dest="${specs.dir}/DOM2-Views.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM2-Views.zip" dest="${specs.dir}/Level-2/Views"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-2/Views/xml-source.zip" dest="${specs.dir}/Level-2/xml/views"/>
+
+
+		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/DOM2-Events.zip"
+			dest="${specs.dir}/DOM2-Events.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM2-Events.zip" dest="${specs.dir}/Level-2/Events"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-2/Events/xml-source.zip" dest="${specs.dir}/Level-2/xml/events"/>
+
+		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/DOM2-Style.zip"
+			dest="${specs.dir}/DOM2-Style.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM2-Style.zip" dest="${specs.dir}/Level-2/Style"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-2/Style/xml-source.zip" dest="${specs.dir}/Level-2/xml/style"/>
+
+		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/DOM2-Traversal-Range.zip"
+			dest="${specs.dir}/DOM2-Traversal-Range.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM2-Traversal-Range.zip" dest="${specs.dir}/Level-2/Traversal-Range"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-2/Traversal-Range/xml-source.zip" dest="${specs.dir}/Level-2/xml/traversal-range"/>
+
+
+		<get src="http://www.w3.org/TR/2000/WD-DOM-Level-2-HTML-20001113/DOM2-HTML.zip"
+			dest="${specs.dir}/DOM2-HTML.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM2-HTML.zip" dest="${specs.dir}/Level-2/HTML"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-2/HTML/xml-source.zip" dest="${specs.dir}/Level-2/xml/html"/>
+
+		<!--  zip file is missing two support files   -->
+		<echo file="${specs.dir}/Level-2/xml/options.xml" message="&lt;?xml version='1.0' encoding='UTF-8'?&gt;"/>
+		<echo file="${specs.dir}/Level-2/xml/status.xml" message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
+
+
+	</target>
+
+	<target name="dom2-schema" depends="dom2-interfaces">
+		<style in="${build.dir}/dom2-interfaces.xml" out="${build.dir}/_dom2.xsd" style="${transforms.dir}/dom-to-xsd.xsl">
+			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
+		</style>
+
+		<!--  remove leading underscore from _xmlns attribute    -->
+   		<exec executable="sed" output="${build.dir}/dom2.xsd">
+			<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom2.xsd"/>
+   		</exec>
+		<delete file="${build.dir}/_dom2.xsd"/>
+	</target>
+
+	<target name="dom2-dtd" depends="dom-interfaces">
+		<style in="${build.dir}/dom2-interfaces.xml" out="${build.dir}/dom2.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
+			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
+		</style>
+		<copy file="${build.dir}/dom2.dtd" todir="${tests.dir}/level2/core"/>
+	</target>
+
+	<target name="dom2-subjects" depends="dom2-init">
+		<style basedir="${specs.dir}/Level-2/xml/core" in="${specs.dir}/Level-2/xml/core/dom-spec.xml" out="${build.dir}/dom2-subjects.xml" style="${transforms.dir}/subjects.xsl">
+			<param name="otherdoc1" value="../views/dom-spec.xml"/>
+			<param name="otherdoc2" value="../events/dom-spec.xml"/>
+			<param name="otherdoc3" value="../traversal-range/dom-spec.xml"/>
+			<param name="otherdoc4" value="../style/dom-spec.xml"/>
+			<param name="otherdoc5" value="../html/dom-spec.xml"/>
+		</style>
+	</target>
+
+	<target name="dom2-interfaces" depends="dom2-init">
+		<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml" out="${build.dir}/dom2-interfaces.xml" style="${transforms.dir}/dom2-combine.xsl"/>
+	</target>
+
+
 
 <target name="get-nist-level-1-core">
    <mkdir dir="nist/level-1/core"/>
