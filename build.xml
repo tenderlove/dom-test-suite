@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.61  2002-06-06 05:04:11  dom-ts-4
+Revision 1.62  2002-06-10 04:24:01  dom-ts-4
+Added XHTML DTD to dom1-core.jar
+
+Revision 1.61  2002/06/06 05:04:11  dom-ts-4
 Update for DOM Level 2 HTML CR
 Added dom2-html-jar target
 
@@ -250,6 +253,24 @@ All implementation conditions combined into implementationAttribute element
     <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
     <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="avalon-available" file="${lib.dir}/avalon.zip"/>
+    <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-strict.dtd"/>
+</target>
+
+
+<target name="get-xhtml1-dtd" unless="xhtml1-dtd-available">
+    <mkdir dir="${lib.dir}/xhtml1-dtd"/>
+    <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+        dest="${lib.dir}/xhtml1-dtd/xhtml1-strict.dtd"
+        usetimestamp="yes"/>
+    <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent"
+        dest="${lib.dir}/xhtml1-dtd/xhtml-lat1.ent"
+        usetimestamp="yes"/>
+    <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent"
+        dest="${lib.dir}/xhtml1-dtd/xhtml-symbol.ent"
+        usetimestamp="yes"/>
+    <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent"
+        dest="${lib.dir}/xhtml1-dtd/xhtml-special.ent"
+        usetimestamp="yes"/>
 </target>
 
 <!--  determines if DOM 1 spec files are already available locally  -->
@@ -978,7 +999,8 @@ All implementation conditions combined into implementationAttribute element
 		encoding="UTF8"/>
 </target>
 
-<target name="dom1-core-jar" depends="dom1-core-javac">
+<target name="dom1-core-jar" depends="dom1-core-javac,get-xhtml1-dtd">
+    
 	<jar jarfile="${build.dir}/dom1-core.jar" manifest="java/dom1-core.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
@@ -988,6 +1010,7 @@ All implementation conditions combined into implementationAttribute element
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
+        <fileset dir="${lib.dir}/xhtml1-dtd"/>
 	</jar>
 </target>
 
