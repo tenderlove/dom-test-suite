@@ -19,11 +19,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The "setNodeValue()" method for an attribute creates a 
   Text node with the unparsed content of the string.
   Retrieve the attribute named "street" from the last 
-  child of of the fourth employee and assign the "Y%ent1;" 
+  child of of the fourth employee and assign the "Y%ent1" 
   string to its value attribute.  This value is not yet
   parsed and therefore should still be the same upon
   retrieval. This test uses the "getNamedItem(name)" method
   from the NamedNodeMap interface. 
+
+  See attrcreatetextnode3 for a modified version of this 
+  test that is more likely to provoke the suspect behavior.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
