@@ -28,6 +28,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     This child contains a block of text that is spread 
     across multiple lines.   The content of the "name" child
     should be parsed and treated as a single Text node.
+
+    This appears to be a duplicate of elementnormalize.xml in DOM L1 Test Suite
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
@@ -43,10 +45,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <normalize obj="root"/>
-<getElementsByTagName interface="Element" obj="root" tagname="&quot;name&quot;" var="elementList"/>
+<getElementsByTagName interface="Element" obj="root" tagname='"name"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="firstChild"/>
 <childNodes obj="firstChild" var="textList"/>
 <item interface="NodeList" obj="textList" index="0" var="textNode"/>
 <data interface="CharacterData" obj="textNode" var="data"/>
-<assertEquals actual="data" expected="&quot;Roger Jones&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="data" expected='"Roger\n Jones"' id="data" ignoreCase="false"/>
 </test>
