@@ -66,7 +66,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventHandler DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -564,6 +564,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                 <xs:attribute use="optional" type="variable" name="return"/>
             </xs:complexType>
 
+            <xs:complexType name="sinkAttribute">
+                <xs:sequence/>
+                <xs:attribute use="required" type="literal" name="value"/>
+            </xs:complexType>
+
 			<xs:element name="var">
 				<xs:annotation>
 					<xs:documentation>Declare and optionally initialize a variable.  [Tenative] All variables must be declared.  Use instanceOf for type assertions.</xs:documentation>
@@ -571,12 +576,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:complexType>
 					<xs:choice minOccurs="0">
 						<xs:element ref="member" maxOccurs="unbounded"/>
-                        <!--  define elements for every method in user implemented interfaces
-                                  used like anonymous inner class definitions  -->
+                            <!--  define elements for every method in user implemented interfaces
+                                      used like anonymous inner class definitions  -->
                         <xsl:for-each select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]">
-                            <xsl:for-each select="method">
-                                <xs:element name="{@name}" type="sinkMethod"/>
-                            </xsl:for-each>
+                            <xs:sequence>
+                                <xsl:for-each select="method|attribute">
+                                    <xsl:choice>
+                                        <xsl:when test="name() = 'method'">
+                                            <xs:element name="{@name}" type="sinkMethod"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xs:element name="{@name}" type="sinkAttribute"/>
+                                        </xsl:otherwise>
+                                    </xsl:choice>
+                                </xsl:for-each>
+                            </xs:sequence>
                         </xsl:for-each>
                     </xs:choice>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
