@@ -34,17 +34,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="null"/>
-<var name="qualifiedName" type="DOMString" value="&quot;emp:qualifiedName&quot;"/>
+<var name="namespaceURI" type="DOMString" isNull="true"/>
+<var name="qualifiedName" type="DOMString" value='"emp:qualifiedName"'/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"employee"'/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
-<assertDOMException id="elementSetAttributeNSURINullAssert">
+<assertDOMException id="throw_NAMESPACE_ERR">
 <NAMESPACE_ERR>
-<setAttributeNS obj="testAddr" namespaceURI="namespaceURI" qualifiedName="qualifiedName" value="&quot;newValue&quot;"/>
+<setAttributeNS obj="testAddr" namespaceURI="namespaceURI" qualifiedName="qualifiedName" value='"newValue"'/>
 </NAMESPACE_ERR>
 </assertDOMException>
 </test>
