@@ -79,3 +79,5 @@ officially released; you can and should therefore not use the results to
 make any claims as far as DOM conformance is concerned. The DOM TS will be 
 officially released shortly, in the meanwhile we welcome your comments to 
 www-dom-ts@w3.org, the DOM TS mailing list.
+
+Dimitris Dimitriadis (dom-ts-1) 2001-11-21
