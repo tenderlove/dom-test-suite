@@ -1,0 +1,11 @@
+Manifest-Version: 2.0
+Main-Class: org.w3c.domts.JUnitRunner
+Class-Path: xerces.jar xml4j.jar xmlparserv2.jar crimson.jar parser.jar jaxp.jar xml-apis.jar junit.jar testlet.jar
+
+Name: org/w3c/domts/level1/core
+Specification-Title: W3C/NIST Test Suite for DOM Level 1 Core
+Specification-Version: 0.0.1
+Specification-Vendor: World Wide Web Consortium
+Implementation-Vendor: World Wide Web Consortium 
+Implementation-Version: 0.0.1
+Implementation-Title: W3C/NIST Test Suite for DOM Level 1 Core
