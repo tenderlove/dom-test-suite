@@ -638,7 +638,7 @@ The source document contained the following notice:
             <xsl:value-of select="@expected"/>
             <xsl:text>),</xsl:text>
             <xsl:value-of select="@actual"/>
-            <xsl:text>);
+	    <xsl:text>);
       </xsl:text>
         </xsl:when>
 
@@ -649,7 +649,7 @@ The source document contained the following notice:
                     <xsl:value-of select="@expected"/>
                     <xsl:text>),toLowerArray(</xsl:text>
                     <xsl:value-of select="@actual"/>
-                    <xsl:text>);
+		    <xsl:text>));
        </xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1105,19 +1105,19 @@ function handleEvent(listener, event, userObj) {
 
 
 <xsl:template match="*[local-name()='less']" mode="condition">
-	(<xsl:value-of select="@actual"/> &lt; <xsl:value-of select="expected"/>)
+	(<xsl:value-of select="@actual"/> &lt; <xsl:value-of select="@expected"/>)
 </xsl:template>
 
 <xsl:template match="*[local-name()='lessOrEquals']" mode="condition">
-	(<xsl:value-of select="@actual"/> &lt;= <xsl:value-of select="expected"/>)
+	(<xsl:value-of select="@actual"/> &lt;= <xsl:value-of select="@expected"/>)
 </xsl:template>
 
 <xsl:template match="*[local-name()='greater']" mode="condition">
-	(<xsl:value-of select="@actual"/> &gt; <xsl:value-of select="expected"/>)
+	(<xsl:value-of select="@actual"/> &gt; <xsl:value-of select="@expected"/>)
 </xsl:template>
 
 <xsl:template match="*[local-name()='greaterOrEquals']" mode="condition">
-	(<xsl:value-of select="@actual"/> &gt;= <xsl:value-of select="expected"/>)
+	(<xsl:value-of select="@actual"/> &gt;= <xsl:value-of select="@expected"/>)
 </xsl:template>
 
 <xsl:template match="*[local-name()='isNull']" mode="condition">

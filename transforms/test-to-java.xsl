@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.45  2003-11-18 08:39:58  dom-ts-4
+Revision 1.46  2003-11-19 03:55:52  dom-ts-4
+ECMAScript missing ) on assertEqualsCollectionexpected instead of @expected on less, lessOrEquals...Bug 364
+
+Revision 1.45  2003/11/18 08:39:58  dom-ts-4
 Fix Java production for attributes that start with is (bug 379)
 
 Revision 1.44  2003/11/10 07:34:13  dom-ts-4
@@ -1981,19 +1984,19 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 
 
 <xsl:template match="*[local-name()='less']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &lt; <xsl:value-of select="expected"/><xsl:text>)</xsl:text>
+    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &lt; <xsl:value-of select="@expected"/><xsl:text>)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='lessOrEquals']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &lt;= <xsl:value-of select="expected"/><xsl:text>)</xsl:text>
+    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &lt;= <xsl:value-of select="@expected"/><xsl:text>)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='greater']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &gt; <xsl:value-of select="expected"/><xsl:text>)</xsl:text>
+    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &gt; <xsl:value-of select="@expected"/><xsl:text>)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='greaterOrEquals']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &gt;= <xsl:value-of select="expected"/><xsl:text>)</xsl:text>
+    <xsl:text>(</xsl:text><xsl:value-of select="@actual"/> &gt;= <xsl:value-of select="@expected"/><xsl:text>)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='isNull']" mode="condition">
