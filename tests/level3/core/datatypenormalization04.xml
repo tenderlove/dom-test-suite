@@ -36,11 +36,12 @@ Normalize document with datatype-normalization set to true.  Check if float valu
 <var name="canSetNormalization" type="boolean"/>
 <var name="canSetValidate" type="boolean"/>
 <var name="canSetXMLSchema" type="boolean"/>
+<var name="xsdNS" type="DOMString" value='"http://www.w3.org/2001/XMLSchema"'/>
 <load var="doc" href="datatype_normalization" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <canSetParameter var="canSetNormalization" obj="domConfig" name='"datatype-normalization"' value="true"/>
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
-<canSetParameter var="canSetXMLSchema" obj="domConfig"  name='"schema-type"' value='"http://www.w3.org/2001/XMLSchema"'/>
+<canSetParameter var="canSetXMLSchema" obj="domConfig"  name='"schema-type"' value='xsdNS'/>
 <if>
 	<and>
 		<isTrue value="canSetNormalization"/>
@@ -49,7 +50,7 @@ Normalize document with datatype-normalization set to true.  Check if float valu
 	</and>
 	<setParameter obj="domConfig" name='"datatype-normalization"' value="true"/>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
-	<setParameter obj="domConfig" name='"schema-type"' value='"http://www.w3.org/2001/XMLSchema"'/>
+	<setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
 	<normalizeDocument obj="doc"/>
 	<getElementsByTagNameNS 
 		var="elemList" 

@@ -62,7 +62,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 	<xsl:template match="/">
 <xsl:text>
 &lt;!--
- Copyright (c) 2001-2003 World Wide Web Consortium,
+ Copyright (c) 2001-2004 World Wide Web Consortium,
  (Massachusetts Institute of Technology, Institut National de
  Recherche en Informatique et en Automatique, Keio University). All
  Rights Reserved. This program is distributed under the W3C's Software
@@ -78,11 +78,14 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "fail|assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance|allErrors|allNotifications|operation|key|src|dst"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance|allErrors|allNotifications|operation|key|dst</xsl:text>
+<xsl:if test="not($attributes[@name = 'src'])">|src</xsl:if>
+<xsl:if test="not($attributes[@name = 'data'])">|data</xsl:if>
+<xsl:text>"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
-&lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;"&gt;
+&lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|not|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;"&gt;
 
 &lt;!ENTITY % assertion "%framework-assertion;</xsl:text>
 	<xsl:if test="$exceptions">
@@ -212,7 +215,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
                             <xsl:if test="@name='length'">
                                 <xsl:text> | DOMString </xsl:text>
                             </xsl:if>
-                            <xsl:if test="@name='data'">
+                            <xsl:if test="@name='data' or @name = 'src'">
                             	<xsl:text> | UserDataNotification </xsl:text>
                             </xsl:if>
 							<xsl:text> ) </xsl:text>
@@ -408,7 +411,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
    name CDATA #REQUIRED
    xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation CDATA "<xsl:value-of select="concat($schema-namespace, concat(' ',$schema-location))"/>"
-   contentType CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT package (metadata?, (test|suite)*)&gt;
@@ -424,7 +426,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
    name CDATA #REQUIRED
    xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation CDATA "<xsl:value-of select="concat($schema-namespace, concat(' ',$schema-location))"/>"
-   contentType CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT suite.member EMPTY&gt;
@@ -700,6 +701,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	expected CDATA #REQUIRED
 	id ID #REQUIRED
 	ignoreCase (true|false|auto) #REQUIRED
+	context (attribute|element) #IMPLIED
 	bitmask CDATA #IMPLIED
 &gt;
 
@@ -709,6 +711,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	expected CDATA #REQUIRED
 	id ID #REQUIRED
 	ignoreCase (true|false|auto) #REQUIRED
+	context (attribute|element) #IMPLIED
 	bitmask CDATA #IMPLIED
 &gt;
 
@@ -755,6 +758,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
 	ignoreCase (true|false|auto) "false"
+	context (attribute|element) #IMPLIED
 	bitmask CDATA #IMPLIED
 &gt;
 
@@ -764,6 +768,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	actual CDATA #REQUIRED
 	expected CDATA #REQUIRED
 	ignoreCase (true|false|auto) "false"
+	context (attribute|element) #IMPLIED
 	bitmask CDATA #IMPLIED
 &gt;
 
@@ -1010,14 +1015,6 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	interface (UserDataNotification) #IMPLIED
 &gt;
 
-&lt;!ELEMENT src EMPTY&gt;
-&lt;!ATTLIST src
-	id ID #IMPLIED
-	var CDATA #REQUIRED
-	obj CDATA #REQUIRED
-	interface (UserDataNotification) #IMPLIED
-&gt;
-
 &lt;!ELEMENT dst EMPTY&gt;
 &lt;!ATTLIST dst
 	id ID #IMPLIED
@@ -1025,6 +1022,28 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	obj CDATA #REQUIRED
 	interface (UserDataNotification) #IMPLIED
 &gt;
+
+<xsl:if test="not($attributes[@name = 'src'])">
+&lt;!ELEMENT src EMPTY&gt;
+&lt;!ATTLIST src
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	obj CDATA #REQUIRED
+	interface (UserDataNotification) #IMPLIED
+&gt;
+</xsl:if>
+
+<xsl:if test="not($attributes[@name = 'data'])">
+&lt;!ELEMENT data EMPTY&gt;
+&lt;!ATTLIST data
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+	obj CDATA #REQUIRED
+	interface (UserDataNotification) #IMPLIED
+&gt;
+</xsl:if>
+
+
 
 &lt;!ELEMENT allErrors EMPTY&gt;
 &lt;!ATTLIST allErrors

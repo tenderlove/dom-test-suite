@@ -72,7 +72,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
             _xmlns_test="{$schema-namespace}"
 			elementFormDefault="qualified">
 		<xsl:comment>
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -153,7 +153,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<!--  choose whether interface is required based
 							 on number of interfaces method is introduced by  -->
 					<xsl:choose>
-						<xsl:when test="@name='length' or @name='data'">
+						<xsl:when test="@name='length' or @name='data' or @name = 'src'">
 							<xsl:attribute name="use">required</xsl:attribute>
 						</xsl:when>
 						<xsl:when test="@name = 'contentType'">
@@ -177,7 +177,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                             <xsl:if test="@name='length'">
                                 <xs:enumeration value="DOMString"/>
                             </xsl:if>
-                            <xsl:if test="@name='data'">
+                            <xsl:if test="@name='data' or @name = 'src'">
                             	<xs:enumeration value="UserDataNotification"/>
                             </xsl:if>
 						</xs:restriction>
@@ -523,13 +523,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>Used in method name in generated code.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
-                    <xs:attribute name="contentType" type="loadContentType" use="optional">
-                        <xs:annotation>
-                            <xs:documentation>Content type used to select the appropriate test documents.  Value propagates from enclosing suites.
-                            For example, loading "file1" when contextType="text/xml" should load "staff.xml".  If contentType="image/xsl+svg", file1.svg would be loaded.
-                         </xs:documentation>
-                         </xs:annotation>
-                    </xs:attribute>
 				</xs:complexType>
                 <!--  variables must be uniquely named   -->
                 <xs:key name="var-name">
@@ -603,13 +596,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>Used in method name in generated code.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
-                    <xs:attribute name="contentType" type="loadContentType" use="optional">
-                        <xs:annotation>
-                            <xs:documentation>Content type used to select the appropriate test documents.  Value propagates from enclosing suites.
-                            For example, loading "file1" when contextType="text/xml" should load "staff.xml".  If contentType="image/xsl+svg", file1.svg would be loaded.
-                         </xs:documentation>
-                         </xs:annotation>
-                    </xs:attribute>
 				</xs:complexType>
 			</xs:element>
 
@@ -1021,6 +1007,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:attribute name="expected" type="variableOrLiteral" use="required"/>
 				<xs:attribute name="id" type="xs:ID" use="required"/>
 				<xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
+				<xs:attribute name="context" use="optional" type="ignoreCaseContext"/>
 				<xs:attribute name="bitmask" use="optional" type="xs:integer"/>
 			</xs:complexType>
 			<xs:element name="assertEquals" type="comparisonAssertionWithCase"/>
@@ -1111,12 +1098,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="allErrors"/>
 					<xs:element ref="operation"/>
 					<xs:element ref="key"/>
-					<xs:element ref="src"/>
 					<xs:element ref="dst"/>
 					<xs:element ref="createXPathEvaluator"/>
 					<xs:element ref="getResourceURI"/>
 					<xs:element ref="substring"/>
 					<xs:element ref="createTempURI"/>
+					<xsl:if test="not($attributes[@name = 'src'])">
+						<xs:element ref="src"/>
+					</xsl:if>
+					<xsl:if test="not($attributes[@name = 'data'])">
+						<xs:element ref="data"/>
+					</xsl:if>
 				</xs:choice>
 			</xs:group>
 
@@ -1148,11 +1140,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     </xs:enumeration>
                 </xs:restriction>
             </xs:simpleType>
+            <xs:simpleType name="ignoreCaseContext">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="attribute"/>
+                    <xs:enumeration value="element"/>
+                </xs:restriction>
+            </xs:simpleType>
 			<xs:complexType name="comparisonWithCase">
 				<xs:attribute name="id" type="xs:ID" use="optional"/>
 				<xs:attribute name="actual" type="variable" use="required"/>
 				<xs:attribute name="expected" type="variableOrLiteral" use="required"/>
 				<xs:attribute name="ignoreCase" use="required" type="ignoreCaseEnum"/>
+				<xs:attribute name="context" use="optional" type="ignoreCaseContext"/>
 				<xs:attribute name="bitmask" use="optional" type="xs:integer"/>
 			</xs:complexType>
 			<xs:element name="equals" type="comparisonWithCase">
@@ -1289,6 +1288,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="and"/>
 					<xs:element ref="or"/>
 					<xs:element ref="xor"/>
+					<xs:element ref="not"/>
 					<xs:element ref="instanceOf"/>
 					<xs:element ref="isTrue"/>
 					<xs:element ref="isFalse"/>
@@ -1466,9 +1466,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			</xs:complexType>
 			<xs:element name="operation" type="UserDataNotificationAccessor"/>
 			<xs:element name="key" type="UserDataNotificationAccessor"/>
-			<xs:element name="src" type="UserDataNotificationAccessor"/>
 			<xs:element name="dst" type="UserDataNotificationAccessor"/>
-				
+			<xsl:if test="not($attributes[@name = 'data'])">
+				<xs:element name="data" type="UserDataNotificationAccessor"/>
+			</xsl:if>	
+			<xsl:if test="not($attributes[@name = 'src'])">
+				<xs:element name="src" type="UserDataNotificationAccessor"/>
+			</xsl:if>	
 			
             <xs:element name="createXPathEvaluator">
                 <xs:complexType>

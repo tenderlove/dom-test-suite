@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="matchCount" type="int" value="0"/>
   <var name="paramValue" type="DOMUserData"/>
   <var name="canSet" type="boolean"/>
-  <load var="doc" href="barfoo"/>
+  <load var="doc" href="barfoo" willBeModified="false"/>
   <domConfig var="config" obj="doc" interface="Document"/>
   <assertNotNull actual="config" id="configNotNull"/>
   <parameterNames var="parameterNames" obj="config"/>

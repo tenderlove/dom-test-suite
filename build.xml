@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.123  2004-01-28 23:22:31  dom-ts-4
+Revision 1.124  2004-02-06 10:13:33  dom-ts-4
+Proposed recommendation changes (bug 518)
+
+Revision 1.123  2004/01/28 23:22:31  dom-ts-4
 Support for ignoringComments impl attribute (bug 509)
 
 Revision 1.122  2004/01/21 17:46:03  dom-ts-4
@@ -405,7 +408,6 @@ All implementation conditions combined into implementationAttribute element
 
 -->
 <project default="usage" basedir=".">
-    <property name="xdk10.lib.dir" location="/xdk_10/lib"/>
     <!-- 
        specifying -Dno-network=true on command line
        should allow building without a network
@@ -1420,13 +1422,14 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom2-core-validate-tests" depends="dom2-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/core" includes="*.xml"/>  
+		<fileset dir="${tests.dir}/level2/core" includes="*.xml" excludes="hc_namednodemapinvalidtype1.xml"/>  
 	</xmlvalidate>
 </target>
 
 <target name="dom2-core-schema-validate-tests" depends="check-schema-support, dom2-dtd, dom2-schema">
     <ant antfile="schemavalidate.ant">
-    	<property name="validate.dir" location="${tests.dir}/level2/core"/>  
+    	<property name="validate.dir" location="${tests.dir}/level2/core"/>
+    	<property name="excludes" value="hc_namednodemapinvalidtype1.xml"/>  
     </ant>
 </target>
 
@@ -1798,21 +1801,21 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-dom3-core" depends="dom3-available"><!-- unless="dom3-core-available" -->
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2004/PR-DOM-Level-3-Core-20040205/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom3-ls" depends="dom3-available"><!-- unless="dom3-ls-available" -->
-	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/DOM3-LS.zip"
+	<get src="http://www.w3.org/TR/2004/PR-DOM-Level-3-LS-20040205/DOM3-LS.zip"
 		dest="${specs.dir}/DOM3-LS.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom3-val" depends="dom3-available"><!-- unless="dom3-val-available"-->
-	<get src="http://www.w3.org/TR/2003/PR-DOM-Level-3-Val-20031215/DOM3-Val.zip"
+	<get src="http://www.w3.org/TR/2004/REC-DOM-Level-3-Val-20040127/DOM3-Val.zip"
 		dest="${specs.dir}/DOM3-Val.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
