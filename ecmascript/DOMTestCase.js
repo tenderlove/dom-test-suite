@@ -203,7 +203,7 @@ function IFrameBuilder() {
     this.fixedAttributeValues = [false,  true, false, true, true , false, false ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
-
+    this.exception = null;
 }
 
 IFrameBuilder.prototype.hasFeature = function(feature, version) {
@@ -268,10 +268,11 @@ function MSXMLBuilder(progID) {
     this.async = false;
     this.supportsAsyncChange = true;
     this.parser = null;
+    this.exception = null;
 }
 
 MSXMLBuilder.prototype.createMSXML = function() {
-    var parser = new ActiveXObject(this.progid);
+    var parser = new ActiveXObject(this.progID);
     parser.async = this.async;
     parser.preserveWhiteSpace = !this.configurableAttributeValues[1];
     parser.validateOnParse = this.configurableAttributeValues[0];
@@ -292,7 +293,7 @@ MSXMLBuilder.prototype.preload = function(frame, varname, url) {
 }
 
 MSXMLBuilder.prototype.load = function(frame, varname, url) {
-    var parser = this.CreateMSXML();
+    var parser = this.createMSXML();
 	if(!parser.load(fileBase + url + getSuffix(this.contentType))) {
 		throw parser.parseError.reason;
 	}
@@ -339,7 +340,7 @@ MSXMLBuilder.prototype.toAutoCaseArray = function(s) {
 MSXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
     var i;
     for (i = 0; i < this.fixedAttributeNames.length; i++) {
-        if (this.fixedAttributeNames[i] == attr) {
+        if (this.fixedAttributeNames[i] == attribute) {
             if (this.fixedAttributeValues[i] != value) {
                 throw "MSXML does not support " + attribute + "=" + value;
             }
@@ -412,6 +413,7 @@ function MozillaXMLBuilder() {
 
     this.docs = new Array();
     this.docnames = new Array();
+    this.exception = null;
 }
 
 MozillaXMLBuilder.prototype.preload = function(frame, varname, url) {
@@ -474,6 +476,63 @@ var builder = null;
 if (top && top.jsUnitParmHash)
 {
     builder = createBuilder(top.jsUnitParmHash.implementation);
+    try {
+        if (top.jsUnitParmHash.asynchronous == 'true' && builder.supportAsync) {
+            builder.async = true;
+        }
+        if (top.jsUnitParmHash.expandentityreferences) {
+            if (top.jsUnitParmHash.expandEntityReferences == 'true') {
+                builder.setImplementationAttribute('expandEntityReferences', true);
+            } else {
+                builder.setImplementationAttribute('expandEntityReferences', false);
+            }
+        }
+        if (top.jsUnitParmHash.ignoringelementcontentwhitespace) {
+            if (top.jsUnitParmHash.ignoringElementContentWhitespace == 'true') {
+                builder.setImplementationAttribute('ignoringElementContentWhitespace', true);
+            } else {
+                builder.setImplementationAttribute('ignoringElementContentWhitespace', false);
+            }
+        }
+        if (top.jsUnitParmHash.validating) {
+            if (top.jsUnitParmHash.validating == 'true') {
+                builder.setImplementationAttribute('validating', true);
+            } else {
+                builder.setImplementationAttribute('validating', false);
+            }
+        }
+        if (top.jsUnitParmHash.coalescing) {
+            if (top.jsUnitParmHash.coalescing == 'true') {
+                builder.setImplementationAttribute('coalescing', true);
+            } else {
+                builder.setImplementationAttribute('coalescing', false);
+            }
+        }
+        if (top.jsUnitParmHash.namespaceaware) {
+            if (top.jsUnitParmHash.namespaceaware == 'true') {
+                builder.setImplementationAttribute('namespaceAware', true);
+            } else {
+                builder.setImplementationAttribute('namespaceAware', false);
+            }
+        }
+        var contentType = top.jsUnitParmHash.contenttype;
+        if (contentType != null) {
+            var contentTypeSet = false;
+            for (var i = 0; i < builder.supportedContentTypes.length; i++) {
+                if (builder.supportedContentTypes[i] == contentType) {
+                    builder.contentType = contentType;
+                    contentTypeSet = true;
+                    break;
+                }
+            }
+            if (!contentTypeSet) {
+                builder.exception = "Builder does not support content type " + contentType;
+            }
+        }
+    }
+    catch(ex) {
+        builder.exception = ex;
+    }
 } else {
     builder = new IFrameBuilder();
 }
@@ -510,3 +569,11 @@ function MSXMLBuilder_onreadystatechange() {
         loadComplete();
     }
 }
+
+
+var fileBase = location.href;
+if (fileBase.indexOf('?') != -1) {
+   fileBase = fileBase.substring(0, fileBase.indexOf('?'));
+}
+var fileBase = fileBase.substring(0, fileBase.lastIndexOf('/') + 1) + "files/";
+

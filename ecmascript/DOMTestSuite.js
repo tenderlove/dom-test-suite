@@ -43,7 +43,6 @@ function onImplementationChange() {
         }
     }
     update();
-    updateIncompatibleTests();
 }
 
 
@@ -70,6 +69,7 @@ function update() {
         }
         contentTypes[i].disabled = disabled;
     }
+    updateIncompatibleTests();
 }
 
 function updateIncompatibleTests() {
@@ -170,18 +170,19 @@ function checkTest(activeTests, inactiveTests, testName, loadedDocs,
     }
 }
 
-function fillTestSelection() {
-    var pageURL = location.href;
-    if (pageURL.indexOf('?') != -1) {
-        pageURL = pageURL.substring(0, pageURL.indexOf('?'));
+function fixTestPagePath() {
+    var options = document.forms[0].testpage.options;
+    for (var i = 0; i < options.length; i++) {
+        if (options[i].selected && options[i].value.indexOf(':') == -1) {
+            var pageURL = location.href;
+            if (pageURL.indexOf('?') != -1) {
+                pageURL = pageURL.substring(0, pageURL.indexOf('?'));
+            }
+            var baseURL = pageURL.substring(0, pageURL.lastIndexOf('/') + 1);
+            options[i].value = baseURL + options[i].value;
+        }
     }
-    var baseURL = pageURL.substring(0, pageURL.lastIndexOf('/') + 1);
-    var tests = new Array();
-    checkTests(tests, tests);
-    var select = document.forms[0].testpage;
-    select.options[0] = new Option("All compatible tests", pageURL);
-    for (var i = 0; i < tests.length; i++) {
-        select.options[i+1] = new Option(tests[i], baseURL + tests[i] + ".html");
-    }
+    return true;
 }
+
 
