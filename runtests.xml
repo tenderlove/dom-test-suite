@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.4  2004-01-06 06:57:00  dom-ts-4
+Revision 1.5  2004-01-22 06:11:41  dom-ts-4
+Add L3 Core datatype normalization tests (bug 478)
+
+Revision 1.4  2004/01/06 06:57:00  dom-ts-4
 Adding schemaValidating precondition (bug 456)
 
 Revision 1.3  2003/12/23 03:25:31  dom-ts-4
@@ -52,6 +55,8 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 			<pathelement path="${build.dir}/dom${level}-${module}.jar"/>
 			<pathelement path="${build.dir}/junit-run.jar"/>
 		</classpath>
+		<jvmarg value="-Djava.endorsed.dirs=${xerces.build.dir}"/>
+		<jvmarg value="-Xmx900M"/>
 		<formatter type="xml"/>
 		<test name="org.w3c.domts.level${level}.${module}.TestXerces${config}" 
 			todir="${build.dir}" 

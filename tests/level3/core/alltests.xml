@@ -21,6 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="attrgetschematypeinfo04.xml"/>
     <suite.member href="attrgetschematypeinfo05.xml"/>
 
+	<suite.member href="datatypenormalization01.xml"/>	
+	<suite.member href="datatypenormalization02.xml"/>	
+	<suite.member href="datatypenormalization03.xml"/>	
+	<suite.member href="datatypenormalization04.xml"/>	
+	<suite.member href="datatypenormalization05.xml"/>	
+	<suite.member href="datatypenormalization06.xml"/>	
+
+
 	<!-- DOMImplementation tests -->
     <suite.member href="domimplementationgetfeature01.xml"/>
     <suite.member href="domimplementationgetfeature02.xml"/>
@@ -146,6 +154,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="documentnormalizedocument05.xml"/>	
 	<suite.member href="documentnormalizedocument06.xml"/>	
 	<suite.member href="documentnormalizedocument07.xml"/>	
+
+
 	<!-- need to add more tests here -->
 	
 	<!-- rename Node -->
