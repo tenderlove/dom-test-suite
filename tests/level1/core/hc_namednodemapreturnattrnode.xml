@@ -57,7 +57,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<contentType type="text/html"/>
 	<assertEquals actual="attrName" expected='"class"' id="attrNameHTML" ignoreCase="true"/>
 	<else>
-		<assertEquals actual="attrName" expected='"class"' id="attrName" ignoreCase="true"/>
+		<assertEquals actual="attrName" expected='"class"' id="attrName" ignoreCase="false"/>
 	</else>
 </if>
 </test>
