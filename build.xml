@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.75  2002-11-06 12:27:51  dom-ts-5
+Revision 1.76  2002-11-25 21:08:22  plehegar
+Link the DOM Level 2 HTML PR draft instead of CR draft.
+
+Revision 1.75  2002/11/06 12:27:51  dom-ts-5
 Update for DOM Level 2 HTML CR
 xml-source.xml replaces dom-spec.xml in the DOM2-HTML.zip file
 
@@ -271,6 +274,7 @@ All implementation conditions combined into implementationAttribute element
     <echo message="dom1-core-doxygen    builds documentation for DOM Level 1 Core"/>
     <echo message="dom1-core-dist       builds distribution for DOM Level 1 Core"/>
     <echo message="dom2-core-*          Same as above but for DOM Level 2 Core"/>
+    <echo message="dom2-html-*          Same as above but for DOM Level 2 Core"/>
 	<echo message=""/>
 </target>
 
@@ -645,10 +649,10 @@ All implementation conditions combined into implementationAttribute element
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-2"/>
-	<get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20021007/DOM2-HTML.zip"
+	<get src="http://www.w3.org/TR/2002/PR-DOM-Level-2-HTML-20021108/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
 		usetimestamp="yes"/>
-    <get src="http://www.w3.org/TR/2002/CR-DOM-Level-2-HTML-20021007/java-binding.zip"
+    <get src="http://www.w3.org/TR/2002/PR-DOM-Level-2-HTML-20021108/java-binding.zip"
         dest="${specs.dir}/DOM2-HTML-Java-Binding.zip"
         usetimestamp="yes"/>
 </target>
