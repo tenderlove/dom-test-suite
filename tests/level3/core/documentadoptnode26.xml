@@ -42,7 +42,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <var name="rootNS" type="DOMString"/>
 <var name="rootTagname" type="DOMString"/>
-<var name="nullValue" type="DOMString" isNull="true"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <namespaceURI var="rootNS" obj="docElem" interface="Node"/>
@@ -50,7 +49,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementation var="domImpl" obj="doc"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootTagname' doctype="nullDocType"/>
 <createElementNS var="newElem" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"head"'/>
-<setAttributeNS obj="newElem" namespaceURI='"http://www.w3.org/XML/1998/namespace"' qualifiedName='"xml:lang"' value="nullValue"/>
+<setAttributeNS obj="newElem" 
+	namespaceURI='"http://www.w3.org/XML/1998/namespace"' 
+	qualifiedName='"xml:lang"' value='"en-US"'/>
 <documentElement obj="newDoc" var="docElem"/>
 <appendChild obj="docElem" var="appendedChild" newChild="newElem"/>
 <adoptNode var="adoptedNode" obj="doc" source="newElem"/>
