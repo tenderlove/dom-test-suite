@@ -41,7 +41,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="trNode" type="Node"/>
 <var name="cellNode" type="Node"/>
 <var name="value" type="DOMString"/>
-<var name="newCell" type="HTMLElement"/>
 <var name="vcells" type="int" />
 <var name="doc" type="Document"/>
 <load var="doc" href="tablerow" willBeModified="false"/>
@@ -50,18 +49,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="3"/>
 <cells interface="HTMLTableRowElement" obj="testNode" var="cellsnodeList"/>
 <length interface="HTMLCollection" obj="cellsnodeList" var="vcells"/>
-<assertEquals actual="vcells" expected="6" id="cellsLink" ignoreCase="false"/>
+<assertEquals actual="vcells" expected="6" id="cellsLink1" ignoreCase="false"/>
 <item interface="NodeList" obj="cellsnodeList" var="trNode" index="0"/>
 <firstChild interface="Node" obj="trNode" var="cellNode"/>
 <nodeValue obj="cellNode" var="value"/>
-<assertEquals actual="value" expected="'EMP0001'" id="value1Link" ignoreCase="false"/>
-<deleteCell interface="HTMLTableRowElement" obj="testNode" var="newCell" index="0"/>
+<assertEquals actual="value" expected='"EMP0001"' id="value1Link" ignoreCase="false"/>
+<deleteCell interface="HTMLTableRowElement" obj="testNode" index="0"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="3"/>
 <cells interface="HTMLTableRowElement" obj="testNode" var="cellsnodeList"/>
 <length interface="HTMLCollection" obj="cellsnodeList" var="vcells"/>
-<assertEquals actual="vcells" expected="5" id="cellsLink" ignoreCase="false"/>
+<assertEquals actual="vcells" expected="5" id="cellsLink2" ignoreCase="false"/>
 <item interface="NodeList" obj="cellsnodeList" var="trNode" index="0"/>
 <firstChild interface="Node" obj="trNode" var="cellNode"/>
 <nodeValue obj="cellNode" var="value"/>
-<assertEquals actual="value" expected="'Margaret Martin'" id="value1Link" ignoreCase="false"/>
+<assertEquals actual="value" expected='"Margaret Martin"' id="value2Link" ignoreCase="false"/>
 </test>
