@@ -699,15 +699,18 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
+<target name="dom1-core-validate-html-files" depends="init" if="jtidy-available">
+    <antcall target="validate-html">
+    	<param name="dir" value="${tests.dir}/level1/core/files"/>
+    </antcall>	
+</target>
 
-<target name="dom1-core-validate-files" depends="init">
+
+<target name="dom1-core-validate-files" depends="dom1-core-validate-html-files">
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml *.xhtml *.svg" excludes="hc_nodtdstaff.*"/>  
 	</xmlvalidate>
-    <antcall target="validate-html">
-    	<param name="dir" value="${tests.dir}/level1/core/files"/>
-    </antcall>	
 </target>
 
 
@@ -1264,15 +1267,18 @@ This target checks that the output of that implied transform is valid HTML
     </style>
 </target>
 
-<target name="dom2-core-validate-files" depends="init">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/core/files" includes="*.xml *.xhtml *.svg" excludes="nodtdstaff.*"/>  
-	</xmlvalidate>
+<target name="dom2-core-validate-html-files" depends="init" if="jtidy-available">
     <antcall target="validate-html">
     	<param name="dir" value="${tests.dir}/level2/core/files"/>
     </antcall>	
 	
+</target>
+
+<target name="dom2-core-validate-files" depends="dom2-core-validate-html-files">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/core/files" includes="*.xml *.xhtml *.svg" excludes="nodtdstaff.*"/>  
+	</xmlvalidate>
 	
 </target>
 
@@ -1438,7 +1444,14 @@ This target checks that the output of that implied transform is valid HTML
     </ant>
 </target>
 
-<target name="dom2-html-validate-files" depends="get-xhtml1-dtd, dom1-html-validate-files">
+<target name="dom2-html-validate-html-files" depends="init" if="jtidy-available">
+    <antcall target="validate-html">
+    	<param name="dir" value="${tests.dir}/level2/html/files"/>
+    </antcall>	
+	
+</target>
+
+<target name="dom2-html-validate-files" depends="get-xhtml1-dtd, dom1-html-validate-files, dom2-html-validate-html-files">
     <copy todir="${tests.dir}/level2/html/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
@@ -1447,10 +1460,6 @@ This target checks that the output of that implied transform is valid HTML
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level2/html/files" includes="*.xml *.xhtml"/>  
 	</xmlvalidate>
-	
-    <!-- antcall target="validate-html">
-    	<param name="dir" value="${tests.dir}/level2/html/files"/>
-    </antcall -->	
 	
 	
 </target>
@@ -1663,15 +1672,18 @@ This target checks that the output of that implied transform is valid HTML
 
 <!--   DOM Level 2 Events   -->
 
-<target name="dom2-events-validate-files" depends="init">
-	<xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level2/events/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
-	</xmlvalidate>
+<target name="dom2-events-validate-html-files" depends="init" if="jtidy-available">
     <antcall target="validate-html">
     	<param name="dir" value="${tests.dir}/level2/events/files"/>
     </antcall>	
 	
+</target>
+
+<target name="dom2-events-validate-files" depends="dom2-events-validate-html-files">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level2/events/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
+	</xmlvalidate>
 </target>
 
 
