@@ -64,7 +64,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <for-each collection="illegalVersion" member="versionValue">
 <assertDOMException id="NOT_SUPPORTED_ERR_documentsetversion01">
 <NOT_SUPPORTED_ERR>
-<xmlVersion  obj="doc" value='"versionValue"' interface="Document"/>
+<xmlVersion  obj="doc" value='versionValue' interface="Document"/>
 </NOT_SUPPORTED_ERR>
 </assertDOMException>
 </for-each>
