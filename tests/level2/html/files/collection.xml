@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "xhtml1-transitional.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
 <title>NIST DOM HTML Test - BR</title>
 </head>
 <body> 
 <table id="table-1" border="4" frame="border" cellpadding="2" cellspacing="2" summary="HTML Control Table" rules="all">
-<caption></caption>
+<caption>Table Caption</caption>
 <thead align="center" valign="middle">
 <tr align="center" valign="middle" char="*" charoff="1">
 <th id="header-1">Employee Id</th>
@@ -50,7 +50,7 @@
 </table>
 <form id="form1" action="./files/getData.pl" method="post">
 <p>
-<select id="selectId" dir="ltr" tabindex="7" name="select1" multiple="multiple" size="1" onblur="newId(this)" onfocus="newDir(this)">
+<select id="selectId" dir="ltr" tabindex="7" name="select1" multiple="multiple" size="1">
 <option selected="selected" value="EMP1">EMP10001</option>
 <option>EMP10002</option>
 <option>EMP10003</option> 
