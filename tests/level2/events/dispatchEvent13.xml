@@ -34,10 +34,17 @@ can never be invoked after being removed.
 <var name="preventDefault" type="boolean"/>
 <var name="listeners" type="List"/>
 <var name="events" type="List"/>
+<!--  definition of private class instance that implements EventListener   -->
 <var name="listener1" type="EventListener">
+    <!--   instance scope variables, 
+           value attributes are passed via constructor   -->
     <var name="events" type="List" value="events"/>
     <var name="listeners" type="List" value="listeners"/>
+    <!--    implementation of handleEvent method
+                any parameters (in this case 'evt') are
+                predefined   -->
     <handleEvent>
+        <!--  method scope variables   -->
         <var name="target" type="EventTarget"/>
         <var name="listener" type="EventListener"/>
         <!--  add event to the collection   -->
@@ -49,6 +56,7 @@ can never be invoked after being removed.
         </for-each> 
     </handleEvent>
 </var>
+<!--   identical implementation of EventListener    -->
 <var name="listener2" type="EventListener">
     <var name="events" type="List" value="events"/>
     <var name="listeners" type="List" value="listeners"/>
