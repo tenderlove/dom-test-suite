@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.14  2001-08-21 06:06:12  dom-ts-4
+Revision 1.15  2001-08-22 01:46:10  dom-ts-4
+Updated subjects based on filename analysis
+
+Revision 1.14  2001/08/21 06:06:12  dom-ts-4
 DOM 1 SE targets
 Fixed cases that locked Xalan
 org.w3c.domts.level1.core.alltests
@@ -143,6 +146,23 @@ All implementation conditions combined into implementationAttribute element
 	       out="${build.dir}/dom1-subjects.xml"
 	       style="${transforms.dir}/subjects.xsl"/>
 </target>
+
+<target name="analyze-names" depends="dom1-interfaces">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
+	<style basedir="${tests.dir}/level1/core" 
+		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
+		   includes="*.xml" 
+	       style="${transforms.dir}/analyzename.xsl" 
+	       extension=".xml">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level1.core"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
+	</style>
+</target>
+
 
 <target name="dom1-interfaces" depends="dom1-init">
 	<style basedir="${specs.dir}/Level-1/xml"
@@ -370,9 +390,6 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-core-gen-java" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
-    <!-- TODO: explicitly excludes tests that Xalan 2.1 has problems with  -->
-<!--           excludes="**/documentcreatecdatasection.xml,**/textsplittextnomodificationallowederr.xml" -->
-
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
@@ -385,15 +402,6 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
-    <!--  and pull a Julia Child (or Martha Stewart) and pull the completed
-                tests out of the other oven   
-    <get src="http://home.houston.rr.com/curta/documentcreatecdatasection.java"
-         dest="${java.build.dir}/org/w3c/domts/level1/core/documentcreatecdatasection.java"
-         usetimestamp="yes"/>
-    <get src="http://home.houston.rr.com/curta/textsplittextnomodificationallowederr.java"
-         dest="${java.build.dir}/org/w3c/domts/level1/core/textsplittextnomodificationallowederr.java"
-         usetimestamp="yes"/>
-         -->
 </target>
 
 <target name="dom1-core-gen-ecmascript" depends="dom1-interfaces">
