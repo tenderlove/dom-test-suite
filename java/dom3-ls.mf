@@ -8,4 +8,4 @@ Specification-Version: 0.0.1
 Specification-Vendor: World Wide Web Consortium
 Implementation-Vendor: World Wide Web Consortium 
 Implementation-Version: 0.0.1
-Implementation-Title: W3C/NIST Test Suite for DOM Level 2 Load-Save
+Implementation-Title: W3C/NIST Test Suite for DOM Level 3 Load-Save
