@@ -22,11 +22,13 @@
   <metadata>
     <title>DOMWriterFilterTest2</title>
     &creator; 
-    <description>Uses a filter to strip all text during serializer then parses output to check an attribute.</description> 
+    <description>Uses a filter to strip text during serialization
+    parsers to check expections.</description> 
     &contributor; &date;
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-LSSerializerFilter"/>    
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-acceptNode"/>    
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-whatToShow"/>    	
+	<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=643"/>    	
   </metadata>
 
 
@@ -79,11 +81,11 @@
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <item interface="NodeList" obj="elementList" index="0" var="elt1"/>
 
-  <!--  text content of attribute node (but not attribute) should have been stripped -->
+  <!--  attr not effected since children of attribute nodes not passed to filter -->
   <getAttributeNode var="attrNode" obj="elt1" name='"attr1"'/>
   <assertNotNull actual="attrNode" id="attrExists"/>
   <nodeValue var="attr1" obj="attrNode"/>
-  <assertEquals actual="attr1"  expected='""' ignoreCase="false" id="attrIsBlank"/>
+  <assertEquals actual="attr1"  expected='"attr1"' ignoreCase="false" id="attrUnchanged"/>
 
   <!--  elt1 should be empty   -->
   <hasChildNodes obj="elt1" var="childs"/>
