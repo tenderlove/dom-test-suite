@@ -95,4 +95,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:value-of select="normalize-space(.)"/>
 	</xsl:template>
 
+	<xsl:template match="exception">
+		<exception>
+			<!--   replicate attributes   -->
+			<xsl:apply-templates select="@*"/>
+			<!--   process children and text content in "interface" mode  -->				
+			<xsl:apply-templates select="*|text()" mode="interface"/>
+		</exception>
+	</xsl:template>
+
+	<xsl:template match="group">
+		<group>
+			<!--   replicate attributes   -->
+			<xsl:apply-templates select="@*"/>
+			<!--   process children and text content in "interface" mode  -->				
+			<xsl:apply-templates select="*|text()" mode="interface"/>
+		</group>
+	</xsl:template>
+
 </xsl:stylesheet>

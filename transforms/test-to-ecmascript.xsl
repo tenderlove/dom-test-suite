@@ -26,35 +26,12 @@ saxon -o someTest.js someTest.xml test-to-ecmascript.xsl
 
 -->
 
-<!--
-$Log: test-to-ecmascript.xsl,v $
-Revision 1.5  2001-08-30 08:30:18  dom-ts-4
-Added metadata and Software licence (dropped in earlier processing) to test
-Enhanced test-matrix.xsl
-
-Revision 1.4  2001/08/23 08:01:49  dom-ts-4
-Test fixups for ignoring whitespace, et al
-
-Revision 1.3  2001/08/22 22:12:50  dom-ts-4
-Now passing all tests with default settings
-
-Revision 1.2  2001/08/15 04:44:03  dom-ts-4
-Added dom1-gen-ecmascript target to build.xml
-Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
-
-Revision 1.1  2001/08/14 18:49:35  dom-ts-4
-Changed location of resource files
-Remove spurious required ID's from DTD
-Added xmlns:xsi and xsi:schema location to DTD
-Removed package and targetURI attributes from Schema/DTD
-
--->
 
 
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--  relative to transform   -->
-	<xsl:param name="interfaces-docname"/>
+	<xsl:param name="interfaces-docname">..\build\dom1-interfaces.xml</xsl:param>
     <xsl:param name="target-uri-base"/>
 
 
@@ -151,18 +128,14 @@ The source document contained the following notice:
             <xsl:text>;</xsl:text>
        </xsl:for-each>
        <xsl:text>
-      var myFactory = factory.newInstance(attrNames,attrValues);
+      this.builder = factory.newDocumentBuilder(attrNames,attrValues);
 </xsl:text>
 	</xsl:when>
 	<xsl:otherwise>
-		<xsl:text>      var myFactory = factory.newInstance();
+		<xsl:text>      this.builder = factory.newDocumentBuilder(null,null);
 </xsl:text>
 	</xsl:otherwise>
 </xsl:choose>
-
-<xsl:text>
-      var builder = myFactory.newDocumentBuilder();
-</xsl:text>
 
 <xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
 
@@ -170,17 +143,15 @@ The source document contained the following notice:
     <xsl:text>      var domImpl = builder.getDOMImplementation();
 </xsl:text>
     <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(!domImpl.hasFeature("</xsl:text>
+	    <xsl:text>      if(!domImpl.hasFeature(</xsl:text>
 	    <xsl:value-of select="@feature"/>
-	    <xsl:text>",</xsl:text>
+	    <xsl:text>,</xsl:text>
 	    <xsl:choose>
 		    <xsl:when test="@version">
-			    <xsl:text>"</xsl:text>
 			    <xsl:value-of select="@version"/>
-			    <xsl:text>"</xsl:text>
 		    </xsl:when>
 		    <xsl:otherwise>
-			    <xsl:text>""</xsl:text>
+			    <xsl:text>null</xsl:text>
 		    </xsl:otherwise>
 	    </xsl:choose>
 	    <xsl:text>)) {
@@ -227,8 +198,6 @@ function </xsl:text>
 </xsl:text>
 <xsl:call-template name="implCheck"/>
 <xsl:text>
-  this.factory = myFactory;
-  this.builder = builder;
   this.runTest = </xsl:text>
   <xsl:value-of select="@name"/>
   <xsl:text>_runTest;
@@ -242,58 +211,13 @@ function </xsl:text>
 
 <!--   when encountering a test   -->
 <xsl:template match="*[local-name()='suite']">
-<xsl:choose>
-	<xsl:when test="@package">
-package <xsl:value-of select="@package"/>;
-	</xsl:when>
-	<xsl:otherwise>
-package org.w3c.domts.level1.core;
-	</xsl:otherwise>
-</xsl:choose>
-
-import org.w3c.dom.*;
-<xsl:if test="*[local-name() = 'hasFeature' and @feature='Events']">
-import org.w3c.dom.events;
-</xsl:if>
-import org.w3c.domts.*;
-import javax.xml.parsers.*;
-import java.util.*;
 
 <!--  if there is a metadata child element then
           produce documentation comments    -->
-<xsl:apply-templates select="*[local-name()='metadata']"/>
-    <xsl:text>public class </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text> extends DOMTestSuite {
-
-   public </xsl:text>
-    <xsl:value-of select="@name"/>
-   	<xsl:text>(DOMTestDocumentBuilderFactory factory) throws Exception {
-</xsl:text>
-
-    <xsl:call-template name="implCheck"/>
-    <xsl:text>
-      setFactory(factory);
-   }
-
-   public void build(DOMTestSink sink) {
-</xsl:text>
+    <xsl:apply-templates select="*[local-name()='metadata']"/>
     <xsl:for-each select="*[local-name() = 'suite.member']">
-        <xsl:variable name="testDef" select="document(@href,.)/*"/>
-         <xsl:text>      sink.addTest(</xsl:text>
-         <xsl:if test="$testDef/@package">
-            <xsl:value-of select="$testDef/@package"/>
-            <xsl:text>.</xsl:text>
-         </xsl:if>
-         <xsl:value-of select="$testDef/@name"/>
-         <xsl:text>.class);
-</xsl:text>
+        <xsl:apply-templates select="document(@href,.)/*"/>
     </xsl:for-each>
-   }
-   public String getTargetURI() {
-      return "<xsl:value-of select="concat($target-uri-base,@name)"/>";
-   }
-}
 </xsl:template>
 
 
@@ -319,6 +243,15 @@ import java.util.*;
 <xsl:template match="*[local-name()='signed']" mode="body"/>
 <xsl:template match="*[local-name()='not']" mode="body"/>
 
+<!--   this template generates code for the DOMString.length  -->
+<xsl:template match="*[local-name()='length' and @interface='DOMString']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = </xsl:text>
+    <xsl:value-of select="@obj"/>
+    <xsl:text>.length;
+      </xsl:text>
+</xsl:template>
+
 
 <!--   implementation attribute doesn't do anything in the body of the test  -->
 <xsl:template match="*[local-name()='implementationAttribute']" mode="body"/>
@@ -340,15 +273,15 @@ import java.util.*;
 			<xsl:value-of select="@obj"/>
 			<xsl:text>.</xsl:text>
 		</xsl:if>
-		<xsl:text>hasFeature("</xsl:text>
+		<xsl:text>hasFeature(</xsl:text>
 		<xsl:value-of select="@feature"/>
-		<xsl:text>",</xsl:text>
+		<xsl:text>,</xsl:text>
 		<xsl:choose>
 			<xsl:when test="@version">
-				<xsl:text>"</xsl:text><xsl:value-of select="@version"/><xsl:text>"</xsl:text>
+				<xsl:value-of select="@version"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>""</xsl:text>
+				<xsl:text>null</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:text>);
@@ -374,12 +307,13 @@ import java.util.*;
 			<xsl:text> = new Array();
 </xsl:text>
 			<xsl:for-each select="*[local-name()='member']">
+                <xsl:text>      </xsl:text>
      			<xsl:value-of select="$varname"/>
                 <xsl:text>[</xsl:text>
-                <xsl:value-of select="position()"/>
+                <xsl:value-of select="position()-1"/>
                 <xsl:text>] = </xsl:text>
                 <xsl:value-of select="text()"/>
-                <xsl:text>];
+                <xsl:text>;
 </xsl:text>
 			</xsl:for-each>
 		</xsl:when>
@@ -662,9 +596,7 @@ import java.util.*;
 	<xsl:text>assertInstanceOf("</xsl:text>
 	<xsl:value-of select="@id"/>
 	<xsl:text>","</xsl:text>
-	<xsl:call-template name="produce-type">
-		<xsl:with-param name="type" select="@type"/>
-	</xsl:call-template>
+    <xsl:value-of select="@type"/>
 	<xsl:text>",</xsl:text>
 	<xsl:value-of select="@obj"/>
 	<xsl:text>);
@@ -700,9 +632,36 @@ import java.util.*;
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertEquals']" mode="body">
+    <xsl:variable name="expected" select="@expected"/>
+    <xsl:variable name="expectedType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $expected]/@type"/>
+    <xsl:choose>
+        <xsl:when test="$expectedType = 'Collection'">
+            <xsl:call-template name="assertEquals">
+                <xsl:with-param name="type">Collection</xsl:with-param>
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="$expectedType = 'List'">
+            <xsl:call-template name="assertEquals">
+                <xsl:with-param name="type">List</xsl:with-param>
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:call-template name="assertEquals">
+                <xsl:with-param name="type"/>
+            </xsl:call-template>
+        </xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template name="assertEquals">
+    <!--  either Equals, CollectionEquals or ListEquals  -->
+    <xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="@ignoreCase = 'true'">
-			<xsl:text>assertEqualsIgnoreCase("</xsl:text>
+            <xsl:text>      assertEquals</xsl:text>
+            <xsl:value-of select="$type"/>
+			<xsl:text>IgnoreCase("</xsl:text>
 			<xsl:value-of select="@id"/>
 			<xsl:text>",</xsl:text>
 			<xsl:value-of select="@expected"/>
@@ -711,11 +670,13 @@ import java.util.*;
 			<xsl:text>);
 </xsl:text>
 			<xsl:if test="*">
-				<xsl:text>      if(</xsl:text>
+				<xsl:text>      if(equals</xsl:text>
+                <xsl:value-of select="$type"/>
+                <xsl:text>IgnoreCase(</xsl:text>
 				<xsl:value-of select="@expected"/>
-				<xsl:text>.toUpperCase() == </xsl:text>
+				<xsl:text>,</xsl:text>
 				<xsl:value-of select="@actual"/>
-				<xsl:text>.toUpperCase()) {
+				<xsl:text>)) {
       </xsl:text>
 				<xsl:apply-templates mode="body"/>
 				<xsl:text>      }
@@ -723,7 +684,9 @@ import java.util.*;
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>assertEquals("</xsl:text>
+			<xsl:text>      assertEquals</xsl:text>
+            <xsl:value-of select="$type"/>
+            <xsl:text>("</xsl:text>
 			<xsl:value-of select="@id"/>
 			<xsl:text>",</xsl:text>
 			<xsl:value-of select="@expected"/>
@@ -732,11 +695,13 @@ import java.util.*;
 			<xsl:text>);
       </xsl:text>
 			<xsl:if test="*">
-				<xsl:text>if(</xsl:text>
+				<xsl:text>if(equals</xsl:text>
+                <xsl:value-of select="$type"/>
+                <xsl:text>(</xsl:text>
 				<xsl:value-of select="@expected"/>
-                <xsl:text> == </xsl:text>
+                <xsl:text>,</xsl:text>
 				<xsl:value-of select="@actual"/>
-				<xsl:text>) {
+				<xsl:text>)) {
 </xsl:text>
 				<xsl:apply-templates mode="body"/>
 				<xsl:text>      }
@@ -919,23 +884,33 @@ function handleEvent(listener, event, userObj) {
 
 <xsl:template match="*[local-name()='load']" mode="body">
 	<xsl:value-of select="@var"/>
-	<xsl:text> = load(this,"</xsl:text>
+	<xsl:text> = this.builder.load("</xsl:text>
 	<xsl:value-of select="@href"/>
-	<xsl:text>");
+	<xsl:text>",</xsl:text>
+    <xsl:value-of select="@willBeModified"/>
+	<xsl:text>);
       </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertDOMException']" mode="body">
+    <xsl:text>
 	{
 		var success = false;
 		try {
-			<xsl:apply-templates select="*/*" mode="body"/>
+            </xsl:text>
+	<xsl:apply-templates select="*/*" mode="body"/>
+    <xsl:text>  }
+		catch(ex) {            
+			success = this.builder.isDOMExceptionCode(ex,</xsl:text>
+    <xsl:variable name="excode" select="local-name(*)"/>
+	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
+	<xsl:text>);
 		}
-		catch(ex) {
-			success = (ex.code == <xsl:value-of select="name(*)"/>);
-		}
-		assertTrue("<xsl:value-of select="@id"/>",success);
+		assertTrue("</xsl:text>
+	<xsl:value-of select="@id"/>
+	<xsl:text>",success);
 	}
+</xsl:text>
 </xsl:template>
 
 <xsl:template match="text()" mode="body"/>
@@ -1085,7 +1060,7 @@ function handleEvent(listener, event, userObj) {
 <xsl:template match="*[local-name()='and']" mode="condition">
 	(<xsl:apply-templates select="*[1]" mode="condition"/>
 	<xsl:for-each select="*[position() &gt; 1]">
-		<xsl:text> &amp; </xsl:text>
+		<xsl:text> &amp;&amp; </xsl:text>
 		<xsl:apply-templates select="." mode="condition"/>
 	</xsl:for-each>)
 </xsl:template>
@@ -1093,7 +1068,7 @@ function handleEvent(listener, event, userObj) {
 <xsl:template match="*[local-name()='or']" mode="condition">
 	(<xsl:apply-templates select="*[1]" mode="condition"/>
 	<xsl:for-each select="*[position() &gt; 1]">
-		<xsl:text> | </xsl:text>
+		<xsl:text> || </xsl:text>
 		<xsl:apply-templates select="." mode="condition"/>
 	</xsl:for-each>)
 </xsl:template>
@@ -1199,7 +1174,7 @@ function handleEvent(listener, event, userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">
-	<xsl:text>(getImplementationAttribute("</xsl:text>
+	<xsl:text>(this.builder.getImplementationAttribute("</xsl:text>
 	<xsl:value-of select="@name"/>
     <xsl:text>") == </xsl:text>
     <xsl:value-of select="@value"/>
