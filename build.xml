@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.47  2002-02-22 10:15:55  dom-ts-4
+Revision 1.48  2002-02-26 07:18:21  dom-ts-4
+Copy test-to-html.xsl to distribution tests directory
+
+Revision 1.47  2002/02/22 10:15:55  dom-ts-4
 Changed build directory for DOM L2 Core and HTML JSUnit tests to match DOM L1 Core
 
 Revision 1.46  2002/02/13 16:26:16  dom-ts-4
@@ -359,6 +362,7 @@ All implementation conditions combined into implementationAttribute element
         <fileset dir="${tests.dir}/level1/core" includes="*.xml"/>
         <fileset dir="${build.dir}" includes="dom1.dtd"/>
         <fileset dir="${build.dir}" includes="dom1.xsd"/>
+        <fileset dir="${transforms.dir}" includes="test-to-html.xsl"/>
     </copy>
     <copy todir="${build.dir}/level1/core/tests/files">
         <fileset dir="${tests.dir}/level1/core/files" excludes="*.bak"/>
