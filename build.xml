@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.83  2003-01-28 06:07:45  dom-ts-4
+Revision 1.84  2003-02-06 05:58:30  dom-ts-4
+Updated for DOM 3 Val 02/05 working draft
+
+Revision 1.83  2003/01/28 06:07:45  dom-ts-4
 Added dependency on dom2-init to dom3-interfaces (needs DOM 2 Traversal/Range)
 
 Revision 1.82  2003/01/25 18:00:03  dom-ts-4
@@ -1725,7 +1728,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom3-val" depends="dom3-available" unless="dom3-val-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Val-20021008/DOM3-Val.zip"
+	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Val-20030205/DOM3-Val.zip"
 		dest="${specs.dir}/DOM3-Val.zip"
 		usetimestamp="yes"/>
 </target>
