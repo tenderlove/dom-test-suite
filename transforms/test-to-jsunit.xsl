@@ -38,14 +38,11 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 <xsl:template match="*[local-name() = 'test']" mode="jsunit">
     <xsl:variable name="loads" select="*[local-name() = 'load' and not(@interface)]"/>
     <html>
+        <xsl:call-template name="copyright"/>
         <head>
             <title><xsl:value-of select="@name"/></title>
             <link rel="stylesheet" href="../../jsunit/css/jsUnitStyle.css"/>
             <script language="JavaScript" src="../../jsunit/app/jsUnitCore.js"></script>
-            <script language="JavaScript">
-var testURL = window.location.href;
-var fileBase = testURL.substring(0, testURL.lastIndexOf("/")) + "/files/";
-</script>
             <script language="JavaScript" src="DOMTestCase.js"></script>
             <script language="JavaScript">
 // expose test function names
@@ -57,6 +54,15 @@ return ['<xsl:value-of select="@name"/>'];
 var docsLoaded = -1000000;
 var setUpException = null;
 
+//
+//   This function is called by the testing framework before
+//      running the test suite.
+//
+//   If there are no configuration exceptions, asynchronous
+//        document loading is started.  Otherwise, the status
+//        is set to complete and the exception is immediately
+//        raised when entering the body of the test.
+//
 function setUpPage() {
    setUpPageStatus = 'running';
    try {
@@ -95,6 +101,13 @@ function setUpPage() {
     }
 }
 
+//
+//   This method is called on the completion of 
+//      each asychronous load started in setUpTests.
+//
+//   When every synchronous loaded document has completed,
+//      the page status is changed which allows the
+//      body of the test to be executed.
 function loadComplete() {
     if (++docsLoaded == <xsl:value-of select="count($loads)"/>) {
         setUpPageStatus = 'complete';
@@ -123,211 +136,49 @@ function checkSetUp() {
 
 <xsl:template match="*[local-name() = 'suite']" mode="jsunit">
     <html>
+        <xsl:call-template name="copyright"/>
         <head>
             <title><xsl:value-of select="@name"/></title>
             <link rel="stylesheet" href="../../jsunit/css/jsUnitStyle.css"/>
             <script language="JavaScript" src="../../jsunit/app/jsUnitCore.js"></script>
             <script language="JavaScript" src="DOMTestCase.js"></script>
+            <script language="JavaScript" src="DOMTestSuite.js"></script>
             <script language="JavaScript">
-            <xsl:text>
-
 var builder = new IFrameBuilder();
 
-function updateImplementationAttribute(options, implAttribute) {
-   var builderVal = builder.getImplementationAttribute(implAttribute);
-   var disabled = false;
-   for (var i = 0; i &lt; builder.fixedAttributeNames.length; i++) {
-      if (implAttribute == builder.fixedAttributeNames[i]) {
-        disabled = true;
-        break;
-      }
-   }
-   updateTrueFalse(options, builderVal, disabled);
-}
-
-function updateTrueFalse(options, builderVal, disabled) {
-   for(var i = 0; i &lt; options.length; i++) {
-      if (options[i].value == "true") {
-         options[i].checked = builderVal;
-      } else {
-         options[i].checked = !builderVal;
-      }
-      options[i].disabled = disabled;
-   }
-}
-
-
-function onImplementationChange() {
-    var implOptions = document.forms[0].implementation;
-    for(var i = 0; i &lt; implOptions.length; i++) {
-        if (implOptions[i].checked) {
-            builder = createBuilder(implOptions[i].value);
-            break;
-        }
-    }
-    update();
-    updateIncompatibleTests();
-}
-
-
-
-function update() {
-    updateTrueFalse(document.forms[0].asynchronous, builder.async, !builder.supportsAsyncChange);
-    updateImplementationAttribute(document.forms[0].expandEntityReferences, "expandEntityReferences");
-    updateImplementationAttribute(document.forms[0].ignoringElementContentWhitespace, "ignoringElementContentWhitespace");
-    updateImplementationAttribute(document.forms[0].validating, "validating");
-    updateImplementationAttribute(document.forms[0].coalescing, "coalescing");
-    updateImplementationAttribute(document.forms[0].namespaceAware, "namespaceAware");
-
-    var contentTypes = document.forms[0].contentType;
-    for(i = 0; i &lt; contentTypes.length; i++) {
-        if (contentTypes[i].value == builder.contentType) {
-            contentTypes[i].checked = true;
-        }
-        var disabled = true;
-        for(var j = 0; j &lt; builder.supportedContentTypes.length; j++) {
-            if (contentTypes[i].value == builder.supportedContentTypes[j]) {
-                disabled = false;
-                break;
-            }
-        }
-        contentTypes[i].disabled = disabled;
-    }
-}
-
-function updateIncompatibleTests() {
-    var incompatibleTests = new Array();
-    checkTests(null, incompatibleTests);
-    var i = 0;
-    existingTests = document.forms[0].incompatible.options;
-    var overlapCount = existingTests.length;
-    if (overlapCount &gt; incompatibleTests.length) {
-        overlapCount = incompatibleTests.length;
-        existingTests.length = overlapCount;
-    }
-    for (i = 0; i &lt; overlapCount; i++) {
-        if (existingTests[i].text != incompatibleTests[i]) {
-            existingTests[i].text = incompatibleTests[i];
-        }
-    }
-    if (incompatibleTests.length &gt; overlapCount) {
-        for (; i &lt; incompatibleTests.length; i++) {
-            var newOption = document.createElement("option");
-            newOption.text = incompatibleTests[i];
-            document.forms[0].incompatible.insertBefore(newOption, null);
-        }
-    }
-}
-
-function setImplementationAttribute(implAttr, implValue) {
-    try {
-        builder.setImplementationAttribute(implAttr, implValue);
-        updateIncompatibleTests();
-    } catch(msg) {
-        alert(msg);
-        update();
-    }
-}
-
-function setContentType(contentType) {
-    for (var i = 0; i &lt; builder.supportedContentTypes.length; i++) {
-        if (builder.supportedContentTypes[i] == contentType) {
-            builder.contentType = contentType;
-            updateIncompatibleTests();
-            return;
-        }
-    }
-    alert(contentType + " not supported by selected implementation");
-    update();
-}
-
-function checkTest(activeTests, inactiveTests, testName, loadedDocs, 
-    featureNames, featureVersions, 
-    implementationAttrNames, implementationAttrValues) {
-    var active = true;
-    var i;
-    if (loadedDocs != null) {
-        for (i = 0; i &lt; loadedDocs.length; i++) {
-            if (loadedDocs[i] == "staff" &amp;&amp; !(builder.contentType == "text/xml" || builder.contentType == "image/svg+xml")) {
-                active = false;
-                break;
-            }
-        }
-    }
-    if (active &amp;&amp; featureNames != null) {
-        for (i = 0; i &lt; featureNames.length; i++) {
-            if (!builder.hasFeature(featureNames[i], featureVersions[i])) {
-                active = false;
-            }
-        }
-    }
-    if (active &amp;&amp; implementationAttrNames != null) {
-        for (i = 0; i &lt; implementationAttrNames.length; i++) {
-            var existing = builder.getImplementationAttribute(implementationAttrNames[i]);
-            //
-            //   if the setting doesn't equal the current (possibly fixed) setting
-            //
-            if (existing != implementationAttrValues[i]) {
-                //
-                //  see if it is settable
-                //
-                var settable = false;
-                for (var j = 0; j &lt; builder.configurableAttributeNames.length; j++) {
-                    if (builder.configurableAttributeNames[i] == implementationAttrNames[i]) {
-                        settable = true;
-                        break;
-                    }
-                }
-                active = settable;
-            }
-        }
-    }
-    if (active) {
-        if (activeTests != null) {
-            activeTests[activeTests.length] = testName;
-        }
-    } else {
-        if (inactiveTests != null) {
-            inactiveTests[inactiveTests.length] = testName;
-        }
-    }
-}
-
-
-function checkTests(activeTests, inactiveTests) {
-</xsl:text>
+//
+//  This function evaluates all tests and suites that appear in
+//     the suite definition.  Tests that are compatible
+//     are added to the compatible array, other tests
+//     to the incompatible.  Either array may be null
+//     and they may be the same to collect all tests
+//
+function checkTests(compatible, incompatible) {
 <xsl:for-each select="*[local-name()='suite.member']">
     <xsl:apply-templates select="document(@href,.)/*" mode="suite"/>
 </xsl:for-each>
 }
-<xsl:text>
 
+//
+//   builds the test suite definition from all the
+//       tests compatible with the current parser settings
+//
 function suite() {
     var newsuite = new top.jsUnitTestSuite(); 
-    var activeTests = new Array();
-    var inactiveTests = new Array();
-    checkTests(activeTests, inactiveTests);
-    for (i = 0; i &lt; activeTests.length; i++) {
-        newsuite.addTestPage("</xsl:text>
-        <xsl:value-of select="$testpath"/>
-        <xsl:text>" + activeTests[i] + ".html");
+    var compatible = new Array();
+    checkTests(compatible, null);
+    for (i = 0; i &lt; compatible.length; i++) {
+        newsuite.addTestPage("<xsl:value-of select="$testpath"/>" + compatible[i] + ".html");
     }
     return newsuite;
 }
-</xsl:text>
 </script>
         </head>
-        <body>
+        <body onload="domtsSuiteOnLoad()">
 <form id="configuration" action="../../jsunit/testRunner.html" target="jsunit">
             <table width="100%" border="1">
                 <tr>
-                    <td>Test: <select name="test" size="1">
-        <option value="all">All compatible tests</option>
-    <xsl:for-each select="*[local-name() = 'suite.member']">
-        <option id="{substring-before(@href, '.')}_option" value="{substring-before(@href, '.')}">
-            <xsl:value-of select="substring-before(@href, '.')"/>
-        </option>
-    </xsl:for-each>
+                    <td>Test: <select name="testpage" size="1">
                     </select>
                     <input type="submit" value="Load JSUnit"></input>
                     </td>
@@ -414,7 +265,7 @@ function suite() {
 </xsl:template>
 
 <xsl:template match="*[local-name()='test']" mode="suite">
-    <xsl:text>checkTest(activeTests, inactiveTests, "</xsl:text>
+    <xsl:text>checkTest(compatible, incompatible, "</xsl:text>
     <xsl:value-of select="@name"/>
     <xsl:text>", </xsl:text>
     <xsl:variable name="loads" select="*[local-name() = 'load' and not(@interface)]"/>
@@ -492,6 +343,20 @@ function suite() {
 </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
+</xsl:template>
+
+<xsl:template name="copyright">
+<xsl:comment>
+Copyright (c) 2001-2003 World Wide Web Consortium,
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University). All
+Rights Reserved. This program is distributed under the W3C's Software
+Intellectual Property License. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+</xsl:comment>
 </xsl:template>
 
 
