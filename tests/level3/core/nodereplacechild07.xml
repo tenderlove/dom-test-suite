@@ -21,9 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild07</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on this Document node attempt to replace this DocumentElement node 
 	with  a new element and verify if the name of the replaced documentElement Node.
 </description>
@@ -38,11 +35,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elem" type="Element"/>
 <var name="nodeName" type="DOMString"/>
 <var name="replacedNode" type="Node"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:elem"'/>
-<replaceChild obj="doc" var="replacedNode" oldChild="docElem" newChild="elem"/>
+<tagName var="rootName" obj="docElem"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<createElementNS var="elem" obj="doc" namespaceURI='rootNS' qualifiedName='rootName'/>
+<try>
+	<replaceChild obj="doc" var="replacedNode" oldChild="docElem" newChild="elem"/>
+	<catch>
+		<DOMException code="NOT_SUPPORTED_ERR">
+			<return/>
+		</DOMException>
+	</catch>
+</try>
 <documentElement var="replaced" obj="doc"/>
 <nodeName obj="replaced" var="nodeName"/>
-<assertEquals actual="nodeName" expected='"dom3:elem"' id="nodereplacechild07" ignoreCase="false"/>
+<assertEquals actual="nodeName" expected='rootName' id="nodereplacechild07" ignoreCase="false"/>
 </test>

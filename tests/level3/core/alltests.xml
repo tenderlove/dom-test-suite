@@ -210,6 +210,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="hasFeature03.xml"/>
     <suite.member href="hasFeature04.xml"/>
  	
+ 	<suite.member href="nodeappendchild01.xml"/>
+ 	<suite.member href="nodeappendchild02.xml"/>
+ 	
 	<!-- Node Tests -->	
 	<!-- insertBefore -->
 	<suite.member href="nodeinsertbefore01.xml"/>
@@ -260,6 +263,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="nodereplacechild36.xml"/>
 	<suite.member href="nodereplacechild37.xml"/>
 	<suite.member href="nodereplacechild38.xml"/>
+	<suite.member href="nodereplacechild39.xml"/>
+	<suite.member href="nodereplacechild40.xml"/>
 	
 	<!-- removeChild -->
 	<suite.member href="noderemovechild01.xml"/>	

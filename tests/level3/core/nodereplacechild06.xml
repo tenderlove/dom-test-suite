@@ -21,17 +21,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild06</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using replaceChild on this Document node attempt to replace this DocumentElement node 
-	with  a new element and verify if the name of the replaced documentElement Node.
+	with one of its child elements and verify if the name of the replaced documentElement Node.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="replaced" type="Element"/>
@@ -41,9 +37,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="replacedNode" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"p"' interface="Document"/>
+<getElementsByTagName var="childList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="childList" index="0" interface="NodeList"/>
-<replaceChild obj="doc" var="replacedNode" oldChild="docElem" newChild="elem"/>
+<try>
+	<replaceChild obj="doc" var="replacedNode" oldChild="docElem" newChild="elem"/>
+	<catch>
+		<DOMException code="NOT_SUPPORTED_ERR">
+			<return/>
+		</DOMException>
+	</catch>
+</try>
 <documentElement var="replaced" obj="doc"/>
 <nodeName obj="replaced" var="nodeName"/>
 <assertEquals actual="nodeName" expected='"p"' id="nodereplacechild06" ignoreCase="false"/>
