@@ -10,8 +10,7 @@
    <!ENTITY ent1 "This entity should be discarded">
    <!NOTATION notation1 PUBLIC "notation1File">
    <!NOTATION notation2 SYSTEM "notation2File">
-]
->
+]>
 <!-- This is comment number 1.-->
 <staff xml:base="http://www.w3.org/DOM/L3Test">
  <employee xmlns="http://www.nist.gov" xmlns:dmstc="http://www.usa.com">

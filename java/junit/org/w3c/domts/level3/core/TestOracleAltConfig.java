@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium, (Massachusetts Institute of
+ * Copyright (c) 2001-2003 World Wide Web Consortium, (Massachusetts Institute of
  * Technology, Institut National de Recherche en Informatique et en
  * Automatique, Keio University). All Rights Reserved. This program is
  * distributed under the W3C's Software Intellectual Property License. This
@@ -9,7 +9,7 @@
  * http://www.w3.org/Consortium/Legal/ for more details.
  */
 
-package org.w3c.domts.level2.core;
+package org.w3c.domts.level3.core;
 
 import java.lang.reflect.Constructor;
 
@@ -23,14 +23,13 @@ import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
 import org.w3c.domts.JUnitTestSuiteAdapter;
 
 /**
- * Test suite that runs all DOM L2 Core tests using the
- * Oracle Parser for Java in default configuration.
+ * Test suite that runs all DOM L3 Core tests using the
+ * Oracle Parser for Java in an alternative configuration.
  * 
  * @author Curt Arnold
  * 
  */
-public class TestOracle extends TestSuite {
-
+public class TestOracleAltConfig extends TestSuite {
 	/**
 	 * Constructor
 	 * @return test suite
@@ -39,7 +38,7 @@ public class TestOracle extends TestSuite {
 	public static TestSuite suite() throws Exception {
 		Class testClass =
 			ClassLoader.getSystemClassLoader().loadClass(
-				"org.w3c.domts.level2.core.alltests");
+				"org.w3c.domts.level3.core.alltests");
 		Constructor testConstructor =
 			testClass.getConstructor(
 				new Class[] { DOMTestDocumentBuilderFactory.class });
@@ -53,7 +52,7 @@ public class TestOracle extends TestSuite {
 		DOMTestDocumentBuilderFactory factory =
 			new JAXPDOMTestDocumentBuilderFactory(
 				oracleFactory,
-				JAXPDOMTestDocumentBuilderFactory.getConfiguration1());
+				JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
 		Object test = testConstructor.newInstance(new Object[] { factory });
 

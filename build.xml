@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.115  2003-12-09 08:22:27  dom-ts-4
+Revision 1.116  2003-12-10 10:30:35  dom-ts-4
+L3 Core fixups (Bug 404)
+
+Revision 1.115  2003/12/09 08:22:27  dom-ts-4
 Additional L&S tests, mostly configuration (Bug 401)
 
 Revision 1.114  2003/12/08 07:50:50  dom-ts-4
@@ -509,7 +512,7 @@ All implementation conditions combined into implementationAttribute element
 	<jar jarfile="${build.dir}/${jarfile}"  
 		 manifest="java/dom${level}-${module}.mf"
 		 basedir="${java.build.dir}"
-		 includes="org/w3c/domts/* org/w3c/domts/level${level}/${module}/*"
+		 includes="org/w3c/domts/* org/w3c/domts/level${level}/${module}/* org/w3c/dom/* org/w3c/dom/${module}/*"
 		 excludes="*.bak">
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
 		<fileset dir="java" includes="org/w3c/domts/*.java"/>
@@ -1044,7 +1047,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="dom1-html-jar" depends="dom1-html-javac">
+<target name="dom1-html-jar" depends="dom1-html-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="1"/>
 		<param name="module" value="html"/>
@@ -1385,7 +1388,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-core-jar" depends="dom2-core-javac">
+<target name="dom2-core-jar" depends="dom2-core-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="2"/>
 		<param name="module" value="core"/>
@@ -1498,7 +1501,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-html-jar" depends="dom2-html-javac">
+<target name="dom2-html-jar" depends="dom2-html-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="2"/>
 		<param name="module" value="html"/>
@@ -1603,7 +1606,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-events-jar" depends="dom2-events-javac">
+<target name="dom2-events-jar" depends="dom2-events-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="2"/>
 		<param name="module" value="events"/>
@@ -1895,17 +1898,27 @@ All implementation conditions combined into implementationAttribute element
 	</antcall>
 </target>
 
+<target name="dom3-core-validate-files" depends="get-xhtml1-dtd">
+    <copy todir="${tests.dir}/level3/core/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+
+	<xmlvalidate lenient="no" failonerror="no"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/core/files" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
 <target name="dom3-core-javac" depends="common-javac,dom3-core-gen-java">
 
 	<javac 
 		destdir="${java.build.dir}" 
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
+        fork="true"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
-        <src path="${dom3-ls-java-src}"/>
-        <src path="${dom3-xpath-java-src}"/>
         <include name="org/w3c/domts/level3/core/*"/>
         <include name="org/w3c/domts/*"/>
         <include name="org/w3c/dom/**"/>
@@ -1929,13 +1942,163 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-core-jar" depends="dom3-core-javac">
+<target name="dom3-core-jar" depends="dom3-core-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
+
+
+<!--  This target hacks the CR Core test so that it can run
+         against the slightly stale Oracle XDK 10_0_1_0_1A   -->
+<target name="dom3-core-xdk" depends="dom3-core-gen-java,common-javac">
+	<replace dir="${java.build.dir}" includes="**/*.java">
+		<replacefilter token="doc.getXmlEncoding()" value="((oracle.xml.parser.v2.XMLDocument) doc).getEncoding()"/>
+		<replacefilter token="cloned.getXmlEncoding()" value="((oracle.xml.parser.v2.XMLDocument) cloned).getEncoding()"/>
+		<replacefilter token="newDoc.getXmlEncoding()" value="((oracle.xml.parser.v2.XMLDocument) newDoc).getEncoding()"/>
+		<replacefilter token="doc.getXmlVersion()" value="((oracle.xml.parser.v2.XMLDocument) doc).getVersion()"/>
+		<replacefilter token="newDoc.getXmlVersion()" value="((oracle.xml.parser.v2.XMLDocument) newDoc).getVersion()"/>
+		<replacefilter token="doc.setXmlVersion" value="((oracle.xml.parser.v2.XMLDocument) doc).setVersion"/>
+		<replacefilter token="newDoc.setXmlVersion" value="((oracle.xml.parser.v2.XMLDocument) newDoc).setVersion"/>
+		<replacefilter token="doc.setXmlStandalone(true)" value='((oracle.xml.parser.v2.XMLDocument) doc).setStandalone("yes")'/>
+		<replacefilter token="newDoc.setXmlStandalone(true)" value='((oracle.xml.parser.v2.XMLDocument) newDoc).setStandalone("yes")'/>
+		<replacefilter token="newDoc.setXmlStandalone(false)" value='((oracle.xml.parser.v2.XMLDocument) newDoc).setStandalone("no")'/>
+		<replacefilter token="newDoc.getXmlStandalone()" value='"yes".equals(((oracle.xml.parser.v2.XMLDocument) newDoc).getStandalone())'/>
+		<replacefilter token="doc.adoptNode" value="((oracle.xml.parser.v2.XMLDocument) doc).adoptNode"/>
+		<replacefilter token="docAdopter.adoptNode" value="((oracle.xml.parser.v2.XMLDocument) docAdopter).adoptNode"/>
+		<replacefilter token="doc.getTextContent" value="((oracle.xml.parser.v2.XMLNode) doc).getText"/>
+		<replacefilter token="doctype.getTextContent" value="((oracle.xml.parser.v2.XMLNode) doctype).getText"/>
+		<replacefilter token="elem.getTextContent" value="((oracle.xml.parser.v2.XMLNode) elem).getText"/>
+		<replacefilter token="attr.getTextContent" value="((oracle.xml.parser.v2.XMLNode) attr).getText"/>
+		<replacefilter token="newDoc.getTextContent" value="((oracle.xml.parser.v2.XMLNode) newDoc).getText"/>
+		<replacefilter token="cdata.getTextContent" value="((oracle.xml.parser.v2.XMLNode) cdata).getText"/>
+		<replacefilter token="comment.getTextContent" value="((oracle.xml.parser.v2.XMLNode) comment).getText"/>
+		<replacefilter token="docType.getTextContent" value="((oracle.xml.parser.v2.XMLNode) docType).getText"/>
+		<replacefilter token="entRef.getTextContent" value="((oracle.xml.parser.v2.XMLNode) entRef).getText"/>
+		<replacefilter token="entity.getTextContent" value="((oracle.xml.parser.v2.XMLNode) entity).getText"/>
+		<replacefilter token="elemChild.getTextContent" value="((oracle.xml.parser.v2.XMLNode) elemChild).getText"/>
+		<replacefilter token="pi.getTextContent" value="((oracle.xml.parser.v2.XMLNode) pi).getText"/>
+		<replacefilter token="txt.getTextContent" value="((oracle.xml.parser.v2.XMLNode) txt).getText"/>
+		<replacefilter token="notation1.getTextContent" value="((oracle.xml.parser.v2.XMLNode) notation1).getText"/>
+		<replacefilter token="doc1.isSameNode(" value="(doc1 == "/>
+		<replacefilter token="docType1.isSameNode(" value="(docType1 == "/>
+		<replacefilter token="element2.isSameNode(" value="(element2 == "/>
+		<replacefilter token="attr1.isSameNode(" value="(attr1 == "/>
+		<replacefilter token="entity1.isSameNode(" value="(entity1 == "/>
+		<replacefilter token="notation1.isSameNode(" value="(notation1 == "/>
+		<replacefilter token="docType.isSameNode(" value="(docType == "/>
+		<replacefilter token="newDoc.isSameNode(" value="(newDoc == "/>
+		<replacefilter token="doc.getUserData(" value="((oracle.xml.parser.v2.XMLNode) doc).getProperty("/>
+		<replacefilter token="docType.getUserData(" value="((oracle.xml.parser.v2.XMLNode) docType).getProperty("/>
+		<replacefilter token="entity.getUserData(" value="((oracle.xml.parser.v2.XMLNode) entity).getProperty("/>
+		<replacefilter token="txt.getUserData(" value="((oracle.xml.parser.v2.XMLNode) txt).getProperty("/>
+		<replacefilter token="pi.getUserData(" value="((oracle.xml.parser.v2.XMLNode) pi).getProperty("/>
+		<replacefilter token="elem.getUserData(" value="((oracle.xml.parser.v2.XMLNode) elem).getProperty("/>
+		<replacefilter token="attr.getUserData(" value="((oracle.xml.parser.v2.XMLNode) attr).getProperty("/>
+		<replacefilter token="entRef.getUserData(" value="((oracle.xml.parser.v2.XMLNode) entRef).getProperty("/>
+		<replacefilter token="cData.getUserData(" value="((oracle.xml.parser.v2.XMLNode) cData).getProperty("/>
+		<replacefilter token="docElem.getUserData(" value="((oracle.xml.parser.v2.XMLNode) docElem).getProperty("/>
+		<replacefilter token="comment.getUserData(" value="((oracle.xml.parser.v2.XMLNode) comment).getProperty("/>
+		<replacefilter token="notation.getUserData(" value="((oracle.xml.parser.v2.XMLNode) notation).getProperty("/>
+
+
+		<replacefilter token='doc.setUserData("something"' value='((oracle.xml.parser.v2.XMLNode) doc).getUserData("something"); ((oracle.xml.parser.v2.XMLNode) doc).setProperty("something"'/>
+		<replacefilter token='docType.setUserData("KeyDoc"' value='((oracle.xml.parser.v2.XMLNode) docType).getUserData("KeyDoc"); ((oracle.xml.parser.v2.XMLNode) docType).setProperty("KeyDoc"'/>
+		<replacefilter token='entity.setUserData("key"' value='((oracle.xml.parser.v2.XMLNode) entity).getUserData("key"); ((oracle.xml.parser.v2.XMLNode) docType).setProperty("key"'/>
+		<replacefilter token='pi.setUserData("key"' value='((oracle.xml.parser.v2.XMLNode) pi).getUserData("key"); ((oracle.xml.parser.v2.XMLNode) pi).setProperty("key"'/>
+		<replacefilter token='doc.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) doc).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) doc).setProperty("Key1"'/>
+		<replacefilter token='elem.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) elem).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) elem).setProperty("Key1"'/>
+		<replacefilter token='elem.setUserData("Key2"' value='((oracle.xml.parser.v2.XMLNode) elem).getUserData("Key2"); ((oracle.xml.parser.v2.XMLNode) elem).setProperty("Key2"'/>
+		<replacefilter token='attr.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) attr).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) attr).setProperty("Key1"'/>
+		<replacefilter token='attr.setUserData("Key2"' value='((oracle.xml.parser.v2.XMLNode) attr).getUserData("Key2"); ((oracle.xml.parser.v2.XMLNode) attr).setProperty("Key2"'/>
+		<replacefilter token='comment.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) comment).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) comment).setProperty("Key1"'/>
+		<replacefilter token='notation.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) notation).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) notation).setProperty("Key1"'/>
+		<replacefilter token='entRef.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) entRef).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) entRef).setProperty("Key1"'/>
+		<replacefilter token='cData.setUserData("Key2"' value='((oracle.xml.parser.v2.XMLNode) cData).getUserData("Key2"); ((oracle.xml.parser.v2.XMLNode) cData).setProperty("Key2"'/>
+		<replacefilter token='docElem.setUserData("Key1"' value='((oracle.xml.parser.v2.XMLNode) docElem).getUserData("Key1"); ((oracle.xml.parser.v2.XMLNode) docElem).setProperty("Key1"'/>
+        <replacefilter token="newDoc.adoptNode" value="((oracle.xml.parser.v2.XMLDocument) newDoc).adoptNode"/>
+
+		<replacefilter token=", nullHandler" value=""/>
+		<replacefilter token="doc.getXmlStandalone()" value='"yes".equals(((oracle.xml.parser.v2.XMLDocument) doc).getStandalone())'/>
+	</replace> 
+
+	<replace dir="${java.build.dir}/org/w3c/domts/level3/core" includes="nodegetuserdata*.java nodesetuserdata*.java">
+      <replacefilter token=".isEqualNode(" value=" == ("/>
+	</replace>
+
+	<replace dir="${java.build.dir}" includes="org/w3c/domts/level3/core/alltests.java">
+      <replacefilter token="sink.addTest(domimplementationgetfeature" value="//sink.addTest(domimplementationgetfeature"/>
+      <replacefilter token="sink.addTest(documentgetinputencoding" value="//sink.addTest(documentgetinputencoding"/>
+      <replacefilter token="sink.addTest(documentgetstrict" value="//sink.addTest(documentgetstrict"/>
+      <replacefilter token="sink.addTest(documentsetstrict" value="//sink.addTest(documentsetstrict"/>
+      <replacefilter token="sink.addTest(documentgetdocumenturi" value="//sink.addTest(documentgetdocumenturi"/>
+      <replacefilter token="sink.addTest(documentsetdocumenturi" value="//sink.addTest(documentsetdocumenturi"/>
+      <replacefilter token="sink.addTest(documentnormalizedocument" value="//sink.addTest(documentnormalizedocument"/>
+      <replacefilter token="sink.addTest(documentrenamenode" value="//sink.addTest(documentrenamenode"/>
+      <replacefilter token="sink.addTest(nodegetbaseuri" value="//sink.addTest(getbaseuri"/>
+      <replacefilter token="sink.addTest(nodecomparedocumentposition" value="//sink.addTest(nodecompareposition"/>
+      <replacefilter token="sink.addTest(nodeisequal" value="//sink.addTest(nodeisequal"/>
+      <replacefilter token="sink.addTest(nodelookup" value="//sink.addTest(nodelookup"/>
+      <replacefilter token="sink.addTest(nodeisdefault" value="//sink.addTest(nodeisdefault"/>
+      <replacefilter token="sink.addTest(attrisid" value="//sink.addTest(attrisid"/>
+      <replacefilter token="sink.addTest(elementsetid" value="//sink.addTest(elementsetid"/>
+      <replacefilter token="sink.addTest(elementiselement" value="//sink.addTest(elementiselement"/>
+      <replacefilter token="sink.addTest(textwholetext" value="//sink.addTest(textwholetext"/>
+      <replacefilter token="sink.addTest(textreplacewholetext" value="//sink.addTest(textreplacewholetext"/>
+      <replacefilter token="sink.addTest(textiselementcontent" value="//sink.addTest(textiselementcontent"/>
+      <replacefilter token="sink.addTest(domconfig" value="//sink.addTest(domconfig"/>
+      <replacefilter token="sink.addTest(domstringlist" value="//sink.addTest(domstringlist"/>
+      <replacefilter token="sink.addTest(entitygetinput" value="//sink.addTest(elementgetinput"/>
+      <replacefilter token="sink.addTest(entitygetxml" value="//sink.addTest(elementgetxml"/>
+      <replacefilter token="sink.addTest(nodesettext" value="//sink.addTest(nodesettext"/>
+	</replace> 
+
+
+	<delete>
+		<fileset dir="${java.build.dir}" includes="org/w3c/dom/**/*.class"/>
+	</delete>
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${xdk10.lib.dir}/xmlparserv2.jar;${java.build.dir}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <include name="org/w3c/domts/level3/core/*"/>
+        <include name="org/w3c/domts/*"/>
+        <exclude name="org/w3c/domts/level3/core/domimplementationgetfeature*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentgetinputencoding*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentgetstrict*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentsetstrict*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentgetdocumenturi*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentsetdocumenturi*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentnormalizedocument*.java"/>
+        <exclude name="org/w3c/domts/level3/core/documentrenamenode*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodegetbaseuri*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodesettext*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodecomparedocumentposition*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodeisequal*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodelookup*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodeisdefault*.java"/>
+        <exclude name="org/w3c/domts/level3/core/attrisid*.java"/>
+        <exclude name="org/w3c/domts/level3/core/elementsetid*.java"/>
+        <exclude name="org/w3c/domts/level3/core/textiselementcontent*.java"/>
+        <exclude name="org/w3c/domts/level3/core/textwholetext*.java"/>
+        <exclude name="org/w3c/domts/level3/core/textreplacewholetext*.java"/>
+        <exclude name="org/w3c/domts/level3/core/domconfig*.java"/>
+        <exclude name="org/w3c/domts/level3/core/domstringlist*.java"/>
+        <exclude name="org/w3c/domts/level3/core/entitygetinput*.java"/>
+        <exclude name="org/w3c/domts/level3/core/entitygetxml*.java"/>
+        <exclude name="org/w3c/domts/level3/core/nodesettext*.java"/>
+    </javac>
+	<antcall target="jar">
+		<param name="level" value="3"/>
+		<param name="module" value="core"/>
+		<param name="jarfile" value="dom3-core-xdk.jar"/>
+	</antcall>
+</target>
 
 
 
@@ -2020,7 +2183,7 @@ All implementation conditions combined into implementationAttribute element
     </javac>
 </target>
 
-<target name="dom3-events-jar" depends="dom3-events-javac">
+<target name="dom3-events-jar" depends="dom3-events-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="events"/>
@@ -2130,7 +2293,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-ls-jar" depends="dom3-ls-javac">
+<target name="dom3-ls-jar" depends="dom3-ls-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="ls"/>
@@ -2306,7 +2469,7 @@ All implementation conditions combined into implementationAttribute element
     </javac>
 </target>
 
-<target name="dom3-xpath-jar" depends="dom3-xpath-javac">
+<target name="dom3-xpath-jar" depends="dom3-xpath-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="xpath"/>
@@ -2414,7 +2577,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="dom3-val-jar" depends="dom3-val-javac">
+<target name="dom3-val-jar" depends="dom3-val-javac,get-xhtml1-dtd">
 	<antcall target="jar">
 		<param name="level" value="3"/>
 		<param name="module" value="validation"/>
