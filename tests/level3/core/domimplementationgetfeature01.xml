@@ -29,7 +29,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	with the primary core DOMImplementation such as hasFeature, getFeature, etc. 
 	
 	Invoke getFeature method on this DOMImplementation with the value of the feature parameter
-	as Core and version as 1.0.  This should return a DOMImplmentation object that's not null.
+	as Core and version as 2.0.  This should return a DOMImplmentation object that's not null.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
@@ -40,6 +40,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="domImplReturned" type="DOMImplementation"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation obj="doc" var="domImpl"/>
-<getFeature var="domImplReturned" obj="domImpl" feature='"Core"' version='"1.0"' interface="DOMImplementation"/>
+<getFeature var="domImplReturned" obj="domImpl" feature='"Core"' version='"2.0"' interface="DOMImplementation"/>
 <assertNotNull actual="domImplReturned" id="domimplementationgetfeature01" />
 </test>
