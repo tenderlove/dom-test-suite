@@ -25,7 +25,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     For nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE,
     this is always null.
     
-    Retrieve the first emp:employee node and get the first child of this node.
+    Retrieve the first emp:employeeId node and get the first child of this node.
     Since the first child is Text node invoking the "getPrefix()"   
     method will cause "null" to be returned. 
 </description>
@@ -39,9 +39,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="textNode" type="Node"/>
 <var name="prefix" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"emp:employeeId"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <firstChild interface="Node" obj="testEmployee" var="textNode"/>
 <prefix obj="textNode" var="prefix"/>
-<assertNull actual="prefix" id="throw_Null"/>
+<assertNull actual="prefix" id="textNodePrefix"/>
 </test>
