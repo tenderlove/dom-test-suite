@@ -87,6 +87,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLDocument10.xml"/>
      <suite.member href="HTMLDocument11.xml"/>
      <suite.member href="HTMLDocument12.xml"/>
+     <suite.member href="HTMLDocument13.xml"/>
+     <suite.member href="HTMLDocument14.xml"/>
      <suite.member href="HTMLElement01.xml"/>
      <suite.member href="HTMLElement02.xml"/>
      <suite.member href="HTMLElement03.xml"/>
