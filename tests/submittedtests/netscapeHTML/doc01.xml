@@ -20,10 +20,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>HTMLDocument title</title>
 <creator>Netscape</creator>
 <description>
-
+Retrieve the title attribute of HTMLDocument and examine it's value.  
 </description>
 <contributor>Sivakiran Tummala</contributor>
-    Retrieve the title attribute of HTMLDocument and examine it's value.  
 <date qualifier="created">2002-02-08</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html.html"/>
 </metadata>
