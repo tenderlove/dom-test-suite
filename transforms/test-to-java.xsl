@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.34  2003-02-04 05:51:35  dom-ts-4
+Revision 1.35  2003-02-10 05:04:54  dom-ts-4
+Removed spurious brace from production for assertFalse
+
+Revision 1.34  2003/02/04 05:51:35  dom-ts-4
 Added contains condition
 
 Revision 1.33  2003/02/02 21:38:03  dom-ts-4
@@ -967,17 +970,6 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:value-of select="@actual"/>
             <xsl:text>);
       </xsl:text>
-            <xsl:if test="*">
-                <xsl:text>if (</xsl:text>
-                <xsl:value-of select="@actual"/>
-                <xsl:text>) {
-      </xsl:text>
-                <xsl:apply-templates mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>}
-      </xsl:text>
-            </xsl:if>
         </xsl:when>
         <xsl:otherwise>
             <xsl:text>assertTrue("</xsl:text>
@@ -986,19 +978,6 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:apply-templates select="*[1]" mode="condition"/>
             <xsl:text>);
       </xsl:text>
-            <xsl:if test="count(*) &gt; 1">
-                <xsl:text>
-   if (</xsl:text>
-                <xsl:apply-templates select="*[1]" mode="condition"/>
-                <xsl:text>) {
-      </xsl:text>
-                <xsl:apply-templates select="*[position() &gt; 1]" mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>
-    }
-      </xsl:text>
-            </xsl:if>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -1016,33 +995,14 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:value-of select="@actual"/>
             <xsl:text>);
 </xsl:text>
-            <xsl:if test="*">
-                <xsl:text>if (!</xsl:text>
-                <xsl:value-of select="@actual"/>
-                <xsl:text>) {</xsl:text>
-                <xsl:apply-templates mode="body">
-                    <xsl:with-param name="vardefs" select="$vardefs"/>
-                </xsl:apply-templates>
-                <xsl:text>}
-</xsl:text>
-            </xsl:if>
         </xsl:when>
         <xsl:otherwise>
-            {
             <xsl:text>assertFalse("</xsl:text>
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:apply-templates select="*[1]" mode="condition"/>
             <xsl:text>);
 </xsl:text>
-            <xsl:if test="count(*) &gt; 1">
-    if (!<xsl:apply-templates select="*[1]" mode="condition"/>) {
-<xsl:apply-templates mode="body">
-    <xsl:with-param name="vardefs" select="$vardefs"/>
-</xsl:apply-templates>
-
-    }
-</xsl:if>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -1055,16 +1015,6 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:value-of select="@actual"/>
     <xsl:text>);
       </xsl:text>
-    <xsl:if test="*">
-        <xsl:text>if (</xsl:text>
-        <xsl:value-of select="@actual"/>
-        <xsl:text> == null) {</xsl:text>
-        <xsl:apply-templates mode="body">
-            <xsl:with-param name="vardefs" select="$vardefs"/>
-        </xsl:apply-templates>
-        <xsl:text>}
-      </xsl:text>
-    </xsl:if>
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertNotNull']" mode="body">
