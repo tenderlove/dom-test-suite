@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 Copyright (c) 2001 World Wide Web Consortium,
@@ -190,7 +191,9 @@ sorted alphabetically.
                 <!--  the copyright notice placed in the output file.    -->
 		
 			<br />
-			<xsl:text>Tests in this table are released under the the following license:</xsl:text>
+			<xsl:text>Tests in this table are released under the <a 
+href="resources/COPYRIGHT.html>"W3C Software 
+Copyright Notice and License</a>:</xsl:text>
 			<br />
 			<xsl:text>Copyright (c) 2001 World Wide Web Consortium,
 			(Massachusetts Institute of Technology, Institut National de
