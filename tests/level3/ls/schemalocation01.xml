@@ -46,7 +46,7 @@ Validate a document with no DTD against an externally specified schema that matc
 <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
-<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='xsdND'/>
+<canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='xsdNS'/>
 <getResourceURI var="resourceURI" href='"validateschema1"' contentType="text/xml"/>
 <canSetParameter var="canSetSchemaLocation" obj="domConfig" name='"schema-location"' value="resourceURI"/>
 <if>

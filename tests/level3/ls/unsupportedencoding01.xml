@@ -16,39 +16,34 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="wellformed03">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="unsupportedencoding01">
 <metadata>
-<title>wellformed03</title>
+<title>checkcharacternormalization02</title>
 <creator>Curt Arnold</creator>
 <description>
-Load a document with an invalid character in an attribute value, should throw a PARSE_ERR and 
-dispatch a DOMError with type 'wf-invalid-character'.
+Parsing a document with a unsupported encoding should raise a PARSE_ERR and dispatch a "unsupported-encoding"
+DOM error.
 </description>
-<date qualifier="created">2004-03-29</date>
+<date qualifier="created">2004-03-31</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="elem" type="Element"/>
-<var name="node" type="Node"/>
-<var name="nodeName" type="DOMString"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="domImplLS" type="DOMImplementationLS"/>
 <var name="lsParser" type="LSParser"/>
-<var name="nullSchemaType" type="DOMString" isNull="true"/>
 <var name="resourceURI" type="DOMString"/>
+<var name="nullSchemaLanguage" type="DOMString" isNull="true"/>
 <var name="errorMonitor" type="DOMErrorMonitor"/>
 <var name="errors" type="List"/>
 <var name="error" type="DOMError"/>
-<var name="errorCount" type="int" value="0"/>
 <var name="severity" type="int"/>
 <var name="type" type="DOMString"/>
+<var name="errorCount" type="int" value="0"/>
 <implementation var="domImplLS"/>
-<createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
+<createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaLanguage"/>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
-<setParameter obj="domConfig" name='"well-formed"' value="true"/>
 <setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
-<getResourceURI var="resourceURI" href='"wellformed3"' contentType="text/xml"/>
+<getResourceURI var="resourceURI" href='"unsupportedencoding1"' contentType="text/xml"/>
 <assertLSException id="throw_PARSE_ERR">
 	<PARSE_ERR>
 		<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
@@ -56,13 +51,14 @@ dispatch a DOMError with type 'wf-invalid-character'.
 </assertLSException>
 <allErrors var="errors" obj="errorMonitor"/>
 <for-each member="error" collection="errors">
-	<type interface="DOMError" var="type" obj="error"/>
 	<severity var="severity" obj="error"/>
-	<if><equals actual="type" expected='"wf-invalid-character"' ignoreCase="false"/>
-		<assertEquals actual="severity" expected="2" id="severityError" ignoreCase="false"/>
+	<type var="type" obj="error" interface="DOMError"/>
+	<if><equals actual="type" expected='"unsupported-encoding"' ignoreCase="true"/>
+		<assertEquals actual="severity" expected="3" id="isError"/>
 		<increment var="errorCount" value="1"/>
 	</if>
 </for-each>
-<assertEquals actual="errorCount" expected="1" ignoreCase="false" id="oneWFError"/>
+<assertEquals actual="errorCount" expected="1" ignoreCase="false" id="oneError"/>
 </test> 
+ 
  

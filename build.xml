@@ -119,6 +119,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <copy todir="${build.dir}/ecmascript/level${level}/${module}/files">
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
     </copy>
+    <copy todir="${build.dir}/ecmascript/level${level}/${module}/files/subdir">
+		<fileset dir="tests/level${level}/${module}/files/subdir" excludes="*.bak"/>
+    </copy>
     <!--  copy XHTML 1.0 DTD's to output directory   -->
     <copy todir="${build.dir}/ecmascript/level${level}/${module}/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
@@ -386,7 +389,7 @@ This target checks that the output of that implied transform is valid HTML
 		 basedir="${java.build.dir}"
 		 includes="org/w3c/domts/* org/w3c/domts/level${level}/${module}/* org/w3c/dom/* org/w3c/dom/${module}/*"
 		 excludes="*.bak">
-		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
+		<fileset dir="tests/level${level}/${module}/files" includes="**/*" excludes="*.bak"/>
 		<fileset dir="java" includes="org/w3c/domts/*.java"/>
         <fileset dir="java" includes="org/**/*.java"/>
 	</jar>
@@ -2711,6 +2714,7 @@ This target checks that the output of that implied transform is valid HTML
 			<exclude name="canonicalform02.xml"/>
 			<exclude name="canonicalform03.xml"/>
 			<exclude name="wellformed*.xml"/>			
+			<exclude name="unsupportedencoding1.xml"/>
 		</fileset>  
 	</xmlvalidate>
 </target>

@@ -60,7 +60,7 @@ characters are normalized.
 <firstChild var="text" obj="pElem" interface="Node"/>
 <nodeValue var="textValue" obj="text"/>
 <assertEquals actual="textValue" expected='"barsu&#xE7;on"' 
-	ignoreCase="false" id="noCharNormalization"/> 
+	ignoreCase="false" id="charNormalized"/> 
 </if>
 </test> 
  

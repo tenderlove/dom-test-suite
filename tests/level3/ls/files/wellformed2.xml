@@ -3,6 +3,6 @@
 <html>
 	<head><title>Not well-formed</title></head>
 	<body>
-		<p 4world='bad name'/>
+		<p wor×ld='bad name'/>
 	</body>
 </html>
