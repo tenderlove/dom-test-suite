@@ -13,5 +13,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE suite SYSTEM "dom3.dtd">
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
+<metadata>
+<title>DOM Level 3 Events Test Suite</title>
+</metadata>
      <suite.member href="hasFeature01.xml"/>
 </suite>

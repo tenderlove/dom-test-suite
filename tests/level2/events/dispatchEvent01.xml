@@ -2,7 +2,7 @@
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -20,8 +20,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>dispatchEvent01</title>
 <creator>Curt Arnold</creator>
 <description>
-A null reference is passed to EventTarget.dispatchEvent().  Should raise implementation
-specific exception per file:///D:/apache-xml/2001/DOM-Test-Suite/lib/specs/Level-2/Core/core.html#ID-17189187
+A null reference is passed to EventTarget.dispatchEvent(), should raise implementation
+or platform exception.
 </description>
 <date qualifier="created">2002-05-30</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Events/events#Events-EventTarget-dispatchEvent"/>
@@ -32,7 +32,7 @@ specific exception per file:///D:/apache-xml/2001/DOM-Test-Suite/lib/specs/Level
 <var name="evt" type="Event" isNull="true"/>
 <var name="preventDefault" type="boolean"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<assertImplementationException id="implException">
+<assertImplementationException id="throw_ImplException">
     <dispatchEvent var="preventDefault" obj="doc" evt="evt"/>
 </assertImplementationException>
 </test>

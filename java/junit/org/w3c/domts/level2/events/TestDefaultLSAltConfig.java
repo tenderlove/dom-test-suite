@@ -9,7 +9,7 @@
  * http://www.w3.org/Consortium/Legal/ for more details.
  */
 
-package org.w3c.domts.level2.core;
+package org.w3c.domts.level2.events;
 
 import java.lang.reflect.Constructor;
 

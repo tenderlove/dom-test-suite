@@ -12,6 +12,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE suite SYSTEM "dom2.dtd">
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="alltests">
+<metadata>
+<title>DOM Level 2 Core Test Suite</title>
+</metadata>
 	 <suite.member href="attrgetownerelement01.xml"/>
      <suite.member href="attrgetownerelement02.xml"/>
      <suite.member href="attrgetownerelement03.xml"/>

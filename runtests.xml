@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.10  2004-03-09 21:16:41  dom-ts-4
+Revision 1.11  2004-03-10 07:34:01  dom-ts-4
+ECMAScript support for Events test suite (bug 483)
+
+Revision 1.10  2004/03/09 21:16:41  dom-ts-4
 LS test loader by reflection, now can be used for L1/L2 tests (bug 571)
 
 Revision 1.9  2004/02/25 06:30:29  dom-ts-4
@@ -765,6 +768,137 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
         <param name="resultsURL" expression="${results.dir}/dom2-core-results.xml"/>
 	</style>
 </target>
+
+
+
+<target name="dom2-events-xerces1">
+	<antcall target="run-xerces1">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces1-alt">
+	<antcall target="run-xerces1">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces2">
+	<antcall target="run-xerces2">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces2-alt">
+	<antcall target="run-xerces2">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+
+<target name="dom2-events-xerces2_svg">
+	<antcall target="run-xerces2_svg">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces2_svg-alt">
+	<antcall target="run-xerces2_svg">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+
+<target name="dom2-events-xerces2_xhtml">
+	<antcall target="run-xerces2_xhtml">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces2_xhtml-alt">
+	<antcall target="run-xerces2_xhtml">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces_dom3">
+	<antcall target="run-xerces_dom3">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces_dom3-alt">
+	<antcall target="run-xerces_dom3">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+
+<target name="dom2-events-batik">
+	<antcall target="run-batik">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces_ls">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+	</antcall>
+</target>
+
+<target name="dom2-events-xerces_ls-alt">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="2"/>
+		<param name="module" value="events"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+
+<target name="dom2-events-all"
+	depends="dom2-events-xerces1, 
+		     dom2-events-xerces1-alt,
+		     dom2-events-xerces2,
+		     dom2-events-xerces2-alt, 
+		     dom2-events-xerces_dom3,
+		     dom2-events-xerces_dom3-alt, 
+	         dom2-events-batik,
+	         dom2-events-xerces2_svg,
+	         dom2-events-xerces2_svg-alt,
+	         dom2-events-xerces2_xhtml,
+	         dom2-events-xerces2_xhtml-alt"/>
+	         
+<target name="dom2-events-results" depends="dom2-events-all">	         
+	<copy file="${transforms.dir}/dom2-events-results.xml" todir="${results.dir}"/>
+	<style in="${test.dir}/dom2-events-metadata.rdf" 
+		   out="${results.dir}/dom2-events-results.html" 
+	       style="${transforms.dir}/results-matrix.xsl" force="true">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/DOM-Level-2-Events/events#"/>
+        <param name="interfacesURL" expression="dom2-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom2-events-subjects.xml"/>
+        <param name="title" expression='DOM Level 2 Events Test Results'/>
+        <param name="resultsURL" expression="${results.dir}/dom2-events-results.xml"/>
+	</style>
+</target>
+
 
 
 

@@ -295,6 +295,32 @@ function checkInitialization(blder, testname) {
 }
 
 
+function EventMonitor() {
+  this.atEvents = new Array();
+  this.bubbledEvents = new Array();
+  this.capturedEvents = new Array();
+  this.allEvents = new Array();
+}
+
+EventMonitor.prototype.handleEvent = function(evt) {
+    switch(evt.eventPhase) {
+       case 1:
+       monitor.capturedEvents[monitor.capturedEvents.length] = evt;
+       break;
+       
+       case 2:
+       monitor.atEvents[monitor.atEvents.length] = evt;
+       break;
+
+       case 3:
+       monitor.bubbledEvents[monitor.bubbledEvents.length] = evt;
+       break;
+    }
+    monitor.allEvents[monitor.allEvents.length] = evt;
+}
+
+
+
 function IFrameBuilder() {
     this.contentType = "text/html";
     this.supportedContentTypes = [ "text/html", 
@@ -341,7 +367,6 @@ IFrameBuilder.prototype.preload = function(frame, varname, url) {
   	if (url.substring(0,5) == "staff" || url == "nodtdstaff" || url == "datatype_normalization") {
     	throw "Tests using staff or nodtdstaff are not supported by HTML processors";
   	}  
-  	return 1;
   }
   var iframe = document.createElement("iframe");
   var srcname = url + getSuffix(this.contentType);

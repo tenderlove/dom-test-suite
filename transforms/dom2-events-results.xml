@@ -1,0 +1,48 @@
+<!DOCTYPE results [
+<!ENTITY dom2-events-xerces1 SYSTEM 'dom2-events-xerces1.xml'>
+<!ENTITY dom2-events-xerces1-alt SYSTEM 'dom2-events-xerces1AltConfig.xml'>
+<!ENTITY dom2-events-xerces2 SYSTEM 'dom2-events-xerces2.xml'>
+<!ENTITY dom2-events-xerces2-alt SYSTEM 'dom2-events-xerces2AltConfig.xml'>
+<!ENTITY dom2-events-xerces2_svg SYSTEM 'dom2-events-xerces2_svg.xml'>
+<!ENTITY dom2-events-xerces2_svg-alt SYSTEM 'dom2-events-xerces2_svgAltConfig.xml'>
+<!ENTITY dom2-events-xerces2_xhtml SYSTEM 'dom2-events-xerces2_xhtml.xml'>
+<!ENTITY dom2-events-xerces2_xhtml-alt SYSTEM 'dom2-events-xerces2_xhtmlAltConfig.xml'>
+<!ENTITY dom2-events-xerces_dom3 SYSTEM 'dom2-events-xerces_dom3.xml'>
+<!ENTITY dom2-events-xerces_dom3-alt SYSTEM 'dom2-events-xerces_dom3AltConfig.xml'>
+<!ENTITY dom2-events-batik SYSTEM 'dom2-events-batik.xml'>
+]>
+<results>
+<implementation name="Xerces-J 2.6.0">
+&dom2-events-xerces2;
+</implementation>
+<implementation name="Xerces-J 2.6.0 Alt">
+&dom2-events-xerces2-alt;
+</implementation>
+<implementation name="Batik 1.5">
+&dom2-events-batik;
+</implementation>
+<implementation name="Xerces-J 2.6.0 SVG">
+&dom2-events-xerces2_svg;
+</implementation>
+<implementation name="Xerces-J 2.6.0 SVG Alt">
+&dom2-events-xerces2_svg-alt;
+</implementation>
+<implementation name="Xerces-J 2.6.0 XHTML">
+&dom2-events-xerces2_xhtml;
+</implementation>
+<implementation name="Xerces-J 2.6.0 XHTML Alt">
+&dom2-events-xerces2_xhtml-alt;
+</implementation>
+<implementation name="Xerces-J 1.4.4">
+&dom2-events-xerces1;
+</implementation>
+<implementation name="Xerces-J 1.4.4 Alt">
+&dom2-events-xerces1-alt;
+</implementation>
+<implementation name="Xerces-J CVS DOM3">
+&dom2-events-xerces_dom3;
+</implementation>
+<implementation name="Xerces-J CVS DOM3">
+&dom2-events-xerces_dom3-alt;
+</implementation>
+</results>

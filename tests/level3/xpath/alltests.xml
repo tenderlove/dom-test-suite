@@ -17,6 +17,9 @@
   %entities;
 ]>
 <suite xmlns="&level3;" name="alltests">
+	<metadata>
+		<title>DOM Level 3 XPath Test Suite</title>
+	</metadata>
      <suite.member href="XPathEvaluatorCast01.xml"/>
      <suite.member href="Element_Nodes.xml"/>
      <suite.member href="Attribute_Nodes.xml"/>

@@ -17,6 +17,9 @@ PURPOSE.
 <!DOCTYPE suite SYSTEM "dom3.dtd">
 
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
+	<metadata>
+		<title>DOM Level 3 Validation Test Suite</title>
+	</metadata>
    <suite.member href="allowedAttributes.xml"/>
    <suite.member href="allowedChildren.xml"/>
    <suite.member href="allowedFirstChildren.xml"/>

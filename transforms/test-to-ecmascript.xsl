@@ -93,6 +93,16 @@ The source document contained the following notice:
 <!--   when encountering a test   -->
 <xsl:template match="*[local-name()='test']">
 
+	<xsl:if test="*[local-name() = 'var' and @type='EventMonitor' and @name='monitor']">
+		<xsl:text>//EventMonitor's require a document level variable named monitor
+var monitor;
+	 </xsl:text>
+	</xsl:if>
+
+	<!--   create anonymous inner classes  -->	
+<xsl:apply-templates mode="innerClass" select="*[local-name() = 'var'  and *[local-name() != 'member']]"/>
+	
+
 <!--  if there is a metadata child element then
           produce documentation comments    -->
     <xsl:apply-templates select="*[local-name()='metadata']"/>
@@ -227,16 +237,23 @@ The source document contained the following notice:
 	test framework constructs
 
 -->
-<xsl:template match="*[local-name()='var']" mode="body">
+<xsl:template match="*[local-name()= 'var']" mode="body">
 	<xsl:variable name="varname" select="@name"/>
-	<xsl:text>var </xsl:text>
+	<xsl:choose>
+		<!-- EventMonitors, anon inner classes have document scope   -->
+		<xsl:when test="@type = 'EventMonitor'"/>
+		<xsl:when test="*"/>
+		<xsl:otherwise>
+			<xsl:text>var </xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
 	<xsl:value-of select="$varname"/>
 	<xsl:choose>
                 <xsl:when test="@isNull='true'">
                   <xsl:text> = null;
 </xsl:text>
                 </xsl:when>
-		<!--  explict value, just add it  -->
+		<!--  explicit value, just add it  -->
 		<xsl:when test="@value"> = <xsl:apply-templates select="@value"/>;</xsl:when>
 		<!--  member, allocate collection or list and populate it  -->
 		<xsl:when test="@type='List' or @type='Collection'">
@@ -253,11 +270,44 @@ The source document contained the following notice:
 </xsl:text>
 			</xsl:for-each>
 		</xsl:when>
-		<!--  virtual method  -->
+		
+        <!--  event monitor type implies constructor    -->
+        <xsl:when test="@type='EventMonitor'">
+        	<xsl:if test="@var != 'monitor'">
+        		<xsl:message>EventMonitors must be named monitor</xsl:message>
+        		<xsl:text>; fail("EventMonitors must be named monitor");
+      </xsl:text>
+        	</xsl:if>
+            <xsl:text> = new EventMonitor();
+      </xsl:text>
+        </xsl:when>
+
+
+        <!--  DOMErrorMonitor type implies constructor    -->
+        <xsl:when test="@type='DOMErrorMonitor'">
+            <xsl:text> = new DOMErrorMonitor();
+      </xsl:text>
+        </xsl:when>
+
+
+        <!--  UserDataMonitor type implies constructor    -->
+        <xsl:when test="@type='UserDataMonitor'">
+            <xsl:text> = new UserDataMonitor();
+      </xsl:text>
+        </xsl:when>
+		
+		<!--  virtual method indicates anonymous inner class, 
+		       which the ECMAScript does as an external class  -->
 		<xsl:when test="*">
-			<xsl:text> = new </xsl:text><xsl:apply-templates select="@type"/> {
-				<xsl:apply-templates mode="anonInner"/>
-			};
+			<xsl:text> = new </xsl:text>
+			<xsl:value-of select="concat(@type, generate-id(.))"/>
+			<xsl:text>(</xsl:text>
+				<xsl:for-each select="*[local-name() = 'var' and @value]">
+					<xsl:if test="position() &gt; 1">, </xsl:if>
+					<xsl:value-of select="@value"/>
+				</xsl:for-each>
+			<xsl:text>);
+	  </xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>;</xsl:text>
@@ -266,6 +316,19 @@ The source document contained the following notice:
 	<xsl:text>
       </xsl:text>
 </xsl:template>
+
+<xsl:template match="*[local-name()='addEventListener' or local-name() = 'removeEventListener']" mode="body">
+	<xsl:value-of select="@obj"/>
+	<xsl:value-of select="concat('.', concat(local-name(), '('))"/>
+	<xsl:value-of select="@type"/>
+	<xsl:text>, </xsl:text>
+	<xsl:value-of select="@listener"/>
+	<xsl:text>.handleEvent, </xsl:text>
+	<xsl:value-of select="@useCapture"/>
+	<xsl:text>);
+	 </xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='comment']" mode="body">
 	<xsl:text>/* </xsl:text>
@@ -382,17 +445,6 @@ The source document contained the following notice:
 </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[local-name()='handleEvent']" mode="anonInner">
-<xsl:text>boolean handleEvent(
-		org.w3c.dom.events.EventListener listener, 
-		org.w3c.dom.events.Events evt,
-		org.w3c.dom.events.EventTarget currentTarget,
-		Object userObj) {
-</xsl:text>
-	<xsl:apply-templates mode="body"/>
-<xsl:text>}
-</xsl:text>
-</xsl:template>
 
 <xsl:template match="*[local-name()='implementation']" mode="body">
 	<xsl:value-of select="@var"/>
@@ -647,7 +699,7 @@ The source document contained the following notice:
 
 <xsl:template match="*[local-name()='assertEquals']" mode="body">
     <xsl:variable name="expected" select="@expected"/>
-    <xsl:variable name="expectedType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $expected]/@type"/>
+    <xsl:variable name="expectedType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var'  and @name = $expected]/@type"/>
     <xsl:text>assertEquals</xsl:text>
     <xsl:choose>
         <xsl:when test="$expectedType = 'Collection'">Collection</xsl:when>
@@ -821,27 +873,75 @@ The source document contained the following notice:
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='EventMonitor.setUserObj']" mode="body">
-	<xsl:value-of select="@obj"/>.setUserObj(<xsl:value-of select="@userObj"/>);
-</xsl:template>
 
-<xsl:template match="*[local-name()='EventMonitor.getAtEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getAtEvents();
+<xsl:template match="*[local-name()='atEvents']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.atEvents;
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='EventMonitor.getCaptureEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getCaptureEvents();
+<xsl:template match="*[local-name()='capturedEvents']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.capturedEvents;
 </xsl:template>
 
-<xsl:template match="*[local-name()='EventMonitor.getBubbleEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getBubbleEvents();
+<xsl:template match="*[local-name()='bubbledEvents']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.bubbledEvents;
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='EventMonitor.getAllEvents']" mode="body">
-	<xsl:value-of select="@var"/> = <xsl:value-of select="@monitor"/>.getAddEvents();
+<xsl:template match="*[local-name()='allEvents']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.allEvents;
 </xsl:template>
+
+<xsl:template match="*[local-name()='allNotifications']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.allNotifications;
+</xsl:template>
+
+<xsl:template match="*[local-name()='operation']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.operation;
+</xsl:template>
+
+<xsl:template match="*[local-name()='key']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.key;
+</xsl:template>
+
+<xsl:template match="*[local-name()='src' and @interface='UserDataNotification']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.src;
+</xsl:template>
+
+<xsl:template match="*[local-name()='dst']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.dst;
+</xsl:template>
+
+<xsl:template match="*[local-name()='allErrors']" mode="body">
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.allErrors;
+</xsl:template>
+
+<xsl:template match="*[local-name()='assertLowerSeverity']" mode="body">
+    <xsl:value-of select="@obj"/>
+    <xsl:text>.assertLowerSeverity(this, "</xsl:text>
+    <xsl:value-of select="@id"/>
+    <xsl:choose>
+    	<xsl:when test="@severity = 'SEVERITY_WARNING'">", 1</xsl:when>
+    	<xsl:when test="@severity = 'SEVERITY_FATAL_ERROR'">", 3</xsl:when>
+    	<xsl:otherwise>", 2</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>);
+     </xsl:text>
+</xsl:template>
+
+
+<xsl:template match="*[local-name()='data' and @interface='UserDataNotification']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:value-of select="@var"/>
+    <xsl:text> = </xsl:text>
+    <xsl:call-template name="retval-cast">
+        <xsl:with-param name="variable" select="@var"/>
+        <xsl:with-param name="vartype" select="$vardefs[@name = current()/@var]/@type"/>
+        <xsl:with-param name="rettype" select="'DOMUserData'"/>
+    </xsl:call-template>
+    <xsl:value-of select="@obj"/>.getData();
+</xsl:template>
+
 
 <xsl:template name="produce-type">
 	<xsl:param name="type"/>
@@ -901,6 +1001,27 @@ function handleEvent(listener, event, userObj) {
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='assertEventException']" mode="body">
+    <xsl:text>
+	{
+		success = false;
+		try {
+            </xsl:text>
+	<xsl:apply-templates select="*/*" mode="body"/>
+    <xsl:text>  }
+		catch(ex) {            
+      success = (typeof(ex.code) != 'undefined' &amp;&amp; ex.code == </xsl:text>		            
+    <xsl:variable name="excode" select="local-name(*)"/>
+	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
+	<xsl:text>);
+		}
+		assertTrue("</xsl:text>
+	<xsl:value-of select="@id"/>
+	<xsl:text>",success);
+	}
+</xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='assertLSException']" mode="body">
     <xsl:text>
@@ -944,6 +1065,23 @@ function handleEvent(listener, event, userObj) {
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='assertImplementationException']" mode="body">
+    <xsl:param name="vardefs"/>
+      {
+         success = false;
+         try {
+            <xsl:apply-templates mode="body"/>
+            <xsl:text>
+      } catch (ex) {
+    	 success = true;
+      }
+      assertTrue("</xsl:text>
+      <xsl:value-of select="@id"/><xsl:text>", success);
+	}
+      </xsl:text>
+</xsl:template>
+
+
 <xsl:template match="text()" mode="body"/>
 
 <xsl:template match="*" mode="body">
@@ -965,6 +1103,8 @@ function handleEvent(listener, event, userObj) {
 
 				<xsl:otherwise>
 					<xsl:message>Unrecognized element <xsl:value-of select="local-name(.)"/></xsl:message>
+					<xsl:text>fail("Unrecognized method or attribute </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>");
+</xsl:text>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:otherwise>
@@ -1344,6 +1484,144 @@ function handleEvent(listener, event, userObj) {
     <xsl:value-of select="@var"/>
     <xsl:text> = createTempHttpURI();
       </xsl:text>
+</xsl:template>
+
+
+<xsl:template match="*[local-name() = 'var']" mode="innerClass">
+   <xsl:param name="vardefs"/>
+   <xsl:text>
+     /**
+      *    Inner class implementation for variable </xsl:text>
+   <xsl:value-of select="@name"/>
+   <xsl:text> 
+      */
+var </xsl:text>
+	<xsl:value-of select="@name"/>
+	<xsl:text>;
+
+/**
+        * Constructor
+</xsl:text>
+       <!--  write @param comments for each parameter   -->
+       <xsl:variable name='classFields' select="*[local-name() = 'var']"/>
+        <xsl:for-each select="*[local-name() = 'var'  and @value]">
+        <xsl:text>
+        * @param </xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text> Value from value attribute of nested var element</xsl:text>
+   </xsl:for-each>
+   <xsl:text>
+        */
+	      
+function </xsl:text>
+   <xsl:variable name="className" select="concat(@type, generate-id(.))"/>
+   <xsl:variable name="instanceVar" select="@name"/>
+   <xsl:value-of select="concat($className, '(')"/>
+   <xsl:for-each select="*[local-name() = 'var' and @value]">
+   		<xsl:if test="position() &gt; 1">
+        	<xsl:text>, </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@name"/>
+   </xsl:for-each>
+   <xsl:text>) { 
+           </xsl:text>
+   <xsl:for-each select="*[local-name() = 'var' and @value]">
+        <xsl:text>this.</xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text> = </xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text>;
+           </xsl:text>
+   </xsl:for-each>
+   <xsl:text>}
+   </xsl:text>
+   <xsl:variable name="interface-name" select="@type"/>
+   <xsl:variable name="interface" select="$domspec/library/interface[@name=$interface-name]"/>
+   <xsl:for-each select="*[local-name() != 'var']">
+        <xsl:call-template name="produce-inner-feature">
+            <xsl:with-param name="method-name" select="local-name()"/>
+            <xsl:with-param name="interface" select="$interface"/>
+            <xsl:with-param name="vardefs" select="$vardefs"/>
+            <xsl:with-param name="className" select="$className"/>
+            <xsl:with-param name="instanceVar" select="$instanceVar"/>
+            <xsl:with-param name="classFields" select="$classFields"/>
+        </xsl:call-template>
+   </xsl:for-each>
+</xsl:template>
+
+
+<xsl:template name="produce-inner-feature">
+    <xsl:param name="interface"/>
+    <xsl:param name="method-name"/>
+    <xsl:param name="vardefs"/>
+    <xsl:param name="className"/>
+    <xsl:param name="instanceVar"/>
+    <xsl:param name="classFields"/>
+
+    <xsl:variable name="method-def" select="$interface/method[@name=$method-name]"/>
+        <xsl:choose>
+            <xsl:when test="$method-def">
+                <xsl:text>
+        /**
+         *    </xsl:text><xsl:value-of select="$method-def/descr"/>
+         <xsl:for-each select="$method-def/parameters/param">
+            <xsl:text>
+         * @param </xsl:text><xsl:value-of select="@name"/><xsl:text> </xsl:text><xsl:value-of select="descr"/>
+         </xsl:for-each>
+         <xsl:text>
+         */
+</xsl:text>
+		 <xsl:value-of select="$className"/>
+		 <xsl:text>.prototype.</xsl:text>
+         <xsl:value-of select="$method-def/@name"/>
+         <xsl:text> = function(</xsl:text>
+         <xsl:for-each select="$method-def/parameters/param">
+              <xsl:if test="position() &gt; 1">
+                   <xsl:text>, </xsl:text>
+              </xsl:if>
+              <xsl:value-of select="@name"/>
+         </xsl:for-each>
+         <xsl:text>) {
+         //
+         //   bring class variables into function scope
+         //
+        </xsl:text>
+   <xsl:for-each select="$classFields">
+        <xsl:text>var </xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text> = </xsl:text>
+        <xsl:value-of select="concat($instanceVar, '.')"/>
+        <xsl:value-of select="@name"/>
+        <xsl:text>;
+           </xsl:text>
+   </xsl:for-each>
+
+        <xsl:apply-templates mode="body">
+                    <xsl:with-param name="vardefs" select="*[local-name() = 'var'] | $method-def/parameters/param | preceding-sibling::*[local-name() = 'var']"/>
+        </xsl:apply-templates>
+                <xsl:text>}
+</xsl:text>
+            </xsl:when>
+
+            <!--  not method, possibly an attribute   -->
+            <xsl:when test="$interface/attribute[@name = $method-name]">
+            	<xsl:message terminate="yes">No production for inner class attributes</xsl:message>
+            </xsl:when>
+
+            <xsl:when test="$interface/@inherits">
+                <xsl:call-template name="produce-inner-feature">
+                    <xsl:with-param name="interface" select="$domspec/library/interface[@name=$interface/@inherits]"/>
+                    <xsl:with-param name="method-name" select="$method-name"/>
+    				<xsl:with-param name="className" select="$className"/>
+    				<xsl:with-param name="instanceVar" select="$className"/>
+    				<xsl:with-param name="classFields" select="$classFields"/>
+                </xsl:call-template>
+            </xsl:when>
+
+            <xsl:otherwise>
+                <xsl:message terminate="yes">Method <xsl:value-of select="$method-name"/> not found for interface <xsl:value-of select="$interface/@name"/>.</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
 </xsl:template>
 
 
