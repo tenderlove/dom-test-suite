@@ -1,5 +1,5 @@
 <!ENTITY level3      "http://www.w3.org/2001/DOM-Test-Suite/Level-3">
-<!ENTITY spec        "http://www.w3.org/TR/DOM-Level-3-LS/load-save.html">
+<!ENTITY spec        "http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save">
 <!ENTITY date        "<date qualifier='created'>2002-03-23</date>">
 <!ENTITY contributor "<contributor>X-Hive Corporation</contributor>">
 <!ENTITY creator     "<creator>Jeroen van Rotterdam</creator>">
@@ -27,14 +27,14 @@
 
 
                       <!-- testfiles  -->
-                      <var name='TEST0'   type='DOMString' value='&quot;files/test0.xml&quot;'/>
-                      <var name='TEST1'   type='DOMString' value='&quot;files/test1.xml&quot;'/>
-                      <var name='TEST2'   type='DOMString' value='&quot;files/test2.xml&quot;'/>
-                      <var name='TEST3'   type='DOMString' value='&quot;files/test3.xml&quot;'/>
-                      <var name='TEST4'   type='DOMString' value='&quot;files/test4.xml&quot;'/>
-                      <var name='TEST5'   type='DOMString' value='&quot;files/test5.xml&quot;'/>
-                      <var name='TEST6'   type='DOMString' value='&quot;files/test6.xml&quot;'/>
-                      <var name='TEST7'   type='DOMString' value='&quot;files/test7.xml&quot;'/>
+                      <var name='TEST0'   type='DOMString' value='&quot;test0&quot;'/>
+                      <var name='TEST1'   type='DOMString' value='&quot;test1&quot;'/>
+                      <var name='TEST2'   type='DOMString' value='&quot;test2&quot;'/>
+                      <var name='TEST3'   type='DOMString' value='&quot;test3&quot;'/>
+                      <var name='TEST4'   type='DOMString' value='&quot;test4&quot;'/>
+                      <var name='TEST5'   type='DOMString' value='&quot;test5&quot;'/>
+                      <var name='TEST6'   type='DOMString' value='&quot;test6&quot;'/>
+                      <var name='TEST7'   type='DOMString' value='&quot;test7&quot;'/>
                       <var name='TESTPDF' type='DOMString' value='&quot;test.pdf&quot;'/>
 
                       <implementation var='implementation'/> 

@@ -27,15 +27,14 @@
     <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
 
-  <!-- todo create inputstream -->
-  <var name="myByteStream" type="LSInputStream"/>
+  <var name="myByteStream" type="LSInputStream" value="3C656C74302F3E"/>
   <var name="elementList" type="NodeList"/>
 
   &vars;
   &init;
 
   
-  <byteStream obj="inputSource" var="myByteStream" interface="LSInput"/> 
+  <byteStream obj="inputSource" value="myByteStream" interface="LSInput"/> 
 
   <parse var="document" obj="builder" input="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>

@@ -4,7 +4,7 @@
   <!ELEMENT elt0 (elt1+)>
 
   <!ELEMENT elt1 (#PCDATA)>
-  <!ENTITY ref SYSTEM "files/test5.xml">
+  <!ENTITY ref SYSTEM "test5.xml">
 ]>
    <elt0>
       <elt1>first elt1</elt1>

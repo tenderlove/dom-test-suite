@@ -30,20 +30,26 @@
   <var name="writeResult"  type="boolean"/>
   <var name="elementList"  type="NodeList"/>
   <var name="firstElt3"    type="Node"/>
-  <var name="outputStream" type="LSOutputStream" isNull="true"/>
-  <var name="inputURI"     type="DOMString" value='"output/mytempoutput"'/>
+  <var name="output" type="LSOutput"/>
+  <var name="outputStream" type="LSOutputStream"/>
+  <var name="inputStream"  type="LSInputStream"  isNull="true"/>
+  <var name="resourceURI"  type="DOMString"/>
 
   &vars;
 
   &init;
   <!-- write out only subtree with elt3-->
-  <parseURI  var="document" obj="builder" uri="TEST2"/>
+  <getResourceURI var="resourceURI" href="TEST2"/>
+  <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt3&quot;" var="elementList"/>
   <item interface="NodeList" obj="elementList" var="firstElt3" index="0"/>
+  <createLSOutput var="output" obj="lsImplementation"/>
+  <byteStream obj="output" value="outputStream" interface="LSOutput"/>
 
-
-  <write var="writeResult" obj="writer" destination="outputStream" nodeArg="firstElt3"/> 
-  <parseURI  var="document" obj="builder" uri="inputURI"/>
+  <write var="writeResult" obj="writer" destination="output" nodeArg="firstElt3"/>
+  <assign var="inputStream" value="outputStream"/>
+  <byteStream obj="inputSource" value="inputStream" interface="LSInput"/>
+  <parse  var="document" obj="builder" input="inputSource"/>
  
   <!-- no elt2 may be found --> 
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>

@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.7  2003-06-27 05:36:05  dom-ts-4
+ Revision 1.8  2003-12-02 03:49:29  dom-ts-4
+ Load/save fixup (bug 396)
+
+ Revision 1.7  2003/06/27 05:36:05  dom-ts-4
  contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
 
  Revision 1.6  2003/04/24 05:02:05  dom-ts-4
@@ -141,6 +144,10 @@ public abstract class DOMTest {
     }
     return resolvedURI;
   }
+  
+  public String getResourceURI(String href) throws DOMTestLoadException {
+  	  return resolveURI(href).toString();
+  }
 
   public Document load(String docURI) throws DOMTestLoadException {
 
@@ -152,8 +159,13 @@ public abstract class DOMTest {
   }
 
 
-  public InputStream openStream(String docURI) throws DOMTestLoadException, IOException {
-    return resolveURI(docURI).openStream();
+  public InputStream createStream(String bytes) throws DOMTestLoadException, IOException {
+    int byteCount = bytes.length()/2;
+    byte[] array = new byte[byteCount];
+    for(int i = 0; i < byteCount; i++) {
+        array[i] = Byte.parseByte(bytes.substring(i*2, i*2+2), 16);
+    }
+    return new java.io.ByteArrayInputStream(array);
   }
 
 

@@ -20,14 +20,16 @@
 
 <test xmlns="&level3;" name="DOMEntityResolverTest0">
   <metadata>
-    <title>DOMEntityResolver</title>
+    <title>DOMEntityResolverTest01</title>
     &creator; 
     <description>Simple entity resolver test, see whether all parameters are forwarded to the entity resolver</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMEntityResolver"/>
+    <subject resource="&spec;#LS-LSParser-parseURI"/>
+    <subject resource="&spec;#LS-LSResourceResolver"/>
+    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-property"/>
   </metadata>
 
-
+  <var name="resourceURI" type="DOMString"/>
   <var name="myentityresolver" type="LSResourceResolver"> 
      <resolveResource>
      	<var name="nullInput" type="LSInput" isNull="true"/>
@@ -52,7 +54,8 @@
 
   <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
   
-  <parseURI var="document" obj="builder" uri="TEST6"/>
+  <getResourceURI var="resourceURI" href="TEST6"/>
+  <parseURI var="document" obj="builder" uri="resourceURI"/>
 
 
 </test>

@@ -22,19 +22,16 @@
   <metadata>
     <title>LSInputFilter</title>
     &creator; 
-    <description>LSInputFilter test, this test eliminates all text through whatToShow. All structure should be remained</description> 
+    <description>LSInputFilter test, this test eliminates all text through whatToShow. All structure should remain.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSInputFilter"/>
   </metadata>
 
 
-  <var name="myfilter" type="LSParserFilter"> 
+  <var name="myfilter" type="LSSerializerFilter"> 
      <var name="name" type="DOMString"/>
      &filterVars;
 
-     <startElement>
-     	<return value="FILTER_ACCEPT"/>
-     </startElement>
      <acceptNode>
         <return value="FILTER_REJECT"/>            
      </acceptNode>
@@ -56,7 +53,7 @@
   <var name="elementList"     type="NodeList"/>
   <var name="elt1"            type="Element"/>
   <var name="childs"          type="boolean"/>
-  <var name="attr1"           type="Attr"/>
+  <var name="attr1"           type="DOMString"/>
 
   &vars;
   &init;
@@ -66,7 +63,7 @@
   <parse  var="document" obj="builder" input="inputSource"/>
 
   <!-- apply the filter -->
-  <filter obj="writer" value="myfilter" interface="LSParser"/>
+  <filter obj="writer" value="myfilter" interface="LSSerializer"/>
 
   <!-- serialize result -->
   <writeToString var="writeResult" obj="writer" nodeArg="document"/> 
@@ -81,10 +78,9 @@
   <hasChildNodes obj="elt1" var="childs"/>
   <assertFalse actual="childs" id="nodeHasChilds_elt1"/>
 
-  <!-- tests no child of attr1,  is this correct ??-->
-  <getAttributeNode var="attr1" obj="elt1" name='"attr1"'/>
-  <hasChildNodes obj="attr1" var="childs"/>
-  <assertFalse actual="childs" id="nodeHasChilds_attr1"/>
+  <!--  text content of attribute node (but not attribute) should have been stripped -->
+  <getAttribute var="attr1" obj="elt1" name='"attr1"'/>
+  <assertEquals actual="attr1"  expected='""' ignoreCase="false" id="attr1_value"/>
 
 
 </test>

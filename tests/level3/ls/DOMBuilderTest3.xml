@@ -34,14 +34,16 @@
   <var name="thirdElt"    type="Element"/>
   <var name="nodeName"    type="DOMString"/>
   <var name="returnNode"  type="Node"/>
+  <var name="resourceURI" type="DOMString"/>
 
   &vars;
 
   &init;
 
-  <parseURI  var="document" obj="builder" uri="TEST0"/>
+  <getResourceURI var="resourceURI" href="TEST0"/>
+  <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
-  <assertSize collection="elementList" size="1" id="count_elt1"/>
+  <assertSize collection="elementList" size="2" id="count_elt1"/>
 
 
   <item interface="NodeList" obj="elementList" var="firstElt1" index="0"/>

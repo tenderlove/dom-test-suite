@@ -27,7 +27,7 @@
     <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
   </metadata>
 
-
+  <var name="resourceURI" type="DOMString"/>
   <var name="myfilter" type="LSParserFilter"> 
      &filterVars;
      <var name="type" type="int"/>
@@ -61,7 +61,8 @@
 
   &builder.setFilter_myfilter;
 
-  <parseURI  var="document" obj="builder" uri="TEST7"/>
+  <getResourceURI var="resourceURI" href="TEST7"/>
+  <parseURI  var="document" obj="builder" uri="resourceURI"/>
 
 </test>
 

@@ -49,22 +49,24 @@
   <var name="ENTITY_RESOLVER" type="DOMString" value='"entity-resolver"'/>
   <var name="elementList" type="NodeList"/>
   <var name="configuration" type="DOMConfiguration"/>
+  <var name="resourceURI" type="DOMString"/>
 
   &vars;
   &init;
 
   <config var="configuration" obj="builder" interface="LSParser"/> 
 
+  <getResourceURI var="resourceURI" href="TEST4"/>
   
   <!-- before applying the entity resolver there should be 2 elt1 in this document -->
-  <parseURI var="document" obj="builder" uri="TEST4"/>
+  <parseURI var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_before_applying_entity_resolver"/>
 
   <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
 
   <!-- after applying the entity resolver there should be 3 elt1 in this document -->
-  <parseURI var="document" obj="builder" uri="TEST4"/>
+  <parseURI var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="3" id="count_elt1_after_applying_entity_resolver"/>
 

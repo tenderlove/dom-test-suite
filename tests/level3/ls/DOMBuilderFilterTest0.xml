@@ -58,19 +58,19 @@
 
   <var name="list" type="NodeList"/>
   <var name="count" type="int"/>
-
+  <var name="resourceURI" type="DOMString"/>
   &vars;
   &init;
 
-
-  <parseURI  var="document" obj="builder" uri="TEST1"/>
+  <getResourceURI var="resourceURI" href="TEST1"/>
+  <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName var="list" obj="document" tagname="&quot;elt1&quot;" interface="Document"/>
   <length var="count" obj="list" interface="NodeList"/>
   <assertEquals actual="count" expected="1" ignoreCase="false" id="filter_count_1"/>
 
   &builder.setFilter_myfilter;
 
-  <parseURI  var="document" obj="builder" uri="TEST1"/>
+  <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName var="list" obj="document" tagname="&quot;elt1&quot;" interface="Document"/>
   <length var="count" obj="list" interface="NodeList"/>
   <assertEquals actual="count" expected="0" ignoreCase="false" id="filter_count_2"/>

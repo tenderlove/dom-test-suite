@@ -29,11 +29,12 @@
   <var name="stringDoc"   type="DOMString"/>
   <var name="writeResult"   type="DOMString"/>
   <var name="elementList" type="NodeList"/>
+  <var name="resourceURI" type="DOMString"/>
 
   &vars;
   &init;
-
-  <parseURI  var="document" obj="builder" uri="TEST0"/>
+  <getResourceURI var="resourceURI" href="TEST0"/>
+  <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <writeToString var="writeResult" obj="writer" nodeArg="document"/> 
 
   <stringData obj="inputSource" value="writeResult"/>
