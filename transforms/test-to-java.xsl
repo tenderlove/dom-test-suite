@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.38  2003-04-03 07:19:19  dom-ts-4
+Revision 1.39  2003-04-09 21:16:53  plehegar
+Added handling for assertXPathException
+Modified import statements to differenciate DOM Level 3 XPath and LS
+
+Revision 1.38  2003/04/03 07:19:19  dom-ts-4
 Support value parameter for DOMInputStream variable definition by call to openStream
 
 Revision 1.37  2003/02/28 07:42:59  dom-ts-4
@@ -330,8 +334,11 @@ package <xsl:value-of select="$package"/>;
 import org.w3c.dom.*;
 <xsl:value-of select="$import-html"/>
 import org.w3c.dom.events.*;
-<xsl:if test="contains($package, 'level3')">
+<xsl:if test="contains($package, 'level3.ls')">
 import org.w3c.dom.ls.*;
+</xsl:if>
+<xsl:if test="contains($package, 'level3.xpath')">
+import org.w3c.dom.xpath.*;
 </xsl:if>
 
 import org.w3c.domts.DOMTestCase;
@@ -1520,6 +1527,20 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:apply-templates>    } catch (EventException ex) {
             success = (ex.code == EventException.<xsl:value-of select="name(*)"/>);
+         }
+         assertTrue("<xsl:value-of select="@id"/>", success);
+      }
+</xsl:template>
+
+<xsl:template match="*[local-name()='assertXPathException']" mode="body">
+    <xsl:param name="vardefs"/>
+      {
+         boolean success = false;
+         try {
+            <xsl:apply-templates select="*/*" mode="body">
+                <xsl:with-param name="vardefs" select="$vardefs"/>
+            </xsl:apply-templates>    } catch (XPathException ex) {
+            success = (ex.code == XPathException.<xsl:value-of select="name(*)"/>);
          }
          assertTrue("<xsl:value-of select="@id"/>", success);
       }
