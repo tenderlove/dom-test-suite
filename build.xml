@@ -2556,6 +2556,7 @@ This target checks that the output of that implied transform is valid HTML
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
         target="1.1"
+        fork="true"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -2721,6 +2722,7 @@ This target checks that the output of that implied transform is valid HTML
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
         target="1.1"
+        fork="true"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -2882,6 +2884,7 @@ This target checks that the output of that implied transform is valid HTML
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
         target="1.1"
+        fork="true"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
@@ -3028,6 +3031,7 @@ This target checks that the output of that implied transform is valid HTML
 		classpath="${java.build.dir};${jaxp.jar}"
         debug="on"
         target="1.1"
+        fork="true"
 		encoding="UTF8">
         <src path="${java.build.dir}"/>
         <src path="${dom3-core-java-src}"/>
