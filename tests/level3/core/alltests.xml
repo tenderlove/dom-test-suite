@@ -135,10 +135,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="documentrenamenode27.xml"/>
 	<suite.member href="documentrenamenode28.xml"/>
 	<suite.member href="documentrenamenode29.xml"/>
-	
 
+    <suite.member href="domconfigcanonicalform1.xml"/>
+    <suite.member href="domconfigcdatasections1.xml"/>
+    <suite.member href="domconfigcheckcharacternormalization1.xml"/>
+    <suite.member href="domconfigcomments1.xml"/>
+    <suite.member href="domconfigdatatypenormalization1.xml"/>
+    <suite.member href="domconfigelementcontentwhitespace1.xml"/>
+    <suite.member href="domconfigentities1.xml"/>
+    <suite.member href="domconfigerrorhandler1.xml"/>
+    <suite.member href="domconfigerrorhandler2.xml"/>
+    <suite.member href="domconfiginfoset1.xml"/>
+    <suite.member href="domconfignamespacedeclarations1.xml"/>
+    <suite.member href="domconfignamespaces1.xml"/>
+    <suite.member href="domconfignormalizecharacters1.xml"/>
+    <suite.member href="domconfigschemalocation1.xml"/>
+    <suite.member href="domconfigschematype1.xml"/>
+    <suite.member href="domconfigsplitcdatasections1.xml"/>
+    <suite.member href="domconfigvalidate1.xml"/>
+    <suite.member href="domconfigvalidateifschema1.xml"/>
+    <suite.member href="domconfigwellformed1.xml"/>
+ 	
 	<!-- Node Tests -->	
-	<!-- insetBefore -->
+	<!-- insertBefore -->
 	<suite.member href="nodeinsertbefore01.xml"/>
 	<suite.member href="nodeinsertbefore02.xml"/>
 	<suite.member href="nodeinsertbefore03.xml"/>
