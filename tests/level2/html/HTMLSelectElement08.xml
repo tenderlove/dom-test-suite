@@ -46,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"option"</member>
 </var>
 <load var="doc" href="select" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;select&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"select"'/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <options interface="HTMLSelectElement" obj="testNode" var="optionsnodeList"/>
@@ -54,5 +54,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName obj="voption" var="optionName"/>
 <append collection="result" obj="optionName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedOptions" id="optionsLink" ignoreCase="false"/>
+<assertEquals actual="result" expected="expectedOptions" id="optionsLink" ignoreCase="auto"/>
 </test>

@@ -52,5 +52,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName obj="vrow" var="rowName"/>
 <append collection="result" obj="rowName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedOptions" id="rowsLink" ignoreCase="false"/>
+<assertEquals actual="result" expected="expectedOptions" id="rowsLink" ignoreCase="auto"/>
 </test>
