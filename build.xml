@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.49  2002-02-28 06:52:48  dom-ts-4
+Revision 1.50  2002-03-01 07:29:42  dom-ts-4
+DOM L2 Distribution runnable (at least with SAXON)
+
+Revision 1.49  2002/02/28 06:52:48  dom-ts-4
 Added dom2-core-dist
 
 Revision 1.48  2002/02/26 07:18:21  dom-ts-4
@@ -607,27 +610,56 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-subjects" depends="dom2-init">
 	<!--  create a DOM 2 version of subjects.xsl  -->
+    <!--
 	<exec executable="sed" output="${build.dir}/dom2-subjects.xsl">
 		<arg line="'{s/dom1.dtd/dom2.dtd/;s/Level-1/Level-2/;}' ${transforms.dir}/subjects.xsl"/>
 	</exec>
+    -->
 
 	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
 	       out="${build.dir}/dom2-core-subjects.xml"
-	       style="${build.dir}/dom2-subjects.xsl"/>
+	       style="${transforms.dir}/subjects.xsl">
+           <param name="specURI" expression="http://www.w3.org/TR/DOM-Level-2-Core/core"/>
+           <param name="specTitle" expression="Document Object Model (DOM) Level 2 Core Specification"/>
+    </style>
+
 	<style in="${specs.dir}/Level-2/xml/views/dom-spec.xml"
 	       out="${build.dir}/dom2-views-subjects.xml"
-	       style="${build.dir}/dom2-subjects.xsl"/>
+	       style="${transforms.dir}/subjects.xsl">
+           <param name="specURI" expression="http://www.w3.org/TR/DOM-Level-2-Views/views"/>
+           <param name="specTitle" expression="Document Object Model (DOM) Level 2 Views Specification"/>
+    </style>
+
 	<style in="${specs.dir}/Level-2/xml/events/dom-spec.xml"
 	       out="${build.dir}/dom2-events-subjects.xml"
-	       style="${build.dir}/dom2-subjects.xsl"/>
-	<style in="${specs.dir}/Level-2/xml/traversal-range/dom-spec.xml"
-	       out="${build.dir}/dom2-traversal-range-subjects.xml"
-	       style="${build.dir}/dom2-subjects.xsl"/>
+	       style="${transforms.dir}/subjects.xsl">
+           <param name="specURI" expression="http://www.w3.org/TR/DOM-Level-2-Events/events"/>
+           <param name="specTitle" expression="Document Object Model (DOM) Level 2 Events Specification"/>
+    </style>
+    <!--
+    Entities, probably defined in traversal-range/dom-spec.xml, not defined
+	<style in="${specs.dir}/Level-2/xml/traversal-range/traversal.xml"
+	       out="${build.dir}/dom2-traversal-subjects.xml"
+	       style="${transforms.dir}/subjects.xsl">
+           <param name="specURI" expression="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal"/>
+           <param name="specTitle" expression="Document Object Model (DOM) Level 2 Traversal Specification
+"/>
+    </style>
+	<style in="${specs.dir}/Level-2/xml/traversal-range/range.xml"
+	       out="${build.dir}/dom2-range-subjects.xml"
+	       style="${transforms.dir}/subjects.xsl">
+           <param name="specURI" expression="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/range"/>
+           <param name="specTitle" expression="Document Object Model (DOM) Level 2 Range Specification
+"/>
+    </style>
+    -->
 	<style in="${specs.dir}/Level-2/xml/html/dom-spec.xml"
 	       out="${build.dir}/dom2-html-subjects.xml"
-	       style="${build.dir}/dom2-subjects.xsl"/>
-	<!--  remove DOM 2 version of subjects.xsl  -->
-	<delete file="{build.dir}/dom2-subjects.xsl"/>
+	       style="${transforms.dir}/subjects.xsl">
+           <param name="specURI" expression="http://www.w3.org/TR/DOM-Level-2-HTML/html"/>
+           <param name="specTitle" expression="Document Object Model (DOM) Level 2 HTML Specification
+"/>
+    </style>
 </target>
 
 
@@ -639,6 +671,11 @@ All implementation conditions combined into implementationAttribute element
 	<xmlvalidate file="${build.dir}/dom2-interfaces.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
+
+	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
+	       out="${build.dir}/dom2-core-interfaces.xml"
+	       style="${transforms.dir}/extract.xsl"/>
+
 </target>
 
 
@@ -1081,13 +1118,15 @@ All implementation conditions combined into implementationAttribute element
 	       style="${transforms.dir}/test-matrix.xsl">
 		<param name="specURI"
 		       expression="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
-        <param name="interfacesURL" expression="dom2-interfaces.xml"/>
-        <param name="specMetadataURL" expression="dom2-subjects.xml"/>
+        <param name="interfacesURL" expression="dom2-core-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom2-core-subjects.xml"/>
+        <param name="title" expression="DOM Level 2 Core Test Suite Matrix"/>
 	</style>
 </target>
 
 
-<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-matrix,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema">
+<!--   need to add dom2-core-matrix, but currently locks Xalan  -->
+<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema">
     <mkdir dir="${build.dir}/level2/core/resources"/>
     <mkdir dir="${build.dir}/level2/core/java"/>
     <copy file="docs/level2/core/index.htm" todir="${build.dir}/level2/core"/>
