@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!-- 
- Copyright (c) 2003 X-Hive Corporation
+ Copyright (c) 2003-2004 X-Hive Corporation
 
  All Rights Reserved. This work is distributed under the W3C(r)
  Software License [1] in the hope that it will be useful, but WITHOUT
@@ -49,7 +49,7 @@
 
   &init;
 
-  <config var="configuration" obj="builder" interface="LSParser"/> 
+  <domConfig var="configuration" obj="builder" interface="LSParser"/> 
 
   <getResourceURI var="resourceURI" href="TESTPDF" scheme="http" contentType="application/pdf"/>
   <parseURI var="document" obj="builder" uri="resourceURI"/>
@@ -64,9 +64,11 @@
   	 <isTrue value="mediaTypesSupported"/>
   	 <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
   	 <setParameter obj="configuration" name="ERROR_HANDLER" value="errorHandler"/>
-	 <parseURI var="document" obj="builder" uri="resourceURI"/>
-	 <!--  document should fail to parse due to unsupported media type  -->
-	 <assertNull actual="document" id="testpdf_failed"/>
+  	 <assertLSException id="throw_PARSE_ERR">
+  	 	<PARSE_ERR>
+	 		<parseURI var="document" obj="builder" uri="resourceURI"/>
+	 	</PARSE_ERR>
+	 </assertLSException>
   </if>
   
 </test>

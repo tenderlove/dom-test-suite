@@ -2,7 +2,7 @@
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2003 World Wide Web Consortium, 
+Copyright (c) 2003-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -41,9 +41,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   
   <!--   create a serializer and write a test document    -->
   <createLSSerializer var="serializer" obj="domImpl"/>
-  <write var="status" obj="serializer" destination="output" nodeArg="testDoc"/>
-  <assertFalse actual="status" id="writeStatus"/>
-  
+  <assertLSException id="throw_SERIALIZE_ERR">
+  	<SERIALIZE_ERR>
+  		<write var="status" obj="serializer" destination="output" nodeArg="testDoc"/>
+  	</SERIALIZE_ERR>
+  </assertLSException>
 </test>
 
 

@@ -42,7 +42,7 @@
   <parse  var="document" obj="builder" input="inputSource"/>
  
   <!-- include xml declaration on serialization --> 
-  <config var="configuration" obj="writer" interface="LSSerializer"/> 
+  <domConfig var="configuration" obj="writer" interface="LSSerializer"/> 
 
   <setParameter obj="configuration" name="XML_DECLARATION" value="false"/>
   <writeToString var="writeResult" obj="writer" nodeArg="document"/> 

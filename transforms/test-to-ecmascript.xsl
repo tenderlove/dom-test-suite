@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -652,23 +652,26 @@ The source document contained the following notice:
         <xsl:when test="$expectedType = 'Collection'">Collection</xsl:when>
         <xsl:when test="$expectedType = 'List'">List</xsl:when>
     </xsl:choose>
-    <xsl:text>("</xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@ignoreCase='auto'">
+    		<xsl:text>AutoCase("</xsl:text>
+    		<xsl:choose>
+    			<xsl:when test="@context">
+    				<xsl:value-of select="@context"/>
+    			</xsl:when>
+    			<xsl:otherwise>
+    				<xsl:text>element</xsl:text>
+    			</xsl:otherwise>
+    		</xsl:choose>
+    		<xsl:text>", "</xsl:text>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>("</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
     <xsl:value-of select="@id"/>
     <xsl:text>",</xsl:text>
     <xsl:choose>
-        <xsl:when test="@ignoreCase='auto'">
-            <xsl:text>toAutoCase</xsl:text>
-            <xsl:if test="$expectedType = 'Collection' or $expectedType = 'List'">
-                <xsl:text>Array</xsl:text>
-            </xsl:if>
-            <xsl:text>(</xsl:text>
-            <xsl:value-of select="@expected"/>
-            <xsl:text>),</xsl:text>
-            <xsl:value-of select="@actual"/>
-	    <xsl:text>);
-      </xsl:text>
-        </xsl:when>
-
         <xsl:when test="@ignoreCase='true'">
             <xsl:choose>
                 <xsl:when test="$expectedType = 'Collection' or $expectedType = 'List'">
@@ -870,6 +873,28 @@ function handleEvent(listener, event, userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertDOMException']" mode="body">
+    <xsl:text>
+	{
+		var success = false;
+		try {
+            </xsl:text>
+	<xsl:apply-templates select="*/*" mode="body"/>
+    <xsl:text>  }
+		catch(ex) {            
+			success = (ex.code == </xsl:text>
+    <xsl:variable name="excode" select="local-name(*)"/>
+	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
+	<xsl:text>);
+		}
+		assertTrue("</xsl:text>
+	<xsl:value-of select="@id"/>
+	<xsl:text>",success);
+	}
+</xsl:text>
+</xsl:template>
+
+
+<xsl:template match="*[local-name()='assertLSException']" mode="body">
     <xsl:text>
 	{
 		var success = false;

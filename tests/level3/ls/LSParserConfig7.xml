@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   
   <implementation var="domImpl"/>
   <createLSParser var="parser" obj="domImpl" mode="1" schemaType="NULL_SCHEMA_TYPE"/>
-  <config var="config" obj="parser" interface="LSParser"/>
+  <domConfig var="config" obj="parser" interface="LSParser"/>
   <assertNotNull actual="config" id="configNotNull"/>
   <getParameter var="state" obj="config" name="propertyName"/>
   <assertTrue actual="state" id="defaultValue"/>

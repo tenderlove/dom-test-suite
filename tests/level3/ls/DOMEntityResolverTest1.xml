@@ -56,7 +56,7 @@
   &vars;
   &init;
 
-  <config var="configuration" obj="builder" interface="LSParser"/> 
+  <domConfig var="configuration" obj="builder" interface="LSParser"/> 
 
   <getResourceURI var="resourceURI" href="TEST4"/>
   

@@ -2,7 +2,7 @@
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
 
-Copyright (c) 2003 World Wide Web Consortium, 
+Copyright (c) 2003-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,8 +38,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <getResourceURI var="resourceURI" href='"test0"'/>
   <plus var="resourceURI" op1="resourceURI" op2='"_missing"'/>
   <systemId obj="input" value="resourceURI" interface="LSInput"/>  
-  <parse var="document" obj="parser" input="input"/>
-  <assertNull actual="document" id="documentIsNull"/>
+  <assertLSException id="throw_PARSE_ERR">
+  	<PARSE_ERR>
+  		<parse var="document" obj="parser" input="input"/>
+  	</PARSE_ERR>
+  </assertLSException>
 </test>
 
 

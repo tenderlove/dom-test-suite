@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   
   <implementation var="domImpl"/>
   <createLSSerializer var="serializer" obj="domImpl"/>
-  <config var="config" obj="serializer" interface="LSSerializer"/>
+  <domConfig var="config" obj="serializer" interface="LSSerializer"/>
   <assertNotNull actual="config" id="configNotNull"/>
   <getParameter var="state" obj="config" name='"canonical-form"'/>
   <assertFalse actual="state" id="canonical-form-is-false"/>

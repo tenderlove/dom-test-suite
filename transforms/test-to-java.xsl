@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.60  2004-01-21 17:46:03  dom-ts-4
+Revision 1.61  2004-02-09 07:12:22  dom-ts-4
+Changed tests to expect LSException (bug 518)
+
+Revision 1.60  2004/01/21 17:46:03  dom-ts-4
 Add UserDataHandler and DOMErrorHandler tests (bug 477)
 
 Revision 1.59  2004/01/16 06:50:32  dom-ts-4
@@ -373,7 +376,7 @@ The source document contained the following notice:
             <xsl:otherwise>true</xsl:otherwise>
         </xsl:choose>
         <xsl:text>) {
-         throw new org.w3c.domts.DOMTestIncompatibleException(</xsl:text>
+         throw org.w3c.domts.DOMTestIncompatibleException.incompatibleFeature(</xsl:text>
         <xsl:value-of select="@feature"/>
         <xsl:choose>
             <xsl:when test="@version">
@@ -432,16 +435,29 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
    public </xsl:text>
     <xsl:value-of select="@name"/>
     <xsl:text>(DOMTestDocumentBuilderFactory factory) </xsl:text>
-    <!--  if there are any implementationAttribute or hasFeature (before a var) elements
+    <!--  if there are any implementationAttribute, load or hasFeature (before a var) elements
                then must declare that we might throw an incompatible test exception   -->
-    <xsl:if test="*[local-name() = 'implementationAttribute' or (local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var']))]">
+    <xsl:if test="*[local-name() = 'implementationAttribute' or local-name() = 'load' or (local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var']))]">
         <xsl:text> throws org.w3c.domts.DOMTestIncompatibleException</xsl:text>
     </xsl:if>
     <xsl:text> {
 </xsl:text>
 <xsl:call-template name="implCheck"/>
 <xsl:text>
-   }
+    //
+    //   check if loaded documents are supported for content type
+    //
+	String contentType = getContentType();
+	</xsl:text>
+	<xsl:for-each select="*[local-name() = 'load' and @href]">
+		<xsl:text>preload(contentType, "</xsl:text>
+		<xsl:value-of select="@href"/>
+		<xsl:text>", </xsl:text>
+		<xsl:value-of select="@willBeModified"/>
+		<xsl:text>);
+	</xsl:text>
+	</xsl:for-each>
+	<xsl:text>}
 </xsl:text>
 
 <xsl:apply-templates mode="innerClass" select="*[local-name() = 'var' and *[local-name() != 'member']]"/>
@@ -1383,6 +1399,25 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:text>);
 </xsl:text>
         </xsl:when>
+        <xsl:when test="@ignoreCase = 'auto'">
+            <xsl:text>assertEqualsAutoCase("</xsl:text>
+            <xsl:choose>
+            	<xsl:when test="@context">
+            		<xsl:value-of select="@context"/>
+				</xsl:when>
+				<xsl:otherwise>
+            		<xsl:text>element</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text>", "</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text>", </xsl:text>
+            <xsl:value-of select="@expected"/>
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="@actual"/>
+            <xsl:text>);
+        </xsl:text>
+        </xsl:when>
         <xsl:otherwise>
             <xsl:text>assertEquals("</xsl:text>
             <xsl:value-of select="@id"/>
@@ -1410,6 +1445,26 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:value-of select="@actual"/>
             <xsl:text>);
 </xsl:text>
+        </xsl:when>
+        <xsl:when test="@ignoreCase = 'auto'">
+            <xsl:text>assertNotEqualsAutoCase("</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text>", </xsl:text>
+            <xsl:value-of select="@expected"/>
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="@actual"/>
+            <xsl:choose>
+            	<xsl:when test="@context">
+            		<xsl:text>, "</xsl:text>
+            		<xsl:value-of select="@context"/>
+            		<xsl:text>");
+</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+            		<xsl:text>, "element");
+</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
         </xsl:when>
         <xsl:otherwise>
             <xsl:text>assertNotEquals("</xsl:text>
@@ -1866,6 +1921,21 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
       }
 </xsl:template>
 
+<xsl:template match="*[local-name()='assertLSException']" mode="body">
+    <xsl:param name="vardefs"/>
+      {
+         boolean success = false;
+         try {
+            <xsl:apply-templates select="*/*" mode="body">
+                <xsl:with-param name="vardefs" select="$vardefs"/>
+            </xsl:apply-templates>    } catch (LSException ex) {
+            success = (ex.code == LSException.<xsl:value-of select="name(*)"/>);
+         }
+         assertTrue("<xsl:value-of select="@id"/>", success);
+      }
+</xsl:template>
+
+
 <xsl:template match="*[local-name()='assertEventException']" mode="body">
     <xsl:param name="vardefs"/>
       {
@@ -2310,6 +2380,18 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:when test="@ignoreCase='true'">
             <xsl:text>equalsIgnoreCase(</xsl:text>
         </xsl:when>
+        <xsl:when test="@ignoreCase='auto'">
+            <xsl:text>equalsAutoCase("</xsl:text>
+            <xsl:choose>
+            	<xsl:when test="@context">
+            		<xsl:value-of select="@context"/>
+            	</xsl:when>
+            	<xsl:otherwise>
+            		<xsl:text>element</xsl:text>
+            	</xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>", </xsl:text>
+        </xsl:when>
         <xsl:otherwise>
             <xsl:text>equals(</xsl:text>
         </xsl:otherwise>
@@ -2326,6 +2408,18 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:choose>
         <xsl:when test="@ignoreCase='true'">
             <xsl:text>!equalsIgnoreCase(</xsl:text>
+        </xsl:when>
+        <xsl:when test="@ignoreCase='auto'">
+            <xsl:text>!equalsAutoCase("</xsl:text>
+            <xsl:choose>
+            	<xsl:when test="@context">
+            		<xsl:value-of select="@context"/>
+            	</xsl:when>
+            	<xsl:otherwise>
+            		<xsl:text>element</xsl:text>
+            	</xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>", </xsl:text>
         </xsl:when>
         <xsl:otherwise>
             <xsl:text>!equals(</xsl:text>

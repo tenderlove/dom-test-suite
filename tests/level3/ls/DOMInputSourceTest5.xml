@@ -56,7 +56,7 @@
   &vars;
   &init;
 
-  <config var="configuration" obj="builder" interface="LSParser"/> 
+  <domConfig var="configuration" obj="builder" interface="LSParser"/> 
 
   <setParameter obj="configuration" name='"resource-resolver"' value="myentityresolver"/>
   <setParameter obj="configuration" name='"entities"' value="false"/>
