@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,13 +21,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentadoptnode01</title>
 <creator>IBM</creator>
 <description>
-	The adoptNode method changes the ownerDocument of a node, its children, as well as the 
-	attached attribute nodes if there are any. If the node has a parent it is first removed 
-	from its parent child list. 
-	If the node is an Attr node, the ownerElement attribute is set to null and the specified 
-	flag is set to true on the adopted Attr. The descendants of the source Attr are recursively 
-	adopted. 
-	
 	Adopt the street attribute node of the second element whose localName is address and namespaceURI
 	http://www.nist.gov.  Check if this attribute has been adopted successfully by verifying the
 	nodeName, nodeType, nodeValue, specified and ownerElement attributes of the adopted node.
@@ -47,6 +40,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <var name="nodeValue" type="DOMString"/>
+<var name="firstChild" type="Text"/>
+<var name="firstChildValue" type="DOMString"/>
+<var name="secondChild" type="EntityReference"/>
+<var name="secondChildType" type="int"/>
+<var name="secondChildName" type="DOMString"/>
+
+
 <load var="doc" href="staffNS" willBeModified="false"/>
 <getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
 <item var="element" obj="childList" index="1" interface="NodeList"/>
@@ -58,6 +58,24 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <ownerElement var="attrOwnerElem" obj="adoptedStreet" interface="Attr"/>
 <assertEquals expected='"street"' actual="nodeName"  id="documentadoptode01_nodeName" ignoreCase="false"/>
 <assertEquals expected="2" actual="nodeType"  id="documentadoptNode01_nodeType" ignoreCase="false"/>
-<assertEquals expected='"Yes"' actual="nodeValue"  id="documentadoptnode01_nodeValue" ignoreCase="false"/>
 <assertNull  actual="attrOwnerElem"  id="documentadoptnode01_ownerDoc"/>
+<!--  The attribute's child list can either be a text node "Yes" or 
+          an text node "Y" and a entity reference to "ent1"  -->
+<firstChild var="firstChild" obj="adoptedStreet" interface="Node"/>
+<assertNotNull actual="firstChild" id="firstChildNotNull"/>
+<nodeValue var="firstChildValue" obj="firstChild"/>
+<if>
+	<equals actual="firstChildValue" expected='"Y"' ignoreCase="false"/>
+	<nextSibling var="secondChild" obj="firstChild" interface="Node"/>
+	<assertNotNull actual="secondChild" id="secondChildNotNull"/>
+	<nodeType var="secondChildType" obj="secondChild"/>
+	<assertEquals actual="secondChildType" expected="5" 
+		id="secondChildIsEntityReference" ignoreCase="false"/>
+	<nodeName var="secondChildName" obj="secondChild"/>
+	<assertEquals actual="secondChildName" expected='"ent1"' 
+		id="secondChildIsEnt1Reference" ignoreCase="false"/>
+	<else>
+		<assertEquals expected='"Yes"' actual="nodeValue"  id="documentadoptnode01_nodeValue" ignoreCase="false"/>
+	</else>
+</if>
 </test>
