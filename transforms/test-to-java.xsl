@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.37  2003-02-28 07:42:59  dom-ts-4
+Revision 1.38  2003-04-03 07:19:19  dom-ts-4
+Support value parameter for DOMInputStream variable definition by call to openStream
+
+Revision 1.37  2003/02/28 07:42:59  dom-ts-4
 Update for 2003-02-26 L3 Working Drafts
 
 Revision 1.36  2003/02/13 03:24:57  dom-ts-4
@@ -740,6 +743,12 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:when test="@isNull='true'">
             <xsl:text> = null;
 </xsl:text>
+        </xsl:when>
+
+        <xsl:when test="@value and @type = 'DOMInputStream'">
+            <xsl:text> = openStream(</xsl:text>
+            <xsl:value-of select="@value"/>
+            <xsl:text>);</xsl:text>
         </xsl:when>
 
         <!--  explict value, just add it  -->
