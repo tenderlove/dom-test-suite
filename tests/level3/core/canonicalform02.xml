@@ -45,6 +45,7 @@ characters are not normalized.
 <canSetParameter var="canSet" obj="domConfig" name='"canonical-form"' value="true"/>
 <if><isTrue value="canSet"/>
 <setParameter obj="domConfig" name='"canonical-form"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
 <!--  character entity is expanded during code generation

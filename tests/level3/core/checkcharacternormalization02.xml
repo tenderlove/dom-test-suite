@@ -52,6 +52,7 @@ non-normalized characters are signaled.
 <canSetParameter var="canSet" obj="domConfig" name='"check-character-normalization"' value="true"/>
 <if><isTrue value="canSet"/>
 <setParameter obj="domConfig" name='"check-character-normalization"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
 <!--  character entity is expanded during code generation

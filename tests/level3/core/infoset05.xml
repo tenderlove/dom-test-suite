@@ -37,6 +37,7 @@ namespace declaration attributes are maintained.
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"infoset"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <normalizeDocument obj="doc"/>
 <!--  fail test if normalize had any errors or fatal errors   -->
 <assertLowerSeverity obj="errorMonitor" id="normalizeError" severity="SEVERITY_ERROR"/>

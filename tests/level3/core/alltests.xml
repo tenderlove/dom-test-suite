@@ -44,6 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="canonicalform09.xml"/>
 <suite.member href="canonicalform10.xml"/>
 <suite.member href="canonicalform11.xml"/>
+<suite.member href="canonicalform12.xml"/>
 <suite.member href="cdatasections01.xml"/>
 <suite.member href="checkcharacternormalization01.xml"/>
 <suite.member href="checkcharacternormalization02.xml"/>
@@ -67,7 +68,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="datatypenormalization16.xml"/>
 <suite.member href="datatypenormalization17.xml"/>
 <suite.member href="datatypenormalization18.xml"/>
-<suite.member href="datatypenormalization19.xml"/>
 <suite.member href="documentadoptnode01.xml"/>
 <suite.member href="documentadoptnode02.xml"/>
 <suite.member href="documentadoptnode03.xml"/>

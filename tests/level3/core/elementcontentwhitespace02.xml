@@ -49,6 +49,7 @@ whitespace in element content is eliminated.
 	</and>
 	<setParameter obj="domConfig" name='"element-content-whitespace"' value="false"/>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
+	<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 	<normalizeDocument obj="doc"/>
 	<!--  fail test if normalize had any errors or fatal errors   -->
 	<assertLowerSeverity obj="errorMonitor" id="normalizeError" severity="SEVERITY_ERROR"/>

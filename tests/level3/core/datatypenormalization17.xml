@@ -21,8 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>datatypenormalization17</title>
 <creator>Curt Arnold</creator>
 <description>
-Normalize document with datatype-normalization set to false.  
-Check if string values were normalized.
+Normalize document with datatype-normalization set to false, string values
+should not be normalized.  
 </description>
 <date qualifier="created">2004-02-25</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
@@ -40,7 +40,6 @@ Check if string values were normalized.
 <var name="errorMonitor" type="DOMErrorMonitor"/>
 <var name="childNode" type="Node"/>
 <var name="childValue" type="DOMString"/>
-<var name="childLength" type="int"/>
 <load var="doc" href="datatype_normalization2" willBeModified="true"/>
 
 <domConfig obj="doc" var="domConfig" interface="Document"/>
@@ -64,11 +63,6 @@ Check if string values were normalized.
 		namespaceURI='"http://www.w3.org/1999/xhtml"' 
 		localName='"code"' 
 		interface="Document"/>
-	<item var="element" obj="elemList" interface="NodeList" index="0"/>
-	<firstChild var="childNode" obj="element" interface="Node"/>
-	<nodeValue var="childValue" obj="childNode"/>
-	<length var="childLength" obj="childValue" interface="DOMString"/>
-	<assertEquals actual="childLength" expected='18' ignoreCase="false" id="content1"/>
 	<item var="element" obj="elemList" interface="NodeList" index="1"/>
 	<firstChild var="childNode" obj="element" interface="Node"/>
 	<nodeValue var="childValue" obj="childNode"/>
@@ -77,6 +71,10 @@ Check if string values were normalized.
 	<firstChild var="childNode" obj="element" interface="Node"/>
 	<nodeValue var="childValue" obj="childNode"/>
 	<assertEquals actual="childValue" expected='"EMP 0001"' ignoreCase="false" id="content3"/>
+	<item var="element" obj="elemList" interface="NodeList" index="0"/>
+	<firstChild var="childNode" obj="element" interface="Node"/>
+	<nodeValue var="childValue" obj="childNode"/>
+	<assertNotEquals actual="childValue" expected='"EMP 0001"' ignoreCase="false" id="content1"/>
 </if>
 </test> 
  

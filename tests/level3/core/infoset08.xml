@@ -42,6 +42,7 @@ whitespace in element content is preserved.
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"infoset"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <!-- if we discarded whitespace on parse, add some back  -->
 <if><implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
 	<getElementsByTagName 

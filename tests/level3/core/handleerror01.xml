@@ -41,7 +41,6 @@ CDATASections should be split.
 <var name="childValue" type="DOMString"/>
 <var name="childType" type="int"/>
 <var name="retval" type="Node"/>
-<var name="errorMonitor" type="DOMErrorMonitor"/>
 <var name="errors" type="List"/>
 
 <var name="errorHandler" type="DOMErrorHandler">

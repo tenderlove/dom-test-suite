@@ -44,6 +44,7 @@ Normalize document using Node.normalize checking that "entities" parameter is ig
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"entities"' value="false"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <!--  add an entity reference to the content of the p element  -->
 <getElementsByTagName 
 	var="pList" 

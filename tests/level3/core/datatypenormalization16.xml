@@ -69,7 +69,7 @@ Check if string values were normalized per explicit whitespace=replace.
 	<item var="element" obj="elemList" interface="NodeList" index="0"/>
 	<firstChild var="childNode" obj="element" interface="Node"/>
 	<nodeValue var="childValue" obj="childNode"/>
-	<assertEquals actual="childValue" expected='"     EMP  0001    "' ignoreCase="false" id="content1"/>
+	<assertEquals actual="childValue" expected='"     EMP  0001 "' ignoreCase="false" id="content1"/>
 	<item var="element" obj="elemList" interface="NodeList" index="1"/>
 	<firstChild var="childNode" obj="element" interface="Node"/>
 	<nodeValue var="childValue" obj="childNode"/>

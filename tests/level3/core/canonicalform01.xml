@@ -48,6 +48,7 @@ entity references are expanded and unused entity declaration are maintained.
 <canSetParameter var="canSet" obj="domConfig" name='"canonical-form"' value="true"/>
 <if><isTrue value="canSet"/>
 <setParameter obj="domConfig" name='"canonical-form"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <!--  add an entity reference to the content of the p element  -->
 <getElementsByTagName 
 	var="pList" 
@@ -73,11 +74,6 @@ entity references are expanded and unused entity declaration are maintained.
 <assertEquals actual="childName" expected='"#text"' ignoreCase="false" id="firstChildName"/>
 <nodeValue var="childValue" obj="child"/>
 <assertEquals actual="childValue" expected='"barfoo"' ignoreCase="false" id="firstChildValue"/>
-<!--  early drafts would have removed unused entity declarations too  -->
-<doctype var="doctype" obj="doc"/>
-<entities var="entities" obj="doctype"/>
-<getNamedItem var="ent2" obj="entities" name='"ent2"'/>
-<assertNotNull actual="ent2" id="ent2NotNull"/>
 </if>
 </test> 
  

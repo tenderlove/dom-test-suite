@@ -42,6 +42,7 @@ characters are not normalized.
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"normalize-characters"' value="false"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
 <!--  character entity is expanded during code generation

@@ -41,6 +41,7 @@ normalized with canonical-form = true.
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <canSetParameter var="canSet" obj="domConfig" name='"canonical-form"' value="true"/>
 <if><isTrue value="canSet"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <setParameter obj="domConfig" name='"canonical-form"' value="true"/>
 <normalizeDocument obj="doc"/>
 <!--  fail test if normalize had any errors or fatal errors   -->

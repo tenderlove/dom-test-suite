@@ -41,6 +41,7 @@ no errors are dispatched.
 <var name="retval" type="Node"/>
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <setParameter obj="domConfig" name='"check-character-normalization"' value="false"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>

@@ -45,6 +45,7 @@ characters are normalized.
 <canSetParameter var="canSet" obj="domConfig" name='"normalize-characters"' value="true"/>
 <if><isTrue value="canSet"/>
 <setParameter obj="domConfig" name='"normalize-characters"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="pElem" obj="pList" index="0" interface="NodeList"/>
 <!--  character entity is expanded during code generation
