@@ -35,7 +35,7 @@ first employee and examine its NextSibling node.  This test uses the
 <var name="domesticAttr" type="Attr"/>
 <var name="s" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="addressList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="addressList" tagname='"acronym"'/>
 <item interface="NodeList" obj="addressList" var="testNode" index="0"/>
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="domesticAttr" name='"title"'/>

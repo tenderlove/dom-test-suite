@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     removed before the new one is added.
     
     Retrieve the second "p" and replace its TWELFTH 
-    child("abbr") with its SECOND child(em).   After the
+    child("acronym") with its SECOND child(em).   After the
     replacement the second child should now be the one that used   
     to be at the third position and the TWELFTH child should be the
     one that used to be at the SECOND position.

@@ -23,7 +23,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     Retrieve the textual data from the last child of the 
     second employee.   That node is composed of two   
     EntityReference nodes and two Text nodes.   After
-    the content node is parsed, the "abbr" Element
+    the content node is parsed, the "acronym" Element
     should contain four children with each one of the
     EntityReferences containing one child.
 </description>
@@ -52,7 +52,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"&#946; Dallas, &#947;\n 98554"</member>
 </var>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="addressNode" index="1"/>
 <childNodes obj="addressNode" var="childList"/>
 <for-each collection="childList" member="child">

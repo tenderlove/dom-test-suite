@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addrAttr" type="Attr"/>
 <var name="nodeType" type="int"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <getAttributeNode obj="testAddr" name='"title"' var="addrAttr"/>
 <nodeType obj="addrAttr" var="nodeType"/>

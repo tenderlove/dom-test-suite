@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testAddress" type="Element"/>
 <var name="attrAddress" type="Attr"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="addressElementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="addressElementList"/>
 <item interface="NodeList" obj="addressElementList" index="4" var="testAddress"/>
 <createAttribute obj="doc" var="oldAttribute" name='"oldAttribute"'/>
 <assertDOMException id="elementNotFoundErrAssert">

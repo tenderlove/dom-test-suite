@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"title"</member>
 </var>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="addressNode"/>
 <cloneNode obj="addressNode" deep="false" var="clonedNode"/>
 <attributes obj="clonedNode" var="attributes"/>

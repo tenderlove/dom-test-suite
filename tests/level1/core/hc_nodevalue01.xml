@@ -27,7 +27,7 @@ should still return null.
 <var name="newNode" type="Element"/>
 <var name="newValue" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElement obj="doc" var="newNode" tagName='"abbr"'/>
+<createElement obj="doc" var="newNode" tagName='"acronym"'/>
 <nodeValue obj="newNode" var="newValue"/>
 <assertNull actual="newValue" id="initiallyNull"/>
 <!--   attempt to change the value and make sure that it stays null  -->

@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"class"</member>
 </var>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testAddr"/>
 <attributes obj="testAddr" var="addrAttr"/>
 <for-each collection="addrAttr" member="attrNode">

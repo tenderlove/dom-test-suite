@@ -39,7 +39,7 @@ from the Document interface.
 <var name="streetAttr" type="Attr"/>
 <var name="value" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testEmployee"/>
 <createAttribute obj="doc" var="newAttribute" name='"class"'/>
 <setAttributeNode obj="testEmployee" var="streetAttr" newAttr="newAttribute"/>

@@ -40,12 +40,12 @@ employee.  This should raise the desired exception.
 <var name="setAttr" type="Attr"/>
 <var name="setNode" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="firstNode" index="0"/>
 <createAttribute obj="doc" var="domesticAttr" name='"title"'/>
 <value interface="Attr" obj="domesticAttr" value='"Y&#945;"'/>
 <setAttributeNode var="setAttr" obj="firstNode" newAttr="domesticAttr"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testNode" index="2"/>
 <attributes obj="testNode" var="attributes"/>
 <assertDOMException id="namednodemapInUseAttributeErrAssert">

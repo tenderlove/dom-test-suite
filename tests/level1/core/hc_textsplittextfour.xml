@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="splitNode" type="Text"/>
 <var name="value" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="addressNode" index="0"/>
 <firstChild interface="Node" obj="addressNode" var="textNode"/>
 <splitText obj="textNode" var="splitNode" offset="30"/>

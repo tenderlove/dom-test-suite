@@ -19,9 +19,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The "createElement(tagName)" method creates an Element 
    of the type specified.
    Retrieve the entire DOM document and invoke its 
-   "createElement(tagName)" method with tagName="abbr".
+   "createElement(tagName)" method with tagName="acronym".
    The method should create an instance of an Element node
-   whose tagName is "abbr".  The NodeName, NodeType 
+   whose tagName is "acronym".  The NodeName, NodeType 
    and NodeValue are returned.
 </description>
 
@@ -34,9 +34,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newElementType" type="int"/>
 <var name="newElementValue" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<createElement obj="doc" var="newElement" tagName='"abbr"'/>
+<createElement obj="doc" var="newElement" tagName='"acronym"'/>
 <nodeName obj="newElement" var="newElementName"/>
-<assertEquals actual="newElementName" expected='"abbr"' ignoreCase="auto" id="strong"/>
+<assertEquals actual="newElementName" expected='"acronym"' ignoreCase="auto" id="strong"/>
 <nodeType obj="newElement" var="newElementType"/>
 <assertEquals actual="newElementType" expected="1" ignoreCase="false" id="type"/>
 <nodeValue obj="newElement" var="newElementValue"/>

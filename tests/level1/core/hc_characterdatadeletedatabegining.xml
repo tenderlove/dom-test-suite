@@ -36,7 +36,7 @@ should be "Dallas, Texas 98551".
 <var name="child" type="CharacterData"/>
 <var name="childData" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
 <firstChild interface="Node" obj="nameNode" var="child"/>
 <deleteData obj="child" offset="0" count="16"/>

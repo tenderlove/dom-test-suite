@@ -20,7 +20,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    method is case-sensitive for XML documents.
    Retrieve the entire DOM document and invoke its 
    "createElement(tagName)" method twice.  Once for tagName
-   equal to "abbr" and once for tagName equal to "ADDRESS"
+   equal to "acronym" and once for tagName equal to "ADDRESS"
    Each call should create a distinct Element node.  The
    newly created Elements are then assigned attributes 
    that are retrieved.
@@ -36,7 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attribute2" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createElement obj="doc" var="newElement1" tagName='"ABBR"'/>
-<createElement obj="doc" var="newElement2" tagName='"abbr"'/>
+<createElement obj="doc" var="newElement2" tagName='"acronym"'/>
 <setAttribute obj="newElement1" name='"style"' value='"Fort Worth"'/>
 <setAttribute obj="newElement2" name='"title"' value='"Dallas"'/>
 <getAttribute obj="newElement1" var="attribute1" name='"style"'/>

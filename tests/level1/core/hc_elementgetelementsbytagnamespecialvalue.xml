@@ -42,7 +42,7 @@ in the order the children were encountered.
 <member>"code"</member>
 <member>"sup"</member>
 <member>"var"</member>
-<member>"abbr"</member>
+<member>"acronym"</member>
 </var>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>

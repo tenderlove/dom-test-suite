@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testAddress" type="Element"/>
 <var name="attrValue" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="2" var="testAddress"/>
 <getAttribute obj="testAddress" var="attrValue" name='"class"'/>
 <assertEquals actual="attrValue" expected='"No"' id="attrValue" ignoreCase="false"/>

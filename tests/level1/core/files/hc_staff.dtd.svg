@@ -2,7 +2,7 @@
 <!ELEMENT strong (#PCDATA)>
 <!ELEMENT code (#PCDATA)>
 <!ELEMENT sup (#PCDATA)>
-<!ELEMENT abbr (#PCDATA)>
+<!ELEMENT acronym (#PCDATA)>
 <!ELEMENT entElement ( #PCDATA ) >
 <!ELEMENT var ( #PCDATA | entElement )* >
 <!ELEMENT p (em, strong, code, sup, var, abbr) >

@@ -37,7 +37,7 @@ thru 9 of the character data with "South".
 <var name="child" type="CharacterData"/>
 <var name="childData" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
 <firstChild interface="Node" obj="nameNode" var="child"/>
 <replaceData obj="child" offset="0" count="4" arg='"2500"'/>

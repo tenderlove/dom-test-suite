@@ -45,7 +45,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="setAttr1" type="Attr"/>
 <var name="setAttr2" type="Attr"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="addressElementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="addressElementList"/>
 <item interface="NodeList" obj="addressElementList" index="1" var="testAddress"/>
 <createElement obj="doc" var="newElement" tagName='"p"'/>
 <appendChild var="appendedChild" obj="testAddress" newChild="newElement"/>

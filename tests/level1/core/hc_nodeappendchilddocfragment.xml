@@ -52,7 +52,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"#text"</member>
 <member>"var"</member>
 <member>"#text"</member>
-<member>"abbr"</member>
+<member>"acronym"</member>
 <member>"#text"</member>
 <member>"newChild1"</member>
 <member>"newChild2"</member>

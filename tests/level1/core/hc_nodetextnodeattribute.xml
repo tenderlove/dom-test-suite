@@ -36,7 +36,7 @@ on the Text Node.  It should return null.
 <var name="textNode" type="Node"/>
 <var name="attrList" type="NamedNodeMap"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <firstChild interface="Node" obj="testAddr" var="textNode"/>
 <attributes obj="textNode" var="attrList"/>

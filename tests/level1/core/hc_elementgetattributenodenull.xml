@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testEmployee" type="Element"/>
 <var name="domesticAttr" type="Attr"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
 <getAttributeNode obj="testEmployee" var="domesticAttr" name='"invalidAttribute"'/>
 <assertNull actual="domesticAttr" id="elementGetAttributeNodeNullAssert"/>

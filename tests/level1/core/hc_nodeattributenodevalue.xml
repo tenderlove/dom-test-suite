@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="addrAttr" type="Attr"/>
 <var name="attrValue" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"abbr"'/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <getAttributeNode obj="testAddr" name='"title"' var="addrAttr"/>
 <nodeValue obj="addrAttr" var="attrValue"/>

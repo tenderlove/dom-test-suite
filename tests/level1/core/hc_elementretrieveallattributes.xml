@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testAddress" type="Node"/>
 <var name="attributes" type="NamedNodeMap"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname='"abbr"' var="addressList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="addressList"/>
 <item interface="NodeList" obj="addressList" index="0" var="testAddress"/>
 <attributes obj="testAddress" var="attributes"/>
 <assertSize collection="attributes" size="1" id="attrCount"/>
