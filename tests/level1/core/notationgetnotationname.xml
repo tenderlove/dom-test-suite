@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!--Notation interface -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9"/>
 </metadata>
+<hasFeature feature="XML"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="notations" type="NamedNodeMap"/>

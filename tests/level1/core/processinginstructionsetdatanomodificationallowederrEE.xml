@@ -34,6 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!--  bug report on earlier version    -->
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Apr/0053.html"/>
 </metadata>
+<hasFeature feature="XML"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
