@@ -8,7 +8,7 @@
 </head>
 <body> 
 <p>
-<applet align="bottom" alt="Applet Number 1" archive="" code="org/w3c/domts/DOMTSApplet1.class" codebase="applets" height="301" hspace="0" name="applet1" vspace="0" width="301"></applet>
+<applet align="bottom" alt="Applet Number 1" archive="" code="org/w3c/domts/DOMTSApplet1.class" codebase="applets" height="306" hspace="0" name="applet1" vspace="0" width="301"></applet>
 </p>
 </body>
 </html>
