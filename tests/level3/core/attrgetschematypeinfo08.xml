@@ -31,8 +31,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
-<implementationAttribute name="validating" value="true"/>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elemList" type="NodeList"/>
 <var name="acElem" type="Element"/>

@@ -33,8 +33,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo"/>
 </metadata>
 <implementationAttribute name="schemaValidating" value="true"/>
-<implementationAttribute name="validating" value="true"/>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="supElem" type="Element"/>
 <var name="elemTypeInfo" type="TypeInfo"/>
@@ -48,6 +46,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <schemaTypeInfo var="elemTypeInfo" obj="supElem" interface="Element"/>
 <typeName var="typeName" obj="elemTypeInfo"/>
 <typeNamespace var="typeNamespace" obj="elemTypeInfo"/>
-<assertEquals expected='"string"' actual="typeName" id="elementgetschematypeinfo07_typeName" ignoreCase="false"/>
-<assertEquals expected='"http://www.w3.org/2001/XMLSchema"' actual="typeNamespace" id="elementgetschematypeinfo07_typeNamespace" ignoreCase="false"/>
+<assertEquals expected='"sup"' actual="typeName" id="elementgetschematypeinfo07_typeName" ignoreCase="false"/>
+<assertEquals expected='"http://www.w3.org/1999/xhtml"' actual="typeNamespace" id="elementgetschematypeinfo07_typeNamespace" ignoreCase="false"/>
 </test>  
