@@ -61,7 +61,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"gender"</member>
 <member>"address"</member>
 </var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <cloneNode obj="employeeNode" deep="true" var="clonedNode"/>

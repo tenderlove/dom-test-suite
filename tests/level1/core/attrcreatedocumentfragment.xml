@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrs" type="Attr"/>
 <var name="attrName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="docFragment"/>
 <createElement obj="doc" var="newOne" tagName="&quot;newElement&quot;"/>
 <setAttribute obj="newOne" name="&quot;newdomestic&quot;" value="&quot;Yes&quot;"/>

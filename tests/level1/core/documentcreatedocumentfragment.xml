@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newDocFragmentName" type="DOMString"/>
 <var name="newDocFragmentType" type="int"/>
 <var name="newDocFragmentValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="newDocFragment"/>
 <childNodes obj="newDocFragment" var="children"/>
 <length interface="NodeList" obj="children" var="length"/>

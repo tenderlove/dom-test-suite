@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newElementName" type="DOMString"/>
 <var name="newElementType" type="int"/>
 <var name="newElementValue" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
 <nodeName obj="newElement" var="newElementName"/>
 <assertEquals actual="newElementName" expected="&quot;address&quot;" ignoreCase="false" id="name"/>

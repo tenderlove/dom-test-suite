@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="badEntityRef" type="EntityReference"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <assertDOMException id="documentInvalidCharacterExceptionCreateEntRefAssert">
 <INVALID_CHARACTER_ERR>
 <createEntityReference var="badEntityRef" obj="doc" name="&quot;invalid^Name&quot;"/>

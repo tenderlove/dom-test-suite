@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newTextName" type="DOMString"/>
 <var name="newTextValue" type="DOMString"/>
 <var name="newTextType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createTextNode obj="doc" var="newTextNode" data="&quot;This is a new Text node&quot;"/>
 <nodeValue obj="newTextNode" var="newTextValue"/>
 <assertEquals actual="newTextValue" expected="&quot;This is a new Text node&quot;" ignoreCase="false" id="value"/>

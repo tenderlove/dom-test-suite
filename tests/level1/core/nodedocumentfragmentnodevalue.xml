@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="docFragment" type="DocumentFragment"/>
 <var name="attrList" type="NamedNodeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createDocumentFragment obj="doc" var="docFragment"/>
 <attributes obj="docFragment" var="attrList"/>
 <assertNull actual="attrList" id="nodeDocumentFragmentNodeAttributesAssert1"/>

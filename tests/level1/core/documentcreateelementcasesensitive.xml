@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newElement2" type="Element"/>
 <var name="attribute1" type="DOMString"/>
 <var name="attribute2" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createElement obj="doc" var="newElement1" tagName="&quot;ADDRESS&quot;"/>
 <createElement obj="doc" var="newElement2" tagName="&quot;address&quot;"/>
 <setAttribute obj="newElement1" name="&quot;district&quot;" value="&quot;Fort Worth&quot;"/>

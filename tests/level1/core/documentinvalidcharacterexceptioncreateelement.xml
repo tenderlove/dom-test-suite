@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="badElement" type="Element"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <assertDOMException id="documentInvalidCharacterExceptionCreateElementAssert">
 <INVALID_CHARACTER_ERR>
 <createElement var="badElement" obj="doc" tagName="&quot;invalid^Name&quot;"/>

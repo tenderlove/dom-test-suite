@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="piValue" type="DOMString"/>
 <var name="piName" type="DOMString"/>
 <var name="piType" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
+<load var="doc" href="staff.xml" willBeModified="true"/>
 <createProcessingInstruction obj="doc" var="newPINode" target="&quot;TESTPI&quot;" data="&quot;This is a new PI node&quot;"/>
 <nodeName obj="newPINode" var="piName"/>
 <assertEquals actual="piName" expected="&quot;TESTPI&quot;" ignoreCase="false" id="name"/>
