@@ -29,6 +29,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=184"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -38,9 +39,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributeNode" type="Node"/>
 <var name="attributeName" type="DOMString"/>
 <var name="result" type="Collection"/>
-<var name="expectedResult" type="Collection">
+<var name="htmlExpected" type="Collection">
 <member>"class"</member>
 <member>"title"</member>
+</var>
+<var name="expected" type="Collection">
+<member>"class"</member>
+<member>"title"</member>
+<member>"dir"</member>
 </var>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
@@ -52,9 +58,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <append collection="result" obj="attributeName"/>
 </for-each>
 <if><contentType type="text/html"/>
-<assertEquals actual="result" expected="expectedResult" id="nodeNames_html" ignoreCase="true"/>
+<assertEquals actual="result" expected="htmlExpected" id="nodeNames_html" ignoreCase="true"/>
 <else>
-<assertEquals actual="result" expected="expectedResult" id="nodeNames" ignoreCase="false"/>
+<assertEquals actual="result" expected="expected" id="nodeNames" ignoreCase="false"/>
 </else>
 </if>
 </test>

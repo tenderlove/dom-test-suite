@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=184"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -37,9 +38,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributes" type="NamedNodeMap"/>
 <var name="child" type="Node"/>
 <var name="nodeName" type="DOMString"/>
+<var name="htmlExpected" type="Collection">
+    <member>"title"</member>
+    <member>"class"</member>
+</var>
 <var name="expected" type="Collection">
     <member>"title"</member>
     <member>"class"</member>
+    <member>"dir"</member>
 </var>
 <var name="actual" type="Collection"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
@@ -51,7 +57,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <append collection="actual" obj="nodeName"/>
 </for-each>
 <if><contentType type="text/html"/>
-<assertEquals id="attrName_html" actual="actual" expected="expected" ignoreCase="true"/>
+<assertEquals id="attrName_html" actual="actual" expected="htmlExpected" ignoreCase="true"/>
 <else>
 <assertEquals id="attrName" actual="actual" expected="expected" ignoreCase="false"/>
 </else>
