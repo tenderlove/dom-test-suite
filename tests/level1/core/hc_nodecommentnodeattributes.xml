@@ -18,16 +18,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <description>
     The "getAttributes()" method invoked on a Comment 
     Node returns null.
-    
-    Retrieve the Comment Node(third child) of the DOM 
-    document and invoke the "getAttributes()" method on the 
-    Comment Node.   It should return null. 
+
+    Find any comment that is an immediate child of the root
+    and assert that Node.attributes is null.  Then create
+    a new comment node (in case they had been omitted) and
+    make the assertion.    
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=248"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=263"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="commentNode" type="Node"/>
