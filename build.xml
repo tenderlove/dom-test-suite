@@ -193,20 +193,16 @@ This target checks that the output of that implied transform is valid HTML
 <target name="gen-svgunit">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
+	<property name="dst.dir" value="${build.dir}/self-hosted/svg/level${level}/${module}"/>
 	
-    <mkdir dir="${build.dir}/svg/level${level}/${module}/files"/>
-	<copy todir="${build.dir}/svg/level${level}/${module}">
+	<copy todir="${dst.dir}">
         <fileset dir="ecmascript" includes="svgunit.js"/>
     </copy>
-    <copy todir="${build.dir}/svg/level${level}/${module}">
+    <copy todir="${dst.dir}">
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak *.html *.xml *.xhtml *.svg *.js"/>
     </copy>
-    <copy todir="${build.dir}/svg/level${level}/${module}/files">
-		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak *.html *.xml *.xhtml"/>
-    </copy>
-
 	<style basedir="${tests.dir}/level${level}/${module}" 
-		   destdir="${build.dir}/svg/level${level}/${module}" 
+		   destdir="${dst.dir}" 
 		   includes="*.xml" 
            excludes="metadata.xml alltests.xml"
 	       style="${transforms.dir}/test-to-svgunit.xsl" 
@@ -219,27 +215,150 @@ This target checks that the output of that implied transform is valid HTML
 	</style>
 
 	<style basedir="${tests.dir}/level${level}/${module}" 
-		   destdir="${build.dir}/svg/level${level}/${module}" 
+		   destdir="${dst.dir}" 
 		   includes="alltests.xml" 
 	       style="${transforms.dir}/suite-to-svgunit.xsl" 
 	       extension=".ant">
 	</style>
 
-	
 	<!--  a suite creates an Ant file that is executed to fixup the filenames  -->
-	<ant antfile="${build.dir}/svg/level${level}/${module}/alltests.ant">
-		<property name="svg.dir" value="${build.dir}/svg/level${level}/${module}"/>
+	<ant antfile="${dst.dir}/alltests.ant">
+		<property name="svg.dir" value="${dst.dir}"/>
 		<property name="files.dir" value="${tests.dir}/level${level}/${module}/files"/>
 		<property name="ecmascript.dir" location="ecmascript"/>
 	</ant>
 	
-	<!-- xmlvalidate lenient="no" failonerror="yes"
-	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${build.dir}/svg/level${level}/${module}" includes="*.svg"/>  
-	</xmlvalidate -->
+</target>
+
+
+
+<target name="gen-selfhtml">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="dst.dir" value="${build.dir}/self-hosted/html/level${level}/${module}"/>
+	
+    <mkdir dir="${dst.dir}"/>
+	<copy todir="${dst.dir}">
+        <fileset dir="ecmascript" includes="selfhtml.js alltests.html alltests.js"/>
+    </copy>
+    <replace file="${dst.dir}/alltests.html"
+         token="SuiteName" value="DOM Level ${level} ${module} - HTML"/>
+	<copy todir="${dst.dir}">
+        <fileset dir="docs/resources" includes="COPYRIGHT.html"/>
+    </copy>
+    <copy todir="${dst.dir}">
+		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak *.html *.xml *.xhtml *.svg *.js"/>
+    </copy>
+
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${dst.dir}" 
+		   includes="*.xml" 
+           excludes="metadata.xml alltests.xml"
+	       style="${transforms.dir}/test-to-selfhtml.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom${level}-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level${level}/${module}/"/>
+        <param name="testpath" expression="../level${level}/${module}/"/>
+	</style>
+
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${dst.dir}" 
+		   includes="alltests.xml" 
+	       style="${transforms.dir}/suite-to-selfhtml_ant.xsl" 
+	       extension=".ant">
+	       <param name="level" expression="${level}"/>
+	       <param name="module" expression="${module}"/>
+	</style>
+
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${dst.dir}" 
+		   includes="alltests.xml" 
+	       style="${transforms.dir}/suite-to-selfhtml_html.xsl" 
+	       extension=".frame.html">
+	</style>
+	
+	<!--  a suite creates an Ant file that is executed to fixup the filenames  -->
+	<ant antfile="${dst.dir}/alltests.ant">
+		<property name="html.dir" value="${dst.dir}"/>
+		<property name="files.dir" value="${tests.dir}/level${level}/${module}/files"/>
+		<property name="l1files.dir" value="${tests.dir}/level1/${module}/files"/>
+		<property name="ecmascript.dir" location="ecmascript"/>
+	</ant>
+	
+    <antcall target="validate-html">
+    	<param name="dir" value="${dst.dir}"/>
+    </antcall>
+
 	
 </target>
 
+<target name="gen-selfxhtml" depends="get-xhtml1-dtd">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="dst.dir" value="${build.dir}/self-hosted/xhtml/level${level}/${module}"/>
+	
+    <mkdir dir="${dst.dir}"/>
+	<copy todir="${dst.dir}">
+        <fileset dir="ecmascript" includes="selfxhtml.js alltests.xhtml alltests.js"/>
+    </copy>
+    <replace file="${dst.dir}/alltests.xhtml"
+         token="SuiteName" value="DOM Level ${level} ${module} - XHTML"/>
+	<copy todir="${dst.dir}">
+        <fileset dir="docs/resources" includes="COPYRIGHT.html"/>
+    </copy>
+    <copy todir="${dst.dir}">
+		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak *.html *.xml *.xhtml *.svg *.js xhtml*.dtd"/>
+    </copy>
+    <copy todir="${dst.dir}">
+		<fileset dir="lib/xhtml1-dtd"/>
+    </copy>
+    
+
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${dst.dir}" 
+		   includes="*.xml" 
+           excludes="metadata.xml alltests.xml"
+	       style="${transforms.dir}/test-to-selfhtml.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom${level}-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level${level}/${module}/"/>
+        <param name="testpath" expression="../level${level}/${module}/"/>
+	</style>
+
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${dst.dir}" 
+		   includes="alltests.xml" 
+	       style="${transforms.dir}/suite-to-selfhtml_ant.xsl" 
+	       extension=".ant">
+	       <param name="extension" expression=".xhtml"/>
+	</style>
+
+	<style basedir="${tests.dir}/level${level}/${module}" 
+		   destdir="${dst.dir}" 
+		   includes="alltests.xml" 
+	       style="${transforms.dir}/suite-to-selfxhtml_xhtml.xsl" 
+	       extension=".frame.xhtml">
+	</style>
+	
+	<!--  a suite creates an Ant file that is executed to fixup the filenames  -->
+	<ant antfile="${dst.dir}/alltests.ant">
+		<property name="html.dir" value="${dst.dir}"/>
+		<property name="files.dir" value="${tests.dir}/level${level}/${module}/files"/>
+		<property name="ecmascript.dir" location="ecmascript"/>
+	</ant>
+	
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${dst.dir}" 
+			includes="*.xhtml *.xhtm" excludes="documentgetdoctypenodtd.xhtml"/>  
+	</xmlvalidate>
+	
+	
+</target>
 
 
 
@@ -378,17 +497,33 @@ This target checks that the output of that implied transform is valid HTML
     <copy todir="${build.dir}/level${level}/${module}/survey"
     	file="${build.dir}/dom${level}-${module}-metadata.rdf"/>
 
-    <available property="dist-includes-svg" file="${build.dir}/svg/level${level}/${module}/alltests.ant"/>
+    <available property="dist-includes-self-hosted-html" file="${build.dir}/self-hosted/html/level${level}/${module}"/>
+    <available property="dist-includes-self-hosted-xhtml" file="${build.dir}/self-hosted/xhtml/level${level}/${module}"/>
+    <available property="dist-includes-self-hosted-svg" file="${build.dir}/self-hosted/svg/level${level}/${module}"/>
 </target>
 
-<target name="dist-prep-svg" depends="dist-prep" if="dist-includes-svg">
-    <mkdir dir="${build.dir}/level${level}/${module}/svg/level${level}/${module}"/>
-    <copy todir="${build.dir}/level${level}/${module}/svg/level${level}/${module}">
-        <fileset dir="${build.dir}/svg/level${level}/${module}" excludes="*.ant"/>
+<target name="dist-prep-self-hosted-html" depends="dist-prep" if="dist-includes-self-hosted-html">
+    <mkdir dir="${build.dir}/level${level}/${module}/self-hosted/html/level${level}/${module}"/>
+    <copy todir="${build.dir}/level${level}/${module}/self-hosted/html/level${level}/${module}">
+        <fileset dir="${build.dir}/self-hosted/html/level${level}/${module}" excludes="*.ant"/>
     </copy>
 </target>
 
-<target name="dist" depends="dist-prep-svg">
+<target name="dist-prep-self-hosted-xhtml" depends="dist-prep" if="dist-includes-self-hosted-xhtml">
+    <mkdir dir="${build.dir}/level${level}/${module}/self-hosted/xhtml/level${level}/${module}"/>
+    <copy todir="${build.dir}/level${level}/${module}/self-hosted/xhtml/level${level}/${module}">
+        <fileset dir="${build.dir}/self-hosted/xhtml/level${level}/${module}" excludes="*.ant"/>
+    </copy>
+</target>
+
+<target name="dist-prep-self-hosted-svg" depends="dist-prep" if="dist-includes-self-hosted-svg">
+    <mkdir dir="${build.dir}/level${level}/${module}/self-hosted/svg/level${level}/${module}"/>
+    <copy todir="${build.dir}/level${level}/${module}/self-hosted/svg/level${level}/${module}">
+        <fileset dir="${build.dir}/self-hosted/svg/level${level}/${module}" excludes="*.ant"/>
+    </copy>
+</target>
+
+<target name="dist" depends="dist-prep-self-hosted-html, dist-prep-self-hosted-xhtml, dist-prep-self-hosted-svg">
     <mkdir dir="${dist.dir}"/>
     <zip  zipfile="${dist.dir}/dom${level}-${module}.zip" basedir="${build.dir}/level${level}/${module}"/>
     <tar tarfile="${dist.dir}/dom${level}-${module}.tar.gz" basedir="${build.dir}/level${level}/${module}" compression="gzip"/>
@@ -656,6 +791,19 @@ This target checks that the output of that implied transform is valid HTML
     </antcall>
 </target>
 
+<target name="dom1-core-gen-selfhtml" depends="dom1-interfaces,dom1-dtd">
+    <antcall target="gen-selfhtml">
+    	<param name="level" value="1"/>
+    	<param name="module" value="core"/>
+    </antcall>
+</target>
+
+<target name="dom1-core-gen-selfxhtml" depends="dom1-interfaces,dom1-dtd">
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="1"/>
+    	<param name="module" value="core"/>
+    </antcall>
+</target>
 
 <target name="dom1-core-validate-tests" depends="dom1-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
@@ -783,7 +931,9 @@ This target checks that the output of that implied transform is valid HTML
               junit-run,
               get-junit-license,
               dom1-schema,
-              dom1-core-gen-svgunit">
+              dom1-core-gen-svgunit,
+              dom1-core-gen-selfhtml,
+              dom1-core-gen-selfxhtml">
     <antcall target="dist">
     	<param name="level" value="1"/>
     	<param name="module" value="core"/>
@@ -922,6 +1072,20 @@ This target checks that the output of that implied transform is valid HTML
 
 <target name="dom1-html-gen-jsunit" depends="jsunit-get, dom1-html-gen-jsunit-base"/>
 
+<target name="dom1-html-gen-selfhtml" depends="dom1-interfaces,dom1-dtd">
+    <antcall target="gen-selfhtml">
+    	<param name="level" value="1"/>
+    	<param name="module" value="html"/>
+    </antcall>
+</target>
+
+<target name="dom1-html-gen-selfxhtml" depends="dom1-interfaces,dom1-dtd">
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="1"/>
+    	<param name="module" value="html"/>
+    </antcall>
+</target>
+
 
 <target name="dom1-html-checkstyle" depends="checkstyle-available, dom1-html-javac">
     <antcall target="checkstyle">
@@ -962,7 +1126,9 @@ This target checks that the output of that implied transform is valid HTML
 	         get-junit,
 	         junit-run,
 	         get-junit-license,
-	         dom1-schema">
+	         dom1-schema,
+	         dom1-html-gen-selfhtml,
+	         dom1-html-gen-selfxhtml">
     <antcall target="dist">
     	<param name="level" value="1"/>
     	<param name="module" value="html"/>
@@ -1313,6 +1479,22 @@ This target checks that the output of that implied transform is valid HTML
 
 <target name="dom2-core-gen-jsunit" depends="jsunit-get, dom2-core-gen-jsunit-base"/>
 
+<target name="dom2-core-gen-selfhtml" depends="dom2-interfaces,dom2-dtd">
+    <antcall target="gen-selfhtml">
+    	<param name="level" value="2"/>
+    	<param name="module" value="core"/>
+    </antcall>
+</target>
+
+<target name="dom2-core-gen-selfxhtml" depends="dom2-interfaces,dom2-dtd">
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="2"/>
+    	<param name="module" value="core"/>
+    </antcall>
+</target>
+
+
+
 <target name="dom2-core-gen-svgunit" depends="dom2-interfaces,dom2-dtd">
     <antcall target="gen-svgunit">
     	<param name="level" value="2"/>
@@ -1400,7 +1582,9 @@ This target checks that the output of that implied transform is valid HTML
 	         junit-run,
 	         get-junit-license,
 	         dom2-schema,
-	         dom2-core-gen-svgunit">
+	         dom2-core-gen-svgunit,
+	         dom2-core-gen-selfxhtml,
+	         dom2-core-gen-selfhtml">
     <antcall target="dist">
     	<param name="level" value="2"/>
     	<param name="module" value="core"/>
@@ -1547,6 +1731,97 @@ This target checks that the output of that implied transform is valid HTML
 
 <target name="dom2-html-gen-jsunit" depends="jsunit-get, dom2-html-gen-jsunit-base"/>
 
+<target name="dom2-html-gen-selfhtml" depends="dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
+    <mkdir dir="${build.dir}/selfhtml/level2/html/files"/>
+    <copy todir="${build.dir}/selfhtml/level2/html/files">
+		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
+    </copy>
+	<style basedir="${tests.dir}/level1/html" 
+		   destdir="${build.dir}/selfhtml/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml
+                     alltests.xml 
+                     HTMLAppletElement07.xml 
+                     HTMLAppletElement09.xml
+                     HTMLBaseFontElement03.xml
+                     HTMLImageElement05.xml
+                     HTMLImageElement06.xml
+                     HTMLImageElement11.xml
+                     HTMLImageElement12.xml
+                     HTMLImageElement14.xml
+                     HTMLInputElement13.xml
+                     HTMLObjectElement11.xml
+                     HTMLObjectElement16.xml
+                     hasFeature00.xml
+                     object08.xml
+                     object13.xml"
+	       style="${transforms.dir}/test-to-selfhtml.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+        <param name="testpath" expression="../level2/html/"/>
+	</style>
+
+    <antcall target="gen-selfhtml">
+    	<param name="level" value="2"/>
+    	<param name="module" value="html"/>
+    </antcall>
+    
+    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
+    <copy todir="${build.dir}/selfhtml/level2/html/applets/org/w3c/domts">
+        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
+    </copy>
+    <copy todir="${build.dir}/selfhtml/level2/html/applets">
+        <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
+    </copy>
+</target>
+
+<target name="dom2-html-gen-selfxhtml" depends="dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
+    <mkdir dir="${build.dir}/selfxhtml/level2/html"/>
+	<style basedir="${tests.dir}/level1/html" 
+		   destdir="${build.dir}/selfxhtml/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml
+                     alltests.xml 
+                     HTMLAppletElement07.xml 
+                     HTMLAppletElement09.xml
+                     HTMLBaseFontElement03.xml
+                     HTMLImageElement05.xml
+                     HTMLImageElement06.xml
+                     HTMLImageElement11.xml
+                     HTMLImageElement12.xml
+                     HTMLImageElement14.xml
+                     HTMLInputElement13.xml
+                     HTMLObjectElement11.xml
+                     HTMLObjectElement16.xml
+                     hasFeature00.xml
+                     object08.xml
+                     object13.xml"
+	       style="${transforms.dir}/test-to-selfhtml.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+        <param name="testpath" expression="../level2/html/"/>
+	</style>
+
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="2"/>
+    	<param name="module" value="html"/>
+    </antcall>
+    
+    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
+    <copy todir="${build.dir}/selfxhtml/level2/html/applets/org/w3c/domts">
+        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
+    </copy>
+    <copy todir="${build.dir}/selfxhtml/level2/html/applets">
+        <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
+    </copy>
+</target>
+
 <target name="dom2-html-javac" depends="common-javac, dom2-html-gen-java">
 	<javac srcdir="${java.build.dir}"
 		includes="org/w3c/domts/level2/html/*.java" 
@@ -1641,7 +1916,9 @@ This target checks that the output of that implied transform is valid HTML
 		get-junit,
 		junit-run,
 		get-junit-license,
-		dom2-schema">
+		dom2-schema,
+		dom2-core-gen-selfxhtml,
+		dom2-core-gen-selfhtml">
     <antcall target="dist">
     	<param name="level" value="2"/>
     	<param name="module" value="html"/>
@@ -1734,6 +2011,22 @@ This target checks that the output of that implied transform is valid HTML
 
 <target name="dom2-events-gen-jsunit" depends="jsunit-get, dom2-events-gen-jsunit-base"/>
 
+<target name="dom2-events-gen-selfhtml" depends="dom2-interfaces,dom2-dtd">
+    <antcall target="gen-selfhtml">
+    	<param name="level" value="2"/>
+    	<param name="module" value="events"/>
+    </antcall>
+</target>
+
+<target name="dom2-events-gen-selfxhtml" depends="dom2-interfaces,dom2-dtd">
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="2"/>
+    	<param name="module" value="events"/>
+    </antcall>
+</target>
+
+
+
 <target name="dom2-events-gen-svgunit" depends="dom2-interfaces,dom2-dtd">
     <antcall target="gen-svgunit">
     	<param name="level" value="2"/>
@@ -1796,7 +2089,9 @@ This target checks that the output of that implied transform is valid HTML
               junit-run,
               get-junit-license,
               dom2-schema,
-              dom2-events-gen-svgunit">
+              dom2-events-gen-svgunit,
+              dom2-events-gen-selfhtml,
+              dom2-events-gen-selfxhtml">
     <antcall target="dist">
     	<param name="level" value="2"/>
     	<param name="module" value="events"/>
@@ -2106,6 +2401,14 @@ This target checks that the output of that implied transform is valid HTML
 
 <target name="dom3-core-gen-jsunit" depends="jsunit-get, dom3-core-gen-jsunit-base"/>
 
+<target name="dom3-core-gen-selfxhtml" depends="dom3-interfaces,dom3-dtd">
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="3"/>
+    	<param name="module" value="core"/>
+    </antcall>
+</target>
+
+
 <target name="dom3-core-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-svgunit">
     	<param name="level" value="3"/>
@@ -2202,7 +2505,8 @@ This target checks that the output of that implied transform is valid HTML
 	         junit-run,
 	         get-junit-license,
 	         dom3-schema,
-	         dom3-core-gen-svgunit">
+	         dom3-core-gen-svgunit,
+	         dom3-core-gen-selfxhtml">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="core"/>
@@ -2271,6 +2575,12 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
+<target name="dom3-events-gen-selfxhtml" depends="dom3-interfaces,dom3-dtd">
+    <antcall target="gen-selfxhtml">
+    	<param name="level" value="3"/>
+    	<param name="module" value="events"/>
+    </antcall>
+</target>
 
 <target name="dom3-events-validate-tests" depends="dom3-dtd">
 	<xmlvalidate lenient="no" failonerror="yes"
@@ -2344,7 +2654,8 @@ This target checks that the output of that implied transform is valid HTML
 		     junit-run,
 		     get-junit-license,
 		     dom3-schema,
-		     dom3-events-gen-svgunit">
+		     dom3-events-gen-svgunit,
+		     dom3-events-gen-selfxhtml">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="events"/>

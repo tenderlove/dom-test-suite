@@ -33,6 +33,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <member>"head"</member>
     <member>"meta"</member>
     <member>"title"</member>
+    <member>"script"</member>
+    <member>"script"</member>
+    <member>"script"</member>
     <member>"body"</member>
     <member>"p"</member>
     <member>"em"</member>

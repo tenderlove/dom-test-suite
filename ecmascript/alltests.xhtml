@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+   "xhtml1-frameset.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>SuiteName</title>
+<script type="text/javascript">
+var isLogging = false;
+var log = new Array();
+var xhtmlNS = "http://www.w3.org/1999/xhtml";
+
+
+function startLogging() {
+   isLogging = true;
+   return false;
+}
+
+function endLogging() {
+  isLogging = false;
+  var logDoc = test_log.document;
+  var i;
+   var logDoc = test_log.document;
+   var html = logDoc.createElementNS(xhtmlNS, "html");
+   var head = logDoc.createElementNS(xhtmlNS, "head");
+   html.appendChild(head);
+   var titleElem = logDoc.createElementNS(xhtmlNS, "title");
+   titleElem.appendChild(logDoc.createTextNode("test report"));
+   head.appendChild(titleElem);
+   var body = logDoc.createElementNS(xhtmlNS, "body");
+   html.appendChild(body);
+   var preElem = logDoc.createElementNS(xhtmlNS, "pre");
+   body.appendChild(preElem);
+   var logContent = "&lt;testsuite&gt;\n";
+   for (i = 0; i &lt; log.length; i++) {
+     logContent = logContent + (log[i] + "\n");
+   }
+   logContent = logContent + "&lt;/testsuite&gt;\n";
+   preElem.appendChild(logDoc.createTextNode(logContent));
+   if (logDoc.documentElement != null) {
+       logDoc.replaceChild(html, logDoc.documentElement);
+   } else {
+       logDoc.appendChild(html);
+   }
+   log = new Array();
+}
+
+function setResult(testName, resultType, message) {
+   var report = "";
+   if (isLogging) {
+      if (resultType == null) {
+         report = "&lt;testcase name='" + testName + "'/&gt;\n";
+      } else {
+         if (resultType == "skip") {
+      	   report = "&lt;skip name='" + testName + "'";
+      	   if (message != null) {
+      	     report = report + " message='" + message + "'/&gt;\n";
+      	   } else {
+      	     report = report + "/&gt;\n";
+      	   }
+         } else {
+           report = "&lt;testcase name='" + testName + "'&gt;\n";
+           if (resultType == "failure") {
+             report = report + "&lt;failure";
+           } else {
+             report = report + "&lt;error";
+           }
+      	   if (message != null) {
+      	     report = report + " message='" + message + "'/&gt;\n";
+      	   } else {
+      	     report = report + "/&gt;\n";
+      	   }
+      	   report = report + "&lt;/testcase&gt;\n";
+         }
+      }
+      log[log.length] = report;
+   }
+}
+
+</script>
+</head>
+<frameset rows="60%,20%,20%">
+<frame src="alltests.frame.xhtml"/>
+<frame name="test_frame"/>
+<frame name="test_log"/>
+<noframes><p><a href="alltests.frame.html">Frameless test suite</a></p></noframes>
+</frameset>
+</html>

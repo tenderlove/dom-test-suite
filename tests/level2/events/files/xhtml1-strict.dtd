@@ -25,7 +25,7 @@ this DTD can be replaced by the normal DTD for XHTML.
 
 <!ELEMENT html (head, body)>
 <!ATTLIST html xmlns CDATA #IMPLIED>
-<!ELEMENT head (meta,title)>
+<!ELEMENT head (meta,title,script*)>
 <!ELEMENT meta EMPTY>
 <!ATTLIST meta 
 	http-equiv CDATA #IMPLIED
@@ -59,4 +59,6 @@ this DTD can be replaced by the normal DTD for XHTML.
     id ID #IMPLIED
 >
 <!ELEMENT script (#PCDATA)>
-<!ATTLIST script type CDATA #IMPLIED>          
+<!ATTLIST script 
+ type CDATA #IMPLIED
+ src CDATA #IMPLIED>          

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>SuiteName</title>
+<script type="text/javascript">
+var isLogging = false;
+var log = new Array();
+
+function startLogging() {
+  var logDoc = test_log.document;
+  logDoc.write("Test logging started");
+  logDoc.close();  
+  isLogging = true;
+  return false;
+}
+
+function endLogging() {
+  isLogging = false;
+  var logDoc = test_log.document;
+  var i;
+  var logContent = "&lt;testsuite&gt;\n";
+  for (i = 0; i < log.length; i++) {
+     logContent = logContent + (log[i] + "\n");
+  } 
+  logContent = logContent + "&lt;/testsuite&gt;";
+  logDoc.write(logContent);
+  logDoc.close();  
+  log = new Array();
+}
+
+function setResult(testName, resultType, message) {
+   var report = "";
+   if (isLogging) {
+      if (resultType == null) {
+         report = "&lt;testcase name='" + testName + "'/&gt;\n";
+      } else {
+         if (resultType == "skip") {
+      	   report = "&lt;skip name='" + testName + "'";
+      	   if (message != null) {
+      	     report = report + " message='" + message + "'/&gt;\n";
+      	   } else {
+      	     report = report + "/&gt;\n";
+      	   }
+         } else {
+           report = "&lt;testcase name='" + testName + "'&gt;\n";
+           if (resultType == "failure") {
+             report = report + "&lt;failure";
+           } else {
+             report = report + "&lt;error";
+           }
+      	   if (message != null) {
+      	     report = report + " message='" + message + "'/&gt;\n";
+      	   } else {
+      	     report = report + "/&gt;\n";
+      	   }
+      	   report = report + "&lt;/testcase&gt;\n";
+         }
+      }
+      log[log.length] = report;
+   }
+}
+
+</script>
+</head>
+<frameset ROWS="60%,20%,20%">
+<frame SRC="alltests.frame.html">
+<frame name="test_frame">
+<frame name="test_log" src="COPYRIGHT.html">
+<noframes><p><a href="alltests.frame.html">Frameless test suite</a></p></noframes>
+</frameset>
+</html>
