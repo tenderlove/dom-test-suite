@@ -32,6 +32,7 @@ this DTD can be replaced by the normal DTD for XHTML.
 	content CDATA #IMPLIED>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT body (p*)>
+<!ATTLIST body onload CDATA #IMPLIED>
 <!ELEMENT p (#PCDATA|em|strong|code|sup|var|acronym|abbr)*>
 <!ATTLIST p 
   xmlns:dmstc CDATA #IMPLIED
