@@ -51,6 +51,7 @@ function exposeTestFunctionNames()
 return ['<xsl:value-of select="@name"/>'];
 }
 
+var fileBase = "<xsl:value-of select="$testpath"/>files/";
 var docsLoaded = -1000000;
 var setUpException = null;
 
@@ -66,6 +67,9 @@ var setUpException = null;
 function setUpPage() {
    setUpPageStatus = 'running';
    try {
+     if (builder.exception != null) {
+        throw builder.exception;
+     }     
 <xsl:for-each select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]">
     <xsl:text>       checkFeature(</xsl:text>
     <xsl:value-of select="@feature"/>
@@ -87,8 +91,6 @@ function setUpPage() {
     <xsl:text>", </xsl:text><xsl:value-of select="@value"/><xsl:text>);
 </xsl:text>
 </xsl:for-each>
-
-
        docsLoaded = 0;<xsl:for-each select="$loads">
        <xsl:text>
        docsLoaded += preload(this.</xsl:text><xsl:value-of select="@var"/>, "<xsl:value-of select="@var"/>", "<xsl:value-of select="@href"/>");</xsl:for-each>
@@ -144,7 +146,6 @@ function checkSetUp() {
             <script language="JavaScript" src="DOMTestCase.js"></script>
             <script language="JavaScript" src="DOMTestSuite.js"></script>
             <script language="JavaScript">
-var builder = new IFrameBuilder();
 
 //
 //  This function evaluates all tests and suites that appear in
@@ -174,13 +175,26 @@ function suite() {
 }
 </script>
         </head>
-        <body onload="domtsSuiteOnLoad()">
-<form id="configuration" action="../../jsunit/testRunner.html" target="jsunit">
+        <body>
+            <form id="configuration" action="../../jsunit/testRunner.html" target="jsunit" onsubmit="fixTestPagePath()">
             <table width="100%" border="1">
-                <tr>
-                    <td>Test: <select name="testpage" size="1">
-                    </select>
-                    <input type="submit" value="Load JSUnit"></input>
+                <tr><td>                    
+                    <table width="100%">
+                        <tr>
+                            <td>Test: </td>
+                            <td>
+                                <select name="testpage" size="1">
+                                    <option selected="selected" value="alltests.html">All applicable tests</option>
+                                    <xsl:for-each select="*[local-name() = 'suite.member']">
+                                        <option value="{substring-before(@href,'.')}.html"><xsl:value-of select="substring-before(@href, '.')"/></option>
+                                    </xsl:for-each>
+                                </select>
+                            </td>
+                            <td align="right">
+                                <input type="submit" value="Load JSUnit"></input>
+                            </td>
+                        </tr>
+                    </table>
                     </td>
                 </tr>
                 <tr>
@@ -191,11 +205,11 @@ function suite() {
                         <table>
                             <tr><th>Implementation</th></tr>
                             <tr><td><input type="radio" name="implementation" value="iframe" checked="checked" onclick="onImplementationChange()">iframe</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="dom3" onclick="onImplementationChange()">DOM 3 Load/Save</input></td></tr>
+                            <tr><td><input disabled="true" type="radio" name="implementation" value="dom3" onclick="onImplementationChange()">DOM 3 Load/Save</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="mozillaXML" onclick="onImplementationChange()">Mozilla XML</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="msxml3" onclick="onImplementationChange()">MSXML 3.0</input></td></tr>
                             <tr><td><input type="radio" name="implementation" value="msxml4" onclick="onImplementationChange()">MSXML 4.0</input></td></tr>
-                            <tr><td><input type="radio" name="implementation" value="adobeSVG" onclick="onImplementationChange()">Adobe SVG</input></td></tr>
+                            <tr><td><input disabled="disabled" type="radio" name="implementation" value="adobeSVG" onclick="onImplementationChange()">Adobe SVG</input></td></tr>
                         </table>
                     </td>
                     <td valign="top">
@@ -243,7 +257,7 @@ function suite() {
                             <tr><td><input type="radio" name="contentType" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input></td></tr>
                             <tr><td><input type="radio" name="contentType" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input></td></tr>
                             <tr><td><input type="radio" name="contentType" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input></td></tr>
-                            <tr><td><input type="radio" name="contentType" value="text/mathml" onclick="setContentType('text/mathml')">MathML</input></td></tr>
+                            <tr><td><input disabled="disabled" type="radio" name="contentType" value="text/mathml" onclick="setContentType('text/mathml')">MathML</input></td></tr>
                         </table>
                     </td>
                 </tr>
@@ -252,14 +266,17 @@ function suite() {
                     <td>
 <table width="100%">
 <tr><td>The following tests are incompatible with the current settings</td></tr>
-<tr><td><select name="incompatible" size="10"></select></td></tr>
+<tr><td>
+<select name="incompatible" size="10">
+<option>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</option>
+</select></td></tr>
 </table>
                     </td>
                 </tr>
                 </td>
                 </tr>
             </table>
-        </form>
+            </form>
         </body>
     </html>
 </xsl:template>
