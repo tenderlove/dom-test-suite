@@ -229,7 +229,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 	<xsl:template name="relation-exception">
 		<xsl:param name="baseXPointer"/>
-		<xsl:variable name="exceptionURI"><xsl:value-of select="$baseXPointer"/>exception[name='<xsl:value-of select="@name"/>']/descr/p[</xsl:variable>
+		<xsl:variable name="exceptionURI"><xsl:value-of select="$baseXPointer"/>exception[@name='<xsl:value-of select="@name"/>']/descr/p[</xsl:variable>
 		<xsl:for-each select="descr/p">
 			<xsl:text>
 </xsl:text>
