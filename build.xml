@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.89  2003-03-14 07:25:13  dom-ts-4
+Revision 1.90  2003-04-09 21:15:18  plehegar
+Added rules for DOM Level 3 XPath (Java and JSUnit)
+Updated references to DOM Level 3 XPath and DOM Level 3 Events
+
+Revision 1.89  2003/03/14 07:25:13  dom-ts-4
 Split test suite code into DOMTestSuite.js
 
 Revision 1.88  2003/02/28 07:42:06  dom-ts-4
@@ -1704,13 +1708,13 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="get-dom3-xpath" depends="dom3-available" unless="dom3-xpath-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-XPath-20020328/DOM3-XPath.zip"
+	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-XPath-20030331/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
 		usetimestamp="yes"/>
 </target>
 
 <target name="get-dom3-events" depends="dom3-available" unless="dom3-events-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Events-20020712/DOM3-Events.zip"
+	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/DOM3-Events.zip"
 		dest="${specs.dir}/DOM3-Events.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1859,6 +1863,14 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
+<target name="dom3-xpath-validate-tests" depends="dom3-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/xpath" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
+
 <target name="dom3-subjects" depends="dom3-init">
 	<!--  create a DOM 3 version of subjects.xsl  -->
     <copy file="${transforms.dir}/subjects.xsl" tofile="${build.dir}/dom3-subjects.xsl"/>
@@ -1905,6 +1917,47 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/ls/"/>
 	</style>
+</target>
+
+<target name="dom3-xpath-gen-java" depends="dom3-interfaces,dom3-schema">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level3/xpath"/>
+
+	<style basedir="${tests.dir}/level3/xpath" 
+		   destdir="${java.build.dir}/org/w3c/domts/level3/xpath" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom3-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level3.xpath"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/xpath/"/>
+	</style>
+</target>
+
+<target name="dom3-xpath-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-schema">
+    <mkdir dir="${build.dir}/ecmascript/level3/xpath/files"/>
+    <copy todir="${build.dir}/ecmascript/level3/xpath">
+      <fileset dir="ecmascript" includes="*.js"/>
+    </copy>
+    <copy todir="${build.dir}/ecmascript/level3/xpath/files">
+      <fileset dir="tests/level3/xpath/files" excludes="*.bak"/>
+    </copy>
+    
+    <style basedir="${tests.dir}/level3/xpath" 
+      destdir="${build.dir}/ecmascript/level3/xpath" 
+      includes="*.xml" 
+      excludes="metadata.xml"
+      style="${transforms.dir}/test-to-jsunit.xsl" 
+      extension=".html">
+      <param name="interfaces-docname"
+	expression="../${build.dir}/dom3-interfaces.xml"/>
+      <param name="target-uri-base"
+	expression="http://www.w3.org/2001/DOM-Test-Suite/level3/xpath/"/>
+      <param name="testpath" expression="../level3/xpath/"/>
+    </style>
 </target>
 
 <!--  
@@ -2016,6 +2069,92 @@ it would compile all DOM 3 java code
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>
 </target>
+
+<target name="dom3-xpath-javac" depends="common-javac,dom3-xpath-gen-java">
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <src path="${specs.dir}/Level-3/Core/java"/>
+        <src path="${specs.dir}/Level-3/XPath/java"/>
+        <include name="org/w3c/domts/level3/xpath/*"/>
+        <include name="org/w3c/domts/*"/>
+        <include name="org/w3c/dom/**"/>
+    </javac>
+</target>
+
+<target name="dom3-xpath-checkstyle" depends="checkstyle-available, dom3-xpath-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level3/xpath" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
+
+<target name="dom3-xpath-jar" depends="dom3-xpath-javac">
+	<!--  will need to provide a manifest    -->
+	<jar jarfile="${build.dir}/dom3-xpath.jar"  manifest="java/dom3-xpath.mf">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level3/xpath/*"
+		         excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/dom/*"
+		         excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/dom/xpath/*"
+		         excludes="*.bak"/>
+
+        <!--  leave commented until we have some associated files  -->
+		<!-- fileset dir="tests/level3/xpath/files" excludes="*.bak"/ -->
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
+</target>
+
+<target name="dom3-xpath-metadata" depends="dom3-schema">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level3/xpath/alltests.xml" 
+		   out="${build.dir}/dom3-xpath-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/xpath/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
+
+
+<target name="dom3-xpath-matrix" depends="dom3-xpath-metadata,dom3-subjects,dom3-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom3-xpath-metadata.rdf" 
+		   out="${build.dir}/dom3-xpath-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/DOM-Level-3-XPath/xpath#"/>
+        <param name="interfacesURL" expression="dom3-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom3-xpath-subjects.xml"/>
+        <param name="title" expression='DOM Level 3 XPath Test Suite Matrix'/>
+	</style>
+</target>
+
 
 
 
