@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.55  2002-03-27 07:40:15  dom-ts-4
+Revision 1.56  2002-04-09 01:30:38  dom-ts-4
+dom1-core-metadata didn't declare dependence on dom1-dtd
+updated URL for new XPath WD
+
+Revision 1.55  2002/03/27 07:40:15  dom-ts-4
 dom3-schema builds "almost" final schema
 
 Revision 1.54  2002/03/04 14:17:13  dom-ts-4
@@ -299,7 +303,7 @@ All implementation conditions combined into implementationAttribute element
 	       style="${transforms.dir}/subjects.xsl"/>
 </target>
 
-<target name="dom1-core-metadata" depends="dom1-init">
+<target name="dom1-core-metadata" depends="dom1-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level1/core/alltests.xml" 
 		   out="${build.dir}/dom1-core-metadata.rdf" 
@@ -323,7 +327,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom1-html-metadata" depends="dom1-init">
+<target name="dom1-html-metadata" depends="dom1-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level1/html/alltests.xml" 
 		   out="${build.dir}/dom1-html-metadata.rdf" 
@@ -1201,7 +1205,7 @@ All implementation conditions combined into implementationAttribute element
 	</jar>
 </target>
 
-<target name="dom2-core-metadata" depends="dom2-init">
+<target name="dom2-core-metadata" depends="dom2-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level2/core/alltests.xml" 
 		   out="${build.dir}/dom2-core-metadata.rdf" 
@@ -1310,7 +1314,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom3-xpath" depends="dom3-available" unless="dom3-xpath-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-XPath-20020208/DOM3-XPath.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-XPath-20020328/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1450,7 +1454,8 @@ All implementation conditions combined into implementationAttribute element
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
 	</style>
-	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/>
+    <!--  can't copy until we no longer need human editing  -->
+	<!-- copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/ -->
 </target>
 
 <target name="dom3-subjects" depends="dom3-init">
