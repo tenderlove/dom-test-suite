@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2003 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.13  2002-07-01 03:57:31  dom-ts-4
+ Revision 1.14  2003-11-18 08:14:55  dom-ts-4
+ assertTrue does not accept Object's (bug 380)
+
+ Revision 1.13  2002/07/01 03:57:31  dom-ts-4
  Added name parameter to assertURIEquals
 
  Revision 1.12  2002/06/03 23:48:48  dom-ts-4
@@ -160,9 +163,17 @@ public abstract class DOMTestCase extends DOMTest  {
   public void assertTrue(String assertID, boolean actual) {
     framework.assertTrue(this,assertID,actual);
   }
+  
+  public void assertTrue(String assertID, Object actual) {
+  	 framework.assertTrue(this, assertID, ((Boolean) actual).booleanValue());
+  }
 
   public void assertFalse(String assertID, boolean actual) {
     framework.assertFalse(this,assertID,actual);
+  }
+  
+  public void assertFalse(String assertID, Object actual) {
+  	framework.assertFalse(this, assertID, ((Boolean) actual).booleanValue());
   }
 
   public void assertNull(String assertID, Object actual) {
