@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DocumentLSTest0">
+  <metadata>
+    <title>DocumentLS</title>
+    &creator; 
+    <description>Test the load through DocumentLS, documents content should be replaced</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DocumentLS"/>
+  </metadata>
+
+  <var name="documentls"   type="DocumentLS"/>
+  <var name="result"       type="boolean"/>
+  <var name="elementList"  type="NodeList"/>
+  <var name="mystring"     type="DOMString" value="&quot;&lt;elt0&gt;&lt;elt1&gt;only one elt1&lt;/elt1&gt;&lt;/elt0&gt;&quot;"/>
+
+  &vars;
+  &init;
+
+
+  <!-- first a normal parse-->
+  <parseURI  var="document" obj="builder" uri="TEST0"/>
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="2" id="count_elt1_1"/>
+
+  <assign var="documentls" value="document"/>
+  <loadXML var="result" obj="documentls" source="mystring"/>
+
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="1" id="count_elt1_2"/>
+
+
+</test>
+
+
+
+
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMWriterFilterTest1">
+  <metadata>
+    <title>DOMWriterFilter</title>
+    &creator; 
+    <description>DOMWriterFilter test, this test tests whether the whattoshow on a writer filter for attribute nodes is ignored. 
+                 An attempt is made to filter out attribute, they should remain in the result</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMWriterFilter"/>
+  </metadata>
+
+
+  <var name="myfilter" type="DOMWriterFilter"> 
+     <var name="name" type="DOMString"/>
+     &filterVars;
+
+
+     <acceptNode>
+        <return value="FILTER_REJECT"/>            
+     </acceptNode>
+
+     <whatToShow interface="DOMWriterFilter">            
+       <get>
+        <return value="SHOW_ATTRIBUTE"/>
+       </get>
+     </whatToShow>
+
+  </var>
+
+
+
+
+  <var name="configuration"   type="DOMConfiguration"/>
+  <var name="stringDoc"       type="DOMString" value="&quot;&lt;elt1 attr1='attr1'&gt;first elt1&lt;/elt1&gt;&quot;"/>
+  <var name="writeResult"     type="DOMString"/>
+  <var name="length"          type="int"/>
+  <var name="elementList"     type="NodeList"/>
+  <var name="elt1"            type="Element"/>
+  <var name="attr1"           type="DOMString"/>
+
+  &vars;
+  &init;
+
+  <!-- parse the string -->
+  <stringData obj="inputSource" value="stringDoc" interface="DOMInputSource"/>
+  <parse  var="document" obj="builder" is="inputSource"/>
+
+  <!-- apply the filter -->
+  <filter obj="writer" value="myfilter" interface="DOMWriter"/>
+
+  <!-- serialize result -->
+  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+
+  <!-- parse result -->
+  <stringData obj="inputSource" value="writeResult" interface="DOMInputSource"/>
+  <parse  var="document" obj="builder" is="inputSource"/>
+
+  <!-- tests elt1 should be in the result-->
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="1" id="count_elt2"/>
+
+  <!-- attr1 of elt1 should still be there !!-->
+  <item interface="NodeList" obj="elementList" index="0" var="elt1"/>
+
+  <getAttribute obj="elt1" var="attr1" name="&quot;attr1&quot;"/>
+  <assertEquals actual="attr1" expected='"attr1"' ignoreCase="false" id="attrib1"/>
+
+
+</test>
+
+
+
+

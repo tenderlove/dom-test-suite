@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMInputSourceTest5">
+  <metadata>
+    <title>DOMInputSource</title>
+    &creator; 
+    <description>Tests behaviour of the baseURI of DOMInputSource</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+  </metadata>
+
+
+  <var name="myentityresolver" type="DOMEntityResolver"> 
+     <var name="erInputSource" type="DOMInputSource"/>
+     <resolveEntity>
+
+        <assertEquals actual="publicId"  expected='"new_public"' ignoreCase="false" id="er_public"/>
+        <assertEquals actual="systemId"  expected='"new_system"' ignoreCase="false" id="er_system"/>
+        <assertEquals actual="baseURI" expected='"new_base"'   ignoreCase="false" id="er_base"/>
+        
+
+        <return value="null"/>            
+     </resolveEntity>
+
+  </var>
+
+  <var name="ENTITY_RESOLVER" type="DOMString" value='"entity-resolver"'/>
+  <var name="configuration" type="DOMConfiguration"/>
+
+  &vars;
+  &init;
+
+  <config var="configuration" obj="builder" interface="DOMBuilder"/> 
+
+  <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
+ 
+  <systemId obj="inputSource" value='"new_system"' interface="DOMInputSource"/>
+  <publicId obj="inputSource" value='"new_public"' interface="DOMInputSource"/>
+  <baseURI  obj="inputSource" value='"new_base"' interface="DOMInputSource"/>
+ 
+  <parse var="document" obj="builder" is="inputSource"/>
+
+
+
+</test>
+
+
+
+
+

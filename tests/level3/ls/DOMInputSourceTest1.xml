@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMInputSourceTest0">
+  <metadata>
+    <title>DOMInputSource</title>
+    &creator; 
+    <description>test the builder by using a characterstream inputsource</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+  </metadata>
+  &vars;
+
+  <!-- todo create reader -->
+  <var name="myReader" type="DOMReader"/>
+  <var name="elementList" type="NodeList"/>
+
+  &init;
+
+  
+  <characterStream var="inputSource" obj="myReader"/> 
+
+  <parse var="document" obj="builder" is="inputSource"/>
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="1" id="count_elt0"/>
+
+</test>
+
+
+
+
+

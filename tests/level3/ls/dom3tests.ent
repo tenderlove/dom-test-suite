@@ -2,25 +2,74 @@
 <!ENTITY spec        "http://www.w3.org/TR/DOM-Level-3-LS/load-save.html">
 <!ENTITY date        "<date qualifier='created'>2002-03-23</date>">
 <!ENTITY contributor "<contributor>X-Hive Corporation</contributor>">
-<!ENTITY creator     "<creator>X-Hive Corporation</creator>">
+<!ENTITY creator     "<creator>Jeroen van Rotterdam</creator>">
 
-<!ENTITY vars        "<var name='implementation'   type='DOMImplementation'/>   
+<!ENTITY vars        "
+                      <var name='implementation'   type='DOMImplementation'/> 
                       <var name='lsImplementation' type='DOMImplementationLS'/> 
                       <var name='inputSource'      type='DOMInputSource'/> 
                       <var name='document'         type='Document'/>            
                       <var name='writer'           type='DOMWriter'/>            
                       <var name='builder'          type='DOMBuilder'/>
-                      <var name='testfile1'        type='DOMString' value='&quot;test1.xml&quot;'/>
-                      <var name='mode'             type='short'     value='1'/>
-                      <var name='schemaType'       type='DOMString' value='null'/>">
+                      <var name='schemaType'       type='DOMString' value='null'/>
+                     
+                      <!-- constants  -->
+                      <var name='MODE_SYNCHRONOUS'  type='short'  value='1'/>
+                      <var name='MODE_ASYNCHRONOUS' type='short'  value='2'/>
+                      <var name='DTD_SCHEMATYPE'    type='DOMString' value='&quot;http://www.w3.org/TR/REC-xml&quot;'/>
+                      <var name='SCHEMA_SCHEMATYPE' type='DOMString' value='&quot;http://www.w3.org/2001/XMLSchema&quot;'/>
 
-<!ENTITY init        "<createDOMBuilder      var='builder'     obj='lsImplementation' mode='mode' schemaType='schemaType'/>
+                      <!-- action types DOMBuilder.parseWithContext -->
+                      <var name='ACTION_REPLACE'             type='short' value='1'/>
+                      <var name='ACTION_APPEND_AS_CHILDREN'  type='short' value='2'/>
+                      <var name='ACTION_INSERT_AFTER'        type='short' value='3'/>
+                      <var name='ACTION_INSERT_BEFORE'       type='short' value='4'/>
+
+
+                      <!-- testfiles  -->
+                      <var name='TEST0'   type='DOMString' value='&quot;files/test0.xml&quot;'/>
+                      <var name='TEST1'   type='DOMString' value='&quot;files/test1.xml&quot;'/>
+                      <var name='TEST2'   type='DOMString' value='&quot;files/test2.xml&quot;'/>
+                      <var name='TEST3'   type='DOMString' value='&quot;files/test3.xml&quot;'/>
+                      <var name='TEST4'   type='DOMString' value='&quot;files/test4.xml&quot;'/>
+                      <var name='TEST5'   type='DOMString' value='&quot;files/test5.xml&quot;'/>
+                      <var name='TEST6'   type='DOMString' value='&quot;files/test6.xml&quot;'/>
+                      <var name='TEST7'   type='DOMString' value='&quot;files/test7.xml&quot;'/>
+                      <var name='TESTPDF' type='DOMString' value='&quot;test.pdf&quot;'/>
+
+                      <implementation var='implementation'/> 
+                      <assign var='lsImplementation' value='implementation'/> 
+                      ">
+
+<!ENTITY filterVars  "
+                      <var name='SHOW_ELEMENT'      type='int'    value='1'/>
+                      <var name='SHOW_ALL'          type='int'    value='0xFFFFFFFF'/>
+                      <var name='FILTER_ACCEPT'     type='short'  value='1'/>
+                      <var name='FILTER_REJECT'     type='short'  value='2'/>
+                      <var name='FILTER_SKIP'       type='short'  value='3'/>
+                      ">
+
+<!ENTITY errorHandlerVars  "
+                      <var name='error'            type='DOMError'/>
+                      <var name='severity'         type='short'/>
+                      <var name='message'          type='DOMString'/>
+                      <var name='type'             type='DOMString'/>
+                      <var name='location'         type='DOMLocator'/>
+                      ">
+
+<!ENTITY assignErrorHandlerVars  "
+                      <severity         var='severity'         obj='error' interface='DOMError'/> 
+                      <message          var='message'          obj='error' interface='DOMError'/>
+                      <type             var='type'             obj='error' interface='DOMError'/>
+                      <location         var='location'         obj='error' interface='DOMError'/>
+                      ">
+
+
+<!ENTITY init        "<createDOMBuilder      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
                       <createDOMWriter       var='writer'      obj='lsImplementation'/>
                       <createDOMInputSource  var='inputSource' obj='lsImplementation'/>">
 
 <!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='DOMBuilder'/>">
 
-<!ENTITY SHOW_ELEMENT "1">
-<!ENTITY FILTER_ACCEPT "1">
-<!ENTITY FILTER_REJECT "2">
-<!ENTITY FILTER_SKIP "3">
+
+

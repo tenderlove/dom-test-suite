@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM 'dom3.dtd' [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="DOMBuilderTest1">
+  <metadata>
+    <title>DOMBuilder</title>
+    &creator; 
+    <description>DOM Builder test</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMBuilder"/>
+  </metadata>
+  <var name="elementList" type="NodeList"/>
+  <var name="stringDoc"   type="DOMString"/>
+  <var name="firstElt2"   type="Element"/>
+  <var name="returnNode"  type="Node"/>
+  &vars;
+  
+  &init;
+
+  <parseURI  var="document" obj="builder" uri="TEST0"/>
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="1" id="elt2Count_1"/>
+
+  <item interface="NodeList" obj="elementList" var="firstElt2" index="0"/>
+
+  <systemId obj="inputSource" value="TEST2" interface="DOMInputSource"/>
+  <parseWithContext  obj="builder" is="inputSource" cnode="firstElt2" action="ACTION_REPLACE" var="returnNode"/>
+  
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="1" id="elt2Count_2"/>
+
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt3&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="1" id="elt3Count"/>
+
+</test>
+
+
+
+
+
+

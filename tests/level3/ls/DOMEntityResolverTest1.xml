@@ -1,0 +1,76 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMEntityResolverTest1">
+  <metadata>
+    <title>DOMEntityResolver</title>
+    &creator; 
+    <description>Tests a custom entity resolver. The entity resolver creates an input source that supplies 2 elt1 elements. The original entity reference referes to 1 elt1</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMEntityResolver"/>
+  </metadata>
+
+
+  <var name="myentityresolver" type="DOMEntityResolver"> 
+     <var name="erInputSource" type="DOMInputSource"/>
+     <resolveEntity>
+
+        <var name='implementation'   type='DOMImplementation'/> 
+        <var name='lsImplementation' type='DOMImplementationLS'/> 
+        <var name="substitute"       type="DOMString" value="&quot;&lt;elt1&gt;second elt1&lt;/elt1&gt;&lt;elt1&gt;third elt1&lt;/elt1&gt;&quot;"/>
+
+        <implementation var='implementation'/> 
+        <assign var='lsImplementation' value='implementation'/> 
+
+        <createDOMInputSource  var='erInputSource' obj='lsImplementation'/>
+        <stringData obj="erInputSource" value="substitute" interface="DOMInputSource"/>
+        
+        <return value="erInputSource"/>            
+     </resolveEntity>
+
+  </var>
+
+  <var name="ENTITY_RESOLVER" type="DOMString" value='"entity-resolver"'/>
+  <var name="elementList" type="NodeList"/>
+  <var name="configuration" type="DOMConfiguration"/>
+
+  &vars;
+  &init;
+
+  <config var="configuration" obj="builder" interface="DOMBuilder"/> 
+
+  
+  <!-- before applying the entity resolver there should be 2 elt1 in this document -->
+  <parseURI var="document" obj="builder" uri="TEST4"/>
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="2" id="count_elt1_before_applying_entity_resolver"/>
+
+  <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
+
+  <!-- after applying the entity resolver there should be 3 elt1 in this document -->
+  <parseURI var="document" obj="builder" uri="TEST4"/>
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="3" id="count_elt1_after_applying_entity_resolver"/>
+
+</test>
+
+
+
+
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMWriterTest2">
+  <metadata>
+    <title>DOMWriter</title>
+    &creator; 
+    <description>DOMWriter test</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMWriter"/>
+  </metadata>
+
+  <var name="configuration"   type="DOMConfiguration"/>
+  <var name="XML_DECLARATION" type="DOMString" value='"xml-declaration"'/>
+  <var name="stringDoc"       type="DOMString" value='"&lt;hello&gt;me again&lt;/hello&gt;"'/>
+  <var name="writeResult"     type="DOMString"/>
+  <var name="length"          type="int"/>
+
+  &vars;
+  &init;
+
+  <!-- parse the string -->
+  <stringData obj="inputSource" value="stringDoc" interface="DOMInputSource"/>
+  <parse  var="document" obj="builder" is="inputSource"/>
+ 
+  <!-- include xml declaration on serialization --> 
+  <config var="configuration" obj="writer" interface="DOMWriter"/> 
+
+  <setParameter obj="configuration" name="XML_DECLARATION" value="false"/>
+  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+  <length var="length" obj="writeResult" interface="DOMString"/>
+  <assertEquals actual="length" expected="23" id="length_without_xml_declaration" ignoreCase="false"/>
+
+  <setParameter obj="configuration" name="XML_DECLARATION" value="true"/>
+  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+  <length var="length" obj="writeResult" interface="DOMString"/>
+  <assertNotEquals actual="length" expected="23" id="length_with_xml_declaration" ignoreCase="false"/>
+
+</test>
+
+
+
+
+

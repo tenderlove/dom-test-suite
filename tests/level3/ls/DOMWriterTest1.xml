@@ -1,0 +1,57 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMWriterTest1">
+  <metadata>
+    <title>DOMWriter</title>
+    &creator; 
+    <description>A Simple writer test, serializes a specific node in the tree and parses it back in</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMWriter"/>
+  </metadata>
+  <var name="stringDoc"    type="DOMString"/>
+  <var name="writeResult"  type="boolean"/>
+  <var name="elementList"  type="NodeList"/>
+  <var name="firstElt3"    type="Node"/>
+  <var name="outputStream" type="DOMOutputStream"/>
+  <var name="inputURI"     type="DOMString" value='"output/mytempoutput"'/>
+
+  &vars;
+
+  &init;
+  <!-- write out only subtree with elt3-->
+  <parseURI  var="document" obj="builder" uri="TEST2"/>
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt3&quot;" var="elementList"/>
+  <item interface="NodeList" obj="elementList" var="firstElt3" index="0"/>
+
+
+  <writeNode var="writeResult" obj="writer" destination="outputStream" wnode="firstElt3"/> 
+  <parseURI  var="document" obj="builder" uri="inputURI"/>
+ 
+  <!-- no elt2 may be found --> 
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt2&quot;" var="elementList"/>
+  <assertSize collection="elementList" size="0" id="elt2Count_1"/>
+
+
+</test>
+
+
+
+
+

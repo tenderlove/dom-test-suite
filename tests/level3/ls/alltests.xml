@@ -1,15 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
-<!--
-Copyright (c) 2001 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 -->
+
+<!DOCTYPE suite SYSTEM 'dom3.dtd'>
 <suite xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="alltests">
-     <suite.member href="test1.xml"/>
+     <suite.member href="DOMBuilderFilterTest0.xml"/>
+     <suite.member href="DOMBuilderFilterTest1.xml"/>
+     <suite.member href="DOMBuilderFilterTest2.xml"/>
+     <suite.member href="DOMBuilderTest0.xml"/>
+     <suite.member href="DOMBuilderTest1.xml"/>
+     <suite.member href="DOMBuilderTest2.xml"/>
+     <suite.member href="DOMBuilderTest3.xml"/>
+     <suite.member href="DOMBuilderTest4.xml"/>
+     <suite.member href="DOMBuilderTest5.xml"/>
+     <suite.member href="DOMEntityResolverTest0.xml"/>
+     <suite.member href="DOMEntityResolverTest1.xml"/>
+     <suite.member href="DOMImplementationLSTest.xml"/>
+     <suite.member href="DOMInputSourceTest0.xml"/>
+     <suite.member href="DOMInputSourceTest1.xml"/>
+     <suite.member href="DOMInputSourceTest2.xml"/>
+     <suite.member href="DOMInputSourceTest3.xml"/>
+     <suite.member href="DOMInputSourceTest4.xml"/>
+     <suite.member href="DOMInputSourceTest5.xml"/>
+     <suite.member href="DOMWriterFilterTest0.xml"/>
+     <suite.member href="DOMWriterFilterTest1.xml"/>
+     <suite.member href="DOMWriterFilterTest2.xml"/>
+     <suite.member href="DOMWriterFilterTest3.xml"/>
+     <suite.member href="DOMWriterTest0.xml"/>
+     <suite.member href="DOMWriterTest1.xml"/>
+     <suite.member href="DOMWriterTest2.xml"/>
+     <suite.member href="DocumentLSTest0.xml"/>
+     <suite.member href="DocumentLSTest1.xml"/>
+     <suite.member href="DocumentLSTest2.xml"/>
+     <suite.member href="DocumentLSTest3.xml"/>
+     <suite.member href="DocumentLSTest4.xml"/>
+     <suite.member href="DocumentLSTest5.xml"/>
+     <suite.member href="ElementLSTest0.xml"/>
+     <suite.member href="ElementLSTest1.xml"/>
 </suite>

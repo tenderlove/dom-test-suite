@@ -1,0 +1,70 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMBuilderFilterTest1">
+  <metadata>
+    <title>DOMBuilderFilter</title>
+    &creator; 
+    <description>DOM Builder Filter test, test whether incorrect node types are never passed to the filter</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMBuilderFilter"/>
+  </metadata>
+
+
+  <var name="myfilter" type="DOMBuilderFilter"> 
+     &filterVars;
+     <var name="type" type="int"/>
+
+     <startElement>
+        <return value="FILTER_ACCEPT"/>            
+     </startElement>
+
+     <acceptNode>
+        <nodeType obj="enode" var="type"/>
+
+        <assertNotEquals actual="type" expected="2"  id="attribute_node_test" ignoreCase="false"/>
+        <assertNotEquals actual="type" expected="6"  id="entity_node_test" ignoreCase="false"/>
+        <assertNotEquals actual="type" expected="9"  id="document_node_test" ignoreCase="false"/>
+        <assertNotEquals actual="type" expected="10" id="document_type_node_test" ignoreCase="false"/>
+        <assertNotEquals actual="type" expected="12" id="notation_node_test" ignoreCase="false"/>
+
+        <return value="FILTER_ACCEPT"/>            
+     </acceptNode>
+
+     <whatToShow interface="DOMBuilderFilter">            
+       <get>
+        <return value="SHOW_ALL"/>
+       </get>
+     </whatToShow>
+
+  </var>
+
+  &vars;
+  &init;
+
+  &builder.setFilter_myfilter;
+
+  <parseURI  var="document" obj="builder" uri="TEST7"/>
+
+</test>
+
+
+
+
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMWriterFilterTest2">
+  <metadata>
+    <title>DOMWriterFilter</title>
+    &creator; 
+    <description>DOMWriterFilter test, this test eliminates all text through whatToShow. All structure should be remained</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMWriterFilter"/>
+  </metadata>
+
+
+  <var name="myfilter" type="DOMWriterFilter"> 
+     <var name="name" type="DOMString"/>
+     &filterVars;
+
+
+     <acceptNode>
+        <return value="FILTER_REJECT"/>            
+     </acceptNode>
+
+     <whatToShow interface="DOMWriterFilter">            
+       <get>
+        <return value="SHOW_TEXT"/>
+       </get>
+     </whatToShow>
+
+  </var>
+
+
+
+
+  <var name="stringDoc"       type="DOMString" value="&quot;&lt;elt1 attr1='attr1'&gt;first elt1&lt;/elt1&gt;&quot;"/>
+  <var name="writeResult"     type="DOMString"/>
+  <var name="length"          type="int"/>
+  <var name="elementList"     type="NodeList"/>
+  <var name="elt1"            type="Element"/>
+  <var name="childs"          type="boolean"/>
+  <var name="attr1"           type="Attr"/>
+
+  &vars;
+  &init;
+
+  <!-- parse the string -->
+  <stringData obj="inputSource" value="stringDoc" interface="DOMInputSource"/>
+  <parse  var="document" obj="builder" is="inputSource"/>
+
+  <!-- apply the filter -->
+  <filter obj="writer" value="myfilter" interface="DOMWriter"/>
+
+  <!-- serialize result -->
+  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+
+  <!-- parse result -->
+  <stringData obj="inputSource" value="writeResult" interface="DOMInputSource"/>
+  <parse  var="document" obj="builder" is="inputSource"/>
+
+  <!-- tests no child of elt1-->
+  <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
+  <item interface="NodeList" obj="elementList" index="0" var="elt1"/>
+  <hasChildNodes obj="elt1" var="childs"/>
+  <assertFalse actual="childs" id="nodeHasChilds_elt1"/>
+
+  <!-- tests no child of attr1,  is this correct ??-->
+  <getAttributeNode var="attr1" obj="elt1" name='"attr1"'/>
+  <hasChildNodes obj="attr1" var="childs"/>
+  <assertFalse actual="childs" id="nodeHasChilds_attr1"/>
+
+
+</test>
+
+
+
+

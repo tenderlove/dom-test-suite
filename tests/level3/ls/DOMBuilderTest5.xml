@@ -1,0 +1,65 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd"[
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+<test xmlns="&level3;" name="DOMBuilderTest5">
+  <metadata>
+    <title>DOMBuilder</title>
+    &creator; 
+    <description>DOM Builder test, tests unsupported media types. DOMConfiguration has an option to check media types. A pdf file is loaded which should generate error using the registered error handler</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMBuilder"/>
+  </metadata>
+
+
+  <var name="elementList" type="NodeList"/>
+  <var name="stringDoc" type="DOMString"/>
+  <var name="configuration" type="DOMConfiguration"/>
+  <var name="atrue" type="boolean" value="true"/>
+
+  <var name="ERROR_HANDLER" type="DOMString" value='"error-handler"'/>
+  <var name="SUPPORTED_MEDIATYPES_ONLY" type="DOMString" value='"supported-mediatypes-only"'/>
+
+
+  <var name="errorHandler" type="DOMErrorHandler"> 
+     &errorHandlerVars;
+
+     <handleError>
+        &assignErrorHandlerVars;
+
+        <assertEquals id="handler_1" actual="type" expected='"what_should_i_expect_here_?"' ignoreCase="false"/> 
+        <return value="false"/>
+     </handleError>
+  </var>
+  &vars;
+
+  &init;
+
+  <config var="configuration" obj="builder" interface="DOMBuilder"/> 
+
+  <setParameter obj="configuration" name="ERROR_HANDLER"             value="errorHandler"/>
+  <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="atrue"/>
+
+
+  <parseURI var="document" obj="builder" uri="TESTPDF"/>
+  
+</test>
+
+
+
+
+
+

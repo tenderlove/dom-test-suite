@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DocumentLSTest5">
+  <metadata>
+    <title>DocumentLS</title>
+    &creator; 
+    <description>tests DocumentLS using saveXML which is called with a node from a wrong document. Should give a wrong_document_err</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DocumentLS"/>
+  </metadata>
+
+  <var name="documentls"   type="DocumentLS"/>
+  <var name="stringResult" type="DOMString"/>
+  <var name="document0"    type="Document"/>
+  <var name="document1"    type="Document"/>
+
+  &vars;
+  &init;
+
+
+  <!-- first a normal parse-->
+  <parseURI  var="document0" obj="builder" uri="TEST0"/>
+  <parseURI  var="document1" obj="builder" uri="TEST1"/>
+
+  <assign var="documentls" value="document0"/>
+
+  <assertDOMException id="wrong_document_on_savexml">
+   <WRONG_DOCUMENT_ERR>
+     <saveXML var="stringResult" obj="documentls" snode="document1" interface="DocumentLS"/>
+   </WRONG_DOCUMENT_ERR>
+  </assertDOMException>
+
+</test>
+
+
+
+
+

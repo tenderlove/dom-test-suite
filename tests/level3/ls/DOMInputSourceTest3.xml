@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="no"?>
+<!-- 
+ Copyright (c) 2003 X-Hive Corporation
+
+ All Rights Reserved. This work is distributed under the W3C(r)
+ Software License [1] in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.
+
+ [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+-->
+
+
+<!DOCTYPE test SYSTEM "dom3.dtd" [
+  <!ENTITY % entities SYSTEM "dom3tests.ent">
+  %entities;
+]>
+
+
+<test xmlns="&level3;" name="DOMInputSourceTest3">
+  <metadata>
+    <title>DOMInputSource</title>
+    &creator; 
+    <description>test the builder by using a string inputsource overriding the encoding type, using characterStream however nothing should change</description> 
+    &contributor; &date;
+    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+  </metadata>
+
+  <var name="elementList" type="NodeList"/>
+  <var name="myString" type="DOMString" value="&quot;&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;elt0&gt;elt0&lt;/elt0&gt;&quot;"/>
+  <var name="encodingString" type="DOMString"/>
+  <var name="iso"            type="DOMString" value="&quot;ISO-8859-1&quot;"/>
+  <var name="utf"            type="DOMString" value="&quot;UTF-8&quot;"/>
+
+  <!-- todo create char stream-->
+  <var name="myReader" type="DOMReader"/>
+
+  &vars;
+  &init;
+
+
+  
+
+
+
+  <stringData obj="inputSource" value="myString" interface="DOMInputSource"/> 
+  <encoding   obj="inputSource" value="iso" interface="DOMInputSource"/> 
+
+  <parse var="document" obj="builder" is="inputSource"/>
+
+  <!-- encoding should be changed for a DOMString inputsource -->
+  <encoding var="encodingString" obj="document" interface="Document"/> 
+  <assertEquals actual="encodingString" expected="iso" ignoreCase="false" id="encodingstringcheck0"/>
+
+  <!-- using a characterStream nothing should change-->
+  <createDOMInputSource  var="inputSource" obj="lsImplementation"/>
+  <encoding   obj="inputSource" value="iso" interface="DOMInputSource"/> 
+  <characterStream var="inputSource" obj="myReader"/> 
+  <parse var="document" obj="builder" is="inputSource"/>
+  <assertEquals actual="encodingString" expected="utf" ignoreCase="false" id="encodingstringcheck1"/>
+
+</test>
+
+
+
+
+
