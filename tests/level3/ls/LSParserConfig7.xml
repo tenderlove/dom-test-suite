@@ -47,7 +47,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   	  <assertFalse actual="state" id="setFalseIsEffective"/>
   	  <setParameter obj="config" name="propertyName" value="true"/>
   	  <getParameter var="state" obj="config" name="propertyName"/>
-  	  <assertFalse actual="state" id="setTrueIsEffective"/>
+  	  <assertTrue actual="state" id="setTrueIsEffective"/>
   	  <else>
   	  	  <setParameter obj="config" name="propertyName" value="true"/>
   	  	  <assertDOMException id="throw_NOT_SUPPORTED_ERR_if_not_canSetParameter">

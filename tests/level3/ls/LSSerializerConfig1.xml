@@ -44,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <getParameter var="state" obj="config" name='"ignore-unknown-character-denormalizations"'/>
   <assertTrue actual="state" id="ignore-unknown-character-denormalizations-is-true"/>
 
-  <!--  normalize characters is supported to be true if
+  <!--  normalize characters is supposed to be true if
            the implementation supports true    -->
   <getParameter var="state" obj="config" name='"normalize-characters"'/>
   <canSetParameter var="canSet" obj="config" name='"normalize-characters"' value="true"/>
@@ -56,7 +56,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   </assertTrue>
 
   <getParameter var="state" obj="config" name='"xml-declaration"'/>
-  <assertFalse actual="state" id="xml-declaration-is-false"/>
+  <assertTrue actual="state" id="xml-declaration-is-true"/>
   <getParameter var="state" obj="config" name='"well-formed"'/>
   <assertTrue actual="state" id="well-formed-is-true"/>
   <getParameter var="state" obj="config" name='"namespaces"'/>

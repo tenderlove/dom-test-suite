@@ -28,6 +28,7 @@
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSResourceResolver-resolveResource"/>
   </metadata>
+  <implementationAttribute name="validating" value="true"/>
 
 
   <var name="myentityresolver" type="LSResourceResolver"> 

@@ -22,14 +22,20 @@
   <metadata>
     <title>DOMImplementationLSTest3</title>
     &creator; 
-    <description>Calls DOMImplementationLS.createLSParser(MODE_SYNCHRONOUS, "http://www.w3.org/2001/XMLSchema") and checks the return value is not null.</description> 
+    <description>Calls DOMImplementationLS.createLSParser(MODE_SYNCHRONOUS, "http://www.w3.org/2001/XMLSchema").  
+    Should either throw a NOT_SUPPORTED_ERR or return a non-null builder.</description> 
     &contributor; &date;
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSParser"/>    
   </metadata>
   &vars;
   
-  <createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='SCHEMA_SCHEMATYPE'/>
-  <assertNotNull actual="builder" id="builderNotNull"/>
+  <try>
+  	<createLSParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='SCHEMA_SCHEMATYPE'/>
+    <assertNotNull actual="builder" id="builderNotNull"/>
+  	<catch>
+  		<DOMException code="NOT_SUPPORTED_ERR"/>
+  	</catch>
+  </try>
 </test>
 
 

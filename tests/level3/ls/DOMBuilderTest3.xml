@@ -67,7 +67,7 @@
   <assertEquals actual="nodeName" expected="&quot;elt2&quot;" id="nextSibling_after_add" ignoreCase="false"/>
 
   <nextSibling interface="Node" obj="secondElt1" var="thirdElt"/>
-  <nodeName obj="secondElt1" var="nodeName"/>
+  <nodeName obj="thirdElt" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="nextSiblings_sibling_after_add" ignoreCase="false"/>
 
 </test>

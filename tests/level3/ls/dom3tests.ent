@@ -36,7 +36,7 @@
                       <var name='TEST5'   type='DOMString' value='&quot;test5&quot;'/>
                       <var name='TEST6'   type='DOMString' value='&quot;test6&quot;'/>
                       <var name='TEST7'   type='DOMString' value='&quot;test7&quot;'/>
-                      <var name='TESTPDF' type='DOMString' value='&quot;test.pdf&quot;'/>
+                      <var name='TESTPDF' type='DOMString' value='&quot;http://localhost:8080/domts/testpdf.pdf&quot;'/>
 
                       <implementation var='implementation'/> 
                       <assign var='lsImplementation' value='implementation'/> 
@@ -46,6 +46,8 @@
                       <var name='SHOW_ELEMENT'      type='int'    value='1'/>
                       <var name='SHOW_TEXT'         type='int'    value='4'/>
                       <var name='SHOW_ALL'          type='int'    value='65535'/>
+                      <var name='SHOW_ATTRIBUTE'      type='int'    value='2'/>
+                      <var name='SHOW_COMMENT'      type='int'    value='128'/>
                       <var name='FILTER_ACCEPT'     type='short'  value='1'/>
                       <var name='FILTER_REJECT'     type='short'  value='2'/>
                       <var name='FILTER_SKIP'       type='short'  value='3'/>

@@ -71,13 +71,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   				<equals actual="parameterName" expected='"discard-default-content"'/>
   				<equals actual="parameterName" expected='"format-pretty-print"'/>
   				<equals actual="parameterName" expected='"ignore-unknown-character-denormalizations"'/>
-  				<equals actual="parameterName" expected='"normalize-characters"'/>
   				<equals actual="parameterName" expected='"xml-declaration"'/>
   			</or>
   			<increment var="matchCount" value="1"/>
   		</if>
   </for-each>
-  <assertEquals actual="matchCount" expected="23" id="definedParameterCount" ignoreCase="false"/>
+  <assertEquals actual="matchCount" expected="22" id="definedParameterCount" ignoreCase="false"/>
 </test>
 
 

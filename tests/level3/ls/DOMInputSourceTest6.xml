@@ -18,28 +18,31 @@
 ]>
 
 
-<test xmlns="&level3;" name="DOMInputSourceTest3">
+<test xmlns="&level3;" name="DOMInputSourceTest6">
   <metadata>
-    <title>DOMInputSourceTest3</title>
+    <title>DOMInputSourceTest6</title>
     &creator; 
-    <description>Specify encodings for LSInput with string data.  The
+    <description>Specify encodings for LSInput with a character stream.  The
     setting should have no effect and the inputEncoding of the resulting document should be UTF-16.</description> 
     &contributor; &date;
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-encoding"/>
     <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parse"/>
   </metadata>
   <hasFeature feature='"Core"' version='"3.0"'/>
-  <var name="myString" type="DOMString" value="&quot;&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;elt0&gt;elt0&lt;/elt0&gt;&quot;"/>
+
   <var name="encodingString" type="DOMString"/>
+
+  <var name="myReader" type="LSReader" value="&quot;&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;elt0&gt;elt0&lt;/elt0&gt;&quot;"/>
+
   &vars;
   &init;
 
   <!--  initialize an input source with a string and a misleading encoding  -->
-  <stringData obj="inputSource" value="myString" interface="LSInput"/>    
   <encoding   obj="inputSource" value='"UTF-8"' interface="LSInput"/> 
+  <characterStream obj="inputSource" var="myReader" interface="LSInput"/> 
   <!--  parse   -->
   <parse var="document" obj="builder" input="inputSource"/>
-  
+
   <!--  check inputEncoding, should be UTF-16   -->
   <inputEncoding var="encodingString" obj="document" interface="Document"/> 
   <assertEquals actual="encodingString" expected='"UTF-16"' ignoreCase="true" id="encodingstringcheck0"/>

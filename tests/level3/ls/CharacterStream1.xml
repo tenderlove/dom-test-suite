@@ -69,7 +69,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <characterStream obj="input" value="reader" interface="LSInput"/>
   <characterStream var="checkReader" obj="input" interface="LSInput"/>
   <assertNotNull actual="checkReader" id="readerNotNull"/>
-  <createLSParser var="parser" obj="domImpl" schemaType="NULL_SCHEMA_TYPE" mode="0"/>
+  <createLSParser var="parser" obj="domImpl" schemaType="NULL_SCHEMA_TYPE" mode="1"/>
   <parse var="checkDoc" obj="parser" input="input"/>
   <assertNotNull actual="checkDoc" id="checkNotNull"/>
   <documentElement var="docElem" obj="checkDoc"/>

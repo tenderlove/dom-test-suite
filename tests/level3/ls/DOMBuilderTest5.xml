@@ -20,7 +20,9 @@
   <metadata>
     <title>DOMBuilderTest5</title>
     &creator; 
-    <description>DOM Builder test, tests unsupported media types. DOMConfiguration has an option to check media types. A pdf file is loaded which should generate error using the registered error handler</description> 
+    <description>supported-media-types-only is set to true if supported and
+    an XML file with an unsupported media type from an HTTP server
+    on the local machine is retrieved.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-DOMParser"/>
   </metadata>
@@ -29,11 +31,10 @@
   <var name="elementList" type="NodeList"/>
   <var name="stringDoc" type="DOMString"/>
   <var name="configuration" type="DOMConfiguration"/>
-  <var name="atrue" type="boolean" value="true"/>
 
   <var name="ERROR_HANDLER" type="DOMString" value='"error-handler"'/>
   <var name="SUPPORTED_MEDIATYPES_ONLY" type="DOMString" value='"supported-media-types-only"'/>
-
+  <var name="mediaTypesSupported" type="boolean"/>
 
   <var name="errorHandler" type="DOMErrorHandler"> 
      &errorHandlerVars;
@@ -41,7 +42,7 @@
      <handleError>
         &assignErrorHandlerVars;
 
-        <assertEquals id="handler_1" actual="type" expected='"what_should_i_expect_here_?"' ignoreCase="false"/> 
+        <assertEquals id="handler_1" actual="type" expected='"unsupported-media-type"' ignoreCase="false"/> 
         <return value="false"/>
      </handleError>
   </var>
@@ -52,10 +53,14 @@
   <config var="configuration" obj="builder" interface="LSParser"/> 
 
   <setParameter obj="configuration" name="ERROR_HANDLER"             value="errorHandler"/>
-  <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="atrue"/>
 
-
-  <parseURI var="document" obj="builder" uri="TESTPDF"/>
+  <canSetParameter var="mediaTypesSupported" obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
+  <if>
+  	 <isTrue value="mediaTypesSupported"/>
+  	 <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="true"/>
+	 <parseURI var="document" obj="builder" uri="TESTPDF"/>
+	 <assertNull actual="document" id="docNull"/>
+  </if>
   
 </test>
 
