@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.116  2003-12-10 10:30:35  dom-ts-4
+Revision 1.117  2003-12-15 18:07:04  dom-ts-4
+Fixed dependencies for dom3-*-metadata targets (bug 426)
+
+Revision 1.116  2003/12/10 10:30:35  dom-ts-4
 L3 Core fixups (Bug 404)
 
 Revision 1.115  2003/12/09 08:22:27  dom-ts-4
@@ -2116,7 +2119,7 @@ All implementation conditions combined into implementationAttribute element
     </ant>
 </target>
 
-<target name="dom3-core-metadata" depends="dom3-schema">
+<target name="dom3-core-metadata" depends="dom3-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/core/alltests.xml" 
 		   out="${build.dir}/dom3-core-metadata.rdf" 
@@ -2220,7 +2223,7 @@ All implementation conditions combined into implementationAttribute element
     </antcall>
 </target>
 
-<target name="dom3-events-metadata" depends="dom3-schema">
+<target name="dom3-events-metadata" depends="dom3-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/events/alltests.xml" 
 		   out="${build.dir}/dom3-events-metadata.rdf" 
@@ -2401,7 +2404,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom3-ls-metadata" depends="dom3-schema">
+<target name="dom3-ls-metadata" depends="dom3-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/ls/alltests.xml" 
 		   out="${build.dir}/dom3-ls-metadata.rdf" 
@@ -2504,7 +2507,7 @@ All implementation conditions combined into implementationAttribute element
     </antcall>
 </target>
 
-<target name="dom3-xpath-metadata" depends="dom3-schema">
+<target name="dom3-xpath-metadata" depends="dom3-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/xpath/alltests.xml" 
 		   out="${build.dir}/dom3-xpath-metadata.rdf" 
@@ -2615,7 +2618,7 @@ All implementation conditions combined into implementationAttribute element
     </antcall>
 </target>
 
-<target name="dom3-val-metadata" depends="dom3-dtd, dom3-schema">
+<target name="dom3-val-metadata" depends="dom3-dtd">
     <mkdir dir="${build.dir}"/>
 	<style in="${tests.dir}/level3/validation/alltests.xml" 
 		   out="${build.dir}/dom3-val-metadata.rdf" 
