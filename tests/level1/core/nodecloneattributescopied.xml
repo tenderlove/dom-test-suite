@@ -16,12 +16,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeCloneAttributesCopied</title>
 <creator>NIST</creator>
 <description>
-    If the "cloneNode(deep)" method was used to clone an
+    If the cloneNode method is used to clone an
     Element node, all the attributes of the Element are
     copied along with their values.
     
-    Retrieve the last child of the second employee and inoke
-    the "cloneNode(deep)" method with deep=true.   The
+    Retrieve the last child of the second employee and invoke
+    the cloneNode method.   The
     duplicate node returned by the method should copy the
     attributes associated with this node.
 </description>
