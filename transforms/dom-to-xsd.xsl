@@ -1077,6 +1077,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="expected" type="variableOrIntLiteral" use="required"/>
 				</xs:complexType>
 			</xs:element>
+            <xs:element name="contains">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    <xs:attribute name="obj" type="variable" use="required"/>
+                    <xs:attribute name="substring" type="variableOrStringLiteral" use="required"/>
+                </xs:complexType>
+            </xs:element>
 
 
 
@@ -1181,6 +1188,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			                <xs:attribute name="type" type="loadContentType" use="required"/>
 		                </xs:complexType>
 	                </xs:element>
+                    <xs:element ref="contains"/>
 				</xs:choice>
 			</xs:group>
 			<xs:element name="else">

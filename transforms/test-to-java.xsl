@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.33  2003-02-02 21:38:03  dom-ts-4
+Revision 1.34  2003-02-04 05:51:35  dom-ts-4
+Added contains condition
+
+Revision 1.33  2003/02/02 21:38:03  dom-ts-4
 Fixes for DocumentLS.load
 
 Revision 1.32  2003/01/29 04:58:15  dom-ts-4
@@ -977,10 +980,9 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             </xsl:if>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:text>  assertTrue("</xsl:text>
+            <xsl:text>assertTrue("</xsl:text>
             <xsl:value-of select="@id"/>
-            <xsl:text>",
-      </xsl:text>
+            <xsl:text>",</xsl:text>
             <xsl:apply-templates select="*[1]" mode="condition"/>
             <xsl:text>);
       </xsl:text>
@@ -1947,6 +1949,10 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 
 <xsl:template match="*[local-name()='hasSize']" mode="condition">
     <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.size() == <xsl:value-of select="@expected"/><xsl:text>)</xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='contains']" mode="condition">
+    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.indexOf(<xsl:value-of select="@substring"/><xsl:text>) >= 0)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">

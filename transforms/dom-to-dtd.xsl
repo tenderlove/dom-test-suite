@@ -78,7 +78,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
-&lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType| %implementation-condition;"&gt;
+&lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;"&gt;
 
 &lt;!ENTITY % assertion "%framework-assertion;</xsl:text>
 	<xsl:variable name="exceptions" select="//exception[@id]"/>
@@ -760,6 +760,12 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	expected CDATA #REQUIRED
 &gt;
 
+&lt;!ELEMENT contains EMPTY&gt;
+&lt;!ATTLIST contains
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	substring CDATA #REQUIRED
+&gt;
 
 &lt;!ELEMENT implementationAttribute EMPTY&gt;
 &lt;!ATTLIST implementationAttribute
