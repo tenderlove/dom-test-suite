@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.78  2003-01-16 06:37:39  dom-ts-4
+Revision 1.79  2003-01-17 06:48:58  dom-ts-4
+Added convienience targets for one shot LS test code generation
+Added dom3-ls-validate-tests target, requires more work on DTD
+
+Revision 1.78  2003/01/16 06:37:39  dom-ts-4
 Update for DOM 2 HTML REC, new LS draft
 
 Revision 1.77  2002/11/26 20:17:00  plehegar
@@ -1818,9 +1822,16 @@ All implementation conditions combined into implementationAttribute element
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
 	</style>
-    <!--  can't copy until we no longer need human editing  -->
-	<!-- copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/ -->
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls"/>
 </target>
+
+<target name="dom3-ls-validate-tests" depends="dom3-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/ls" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
 
 <target name="dom3-subjects" depends="dom3-init">
 	<!--  create a DOM 3 version of subjects.xsl  -->
@@ -1869,6 +1880,56 @@ All implementation conditions combined into implementationAttribute element
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/ls/"/>
 	</style>
 </target>
+
+<!--  
+
+This target generates Java code for one DOM 3 test
+using the last dom3-interfaces.xml file generated
+
+Useful for quick evaluation of test modifications 
+but not part of the automated build
+
+Name probably should change since it looks like
+it would generate all DOM 3 java code
+-->
+<target name="dom3-gen-java" depends="init">
+ <style basedir="${tests.dir}/level3/${module}"
+        destdir="${java.build.dir}/org/w3c/domts/level3/${module}"
+        includes="${test}"
+        style="${transforms.dir}/test-to-java.xsl"
+        extension=".java">
+  <param name="interfaces-docname"
+       expression="../${build.dir}/dom3-interfaces.xml"/>
+  <param name="package"
+       expression="org.w3c.domts.level3.${module}"/>
+  <param name="target-uri-base"
+       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/${module}/"/>
+ </style>
+</target>
+
+<!--  
+
+This target performs a Java compilation of one DOM 3 test
+
+Useful for quick evaluation of test modifications 
+but not part of the automated build
+
+Name probably should change since it looks like
+it would compile all DOM 3 java code
+-->
+<target name="dom3-javac" depends="init">
+
+	<javac
+		destdir="${java.build.dir}"
+		classpath="${java.build.dir};${jaxp.jar}"
+                debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <include name="org/w3c/domts/level3/${module}/*"/>
+    </javac>
+</target>
+
+
 
 <target name="dom3-ls-javac" depends="common-javac,dom3-ls-gen-java">
 
