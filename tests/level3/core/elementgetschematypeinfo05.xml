@@ -41,11 +41,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elemList" type="NodeList"/>
 <var name="docElemNodeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
-<getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
+<getElementsByTagName var="elemList" obj="doc" tagname='"span"' interface="Document"/>
 <item var="acElem" obj="elemList" index="0" interface="NodeList"/>
 <schemaTypeInfo var="elemTypeInfo" obj="acElem" interface="Element"/>
 <typeName var="typeName" obj="elemTypeInfo"/>
 <typeNamespace var="typeNamespace" obj="elemTypeInfo"/>
-<assertEquals expected='"string"' actual="typeName" id="elementgetschematypeinfo05_typeName" ignoreCase="false"/>
-<assertEquals expected='"http://www.w3.org/2001/XMLSchema"' actual="typeNamespace" id="elementgetschematypeinfo05_typeNamespace" ignoreCase="false"/>
+<assertEquals expected='"string"' actual="typeName" id="typeNameString" ignoreCase="false"/>
+<assertEquals expected='"http://www.w3.org/2001/XMLSchema"' actual="typeNamespace" id="typeNsXSD" ignoreCase="false"/>
 </test> 
