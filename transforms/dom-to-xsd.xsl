@@ -42,7 +42,8 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<xsl:variable name="source" select="/spec/header/publoc/loc[1]/@href"/>
 	<xsl:output method="xml" indent="yes" 
 		doctype-system="http://www.w3.org/2001/XMLSchema.dtd" 
-		doctype-public="-//W3C//DTD XMLSCHEMA 200102//EN"/>
+		doctype-public="-//W3C//DTD XMLSCHEMA 200102//EN"
+		encoding="UTF-8"/>
 
 
 	<!--  interfaces defined in DOM recommendation  -->
@@ -283,10 +284,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 			<xs:simpleType name="stringLiteral">
 				<xs:annotation>
-					<xs:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.  Quotes inside the literal can be represented by \", backslashed in the literal can be represented by \\.  Currently no other escape sequences are allowed.</xs:documentation>
+					<xs:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.  The following subset of Java escape sequences are supported, \", \\, \n</xs:documentation>
 				</xs:annotation>
 				<xs:restriction base="xs:string">
-					<xs:pattern value='"([^"\]|\\"|\\\\)*"'/>
+					<xs:pattern value='"([^"\\]|\\"|\\\\|\\n)*"'/>
 				</xs:restriction>
 			</xs:simpleType>
 

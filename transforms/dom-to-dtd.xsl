@@ -37,7 +37,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 
 	<!--   symbolic constant for schema namespace   -->
 	<xsl:variable name="source" select="/spec/header/publoc/loc[1]/@href"/>
-	<xsl:output method="text" indent="yes"/>
+	<xsl:output method="text" encoding="UTF-8"/>
 
 	<!--  interfaces defined in DOM recommendation  -->
 	<xsl:variable name="interfaces" select="//interface"/>

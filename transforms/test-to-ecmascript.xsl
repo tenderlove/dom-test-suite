@@ -35,7 +35,7 @@ saxon -o someTest.js someTest.xml test-to-ecmascript.xsl
     <xsl:param name="target-uri-base"/>
 
 
-<xsl:output method="text"/>
+<xsl:output method="text" encoding="UTF-8"/>
 <xsl:variable name="domspec" select="document($interfaces-docname)"/>
 
 <xsl:template match="/">

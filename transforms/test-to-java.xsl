@@ -28,7 +28,12 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.13  2001-10-18 07:58:17  dom-ts-4
+Revision 1.14  2001-10-18 14:21:59  dom-ts-4
+Fixed regexp pattern for stringLiteral
+Explicitly specified UTF-8 encoding for test-to-java.xsl, etc
+Specified UTF8 encoding for javac
+
+Revision 1.13  2001/10/18 07:58:17  dom-ts-4
 assertURIEquals added
 Can now run from dom1-core.jar
 
@@ -77,7 +82,7 @@ All implementation conditions combined into implementationAttribute element
 	<xsl:param name="interfaces-docname">../build/dom1-interfaces.xml</xsl:param>
     <xsl:param name="package">org.w3.domts.level1.core</xsl:param>
     <xsl:param name="target-uri-base">http://www.w3.org/2001/DOM-Test-Suite/tests/Level-1/</xsl:param>
-<xsl:output method="text"/>
+<xsl:output method="text" encoding="UTF-8"/>
 <xsl:variable name="domspec" select="document($interfaces-docname)"/>
 
 <xsl:template match="/">

@@ -13,7 +13,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.26  2001-10-18 07:58:17  dom-ts-4
+Revision 1.27  2001-10-18 14:21:59  dom-ts-4
+Fixed regexp pattern for stringLiteral
+Explicitly specified UTF-8 encoding for test-to-java.xsl, etc
+Specified UTF8 encoding for javac
+
+Revision 1.26  2001/10/18 07:58:17  dom-ts-4
 assertURIEquals added
 Can now run from dom1-core.jar
 
@@ -521,13 +526,15 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${java.build.dir}"/>
 	<javac srcdir="java/org/w3c/domts" 
 		   destdir="${java.build.dir}" 
-		   classpath="${java.build.dir}"/>
+		   classpath="${java.build.dir}"
+		   encoding="UTF8"/>
 </target>
 
 <target name="dom1-core-javac" depends="common-javac,dom1-core-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		destdir="${java.build.dir}" 
-		classpath="${java.build.dir};${jaxp.jar}"/>
+		classpath="${java.build.dir};${jaxp.jar}"
+		encoding="UTF8"/>
 </target>
 
 <target name="dom1-core-jar" depends="dom1-core-javac">
@@ -603,7 +610,8 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom2-core-javac" depends="common-javac,dom2-core-gen-java">
 	<javac srcdir="${java.build.dir}/org/w3c/domts/level2/core" 
 		destdir="${java.build.dir}" 
-		classpath="${java.build.dir};${jaxp.jar}"/>
+		classpath="${java.build.dir};${jaxp.jar}"
+		encoding="UTF8"/>
 </target>
 
 <target name="dom2-core-jar" depends="dom2-core-javac">
@@ -634,7 +642,8 @@ All implementation conditions combined into implementationAttribute element
 
     <javac srcdir="java/junit/org/w3c/domts"
            destdir="${java.build.dir}/junit"
-           classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"/>
+           classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"           
+		   encoding="UTF8"/>
 
 
     <jar jarfile="${dist.dir}/junit-run.jar"
@@ -651,7 +660,8 @@ All implementation conditions combined into implementationAttribute element
 
 	<javac srcdir="java/avalon/org/w3c/domts"
 	       destdir="${java.build.dir}/avalon"
-	       classpath="${lib.dir}/testlet.jar;${java.build.dir}"/>
+	       classpath="${lib.dir}/testlet.jar;${java.build.dir}"	       
+		   encoding="UTF8"/>
 
 	<jar jarfile="${dist.dir}/avalon-run.jar"
 	     manifest="java/avalon/avalon-run.mf">
