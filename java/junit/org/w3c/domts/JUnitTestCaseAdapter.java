@@ -12,7 +12,11 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.2  2001-08-22 22:12:49  dom-ts-4
+ Revision 1.3  2001-10-18 07:58:17  dom-ts-4
+ assertURIEquals added
+ Can now run from dom1-core.jar
+
+ Revision 1.2  2001/08/22 22:12:49  dom-ts-4
  Now passing all tests with default settings
 
  Revision 1.1  2001/07/23 04:52:20  dom-ts-4
@@ -220,6 +224,75 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
   public void assertNotEquals(DOMTestCase test, String assertID, double expected, double actual) {
     if(expected == actual) {
       assertTrue(assertID,expected != actual);
+    }
+  }
+
+  public void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
+    //
+    //  URI must be non-null
+    assertNotNull(assertID, actual);
+
+    String uri = actual;
+
+    int lastPound = actual.lastIndexOf("#");
+    String actualFragment = "";
+    if(lastPound != -1) {
+        //
+        //   substring before pound
+        //
+        uri = actual.substring(0,lastPound);
+        actualFragment = actual.substring(lastPound+1);
+    }
+    if(fragment != null) assertEquals(assertID,fragment, actualFragment);
+
+    int lastQuestion = uri.lastIndexOf("?");
+    String actualQuery = "";
+    if(lastQuestion != -1) {
+        //
+        //   substring before pound
+        //
+        uri = actual.substring(0,lastQuestion);
+        actualQuery = actual.substring(lastQuestion+1);
+    }
+    if(query != null) assertEquals(assertID, query, actualQuery);
+
+    int firstColon = uri.indexOf(":");
+    int firstSlash = uri.indexOf("/");
+    String actualPath = uri;
+    String actualScheme = "";
+    if(firstColon != -1 && firstColon < firstSlash) {
+        actualScheme = uri.substring(0,firstColon);
+        actualPath = uri.substring(firstColon + 1);
+    }
+
+    if(scheme != null) {
+        assertEquals(assertID, scheme, actualScheme);
+    }
+
+    if(path != null) {
+        assertEquals(assertID, path, actualPath);
+    }
+
+    if(host != null) {
+        String actualHost = "";
+        if(actualPath.startsWith("//")) {
+            int termSlash = actualPath.indexOf("/",2);
+            actualHost = actualPath.substring(0,termSlash);
+        }
+        assertEquals(assertID, host, actualHost);
+    }
+
+    if(file != null) {
+        String actualFile = actualPath;
+        int finalSlash = actualPath.lastIndexOf("/");
+        if(finalSlash != -1) {
+            actualFile = actualPath.substring(finalSlash+1);
+        }
+        assertEquals(assertID, file, actualFile);
+    }
+
+    if(isAbsolute != null) {
+        assertEquals(assertID, isAbsolute.booleanValue(), actualPath.startsWith("/"));
     }
   }
 

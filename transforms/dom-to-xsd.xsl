@@ -283,10 +283,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 			<xs:simpleType name="stringLiteral">
 				<xs:annotation>
-					<xs:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.</xs:documentation>
+					<xs:documentation>A string literal.  Distinguished from a variable reference by the enclosing double quotes.  Quotes inside the literal can be represented by \", backslashed in the literal can be represented by \\.  Currently no other escape sequences are allowed.</xs:documentation>
 				</xs:annotation>
 				<xs:restriction base="xs:string">
-					<xs:pattern value='"([^"]|\\")*"'/>
+					<xs:pattern value='"([^"\]|\\"|\\\\)*"'/>
 				</xs:restriction>
 			</xs:simpleType>
 
@@ -793,6 +793,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="id" type="xs:ID" use="required"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="assertURIEquals">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="metadata" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="actual" type="variable" use="required"/>
+					<xs:attribute name="scheme" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="path" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="host" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="file" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="query" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="fragment" type="variableOrStringLiteral" use="optional"/>
+                    <xs:attribute name="isAbsolute" type="variableOrBoolLiteral" use="optional"/>
+					<xs:attribute name="id" type="xs:ID" use="required"/>
+				</xs:complexType>
+			</xs:element>
+
 			<xs:group name="framework-assertion">
 				<xs:choice>
 					<xs:element ref="assertTrue"/>
@@ -805,6 +822,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="assertInstanceOf"/>
 					<xs:element ref="assertSize"/>
 					<xs:element ref="assertEventCount"/>
+					<xs:element ref="assertURIEquals"/>
 				</xs:choice>
 			</xs:group>
 			<xs:group name="framework-statement">

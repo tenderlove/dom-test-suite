@@ -12,7 +12,11 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.2  2001-08-24 08:28:00  dom-ts-4
+Revision 1.3  2001-10-18 07:58:17  dom-ts-4
+assertURIEquals added
+Can now run from dom1-core.jar
+
+Revision 1.2  2001/08/24 08:28:00  dom-ts-4
 Test matrix generation.  Some Node.setValue() tests
 
 Revision 1.1  2001/07/23 04:52:20  dom-ts-4
@@ -31,18 +35,22 @@ import org.xml.sax.*;
 
 public class JUnitRunner {
 
+  private Class testClass = null;
+
+
+  public JUnitRunner(Class testClass) {
+    this.testClass = testClass;
+  }
+
   public JUnitRunner(String[] args) throws Exception {
+    testClass = JUnitRunner.class.getClassLoader().loadClass(args[0]);
+  }
 
-    if(args.length != 1) {
-      printPrologue();
-      printHelp();
-      return;
-    }
-
+  public void execute(String[] args) throws Exception {
     Constructor testConstructor = null;
-    Class testClass = JUnitRunner.class.getClassLoader().loadClass(args[0]);
     testConstructor = testClass.getConstructor(
-        new Class[] { DOMTestDocumentBuilderFactory.class});
+         new Class[] { DOMTestDocumentBuilderFactory.class});
+        
 
     String[] attrNames = {
       "coalescing",
@@ -198,8 +206,14 @@ public class JUnitRunner {
 
 
   public static void main (String[] args) {
+    if(args.length != 1) {
+      printPrologue();
+      printHelp();
+      return;
+    }
     try {
-      new JUnitRunner(args);
+      JUnitRunner runner = new JUnitRunner(args);
+      runner.execute(args);
     }
     catch(Exception ex) {
       ex.printStackTrace();

@@ -12,7 +12,11 @@
 
   /*
  $Log: DOMTestFramework.java,v $
- Revision 1.5  2001-08-22 22:12:49  dom-ts-4
+ Revision 1.6  2001-10-18 07:58:17  dom-ts-4
+ assertURIEquals added
+ Can now run from dom1-core.jar
+
+ Revision 1.5  2001/08/22 22:12:49  dom-ts-4
  Now passing all tests with default settings
 
  Revision 1.4  2001/07/23 04:52:20  dom-ts-4
@@ -57,6 +61,7 @@ public interface DOMTestFramework {
 	void assertNotEquals(DOMTestCase test, String assertID, String expected, String actual);
 	void assertNotEquals(DOMTestCase test, String assertID, int expected, int actual);
 	void assertNotEquals(DOMTestCase test, String assertID, double expected, double actual);
+    void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException; 
 
 
 	boolean same(Object expected, Object actual);

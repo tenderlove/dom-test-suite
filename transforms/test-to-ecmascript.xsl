@@ -631,6 +631,46 @@ function </xsl:text>
 </xsl:if>
 </xsl:template>
 
+<xsl:template match="*[local-name()='assertURIEquals']" mode="body">
+    <xsl:text>assertURIEquals("</xsl:text>
+    <xsl:value-of select="@id"/>
+    <xsl:text>",</xsl:text>
+    <xsl:choose>
+        <xsl:when test="@scheme"><xsl:value-of select="@scheme"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@path"><xsl:value-of select="@path"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@host"><xsl:value-of select="@host"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@file"><xsl:value-of select="@file"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@query"><xsl:value-of select="@query"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@fragment"><xsl:value-of select="@fragment"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@isAbsolute=true">Boolean.TRUE,</xsl:when>
+        <xsl:when test="@isAbsolute=false">Boolean.FALSE,</xsl:when>
+        <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/></xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:value-of select="@actual"/>
+	<xsl:text>);
+</xsl:text>
+</xsl:template>
+
+
 <xsl:template match="*[local-name()='assertEquals']" mode="body">
     <xsl:variable name="expected" select="@expected"/>
     <xsl:variable name="expectedType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $expected]/@type"/>

@@ -75,6 +75,76 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
   }
 
+  function assertURIEquals(assertID, scheme, path, host, file, query, fragment, isAbsolute, actual) {
+    //
+    //  URI must be non-null
+    assertNotNull(assertID, actual);
+
+    var uri = actual;
+
+    var lastPound = actual.lastIndexOf("#");
+    var actualFragment = "";
+    if(lastPound != -1) {
+        //
+        //   substring before pound
+        //
+        uri = actual.substring(0,lastPound);
+        actualFragment = actual.substring(lastPound+1);
+    }
+    if(fragment != null) assertEquals(assertID,fragment, actualFragment);
+
+    var lastQuestion = uri.lastIndexOf("?");
+    var actualQuery = "";
+    if(lastQuestion != -1) {
+        //
+        //   substring before pound
+        //
+        uri = actual.substring(0,lastQuestion);
+        actualQuery = actual.substring(lastQuestion+1);
+    }
+    if(query != null) assertEquals(assertID, query, actualQuery);
+
+    var firstColon = uri.indexOf(":");
+    var firstSlash = uri.indexOf("/");
+    var actualPath = uri;
+    var actualScheme = "";
+    if(firstColon != -1 && firstColon < firstSlash) {
+        actualScheme = uri.substring(0,firstColon);
+        actualPath = uri.substring(firstColon + 1);
+    }
+
+    if(scheme != null) {
+        assertEquals(assertID, scheme, actualScheme);
+    }
+
+    if(path != null) {
+        assertEquals(assertID, path, actualPath);
+    }
+
+    if(host != null) {
+        var actualHost = "";
+        if(actualPath.startsWith("//")) {
+            int termSlash = actualPath.indexOf("/",2);
+            actualHost = actualPath.substring(0,termSlash);
+        }
+        assertEquals(assertID, host, actualHost);
+    }
+
+    if(file != null) {
+        var actualFile = actualPath;
+        var finalSlash = actualPath.lastIndexOf("/");
+        if(finalSlash != -1) {
+            actualFile = actualPath.substring(finalSlash+1);
+        }
+        assertEquals(assertID, file, actualFile);
+    }
+
+    if(isAbsolute != null) {
+        assertEquals(assertID, isAbsolute.booleanValue(), actualPath.startsWith("/"));
+    }
+  }
+
+
   var factory = null;
 
 

@@ -74,7 +74,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 --&gt;
 
-&lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount"&gt;
+&lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals"&gt;
 
 &lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait"&gt;
 
@@ -568,6 +568,19 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	bubbleCount CDATA #IMPLIED
 	totalCount CDATA #IMPLIED
 	monitor CDATA #REQUIRED
+	id ID #REQUIRED
+&gt;
+
+&lt;!ELEMENT assertURIEquals (metadata?)&gt;
+&lt;!ATTLIST assertURIEquals
+	actual CDATA #REQUIRED
+    scheme CDATA #IMPLIED
+    path CDATA #IMPLIED
+    host CDATA #IMPLIED
+    file CDATA #IMPLIED
+    query CDATA #IMPLIED
+    fragment CDATA #IMPLIED
+    isAbsolute CDATA #IMPLIED
 	id ID #REQUIRED
 &gt;
 

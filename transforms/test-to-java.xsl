@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.12  2001-08-30 08:30:18  dom-ts-4
+Revision 1.13  2001-10-18 07:58:17  dom-ts-4
+assertURIEquals added
+Can now run from dom1-core.jar
+
+Revision 1.12  2001/08/30 08:30:18  dom-ts-4
 Added metadata and Software licence (dropped in earlier processing) to test
 Enhanced test-matrix.xsl
 
@@ -236,6 +240,9 @@ import java.util.*;
    public String getTargetURI() {
       return "<xsl:value-of select="concat($target-uri-base,@name)"/>";
    }
+   public static void main(String[] args) {
+        DOMTestCase.doMain(<xsl:value-of select="@name"/>.class,args);
+   }
 }
 </xsl:template>
 
@@ -284,6 +291,11 @@ import java.util.*;
    public String getTargetURI() {
       return "<xsl:value-of select="concat($target-uri-base,@name)"/>";
    }
+
+   public static void main(String[] args) {
+        DOMTestCase.doMain(<xsl:value-of select="@name"/>.class,args);
+   }
+
 }
 </xsl:template>
 
@@ -730,6 +742,46 @@ import java.util.*;
    }
 </xsl:if>
 </xsl:template>
+
+<xsl:template match="*[local-name()='assertURIEquals']" mode="body">
+    <xsl:text>assertURIEquals("</xsl:text>
+    <xsl:value-of select="@id"/>
+    <xsl:text>",</xsl:text>
+    <xsl:choose>
+        <xsl:when test="@scheme"><xsl:value-of select="@scheme"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@path"><xsl:value-of select="@path"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@host"><xsl:value-of select="@host"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@file"><xsl:value-of select="@file"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@query"><xsl:value-of select="@query"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@fragment"><xsl:value-of select="@fragment"/>,</xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+        <xsl:when test="@isAbsolute=true">Boolean.TRUE,</xsl:when>
+        <xsl:when test="@isAbsolute=false">Boolean.FALSE,</xsl:when>
+        <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/></xsl:when>
+        <xsl:otherwise>null,</xsl:otherwise>
+    </xsl:choose>
+    <xsl:value-of select="@actual"/>
+	<xsl:text>);
+</xsl:text>
+</xsl:template>
+
 
 
 

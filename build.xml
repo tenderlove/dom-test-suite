@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.25  2001-09-14 06:55:35  dom-ts-4
+Revision 1.26  2001-10-18 07:58:17  dom-ts-4
+assertURIEquals added
+Can now run from dom1-core.jar
+
+Revision 1.25  2001/09/14 06:55:35  dom-ts-4
 Support for Adobe SVG Viewer (must uncomment code in DOMTestCase.js)
 
 Revision 1.24  2001/09/06 02:35:19  dom-ts-4
@@ -444,7 +448,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom1-core-gen-java" depends="dom1-interfaces">
+<target name="dom1-core-gen-java" depends="dom1-interfaces, dom1-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 

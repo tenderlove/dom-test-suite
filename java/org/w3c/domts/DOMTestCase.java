@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.6  2001-08-30 08:30:18  dom-ts-4
+ Revision 1.7  2001-10-18 07:58:17  dom-ts-4
+ assertURIEquals added
+ Can now run from dom1-core.jar
+
+ Revision 1.6  2001/08/30 08:30:18  dom-ts-4
  Added metadata and Software licence (dropped in earlier processing) to test
  Enhanced test-matrix.xsl
 
@@ -50,6 +54,36 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
   private SAXParseException parseException;
 
   public DOMTestCase() {
+  }
+
+  
+  /**
+   *   This method is called by the main() for each test and
+   *      locates the appropriate test framework and runs the specified test
+   */
+  public static void doMain(Class testClass,String[] args) {
+    //
+    //   Attempt to load JUnitRunner
+    //
+    try {
+        ClassLoader loader = testClass.getClassLoader();
+        Class junitRunnerClass = loader.loadClass("org.w3c.domts.JUnitRunner");
+        Constructor junitRunnerFactory = junitRunnerClass.getConstructor(new Class[] { Class.class });
+        //
+        //   create the JUnitRunner
+        //
+        Object junitRun = junitRunnerFactory.newInstance(new Object[] { testClass });
+        //
+        //   find and call its execute method
+        //
+        Class argsClass = loader.loadClass("[Ljava.lang.String;");
+        Method execMethod = junitRunnerClass.getMethod("execute", new Class[] { argsClass });
+        execMethod.invoke(junitRun, new Object[] { args });
+    }
+    catch(Exception ex) {
+        System.out.println("Error bootstrapping junit-run.jar, check classpath");
+        ex.printStackTrace();
+    }
   }
 
   abstract public void runTest() throws Throwable;
@@ -232,6 +266,11 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
   public void assertNotEquals(String assertID, double expected, double actual) {
     framework.assertNotEquals(this, assertID,expected,actual);
   }
+
+  public void assertURIEquals(String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
+    framework.assertURIEquals(this, assertID, scheme, path, host, file, query, fragment, isAbsolute, actual);
+  }
+
 
   public boolean same(Object expected, Object actual) {
     return framework.same(expected,actual);
