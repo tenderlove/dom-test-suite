@@ -1105,7 +1105,7 @@ function handleEvent(listener, event, userObj) {
 			<xsl:text>.toUpperCase())</xsl:text>
 		</xsl:when>
 		<xsl:when test="@bitmask">
-			<xsl:text> &amp; <xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
+			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>)</xsl:text>
@@ -1133,7 +1133,7 @@ function handleEvent(listener, event, userObj) {
 			<xsl:text>.toUpperCase())</xsl:text>
 		</xsl:when>
 		<xsl:when test="@bitmask">
-			<xsl:text> &amp; <xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
+			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>)</xsl:text>
