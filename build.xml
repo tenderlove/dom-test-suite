@@ -13,7 +13,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.76  2002-11-25 21:08:22  plehegar
+Revision 1.77  2002-11-26 20:17:00  plehegar
+Fixed dom2-html-matrix.
+ The value of param must be inside the expression attribute, and no
+inside its content.
+
+Revision 1.76  2002/11/25 21:08:22  plehegar
 Link the DOM Level 2 HTML PR draft instead of CR draft.
 
 Revision 1.75  2002/11/06 12:27:51  dom-ts-5
@@ -1351,7 +1356,7 @@ All implementation conditions combined into implementationAttribute element
 		       expression="http://www.w3.org/TR/DOM-Level-2-HTML/html#"/>
         <param name="interfacesURL" expression="dom2-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom2-html-subjects.xml"/>
-        <param name="title">DOM Level 2 HTML Test Suite Matrix</param>
+        <param name="title" expression='DOM Level 2 HTML Test Suite Matrix'/>
 	</style>
 </target>
 
