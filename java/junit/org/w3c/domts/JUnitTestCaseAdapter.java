@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.4  2002-06-03 23:48:48  dom-ts-4
+ Revision 1.5  2002-08-12 08:09:18  dom-ts-4
+ Added name parameter to assertURIEquals
+
+ Revision 1.4  2002/06/03 23:48:48  dom-ts-4
  Support for Events tests
 
  Revision 1.3  2001/10/18 07:58:17  dom-ts-4
@@ -239,7 +242,7 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
     }
   }
 
-  public void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
+  public void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String name, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException {
     //
     //  URI must be non-null
     assertNotNull(assertID, actual);
@@ -294,14 +297,26 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
         assertEquals(assertID, host, actualHost);
     }
 
-    if(file != null) {
+    if(file != null || name != null) {
         String actualFile = actualPath;
         int finalSlash = actualPath.lastIndexOf("/");
         if(finalSlash != -1) {
             actualFile = actualPath.substring(finalSlash+1);
         }
-        assertEquals(assertID, file, actualFile);
+        if (file != null) {
+            assertEquals(assertID, file, actualFile);
+        }
     }
+
+    if(name != null) {
+        String actualName = actualPath;
+        int finalPeriod = actualPath.lastIndexOf(".");
+        if(finalPeriod != -1) {
+            actualName = actualFile.substring(0, finalSlash);
+        }
+        assertEquals(assertID, name, actualName);
+    }
+
 
     if(isAbsolute != null) {
         assertEquals(assertID, isAbsolute.booleanValue(), actualPath.startsWith("/"));

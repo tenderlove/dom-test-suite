@@ -12,7 +12,10 @@
 
   /*
  $Log: DOMTestFramework.java,v $
- Revision 1.7  2002-06-03 23:48:48  dom-ts-4
+ Revision 1.8  2002-08-12 08:09:18  dom-ts-4
+ Added name parameter to assertURIEquals
+
+ Revision 1.7  2002/06/03 23:48:48  dom-ts-4
  Support for Events tests
 
  Revision 1.6  2001/10/18 07:58:17  dom-ts-4
@@ -66,7 +69,7 @@ public interface DOMTestFramework {
 	void assertNotEquals(DOMTestCase test, String assertID, int expected, int actual);
 	void assertNotEquals(DOMTestCase test, String assertID, boolean expected, boolean actual);
 	void assertNotEquals(DOMTestCase test, String assertID, double expected, double actual);
-    void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException; 
+    void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String name, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException; 
 
 
 	boolean same(Object expected, Object actual);
