@@ -58,7 +58,7 @@
   <domConfig var="configuration" obj="builder" interface="LSParser"/> 
   <setParameter obj="configuration" name='"resource-resolver"' value="myentityresolver"/>
   
-  <getResourceURI var="resourceURI" href="TEST0"/>
+  <getResourceURI var="resourceURI" href="TEST0" contentType="text/xml"/>
   <parseURI var="document" obj="builder" uri="resourceURI"/>
   <assertNotNull actual="document" id="documentNotNull"/>
   <documentElement var="docElem" obj="document"/>

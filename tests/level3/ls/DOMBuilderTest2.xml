@@ -35,14 +35,14 @@
   &vars;
   &init;
 
-  <getResourceURI var="resourceURI" href="TEST0"/>
+  <getResourceURI var="resourceURI" href="TEST0" contentType="text/xml"/>
   <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>
   <assertSize collection="elementList" size="1" id="count_elt0"/>
 
   <item interface="NodeList" obj="elementList" var="firstElt0" index="0"/>
 
-  <getResourceURI var="resourceURI" href="TEST2"/>
+  <getResourceURI var="resourceURI" href="TEST2" contentType="text/xml"/>
   <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
   <try>
   	<parseWithContext  obj="builder" input="inputSource" contextArg="firstElt0" action="ACTION_APPEND_AS_CHILDREN" var="returnNode"/>

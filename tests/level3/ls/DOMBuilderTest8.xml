@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <implementation var="domImpl"/>
   <createLSParser var="parser" obj="domImpl" schemaType="NULL_SCHEMA_TYPE" mode="1"/>
   <createLSInput var="input" obj="domImpl"/>
-  <getResourceURI var="resourceURI" href='"test0"'/>
+  <getResourceURI var="resourceURI" href='"test0"' contentType="text/xml"/>
   <plus var="resourceURI" op1="resourceURI" op2='"_missing"'/>
   <systemId obj="input" value="resourceURI" interface="LSInput"/>  
   <assertLSException id="throw_PARSE_ERR">

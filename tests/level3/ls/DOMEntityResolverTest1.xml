@@ -58,7 +58,7 @@
 
   <domConfig var="configuration" obj="builder" interface="LSParser"/> 
 
-  <getResourceURI var="resourceURI" href="TEST4"/>
+  <getResourceURI var="resourceURI" href="TEST4" contentType="text/xml"/>
   
   <!-- before applying the entity resolver there should be 2 elt1 in this document -->
   <parseURI var="document" obj="builder" uri="resourceURI"/>

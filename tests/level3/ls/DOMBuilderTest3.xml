@@ -40,7 +40,7 @@
 
   &init;
 
-  <getResourceURI var="resourceURI" href="TEST0"/>
+  <getResourceURI var="resourceURI" href="TEST0" contentType="text/xml"/>
   <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1"/>
@@ -52,7 +52,7 @@
   <nodeName obj="secondElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="nextSibling_before_add" ignoreCase="false"/>
 
-  <getResourceURI var="resourceURI" href="TEST2"/>
+  <getResourceURI var="resourceURI" href="TEST2" contentType="text/xml"/>
   <systemId obj="inputSource" value="resourceURI" interface="LSInput"/>
   <try>
   	<parseWithContext  obj="builder" input="inputSource" contextArg="firstElt1" action="ACTION_INSERT_AFTER" var="returnNode"/>

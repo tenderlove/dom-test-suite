@@ -37,7 +37,7 @@
 
   &init;
 
-  <getResourceURI var="resourceURI" href="TEST0"/>
+  <getResourceURI var="resourceURI" href="TEST0"  contentType="text/xml"/>
   <parseURI  var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_1"/>

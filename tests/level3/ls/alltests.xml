@@ -88,4 +88,66 @@
    <suite.member href="LSSerializerConfig10.xml"/>
    <suite.member href="writeToURI1.xml"/>
    <suite.member href="writeToURI2.xml"/>
+
+   <suite.member href="canonicalform01.xml"/>
+   <suite.member href="canonicalform03.xml"/>
+   <suite.member href="canonicalform04.xml"/>
+   <suite.member href="canonicalform05.xml"/>
+   <suite.member href="canonicalform06.xml"/>
+   <suite.member href="canonicalform08.xml"/>
+   <suite.member href="canonicalform09.xml"/>
+   <suite.member href="canonicalform10.xml"/>
+   <suite.member href="canonicalform11.xml"/>
+   <suite.member href="canonicalform12.xml"/>
+   
+   <suite.member href="cdatasections01.xml"/>
+   <suite.member href="cdatasections02.xml"/>
+   <suite.member href="comments01.xml"/>
+   <suite.member href="comments02.xml"/>
+   
+   <suite.member href="datatypenormalization01.xml"/>
+   <suite.member href="datatypenormalization02.xml"/>
+<suite.member href="datatypenormalization03.xml"/>
+<suite.member href="datatypenormalization04.xml"/>
+<suite.member href="datatypenormalization05.xml"/>
+<suite.member href="datatypenormalization06.xml"/>
+<suite.member href="datatypenormalization07.xml"/>
+<suite.member href="datatypenormalization08.xml"/>
+<suite.member href="datatypenormalization09.xml"/>
+<suite.member href="datatypenormalization10.xml"/>
+<suite.member href="datatypenormalization11.xml"/>
+<suite.member href="datatypenormalization12.xml"/>
+<suite.member href="datatypenormalization13.xml"/>
+<suite.member href="datatypenormalization14.xml"/>
+<suite.member href="datatypenormalization15.xml"/>
+<suite.member href="datatypenormalization16.xml"/>
+   
+   <suite.member href="elementcontentwhitespace01.xml"/>
+   <suite.member href="elementcontentwhitespace02.xml"/>
+   <suite.member href="entities01.xml"/>
+   <suite.member href="entities02.xml"/>
+   <suite.member href="entities03.xml"/>
+   <suite.member href="entities04.xml"/>
+   <suite.member href="entities05.xml"/>
+   <suite.member href="entities06.xml"/>
+   <suite.member href="namespacedeclarations01.xml"/>
+   <suite.member href="namespacedeclarations02.xml"/>
+   <suite.member href="namespaces01.xml"/>
+   <suite.member href="namespaces02.xml"/>
+   
+   <suite.member href="schemalocation01.xml"/>
+   <suite.member href="schemalocation02.xml"/>
+   <suite.member href="schematype01.xml"/>
+   <suite.member href="schematype02.xml"/>
+   <suite.member href="schematype03.xml"/>
+   
+   
+   <suite.member href="validate01.xml"/>
+   <suite.member href="validate02.xml"/>
+   <suite.member href="validate03.xml"/>
+   <suite.member href="validate04.xml"/>
+   <suite.member href="validateifschema01.xml"/>
+   <suite.member href="validateifschema02.xml"/>
+   <suite.member href="validateifschema03.xml"/>
+   <suite.member href="validateifschema04.xml"/>
 </suite>

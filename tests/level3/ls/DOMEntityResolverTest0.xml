@@ -62,7 +62,7 @@
   <domConfig var="configuration" obj="builder" interface="LSParser"/> 
   <setParameter obj="configuration" name='"resource-resolver"' value="myentityresolver"/>
   
-  <getResourceURI var="resourceURI" href="TEST4"/>
+  <getResourceURI var="resourceURI" href="TEST4" contentType="text/xml"/>
   <parseURI var="document" obj="builder" uri="resourceURI"/>
   <getElementsByTagName var="elt2List" obj="document" 
      tagname='"elt2"' interface="Document"/>
