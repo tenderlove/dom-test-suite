@@ -28,7 +28,12 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.25  2002-08-12 09:01:27  dom-ts-4
+Revision 1.26  2002-08-13 04:46:44  dom-ts-4
+Added intermediate get and set elements for attributes
+on user implemented interfaces
+Other load-save support
+
+Revision 1.25  2002/08/12 09:01:27  dom-ts-4
 Added production of inner class property accessors
 
 Revision 1.24  2002/07/01 03:57:06  dom-ts-4
@@ -264,6 +269,15 @@ import org.w3c.dom.*;
 <xsl:value-of select="$import-html"/>
 import org.w3c.dom.events.*;
 import org.w3c.domts.*;
+<xsl:choose>
+    <xsl:when test="contains($package, 'level3')">
+import org.w3c.dom.ls.*;
+    </xsl:when>
+    <xsl:otherwise>
+import org.w3c.dom.events.*;
+    </xsl:otherwise>
+</xsl:choose>
+
 import javax.xml.parsers.*;
 import java.util.List;
 import java.util.Collection;
@@ -314,7 +328,7 @@ import java.util.ArrayList;
    <xsl:param name="vardefs"/>
    <xsl:text>    private class </xsl:text>
    <xsl:value-of select="concat(@type,generate-id(.))"/>
-   <xsl:text> implements </xsl:text>
+   <xsl:text> extends DOMTestInnerClass implements </xsl:text>
    <xsl:value-of select="@type"/>
    <xsl:text> {
        </xsl:text>
@@ -328,17 +342,16 @@ import java.util.ArrayList;
    <!-- constructor    -->
    <xsl:text>        public </xsl:text>
    <xsl:value-of select="concat(@type,generate-id(.))"/>
-   <xsl:text>(</xsl:text>
+   <xsl:text>(DOMTestCase test</xsl:text>
    <!--   constructor argument list   -->
    <xsl:for-each select="*[local-name() = 'var' and @value]">
-        <xsl:if test="position() &gt; 1">
-            <xsl:text>, </xsl:text>
-        </xsl:if>
+        <xsl:text>, </xsl:text>
         <xsl:value-of select="@type"/>
         <xsl:text> </xsl:text>
         <xsl:value-of select="@name"/>
    </xsl:for-each>
    <xsl:text>) { 
+        super(test);
            </xsl:text>
    <xsl:for-each select="*[local-name() = 'var' and @value]">
         <xsl:text>this.</xsl:text>
@@ -395,15 +408,28 @@ import java.util.ArrayList;
 
             <!--  not method, possibly an attribute   -->
             <xsl:when test="$interface/attribute[@name = $method-name]">
+                <xsl:for-each select="*">
                 <xsl:text>        public </xsl:text>
-                <xsl:call-template name="produce-type">
-		            <xsl:with-param name="type" select="$interface/attribute[@name = $method-name]/@type"/>
-	            </xsl:call-template>
-                <xsl:text> get</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="local-name() = 'get'">
+                        <xsl:call-template name="produce-type">
+		                    <xsl:with-param name="type" select="$interface/attribute[@name = $method-name]/@type"/>
+	                    </xsl:call-template>
+                        <xsl:text> get</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>void set</xsl:otherwise>
+                </xsl:choose>
                 <xsl:value-of select="concat(translate(
                     substring($method-name,1,1),'abcdefghijklmnopqrstuvwxyz',
                     'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($method-name,2))"/>
-                <xsl:text>() {
+                <xsl:text>(</xsl:text>
+                <xsl:if test="local-name() = 'set'">
+                    <xsl:call-template name="produce-type">
+		                <xsl:with-param name="type" select="$interface/attribute[@name = $method-name]/@type"/>
+	                </xsl:call-template>
+                    <xsl:text> value</xsl:text>
+                </xsl:if>
+                <xsl:text>) {
         </xsl:text>
 
              <xsl:apply-templates mode="body">
@@ -411,6 +437,7 @@ import java.util.ArrayList;
              </xsl:apply-templates>
                 <xsl:text>}
 </xsl:text>
+                </xsl:for-each>
             </xsl:when>
 
             <xsl:otherwise>
@@ -600,13 +627,11 @@ import java.util.*;
 			<xsl:text> = new </xsl:text>
             <xsl:value-of select="@type"/>
             <xsl:value-of select="generate-id(.)"/>
-            <xsl:text>(</xsl:text>
+            <xsl:text>(this</xsl:text>
             <!--  any var's with value attributes are passed
                     to the constructor    -->
             <xsl:for-each select="*[local-name() = 'var' and @value]">
-                <xsl:if test="position() &gt; 1">
-                    <xsl:text>, </xsl:text>
-                </xsl:if>
+                <xsl:text>, </xsl:text>
                 <xsl:value-of select="@value"/>
             </xsl:for-each>
             <xsl:text> );</xsl:text>
@@ -763,6 +788,11 @@ import java.util.*;
     <xsl:param name="vardefs"/>
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
+	<xsl:call-template name="retval-cast">
+		<xsl:with-param name="variable" select="@var"/>
+		<xsl:with-param name="vartype" select="$vardefs[@name = current()/@var]/@type"/>
+		<xsl:with-param name="rettype" select="'DOMImplementation'"/>
+	</xsl:call-template>
 	<xsl:if test="@obj">
 		<xsl:value-of select="@obj"/>
 		<xsl:text>.</xsl:text>
@@ -1282,6 +1312,8 @@ import java.util.*;
 	<xsl:param name="type"/>
 	<xsl:choose>
 		<xsl:when test="contains($type,'DOMString')">String</xsl:when>
+        <xsl:when test="$type = 'unsigned long'">int</xsl:when>
+        <xsl:when test="$type = 'long'">int</xsl:when>
         <xsl:when test="substring($type, 1, 9) = 'unsigned '">
             <xsl:value-of select="substring($type, 10)"/>
         </xsl:when> 
@@ -1418,7 +1450,14 @@ import java.util.*;
                 </xsl:when>
                 <xsl:otherwise>
 			        <xsl:text>((</xsl:text>
-			        <xsl:value-of select="$reqtype"/>
+                    <xsl:choose>
+                        <xsl:when test="substring($reqtype,1,9) = 'unsigned '">
+			                <xsl:value-of select="substring($reqtype, 10)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+			                <xsl:value-of select="$reqtype"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
 			        <xsl:text>)</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
