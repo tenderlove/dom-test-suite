@@ -63,7 +63,8 @@
   <assertNotNull actual="document" id="documentNotNull"/>
   <documentElement var="docElem" obj="document"/>
   <nodeName var="docElemName" obj="docElem"/>
-  <assertEquals actual="docElemName" expected='"elt0"' id="docElemName"/> 
+  <assertEquals actual="docElemName" expected='"elt0"' 
+  		id="docElemName" ignoreCase="false"/> 
 </test>
 
 

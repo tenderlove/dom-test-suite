@@ -41,7 +41,7 @@
      	<var name="source" type="DOMString" value='"&lt;elt2/&gt;"'/>
 
 		<!--  check that parameters on call to resolveSource are correct  -->
-        <assertNull actual="publicId"  ignoreCase="false" id="rr_publicId"/>
+        <assertNull actual="publicId"  id="rr_publicId"/>
         <assertEquals actual="systemId"  expected='"test5.xml"' ignoreCase="false" id="rr_systemId"/>
         <assertURIEquals actual="baseURI" isAbsolute='true' name='"test4"' id="rr_baseURI"/>
         
@@ -64,9 +64,10 @@
   
   <getResourceURI var="resourceURI" href="TEST4"/>
   <parseURI var="document" obj="builder" uri="resourceURI"/>
-  <getElementsByTagName var="elt2List" obj="document" tagname='"elt2"'/>
+  <getElementsByTagName var="elt2List" obj="document" 
+     tagname='"elt2"' interface="Document"/>
   <length var="elt2Count" obj="elt2List" interface="NodeList"/>
-  <assertEquals actual="elt2Count" expected="1" id="elt2Count"/>
+  <assertEquals actual="elt2Count" expected="1" id="elt2Count" ignoreCase="false"/>
 </test>
 
 
