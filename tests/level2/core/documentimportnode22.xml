@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+
+<!--
+
+Copyright (c) 2001 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom2.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="documentimportnode22">
+<metadata>
+<title>documentimportnode21</title>
+<creator>IBM</creator>
+<description>
+	The importNode method imports a node from another document to this document. 
+	The returned node has no parent; (parentNode is null). The source node is not 
+	altered or removed from the original document but a new copy of the source node
+	is created.
+	
+	Using the method importNode with deep=true/false, import two notaiton nodes into the 
+	same and different documnet objects.  In each case check if valid public and systemids 
+	are returned if any and if none, check if a null value was returned.
+</description>
+<contributor>Neil Delima</contributor>
+<date qualifier="created">2002-04-30</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core"/>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="docImp" type="Document"/>
+<var name="domImpl" type="DOMImplementation"/>
+<var name="docType" type="DocumentType"/>
+<var name="nodeMap" type="NamedNodeMap"/>
+<var name="notation1" type="Notation"/>
+<var name="notation2" type="Notation"/>
+<var name="notationImp1" type="Notation"/>
+<var name="notationImp2" type="Notation"/>
+<var name="notationImpNew1" type="Notation"/>
+<var name="notationImpNew2" type="Notation"/>
+<load var="doc" href="staffNS" willBeModified="false"/>
+<implementation var="domImpl" obj="doc" />
+<doctype var="docType" obj="doc"/>
+<createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="null"/>
+<notations var="nodeMap" obj="docType"/>		
+<getNamedItem var="notation1" obj="nodeMap" name='"notation1"'/>		
+<getNamedItem var="notation2" obj="nodeMap" name='"notation2"'/>		
+<importNode  var="notationImp1" obj="doc" importedNode="notation1" deep="true"/>
+<importNode  var="notationImp2" obj="doc" importedNode="notation2" deep="false"/>
+<importNode  var="notationImpNew1" obj="docImp" importedNode="notation1" deep="false"/>
+<importNode  var="notationImpNew2" obj="docImp" importedNode="notation2" deep="true"/>
+<assertEquals expected="notation1.getPublicId()" actual="notationImp1.getPublicId()" id="documentimportnode22_N1PID"/>
+<assertEquals expected="notation1.getPublicId()" actual="notationImpNew1.getPublicId()" id="documentimportnode22_N1NPID"/>
+<assertNull actual="notationImp1.getSystemId()" id="documentimportnode22_N1SID"/>
+<assertNull actual="notationImpNew1.getSystemId()" id="documentimportnode22_N1NSID"/>
+<assertEquals expected="notation2.getSystemId()" actual="notationImp2.getSystemId()" id="documentimportnode22_N2SID"/>
+<assertEquals expected="notation2.getSystemId()" actual="notationImpNew2.getSystemId()" id="documentimportnode22_N2NSID"/>
+<assertNull actual="notationImp2.getPublicId()" id="documentimportnode22_N2PID"/>
+<assertNull actual="notationImpNew2.getPublicId()" id="documentimportnode22_N2NPID"/>
+</test>
