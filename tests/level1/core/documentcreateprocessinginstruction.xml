@@ -36,9 +36,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newPINode" type="ProcessingInstruction"/>
-<var name="piValue" type="String"/>
-<var name="piName" type="String"/>
-<var name="piType" type="String"/>
+<var name="piValue" type="DOMString"/>
+<var name="piName" type="DOMString"/>
+<var name="piType" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"XML"</member>

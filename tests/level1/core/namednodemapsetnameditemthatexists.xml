@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="namednodemapSetNamedItemThatExists">
-<metadata>
-<title>namednodemapSetNamedItemThatExists</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>namednodemapSetNamedItemThatExists</title>
+		<creator>NIST</creator>
+		<description>
     If the node to be added by the "setNamedItem(arg)" method 
    already exists in the NamedNodeMap, it is replaced by
    the new one.
@@ -37,24 +36,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    method.  This test uses the "createAttribute(name)"
    method from the document interface
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="elementList" type="NodeList"/>
-<var name="newAttribute" type="Attr"/>
-<var name="testAddress" type="Node"/>
-<var name="attributes" type="NamedNodeMap"/>
-<var name="districtNode" type="Attr"/>
-<var name="attrValue" type="String"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-<item interface="NodeList" obj="elementList" var="testAddress" index="1"/>
-<createAttribute obj="doc" var="newAttribute" name="&quot;street&quot;"/>
-<attributes obj="testAddress" var="attributes"/>
-<setNamedItem interface="NamedNodeMap" obj="attributes" arg="newAttribute"/>
-<getNamedItem obj="attributes" var="districtNode" name="&quot;street&quot;"/>
-<nodeValue obj="districtNode" var="attrValue"/>
-<assertEquals actual="attrValue" expected="&quot;&quot;" id="namednodemapSetNamedItemThatExistsAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="elementList" type="NodeList"/>
+	<var name="newAttribute" type="Attr"/>
+	<var name="testAddress" type="Node"/>
+	<var name="attributes" type="NamedNodeMap"/>
+	<var name="districtNode" type="Attr"/>
+	<var name="attrValue" type="DOMString"/>
+	<var name="setNode" type="Node"/>
+	<load var="doc" href="staff.xml" willBeModified="true"/>
+	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+	<item interface="NodeList" obj="elementList" var="testAddress" index="1"/>
+	<createAttribute obj="doc" var="newAttribute" name="&quot;street&quot;"/>
+	<attributes obj="testAddress" var="attributes"/>
+	<setNamedItem var="setNode" obj="attributes" arg="newAttribute"/>
+	<getNamedItem obj="attributes" var="districtNode" name="&quot;street&quot;"/>
+	<nodeValue obj="districtNode" var="attrValue"/>
+	<assertEquals actual="attrValue" expected="&quot;&quot;" id="namednodemapSetNamedItemThatExistsAssert" ignoreCase="false"/>
 </test>

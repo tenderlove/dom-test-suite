@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,25 +15,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeElementNodeType">
-<metadata>
-<title>nodeElementNodeType</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>nodeElementNodeType</title>
+		<creator>NIST</creator>
+		<description>
     The "getNodeType()" method for an Element Node
     returns the constant value 1.
     
     Retrieve the root node and invoke the "getNodeType()"   
     method.   The method should return 1. 
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="rootNode" type="Element"/>
-<var name="nodeType" type="Int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<documentElement obj="doc" var="rootNode"/>
-<nodeType obj="rootNode" var="nodeType"/>
-<assertEquals actual="nodeType" expected="1" id="nodeElementNodeTypeAssert1" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="rootNode" type="Element"/>
+	<var name="nodeType" type="int"/>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<documentElement obj="doc" var="rootNode"/>
+	<nodeType obj="rootNode" var="nodeType"/>
+	<assertEquals actual="nodeType" expected="1" id="nodeElementNodeTypeAssert1" ignoreCase="false"/>
 </test>

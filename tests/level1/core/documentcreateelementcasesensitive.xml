@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="newElement1" type="Element"/>
 <var name="newElement2" type="Element"/>
-<var name="attribute1" type="String"/>
-<var name="attribute2" type="String"/>
+<var name="attribute1" type="DOMString"/>
+<var name="attribute2" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"Fort Worth"</member>

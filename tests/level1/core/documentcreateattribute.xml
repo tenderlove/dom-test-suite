@@ -35,9 +35,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newAttrNode" type="Attr"/>
-<var name="attrValue" type="String"/>
-<var name="attrName" type="String"/>
-<var name="attrType" type="String"/>
+<var name="attrValue" type="DOMString"/>
+<var name="attrName" type="DOMString"/>
+<var name="attrType" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"district"</member>

@@ -40,12 +40,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testNode" type="Node"/>
 <var name="attributes" type="NamedNodeMap"/>
 <var name="streetAttr" type="Attr"/>
-<var name="value" type="String"/>
+<var name="value" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="addressList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="addressList" var="testNode" index="3"/>
 <attributes obj="testNode" var="attributes"/>
 <getNamedItem obj="attributes" var="streetAttr" name="&quot;street&quot;"/>
-<value obj="streetAttr" var="value"/>
+<value interface="Attr"  obj="streetAttr" var="value"/>
 <assertEquals actual="value" expected="&quot;Yes&quot;" id="attrEntityReplacementAssert" ignoreCase="false"/>
 </test>

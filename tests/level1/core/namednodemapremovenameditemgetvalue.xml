@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="namednodemapRemoveNamedItemGetValue">
-<metadata>
-<title>namednodemapRemoveNamedItemGetValue</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>namednodemapRemoveNamedItemGetValue</title>
+		<creator>NIST</creator>
+		<description>
     If the node removed by the "removeNamedItem(name)" method 
    is an Attr node with a default value it is immediately
    replaced. 
@@ -32,22 +31,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    it has a default value of "Yes", that value should
    immediately be the attributes value.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="elementList" type="NodeList"/>
-<var name="testEmployee" type="Node"/>
-<var name="attributes" type="NamedNodeMap"/>
-<var name="streetAttr" type="Attr"/>
-<var name="value" type="String"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-<item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
-<attributes obj="testEmployee" var="attributes"/>
-<removeNamedItem interface="NamedNodeMap" obj="attributes" name="&quot;street&quot;"/>
-<getNamedItem obj="attributes" var="streetAttr" name="&quot;street&quot;"/>
-<value interface="Attr" obj="streetAttr" var="value"/>
-<assertEquals actual="value" expected="&quot;Yes&quot;" id="namednodemapRemoveNamedItemGetValueAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="elementList" type="NodeList"/>
+	<var name="testEmployee" type="Node"/>
+	<var name="attributes" type="NamedNodeMap"/>
+	<var name="streetAttr" type="Attr"/>
+	<var name="value" type="DOMString"/>
+	<var name="removedNode" type="Node"/>
+	<load var="doc" href="staff.xml" willBeModified="true"/>
+	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+	<item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
+	<attributes obj="testEmployee" var="attributes"/>
+	<removeNamedItem var="removedNode" obj="attributes" name="&quot;street&quot;"/>
+	<getNamedItem obj="attributes" var="streetAttr" name="&quot;street&quot;"/>
+	<value interface="Attr" obj="streetAttr" var="value"/>
+	<assertEquals actual="value" expected="&quot;Yes&quot;" id="namednodemapRemoveNamedItemGetValueAssert" ignoreCase="false"/>
 </test>

@@ -278,7 +278,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	       that are dependent on the source document.  Currently only
 		   the allowable types for variables    -->
 	<xsl:template name="dynamic-simpleTypes">
-		<xsl:text>&lt;!ENTITY % variable-type "int|DOMString|List|Collection|EventMonitor</xsl:text>
+		<xsl:text>&lt;!ENTITY % variable-type "int|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
 						<xsl:text>|</xsl:text>
@@ -493,13 +493,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	qualifier (isVersionOf | hasVersion | isReplacedBy | isRequiredBy | requires | isPartOf | hasPart | isReferenceBy | references) #REQUIRED
 &gt;
 					
-&lt;!ELEMENT assertTrue ((%condition;),(%statement;)*)&gt;
+&lt;!ELEMENT assertTrue ((%condition;)?,(%statement;)*)&gt;
 &lt;!ATTLIST assertTrue
 	id ID #REQUIRED
 	actual CDATA #IMPLIED
 &gt;
 							
-&lt;!ELEMENT assertFalse ((%condition;),(%statement;)*)&gt;
+&lt;!ELEMENT assertFalse ((%condition;)?,(%statement;)*)&gt;
 &lt;!ATTLIST assertFalse
 	id ID #REQUIRED
 	actual CDATA #IMPLIED
@@ -652,8 +652,8 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ELEMENT hasFeature EMPTY&gt;
 &lt;!ATTLIST hasFeature
 	id ID #IMPLIED
-	feature (XML | Core | Events | MutationEvents | Traversal | Range) #REQUIRED
-	version (1.0 | 2.0 | 3.0) #IMPLIED
+	feature CDATA #REQUIRED
+	version CDATA #IMPLIED
 	var CDATA #IMPLIED
 	obj CDATA #IMPLIED
 &gt;

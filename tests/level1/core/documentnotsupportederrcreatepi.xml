@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentNotSupportedErrCreatePI">
-<metadata>
-<title>documentNotSupportedErrCreatePI</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documentNotSupportedErrCreatePI</title>
+		<creator>NIST</creator>
+		<description>
     The "createProcessingInstruction(target,data)" method 
    raises a NOT_SUPPORTED_ERR DOMException if the document is
    a HTML document.
@@ -29,17 +28,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    the DOM document was based on a HTML document the desired
    exception should be raised.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_SUPPORTED_ERR'])"/>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-135944439"/>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-135944439')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_SUPPORTED_ERR'])"/>
-</metadata>
-<var name="doc" type="Document"/>
-<load var="doc" href="staff.html" willBeModified="false"/>
-<assertDOMException id="documentNotSupportedErrCreatePIAssert">
-<NOT_SUPPORTED_ERR>
-<createProcessingInstruction obj="doc" target="&quot;XML&quot;" data="&quot;data&quot;"/>
-</NOT_SUPPORTED_ERR>
-</assertDOMException>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NOT_SUPPORTED_ERR'])"/>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-135944439"/>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-135944439')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_SUPPORTED_ERR'])"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="badPI" type="ProcessingInstruction"/>
+	<load var="doc" href="staff.html" willBeModified="false"/>
+	<assertDOMException id="documentNotSupportedErrCreatePIAssert">
+		<NOT_SUPPORTED_ERR>
+			<createProcessingInstruction var="badPI" obj="doc" target="&quot;XML&quot;" data="&quot;data&quot;"/>
+		</NOT_SUPPORTED_ERR>
+	</assertDOMException>
 </test>

@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="clonedNode" type="Node"/>
 <var name="attributes" type="NamedNodeMap"/>
 <var name="attributeNode" type="Node"/>
-<var name="attributeName" type="String"/>
+<var name="attributeName" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"domestic"</member>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="notationGetSystemId">
-<metadata>
-<title>notationGetSystemId</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>notationGetSystemId</title>
+		<creator>NIST</creator>
+		<description>
     The "getSystemId()" method of a Notation node contains
    the system identifier associated with the notation, if
    one was specified.
@@ -28,26 +27,30 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    system identifier.  The string "notation2File" should be
    returned.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="docType" type="DocumentType"/>
-<var name="notations" type="NamedNodeMap"/>
-<var name="notationNode" type="Notation"/>
-<var name="systemId" type="String"/>
-<var name="index" type="int"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<doctype obj="doc" var="docType"/>
-<notations obj="docType" var="notations"/>
-<getNamedItem obj="notations" var="notationNode" name="&quot;notation2&quot;"/>
-<systemId interface="Notation" obj="notationNode" var="systemId"/>
-<lastIndexOf obj="systemId" var="index" ch="'/'"/>
-<if>
-<notEquals actual="index" expected="-1" ignoreCase="false"/>
-<increment var="index" value="1"/>
-<substring obj="systemId" var="systemId" beginIndex="index"/>
-</if>
-<assertEquals actual="systemId" expected="&quot;notation2File&quot;" id="notationGetSystemIdAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="docType" type="DocumentType"/>
+	<var name="notations" type="NamedNodeMap"/>
+	<var name="notationNode" type="Notation"/>
+	<var name="systemId" type="DOMString"/>
+	<var name="index" type="int"/>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<doctype obj="doc" var="docType"/>
+	<notations obj="docType" var="notations"/>
+	<getNamedItem obj="notations" var="notationNode" name="&quot;notation2&quot;"/>
+	<systemId interface="Notation" obj="notationNode" var="systemId"/>
+	<!--  lastIndexOf and substring are not in DOMTSML currently.
+	       This attempts to compensate for absolutation of system ID
+	       Since I don't believe that is legitimate, I'm removing it.  Curt Arnold  
+	<lastIndexOf obj="systemId" var="index" ch="'/'"/>
+	<if>
+		<notEquals actual="index" expected="-1" ignoreCase="false"/>
+		<increment var="index" value="1"/>
+		<substring obj="systemId" var="systemId" beginIndex="index"/>
+	</if>
+	-->
+	<assertEquals actual="systemId" expected="&quot;notation2File&quot;" id="notationGetSystemIdAssert" ignoreCase="false"/>
 </test>

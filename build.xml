@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.11  2001-08-15 04:44:03  dom-ts-4
+Revision 1.12  2001-08-19 20:51:19  dom-ts-4
+Successful DTD validation
+
+Revision 1.11  2001/08/15 04:44:03  dom-ts-4
 Added dom1-gen-ecmascript target to build.xml
 Minor fixes to test-to-java.xsl and test-to-ecmascript.xsl
 
@@ -412,6 +415,10 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="clean" depends="init">
 	<delete dir="${build.dir}"/>
+    <delete file="tests\level1\core\dom1.dtd"/>
+    <delete file="tests\level1\core\dom1.xsd"/>
+    <delete file="tests\level2\core\dom2.dtd"/>
+    <delete file="tests\level2\core\dom2.xsd"/>
 </target>
 
 <target name="dom3-init" depends="init">

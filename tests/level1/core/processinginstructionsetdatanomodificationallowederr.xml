@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="gen" type="Node"/>
 <var name="gList" type="NodeList"/>
 <var name="piNode" type="ProcessingInstruction"/>
-<var name="data" type="String"/>
+<var name="data" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>

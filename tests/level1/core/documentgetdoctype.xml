@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
-<var name="docTypeName" type="String"/>
+<var name="docTypeName" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <name interface="DocumentType" obj="docType" var="docTypeName"/>

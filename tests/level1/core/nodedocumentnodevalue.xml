@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="documentValue" type="String"/>
+<var name="documentValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <nodeValue obj="doc" var="documentValue"/>
 <assertNull actual="documentValue" id="nodeDocumentNodeValueAssert1"/>

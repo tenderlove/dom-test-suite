@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeNode" type="Node"/>
 <var name="employeeList" type="NodeList"/>
 <var name="child" type="Node"/>
-<var name="childName" type="String"/>
+<var name="childName" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"#text"</member>

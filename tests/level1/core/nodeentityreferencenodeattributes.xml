@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeEntityReferenceNodeAttributes">
-<metadata>
-<title>nodeEntityReferenceNodeAttributes</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>nodeEntityReferenceNodeAttributes</title>
+		<creator>NIST</creator>
+		<description>
     The "getAttributes()" method invoked on an EntityReference 
     Node returns null.
     
@@ -28,19 +27,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     "getAttributes()" method on the EntityReference node. 
     It should return null. 
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="elementList" type="NodeList"/>
-<var name="entRefAddr" type="Element"/>
-<var name="entRefNode" type="Node"/>
-<var name="attrList" type="NamedNopdeMap"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-<item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
-<firstChild obj="entRefAddr" var="entRefNode"/>
-<attributes obj="entRefNode" var="attrList"/>
-<assertNull actual="attrList" id="nodeEntityReferenceNodeAttributeseAssert1"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="elementList" type="NodeList"/>
+	<var name="entRefAddr" type="Element"/>
+	<var name="entRefNode" type="Node"/>
+	<var name="attrList" type="NamedNodeMap"/>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+	<item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
+	<firstChild obj="entRefAddr" var="entRefNode"/>
+	<attributes obj="entRefNode" var="attrList"/>
+	<assertNull actual="attrList" id="nodeEntityReferenceNodeAttributeseAssert1"/>
 </test>

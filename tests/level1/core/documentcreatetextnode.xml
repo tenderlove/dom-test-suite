@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentCreateTextNode">
-<metadata>
-<title>documentCreateTextNode</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documentCreateTextNode</title>
+		<creator>NIST</creator>
+		<description>
     The "createTextNode(data)" method creates a Text node 
    given the specfied string.
    Retrieve the entire DOM document and invoke its 
@@ -27,28 +26,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    new Text node whose "data" is the specified string.
    The NodeName and NodeType are also checked.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="newTextNode" type="Text"/>
-<var name="newTextName" type="String"/>
-<var name="newTextValue" type="String"/>
-<var name="newTextType" type="String"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"This is a new Text node"</member>
-<member>"#text"</member>
-<member>"3"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<createTextNode obj="doc" var="newTextNode" tagName="&quot;This is a new Text node&quot;"/>
-<nodeValue obj="newTextNode" var="newTextValue"/>
-<nodeName obj="newTextNode" var="newTextName"/>
-<nodeType obj="newTextNode" var="newTextType"/>
-<append collection="result" obj="newTextValue"/>
-<append collection="result" obj="newTextName"/>
-<append collection="result" obj="newTextType"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateTextNodeAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="newTextNode" type="Text"/>
+	<var name="newTextName" type="DOMString"/>
+	<var name="newTextValue" type="DOMString"/>
+	<var name="newTextType" type="DOMString"/>
+	<var name="result" type="List"/>
+	<var name="expectedResult" type="List">
+		<member>"This is a new Text node"</member>
+		<member>"#text"</member>
+		<member>"3"</member>
+	</var>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<createTextNode obj="doc" var="newTextNode" data="&quot;This is a new Text node&quot;"/>
+	<nodeValue obj="newTextNode" var="newTextValue"/>
+	<nodeName obj="newTextNode" var="newTextName"/>
+	<nodeType obj="newTextNode" var="newTextType"/>
+	<append collection="result" obj="newTextValue"/>
+	<append collection="result" obj="newTextName"/>
+	<append collection="result" obj="newTextType"/>
+	<assertEquals actual="result" expected="expectedResult" id="documentCreateTextNodeAssert" ignoreCase="false"/>
 </test>

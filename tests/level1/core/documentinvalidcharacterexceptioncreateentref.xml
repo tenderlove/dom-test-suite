@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentInvalidCharacterExceptionCreateEntRef">
-<metadata>
-<title>documentInvalidCharacterExceptionCreateEntRef</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documentInvalidCharacterExceptionCreateEntRef</title>
+		<creator>NIST</creator>
+		<description>
     The "createEntityReference(tagName)" method raises an
    INVALID_CHARACTER_ERR DOMException if the specified
    tagName contains an invalid character. 
@@ -29,17 +28,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    equal to the string "invalid^Name".  Due to the invalid 
    character the desired EXCEPTION should be raised.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INVALID_CHARACTER_ERR'])"/>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE"/>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-392B75AE')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
-</metadata>
-<var name="doc" type="Document"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<assertDOMException id="documentInvalidCharacterExceptionCreateEntRefAssert">
-<INVALID_CHARACTER_ERR>
-<createEntityReference obj="doc" tagName="&quot;invalid^Name&quot;"/>
-</INVALID_CHARACTER_ERR>
-</assertDOMException>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INVALID_CHARACTER_ERR'])"/>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE"/>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-392B75AE')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="badEntityRef" type="EntityReference"/>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<assertDOMException id="documentInvalidCharacterExceptionCreateEntRefAssert">
+		<INVALID_CHARACTER_ERR>
+			<createEntityReference var="badEntityRef" obj="doc" name="&quot;invalid^Name&quot;"/>
+		</INVALID_CHARACTER_ERR>
+	</assertDOMException>
 </test>

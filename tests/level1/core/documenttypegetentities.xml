@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documenttypeGetEntities">
-<metadata>
-<title>documenttypeGetEntities</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documenttypeGetEntities</title>
+		<creator>NIST</creator>
+		<description>
     The "getEntities()" method is a NamedNodeMap that contains
    the general entities for this document. 
    
@@ -28,53 +27,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    traversed and the names of the entities are retrieved.
    There should be 5 entities.  Duplicates should be ignored.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="docType" type="DocumentType"/>
-<var name="entityList" type="NamedNodeMap"/>
-<var name="entity" type="Entity"/>
-<var name="name" type="String"/>
-<var name="nameList" type="List"/>
-<var name="orderedList" type="List"/>
-<var name="pivote" type="String"/>
-<var name="comparison" type="int"/>
-<var name="firstNameList" type="List"/>
-<var name="lastNameList" type="List"/>
-<var name="expectedResult" type="List">
-<member>"ent1"</member>
-<member>"ent2"</member>
-<member>"ent3"</member>
-<member>"ent4"</member>
-<member>"ent5"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<doctype obj="doc" var="docType"/>
-<entities obj="docType" var="entityList"/>
-<for-each collection="entityList" member="entity">
-<nodeName obj="entity" var="name"/>
-<append collection="nameList" obj="name"/>
-</for-each>
-<assign var="orderedList" value="nameList"/>
-<for-each collection="nameList" member="pivote">
-<init obj="firstNameList"/>
-<init obj="lastNameList"/>
-<for-each collection="orderedList" member="name">
-<compareTo obj="name" anotherString="pivote" var="comparison"/>
-<if>
-<lessOrEquals actual="comparison" expected="0"/>
-<append collection="firstNameList" obj="name"/>
-<else>
-<append collection="lastNameList" obj="name"/>
-</else>
-</if>
-</for-each>
-<for-each collection="lastNameList" member="name">
-<append collection="firstNameList" obj="name"/>
-</for-each>
-<assign var="orderedList" value="firstNameList"/>
-</for-each>
-<assertEquals actual="orderedList" expected="expectedResult" id="documenttypeGetEntitiesAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="docType" type="DocumentType"/>
+	<var name="entityList" type="NamedNodeMap"/>
+	<!--  by declaring this as a collection, assertEquals will ignore order -->
+	<var name="expectedResult" type="Collection">
+		<member>"ent1"</member>
+		<member>"ent2"</member>
+		<member>"ent3"</member>
+		<member>"ent4"</member>
+		<member>"ent5"</member>
+	</var>
+	<var name="nameList" type="Collection"/>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<doctype obj="doc" var="docType"/>
+	<entities obj="docType" var="entityList"/>
+	<assertSize collection="entityList" size="5" id="entitySize"/>
+	<for-each collection="entityList" member="entity">
+		<nodeName obj="entity" var="name"/>
+		<append collection="nameList" obj="name"/>
+	</for-each>
+	<assertEquals actual="nameList" expected="expectedResult" id="entityNames" ignoreCase="false"/>
 </test>

@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="nameNode" type="Node"/>
 <var name="child" type="CharacterData"/>
-<var name="childData" type="String"/>
+<var name="childData" type="DOMString"/>
 <var name="childLength" type="int"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">

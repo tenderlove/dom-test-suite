@@ -38,7 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <var name="clonedNode" type="Node"/>
-<var name="cloneName" type="String"/>
+<var name="cloneName" type="DOMString"/>
 <var name="cloneChildren" type="NodeList"/>
 <var name="length" type="int"/>
 <var name="result" type="List"/>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentGetElementsByTagNameTotalLength">
-<metadata>
-<title>documentGetElementsByTagNameTotalLength</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documentGetElementsByTagNameTotalLength</title>
+		<creator>NIST</creator>
+		<description>
     The "getElementsByTagName(tagName)" method returns a 
    NodeList of all the Elements in the tree when the  
    tagName is equal to " ".
@@ -29,13 +28,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    equal to " ".  The method should return a NodeList 
    that contains all the elements of the document. 
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-A6C9094"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="nameList" type="NodeList"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nameList" tagname="&quot;*&quot;"/>
-<assertSize obj="nameList" size="37" id="documentGetElementsByTagNameTotalLengthAssert"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-A6C9094"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="nameList" type="NodeList"/>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<getElementsByTagName interface="Document" obj="doc" var="nameList" tagname="&quot;*&quot;"/>
+	<assertSize collection="nameList" size="37" id="documentGetElementsByTagNameTotalLengthAssert"/>
 </test>

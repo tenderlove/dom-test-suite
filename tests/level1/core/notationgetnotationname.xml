@@ -35,7 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="notations" type="NamedNodeMap"/>
 <var name="notationNode" type="Notation"/>
-<var name="notationName" type="String"/>
+<var name="notationName" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <notations obj="docType" var="notations"/>

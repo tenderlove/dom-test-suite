@@ -34,8 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="commentNode" type="Node"/>
-<var name="commentName" type="String"/>
-<var name="commentValue" type="String"/>
+<var name="commentName" type="DOMString"/>
+<var name="commentValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <childNodes obj="doc" var="elementList"/>
 <for-each collection="testList" member="commentNode">

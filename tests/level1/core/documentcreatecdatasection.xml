@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Curt Arnold (Curt Arnold) -->
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -15,11 +15,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
+<?xml-stylesheet type="text/xsl" href="D:\domts\2001\DOM-Test-Suite\transforms\test-to-java.xsl"?>
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentCreateCDATASection">
-<metadata>
-<title>documentCreateCDATASection</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documentCreateCDATASection</title>
+		<creator>NIST</creator>
+		<description>
     The "createCDATASection(data)" method creates a new 
    CDATASection node whose value is the specified string.
    Retrieve the entire DOM document and invoke its 
@@ -28,28 +29,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    string.  The content, name and type are retrieved and
    output.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="newCDATASectionNode" type="CDATASection"/>
-<var name="newCDATASectionValue" type="String"/>
-<var name="newCDATASectionName" type="String"/>
-<var name="newCDATASectionType" type="int"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"This is a new CDATASection node"</member>
-<member>"#cdata-section"</member>
-<member>"4"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<createCDATASection obj="doc" var="newCDATASectionNode" data="&quot;This is a new CDATASection node&quot;"/>
-<nodeValue obj="newCDATASectionNode" var="newCDATASectionValue"/>
-<nodeName obj="newCDATASectionNode" var="newCDATASectionName"/>
-<nodeType obj="newCDATASectionNode" var="newCDATASectionType"/>
-<append collection="result" obj="newCDATASectionValue"/>
-<append collection="result" obj="newCDATASectionName"/>
-<append collection="result" obj="newCDATASectionType"/>
-<assertEquals actual="result" expected="expectedResult" id="documentCreateCDATASectionAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="newCDATASectionNode" type="CDATASection"/>
+	<var name="newCDATASectionValue" type="DOMString"/>
+	<var name="newCDATASectionName" type="DOMString"/>
+	<var name="newCDATASectionType" type="int"/>
+	<var name="result" type="List"/>
+	<var name="expectedResult" type="List">
+		<member>"This is a new CDATASection node"</member>
+		<member>"#cdata-section"</member>
+		<member>"4"</member>
+	</var>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<createCDATASection obj="doc" var="newCDATASectionNode" data="&quot;This is a new CDATASection node&quot;"/>
+	<nodeValue obj="newCDATASectionNode" var="newCDATASectionValue"/>
+	<nodeName obj="newCDATASectionNode" var="newCDATASectionName"/>
+	<nodeType obj="newCDATASectionNode" var="newCDATASectionType"/>
+	<append collection="result" obj="newCDATASectionValue"/>
+	<append collection="result" obj="newCDATASectionName"/>
+	<append collection="result" obj="newCDATASectionType"/>
+	<assertEquals actual="result" expected="expectedResult" id="documentCreateCDATASectionAssert" ignoreCase="false"/>
 </test>

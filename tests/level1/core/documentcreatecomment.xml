@@ -33,9 +33,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newCommentNode" type="Comment"/>
-<var name="newCommentValue" type="String"/>
-<var name="newCommentName" type="String"/>
-<var name="newCommentType" type="String"/>
+<var name="newCommentValue" type="DOMString"/>
+<var name="newCommentName" type="DOMString"/>
+<var name="newCommentType" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"This is a new Comment node"</member>

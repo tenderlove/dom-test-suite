@@ -34,7 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="testList" type="NodeList"/>
 <var name="commentNode" type="Node"/>
-<var name="commentNodeName" type="String"/>
+<var name="commentNodeName" type="DOMString"/>
 <var name="nodeType" type="int"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <childNodes obj="doc" var="testList"/>

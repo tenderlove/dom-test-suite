@@ -40,8 +40,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newEntRefNode" type="Element"/>
 <var name="newEntRefList" type="NodeList"/>
 <var name="child" type="Node"/>
-<var name="name" type="String"/>
-<var name="value" type="String"/>
+<var name="name" type="DOMString"/>
+<var name="value" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"#text"</member>
@@ -56,5 +56,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <append collection="result" obj="name"/>
 <append collection="result" obj="value"/>
 </for-each>
-<assertEquals actuel="result" expected="expectedResult" id="documentCreateEntityReferenceKnownAssert" ignoreCase="false"/>
+<assertEquals actual="result" expected="expectedResult" id="documentCreateEntityReferenceKnownAssert" ignoreCase="false"/>
 </test>

@@ -31,9 +31,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='HIERARCHY_REQUEST_ERROR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='HIERARCHY_REQUEST_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-184E7107')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='HIERARCHY_REQUEST_ERROR'])"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-184E7107')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='HIERARCHY_REQUEST_ERR'])"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newChild" type="Node"/>
@@ -41,13 +41,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeNode" type="Node"/>
 <var name="childList" type="NodeList"/>
 <var name="oldChild" type="Node"/>
+<var name="appendedChild" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <documentElement obj="doc" var="newChild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <assertDOMException id="nodeAppendChildNodeAncestorAssert1">
-<HIERARCHY_REQUEST_ERROR>
-<appendChild obj="employeeNode" newChild="newChild"/>
-</HIERARCHY_REQUEST_ERROR>
+<HIERARCHY_REQUEST_ERR>
+<appendChild var="appendedChild" obj="employeeNode" newChild="newChild"/>
+</HIERARCHY_REQUEST_ERR>
 </assertDOMException>
 </test>

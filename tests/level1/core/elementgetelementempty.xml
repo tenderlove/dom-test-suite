@@ -41,7 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="testEmployee" type="Element"/>
 <var name="domesticAttr" type="Attr"/>
-<var name="attrValue" type="String"/>
+<var name="attrValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <createAttribute obj="doc" var="newAttribute" name="&quot;district&quot;"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>

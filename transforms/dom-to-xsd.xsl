@@ -335,6 +335,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xsd:annotation>
 				<xsd:restriction base="xsd:string">
 					<xsd:enumeration value="int"/>
+                    <xsd:enumeration value="boolean"/>
 					<xsd:enumeration value="DOMString"/>
 					<xsd:enumeration value="List">
 						<xsd:annotation>
@@ -910,8 +911,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xsd:annotation>
 				<xsd:complexType>
 					<xsd:attribute name="id" type="xsd:ID" use="optional"/>
-					<xsd:attribute name="feature" type="feature" use="required"/>
-					<xsd:attribute name="version" type="version" use="optional"/>
+					<xsd:attribute name="feature" type="stringLiteral" use="required"/>
+					<xsd:attribute name="version" type="stringLiteral" use="optional"/>
 					<xsd:attribute name="var" type="variable" use="optional"/>
 					<xsd:attribute name="obj" type="variable" use="optional"/>
 				</xsd:complexType>

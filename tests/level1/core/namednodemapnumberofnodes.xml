@@ -40,5 +40,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
 <attributes obj="testEmployee" var="attributes"/>
-<assertSize obj="attributes" size="2" id="namednodemapNumberOfNodesAssert"/>
+<assertSize collection="attributes" size="2" id="namednodemapNumberOfNodesAssert"/>
 </test>

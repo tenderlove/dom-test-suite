@@ -34,9 +34,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newElement" type="Element"/>
-<var name="newElementName" type="String"/>
-<var name="newElementType" type="String"/>
-<var name="newElementValue" type="String"/>
+<var name="newElementName" type="DOMString"/>
+<var name="newElementType" type="DOMString"/>
+<var name="newElementValue" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"address"</member>

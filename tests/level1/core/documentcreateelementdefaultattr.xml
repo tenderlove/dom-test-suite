@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="documentCreateElementDefaultAttr">
-<metadata>
-<title>documentCreateElementDefaultAttr</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>documentCreateElementDefaultAttr</title>
+		<creator>NIST</creator>
+		<description>
     The "createElement(tagName)" method creates an Element 
    of the type specified.  In addition, if there are known attributes
    with default values, Attr nodes representing them are automatically
@@ -31,29 +30,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    attribute with default values, therefore the newly created element
    will have them.  
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="newElement" type="Element"/>
-<var name="defaultAttr" type="NamedNodeMap"/>
-<var name="child" type="Node"/>
-<var name="name" type="String"/>
-<var name="value" type="String"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"street"</member>
-<member>"Yes"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
-<attributes obj="newElement" var="defaultAttr"/>
-<for-each collection="defaultAttr" member="child">
-<nodeName obj="child" var="name"/>
-<nodeValue obj="child" var="value"/>
-<append collection="result" obj="name"/>
-<append collection="result" obj="value"/>
-</for-each>
-<assertEquals actuel="result" expected="expectedResult" id="documentCreateElementDefaultAttrAssert" ignoreCase="false"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="newElement" type="Element"/>
+	<var name="defaultAttr" type="NamedNodeMap"/>
+	<var name="child" type="Node"/>
+	<var name="name" type="DOMString"/>
+	<var name="value" type="DOMString"/>
+	<var name="result" type="List"/>
+	<var name="expectedResult" type="List">
+		<member>"street"</member>
+		<member>"Yes"</member>
+	</var>
+	<load var="doc" href="staff.xml" willBeModified="false"/>
+	<createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
+	<attributes obj="newElement" var="defaultAttr"/>
+	<for-each collection="defaultAttr" member="child">
+		<nodeName obj="child" var="name"/>
+		<nodeValue obj="child" var="value"/>
+		<append collection="result" obj="name"/>
+		<append collection="result" obj="value"/>
+	</for-each>
+	<assertEquals actual="result" expected="expectedResult" id="documentCreateElementDefaultAttrAssert" ignoreCase="false"/>
 </test>

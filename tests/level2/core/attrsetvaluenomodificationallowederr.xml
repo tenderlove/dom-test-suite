@@ -54,7 +54,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
 <assertDOMException id="attrSetValueNoModificationAllowedErrAssert">
 <NO_MODIFICATION_ALLOWED_ERR>
-<value obj="attrNode" value="&quot;newvalue&quot;"/>
+<value interface="Attr"  obj="attrNode" value="&quot;newvalue&quot;"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

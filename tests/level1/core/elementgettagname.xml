@@ -32,7 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
-<var name="tagname" type="String"/>
+<var name="tagname" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <documentElement obj="doc" var="root"/>
 <tagName obj="root" var="tagname"/>

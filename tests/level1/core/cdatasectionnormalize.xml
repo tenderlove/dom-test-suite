@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="lChild" type="Element"/>
 <var name="childNodes" type="NodeList"/>
 <var name="cdataN" type="CDATASection"/>
-<var name="data" type="String"/>
+<var name="data" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"This is a CDATASection with EntityReference number 2 &amp;ent2;"</member>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -16,10 +15,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="namednodemapChildNodeRange">
-<metadata>
-<title>namednodemapChildNodeRange</title>
-<creator>NIST</creator>
-<description>
+	<metadata>
+		<title>namednodemapChildNodeRange</title>
+		<creator>NIST</creator>
+		<description>
     The range of valid child node indices is 0 to Length -1.
    
    Create a NamedNodeMap object from the attributes of the
@@ -27,19 +26,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
    list from index 0 thru length -1.  All indices should
    be valid.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
-</metadata>
-<var name="doc" type="Document"/>
-<var name="elementList" type="NodeList"/>
-<var name="testEmployee" type="Node"/>
-<var name="attributes" type="NamedNodeMap"/>
-<var name="child" type="Node"/>
-<var name="name" type="String"/>
-<load var="doc" href="staff.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-<item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
-<attributes obj="testEmployee" var="attributes"/>
-<assertSize obj="attributes" size="2" id="namednodemapChildNodeRangeAssert"/>
+		<contributor>Mary Brady</contributor>
+		<date qualifier="created">2001-08-17</date>
+		<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096"/>
+	</metadata>
+	<var name="doc" type="Document"/>
+	<var name="elementList" type="NodeList"/>
+	<var name="testEmployee" type="Node"/>
+	<var name="attributes" type="NamedNodeMap"/>
+	<var name="child" type="Node"/>
+	<var name="name" type="DOMString"/>
+	<load var="doc" href="staff.xml" willBeModified="true"/>
+	<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+	<item interface="NodeList" obj="elementList" var="testEmployee" index="2"/>
+	<attributes obj="testEmployee" var="attributes"/>
+	<assertSize collection="attributes" size="2" id="namednodemapChildNodeRangeAssert"/>
 </test>

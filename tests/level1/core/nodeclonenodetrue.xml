@@ -40,7 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="clonedNode" type="Node"/>
 <var name="clonedList" type="NodeList"/>
 <var name="clonedChild" type="Node"/>
-<var name="clonedChildName" type="String"/>
+<var name="clonedChildName" type="DOMString"/>
 <var name="result" type="List"/>
 <var name="expectedResult" type="List">
 <member>"#text"</member>
