@@ -58,7 +58,7 @@ public class documentcreatecdatasection extends DOMTestCase {
       String newCDATASectionValue;
       String newCDATASectionName;
       int newCDATASectionType;
-      doc = load("staff.xml");
+      doc = load("staff");
       newCDATASectionNode = doc.createCDATASection("This is a new CDATASection node");
       newCDATASectionValue = newCDATASectionNode.getNodeValue();
       assertEquals("nodeValue","This is a new CDATASection node",newCDATASectionValue);
