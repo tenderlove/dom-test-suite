@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "xhtml1-transitional.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>NIST DOM HTML Test - IFRAME</title>
+</head>
+<body>
+<iframe id="Iframe1" name="Iframe1" src="iframe.html">IFRAME1</iframe>
+<iframe id="Iframe2" src="frame.html" name="Iframe2">IFRAME2</iframe>
+</body>
+</html>
