@@ -12,7 +12,11 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.4  2001-11-01 15:02:50  dom-ts-4
+Revision 1.5  2002-01-11 17:05:46  plehegar
+cleaned the DOMImplementation features to match the recommendations.
+Note that DOM Level 3 is still a WD
+
+Revision 1.4  2001/11/01 15:02:50  dom-ts-4
 Doxygen and Avalon support
 
 Revision 1.3  2001/10/18 07:58:17  dom-ts-4
@@ -158,18 +162,33 @@ public class JUnitRunner {
           System.out.println("Class name for DOMImplementation:" + domimplClass.getName());
         }
 
-        printFeature(domimpl,"DOM Level 1","XML","xml","1.0");
-        printFeature(domimpl,"DOM Level 2","XML","xml","2.0");
-        printFeature(domimpl,"DOM Level 2 Core","CORE","core","2.0");
+        printFeature(domimpl,"DOM Level 1 XML","XML","xml","1.0");
+        printFeature(domimpl,"DOM Level 1 HTML","HTML","html","1.0");
+        printFeature(domimpl,"DOM Level 2","CORE","core","2.0");
+        printFeature(domimpl,"DOM Level 2 XML","XML","xml","2.0");
         printFeature(domimpl,"DOM Level 2 HTML", "HTML" , "html" , "2.0");
-        printFeature(domimpl,"DOM Level 2 Traversal","TRAVERSAL","traversal","2.0");
+        printFeature(domimpl,"DOM Level 2 Views", "VIEWS" , "views" , "2.0");
+        printFeature(domimpl,"DOM Level 2 Style Sheets", "STYLESHEETS" , "stylesheets" , "2.0");
+        printFeature(domimpl,"DOM Level 2 CSS", "CSS" , "css" , "2.0");
+        printFeature(domimpl,"DOM Level 2 CSS2", "CSS2" , "css2" , "2.0");
         printFeature(domimpl,"DOM Level 2 Events","EVENTS","events","2.0");
+        printFeature(domimpl,"DOM Level 2 User Interface Events","UIEVENTS","uievents","2.0");
+        printFeature(domimpl,"DOM Level 2 Mouse Events","MOUSEEVENTS","mouseevents","2.0");
         printFeature(domimpl,"DOM Level 2 Mutation Events","MUTATIONEVENTS","mutationevents","2.0");
-        printFeature(domimpl,"DOM Level 3","XML","xml","3.0");
+        printFeature(domimpl,"DOM Level 2 HTML Events","HTMLEVENTS","htmlevents","2.0");
+        printFeature(domimpl,"DOM Level 2 Traversal","TRAVERSAL","traversal","2.0");
+        printFeature(domimpl,"DOM Level 2 Range","RANGE","range","2.0");
+        printFeature(domimpl,"DOM Level 3","CORE","core","3.0");
+        printFeature(domimpl,"DOM Level 3 XML","XML","xml","3.0");
         printFeature(domimpl,"DOM Level 3 Core","CORE","core","3.0");
         printFeature(domimpl,"DOM Level 3 XPath", "XPATH", "xpath", "3.0");
-        printFeature(domimpl,"SVG", "org.w3c.svg", "org.w3c.svg", "1.0");
-        printFeature(domimpl,"MathML", "org.w3c.dom.mathml", "org.w3c.dom.mathml", null);
+        printFeature(domimpl,"SVG Version 1.0", "org.w3c.dom.svg", "org.w3c.dom.svg", "1.0");
+        printFeature(domimpl,"SVG Version 1.0 Static", "org.w3c.dom.svg.static", "org.w3c.dom.svg.static", "1.0");
+        printFeature(domimpl,"SVG Version 1.0 Dynamic", "org.w3c.dom.svg.dynamic", "org.w3c.dom.svg.dynamic", "1.0");
+        printFeature(domimpl,"SVG Version 1.0 Animation", "org.w3c.dom.svg.animation", "org.w3c.dom.svg.animation", "1.0");
+        printFeature(domimpl,"SVG Version 1.0 (full support)", "org.w3c.dom.svg.all", "org.w3c.dom.svg.all", "1.0");
+        printFeature(domimpl,"SMIL Animation", "TIMECONTROL", "timecontrol", null);
+        printFeature(domimpl,"MathML Version 2.0", "org.w3c.dom.mathml", "org.w3c.dom.mathml", null);
       }
     }
     catch(Exception ex) {
