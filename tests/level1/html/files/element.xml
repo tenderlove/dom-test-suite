@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html id="Test-HEAD" title="HEAD Element" lang="en" dir="ltr" class="HEAD-class" xmlns='http://www.w3.org/1999/xhtml'>
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "xhtml1-transitional.dtd">
+<html lang="en" dir="ltr" xmlns='http://www.w3.org/1999/xhtml'>
 <head>
 <title>NIST DOM HTML Test - Element</title>
 </head>
