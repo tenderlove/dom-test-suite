@@ -13,7 +13,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.43  2002-01-29 06:27:11  dom-ts-4
+Revision 1.44  2002-02-13 08:01:15  dom-ts-4
+Added dom1-core-dist target
+Relocated .jar files from dist/ to build/
+Patches JSUnit 1.2.6
+
+Revision 1.43  2002/01/29 06:27:11  dom-ts-4
 Changed tr/2001 to tr/2002 for new working drafts
 
 Revision 1.42  2002/01/29 06:21:44  dom-ts-4
@@ -167,6 +172,7 @@ All implementation conditions combined into implementationAttribute element
     <echo message="dom1-core-gen-jsunit"/>
     <echo message="                     builds JSUnit adapters for DOM Level 1 Core"/>
     <echo message="dom1-core-doxygen    builds documentation for DOM Level 1 Core"/>
+    <echo message="dom1-core-dist       builds distribution for DOM Level 1 Core"/>
     <echo message="dom2-core-*          Same as above but for DOM Level 2 Core"/>
 	<echo message=""/>
 </target>
@@ -187,6 +193,7 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${dist.dir}"/>
     <available property="junit-available" file="${lib.dir}/junit.zip"/>
+    <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
     <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="avalon-available" file="${lib.dir}/avalon.zip"/>
 </target>
@@ -304,6 +311,45 @@ All implementation conditions combined into implementationAttribute element
 	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
 	       out="${build.dir}/dom1-interfaces.xml"
 	       style="${transforms.dir}/extract.xsl"/>
+</target>
+
+<target name="dom1-core-dist" depends="dom1-core-jar,dom1-core-gen-jsunit,dom1-core-matrix,dom1-core-doxygen,junit-run,get-junit-license,dom1-schema">
+    <mkdir dir="${build.dir}/level1/core"/>
+    <mkdir dir="${build.dir}/level1/core/resources"/>
+    <mkdir dir="${build.dir}/level1/core/java"/>
+    <copy file="docs/level1/core/index.htm" todir="${build.dir}/level1/core"/>
+    <copy todir="${build.dir}/level1/core/resources">
+        <fileset dir="docs/level1/core/resources" excludes="*.bak"/>
+    </copy>
+    <copy file="${build.dir}/dom1-core.jar" todir="${build.dir}/level1/core/java"/>
+    <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level1/core/java"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level1/core/java"/>
+    <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level1/core/java"/>
+    <copy file="${lib.dir}/jsunit/testRunner.html" todir="${build.dir}/level1/core/ecmascript"/>
+    <mkdir dir="${build.dir}/level1/core/ecmascript/app"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/app">
+        <fileset dir="${lib.dir}/jsunit/app" excludes="*.bak"/>
+    </copy>
+    <copy file="${lib.dir}/jsunit/docs/gnugpl.html" todir="${build.dir}/level1/core/ecmascript/docs"/>
+    <copy file="${build.dir}/dom1-core-matrix.html" todir="${build.dir}/level1/core"/>
+
+
+    <mkdir dir="${build.dir}/level1/core/tests/files"/>
+    <copy todir="${build.dir}/level1/core/tests">
+        <fileset dir="${tests.dir}/level1/core" includes="*.xml"/>
+        <fileset dir="${build.dir}" includes="dom1.dtd"/>
+        <fileset dir="${build.dir}" includes="dom1.xsd"/>
+    </copy>
+    <copy todir="${build.dir}/level1/core/tests/files">
+        <fileset dir="${tests.dir}/level1/core/files" excludes="*.bak"/>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom1-core.zip" basedir="${build.dir}/level1/core"/>
+    <tar tarfile="${dist.dir}/dom1-core.tar" basedir="${build.dir}/level1/core"/>
+    <gzip src="${dist.dir}/dom1-core.tar" zipfile="${dist.dir}/dom1-core.tar.gz"/>
+        
+        
 </target>
 
 <!--  determines if DOM 1 spec files are already available locally  -->
@@ -616,12 +662,27 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="jsunit-init" depends="jsunit-get">
 	<unzip src="${lib.dir}/jsunit.zip" dest="${lib.dir}"/>
+
+    <!--   apply patches to JSUnit 1.2.6
+              to add code that "injects" jsUnitCore
+              into tests and does not require
+              the tests and test framework to 
+              have a constant relative position   -->
+	<patch patchfile="./patches/main.patch"
+	       originalfile="${lib.dir}/jsunit/app/main.html"/>
+
+	<patch patchfile="./patches/jsUnitRunner.patch"
+	       originalfile="${lib.dir}/jsunit/app/jsUnitRunner.js"/>
+
+	<patch patchfile="./patches/jsUnitCore.patch"
+	       originalfile="${lib.dir}/jsunit/app/jsUnitCore.js"/>
+
 </target>
 
 <target name="dom1-core-gen-jsunit" depends="jsunit-init,dom1-interfaces,dom1-dtd">
-    <mkdir dir="${build.dir}/ecmascript/level1/core"/>
-	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level1/core"/>
-    <copy todir="${build.dir}/ecmascript/level1/core">
+    <mkdir dir="${build.dir}/level1/core/ecmascript/tests"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/core/ecmascript/tests"/>
+    <copy todir="${build.dir}/level1/core/ecmascript/tests">
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
     </copy>
 
@@ -629,11 +690,11 @@ All implementation conditions combined into implementationAttribute element
              is provided since some versions of Xalan-J
                    will stall when processing it    -->
     <copy file="${tests.dir}/level1/core/documentcreatecdatasection.html" 
-            todir="${build.dir}/ecmascript/level1/core"/>
+            todir="${build.dir}/level1/core/ecmascript/tests"/>
 
 
 	<style basedir="${tests.dir}/level1/core" 
-		   destdir="${build.dir}/ecmascript/level1/core" 
+		   destdir="${build.dir}/level1/core/ecmascript/tests" 
 		   includes="*.xml" 
            excludes="metadata.xml,documentcreatecdatasection.xml"
 	       style="${transforms.dir}/test-to-jsunit.xsl" 
@@ -643,14 +704,6 @@ All implementation conditions combined into implementationAttribute element
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
-</target>
-
-<target name="dom1-core-jsunit-zip" depends="init">
-    <zip zipfile="${dist.dir}/dom1-core-ecma.zip"
-         basedir="."
-         excludes="*.bak"
-         includes="lib/jsunit/*.*, lib/jsunit/app/*.*, lib/jsunit/images/*.*, build/ecmascript/level1/core/*.*"/>
-
 </target>
 
 
@@ -695,7 +748,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-core-jar" depends="dom1-core-javac">
-	<jar jarfile="${dist.dir}/dom1-core.jar" manifest="java/dom1-core.mf">
+	<jar jarfile="${build.dir}/dom1-core.jar" manifest="java/dom1-core.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 		<fileset dir="${java.build.dir}"
@@ -724,16 +777,13 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-core-doxygen" depends="dom1-core-gen-java">
-    <mkdir dir="${build.dir}/doxygen/level1"/>
+    <mkdir dir="${build.dir}/level1/core/doxygen"/>
 
     <!--  doxygen must be on path  
           download from http://www.doxygen.org    -->
     <exec executable="doxygen">
         <arg line="dom1-core.doxygen"/>
     </exec>
-
-    <zip zipfile="${dist.dir}/dom1-core-doxygen.zip"
-         basedir="${build.dir}/doxygen/level1/html"/>
 
 </target>
 
@@ -872,7 +922,7 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom2-core-jar" depends="dom2-core-javac">
 	<!--  will need to provide a manifest    -->
-	<jar jarfile="${dist.dir}/dom2-core.jar"  manifest="java/dom2-core.mf">
+	<jar jarfile="${build.dir}/dom2-core.jar"  manifest="java/dom2-core.mf">
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 		<fileset dir="${java.build.dir}"
@@ -894,9 +944,11 @@ All implementation conditions combined into implementationAttribute element
         <arg line="dom2-core.doxygen"/>
     </exec>
 
-    <zip zipfile="${dist.dir}/dom2-core-doxygen.zip"
-         basedir="${build.dir}/doxygen/level2/html"/>
+</target>
 
+<target name="get-junit-license" depends="init" unless="junit-license-available">
+    <get src="http://oss.software.ibm.com/developerworks/opensource/license10.html"
+         dest="${lib.dir}/junit-license.html"/>
 </target>
 
 
@@ -911,7 +963,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="junit-run" depends="common-javac,get-junit">
 	<unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
 
-    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${dist.dir}"/>
+    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}"/>
 
     <mkdir dir="${java.build.dir}/junit"/>
 
@@ -922,7 +974,7 @@ All implementation conditions combined into implementationAttribute element
 		   encoding="UTF8"/>
 
 
-    <jar jarfile="${dist.dir}/junit-run.jar"
+    <jar jarfile="${build.dir}/junit-run.jar"
         manifest="java/junit/junit-run.mf">
         <fileset dir="${java.build.dir}/junit"
 	         includes="org/w3c/domts/**" excludes="*.bak"/>
@@ -959,7 +1011,7 @@ All implementation conditions combined into implementationAttribute element
         <zipfileset src="${lib.dir}/jakarta-avalon-testlet/lib/clutil.jar" includes="**/*.class"/>
 	</jar>
 
-    <copy file="${lib.dir}/testlet.jar" todir="${dist.dir}"/>
+    <copy file="${lib.dir}/testlet.jar" todir="${build.dir}"/>
 
 
 	<javac srcdir="java/avalon/org/w3c/domts"
@@ -968,7 +1020,7 @@ All implementation conditions combined into implementationAttribute element
            debug="on"
 		   encoding="UTF8"/>
 
-	<jar jarfile="${dist.dir}/avalon-run.jar"
+	<jar jarfile="${build.dir}/avalon-run.jar"
 	     manifest="java/avalon/avalon-run.mf">
 		<fileset dir="${java.build.dir}/avalon"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
