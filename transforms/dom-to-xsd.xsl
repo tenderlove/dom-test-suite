@@ -561,7 +561,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
                     <xs:group maxOccurs="unbounded" ref="statement"/>
                 </xs:sequence>
-                <xs:attribute use="optional" type="variable" name="return"/>
             </xs:complexType>
 
             <xs:complexType name="sinkAttribute">
@@ -569,6 +568,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                 <xs:attribute use="required" type="literal" name="value"/>
             </xs:complexType>
 
+            <xs:element name="return">
+                <xs:complexType>
+                    <xs:sequence/>
+                    <xs:attribute name="value" type="variableOrLiteral" use="optional"/>
+                </xs:complexType>
+            </xs:element>
 			<xs:element name="var">
 				<xs:annotation>
 					<xs:documentation>Declare and optionally initialize a variable.  [Tenative] All variables must be declared.  Use instanceOf for type assertions.</xs:documentation>
@@ -581,14 +586,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xsl:for-each select="$interfaces[contains($sink-interfaces,concat(' ',concat(@name,' ')))]">
                             <xs:sequence>
                                 <xsl:for-each select="method|attribute">
-                                    <xsl:choice>
+                                    <xsl:choose>
                                         <xsl:when test="name() = 'method'">
                                             <xs:element name="{@name}" type="sinkMethod"/>
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xs:element name="{@name}" type="sinkAttribute"/>
                                         </xsl:otherwise>
-                                    </xsl:choice>
+                                    </xsl:choose>
                                 </xsl:for-each>
                             </xs:sequence>
                         </xsl:for-each>
@@ -891,6 +896,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="while"/>
 					<xs:element ref="for-each"/>
 					<xs:element ref="comment"/>
+                    <xs:element ref="return"/>
 					<xs:element ref="EventMonitor.setUserObj"/>
 					<xs:element ref="EventMonitor.getAtEvents"/>
 					<xs:element ref="EventMonitor.getCaptureEvents"/>
