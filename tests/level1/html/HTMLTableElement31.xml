@@ -3,7 +3,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -37,11 +37,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#ID-39872903"/>
 <!--  comments on the commented out sections   -->
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Aug/0019.html"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=502"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
-<!--
-<var name="tableList" type="NodeList"/>
--->
 <var name="testNode" type="Node"/>
 <var name="tableNode" type="Node"/>
 <var name="tbodiesnodeList" type="HTMLCollection"/>
@@ -50,15 +48,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="table" type="Element"/>
 <var name="tbodiesLength" type="int"/>
 <load var="doc" href="table1" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"body"'/>
 <assertSize collection="nodeList" size="1" id="tableSize1"/>
 <item interface="NodeList" obj="nodeList" index="0" var="testNode"/>
-<!--
-<tBodies interface="HTMLTableElement" obj="testNode" var="tbodiesnodeList"/>
-<length var="tbodiesLength" obj="tbodiesnodeList" interface="HTMLCollection"/>
-<assertEquals actual="tbodiesLength" expected="1" id="Asize2" ignoreCase="false"/>
-<childNodes obj="testNode" var="tableList"/>
--->
 <createElement obj="doc" var="table" tagName='"table"'/>
 <appendChild obj="testNode" newChild="table" var="tableNode"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
