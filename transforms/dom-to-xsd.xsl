@@ -53,6 +53,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<!--  methods defined in DOM recommendation  -->
 	<xsl:variable name="methods" select="//method"/>
     <xsl:variable name="features" select="//*[name() = 'method' or name() = 'attribute']"/>
+	<xsl:variable name="exceptions" select="//exception[@id]"/>
 
 	<!--  methods keyed by name           -->
 	<xsl:key name="methodByName" match="//method[@name]" use="@name"/>
@@ -1039,6 +1040,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="implementation"/>
 					<xs:element ref="hasFeature"/>
 					<xs:element ref="if"/>
+					<xs:element ref="try"/>
 					<xs:element ref="while"/>
 					<xs:element ref="for-each"/>
 					<xs:element ref="comment"/>
@@ -1272,6 +1274,47 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xs:group ref="condition"/>
 						<xs:group ref="statement" maxOccurs="unbounded"/>
 						<xs:element ref="else" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="try">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="statement" maxOccurs="unbounded"/>
+						<xs:element name="catch">
+							<xs:complexType>
+								<xs:sequence>
+									<xsl:for-each select="$exceptions">
+										<xs:element name="{@name}" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+												<xs:attribute name="id" type="xs:ID" use="optional"/>
+												<xs:attribute name="code" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xsl:for-each select="following-sibling::group[1]/constant">
+																<xs:enumeration value="{@name}"/>
+															</xsl:for-each>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xsl:for-each>
+									<xs:element name="ImplementationException" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:group ref="statement" minOccurs="0" maxOccurs="unbounded"/>
+											</xs:sequence>
+											<xs:attribute name="id" type="xs:ID" use="optional"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 				</xs:complexType>

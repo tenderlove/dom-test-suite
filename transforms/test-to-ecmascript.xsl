@@ -1185,4 +1185,73 @@ function handleEvent(listener, event, userObj) {
 	<xsl:text>)</xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='try']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:variable name="exceptions" select="$domspec//exception[@id]"/>
+    <xsl:variable name="catches" select="*[local-name() = 'catch']/*"/>
+    <xsl:variable name="implException" select="$catches[local-name() = 'ImplementationException']"/>
+    
+    <xsl:text>
+      try {
+      </xsl:text>
+      <xsl:apply-templates select="*[local-name() != 'catch']" mode="body">
+      	<xsl:with-param name="vardefs" select="$vardefs"/>
+      </xsl:apply-templates>
+      <xsl:text>
+      } catch (ex) {
+      </xsl:text>
+      <xsl:for-each select="$exceptions">
+      	  <xsl:if test="$implException or $catches[local-name() = current()/@name]">
+      			<xsl:variable name="exception" select="."/>
+      			<xsl:for-each select="$catches[local-name() = $exception/@name]">
+      				<xsl:variable name="catchCode" select="@code"/>
+      				<xsl:text>if (ex.code == </xsl:text>
+      				<xsl:for-each select="$exception">
+      					<xsl:value-of select="following-sibling::group[1]/constant[@name = $catchCode]/@value"/>
+      				</xsl:for-each>
+      				<xsl:text>) {
+      </xsl:text>
+      				<xsl:apply-templates select="*" mode="body">
+      					<xsl:with-param name="vardefs" select="$vardefs"/>
+      				</xsl:apply-templates>
+      				<xsl:text>}
+      </xsl:text>
+      			</xsl:for-each>
+      		</xsl:if>
+      </xsl:for-each>
+      <xsl:for-each select="$implException">
+      	<xsl:apply-templates select="*" mode="body">
+      		<xsl:with-param name="vardefs" select="$vardefs"/>
+      	</xsl:apply-templates>
+      </xsl:for-each>
+      <xsl:if test="not($implException)">
+      		<xsl:text>    throw ex;
+       </xsl:text>
+      </xsl:if>
+      <xsl:text>
+      }
+      </xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='getResourceURI']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = getResourceURI(</xsl:text>
+    <xsl:value-of select="@href"/>
+    <xsl:text>);
+      </xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='createTempFileURI']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = createTempFileURI();
+      </xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='createTempHttpURI']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = createTempHttpURI();
+      </xsl:text>
+</xsl:template>
+
+
 </xsl:stylesheet>

@@ -48,6 +48,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 	<xsl:variable name="attributes" select="//attribute"/>
 	<!--  methods defined in DOM recommendation  -->
 	<xsl:variable name="methods" select="//method"/>
+	<xsl:variable name="exceptions" select="//exception[@id]"/>
 
 	<!--  attributes and methods keyed by name        -->
 	<xsl:key name="featureByName" match="//*[(name()='attribute' or name()='method') and @name]" use="@name"/>
@@ -77,14 +78,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempFileURI|createTempHttpURI"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempFileURI|createTempHttpURI"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
 &lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;"&gt;
 
 &lt;!ENTITY % assertion "%framework-assertion;</xsl:text>
-	<xsl:variable name="exceptions" select="//exception[@id]"/>
 	<xsl:if test="$exceptions">
 		<xsl:for-each select="$exceptions">
 			<xsl:text>| assert</xsl:text>
@@ -870,6 +870,46 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 &gt;
 
+&lt;!ELEMENT try ((%statement;)+, catch)&gt;
+&lt;!ATTLIST try
+	id ID #IMPLIED
+&gt;
+
+<xsl:text>
+&lt;!ELEMENT catch ((</xsl:text>
+<xsl:for-each select="$exceptions">
+	<xsl:value-of select="@name"/>
+	<xsl:text>*,</xsl:text>
+</xsl:for-each>
+	<xsl:text>ImplementationException?))&gt;
+&lt;!ATTLIST catch
+    id ID #IMPLIED&gt;
+    
+&lt;!ELEMENT ImplementationException ((%statement;)*)&gt;
+&lt;!ATTLIST ImplementationException 
+    id ID #IMPLIED&gt;    
+ 
+ </xsl:text>   
+ 
+ <xsl:for-each select="$exceptions">
+ 	<xsl:variable name="codes" select="following-sibling::group[1]/constant"/>
+ 
+ 	<xsl:text>&lt;!ELEMENT </xsl:text>
+ 	<xsl:value-of select="@name"/>
+ 	<xsl:text> ((%statement;)*)&gt;
+ &lt;!ATTLIST </xsl:text>
+ 	<xsl:value-of select="@name"/>
+ 	<xsl:text> code (</xsl:text>
+ 	<xsl:for-each select="$codes">
+ 		<xsl:if test="position() &gt; 1">|</xsl:if>
+ 		<xsl:value-of select="@name"/>
+ 	</xsl:for-each>
+ 	<xsl:text>) #REQUIRED&gt;
+ </xsl:text>
+ 
+ </xsl:for-each>
+    
+    
 &lt;!ELEMENT atEvents EMPTY&gt;
 &lt;!ATTLIST atEvents
 	id ID #IMPLIED

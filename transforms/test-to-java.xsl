@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.51  2003-12-16 05:36:31  dom-ts-4
+Revision 1.52  2003-12-17 19:29:15  dom-ts-4
+Add try construct to test language (bug 439)
+
+Revision 1.51  2003/12/16 05:36:31  dom-ts-4
 Adds support for for-each member variables of value types (bug 429)
 
 Revision 1.50  2003/12/15 21:37:45  dom-ts-4
@@ -992,7 +995,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text>        return </xsl:text>
     <xsl:value-of select="@value"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 
@@ -1002,7 +1005,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> += </xsl:text>
     <xsl:value-of select="@value"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='decrement']" mode="body">
@@ -1011,7 +1014,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> -= </xsl:text>
     <xsl:value-of select="@value"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='plus']" mode="body">
@@ -1022,7 +1025,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> + </xsl:text>
     <xsl:value-of select="@op2"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='subtract']" mode="body">
@@ -1033,7 +1036,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> - </xsl:text>
     <xsl:value-of select="@op2"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 
@@ -1045,7 +1048,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> * </xsl:text>
     <xsl:value-of select="@op2"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 
@@ -1057,7 +1060,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text> / </xsl:text>
     <xsl:value-of select="@op2"/>
     <xsl:text>;
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='substring']" mode="body">
@@ -1072,7 +1075,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     	<xsl:value-of select="@endIndex"/>
     </xsl:if>
     <xsl:text>);
-</xsl:text>
+      </xsl:text>
 </xsl:template>
 
 
@@ -1481,6 +1484,63 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:text>
     </xsl:text>
 </xsl:template>
+
+<xsl:template match="*[local-name()='try']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:variable name="exceptions" select="$domspec//exception[@id]"/>
+    <xsl:variable name="catches" select="*[local-name() = 'catch']/*"/>
+    <xsl:variable name="implException" select="$catches[local-name() = 'ImplementationException']"/>
+    
+    <xsl:text>
+      try {
+      </xsl:text>
+      <xsl:apply-templates select="*[local-name() != 'catch']" mode="body">
+      	<xsl:with-param name="vardefs" select="$vardefs"/>
+      </xsl:apply-templates>
+      <xsl:text>
+      }
+      </xsl:text>
+      <!--  for each type of defined exception   -->
+      <xsl:for-each select="$exceptions">
+      	  <!--  if there is an ImplementationException or 
+      	  		at least one element for the current exception  -->
+      	  <xsl:if test="$implException or $catches[local-name() = current()/@name]">
+      	  <xsl:text>catch (</xsl:text><xsl:value-of select="@name"/><xsl:text> ex) {
+      </xsl:text>
+      			<xsl:variable name="exception" select="."/>
+      			<xsl:for-each select="$catches[local-name() = $exception/@name]">
+      				<xsl:variable name="catchCode" select="@code"/>
+      				<xsl:text>if (ex.code == </xsl:text>
+      				<xsl:for-each select="$exception">
+      					<xsl:value-of select="following-sibling::group[1]/constant[@name = $catchCode]/@value"/>
+      				</xsl:for-each>
+      				<xsl:text>) {
+      </xsl:text>
+      				<xsl:apply-templates select="*" mode="body">
+      					<xsl:with-param name="vardefs" select="$vardefs"/>
+      				</xsl:apply-templates>
+      				<xsl:text>}
+      </xsl:text>
+      			</xsl:for-each>
+      			<xsl:text>    throw ex;
+      }
+      </xsl:text>
+      		</xsl:if>
+      </xsl:for-each>
+      <!--  for any implementation exception  -->
+      <xsl:for-each select="$implException">
+      	<xsl:text>     catch (Exception ex) {
+      	</xsl:text>
+      	<xsl:apply-templates select="*" mode="body">
+      		<xsl:with-param name="vardefs" select="$vardefs"/>
+      	</xsl:apply-templates>
+      	
+      	<xsl:text>
+      	}
+      	</xsl:text>
+      </xsl:for-each>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='while']" mode="body">
     <xsl:param name="vardefs"/>
