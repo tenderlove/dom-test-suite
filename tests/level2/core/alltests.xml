@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -155,18 +155,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="hasAttributeNS05.xml"/>
      <suite.member href="hasAttributes01.xml"/>
      <suite.member href="hasAttributes02.xml"/>
-     <suite.member href="hc_attrcreatedocumentfragment.xml"/>
-     <suite.member href="hc_attrname.xml"/>
-     <suite.member href="hc_documentcreateattribute.xml"/>
-     <suite.member href="hc_elementgetattributenode.xml"/>
      <suite.member href="hc_entitiesremovenameditemns1.xml"/>
      <suite.member href="hc_entitiessetnameditemns1.xml"/>
-     <suite.member href="hc_namednodemapgetnameditem.xml"/>
+	 <suite.member href="hc_namednodemapinvalidtype1.xml"/>     
      <suite.member href="hc_nodedocumentfragmentnormalize1.xml"/>
      <suite.member href="hc_nodedocumentfragmentnormalize2.xml"/>
      <suite.member href="hc_notationsremovenameditemns1.xml"/>
      <suite.member href="hc_notationssetnameditemns1.xml"/>
-     <suite.member href="ibmtests.xml"/>
      <suite.member href="importNode01.xml"/>
      <suite.member href="importNode02.xml"/>
      <suite.member href="importNode03.xml"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -16,11 +16,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>hc_attrName</title>
 <creator>Curt Arnold</creator>
 <description>
-    The getNodeName() method of an Attribute node. 
-  Retrieve the attribute named street from the last 
-  child of of the second employee and examine its 
-  NodeName.  This test uses the getNamedItem(name) method from the NamedNodeMap 
-  interface.
+  Retrieve the attribute named class from the last 
+  child of of the second "p" element and examine its 
+  NodeName.
 </description>
 
 <date qualifier="created">2002-06-09</date>
@@ -45,15 +43,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getNamedItem obj="attributes" var="streetAttr" name='"class"'/>
 <nodeName obj="streetAttr" var="strong1"/>
 <name obj="streetAttr" var="strong2" interface="Attr"/>
-<!--  The case for attribute names in HTML documents 
-         were not explicitly addressed in L1
-         but were specified to be upper case in L2    -->
-<if><contentType type="text/html"/>
-<assertEquals actual="strong1" expected='"class"' id="nodeName_html" ignoreCase="true"/>
-<assertEquals actual="strong2" expected='"class"' id="name_html" ignoreCase="true"/>
-<else>
-<assertEquals actual="strong1" expected='"class"' id="nodeName" ignoreCase="false"/>
-<assertEquals actual="strong2" expected='"class"' id="name" ignoreCase="false"/>
-</else>
-</if>
+<assertEquals actual="strong1" expected='"class"' id="nodeName" ignoreCase="auto" context="attribute"/>
+<assertEquals actual="strong2" expected='"class"' id="name" ignoreCase="auto" context="attribute"/>
 </test>

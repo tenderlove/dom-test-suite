@@ -13,12 +13,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_nodeattributenodename">
 <metadata>
-<title>hc_nodeAttributeNodeName</title>
+<title>hc_nodeattributenodename</title>
 <creator>Curt Arnold</creator>
 <description>
-    The string returned by the "getNodeName()" method for an 
-    Attribute Node is the name of the Attribute.
-
     Retrieve the Attribute named "title" from the last 
     child of the first p element and check the string returned 
     by the "getNodeName()" method.   It should be equal to 
@@ -39,11 +36,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
 <getAttributeNode obj="testAddr" name='"title"' var="addrAttr"/>
 <nodeName obj="addrAttr" var="attrName"/>
-<if>
-	<contentType type="text/html"/>
-	<assertEquals actual="attrName" expected='"title"' id="nodeNameHTML" ignoreCase="true"/>
-	<else>
-		<assertEquals actual="attrName" expected='"title"' id="nodeName" ignoreCase="false"/>
-	</else>
-</if>
+<assertEquals actual="attrName" expected='"title"' id="nodeName" 
+	ignoreCase="auto" context="attribute"/>
 </test>

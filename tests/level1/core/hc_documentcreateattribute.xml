@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,12 +13,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_documentcreateattribute">
 <metadata>
-<title>hc_documentCreateAttribute</title>
+<title>hc_documentcreateattribute</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "createAttribute(name)" method creates an Attribute 
-   node of the given name.
-   
    Retrieve the entire DOM document and invoke its 
    "createAttribute(name)" method.  It should create a  
    new Attribute node with the given name. The name, value
@@ -42,12 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeValue obj="newAttrNode" var="attrValue"/>
 <assertEquals actual="attrValue" expected='""' ignoreCase="false" id="value"/>
 <nodeName obj="newAttrNode" var="attrName"/>
-<if><contentType type='text/html'/>
-<assertEquals actual="attrName" expected='"title"' ignoreCase="true" id="name_html"/>
-<else>
-<assertEquals actual="attrName" expected='"title"' ignoreCase="false" id="name"/>
-</else>
-</if>
+<assertEquals actual="attrName" expected='"title"' ignoreCase="auto" context="attribute" id="name"/>
 <nodeType obj="newAttrNode" var="attrType"/>
 <assertEquals actual="attrType" expected="2" ignoreCase="false" id="type"/>
 </test>

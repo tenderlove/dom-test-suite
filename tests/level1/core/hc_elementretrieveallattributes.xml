@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,15 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_elementretrieveallattributes">
 <metadata>
-<title>hc_elementRetrieveAllAttributes</title>
+<title>hc_elementretrieveallattributes</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getAttributes()" method(Node Interface) may
-   be used to retrieve the set of all attributes of an
-   element. 
-   
    Create a list of all the attributes of the last child
-   of the first employee by using the "getAttributes()"
+   of the first "p" element by using the "getAttributes()"
    method.
 </description>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,16 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_namednodemapnumberofnodes">
 <metadata>
-<title>hc_namednodemapNumberOfNodes</title>
+<title>hc_namednodemapnumberofnodes</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getLength()" method returns the number of nodes
-   in the map. 
-   
-   Retrieve the second employee and create a NamedNodeMap 
-   listing of the attributes of the last child.  Once the
-   list is created an invocation of the "getLength()"
-   method is executed.  The number of nodes should be 2.
+   Retrieve the second "p" element and evaluate Node.attributes.length.
 </description>
 
 <date qualifier="created">2002-06-09</date>

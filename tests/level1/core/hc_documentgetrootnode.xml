@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,14 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_documentgetrootnode">
 <metadata>
-<title>hc_documentGetRootNode</title>
+<title>hc_documentgetrootnode</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getDocumentElement()" method provides direct access 
-   to the child node that is the root element of the document.
-   Retrieve the entire DOM document and invoke its 
-   "getDocumentElement()" method.  It should return an
-   Element node whose NodeName is "staff".
+  Load a document and invoke its 
+   "getDocumentElement()" method.
 </description>
 
 <date qualifier="created">2002-06-09</date>

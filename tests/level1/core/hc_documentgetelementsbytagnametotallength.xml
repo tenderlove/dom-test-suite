@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,13 +13,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_documentgetelementsbytagnametotallength">
 <metadata>
-<title>hc_documentGetElementsByTagNameTotalLength</title>
+<title>hc_documentgetelementsbytagnametotallength</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getElementsByTagName(tagName)" method returns a 
-   NodeList of all the Elements in the tree when the  
-   tagName is equal to "*".
-   
    Retrieve the entire DOM document and invoke its 
    "getElementsByTagName(tagName)" method with tagName
    equal to "*".  The method should return a NodeList 

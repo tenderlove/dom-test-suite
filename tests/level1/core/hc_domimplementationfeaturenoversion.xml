@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,15 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_domimplementationfeaturenoversion">
 <metadata>
-<title>hc_domimplementationFeatureNoVersion</title>
+<title>hc_domimplementationfeaturenoversion</title>
 <creator>Curt Arnold</creator>
 <description>
-    If the "version" parameter is an empty string in the
-   "hasFeature(feature,version)" method then supporting
-   any version of the feature will cause the method to
-   return true. 
-   
-   Retrieve the entire DOM document and invoke its 
+   Load a document and invoke its 
    "getImplementation()" method.  This should create a
    DOMImplementation object whose "hasFeature(feature,
    version)" method is invoked with version equal to "".

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,16 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_nodegetownerdocument">
 <metadata>
-<title>hc_nodeGetOwnerDocument</title>
+<title>hc_nodegetownerdocument</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getOwnerDocument()" method returns the Document
-    object associated with this node.
-    
-    Retrieve the second employee and examine Document 
-    returned by the "getOwnerDocument()" method.   Invoke
-    the "getDocumentElement()" on the Document which will
-    return an Element that is equal to "html".
+	Evaluate Node.ownerDocument on the second "p" element.
 </description>
 
 <date qualifier="created">2002-06-09</date>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,10 +13,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_attrcreatedocumentfragment">
 <metadata>
-<title>hc_attrCreateDocumentFragment</title>
+<title>hc_attrcreatedocumentfragment</title>
 <creator>Curt Arnold</creator>
 <description>
-    Attr nodes may be associated with Element nodes contained within a DocumentFragment.
   Create a new DocumentFragment and add a newly created Element node(with one attribute).  
   Once the element is added, its attribute should be available as an attribute associated 
   with an Element within a DocumentFragment.
@@ -51,7 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="domesticNode" var="attributes"/>
 <for-each collection="attributes" member="attribute">
     <nodeName var="attrName" obj="attribute"/>
-    <if><equals expected='"lang"' actual="attrName" ignoreCase="true"/>
+    <if><equals expected='"lang"' actual="attrName" ignoreCase="auto" context="attribute"/>
         <increment var="langAttrCount" value="1"/>
     </if>
 </for-each>

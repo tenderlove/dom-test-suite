@@ -13,12 +13,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_namednodemapreturnattrnode">
 <metadata>
-<title>hc_namednodemapReturnAttrNode</title>
+<title>hc_namednodemapreturnattrnode</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getNamedItem(name)" method returns a node of any 
-   type specified by name. 
-   
    Retrieve the second p element and create a NamedNodeMap 
    listing of the attributes of the last child.  Once the
    list is created an invocation of the "getNamedItem(name)"
@@ -43,21 +40,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributes" type="NamedNodeMap"/>
 <var name="streetAttr" type="Node"/>
 <var name="attrName" type="DOMString"/>
-<var name="attrNodeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testEmployee" index="1"/>
 <attributes obj="testEmployee" var="attributes"/>
 <getNamedItem obj="attributes" var="streetAttr" name='"class"'/>
 <assertInstanceOf obj="streetAttr" type="Attr" id="typeAssert"/>
-<nodeName obj="streetAttr" var="attrNodeName"/>
+<nodeName obj="streetAttr" var="attrName"/>
+<assertEquals actual="attrName" expected='"class"' id="nodeName" ignoreCase="auto" context="attribute"/>
 <name obj="streetAttr" var="attrName" interface="Attr"/>
-<assertEquals actual="attrName" expected='attrNodeName' id="nameAndNodeNameEqual" ignoreCase="false"/>
-<if>
-	<contentType type="text/html"/>
-	<assertEquals actual="attrName" expected='"class"' id="attrNameHTML" ignoreCase="true"/>
-	<else>
-		<assertEquals actual="attrName" expected='"class"' id="attrName" ignoreCase="false"/>
-	</else>
-</if>
+<assertEquals actual="attrName" expected='"class"' id="name" ignoreCase="auto" context="attribute"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,17 +13,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_namednodemapgetnameditem">
 <metadata>
-<title>hc_namednodemapGetNamedItem</title>
+<title>hc_namednodemapgetnameditem</title>
 <creator>Curt Arnold</creator>
 <description>
-    The "getNamedItem(name)" method retrieves a node 
-   specified by name. 
-   
-   Retrieve the second employee and create a NamedNodeMap 
+   Retrieve the second "p" element and create a NamedNodeMap 
    listing of the attributes of the last child.  Once the
    list is created an invocation of the "getNamedItem(name)"
-   method is done with name="domestic".  This should result
-   in the domestic Attr node being returned.
+   method is done with name="title".  This should result
+   in the title Attr node being returned.
 </description>
 
 <date qualifier="created">2002-06-09</date>
@@ -44,10 +41,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes obj="testEmployee" var="attributes"/>
 <getNamedItem obj="attributes" var="domesticAttr" name='"title"'/>
 <nodeName obj="domesticAttr" var="attrName"/>
-<if><contentType type="text/html"/>
-<assertEquals actual="attrName" expected='"title"' id="nodeName_html" ignoreCase="true"/>
-<else>
-<assertEquals actual="attrName" expected='"title"' id="nodeName" ignoreCase="false"/>
-</else>
-</if>
+<assertEquals actual="attrName" expected='"title"' 
+	id="nodeName" ignoreCase="auto" context="attribute"/>
 </test>
