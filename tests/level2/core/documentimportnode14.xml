@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -34,6 +34,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-04-30</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -42,11 +43,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="employeeElem" type="Node"/>
 <var name="attrImp" type="Attr"/>
 <var name="nodeName" type="DOMString"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="employeeElem" obj="childList" index="3" interface="NodeList"/>
 <importNode var="imported" obj="doc" importedNode="employeeElem" deep="true"/>
-<getAttributeNodeNS var="attrImp" obj="imported" namespaceURI="null" localName='"defaultAttr"'/>
+<getAttributeNodeNS var="attrImp" obj="imported" namespaceURI="nullNS" localName='"defaultAttr"'/>
 <nodeName var="nodeName" obj="attrImp"/>
 <assertEquals expected='"defaultAttr"' actual="nodeName" id="documentimportnode14" ignoreCase="false"/>
 </test>

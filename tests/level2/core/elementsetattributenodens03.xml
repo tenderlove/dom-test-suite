@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -39,13 +39,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="attribute" type="Attr"/>
   <var name="newAttribute" type="Attr"/>
   <var name="elementList" type="NodeList"/>
+  <var name="nullNS" type="DOMString" isNull="true"/>
   <load var="doc" href="staffNS" willBeModified="false"/>
   <getElementsByTagNameNS var="elementList" obj="doc" 
 			  namespaceURI='"http://www.nist.gov"' 
 			  localName='"address"' interface="Document"/>
   <item var="element1" obj="elementList" index="1" interface="NodeList"/>
   <getAttributeNodeNS var="attribute" obj="element1" 
-		      namespaceURI="null" localName='"street"'/>
+		      namespaceURI="nullNS" localName='"street"'/>
 
   <item var="element2" obj="elementList" index="2"  interface="NodeList"/>
   <assertDOMException id="elementsetattributenodens03">

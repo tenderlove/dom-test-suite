@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-04-28</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -39,20 +40,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entity" type="Entity"/>
 <var name="notation" type="Notation"/>
 <var name="removedNode" type="Node"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <notations var="notations" obj="docType"/>
-<getNamedItemNS var="entity" obj="entities" namespaceURI="null" localName='"ent1"'/>
-<getNamedItemNS var="notation" obj="notations" namespaceURI="null" localName='"notation1"'/>
+<getNamedItemNS var="entity" obj="entities" namespaceURI="nullNS" localName='"ent1"'/>
+<getNamedItemNS var="notation" obj="notations" namespaceURI="nullNS" localName='"notation1"'/>
 <assertDOMException id="namednodemapremovenameditemns05_entities">
 <NO_MODIFICATION_ALLOWED_ERR>
-<removeNamedItemNS var="removedNode" obj="entities"  namespaceURI="null" localName='"notation1"'/>
+<removeNamedItemNS var="removedNode" obj="entities"  namespaceURI="nullNS" localName='"notation1"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 <assertDOMException id="namednodemapremovenameditemns05_notations">
 <NO_MODIFICATION_ALLOWED_ERR>
-<removeNamedItemNS var="removedNode" obj="notations"  namespaceURI="null" localName='"ent1"'/>
+<removeNamedItemNS var="removedNode" obj="notations"  namespaceURI="nullNS" localName='"ent1"'/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -32,6 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-04-28</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -40,12 +41,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attribute" type="Attr"/>
 <var name="elementList" type="NodeList"/>
 <var name="attrValue" type="DOMString"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <getElementsByTagNameNS var="elementList" obj="doc" localName='"employee"' namespaceURI='"http://www.nist.gov"' interface="Document"/>
 <item var="element" obj="elementList" index="1" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
-<removeNamedItemNS var="attribute" obj="attributes" namespaceURI="null" localName='"defaultAttr"'/>
-<getNamedItemNS var="attribute" obj="attributes" namespaceURI="null" localName='"defaultAttr"'/>
+<removeNamedItemNS var="attribute" obj="attributes" namespaceURI="nullNS" localName='"defaultAttr"'/>
+<getNamedItemNS var="attribute" obj="attributes" namespaceURI="nullNS" localName='"defaultAttr"'/>
 <nodeValue var="attrValue" obj="attribute"/>
 <assertNotNull actual="attribute" id="namednodemapremovenameditemns02"/>
 <assertEquals actual="attrValue" expected='"defaultVal"' id="namednodemapremovenameditemns02_attrValue" ignoreCase="false"/>

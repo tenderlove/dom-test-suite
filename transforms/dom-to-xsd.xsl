@@ -305,7 +305,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:documentation>A variable name</xs:documentation>
 				</xs:annotation>
 				<xs:restriction base="xs:string">
-					<xs:pattern value="[A-Za-z][A-Za-z0-9_]*"/>
+					<xs:pattern value="([A-Za-mo-z][A-Za-z0-9_]*)|(n[^u].*)|(nu[^l].*)|(nul[^l].*)|(null.+)"/>
 				</xs:restriction>
 			</xs:simpleType>
 
