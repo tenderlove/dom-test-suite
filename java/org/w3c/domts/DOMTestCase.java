@@ -11,7 +11,10 @@
 
 /*
  * $Log: DOMTestCase.java,v $
- * Revision 1.17  2004-01-06 16:45:42  dom-ts-4
+ * Revision 1.18  2004-02-09 19:22:37  dom-ts-4
+ * Add context on assertEquals for HTML casing (bug 236)Eliminate L2 tests asserting upper case attr names pending errata
+ *
+ * Revision 1.17  2004/01/06 16:45:42  dom-ts-4
  * Removed obsolete avalon testlet support (bug 400)
  * Revision 1.16 2003/12/23 03:27:25 dom-ts-4 Adds
  * fail construct (bug 445)
@@ -63,6 +66,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Iterator;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -375,6 +379,114 @@ public abstract class DOMTestCase extends DOMTest {
 	}
 
 	/**
+	 * Asserts that expected.equalsIgnoreCase(actual) is true
+	 * 
+	 * @param assertID
+	 *            identifier of assertion
+	 * @param actual
+	 *            actual value
+	 * @param expected
+	 *            Expected value, may not be null.
+	 */
+	public void assertEqualsAutoCase(
+		String context,								   
+		String assertID,
+		String expected,
+		String actual) {
+		String contentType = getContentType();
+		//
+		//   if the content type is HTML (not XHTML)
+		//
+		if ("text/html".equals(contentType)) {
+			//
+			//  if the context is attribute, then use case-insentive comparison
+			//
+			if ("attribute".equals(context)) {
+				framework.assertEqualsIgnoreCase(this, assertID, expected, actual);				
+			} else {
+				//
+				//  otherwise should be compared against uppercased expectation
+				framework.assertEquals(this, assertID, expected.toUpperCase(), actual);				
+			}
+		} else {
+			framework.assertEquals(this, assertID, expected, actual);
+		}
+	}
+
+	
+	/**
+	 * Creates an equivalent list where every member has
+	 *     been uppercased
+	 * 
+	 */
+	private List toUpperCase(Collection expected) {
+		List upperd = new ArrayList(expected.size());
+		Iterator iter = expected.iterator();
+		while(iter.hasNext()) {
+			upperd.add(iter.next().toString().toUpperCase());
+		}
+		return upperd;
+	}
+	/**
+	 * Asserts that each entry in actual is matched with an entry in expected
+	 * that only differs by case. Order is not significant.
+	 * 
+	 * @param assertID
+	 *            identifier of assertion
+	 * @param actual
+	 *            actual value
+	 * @param expected
+	 *            Expected value, may not be null.
+	 */
+	public void assertEqualAutoCase(
+		String context,								   	
+		String assertID,
+		Collection expected,
+		Collection actual) {
+		String contentType = getContentType();
+		if ("text/html".equals(contentType)) {
+			if ("attribute".equals(context)) {
+				assertEqualsIgnoreCase(assertID, expected, actual);
+			} else {
+				framework.assertEquals(this, assertID, toUpperCase(expected), actual);
+			}
+			
+		} else {
+			framework.assertEquals(this, assertID, expected, actual);
+		}
+	}
+
+	/**
+	 * Asserts that each entry in actual is matched with an entry in expected
+	 * that only differs by case. Order is significant.
+	 * 
+	 * @param assertID
+	 *            identifier of assertion
+	 * @param actual
+	 *            actual value
+	 * @param expected
+	 *            Expected value, may not be null.
+	 */
+	public void assertEqualsAutoCase(
+		String context,							 
+		String assertID,
+		List expected,
+		List actual) {
+		String contentType = getContentType();
+		if ("text/html".equals(contentType)) {
+			if ("attribute".equals(context)) {
+				assertEqualsIgnoreCase(assertID, expected, actual);
+			} else {
+				framework.assertEquals(this, assertID, toUpperCase(expected), actual);
+			}
+			
+		} else {
+			framework.assertEquals(this, assertID, expected, actual);
+		}
+	}
+
+	
+	/**
 	 * Asserts that expected.equals(actual) is true
 	 * 
 	 * @param assertID
@@ -489,6 +601,32 @@ public abstract class DOMTestCase extends DOMTest {
 		String expected,
 		String actual) {
 		framework.assertNotEqualsIgnoreCase(this, assertID, expected, actual);
+	}
+
+	/**
+	 * Asserts that expected.equalsIgnoreCase(actual) is false
+	 * 
+	 * @param assertID
+	 *            identifier of assertion
+	 * @param actual
+	 *            actual value
+	 * @param expected
+	 *            Expected value, may not be null.
+	 */
+	public void assertNotEqualsAutoCase(
+		String context,								
+		String assertID,
+		String expected,
+		String actual) {
+		String contentType = getContentType();
+		if ("text/html".equals(contentType)) {
+			if ("attribute".equals(context)) {
+				framework.assertNotEqualsIgnoreCase(this, assertID, expected, actual);				
+			} else {
+				framework.assertNotEquals(this, assertID, expected.toUpperCase(), actual);				
+			}
+		}
+		framework.assertNotEquals(this, assertID, expected, actual);
 	}
 
 	/**
@@ -717,6 +855,67 @@ public abstract class DOMTestCase extends DOMTest {
 		return framework.equalsIgnoreCase(expected, actual);
 	}
 
+	/**
+	 * Compares the value of actual and expected ignoring case.
+	 * 
+	 * @param expected
+	 *            expected
+	 * @param actual
+	 *            actual
+	 * @return true if actual and expected are equal ignoring case.
+	 */
+	public boolean equalsAutoCase(String context,String expected, String actual) {
+		if ("text/html".equals(getContentType())) {
+			if ("attribute".equals(context)) {
+				return framework.equalsIgnoreCase(expected, actual);
+			} else {
+				return framework.equals(expected.toUpperCase(), actual);				
+			}		
+		}
+		return framework.equals(expected, actual);
+	}
+
+	/**
+	 * Compares the values in actual and expected ignoring case and order.
+	 * 
+	 * @param expected
+	 *            expected
+	 * @param actual
+	 *            actual
+	 * @return true if actual and expected are equal ignoring case.
+	 */
+	public boolean equalsAutoCase(String context, Collection expected, Collection actual) {
+		if ("text/html".equals(getContentType())) {
+			if ("attribute".equals(context)) {
+				return framework.equalsIgnoreCase(expected, actual);
+			} else {
+				return framework.equals(toUpperCase(expected), actual);				
+			}		
+		}
+		return framework.equals(expected, actual);
+	}
+
+	/**
+	 * Compares the values in actual and expected ignoring case.
+	 * 
+	 * @param expected
+	 *            expected
+	 * @param actual
+	 *            actual
+	 * @return true if actual and expected are equal ignoring case.
+	 */
+	public boolean equalsAutoCase(String context, List expected, List actual) {
+		if ("text/html".equals(getContentType())) {
+			if ("attribute".equals(context)) {
+				return framework.equalsIgnoreCase(expected, actual);
+			} else {
+				return framework.equals(toUpperCase(expected), actual);				
+			}		
+		}
+		return framework.equals(expected, actual);
+	}
+	
+	
 	/**
 	 * Compares the values of actual and expected.
 	 * 
