@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.133  2004-03-09 03:03:42  dom-ts-4
+Revision 1.134  2004-03-09 04:31:04  dom-ts-4
+Remove duplicate L2 HTML tests (bug 587)
+
+Revision 1.133  2004/03/09 03:03:42  dom-ts-4
 Elimination of duplicate L2 HTML test definitions (bug 587)
 
 Revision 1.132  2004/02/27 05:40:42  dom-ts-4
@@ -1586,11 +1589,12 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-html-gen-java" depends="dom2-interfaces,dom2-dtd">
+<target name="dom2-html-gen-java" depends="dom2-interfaces,dom1-dtd,dom2-dtd">
 	<style basedir="${tests.dir}/level1/html" 
 		   destdir="${java.build.dir}/org/w3c/domts/level2/html" 
 		   includes="*.xml" 
            excludes="metadata.xml 
+                     alltests.xml
                      HTMLAppletElement07.xml 
                      HTMLAppletElement09.xml
                      HTMLBaseFontElement03.xml
@@ -1598,6 +1602,7 @@ All implementation conditions combined into implementationAttribute element
                      HTMLImageElement06.xml
                      HTMLImageElement11.xml
                      HTMLImageElement12.xml
+                     HTMLImageElement14.xml
                      HTMLInputElement13.xml
                      HTMLIsIndexElement03.xml
                      HTMLObjectElement11.xml
@@ -1627,7 +1632,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-html-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
+<target name="dom2-html-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level2/html/files"/>
     <copy todir="${build.dir}/ecmascript/level2/html/files">
 		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
@@ -1635,7 +1640,8 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${tests.dir}/level1/html" 
 		   destdir="${build.dir}/ecmascript/level2/html" 
 		   includes="*.xml" 
-           excludes="metadata.xml 
+           excludes="metadata.xml
+                     alltests.xml 
                      HTMLAppletElement07.xml 
                      HTMLAppletElement09.xml
                      HTMLBaseFontElement03.xml
@@ -1643,6 +1649,7 @@ All implementation conditions combined into implementationAttribute element
                      HTMLImageElement06.xml
                      HTMLImageElement11.xml
                      HTMLImageElement12.xml
+                     HTMLImageElement14.xml
                      HTMLInputElement13.xml
                      HTMLIsIndexElement03.xml
                      HTMLObjectElement11.xml

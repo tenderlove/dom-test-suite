@@ -47,10 +47,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLBRElement01.xml"/>
 <suite.member href="../../level1/html/HTMLBaseElement01.xml"/>
 <suite.member href="../../level1/html/HTMLBaseElement02.xml"/>
-<suite.member href="HTMLBaseFontElement03.xml"/>
 <suite.member href="../../level1/html/HTMLBaseFontElement01.xml"/>
 <suite.member href="../../level1/html/HTMLBaseFontElement02.xml"/>
-<suite.member href="../../level1/html/HTMLBaseFontElement03.xml"/>
+<suite.member href="HTMLBaseFontElement03.xml"/>
 <suite.member href="../../level1/html/HTMLBodyElement01.xml"/>
 <suite.member href="../../level1/html/HTMLBodyElement02.xml"/>
 <suite.member href="../../level1/html/HTMLBodyElement03.xml"/>
@@ -297,8 +296,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLImageElement10.xml"/>
 <suite.member href="HTMLImageElement11.xml"/>
 <suite.member href="HTMLImageElement12.xml"/>
-<suite.member href="../../level1/html/HTMLImageElement13.xml"/>
-<suite.member href="../../level1/html/HTMLImageElement14.xml"/>
 <suite.member href="../../level1/html/HTMLInputElement01.xml"/>
 <suite.member href="../../level1/html/HTMLInputElement02.xml"/>
 <suite.member href="../../level1/html/HTMLInputElement03.xml"/>
