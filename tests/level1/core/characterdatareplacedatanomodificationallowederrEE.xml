@@ -3,7 +3,7 @@
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="characterdatareplacedatanomodificationallowederrEE">
 <metadata>
 <title>characterdataReplaceDataNoModificationAllowedErrEE</title>
-<creator>NIST</creator>
+<creator>Curt Arnold</creator>
 <description>
     The "replaceData(offset,count,arg)" method raises a NO_MODIFICATION_ALLOWED_ERR 
    DOMException if the node is readonly.
@@ -12,14 +12,13 @@
    from the entity reference and execute the "replaceData(offset,count,arg)" method.
    This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
-<contributor>Mary Brady</contributor>
-<contributor>Curt Arnold</contributor>
-<date qualifier="created">2001-08-17</date>
+<date qualifier="created">2001-08-21</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-E5CBA7FB')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB"/>
+<source  resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/characterdatareplacedatanomodificationallowederr.xml"/>
 </metadata>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>

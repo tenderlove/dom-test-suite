@@ -33,7 +33,7 @@
     <member>"Texas"</member>
     <member>"\n 98554"</member>
 </var>
-<var name="expectedCoalescing" type="List">
+<var name="expectedExpanded" type="List">
     <member>"1900 Dallas Road Dallas, Texas\n 98554"</member>
 </var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
@@ -55,8 +55,8 @@
     </if>
 </for-each>
 <if>
-    <implementationAttribute name="coalescing" value="true"/>
-    <assertEquals actual="result" expected="expectedCoalescing" ignoreCase="false" id="assertEqCoalescing"/>
+    <implementationAttribute name="expandEntityReferences" value="true"/>
+    <assertEquals actual="result" expected="expectedExpanded" ignoreCase="false" id="assertEqCoalescing"/>
     <else>
         <assertEquals actual="result" expected="expectedNormal" ignoreCase="false" id="assertEqNormal"/>
     </else>

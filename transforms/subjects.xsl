@@ -33,12 +33,6 @@ saxon -o subjects.xml wd-dom.xml subjects.xsl
 
 -->
 
-<!-- 
-     since can't use an arbitrary target namespace, 
-     using Level-1 assuming that it will be fixed by SED afterwards   
-     if inappropriate.
-
- -->
 <xsl:stylesheet version="1.0" 
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -99,27 +93,27 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	          produce <interface> element    -->	
 	<xsl:template match="interface">
 		<xsl:param name="subspecURI"/>
-		<rdf:Description about="{concat($subspecURI,concat('#',@id))}">
+		<rdf:Description rdf:about="{concat($subspecURI,concat('#',@id))}">
 			<dc:title><xsl:value-of select="@name"/></dc:title>
 			<dc:description><xsl:value-of select="normalize-space(descr/p[1])"/></dc:description>
 			<xsl:text>
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="$specTitle"/> </xsl:comment><xsl:text>
 		</xsl:text>
-			<dc:relation qualifier="isPartOf" resource="{$subspecURI}"/>
+			<dc:relation dc:qualifier="isPartOf" rdf:resource="{$subspecURI}"/>
 			<xsl:for-each select="method">
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="@name"/></xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="hasPart" resource="{concat($subspecURI,concat('#',@id))}"/>
+				<dc:relation dc:qualifier="hasPart" rdf:resource="{concat($subspecURI,concat('#',@id))}"/>
 			</xsl:for-each>
 			<xsl:for-each select="attribute">
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="@name"/> attribute </xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="hasPart" resource="{concat($subspecURI,concat('#',@id))}"/>
+				<dc:relation dc:qualifier="hasPart" rdf:resource="{concat($subspecURI,concat('#',@id))}"/>
 			</xsl:for-each>
 		</rdf:Description>
 		<xsl:apply-templates select="*" mode="interface">
@@ -138,14 +132,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:variable name="methodURI" select="concat($subspecURI,concat('#',@id))"/>
 		<xsl:variable name="methodName" select="concat(parent::interface/@name,concat('.',concat(@name,' method')))"/>
 		<xsl:variable name="baseXPointer"><xsl:value-of select="$subspecURI"/>#xpointer(id('<xsl:value-of select="@id"/>')/</xsl:variable>
-		<rdf:Description about="{$methodURI}">
+		<rdf:Description rdf:about="{$methodURI}">
 			<dc:title><xsl:value-of select="$methodName"/></dc:title>
 			<dc:description><xsl:value-of select="normalize-space(descr)"/></dc:description>
 			<xsl:text>
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="parent::interface/@name"/> interface </xsl:comment><xsl:text>
 </xsl:text>
-			<dc:relation qualifier="isPartOf" resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
+			<dc:relation dc:qualifier="isPartOf" rdf:resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
 
 			<!--  produce relations for parameters   -->
 			<xsl:for-each select="parameters/param">
@@ -153,7 +147,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="@name"/> parameter</xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="hasPart" resource="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}"/>
+				<dc:relation dc:qualifier="hasPart" rdf:resource="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}"/>
 			</xsl:for-each>
 
 			<!--  produce relation for return value   -->
@@ -162,7 +156,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:text>
 				<xsl:comment> return value </xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="hasPart" resource="{concat($baseXPointer,'returns)')}"/>
+				<dc:relation dc:qualifier="hasPart" rdf:resource="{concat($baseXPointer,'returns)')}"/>
 			</xsl:if>
 
 			<!--  produce metadata for exceptions  -->
@@ -176,27 +170,27 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 		<!--    produce metadata for parameters  -->
 		<xsl:for-each select="parameters/param">
-			<rdf:Description about="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}">
+			<rdf:Description rdf:about="{concat($baseXPointer,concat('parameters/param[',concat(position(),'])')))}">
 				<dc:title><xsl:value-of select="@name"/> parameter</dc:title>
 				<dc:description><xsl:value-of select="normalize-space(descr/p[1])"/></dc:description>
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="$methodName"/></xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="isPartOf" resource="{$methodURI}"/>
+				<dc:relation dc:qualifier="isPartOf" rdf:resource="{$methodURI}"/>
 			</rdf:Description>
 		</xsl:for-each>
 
 		<!--  produce metadata for return value   -->
 		<xsl:if test="returns[@type != 'void']">
-			<rdf:Description about="{concat($baseXPointer,'returns)')}">
+			<rdf:Description rdf:about="{concat($baseXPointer,'returns)')}">
 				<dc:title><xsl:value-of select="$methodName"/> return value</dc:title>
 				<dc:description><xsl:value-of select="normalize-space(descr)"/></dc:description>
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="$methodName"/></xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="isPartOf" resource="{$methodURI}"/>
+				<dc:relation dc:qualifier="isPartOf" rdf:resource="{$methodURI}"/>
 			</rdf:Description>
 		</xsl:if>
 
@@ -217,13 +211,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:variable name="exceptionURI"><xsl:value-of select="$baseXPointer"/>exception[@name='<xsl:value-of select="@name"/>']/descr/p[</xsl:variable>
 		<xsl:for-each select="descr/p">
 			<rdf:Description>
-				<xsl:attribute name="about"><xsl:value-of select="$exceptionURI"/>substring-before(.,':')='<xsl:value-of select="substring-before(.,':')"/>'])</xsl:attribute>
+				<xsl:attribute 
+				    namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+				    name="about"><xsl:value-of select="$exceptionURI"/>substring-before(.,':')='<xsl:value-of select="substring-before(.,':')"/>'])</xsl:attribute>
 				<dc:description><xsl:value-of select="normalize-space(.)"/></dc:description>
 				<xsl:text>
 </xsl:text>
 				<xsl:comment> <xsl:value-of select="$featureName"/> </xsl:comment><xsl:text>
 </xsl:text>
-				<dc:relation qualifier="isPartOf" resource="{$featureURI}"/>
+				<dc:relation dc:qualifier="isPartOf" rdf:resource="{$featureURI}"/>
 			</rdf:Description>
 		</xsl:for-each>
 	</xsl:template>
@@ -236,8 +232,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="normalize-space(.)"/> </xsl:comment><xsl:text>
 </xsl:text>
-			<dc:relation qualifier="hasPart">
-				<xsl:attribute name="resource"><xsl:value-of select="$exceptionURI"/>substring-before(.,':')='<xsl:value-of select="substring-before(.,':')"/>'])</xsl:attribute>
+			<dc:relation dc:qualifier="hasPart">
+				<xsl:attribute 
+                    namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+				    name="resource"><xsl:value-of select="$exceptionURI"/>substring-before(.,':')='<xsl:value-of select="substring-before(.,':')"/>'])</xsl:attribute>
 			</dc:relation>
 		</xsl:for-each>
 	</xsl:template>
@@ -247,14 +245,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:variable name="attrURI" select="concat($subspecURI,concat('#',@id))"/>
 		<xsl:variable name="attrName" select="concat(parent::interface/@name,concat('.',@name))"/>
 		<xsl:variable name="baseXPointer"><xsl:value-of select="$subspecURI"/>#xpointer(id('<xsl:value-of select="@id"/>')/</xsl:variable>
-		<rdf:Description about="{$attrURI}">
+		<rdf:Description rdf:about="{$attrURI}">
 			<dc:title><xsl:value-of select="$attrName"/> attribute</dc:title>
 			<dc:description><xsl:value-of select="normalize-space(descr)"/></dc:description>
 			<xsl:text>
 </xsl:text>
 			<xsl:comment> <xsl:value-of select="parent::interface/@name"/> interface </xsl:comment><xsl:text>
 </xsl:text>
-			<dc:relation qualifier="isPartOf" resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
+			<dc:relation dc:qualifier="isPartOf" rdf:resource="{concat($subspecURI,concat('#',parent::interface/@id))}"/>
 
 			<!--  produce about for set exceptions  -->
 			<xsl:for-each select="setraises/exception">

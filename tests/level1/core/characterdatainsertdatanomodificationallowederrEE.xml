@@ -3,23 +3,20 @@
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="characterdatainsertdatanomodificationallowederrEE">
 <metadata>
 <title>characterdataInsertDataNoModificationAllowedErrEE</title>
-<creator>NIST</creator>
+<creator>Curt Arnold</creator>
 <description>
     The "insertData(offset,arg)" method raises a NO_MODIFICATION_ALLOWED_ERR 
    DOMException if the node is readonly.   
-   Obtain the children of the THIRD "gender" element.  The elements
-   content is an entity reference.  Get the FIRST item 
-   from the entity reference and execute the "insertData(offset,arg)" method.
+   Create an entity reference and execute the "insertData(offset,arg)" method.
    This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
-<contributor>Mary Brady</contributor>
-<contributor>Curt Arnold</contributor>
-<date qualifier="created">2001-08-17</date>
+<date qualifier="created">2001-08-20</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3EDB695F"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-3EDB695F')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3EDB695F"/>
+<source  resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/characterdatainsertdatanomodificationallowederr.xml"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>

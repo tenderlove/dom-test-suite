@@ -26,15 +26,26 @@
 	<var name="childName" type="DOMString"/>
 	<var name="length" type="int"/>
 	<var name="removedChild" type="Node"/>
+	<var name="removedName" type="DOMString"/>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
 	<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 	<childNodes obj="employeeNode" var="childList"/>
 	<item interface="NodeList" obj="childList" index="0" var="oldChild"/>
 	<removeChild var="removedChild" obj="employeeNode" oldChild="oldChild"/>
+    <nodeName obj="removedChild" var="removedName"/>
 	<item interface="NodeList" obj="childList" index="0" var="child"/>
 	<nodeName obj="child" var="childName"/>
-    <assertEquals actual="childName" expected="&quot;employeeId&quot;" ignoreCase="false" id="childName"/>
 	<length interface="NodeList" obj="childList" var="length"/>
-    <assertEquals actual="length" expected="12" ignoreCase="false" id="length"/>
+    <if>
+        <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+        <assertEquals actual="removedName" expected='"employeeId"' ignoreCase="false" id="removedNameNoWhitespace"/>
+        <assertEquals actual="childName" expected='"name"' ignoreCase="false" id="childNameNoWhitespace"/>
+        <assertEquals actual="length" expected="5" ignoreCase="false" id="lengthNoWhitespace"/>
+        <else>
+            <assertEquals actual="removedName" expected='"#text"' ignoreCase="false" id="removedName"/>
+            <assertEquals actual="childName" expected="&quot;employeeId&quot;" ignoreCase="false" id="childName"/>
+            <assertEquals actual="length" expected="12" ignoreCase="false" id="length"/>
+        </else>
+    </if>
 </test>

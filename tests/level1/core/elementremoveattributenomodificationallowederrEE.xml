@@ -3,7 +3,7 @@
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementremoveattributenomodificationallowederrEE">
 <metadata>
 <title>elementRemoveAttributeNoModificationAllowedErr</title>
-<creator>NIST</creator>
+<creator>Curt Arnold</creator>
 <description>
     The "removeAttribute(name)" method for an attribute causes the 
    DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
@@ -13,13 +13,12 @@
    Try to remove the "domestic" attribute from the entity reference by executing the "removeAttribute(name)" method.
    This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
-<contributor>Mary Brady</contributor>
-<contributor>Curt Arnold</contributor>
-<date qualifier="created">2001-08-17</date>
+<date qualifier="created">2001-08-21</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-6D6AC0F9')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9"/>
+<source  resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/elementremoveattributenomodificationallowederr.xml"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>

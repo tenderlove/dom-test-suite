@@ -35,5 +35,11 @@
 <createElement obj="doc" tagName="&quot;newChild&quot;" var="newChild"/>
 <replaceChild obj="employeeNode" newChild="newChild" oldChild="oldChild" var="replacedNode"/>
 <nodeName obj="replacedNode" var="childName"/>
-<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="nodeReplaceChildNodeNameAssert1" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="childName" expected='"name"' id="nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="childName" expected="&quot;employeeId&quot;" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

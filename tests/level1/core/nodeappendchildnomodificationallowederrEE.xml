@@ -3,7 +3,7 @@
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodeappendchildnomodificationallowederrEE">
 	<metadata>
 <title>nodeAppendChildNoModificationAllowedErrEE</title>
-<creator>NIST</creator>
+<creator>Curt Arnold</creator>
 <description>
     The "appendChild(newChild)" method causes the 
     DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
@@ -12,12 +12,12 @@
     Create an ent3 entity reference and  the "appendChild(newChild)" method.
     This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
+<date qualifier="created">2001-08-21</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-184E7107')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+<source  resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeappendchildnomodificationallowederr.xml"/>
 </metadata>
 	<var name="doc" type="Document"/>
 	<var name="entRef" type="Node"/>

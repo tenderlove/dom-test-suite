@@ -8,7 +8,7 @@
     The "removeChild(oldChild)" method returns 
     the node being removed.
     
-    Remove the first Element of the second employee 
+    Remove the first child of the second employee 
     and check the NodeName returned by the 
     "removeChild(oldChild)" method.   The returned node
     should have a NodeName equal to "#text".
@@ -32,5 +32,11 @@
 <item interface="NodeList" obj="childList" index="0" var="oldChild"/>
 <removeChild obj="employeeNode" oldChild="oldChild" var="removedChild"/>
 <nodeName obj="removedChild" var="childName"/>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="nodeReplaceChildGetNodeNameAssert1" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="childName" expected='"employeeId"' id="nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="childName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

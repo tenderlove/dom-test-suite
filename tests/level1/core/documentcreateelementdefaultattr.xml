@@ -26,19 +26,13 @@
 	<var name="child" type="Node"/>
 	<var name="name" type="DOMString"/>
 	<var name="value" type="DOMString"/>
-	<var name="result" type="List"/>
-	<var name="expectedResult" type="List">
-		<member>"street"</member>
-		<member>"Yes"</member>
-	</var>
 	<load var="doc" href="staff.xml" willBeModified="false"/>
 	<createElement obj="doc" var="newElement" tagName="&quot;address&quot;"/>
 	<attributes obj="newElement" var="defaultAttr"/>
-	<for-each collection="defaultAttr" member="child">
-		<nodeName obj="child" var="name"/>
-		<nodeValue obj="child" var="value"/>
-		<append collection="result" obj="name"/>
-		<append collection="result" obj="value"/>
-	</for-each>
-	<assertEquals actual="result" expected="expectedResult" id="documentCreateElementDefaultAttrAssert" ignoreCase="false"/>
+    <item obj="defaultAttr" var="child" index="0" interface="NamedNodeMap"/>
+	<nodeName obj="child" var="name"/>
+    <assertEquals actual="name" expected='"street"' id="attrName" ignoreCase="false"/>
+	<nodeValue obj="child" var="value"/>
+    <assertEquals actual="value" expected='"Yes"' id="attrValue" ignoreCase="false"/>
+    <assertSize collection="defaultAttr" size="1" id="attrCount"/>
 </test>

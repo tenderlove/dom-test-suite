@@ -11,8 +11,9 @@
    
    Create a list of all the children elements of the third
    employee and access its first child by using an index
-   of 0.  This should result in "employeeId" being
-   selected.  Further we evaluate its content(by using
+   of 0.  This should result in the whitspace before "employeeId" being
+   selected (employeeId when ignoring whitespace).  
+   Further we evaluate its content(by using
    the "getNodeName()" method) to ensure the proper
    element was accessed.
 </description>
@@ -31,5 +32,11 @@
 <childNodes obj="employeeNode" var="employeeList"/>
 <item interface="NodeList" obj="employeeList" var="child" index="0"/>
 <nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="entityGetEntityNameAssert" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="childName" expected='"employeeId"' id="item0NoWhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="childName" expected='"#text"' id="item0Whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

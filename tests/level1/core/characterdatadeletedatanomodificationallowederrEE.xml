@@ -3,7 +3,7 @@
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="characterdatadeletedatanomodificationallowederrEE">
 <metadata>
 <title>characterdataDeleteDataNoModificationAllowedErrEE</title>
-<creator>NIST</creator>
+<creator>Curt Arnold</creator>
 <description>
     The "deleteData(offset,count)" method raises a NO_MODIFICATION_ALLOWED_ERR 
    DOMException if the node is readonly.   
@@ -12,13 +12,13 @@
    "deleteData(offset,count)" method.
    This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
-<contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
+<date qualifier="created">2001-08-20</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-7C603781')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781"/>
+<source  resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/characterdatadeletedatanomodificationallowederr.xml"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>

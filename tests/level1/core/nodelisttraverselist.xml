@@ -21,7 +21,7 @@
 <var name="child" type="Node"/>
 <var name="childName" type="DOMString"/>
 <var name="result" type="List"/>
-<var name="expectedResult" type="List">
+<var name="expectedWhitespace" type="List">
 <member>"#text"</member>
 <member>"employeeId"</member>
 <member>"#text"</member>
@@ -36,6 +36,14 @@
 <member>"address"</member>
 <member>"#text"</member>
 </var>
+<var name="expectedNoWhitespace" type="List">
+<member>"employeeId"</member>
+<member>"name"</member>
+<member>"position"</member>
+<member>"salary"</member>
+<member>"gender"</member>
+<member>"address"</member>
+</var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
@@ -44,5 +52,11 @@
 <nodeName obj="child" var="childName"/>
 <append collection="result" obj="childName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedResult" id="nodelistTraverseListAssert" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="result" expected="expectedNoWhitespace" id="nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="result" expected="expectedWhitespace" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

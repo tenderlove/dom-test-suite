@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="cdatasectionnormalize">
+	<metadata>
+<title>cdataSectionNormalize</title>
+<creator>NIST</creator>
+<description>
+Adjacent CDATASection nodes cannot be merged together by
+use of the "normalize()" method from the Element interface.
+Retrieve second child of the second employee and invoke
+the "normalize()" method.  The Element under contains
+two CDATASection nodes that should not be merged together
+by the "normalize()" method.
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083"/>
+</metadata>
+<!--  test depends on CDATASections being preserved  -->
+<implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <var name="lChild" type="Element"/>

@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test SYSTEM "dom1.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="cdatasectiongetdata">
+	<metadata>
+        <title>cdataSectionGetValue</title>
+<creator>NIST</creator>
+<description>
+The DOMString attribute of the Text node holds the text
+that is contained by the CDATA section.
+Retrieve the last CDATASection node located inside the
+second child of the second employee and examine its
+content.  Since the CDATASection interface inherits
+from the CharacterData interface(via the Text node),
+the "getData()" method can be used to access the
+CDATA content.
+</description>
+<contributor>Mary Brady</contributor>
+<date qualifier="created">2001-08-17</date>
+<source resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
+</metadata>
+<!--  if coalescing, all CDATASection nodes would have been eliminated  -->
+<implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
 <var name="nameList" type="NodeList"/>
 <var name="child" type="Node"/>

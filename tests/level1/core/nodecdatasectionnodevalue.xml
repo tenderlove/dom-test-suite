@@ -17,7 +17,10 @@
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212"/>
 </metadata>
+<!--  if coalescing all CDATASections would have been eliminated   -->
+<implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="cdataName" type="Element"/>

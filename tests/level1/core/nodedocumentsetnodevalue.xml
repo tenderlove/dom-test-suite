@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test SYSTEM "dom1.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="nodedocumentsetnodevalue">
+<metadata>
+<title>nodeDocumentNodeValue</title>
+<creator>Curt Arnold</creator>
+<description>
+    Setting nodeValue for a Document should have no effect.
+    See DOM Level 1, Second Edition or Level 2+
+</description>
+<contributor>Curt Arnold</contributor>
+<date qualifier="created">2001-08-23</date>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+<subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#ID-F68D080"/>
+</metadata>
+<var name="doc" type="Document"/>
+<var name="documentValue" type="DOMString"/>
+<load var="doc" href="staff.xml" willBeModified="false"/>
+<nodeValue obj="doc" value='"Hello World"'/>
+<nodeValue obj="doc" var="documentValue"/>
+<assertNull actual="documentValue" id="stillnull"/>
+</test>

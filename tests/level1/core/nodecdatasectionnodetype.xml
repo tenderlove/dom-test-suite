@@ -15,7 +15,9 @@
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212"/>
 </metadata>
+<implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testName" type="Element"/>

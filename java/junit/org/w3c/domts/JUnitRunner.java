@@ -12,7 +12,10 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.1  2001-07-23 04:52:20  dom-ts-4
+Revision 1.2  2001-08-24 08:28:00  dom-ts-4
+Test matrix generation.  Some Node.setValue() tests
+
+Revision 1.1  2001/07/23 04:52:20  dom-ts-4
 Initial test running using JUnit.
 
 */
@@ -119,8 +122,6 @@ public class JUnitRunner {
 
 
   private static void printImplementation(DOMTestDocumentBuilderFactory factory) {
-    printPrologue();
-
     DocumentBuilderFactory docfactory = factory.newInstance();
     try {
       DocumentBuilder builder = docfactory.newDocumentBuilder();

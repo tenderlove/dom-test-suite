@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.17  2001-08-23 08:01:49  dom-ts-4
+Revision 1.18  2001-08-24 08:28:00  dom-ts-4
+Test matrix generation.  Some Node.setValue() tests
+
+Revision 1.17  2001/08/23 08:01:49  dom-ts-4
 Test fixups for ignoring whitespace, et al
 
 Revision 1.16  2001/08/22 22:12:46  dom-ts-4
@@ -152,6 +155,31 @@ All implementation conditions combined into implementationAttribute element
 	       out="${build.dir}/dom1-subjects.xml"
 	       style="${transforms.dir}/subjects.xsl"/>
 </target>
+
+<target name="dom1-core-metadata" depends="dom1-init">
+    <mkdir dir="${build.dir}"/>
+	<style in="${tests.dir}/level1/core/alltests.xml" 
+		   out="${build.dir}/dom1-core-metadata.rdf" 
+	       style="${transforms.dir}/combine-metadata.xsl">
+		<param name="baseURI"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
+        <param name="externalMetadata" expression="metadata.xml"/>
+	</style>
+</target>
+
+
+<target name="dom1-core-matrix" depends="dom1-core-metadata,dom1-subjects,dom1-interfaces">
+    <mkdir dir="${build.dir}"/>
+	<style in="${build.dir}/dom1-core-metadata.rdf" 
+		   out="${build.dir}/dom1-core-matrix.html" 
+	       style="${transforms.dir}/test-matrix.xsl">
+		<param name="specURI"
+		       expression="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
+        <param name="interfacesURL" expression="dom1-interfaces.xml"/>
+        <param name="specMetadataURL" expression="dom1-subjects.xml"/>
+	</style>
+</target>
+
 
 <target name="analyze-names" depends="dom1-interfaces">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
@@ -399,6 +427,7 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level1/core" 
 		   includes="*.xml" 
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -415,6 +444,7 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${build.dir}/ecmascript/level1/core" 
 		   includes="*.xml" 
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-ecmascript.xsl" 
 	       extension=".js">
 		<param name="interfaces-docname"
@@ -466,7 +496,7 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${tests.dir}/level2/core" 
 		   destdir="${java.build.dir}/org/w3c/domts/level2/core" 
 		   includes="*.xml" 
-           excludes="**/documentcreatecdatasection.xml,**/textsplittextnomodificationallowederr.xml"
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-java.xsl" 
 	       extension=".java">
 		<param name="interfaces-docname"
@@ -483,6 +513,7 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${tests.dir}/level2/core" 
 		   destdir="${build.dir}/ecmascript/level2/core" 
 		   includes="*.xml" 
+           excludes="metadata.xml"
 	       style="${transforms.dir}/test-to-ecmascript.xsl" 
 	       extension=".js">
 		<param name="interfaces-docname"
