@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.79  2003-01-17 06:48:58  dom-ts-4
+Revision 1.80  2003-01-20 06:19:15  dom-ts-4
+Removed Element.getElementsByTagName patch tasks (now done by XSLT)
+
+Revision 1.79  2003/01/17 06:48:58  dom-ts-4
 Added convienience targets for one shot LS test code generation
 Added dom3-ls-validate-tests target, requires more work on DTD
 
@@ -355,16 +358,14 @@ All implementation conditions combined into implementationAttribute element
 	<unzip src="${specs.dir}/DOM.zip" dest="${specs.dir}/Level-1"/>
 	<unzip src="${specs.dir}/Level-1/xml-source.zip" dest="${specs.dir}/Level-1"/>
 
-	<!--  patch wd-dom file to add missing xmlns:xlink attribute  -->
-	<patch patchfile="./patches/wd-dom.patch"
-	       originalfile="${specs.dir}/Level-1/xml/wd-dom.xml"/>
-	<patch patchfile="./patches/level-1-element.patch"
-	       originalfile="${specs.dir}/Level-1/xml/definitions/level-one-core/element.xml"/>
+    <!--  add missing xmlns:xlink attribute    -->
+    <replace file="${specs.dir}/Level-1/xml/wd-dom.xml" token="&lt;spec&gt;"
+        value="&lt;spec xmlns:xlink='http://www.w3.org/1999/xlink'&gt;"/>
 </target>
 
-<target name="dom1-schema" depends="dom1-init">
+<target name="dom1-schema" depends="dom1-interfaces">
 	<style basedir="${specs.dir}/Level-1/xml"
-	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
+	       in="${build.dir}/dom1-interfaces.xml"
 	       out="${build.dir}/dom1.xsd"
 	       style="${transforms.dir}/dom-to-xsd.xsl">
 		<param name="schema-namespace"
@@ -384,9 +385,9 @@ All implementation conditions combined into implementationAttribute element
 	     classname="org.apache.xerces.parsers.SAXParser"/ -->
 </target>
 
-<target name="dom1-dtd" depends="dom1-init">
+<target name="dom1-dtd" depends="dom1-interfaces">
 	<style basedir="${specs.dir}/Level-1/xml"
-	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
+	       in="${build.dir}/dom1-interfaces.xml"
 	       out="${build.dir}/dom1.dtd"
 	       style="${transforms.dir}/dom-to-dtd.xsl">
 		<param name="schema-namespace"
@@ -474,7 +475,7 @@ All implementation conditions combined into implementationAttribute element
 	<style basedir="${specs.dir}/Level-1/xml"
 	       in="${specs.dir}/Level-1/xml/wd-dom.xml"
 	       out="${build.dir}/dom1-interfaces.xml"
-	       style="${transforms.dir}/extract.xsl"
+	       style="${transforms.dir}/dom1-errata.xsl"
 	       processor="trax"/>
 </target>
 
@@ -738,10 +739,6 @@ All implementation conditions combined into implementationAttribute element
 	<echo file="${specs.dir}/Level-2/xml/status.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
-    <!--  change name parameter of Element.getElementsByTagName to tagname   -->
-	<patch patchfile="./patches/level-2-element.patch"
-	       originalfile="${specs.dir}/Level-2/xml/core/definitions/element.xml"/>
-
 
 	<unzip src="${specs.dir}/DOM2-HTML-Java-Binding.zip"
 	       dest="${specs.dir}/Level-2/HTML/java"/>
@@ -830,6 +827,8 @@ All implementation conditions combined into implementationAttribute element
 
 
 <target name="dom2-interfaces" depends="dom2-init">
+    <!--    also changes Element.getElementsByTagName's
+                name parameter to tagname    -->
 	<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml"
 	       out="${build.dir}/dom2-interfaces.xml"
 	       style="${transforms.dir}/dom2-combine.xsl"/>
@@ -1758,10 +1757,6 @@ All implementation conditions combined into implementationAttribute element
 
     <delete file="${specs.dir}/Level-3/xml/core/definitions/element.xml.orig"/>
 
-    <!--   this patch is needed so the parameter names are the same
-               for getElementsByTagName    -->
-	<patch patchfile="./patches/level-3-element.patch"
-	       originalfile="${specs.dir}/Level-3/xml/core/definitions/element.xml"/>
 
     <mkdir dir="${specs.dir}/Level-3/Core/java"/>
 	<unzip src="${specs.dir}/Level-3/Core/java-binding.zip"
