@@ -30,9 +30,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="link" type="DOMString" />
+<var name="doc" type="Node"/>
 <load var="doc" href="anchor.html" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;A&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"A"'/>
+<assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <href interface="HTMLAnchorElement" obj="testNode" var="link"/>
-<assertEquals actual="link" expected="&quot;mary.html&quot;" id="hrefLink" ignoreCase="false"/>
+<assertEquals actual="link" expected='"mary.html"' id="hrefLink" ignoreCase="false"/>
 </test>
