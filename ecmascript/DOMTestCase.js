@@ -708,6 +708,11 @@ DOM3LSBuilder.prototype.toAutoCaseArray = function(s) {
     return s;
 }
 
+DOM3LSBuilder.prototype.hasFeature = function(feature, version) {
+    return document.implementation.hasFeature(feature, version);
+}
+
+
 function createBuilder(implementation) {
   switch(implementation) {
     case "msxml3":
