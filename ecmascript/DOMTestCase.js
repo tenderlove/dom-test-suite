@@ -186,6 +186,11 @@ function size(collection)
   return collection.length;
 }
 
+function same(expected, actual)
+{
+  return expected === actual;
+}
+
 function getSuffix(contentType) {
     switch(contentType) {
         case "text/html":
@@ -749,6 +754,14 @@ function createBuilder(implementation) {
     return new DOM3LSBuilder();
   }
   return new IFrameBuilder();
+}
+
+function checkFeature(feature, version)
+{
+  if (!builder.hasFeature(feature, version))
+  {
+    throw "builder does not support feature " + feature + " version " + version;
+  }
 }
 
 var builder = null;
