@@ -39,6 +39,7 @@ in an error.
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-utf16Offset"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-node"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-uri"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=542"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
@@ -79,20 +80,20 @@ in an error.
 	<severity var="severity" obj="error"/>
 	<if>
 		<equals actual="severity" expected='2' ignoreCase="false"/>
-		<!-- location should have relatedNode, everything else should be -1 or null -->
+		<!-- location should have relatedNode -->
 		<location var="location" obj="error"/>
 		<relatedNode var="problemNode" obj="location" interface="DOMLocator"/>
 		<assertSame actual="problemNode" expected="newChild" id="relatedNode"/>
+
+		<!-- 
+		    can't make assertions about these values
+		-->
 		<lineNumber var="lineNumber" obj="location"/>
-		<assertEquals actual="lineNumber" expected="-1" ignoreCase="false" id="lineNumber"/>
 		<columnNumber var="columnNumber" obj="location"/>
-		<assertEquals actual="columnNumber" expected="-1" ignoreCase="false" id="columnNumber"/>
 		<byteOffset var="byteOffset" obj="location"/>
-		<assertEquals actual="byteOffset" expected="-1" ignoreCase="false" id="byteOffset"/>
 		<utf16Offset var="utf16Offset" obj="location"/>
-		<assertEquals actual="utf16Offset" expected="-1" ignoreCase="false" id="utf16Offset"/>
 		<uri var="uri" obj="location" interface="DOMLocator"/>
-		<assertNull actual="uri" id="uri"/>
+
 		<!--  message should be non-empty  -->
 		<message var="message" obj="error"/>
 		<length var="length" obj="message" interface="DOMString"/>
