@@ -15,17 +15,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="namednodemapsetnameditemns10">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="namednodemapsetnameditemns11">
 <metadata>
-<title>namednodemapsetnameditemns10</title>
+<title>namednodemapsetnameditemns11</title>
 <creator>IBM</creator>
 <description>
     The method setNamedItemNS adds a node using its namespaceURI and localName and 
     raises a HIERARCHY_REQUEST_ERR if an attempt is made to add a node doesn't belong 
     in this NamedNodeMap.
 
-	 Attempt to add an entity to a NamedNodeMap of attribute nodes,
-	 Since nodes of this type cannot be added to the attribute node map a HIERARCHY_REQUEST_ERR
+	 Attempt to add a notation node to a NamedNodeMap of attribute nodes,
+	 Since notations nodes do not belong in the attribute node map a HIERARCHY_REQUEST_ERR
 	 should be raised.
 </description>
 <contributor>Neil Delima</contributor>
@@ -36,23 +36,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
-<var name="entities" type="NamedNodeMap"/>
+<var name="notations" type="NamedNodeMap"/>
 <var name="attributes" type="NamedNodeMap"/>
-<var name="entity" type="Entity"/>
 <var name="notation" type="Notation"/>
 <var name="element" type="Element"/>
 <var name="elementList" type="NodeList"/>
 <var name="newNode" type="Node"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
-<entities var="entities" obj="docType"/>
-<getNamedItem var="entity" obj="entities" name='"ent1"'/>
+<notations var="notations" obj="docType"/>
+<getNamedItem var="notation" obj="notations" name='"notation1"'/>
 <getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"address"' interface="Document"/>
 <item var="element" obj="elementList" index="0" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
-<assertDOMException id="namednodemapsetnameditemns10_entity">
+<assertDOMException id="namednodemapsetnameditemns11_notation">
 <HIERARCHY_REQUEST_ERR>
-<setNamedItemNS var="newNode" obj="attributes" arg="entity"/>
+<setNamedItemNS var="newNode" obj="attributes" arg="notation"/>
 </HIERARCHY_REQUEST_ERR>
 </assertDOMException>
 </test>
