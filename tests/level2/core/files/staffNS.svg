@@ -10,11 +10,23 @@
    <!ENTITY ent1 "This entity should be discarded">
    <!NOTATION notation1 PUBLIC "notation1File">
    <!NOTATION notation2 SYSTEM "notation2File">
-]
->
+   <!ELEMENT svg (rect, script, employee+)>
+   <!ATTLIST svg 
+      xmlns CDATA #FIXED "http://www.w3.org/2000/svg"
+      name CDATA #IMPLIED>
+   <!ELEMENT rect EMPTY>
+   <!ATTLIST rect 
+      x CDATA #REQUIRED
+      y CDATA #REQUIRED
+      width CDATA #REQUIRED
+      height CDATA #REQUIRED>
+  <!ELEMENT script (#PCDATA)>
+  <!ATTLIST script type CDATA #IMPLIED>      
+  <!ENTITY svgunit SYSTEM "svgunit.js">
+  <!ENTITY svgtest SYSTEM "svgtest.js">
+]>
 <!-- This is comment number 1.-->
-<svg xmlns="http://www.w3.org/2000/svg">
- <rect x="0" y="0" width="100" height="100"/>
+<svg xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100"/><script type="text/ecmascript">&svgtest;&svgunit;</script>
  <employee xmlns="http://www.nist.gov" xmlns:dmstc="http://www.usa.com">
   <employeeId>EMP0001</employeeId>
   <name>Margaret Martin</name>
@@ -23,7 +35,7 @@
   <gender>Female</gender>
   <address dmstc:domestic="Yes">1230 North Ave. Dallas, Texas 98551</address>
  </employee>
- <employee xmlns:dmstc="http://www.usa.com" xmlns="">
+ <employee xmlns:dmstc="http://www.usa.com" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/Files">
   <employeeId>EMP0002</employeeId>
   <name>Martha Raynolds
 <![CDATA[This is a CDATASection with EntityReference number 2 &ent2;]]>
@@ -34,7 +46,7 @@
   <address dmstc:domestic="Yes" street="Yes">&ent2; Dallas, &ent3;
  98554</address>
  </employee>
- <employee xmlns:dmstc="http://www.netzero.com" xmlns="">
+ <employee xmlns:dmstc="http://www.netzero.com" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/Files">
   <employeeId>EMP0003</employeeId>
   <name>Roger
  Jones</name>
@@ -50,7 +62,7 @@
   <emp:gender>Female</emp:gender>
   <emp:address emp:domestic="Yes" street="Y&ent1;" emp:zone="CANADA" emp:local1="TRUE">27 South Road. Dallas, texas 98556</emp:address>
  </emp:employee>
- <employee xmlns:emp2="http://www.nist.gov" xmlns="">
+ <employee xmlns:emp2="http://www.nist.gov" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/Files">
   <employeeId>EMP0005</employeeId>
   <name>Robert Myers</name>
   <position>Computer Specialist</position>
