@@ -27,6 +27,15 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 -->
 
+<!--
+$Log: test-to-java.xsl,v $
+Revision 1.4  2001-07-20 05:44:32  dom-ts-4
+Initial SVG support.  multiply renamed mult,
+All implementation conditions combined into implementationAttribute element
+
+-->
+
+
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--  relative to transform   -->
@@ -129,35 +138,19 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 <xsl:template match="*" mode="testConditions"/>
 <xsl:template match="text()" mode="testConditions"/>
 
-<xsl:template match="*[local-name()='validating']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>factory.isValidating();
+<xsl:template match="*[local-name()='implementationAttribute']" mode="testConditions">
+	<xsl:choose>
+		<xsl:when test="@name='signed' or @name='hasNullString'">
+			<xsl:text>    retval &amp;= </xsl:text><xsl:value-of select="@value"/><xsl:text>;
+</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>    retval &amp;= (_factory.getAttribute("</xsl:text><xsl:value-of select="@name"/>") == <xsl:value-of select="@value"/><xsl:text>);
+</xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="*[local-name()='coalescing']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>factory.isCoalescing();
-</xsl:template>
-
-<xsl:template match="*[local-name()='expandEntityReferences']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>factory.isExpandEntityReferences();
-</xsl:template>
-
-<xsl:template match="*[local-name()='ignoringElementContentWhitespace']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>factory.isIgnoringElementContentWhitespace();
-</xsl:template>
-
-<xsl:template match="*[local-name()='ignoringComments']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>factory.isIgnoringComments();
-</xsl:template>
-
-<xsl:template match="*[local-name()='namespaceAware']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>factory.isNamespaceAware();
-</xsl:template>
 
 <xsl:template match="*[local-name()='hasFeature']" mode="testConditions">
 	<!--
@@ -179,18 +172,6 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 	</xsl:if>
 </xsl:template>
 
-<!--  Java implementations are always signed   -->
-<xsl:template match="*[local-name()='signed']" mode="testConditions">
-	<xsl:param name="operator"/>
-	retval &amp;= <xsl:value-of select="$operator"/>true;
-</xsl:template>
-
-<xsl:template match="*[local-name()='not']" mode="testConditions">
-	<xsl:apply-templates mode="testConditions">
-		<xsl:with-param name="operator">!</xsl:with-param>
-	</xsl:apply-templates>
-</xsl:template>
-	
 
 <!--   
 	   The following templates generate the body of setAttributes()
@@ -452,7 +433,7 @@ public class <xsl:value-of select="@name"/> extends DOMTestCase {
 </xsl:template>
 
 
-<xsl:template match="*[local-name()='multiply']" mode="body">
+<xsl:template match="*[local-name()='mult']" mode="body">
 	<xsl:value-of select="@var"/>
 	<xsl:text> = </xsl:text>
 	<xsl:value-of select="@op1"/>

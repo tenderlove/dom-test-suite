@@ -24,6 +24,14 @@ saxon -o dom2-interfaces.xml core/dom-spec.xml combine-dom2.xsl
 
 
 -->
+
+<!--
+$Log: dom2-combine.xsl,v $
+Revision 1.2  2001-07-20 05:44:32  dom-ts-4
+Initial SVG support.  multiply renamed mult,
+All implementation conditions combined into implementationAttribute element
+
+-->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="xml" indent="yes"/>
 	<xsl:variable name="specTitle" select="/spec/header/title"/>
@@ -102,4 +110,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<xsl:value-of select="normalize-space(.)"/>
 	</xsl:template>
 
+	<xsl:template match="xspecref" mode="interface">
+		<xsl:apply-templates select="*" mode="interface"/>
+	</xsl:template>
+
+	<xsl:template match="loc" mode="interface">
+		<xsl:apply-templates select="*" mode="interface"/>
+	</xsl:template>
 </xsl:stylesheet>

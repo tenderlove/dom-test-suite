@@ -77,9 +77,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|multiply|divide|load|implementation|hasFeature|if|while|for-each|comment|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|EventMonitor.setUserObj|EventMonitor.getAtEvents|EventMonitor.getCaptureEvents|EventMonitor.getBubbleEvents|EventMonitor.getAllEvents|wait"&gt;
 
-&lt;!ENTITY % implementation-condition "validating|coalescing|isExpandingEntityReferences|ignoringElementContentWhitespace|ignoringComments|namespaceAware|hasFeature|signed|not"&gt;
+&lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
 &lt;!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize| %implementation-condition;"&gt;
 
@@ -380,8 +380,8 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	op2 CDATA #REQUIRED
 &gt;
 
-&lt;!ELEMENT multiply EMPTY&gt;
-&lt;!ATTLIST multiply
+&lt;!ELEMENT mult EMPTY&gt;
+&lt;!ATTLIST mult
 	id ID #IMPLIED
 	var CDATA #REQUIRED
 	op1 CDATA #REQUIRED
@@ -641,41 +641,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	expected CDATA #REQUIRED
 &gt;
 
-&lt;!ELEMENT validating EMPTY&gt;
-&lt;!ATTLIST validating
+&lt;!ELEMENT implementationAttribute EMPTY&gt;
+&lt;!ATTLIST implementationAttribute
 	id ID #IMPLIED
+	value (true|false) #REQUIRED
+	name (validating|coalescing|expandEntityReferences|namespaceAware|ignoreElementContentWhitespace|signed|hasNullString) #REQUIRED
 &gt;
 
-&lt;!ELEMENT coalescing EMPTY&gt;
-&lt;!ATTLIST coalescing
-	id ID #IMPLIED
-&gt;
-
-&lt;!ELEMENT isExpandingEntityReferences EMPTY&gt;
-&lt;!ATTLIST isExpandingEntityReferences
-	id ID #IMPLIED
-&gt;
-
-
-&lt;!ELEMENT namespaceAware EMPTY&gt;
-&lt;!ATTLIST namespaceAware
-	id ID #IMPLIED
-&gt;
-
-&lt;!ELEMENT ignoringElementContentWhitespace EMPTY&gt;
-&lt;!ATTLIST ignoringElementContentWhitespace
-	id ID #IMPLIED
-&gt;
-
-&lt;!ELEMENT ignoringComments EMPTY&gt;
-&lt;!ATTLIST ignoringComments
-	id ID #IMPLIED
-&gt;
-
-&lt;!ELEMENT signed EMPTY&gt;
-&lt;!ATTLIST signed
-	id ID #IMPLIED
-&gt;
 
 &lt;!ELEMENT hasFeature EMPTY&gt;
 &lt;!ATTLIST hasFeature

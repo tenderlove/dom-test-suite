@@ -11,6 +11,13 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
+<!--
+$Log: build.xml,v $
+Revision 1.6  2001-07-20 05:44:32  dom-ts-4
+Initial SVG support.  multiply renamed mult,
+All implementation conditions combined into implementationAttribute element
+
+-->
 <project default="usage" basedir=".">
 
 	<target name="usage">
@@ -84,12 +91,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 	<target name="dom1-interfaces" depends="dom1-init">
 		<style basedir="${specs.dir}/Level-1/xml" in="${specs.dir}/Level-1/xml/wd-dom.xml" out="${build.dir}/dom1-interfaces.xml" style="${transforms.dir}/extract.xsl"/>
-		<xmlvalidate file="${build.dir}/dom1-interfaces.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
 	</target>
 
 	<target name="dom2-init" depends="init">
 		<mkdir dir="${specs.dir}"/>
-		<mkdir dir="${specs.dir}/Level-1"/>
+		<mkdir dir="${specs.dir}/Level-2"/>
 		<!--   download DOM 1 spec to specs directory   -->
 		<get src="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/DOM2-Core.zip"
 			dest="${specs.dir}/DOM2-Core.zip"
@@ -201,6 +207,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 	<target name="dom2-interfaces" depends="dom2-init">
 		<style in="${specs.dir}/Level-2/xml/core/dom-spec.xml" out="${build.dir}/dom2-interfaces.xml" style="${transforms.dir}/dom2-combine.xsl"/>
+		<xmlvalidate file="${build.dir}/dom2-interfaces.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
 	</target>
 
 
@@ -236,5 +243,172 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <target name="clean" depends="init">
     <delete dir="${build.dir}"/>
 </target>
+
+	<target name="dom3-init" depends="init">
+		<mkdir dir="${specs.dir}"/>
+		<mkdir dir="${specs.dir}/Level-3"/>
+		<!--   download DOM 1 spec to specs directory   -->
+		<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-Core-20010605/DOM3-Core.zip"
+			dest="${specs.dir}/DOM3-Core.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM3-Core.zip" dest="${specs.dir}/Level-3/Core"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-3/Core/xml-source.zip" dest="${specs.dir}/Level-3/xml/core"/>
+
+		<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20010607/DOM3-ASLS.zip"
+			dest="${specs.dir}/DOM3-ASLS.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM3-ASLS.zip" dest="${specs.dir}/Level-3/ASLS"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-3/ASLS/xml-source.zip" dest="${specs.dir}/Level-3/xml/asls"/>
+
+
+		<get src="http://www.w3.org/TR/2001/WD-DOM-Level-3-XPath-20010618/DOM3-XPath.zip"
+			dest="${specs.dir}/DOM3-XPath.zip"
+			usetimestamp="yes"/>
+
+		<unzip src="${specs.dir}/DOM3-XPath.zip" dest="${specs.dir}/Level-3/XPath"/>
+		<!--  XML source has unusual ../../whatever paths,
+		        must put in several layers deep to prevent writing out
+				of build tree   -->
+		<unzip src="${specs.dir}/Level-3/XPath/xml-source.zip" dest="${specs.dir}/Level-3/xml/xpath"/>
+
+	</target>
+
+	<target name="svg-init" depends="init">
+		<mkdir dir="${specs.dir}"/>
+		<mkdir dir="${specs.dir}/SVG1.0"/>
+		<!--   download SVG 1.0 Proposed Recommendation to specs directory   -->
+		<get src="http://www.w3.org/TR/2001/PR-SVG-20010719/PR-SVG-20010719.zip"
+			dest="${specs.dir}/SVG.zip"
+			usetimestamp="yes"/>
+
+
+		<unzip src="${specs.dir}/SVG.zip" dest="${specs.dir}/SVG1.0"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/coords.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/coords.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/coords.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/animate.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/animate.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/animate.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/color.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/color.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/color.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/extend.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/extend.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/extend.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/interact.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/interact.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/interact.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/linking.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/linking.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/linking.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/masking.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/masking.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/masking.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/painting.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/painting.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/painting.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/paths.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/paths.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/paths.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/pservers.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/pservers.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/pservers.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/script.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/script.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/script.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/shapes.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/shapes.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/shapes.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/struct.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/struct.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/struct.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+    	<exec executable="sed" output="${specs.dir}/SVG1.0/types.xml">
+			<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/types.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/types.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/text.xml">
+			<arg line="-e'23,5269d' -f svgfix.sed ${specs.dir}/SVG1.0/text.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/text.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/filters.xml">
+			<arg line="-e'24,4785d' -f svgfix.sed ${specs.dir}/SVG1.0/filters.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/filters.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+   		<exec executable="sed" output="${specs.dir}/SVG1.0/styling.xml">
+			<arg line="-e'23,1563d' -f svgfix.sed ${specs.dir}/SVG1.0/styling.html"/>
+   		</exec>
+		<xmlvalidate file="${specs.dir}/SVG1.0/styling.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+
+	</target>
+
+	<target name="svg-interfaces" depends="svg-init,dom2-interfaces">
+		<style basedir="${specs.dir}/SVG1.0" in="${specs.dir}/SVG1.0/coords.xml" out="${build.dir}/svg-interfaces.xml" style="${transforms.dir}/svg-to-interface.xsl">
+			<param name="dom2-interfaces" expression="../${build.dir}/dom2-interfaces.xml"/>
+		</style>
+		<xmlvalidate file="${build.dir}/svg-interfaces.xml" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+	</target>
+
+	<target name="svg-schema" depends="svg-interfaces">
+		<style in="${build.dir}/svg-interfaces.xml" out="${build.dir}/_svg.xsd" style="${transforms.dir}/dom-to-xsd.xsl">
+			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/SVG"/>
+		</style>
+
+		<!--  remove leading underscore from _xmlns attribute    -->
+   		<exec executable="sed" output="${build.dir}/svg.xsd">
+			<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_svg.xsd"/>
+   		</exec>
+		<delete file="${build.dir}/_svg.xsd"/>
+		<xmlvalidate file="${build.dir}/svg.xsd" lenient="yes" failonerror="yes" classname="org.apache.xerces.parsers.SAXParser"/>
+	</target>
+
+	<target name="svg-dtd" depends="svg-interfaces">
+		<style in="${build.dir}/svg-interfaces.xml" out="${build.dir}/svg.dtd" style="${transforms.dir}/dom-to-dtd.xsl">
+			<param name="schema-namespace" expression="http://www.w3.org/2001/DOM-Test-Suite/SVG"/>
+		</style>
+		<!-- copy file="${build.dir}/svg.dtd" todir="${tests.dir}/svg"/ -->
+	</target>
+
 
 </project> 

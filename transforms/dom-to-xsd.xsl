@@ -371,7 +371,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element ref="metadata" minOccurs="0"/>
-						<xsd:group ref="implementationCondition" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+							<xsd:element ref="hasFeature"/>
+							<xsd:element ref="implementationAttribute"/>
+						</xsd:choice>
 						<xsd:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
 						<xsd:choice>
 							<xsd:element ref="load"/>
@@ -414,7 +417,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element ref="metadata" minOccurs="0"/>
-						<xsd:group ref="implementationCondition" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+							<xsd:element ref="hasFeature"/>
+							<xsd:element ref="implementationAttribute"/>
+						</xsd:choice>
 						<xsd:choice minOccurs="0" maxOccurs="unbounded">
 							<xsd:element ref="suite.member"/>
 						</xsd:choice>
@@ -509,7 +515,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<!--  can't be add since that conflicts with HTMLSelectElement.add  -->
 			<xsd:element name="plus" type="binaryAssignment"/>
 			<xsd:element name="subtract" type="binaryAssignment"/>
-			<xsd:element name="multiply" type="binaryAssignment"/>
+			<xsd:element name="mult" type="binaryAssignment"/>
 			<xsd:element name="divide" type="binaryAssignment"/>
 			<!--  can't be declare since that conflicts with HTMLObjectElement.declare --> 
 			<xsd:element name="var">
@@ -811,7 +817,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xsd:element ref="append"/>
 					<xsd:element ref="plus"/>
 					<xsd:element ref="subtract"/>
-					<xsd:element ref="multiply"/>
+					<xsd:element ref="mult"/>
 					<xsd:element ref="divide"/>
 					<xsd:element ref="load"/>
 					<xsd:element ref="implementation"/>
@@ -896,22 +902,28 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xsd:attribute name="expected" type="variableOrIntLiteral" use="required"/>
 				</xsd:complexType>
 			</xsd:element>
-			<!--  these elements provide access to properties of the implementation  -->
-			<xsd:complexType name="implementationCondition">
-				<xsd:attribute name="id" type="xsd:ID" use="optional"/>
-			</xsd:complexType>
 
-			<xsd:element name="validating" type="implementationCondition"/>
-			<xsd:element name="coalescing"  type="implementationCondition"/>
-			<xsd:element name="expandEntityReferences"  type="implementationCondition"/>
-			<xsd:element name="namespaceAware"  type="implementationCondition"/>
-			<xsd:element name="ignoringElementContentWhitespace"  type="implementationCondition"/>
-			<xsd:element name="ignoringComments"  type="implementationCondition"/>
-			<xsd:element name="signed" type="implementationCondition">
-				<xsd:annotation>
-					<xsd:documentation>Interfaces are defined using signed integers</xsd:documentation>
-				</xsd:annotation>
+
+			<xsd:element name="implementationAttribute">
+				<xsd:complexType>
+					<xsd:attribute name="name" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration>validating</xsd:enumeration>
+								<xsd:enumeration>coalescing</xsd:enumeration>
+								<xsd:enumeration>expandEntityReferences</xsd:enumeration>
+								<xsd:enumeration>namespaceAware</xsd:enumeration>
+								<xsd:enumeration>ignoreElementContentWhitespace</xsd:enumeration>
+								<xsd:enumeration>signed</xsd:enumeration>
+								<xsd:enumeration>hasNullString</xsd:enumeration>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+					<xsd:attribute name="value" use="required" type="xsd:boolean"/>
+					<xsd:attribute name="id" use="optional" type="xsd:ID"/>
+				</xsd:complexType>
 			</xsd:element>
+
 			<xsd:element name="hasFeature">
 				<xsd:annotation>
 					<xsd:documentation>hasFeature is used both as a property of a DOMImplementation (when obj and var attributes are provided) and as a implementationCondition.</xsd:documentation>
@@ -924,19 +936,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xsd:attribute name="obj" type="variable" use="optional"/>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:group name="implementationCondition">
-				<xsd:choice>
-					<xsd:element ref="validating"/>
-					<xsd:element ref="coalescing"/>
-					<xsd:element ref="expandEntityReferences"/>
-					<xsd:element ref="ignoringElementContentWhitespace"/>
-					<xsd:element ref="ignoringComments"/>
-					<xsd:element ref="namespaceAware"/>
-					<xsd:element ref="hasFeature"/>
-					<xsd:element ref="signed"/>
-					<xsd:element ref="not"/>
-				</xsd:choice>
-			</xsd:group>
 			<xsd:element name="not">
 				<xsd:complexType>
 					<xsd:group ref="condition"/>
@@ -991,7 +990,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xsd:element ref="isTrue"/>
 					<xsd:element ref="isFalse"/>
 					<xsd:element ref="hasSize"/>
-					<xsd:group ref="implementationCondition"/>
+					<xsd:element ref="hasFeature"/>
+					<xsd:element ref="implementationAttribute"/>
 				</xsd:choice>
 			</xsd:group>
 			<xsd:element name="else">

@@ -21,7 +21,7 @@ import java.util.*;
  *    This interface provides services typically provided by a test framework
  */
 public interface DOMTestFramework {
-	boolean hasFeature(String feature,String version);
+	boolean hasFeature(String feature,String version) throws Exception;
 	void wait(int millisecond);
 	Document load(String docURI);
 	DOMImplementation getImplementation();
@@ -35,19 +35,28 @@ public interface DOMTestFramework {
 	void assertSize(String testURI, String assertID, int expectedSize, NamedNodeMap collection);
 	void assertSize(String testURI, String assertID, int expectedSize, Collection collection);
 	void assertEqualsIgnoreCase(String testURI, String assertID, String expected, String actual);
+	void assertEqualsIgnoreCase(String testURI, String assertID, Collection expected, Collection actual);
+	void assertEqualsIgnoreCase(String testURI, String assertID, List expected, List actual);
 	void assertEquals(String testURI, String assertID, String expected, String actual);
 	void assertEquals(String testURI, String assertID, int expected, int actual);
+	void assertEquals(String testURI, String assertID, double expected, double actual);
 	void assertEquals(String testURI, String assertID, Collection expected, NodeList actual);
 	void assertEquals(String testURI, String assertID, Collection expected, Collection actual);
 	void assertNotEqualsIgnoreCase(String testURI, String assertID, String expected, String actual);
 	void assertNotEquals(String testURI, String assertID, String expected, String actual);
 	void assertNotEquals(String testURI, String assertID, int expected, int actual);
+	void assertNotEquals(String testURI, String assertID, double expected, double actual);
 
 
 	boolean same(Object expected, Object actual);
 	boolean equalsIgnoreCase(String expected, String actual);
+	boolean equalsIgnoreCase(Collection expected, Collection actual);
+	boolean equalsIgnoreCase(List expected, List actual);
 	boolean equals(String expected, String actual);
 	boolean equals(int expected, int actual);
+	boolean equals(double expected, double actual);
+	boolean equals(Collection expected, Collection actual);
+	boolean equals(List expected, List actual);
 	int size(Collection collection);
 	int size(NamedNodeMap collection);
 	int size(NodeList collection);
