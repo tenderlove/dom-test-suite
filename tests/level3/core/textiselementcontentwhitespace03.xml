@@ -21,22 +21,25 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textiselementcontentwhitespace03</title>
 <creator>IBM</creator>
 <description>
-	Invoke isWhitespaceInElementContent on an existing Text Node that contains whitespace.
+Get the newline between the "body" and "p" element.  Since node is both in element content
+and whitespace, isElementContentWhitespace should return true.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
+<implementationAttribute name="validating" value="true"/>
+<implementationAttribute name="ignoringElementContentWhitespace" value="false"/>
 <var name="doc" type="Document"/>
-<var name="itemList" type="NodeList"/>
-<var name="elementName" type="Element"/>
+<var name="pList" type="NodeList"/>
+<var name="pElem" type="Element"/>
 <var name="textNode" type="Text"/>
-<var name="hasWhitespace" type="boolean"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
-<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"strong"' interface="Document"/>
-<item var="elementName" obj="itemList" index="0" interface="NodeList"/>
-<firstChild var="textNode" obj="elementName" interface="Node"/>
-<isElementContentWhitespace obj="textNode" var="hasWhitespace"/>
-<assertTrue actual="hasWhitespace" id="textiswhitespaceinelementcontent03"/>
+<var name="isElemContentWhitespace" type="boolean"/>
+<load var="doc" href="barfoo" willBeModified="false"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="pElem" obj="pList" index="0" interface="NodeList"/>
+<!--  should be text node containing new line between "body" and "p" element   -->
+<previousSibling var="textNode" obj="pElem" interface="Node"/>
+<isElementContentWhitespace obj="textNode" var="isElemContentWhitespace"/>
+<assertTrue actual="isElemContentWhitespace" id="isElementContentWhitespace"/>
 </test>

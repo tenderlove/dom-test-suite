@@ -21,17 +21,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textiselementcontentwhitespace02</title>
 <creator>IBM</creator>
 <description>
-	Invoke isElementContentWhitespace on a newly created Text Node that does not contain whitespace.
+Get the text node child of the "p" element in barfoo.  isElementContentWhitespace should
+be false since the node is neither whitespace or in element content.  
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace"/>
 </metadata>
 <var name="doc" type="Document"/>
-<var name="newText" type="Text"/>
-<var name="hasWhitespace" type="boolean"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
-<createTextNode var="newText" obj="doc" data='"NoWhiteSpace"'/>
-<isElementContentWhitespace obj="newText" var="hasWhitespace"/>
-<assertFalse actual="hasWhitespace" id="iselementcontentwhitespace02"/>
+<var name="pList" type="NodeList"/>
+<var name="pElem" type="Element"/>
+<var name="textNode" type="Text"/>
+<var name="isElemContentWhitespace" type="boolean"/>
+<load var="doc" href="barfoo" willBeModified="false"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="pElem" obj="pList" index="0" interface="NodeList"/>
+<firstChild var="textNode" obj="pElem" interface="Node"/>
+<isElementContentWhitespace obj="textNode" var="isElemContentWhitespace"/>
+<assertFalse actual="isElemContentWhitespace" id="notElemContentOrWhitespace"/>
 </test>
