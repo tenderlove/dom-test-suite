@@ -28,35 +28,37 @@ isElementContentWhitespace should be false since the node is not whitespace.
 <date qualifier="created">2004-01-05</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace"/>
 </metadata>
-<implementationAttribute name="ignoringElementContentWhitespace" value="false"/>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="bodyList" type="NodeList"/>
 <var name="bodyElem" type="Element"/>
 <var name="textNode" type="Text"/>
-<var name="blankNode" type="Text"/>
+<var name="nonBlankNode" type="Text"/>
 <var name="returnedNode" type="Node"/>
 <var name="isElemContentWhitespace" type="boolean"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="canSetValidation" type="boolean"/>
-<var name="replacedNode" type="Node"/>
+<var name="refChild" type="Node"/>
+<var name="errorMonitor" type="DOMErrorMonitor"/>
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig var="domConfig" obj="doc" interface="Document"/>
 <canSetParameter var="canSetValidation" obj="domConfig" name='"validate"' value="true"/>
 <if>
 	<isTrue value="canSetValidation"/>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
+	<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 	<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 	<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
-	<!--  newline between body and p  -->
-	<firstChild var="textNode" obj="bodyElem" interface="Node"/>
+	<!--  newline between body and p or p  -->
+	<firstChild var="refChild" obj="bodyElem" interface="Node"/>
 	<!--  replace with non-blank  -->
-	<createTextNode var="blankNode" obj="doc" data='"not blank"'/>
-	<replaceChild var="replacedNode" obj="bodyElem" newChild="blankNode" oldChild="textNode"/>
+	<createTextNode var="nonBlankNode" obj="doc" data='"not blank"'/>
+	<insertBefore var="returnedNode" obj="bodyElem" newChild="nonBlankNode" refChild="refChild"/>
 	<normalizeDocument obj="doc"/>
-
+	<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR"/>
 	<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 	<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
-	<!--  newline between body and p  -->
+	<!--  non-blank between body and p  -->
 	<firstChild var="textNode" obj="bodyElem" interface="Node"/>
 	<isElementContentWhitespace obj="textNode" var="isElemContentWhitespace"/>
 	<assertFalse actual="isElemContentWhitespace" id="notElemContent"/>

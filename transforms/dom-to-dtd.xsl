@@ -78,7 +78,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "fail|assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance|allErrors|allNotifications|operation|key|dst</xsl:text>
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance|allErrors|assertLowerSeverity|allNotifications|operation|key|dst</xsl:text>
 <xsl:if test="not($attributes[@name = 'src'])">|src</xsl:if>
 <xsl:if test="not($attributes[@name = 'data'])">|data</xsl:if>
 <xsl:text>"&gt;
@@ -1051,6 +1051,14 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	obj CDATA #REQUIRED
     interface (DOMErrorMonitor) #IMPLIED
 	var CDATA #REQUIRED
+&gt;
+
+&lt;!ELEMENT assertLowerSeverity EMPTY&gt;
+&lt;!ATTLIST assertLowerSeverity
+	id ID #REQUIRED
+	obj CDATA #REQUIRED
+    interface (DOMErrorMonitor) #IMPLIED
+	severity (SEVERITY_WARNING|SEVERITY_ERROR|SEVERITY_FATAL_ERROR) #REQUIRED
 &gt;
 
 &lt;!ELEMENT createXPathEvaluator EMPTY&gt;

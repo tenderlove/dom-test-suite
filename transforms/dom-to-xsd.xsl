@@ -1096,6 +1096,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:element ref="allEvents"/>
 					<xs:element ref="allNotifications"/>
 					<xs:element ref="allErrors"/>
+					<xs:element ref="assertLowerSeverity"/>
 					<xs:element ref="operation"/>
 					<xs:element ref="key"/>
 					<xs:element ref="dst"/>
@@ -1452,6 +1453,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:attribute name="var" type="variable" use="required"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="assertLowerSeverity">
+				<xs:complexType>
+					<xs:attribute name="id" type="xs:ID" use="required"/>
+					<xs:attribute name="obj" type="variable" use="required"/>
+                	<xs:attribute name="interface" use="optional">
+                    	<xs:simpleType>
+                        	<xs:restriction base="xs:string">
+                            	<xs:enumeration value="DOMErrorMonitor"/>
+                        	</xs:restriction>
+                    	</xs:simpleType>
+                	</xs:attribute>
+					<xs:attribute name="severity" use="required">
+                    	<xs:simpleType>
+                        	<xs:restriction base="xs:string">
+                            	<xs:enumeration value="SEVERITY_WARNING"/>
+                            	<xs:enumeration value="SEVERITY_ERROR"/>
+                            	<xs:enumeration value="SEVERITY_FATAL_ERROR"/>
+                        	</xs:restriction>
+                    	</xs:simpleType>
+                    </xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			
 			<xs:complexType name="UserDataNotificationAccessor">
 					<xs:attribute name="id" type="xs:ID" use="optional"/>
 					<xs:attribute name="obj" type="variable" use="required"/>

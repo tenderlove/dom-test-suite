@@ -21,17 +21,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>textiselementcontentwhitespace06</title>
 <creator>Curt Arnold</creator>
 <description>
-Replace the whitespace before the "p" element in barfoo with other whitespace and normalize with validation.
+Insert whitespace before the "p" element in barfoo and normalize with validation.
 isElementContentWhitespace should be true since the node is whitespace and in element content.  
 </description>
 <contributor>Curt Arnold</contributor>
 <date qualifier="created">2004-01-05</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace"/>
 </metadata>
-<implementationAttribute name="ignoringElementContentWhitespace" value="false"/>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="bodyList" type="NodeList"/>
 <var name="bodyElem" type="Element"/>
+<var name="refChild" type="Node"/>
 <var name="textNode" type="Text"/>
 <var name="blankNode" type="Text"/>
 <var name="returnedNode" type="Node"/>
@@ -39,24 +40,27 @@ isElementContentWhitespace should be true since the node is whitespace and in el
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="canSetValidation" type="boolean"/>
 <var name="replacedNode" type="Node"/>
+<var name="errorMonitor" type="DOMErrorMonitor"/>
+
 <load var="doc" href="barfoo" willBeModified="true"/>
 <domConfig var="domConfig" obj="doc" interface="Document"/>
 <canSetParameter var="canSetValidation" obj="domConfig" name='"validate"' value="true"/>
 <if>
 	<isTrue value="canSetValidation"/>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
+	<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 	<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 	<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
-	<!--  newline between body and p  -->
-	<firstChild var="textNode" obj="bodyElem" interface="Node"/>
+	<!--  newline between body and p or the p element  -->
+	<firstChild var="refChild" obj="bodyElem" interface="Node"/>
 	<!--  replace with different whitespace  -->
 	<createTextNode var="blankNode" obj="doc" data='"     "'/>
-	<replaceChild var="replacedNode" obj="bodyElem" newChild="blankNode" oldChild="textNode"/>
+	<insertBefore var="replacedNode" obj="bodyElem" newChild="blankNode" refChild="refChild"/>
 	<normalizeDocument obj="doc"/>
-
+	<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR"/>
 	<getElementsByTagName var="bodyList" obj="doc" tagname='"body"' interface="Document"/>
 	<item var="bodyElem" obj="bodyList" index="0" interface="NodeList"/>
-	<!--  newline between body and p  -->
+	<!--  previously inserted whitespace between body and p  -->
 	<firstChild var="textNode" obj="bodyElem" interface="Node"/>
 	<isElementContentWhitespace obj="textNode" var="isElemContentWhitespace"/>
 	<assertTrue actual="isElemContentWhitespace" id="isElemContentWhitespace"/>

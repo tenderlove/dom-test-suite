@@ -38,6 +38,7 @@ Normalize document with datatype-normalization set to true.  Check if dateTime v
 <var name="canSetValidate" type="boolean"/>
 <var name="canSetXMLSchema" type="boolean"/>
 <var name="xsdNS" type="DOMString" value='"http://www.w3.org/2001/XMLSchema"'/>
+<var name="errorMonitor" type="DOMErrorMonitor"/>
 <load var="doc" href="datatype_normalization" willBeModified="true"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <canSetParameter var="canSetNormalization" obj="domConfig" name='"datatype-normalization"' value="true"/>
@@ -52,7 +53,10 @@ Normalize document with datatype-normalization set to true.  Check if dateTime v
 	<setParameter obj="domConfig" name='"datatype-normalization"' value="true"/>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
 	<setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
+	<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>	
 	<normalizeDocument obj="doc"/>
+	<!--  fail test if normalize had any errors or fatal errors   -->
+	<assertLowerSeverity obj="errorMonitor" id="normalizeError" severity="SEVERITY_ERROR"/>	
 	<getElementsByTagNameNS 
 		var="elemList" 
 		obj="doc" 

@@ -28,14 +28,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
 </metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
 <var name="docElemNodeName" type="DOMString"/>
 <var name="origDocElemNodeName" type="DOMString"/>
+<var name="domConfig" type="DOMConfiguration"/>
+<var name="errorMonitor" type="DOMErrorMonitor"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <nodeName var="origDocElemNodeName" obj="docElem"/>
+<domConfig obj="doc" var="domConfig" interface="Document"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>	
 <normalizeDocument obj="doc"/>
+<!--  fail test if normalize had any errors or fatal errors   -->
+<assertLowerSeverity obj="errorMonitor" id="normalizeError" severity="SEVERITY_ERROR"/>
 <documentElement var="docElem" obj="doc"/>
 <nodeName var="docElemNodeName" obj="docElem"/>
 <assertEquals actual="docElemNodeName" expected='origDocElemNodeName' id="documentnormalizedocument01" ignoreCase="false"/>

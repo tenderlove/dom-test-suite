@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.62  2004-02-09 21:41:14  dom-ts-4
+Revision 1.63  2004-02-17 05:39:21  dom-ts-4
+normalization error instrumentation and req NS awareness (bug 531)
+
+Revision 1.62  2004/02/09 21:41:14  dom-ts-4
 Tweak for src production (bug 513)
 
 Revision 1.61  2004/02/09 07:12:22  dom-ts-4
@@ -1770,6 +1773,19 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 
 <xsl:template match="*[local-name()='allErrors']" mode="body">
     <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllErrors();
+</xsl:template>
+
+<xsl:template match="*[local-name()='assertLowerSeverity']" mode="body">
+    <xsl:value-of select="@obj"/>
+    <xsl:text>.assertLowerSeverity(this, "</xsl:text>
+    <xsl:value-of select="@id"/>
+    <xsl:choose>
+    	<xsl:when test="@severity = 'SEVERITY_WARNING'">", 1</xsl:when>
+    	<xsl:when test="@severity = 'SEVERITY_FATAL_ERROR'">", 3</xsl:when>
+    	<xsl:otherwise>", 2</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>);
+     </xsl:text>
 </xsl:template>
 
 

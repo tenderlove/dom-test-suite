@@ -41,6 +41,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="appendedChild" type="Node"/>
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="pList" type="NodeList"/>
+<var name="errorMonitor" type="DOMErrorMonitor"/>
 <load var="doc" href="barfoo" willBeModified="true"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="pList" index="0" interface="NodeList"/>
@@ -48,7 +49,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <appendChild obj="elem" var="appendedChild" newChild="newCdata"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
+<setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
 <normalizeDocument obj="doc"/>
+<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR" id="normalizationError"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="pList" index="0" interface="NodeList"/>
 <lastChild var="cdata" obj="elem" interface="Node"/>
@@ -56,6 +59,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument03_true" ignoreCase="false"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
 <normalizeDocument obj="doc"/>
+<assertLowerSeverity obj="errorMonitor" severity="SEVERITY_ERROR" id="normalization2Error"/>
 <getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
 <item var="elem" obj="pList" index="0" interface="NodeList"/>
 <lastChild var="text" obj="elem" interface="Node"/>

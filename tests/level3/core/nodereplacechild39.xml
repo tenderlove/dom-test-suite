@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild39</title>
 <creator>Curt Arnold</creator>
 <description>
-Attempt to add a second document element by a trailing comment.  The attempt should result
+Attempt to add a second document element by a replacing a trailing comment.  The attempt should result
 in a HIERARCHY_REQUEST_ERR or NOT_SUPPORTED_ERR. 
 </description>
 <date qualifier="created">2004-01-22</date>

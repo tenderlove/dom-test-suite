@@ -13,6 +13,7 @@
 package org.w3c.domts;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 import org.w3c.dom.DOMError;
 import org.w3c.dom.DOMErrorHandler;
@@ -53,5 +54,14 @@ public class DOMErrorMonitor implements DOMErrorHandler {
 	return new ArrayList(errors);
   }
     
+  public void assertLowerSeverity(DOMTestCase testCase, String id, int severity) {
+  	Iterator iter = errors.iterator();
+  	while(iter.hasNext()) {
+  		DOMError error = (DOMError) iter.next();
+  		if (error.getSeverity() >= severity) {
+  			testCase.fail(id + error.getMessage());
+  		}
+  	}
+  }
 }
 
