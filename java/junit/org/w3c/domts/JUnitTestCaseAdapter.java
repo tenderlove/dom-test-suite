@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.7  2003-12-06 06:50:30  dom-ts-4
+ Revision 1.8  2003-12-15 19:05:55  dom-ts-4
+ Changed implementation of assertEquals(double) (Bug 428)
+
+ Revision 1.7  2003/12/06 06:50:30  dom-ts-4
  More fixes for L&S (Bug 396)
 
  Revision 1.6  2002/08/12 08:21:25  dom-ts-4
@@ -190,9 +193,7 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
   }
 
   public void assertEquals(DOMTestCase test, String assertID, double expected, double actual) {
-    if(expected != actual) {
-      assertEquals(assertID,String.valueOf(expected), String.valueOf(actual));
-    }
+      assertEquals(assertID, expected, actual, 0.0);
   }
 
   public void assertEquals(DOMTestCase test, String assertID, Collection expected, Collection actual) {
