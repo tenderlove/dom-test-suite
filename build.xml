@@ -106,7 +106,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-<target name="gen-jsunit-no-validation">
+<target name="gen-jsunit-no-validation" depends="get-xhtml1-dtd">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
     <property name="hideHTML" value="no"/>
