@@ -154,7 +154,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
   }
 
-function toUpperCaseArray() {
+function toUpperCaseArray(expected) {
     var upperCased = new Array(expected.length);
     for(var i = 0; i < expected.length; i++) {
         if (expected[i].substring(0,1) != "#") {
