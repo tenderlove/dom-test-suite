@@ -323,10 +323,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     doc = document.implementation.createDocument("","temp",null);
     doc.load(sourceURL + ".xml");
     for(var i = 0; i < 5; i++) {
-		alert("doc.documentElement is null " + (doc.documentElement == null).toString());
-		if(doc.documentElement != null) {
-			alert("docElement=" + doc.documentElement.nodeName);
-		}
         if(doc.documentElement != null && doc.documentElement.nodeName != "temp") break;
         alert("Load attempt " + i.toString() + ": Press OK continue.");
     }
@@ -335,7 +331,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		//
 		//   if it will be modified, get another copy started
 		//
-		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL, MozLoad(sourceURL));
+		this.cache[this.cache.length] = new DocumentBuilderCacheEntry(sourceURL, MozXMLLoad(sourceURL));
 	}
 	//
 	//   if not going to be modified, then we can keep this around
@@ -985,3 +981,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	alert("Unrecognized browser: " + navigator.appName);
   }
 
+
+var isTestPageLoaded=false;
+
+function isLoaded() {
+        return isTestPageLoaded;
+}
+function newOnLoadEvent() {
+        isTestPageLoaded=true;
+}
+
+window.onload=newOnLoadEvent;
