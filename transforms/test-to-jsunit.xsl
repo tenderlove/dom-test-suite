@@ -126,7 +126,9 @@ function checkSetUp() {
         </head>
         <body>
             <p class="jsUnitHeading"><xsl:value-of select="@name"/></p>
-            <p class="jsUnitDefault">This page contains test "<xsl:value-of select="@name"/>".</p>
+            <p class="jsUnitDefault">Test source:</p>
+            <xsl:apply-templates select="." mode="html_source"/>
+            <p class="jsUnitDefault">Test documents:</p>
             <xsl:for-each select="$loads">
             	<xsl:choose>
             		<xsl:when test="@href = 'staff'"/>
@@ -135,9 +137,14 @@ function checkSetUp() {
             		
             		<xsl:otherwise>
                 		<iframe name="{@var}" src='files/{@href}.html'></iframe>
+                		<br/>
                 	</xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each>
+            
+            <a href="javascript:setUpPage()">Run setUpPage</a>
+            <br/>
+            <a href="javascript:{@name}()">Run <xsl:value-of select="@name"/></a>
         </body>
     </html>
 </xsl:template>
@@ -381,6 +388,137 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsl:comment>
 </xsl:template>
+
+
+<xsl:template match="*[local-name()='metadata']" mode="html_source">
+    <xsl:param name="indent"/>
+    <xsl:value-of select="$indent"/>
+    <xsl:text>&lt;metadata&gt;</xsl:text>
+    <br/>
+    <xsl:apply-templates select="*" mode="html_metadata">
+          <xsl:with-param name="indent" select="concat('&#160;&#160;&#160;&#160;&#160;',$indent)"/>
+    </xsl:apply-templates>
+    <xsl:text>&lt;/metadata&gt;</xsl:text>
+    <br/>
+</xsl:template>
+
+<xsl:template match="*" mode="html_metadata">
+    <xsl:param name="indent"/>
+    <xsl:value-of select="$indent"/>
+    <xsl:text>&lt;</xsl:text>
+    <xsl:value-of select="local-name()"/>
+    <xsl:apply-templates select="@*" mode="html_source"/>
+    <xsl:choose>
+    	<xsl:when test="*|text()">
+    		<xsl:text>&gt;</xsl:text>
+    		<xsl:apply-templates select="*|text()" mode="html-metadata"/>
+    		<xsl:text>&lt;/</xsl:text>
+    		<xsl:value-of select="local-name()"/>
+    		<xsl:text>&gt;</xsl:text>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>/&gt;</xsl:text>    	
+    	</xsl:otherwise>
+    </xsl:choose>
+    <br/>
+</xsl:template>
+        
+
+<xsl:template match="*" mode="html_source">
+    <xsl:param name="indent"/>
+    <!--  indent the element   -->
+    <xsl:value-of select="$indent"/>
+    <!--  start the element   -->
+    <xsl:text>&lt;</xsl:text>
+    <!--  output the tag name   -->
+    <xsl:value-of select="local-name()"/>
+    <!--  output any attributes  -->
+    <xsl:apply-templates select="@*" mode="html_source"/>
+
+    <xsl:choose>
+        <!--  if there are any child elements  -->
+
+        <xsl:when test="*|comment()">
+            <!--   then close the start tag  -->
+            <xsl:text>&gt;</xsl:text>
+            <br/>
+            <!--    emit the child elements   -->
+            <xsl:apply-templates select="*|comment()|text()" mode="html_source">
+                <xsl:with-param name="indent" select="concat('&#160;&#160;&#160;&#160;&#160;',$indent)"/>
+            </xsl:apply-templates>
+            <!--  write the end tag   -->
+            <xsl:value-of select="$indent"/>
+            <xsl:text>&lt;/</xsl:text>
+            <xsl:value-of select="local-name()"/>
+            <xsl:text>&gt;</xsl:text>
+            <br/>
+        </xsl:when>
+
+        <xsl:otherwise>
+            <!--  close an empty tag   -->
+            <xsl:text>/&gt;</xsl:text>
+            <br/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<xsl:template match="@id" mode="html_source">
+    <xsl:text> </xsl:text>
+    <a id="{.}">
+        <xsl:text>id='</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>'</xsl:text>
+    </a>
+</xsl:template>
+
+<xsl:template match="@resource" mode="html_source">
+    <xsl:text> resource='</xsl:text>
+    <xsl:choose>
+		<xsl:when test="contains(.,'#xpointer(id(')">
+            <a>
+                <xsl:attribute name="href">
+		            <xsl:value-of select="substring-before(.,'#xpointer')"/>
+			        <xsl:text>#</xsl:text>
+			        <xsl:variable name="after" select="substring-after(.,&quot;#xpointer(id(&apos;&quot;)"/>
+			        <xsl:value-of select="substring-before($after,&quot;')&quot;)"/>
+                </xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>
+		</xsl:when>
+
+        <xsl:otherwise>
+            <a href="{.}">
+                <xsl:value-of select="."/>
+            </a>
+        </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>'</xsl:text>
+</xsl:template>
+
+<xsl:template match="@*" mode="html_source">
+    <xsl:text> </xsl:text>
+    <xsl:value-of select="local-name()"/>
+    <xsl:text>='</xsl:text>
+    <xsl:value-of select="."/>
+    <xsl:text>'</xsl:text>
+</xsl:template>
+
+<xsl:template match="comment()" mode="html_source">
+    <xsl:param name="indent"/>
+    <xsl:value-of select="$indent"/>
+    <xsl:text>&lt;!--</xsl:text>
+    <xsl:value-of select="."/>
+    <xsl:text>--&gt;</xsl:text>
+    <br/>
+</xsl:template>
+
+<xsl:template match="text()" mode="html_metadata">
+	<xsl:value-of select="."/>
+</xsl:template>
+
+<xsl:template match="text()" mode="html_source">
+</xsl:template>
+
 
 
 </xsl:stylesheet>

@@ -160,7 +160,7 @@ of a test file
 
 <xsl:template match="text()">
     <xsl:param name="indent"/>
-    <xsl:variable name="normedText" value="normalize-space(.)"/>
+    <xsl:variable name="normedText" select="normalize-space(.)"/>
     <xsl:if test="string-length($normedText) &gt; 0">
         <xsl:value-of select="$indent"/>
         <xsl:value-of select="$normedText"/>
