@@ -294,6 +294,12 @@ function checkInitialization(blder, testname) {
     }
     return null;
 }
+function createTempURI(scheme) {
+   if (scheme == "http") {
+   	  return "http://localhost:8080/webdav/tmp" + Math.floor(Math.random() * 100000) + ".xml";
+   }
+   return "file:///tmp/domts" + Math.floor(Math.random() * 100000) + ".xml";
+}
 
 
 function EventMonitor() {

@@ -2,14 +2,14 @@
 
 <!--
 
-Copyright (c) 2004 World Wide Web Consortium, 
+Copyright (c) 2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
+Recherche en Informatique et en Automatique, Keio University).  All
 Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
+Intellectual Property License.  This program is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
 
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
@@ -21,12 +21,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>namespacedeclarations01</title>
 <creator>Curt Arnold</creator>
 <description>
-Load a document with namespace-declarations = false and see that attributes 
+Load a document with namespace-declarations = false and see that attributes
 for namespace declarations are not present.
 </description>
 <date qualifier="created">2004-03-29</date>
 <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-parseURI"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-namespace-declarations"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docElem" type="Element"/>
@@ -49,5 +49,5 @@ for namespace declarations are not present.
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <getAttributeNode var="node" obj="elem" name='"xmlns:dmstc"'/>
 <assertNull actual="node" id="nsAttrNull"/>
-</test> 
- 
+</test>
+

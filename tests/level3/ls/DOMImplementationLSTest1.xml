@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no"?>
 <?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
-<!-- 
+<!--
  Copyright (c) 2003 X-Hive Corporation
 
  All Rights Reserved. This work is distributed under the W3C(r)
@@ -21,11 +21,11 @@
 <test xmlns="&level3;" name="DOMImplementationLSTest1">
   <metadata>
     <title>DOMImplementationLSTest1</title>
-    &creator; 
-    <description>Calls DOMImplementationLS.createLSParser(MODE_ASYNCHRONOUS, null) and 
-       checks the return value is not null.  Only applicable if DOMImplementation.hasFeature("LS-ASync", null) is true.</description> 
+    &creator;
+    <description>Calls DOMImplementationLS.createLSParser(MODE_ASYNCHRONOUS, null) and
+       checks the return value is not null.  Only applicable if DOMImplementation.hasFeature("LS-ASync", null) is true.</description>
     &contributor; &date;
-    <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-DOMImplementationLS-createLSParser"/>    
+    <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-DOMImplementationLS-createLSParser"/>
     <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-async"/>
     <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-busy"/>
     <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-filter"/>
@@ -33,16 +33,16 @@
   <hasFeature feature='"LS-Async"'/>
   <var name="isAsync" type="boolean"/>
   <var name="isBusy" type="boolean"/>
-  <var name="filter" type="LSParserFilter"/>  
+  <var name="filter" type="LSParserFilter"/>
   &vars;
-  
-  <createLSParser var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='NULL_SCHEMATYPE'/>
-  <assertNotNull actual="builder" id="builderNotNull"/>
-  <async var="isAsync" obj="builder"/>
+
+  <createLSParser var='parser' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='NULL_SCHEMATYPE'/>
+  <assertNotNull actual="parser" id="parserNotNull"/>
+  <async var="isAsync" obj="parser"/>
   <assertTrue actual="isAsync" id="notAsync"/>
-  <busy var="isBusy" obj="builder"/>
+  <busy var="isBusy" obj="parser"/>
   <assertFalse actual="isBusy" id="notBusy"/>
-  <filter var="filter" obj="builder" interface="LSParser"/>
+  <filter var="filter" obj="parser" interface="LSParser"/>
   <assertNull actual="filter" id="nullFilter"/>
 </test>
 

@@ -154,6 +154,8 @@ function loadComplete() {
             		<xsl:when test="@href = 'nodtdstaff'"/>
             		<xsl:when test="@href = 'staffNS'"/>
             		<xsl:when test="@href = 'datatype_normalization'"/>
+            		<xsl:when test="@href = 'test0'"/>
+            		<xsl:when test="@href = 'book'"/>
             		
             		<xsl:otherwise>
                 		<iframe name="{@var}">

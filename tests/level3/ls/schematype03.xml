@@ -2,14 +2,14 @@
 
 <!--
 
-Copyright (c) 2004 World Wide Web Consortium, 
+Copyright (c) 2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University).  All 
+Recherche en Informatique et en Automatique, Keio University).  All
 Rights Reserved.  This program is distributed under the W3C's Software
-Intellectual Property License.  This program is distributed in the 
+Intellectual Property License.  This program is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-PURPOSE.  
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
 
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
@@ -25,8 +25,8 @@ Specify schema validation for a document with no DTD but schema location hints.
 </description>
 <date qualifier="created">2004-03-29</date>
 <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-parseURI"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-schema-type"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-validate"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-schema-type"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#parameter-validate"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
@@ -46,19 +46,19 @@ Specify schema validation for a document with no DTD but schema location hints.
 <canSetParameter var="canSetValidate" obj="domConfig" name='"validate"' value="true"/>
 <canSetParameter var="canSetSchemaType" obj="domConfig" name='"schema-type"' value='xsdNS'/>
 <if>
-	<and>
-		<isTrue value="canSetValidate"/>
-		<isTrue value="canSetSchemaType"/>
-	</and>
-	<setParameter obj="domConfig" name='"validate"' value="true"/>
-	<setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
-	<getResourceURI var="resourceURI" href='"schematype1"' contentType="text/xml"/>
-	<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
-	<assertNotNull actual="doc" id="docNotNull"/>
-	<documentElement var="elem" obj="doc"/>
-	<assertNotNull actual="elem" id="docElemNotNull"/>
-	<nodeName var="nodeName" obj="elem"/>
-	<assertEquals actual="nodeName" expected='"elt0"' ignoreCase="false" id="docElemName"/>
+        <and>
+                <isTrue value="canSetValidate"/>
+                <isTrue value="canSetSchemaType"/>
+        </and>
+        <setParameter obj="domConfig" name='"validate"' value="true"/>
+        <setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
+        <getResourceURI var="resourceURI" href='"schematype1"' contentType="text/xml"/>
+        <parseURI var="doc" obj="lsParser" uri="resourceURI"/>
+        <assertNotNull actual="doc" id="docNotNull"/>
+        <documentElement var="elem" obj="doc"/>
+        <assertNotNull actual="elem" id="docElemNotNull"/>
+        <nodeName var="nodeName" obj="elem"/>
+        <assertEquals actual="nodeName" expected='"elt0"' ignoreCase="false" id="docElemName"/>
 </if>
-</test> 
- 
+</test>
+

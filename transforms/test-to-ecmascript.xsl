@@ -1166,6 +1166,22 @@ function handleEvent(listener, event, userObj) {
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='createTempURI']" mode="body">
+    <xsl:value-of select="@var"/>
+    <xsl:text> = createTempURI("</xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@scheme">
+    		<xsl:value-of select="@scheme"/>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>file</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>");
+      </xsl:text>
+</xsl:template>
+
+
 <xsl:template match="*[local-name()='assertImplementationException']" mode="body">
     <xsl:param name="vardefs"/>
       {
