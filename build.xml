@@ -2142,14 +2142,14 @@ This target checks that the output of that implied transform is valid HTML
 
 <target name="get-dom3-core" depends="dom3-available"><!-- unless="dom3-core-available" -->
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2004/PR-DOM-Level-3-Core-20040205/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
 </target>
 
 <target name="get-dom3-ls" depends="dom3-available"><!-- unless="dom3-ls-available" -->
-	<get src="http://www.w3.org/TR/2004/PR-DOM-Level-3-LS-20040205/DOM3-LS.zip"
+	<get src="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/DOM3-LS.zip"
 		dest="${specs.dir}/DOM3-LS.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
@@ -2164,7 +2164,7 @@ This target checks that the output of that implied transform is valid HTML
 
 
 <target name="get-dom3-xpath" depends="dom3-available" unless="dom3-xpath-available">
-	<get src="http://www.w3.org/TR/2003/CR-DOM-Level-3-XPath-20030331/DOM3-XPath.zip"
+	<get src="http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226/DOM3-XPath.zip"
 		dest="${specs.dir}/DOM3-XPath.zip"
 		usetimestamp="yes"
         ignoreerrors="${no-network}"/>
