@@ -2718,7 +2718,7 @@ This target checks that the output of that implied transform is valid HTML
 
 
 
-<target name="dom3-ls-javac" depends="common-javac,dom3-ls-gen-java">
+<target name="dom3-ls-javac" depends="dom3-common,common,dom3-ls-gen-java">
 
 	<javac 
 		destdir="${java.build.dir}" 
