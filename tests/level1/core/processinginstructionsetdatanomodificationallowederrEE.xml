@@ -31,6 +31,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-837822393')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393"/>
 <source resource="http://www.w3.org/2001/DOM-Test-Suite/level1/core/processinginstructionsetdatanomodificationallowederr.xml"/>
+<!--  bug report on earlier version    -->
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Apr/0053.html"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
@@ -44,7 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <createEntityReference var="entRef" obj="doc" name="&quot;ent4&quot;"/>
 <appendChild var="appendedChild" obj="gender" newChild="entRef"/>
-<firstChild interface="Node" var="entRef" obj="gender"/>
+<lastChild interface="Node" var="entRef" obj="gender"/>
 <lastChild interface="Node" var="piNode" obj="entRef"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
