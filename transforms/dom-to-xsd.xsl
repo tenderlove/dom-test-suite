@@ -68,7 +68,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<xsl:template match="/">
 		<xs:schema targetNamespace="{$schema-namespace}" 
 			_xmlns="{$schema-namespace}" 
-            _xmlns:test="{$schema-namespace}"
+            _xmlns_test="{$schema-namespace}"
 			elementFormDefault="qualified">
 		<xsl:comment>
 Copyright (c) 2001 World Wide Web Consortium,
