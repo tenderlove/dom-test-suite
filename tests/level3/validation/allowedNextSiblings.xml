@@ -41,5 +41,5 @@ PURPOSE.
 <assertNotNull actual="nlist" id="allowedNextSiblingsNotNull"/>
 <getName interface="NameList" obj="nlist" index="0" var="childname"/>
 <!--  since ISBN is already present, no insertable sibling   -->
-<assertNull actual="childName" id="noAllowableNextSibling"/>
+<assertNull actual="childname" id="noAllowableNextSibling"/>
 </test>
