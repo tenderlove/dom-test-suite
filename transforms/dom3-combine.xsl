@@ -27,7 +27,10 @@ saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.3  2002-07-31 04:58:27  dom-ts-4
+Revision 1.4  2003-01-16 06:40:47  dom-ts-4
+Change for 27 Nov 2002 DOM 3 Validation WD
+
+Revision 1.3  2002/07/31 04:58:27  dom-ts-4
 Update for July DOM 3 drafts
 
 Revision 1.2  2002/04/21 23:11:36  dom-ts-4
@@ -72,7 +75,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             -->
 			<xsl:apply-templates select="document('../events/dom-spec.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../ls/dom-spec.xml',.)/spec/*"/>
-			<xsl:apply-templates select="document('../val/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../../Val/xml-source.xml',.)/spec/*"/>
 			<xsl:apply-templates select="document('../xpath/dom-spec.xml',.)/spec/*"/>
 		</library>
 	</xsl:template>
