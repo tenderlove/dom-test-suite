@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.127  2004-02-21 04:09:20  dom-ts-4
+Revision 1.128  2004-02-25 06:30:17  dom-ts-4
+Add support for java test framework use of DOM L3 LS (bug 571)
+
+Revision 1.127  2004/02/21 04:09:20  dom-ts-4
 Adds a fake version of xhtml1-strict.dtd that the beta XDK 10  can read (bug 533)
 
 Revision 1.126  2004/02/15 02:53:30  dom-ts-4
@@ -666,7 +669,7 @@ All implementation conditions combined into implementationAttribute element
 	<mkdir dir="${java.build.dir}"/>
 	<javac srcdir="java"
 		   includes="org/w3c/domts/*.java"
-		   excludes="org/w3c/domts/UserData*.java org/w3c/domts/DOMError*.java org/w3c/domts/DOMLocator*.java"
+		   excludes="org/w3c/domts/UserData*.java org/w3c/domts/LS*.java org/w3c/domts/DOMError*.java org/w3c/domts/DOMLocator*.java"
 		   destdir="${java.build.dir}" 
 		   classpath="${java.build.dir}"
 		   target="1.1"
@@ -2053,6 +2056,7 @@ All implementation conditions combined into implementationAttribute element
 		   encoding="UTF8">
 		<src path="java"/>
         <src path="${dom3-core-java-src}"/>
+        <src path="${dom3-ls-java-src}"/>
 		<include name="org/w3c/domts/*.java"/>
     </javac>
 		

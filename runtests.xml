@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.8  2004-02-17 05:22:01  dom-ts-4
+Revision 1.9  2004-02-25 06:30:29  dom-ts-4
+Add support for java test framework use of DOM L3 LS (bug 571)
+
+Revision 1.8  2004/02/17 05:22:01  dom-ts-4
 Add org.w3c...DOMImplRegList property to run-xerces (bug 530)
 
 Revision 1.7  2004/02/15 02:53:29  dom-ts-4
@@ -169,6 +172,75 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 			outfile="dom${level}-${module}-xerces_dom3${config}"/>
 	</junit>
 </target>
+
+
+<target name="run-xerces_dom3_svg">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="config" value=""/>
+	<junit fork="true">
+		<classpath>
+			<pathelement path="${xerces_dom3.lib.dir}/dom3-xml-apis.jar"/>
+			<pathelement path="${xerces_dom3.lib.dir}/dom3-xercesImpl.jar"/>
+			<pathelement path="${test.dir}/dom${level}-${module}.jar"/>
+			<pathelement path="${test.dir}/junit-run.jar"/>
+		</classpath>
+		<jvmarg value="-Djava.endorsed.dirs=${xerces_dom3.lib.dir}"/>
+		<jvmarg value="-Xmx900M"/>
+		<jvmarg value="-Dorg.w3c.dom.DOMImplementationSourceList=org.apache.xerces.dom.DOMImplementationSourceImpl"/>
+		<jvmarg value="-Dorg.w3c.domts.contentType=image/svg+xml"/>
+		<formatter type="xml"/>
+		<test name="org.w3c.domts.level${level}.${module}.TestXerces${config}" 
+			todir="${results.dir}" 
+			outfile="dom${level}-${module}-xerces_dom3_svg${config}"/>
+	</junit>
+</target>
+
+
+<target name="run-xerces_dom3_xhtml">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="config" value=""/>
+	<junit fork="true">
+		<classpath>
+			<pathelement path="${xerces_dom3.lib.dir}/dom3-xml-apis.jar"/>
+			<pathelement path="${xerces_dom3.lib.dir}/dom3-xercesImpl.jar"/>
+			<pathelement path="${test.dir}/dom${level}-${module}.jar"/>
+			<pathelement path="${test.dir}/junit-run.jar"/>
+		</classpath>
+		<jvmarg value="-Djava.endorsed.dirs=${xerces_dom3.lib.dir}"/>
+		<jvmarg value="-Xmx900M"/>
+		<jvmarg value="-Dorg.w3c.dom.DOMImplementationSourceList=org.apache.xerces.dom.DOMImplementationSourceImpl"/>
+		<jvmarg value="-Dorg.w3c.domts.contentType=application/xhtml+xml"/>
+		<formatter type="xml"/>
+		<test name="org.w3c.domts.level${level}.${module}.TestXerces${config}" 
+			todir="${results.dir}" 
+			outfile="dom${level}-${module}-xerces_dom3_xhtml${config}"/>
+	</junit>
+</target>
+
+<target name="run-xerces_ls">
+	<property name="level" value="1"/>
+	<property name="module" value="core"/>
+	<property name="config" value=""/>
+	<junit fork="true">
+		<classpath>
+			<pathelement path="${xerces_dom3.lib.dir}/dom3-xml-apis.jar"/>
+			<pathelement path="${xerces_dom3.lib.dir}/dom3-xercesImpl.jar"/>
+			<pathelement path="${test.dir}/dom${level}-${module}.jar"/>
+			<pathelement path="${test.dir}/junit-run.jar"/>
+		</classpath>
+		<jvmarg value="-Djava.endorsed.dirs=${xerces_dom3.lib.dir}"/>
+		<jvmarg value="-Xmx900M"/>
+		<jvmarg value="-Dorg.w3c.dom.DOMImplementationSourceList=org.apache.xerces.dom.DOMImplementationSourceImpl"/>
+		<formatter type="xml"/>
+		<test name="org.w3c.domts.level${level}.${module}.TestDefaultLS${config}" 
+			todir="${results.dir}" 
+			outfile="dom${level}-${module}-xerces_ls${config}"/>
+	</junit>
+</target>
+
+
 
 <target name="run-oracle">
 	<property name="level" value="1"/>
@@ -469,7 +541,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 		<param name="specURI"
 		       expression="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#"/>
         <param name="interfacesURL" expression="dom1-interfaces.xml"/>
-        <param name="specMetadataURL" expression="dom1-core-subjects.xml"/>
+        <param name="specMetadataURL" expression="dom1-subjects.xml"/>
         <param name="title" expression='DOM Level 1 Core Test Results'/>
         <param name="resultsURL" expression="${results.dir}/dom1-core-results.xml"/>
 	</style>
@@ -649,7 +721,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	<copy file="${transforms.dir}/dom2-core-results.xml" todir="${results.dir}"/>
 	<style in="${test.dir}/dom2-core-metadata.rdf" 
 		   out="${results.dir}/dom2-core-results.html" 
-	       style="transforms/results-matrix.xsl" force="true">
+	       style="${transforms.dir}/results-matrix.xsl" force="true">
 		<param name="specURI"
 		       expression="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
         <param name="interfacesURL" expression="dom2-interfaces.xml"/>
@@ -678,20 +750,35 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</antcall>
 </target>
 
-<target name="dom3-core-xerces">
+<target name="dom3-core-xerces_dom3">
 	<antcall target="run-xerces_dom3">
 		<param name="level" value="3"/>
 		<param name="module" value="core"/>
 	</antcall>
 </target>
 
-<target name="dom3-core-xerces-alt">
+<target name="dom3-core-xerces_dom3-alt">
 	<antcall target="run-xerces_dom3">
 		<param name="level" value="3"/>
 		<param name="module" value="core"/>
 		<param name="config" value="AltConfig"/>
 	</antcall>
 </target>
+
+<target name="dom3-core-xerces_dom3_svg">
+	<antcall target="run-xerces_dom3_svg">
+		<param name="level" value="3"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
+
+<target name="dom3-core-xerces_dom3_xhtml">
+	<antcall target="run-xerces_dom3_xhtml">
+		<param name="level" value="3"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
+
 
 <target name="dom3-core-batik">
 	<antcall target="run-batik">
@@ -700,18 +787,41 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	</antcall>
 </target>
 
+<target name="dom3-core-xerces_ls">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="3"/>
+		<param name="module" value="core"/>
+	</antcall>
+</target>
 
-<target name="dom3-core-results" depends="dom3-core-xerces, dom3-core-xerces-alt, dom3-core-oracle,dom3-core-oracle-alt">
-    <mkdir dir="${build.dir}"/>
-	<style in="${build.dir}/dom3-core-metadata.rdf" 
-		   out="${build.dir}/dom3-core-results.html" 
-	       style="transforms/results-matrix.xsl" force="true">
+<target name="dom3-core-xerces_ls-alt">
+	<antcall target="run-xerces_ls">
+		<param name="level" value="3"/>
+		<param name="module" value="core"/>
+		<param name="config" value="AltConfig"/>
+	</antcall>
+</target>
+
+
+
+
+<target name="dom3-core-results" 
+	depends="dom3-core-xerces_dom3, 
+			 dom3-core-xerces_dom3-alt, 
+			 dom3-core-xerces_dom3_xhtml, 
+			 dom3-core-xerces_dom3_svg,
+			 dom3-core-xerces_ls,
+			 dom3-core-xerces_ls-alt">
+    <mkdir dir="${results.dir}"/>
+	<style in="${test.dir}/dom3-core-metadata.rdf" 
+		   out="${results.dir}/dom3-core-results.html" 
+	       style="${transforms.dir}/results-matrix.xsl" force="true">
 		<param name="specURI"
 		       expression="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#"/>
         <param name="interfacesURL" expression="dom3-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom3-core-subjects.xml"/>
-        <param name="title" expression='DOM Level 3 Core Test Suite Matrix'/>
-        <param name="resultsURL" expression="../transforms/dom3-core-results.xml"/>
+        <param name="title" expression='DOM Level 3 Core Test Results Matrix'/>
+        <param name="resultsURL" expression="${transforms.dir}/dom3-core-results.xml"/>
 	</style>
 </target>
 

@@ -170,6 +170,14 @@ public final class DocumentBuilderSetting {
 		throws DOMTestIncompatibleException {
 		strategy.applySetting(builder, value);
 	}
+	
+	public final String getProperty() {
+		return property;
+	}
+	
+	public final boolean getValue() {
+		return value;
+	}
 
 	public final String toString() {
 		StringBuffer builder = new StringBuffer(property);
