@@ -1,6 +1,6 @@
 Manifest-Version: 2.0
 Main-Class: org.w3c.domts.JUnitRunner
-Class-Path: dom1-core.jar xerces.jar xml4j.jar xmlparserv2.jar crimson.jar parser.jar junit.jar
+Class-Path: dom1-core.jar junit.jar
 
 Name: org/w3c/domts/JUnitRunner.class
 Specification-Title: JUnit adapter for DOM Test Suite
