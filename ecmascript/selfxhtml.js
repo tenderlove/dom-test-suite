@@ -344,9 +344,9 @@ function HTMLBuilder() {
     this.async = false;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
-        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments"];
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments", "schemaValidating"];
 
-    this.fixedAttributeValues = [false,  true, false, true, true , false, true, false ];
+    this.fixedAttributeValues = [false,  true, false, true, true , false, true, false, false ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.initializationError = null;
