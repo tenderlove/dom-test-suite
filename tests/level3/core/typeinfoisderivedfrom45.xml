@@ -38,7 +38,7 @@ Check if anonymous type of acronym element derived from anySimpleType by extensi
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"acronym"' interface="Document"/>
 <item var="acronymElem" obj="elemList" index="2" interface="NodeList"/>
-<schemaTypeInfo var="typeInfo" obj="acronymElem" interface="Attr"/>
+<schemaTypeInfo var="typeInfo" obj="acronymElem" interface="Element"/>
 <assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
 <isDerivedFrom var="isDerived" obj="typeInfo" typeNamespaceArg='"http://www.w3.org/2000/XMLSchema"'
 	typeNameArg='"anySimpleType"' derivationMethod="2"/>

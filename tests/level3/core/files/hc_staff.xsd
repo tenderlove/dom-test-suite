@@ -127,21 +127,21 @@ be a general purpose schema for XHTML
   
   <xsd:simpleType name="emType">
   	    <xsd:restriction base="unboundedEmType">
-  	    	<xsd:maxLength value="7"/>
+  	    	<xsd:pattern value="EMP[0-9]*"/>
   	    </xsd:restriction>
   </xsd:simpleType>
   		
   
   <xsd:element name="em" type="emType"/>
   
-  <xsd:simpleType name="unboundedStongType">
+  <xsd:simpleType name="unboundedStrongType">
   		<xsd:list itemType="xsd:string"/>
   </xsd:simpleType>
   
   
   <xsd:simpleType name="strongType">
   	  <xsd:restriction base="unboundedStrongType">
-  	  	  <xsl:maxLength value="100"/>
+  	  	  <xsd:maxLength value="100"/>
   	  </xsd:restriction>
   </xsd:simpleType>
   
