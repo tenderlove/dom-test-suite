@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
 Copyright (c) 2001 World Wide Web Consortium, 
@@ -28,12 +28,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	</metadata>
 	<var name="nodeList" type="NodeList" />
 	<var name="testNode" type="Node" />
-	<var name="link" type="DOMString" />
+	<var name="vhref" type="DOMString" />
 	<var name="doc" type="Node" />
 	<load var="doc" href="anchor" willBeModified="false" />
 	<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"a"' />
 	<assertSize collection="nodeList" size="1" id="Asize" />
 	<item interface="NodeList" obj="nodeList" var="testNode" index="0" />
-	<href interface="HTMLAnchorElement" obj="testNode" var="link" />
-	<assertURIEquals actual="link" file='"mary.html"' id="hrefLink"/>
+	<href interface="HTMLAnchorElement" obj="testNode" var="vhref" />
+	<assertURIEquals actual="vhref" file='"submit.gif"' id="hrefLink" ignoreCase="auto"/>
 </test>
