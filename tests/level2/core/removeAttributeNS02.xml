@@ -36,37 +36,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#"/>
 </metadata>
-<var name="localName" type="DOMString" value="&quot;local1&quot;"/>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.nist.gov&quot;"/>
+<!--  this test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Node"/>
 <var name="addrAttr" type="Attr"/>
-<var name="resultAttr" type="DOMString"/>
-<var name="resultNamespaceURI" type="DOMString"/>
-<var name="resultLocalName" type="DOMString"/>
-<var name="resultPrefix" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"FALSE"</member>
-<member>"http://www.nist.gov"</member>
-<member>"local1"</member>
-<member>"emp"</member>
-</var>
+<var name="attr" type="DOMString"/>
+<var name="namespaceURI" type="DOMString"/>
+<var name="localName" type="DOMString"/>
+<var name="prefix" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;emp:address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
-<removeAttributeNS obj="testAddr" namespaceURI="namespaceURI" localName="localName"/>
+<removeAttributeNS obj="testAddr" namespaceURI='"http://www.nist.gov"' localName='"local1"'/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;emp:address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
-<getAttributeNodeNS obj="testAddr" var="addrAttr" namespaceURI="namespaceURI" localName="localName"/>
-<getAttributeNS obj="testAddr" var="resultAttr" namespaceURI="namespaceURI" localName="localName"/>
-<namespaceURI obj="addrAttr" var="resultNamespaceURI"/>
-<localName obj="addrAttr" var="resultLocalName"/>
-<prefix obj="testAddr" var="resultPrefix"/>
-<append collection="result" obj="testAddr"/>
-<append collection="result" obj="resultNamespaceURI"/>
-<append collection="result" obj="resultLocalName"/>
-<append collection="result" obj="resultPrefix"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals" ignoreCase="false"/>
+<getAttributeNodeNS obj="testAddr" var="addrAttr" namespaceURI='"http://www.nist.gov"' localName='"local1"'/>
+<getAttributeNS obj="testAddr" var="attr" namespaceURI='"http://www.nist.gov"' localName='"local1"'/>
+<namespaceURI obj="addrAttr" var="namespaceURI"/>
+<localName obj="addrAttr" var="localName"/>
+<prefix obj="testAddr" var="prefix"/>
+<assertEquals actual="attr" expected='"FALSE"' ignoreCase="false" id="attr"/>
+<assertEquals actual="namespaceURI" expected='"http://www.nist.gov"' ignoreCase="false" id="uri"/>
+<assertEquals actual="localName" expected='"local1"' ignoreCase="false" id="lname"/>
+<assertEquals actual="prefix" expected='"emp"' ignoreCase="false" id="prefix"/>
 </test>
