@@ -252,6 +252,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  	<suite.member href="nodeappendchild01.xml"/>
  	<suite.member href="nodeappendchild02.xml"/>
  	
+ 	<suite.member href="nodegetfeature01.xml"/>
+ 	<suite.member href="nodegetfeature02.xml"/>
+ 	<suite.member href="nodegetfeature03.xml"/>
+ 	<suite.member href="nodegetfeature04.xml"/>
+ 	<suite.member href="nodegetfeature05.xml"/>
+ 	<suite.member href="nodegetfeature06.xml"/>
+ 	<suite.member href="nodegetfeature07.xml"/>
+ 	<suite.member href="nodegetfeature08.xml"/>
+ 	<suite.member href="nodegetfeature09.xml"/>
+ 	<suite.member href="nodegetfeature10.xml"/>
+ 	<suite.member href="nodegetfeature11.xml"/>
+ 	<suite.member href="nodegetfeature12.xml"/>
+ 	<suite.member href="nodegetfeature13.xml"/>
+ 	
 	<!-- Node Tests -->	
 	<!-- insertBefore -->
 	<suite.member href="nodeinsertbefore01.xml"/>
