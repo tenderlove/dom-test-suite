@@ -43,9 +43,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <rows interface="HTMLTableSectionElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="4" id="rowsLink" ignoreCase="false"/>
-<deleteRow interface="HTMLTableElement" obj="testNode" var="newRow" index="0"/>
+<assertEquals actual="vrows" expected="4" id="rowsLink1" ignoreCase="false"/>
+<deleteRow interface="HTMLTableElement" obj="testNode" index="0"/>
 <rows interface="HTMLTableSectionElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="3" id="rowsLink" ignoreCase="false"/>
+<assertEquals actual="vrows" expected="3" id="rowsLink2" ignoreCase="false"/>
 </test>
