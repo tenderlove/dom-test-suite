@@ -21,7 +21,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>datatypenormalization14</title>
 <creator>Curt Arnold</creator>
 <description>
-Normalize document with datatype-normalization set to true.  
+Parse document with datatype-normalization set to true.  
 Check if string values were normalized per explicit whitespace=preserve.
 </description>
 <date qualifier="created">2004-03-29</date>
@@ -61,7 +61,7 @@ Check if string values were normalized per explicit whitespace=preserve.
 	<setParameter obj="domConfig" name='"datatype-normalization"' value="true"/>
 	<setParameter obj="domConfig" name='"validate"' value="true"/>
 	<setParameter obj="domConfig" name='"schema-type"' value='xsdNS'/>
-	<getResourceURI var="resourceURI" href='"datatype_normalization"' contentType="text/xml"/>
+	<getResourceURI var="resourceURI" href='"datatype_normalization2"' contentType="text/xml"/>
 	<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
 	<getElementsByTagNameNS 
 		var="elemList" 

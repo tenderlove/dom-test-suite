@@ -2710,6 +2710,7 @@ This target checks that the output of that implied transform is valid HTML
 			<exclude name="validateschema1.xml"/>
 			<exclude name="canonicalform02.xml"/>
 			<exclude name="canonicalform03.xml"/>
+			<exclude name="wellformed*.xml"/>			
 		</fileset>  
 	</xmlvalidate>
 </target>

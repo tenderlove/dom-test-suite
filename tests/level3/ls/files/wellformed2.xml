@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE html SYSTEM 'xhtml1-strict.dtd'>
+<html>
+	<head><title>Not well-formed</title></head>
+	<body>
+		<p 4world='bad name'/>
+	</body>
+</html>

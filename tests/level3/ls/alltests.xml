@@ -121,6 +121,7 @@
 <suite.member href="datatypenormalization14.xml"/>
 <suite.member href="datatypenormalization15.xml"/>
 <suite.member href="datatypenormalization16.xml"/>
+<suite.member href="datatypenormalization17.xml"/>
    
    <suite.member href="elementcontentwhitespace01.xml"/>
    <suite.member href="elementcontentwhitespace02.xml"/>
@@ -130,6 +131,16 @@
    <suite.member href="entities04.xml"/>
    <suite.member href="entities05.xml"/>
    <suite.member href="entities06.xml"/>
+   
+   <suite.member href="infoset01.xml"/>
+   <suite.member href="infoset02.xml"/>
+   <suite.member href="infoset03.xml"/>
+   <suite.member href="infoset04.xml"/>
+   <suite.member href="infoset05.xml"/>
+   <suite.member href="infoset06.xml"/>
+   <suite.member href="infoset07.xml"/>
+   <suite.member href="infoset08.xml"/>
+   
    <suite.member href="namespacedeclarations01.xml"/>
    <suite.member href="namespacedeclarations02.xml"/>
    <suite.member href="namespaces01.xml"/>
@@ -150,4 +161,9 @@
    <suite.member href="validateifschema02.xml"/>
    <suite.member href="validateifschema03.xml"/>
    <suite.member href="validateifschema04.xml"/>
+   
+   <suite.member href="wellformed01.xml"/>
+   <suite.member href="wellformed02.xml"/>
+   <suite.member href="wellformed03.xml"/>
+   
 </suite>

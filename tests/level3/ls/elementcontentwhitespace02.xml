@@ -46,6 +46,7 @@ element content whitespace is not eliminated.
 <canSetParameter var="canSet" obj="domConfig" name='"validate"' value="true"/>
 <if><isTrue value="canSet"/>
 <setParameter obj="domConfig" name='"validate"' value="true"/>
+</if>
 <setParameter obj="domConfig" name='"element-content-whitespace"' value="true"/>
 <getResourceURI var="resourceURI" href='"hc_staff"' contentType="text/xml"/>
 <parseURI var="doc" obj="lsParser" uri="resourceURI"/>
@@ -54,6 +55,5 @@ element content whitespace is not eliminated.
 <firstChild var="node" obj="elem" interface="Node"/>
 <nodeType var="nodeType" obj="node"/>
 <assertEquals actual="nodeType" expected="3" ignoreCase="false" id="nodeIsText"/>
-</if>
 </test> 
  

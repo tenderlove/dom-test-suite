@@ -16,16 +16,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="validateifschema03">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="infoset01">
 <metadata>
-<title>validateifschema03</title>
+<title>infoset01</title>
 <creator>Curt Arnold</creator>
 <description>
-Load a document with a DTD that doesn't match content with validate-if-schema=false, should load without complaint.
+Load a document with a DTD that doesn't match content with infoset=true, should load without complaint.
 </description>
-<date qualifier="created">2004-03-29</date>
+<date qualifier="created">2004-03-30</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/load-save#LS-LSParser-parseURI"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-validate-if-schema"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
@@ -39,7 +39,7 @@ Load a document with a DTD that doesn't match content with validate-if-schema=fa
 <implementation var="domImplLS"/>
 <createLSParser var="lsParser" obj="domImplLS" mode="1" schemaType="nullSchemaType"/>
 <domConfig obj="lsParser" var="domConfig" interface="LSParser"/>
-<setParameter obj="domConfig" name='"validate-if-schema"' value="false"/>
+<setParameter obj="domConfig" name='"infoset"' value="true"/>
 <getResourceURI var="resourceURI" href='"validate1"' contentType="text/xml"/>
 <parseURI var="doc" obj="lsParser" uri="resourceURI"/>
 <assertNotNull actual="doc" id="docNotNull"/>
