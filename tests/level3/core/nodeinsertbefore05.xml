@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
 <try>
 	<insertBefore obj="doc" var="inserted" newChild="newDocType" refChild="docType"/>
-    <assertSame id="retval_same" actual="inserted" expected="newDocType"/>
+ 	<fail id="throw_DOMException"/>
 	<catch>
 		<DOMException code="HIERARCHY_REQUEST_ERR"/>
 		<DOMException code="NOT_SUPPORTED_ERR"/>

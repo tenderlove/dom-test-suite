@@ -30,6 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=415"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -39,9 +40,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="true"/>
 <documentElement var="docElem" obj="doc"/>
 <createElementNS var="newElem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
-<assertDOMException id="HIERARCHY_REQUEST_ERR_nodeinsertbefore06">
-<HIERARCHY_REQUEST_ERR>
-<insertBefore obj="doc" var="inserted" newChild="newElem" refChild="docElem"/>
-</HIERARCHY_REQUEST_ERR>
-</assertDOMException>
+<try>
+	<insertBefore obj="doc" var="inserted" newChild="newElem" refChild="docElem"/>
+    <fail id="throw_DOMException"/>
+	<catch>
+		<DOMException code="HIERARCHY_REQUEST_ERR"/>
+		<DOMException code="NOT_SUPPORTED_ERR"/>
+	</catch>
+</try>
 </test>

@@ -21,15 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeinsertbefore10</title>
 <creator>IBM</creator>
 <description>
-
-
-
 	Using insertBefore on this Document node attempt to insert a new Element node before
-	another Element node and verfiy if a is HIERARCHY_REQUEST_ERR raised.
+	another Element node and verify a DOMException with a 
+	HIERARCHY_REQUEST_ERR, NOT_FOUND_ERR or NOT_SUPPORTED_ERR is raised.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=415"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -41,9 +40,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagNameNS var="elemList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
 <item var="elem" obj="elemList" index="1" interface="NodeList"/>
 <createElementNS var="newElem" obj="doc"  qualifiedName='"dom3:elem"' namespaceURI='"http://www.w3.org/DOM/Test"'/>
-<assertDOMException id="HIERARCHY_REQUEST_ERR_nodeinsertbefore10">
-<HIERARCHY_REQUEST_ERR>
-<insertBefore obj="doc" var="inserted" newChild="newElem" refChild="elem"/>
-</HIERARCHY_REQUEST_ERR>
-</assertDOMException>
+<try>
+   <insertBefore obj="doc" var="inserted" newChild="newElem" refChild="elem"/>
+   <fail id="throw_DOMException"/>
+   <catch>
+   	    <DOMException code="HIERARCHY_REQUEST_ERR"/>
+   	    <DOMException code="NOT_FOUND_ERR"/>
+   	    <DOMException code="NOT_SUPPORTED_ERR"/>
+   </catch>
+</try>
 </test>
