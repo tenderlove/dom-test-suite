@@ -28,10 +28,10 @@ import java.lang.reflect.*;
 public class XercesHTML2DocumentBuilderFactory
   extends DOMTestDocumentBuilderFactory {
 
-  private final SAXParserFactory factory;
-  private final Constructor htmlBuilderConstructor;
-  private final Method getHTMLDocumentMethod;
-  private final DOMImplementation domImpl;
+  private SAXParserFactory factory;
+  private Constructor htmlBuilderConstructor;
+  private Method getHTMLDocumentMethod;
+  private DOMImplementation domImpl;
   private static final Class[] NO_CLASSES = new Class[0];
   private static final Object[] NO_OBJECTS = new Object[0];
 
