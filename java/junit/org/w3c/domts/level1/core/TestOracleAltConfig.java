@@ -28,18 +28,13 @@ public class TestOracleAltConfig extends TestSuite {
     Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-    String[] attrNames = {
-        "coalescing",
-        "expandEntityReferences",
-        "ignoringElementContentWhitespace",
-        "namespaceAware",
-        "validating" };
-    boolean[] attrValues = { false, true, true, true, true };
-
-    Class parserClass = ClassLoader.getSystemClassLoader().loadClass("oracle.xml.parser.v2.JXDocumentBuilderFactory");
+    DocumentBuilderFactory oracleFactory = (DocumentBuilderFactory)
+      ClassLoader.getSystemClassLoader().
+        loadClass("oracle.xml.jaxp.JXDocumentBuilderFactory").newInstance();
 
     DOMTestDocumentBuilderFactory factory =
-        new DOMTestDocumentBuilderFactory(parserClass, attrNames, attrValues);
+        new JAXPDOMTestDocumentBuilderFactory(oracleFactory,
+          JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 

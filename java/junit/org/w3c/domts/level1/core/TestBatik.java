@@ -21,22 +21,15 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 import org.w3c.domts.*;
 
-public class TestGNUJAXP extends TestSuite {
+public class TestBatik extends TestSuite {
 
   public static TestSuite suite() throws Exception
   {
-    Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.alltests");
+    Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.svg_alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-
-    DocumentBuilderFactory gnujaxpFactory = (DocumentBuilderFactory)
-      ClassLoader.getSystemClassLoader().
-        loadClass("gnu.xml.dom.JAXPFactory").newInstance();
-
     DOMTestDocumentBuilderFactory factory =
-        new JAXPDOMTestDocumentBuilderFactory(gnujaxpFactory,
-          JAXPDOMTestDocumentBuilderFactory.getConfiguration1());
-
+        new BatikTestDocumentBuilderFactory(new DocumentBuilderSetting[0]);
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 

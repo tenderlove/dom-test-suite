@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTestDocumentBuilderFactory.java,v $
- Revision 1.3  2002-01-30 07:08:44  dom-ts-4
+ Revision 1.4  2002-02-03 04:22:35  dom-ts-4
+ DOM4J and Batik support added.
+ Rework of parser settings
+
+ Revision 1.3  2002/01/30 07:08:44  dom-ts-4
  Update for GNUJAXP
 
  Revision 1.2  2001/08/22 22:12:49  dom-ts-4
@@ -29,92 +33,148 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.w3c.domts.*;
 import java.lang.reflect.*;
-
+import java.util.*;
+import org.xml.sax.*;
 /**
+ * This class represents a particular parser and configuration
+ * (such as entity-expanding, non-validating, whitespace ignoring)
+ * for a test session.  Individual tests or suites within a
+ * session can override the session properties on a call to
+ * createBuilderFactory.
  *
+ * @author Curt Arnold
  */
-public class DOMTestDocumentBuilderFactory {
-  private Class factoryClass;
-  private DocumentBuilderFactory baseFactory;
-  private String[] baseNames;
-  private boolean[] baseValues;
+public abstract class DOMTestDocumentBuilderFactory {
+  /**
+   *   Parser configuration
+   */
+  private final DocumentBuilderSetting[] settings;
 
 
-  public DOMTestDocumentBuilderFactory(Class factoryClass,String[] baseNames, boolean[] baseValues) {
-    this.factoryClass = factoryClass;
-    baseFactory = null;
-    this.baseNames = baseNames;
-    this.baseValues = baseValues;
-  }
-
-  public DocumentBuilderFactory newInstance() 
-    throws FactoryConfigurationError, InstantiationException,
-           IllegalAccessException, IllegalArgumentException, 
-           InvocationTargetException, NoSuchMethodException,
-           SecurityException {
-    if(baseFactory == null) {
-      //
-      //   if a specific implementation class was not specified then
-      //      use the JAXP default parser
-      if(factoryClass == null) {
-        baseFactory = DocumentBuilderFactory.newInstance();
-      }
-      else {
-        baseFactory = (DocumentBuilderFactory) factoryClass.getConstructor(new Class[] { }).newInstance(new Object[] {});
-      }
-      for(int i = 0; i < baseNames.length; i++) {
-          setAttribute(baseFactory,baseNames[i],baseValues[i]);
-      }
-    }
-    return baseFactory;
-  }
-
-  public DocumentBuilderFactory newInstance(String[] propNames, boolean[] propValues)
-      throws java.lang.IllegalArgumentException, FactoryConfigurationError {
-
-    DocumentBuilderFactory newFactory = baseFactory;
-    if(baseFactory == null || (propNames != null && propNames.length > 0)) {
-      newFactory = DocumentBuilderFactory.newInstance();
-      for(int i = 0; i < baseNames.length; i++) {
-          setAttribute(newFactory,baseNames[i],baseValues[i]);
-      }
-      if(propNames != null && propNames.length > 0) {
-        for(int i = 0; i < propNames.length; i++) {
-          setAttribute(newFactory,propNames[i], propValues[i]);
-        }
-      }
-      else {
-        baseFactory = newFactory;
-      }
-    }
-    return newFactory;
-  }
-
-  private void setAttribute(DocumentBuilderFactory factory,
-      String property,
-      boolean value)
-      throws IllegalArgumentException
-  {
-    if(property.equals("signed") || property.equals("hasNullString")) {
-      if(!value) {
-        throw new IllegalArgumentException();
-      }
+  /**
+   *   Constructor
+   *   @param properties Array of parser settings, may be null.
+   */
+  public DOMTestDocumentBuilderFactory(DocumentBuilderSetting[] settings)
+    throws DOMTestIncompatibleException {
+    if(settings == null) {
+        this.settings = new DocumentBuilderSetting[0];
     }
     else {
-      try {
-        String mutatorName = "set" +
-          property.substring(0,1).toUpperCase() +
-          property.substring(1);
-        Method mutator = factory.getClass().getMethod(mutatorName,
-          new Class[] { boolean.class });
-        mutator.invoke(factory,new Object[] { new Boolean(value) } );
-      }
-      catch(Exception ex) {
-        factory.setAttribute(property,new Boolean(value));
-      }
+        this.settings = (DocumentBuilderSetting[]) settings.clone();
     }
   }
 
+  /**
+   *   Returns an instance of DOMTestDocumentBuilderFactory
+   *   with the settings from the argument list
+   *   and any non-revoked settings from the current object.
+   *   @param settings array of settings, may be null.
+   */
+  public abstract DOMTestDocumentBuilderFactory newInstance(DocumentBuilderSetting[] settings)
+    throws DOMTestIncompatibleException;
+
+  public abstract DOMImplementation getDOMImplementation();
+
+  public abstract boolean hasFeature(String feature,String version);
+
+  public abstract Document load(java.net.URL url) throws DOMTestLoadException;
+
+    /**
+     *   Merges the settings from the specific test case or suite
+     *   with the existing (typically session) settings.
+     *   @param settings new settings, may be null which will
+     *   return clone of existing settings.
+     */
+  protected DocumentBuilderSetting[] mergeSettings(DocumentBuilderSetting[] newSettings)
+  {
+      if(newSettings == null) {
+        return (DocumentBuilderSetting[]) settings.clone();
+      }
+      List mergedSettings = new ArrayList(settings.length + newSettings.length);
+      //
+      //    all new settings are respected
+      //
+      for(int i = 0; i < newSettings.length; i++) {
+        mergedSettings.add(newSettings[i]);
+      }
+      //
+      //    for all previous settings, take only those that
+      //       do not conflict with existing settings
+      for(int i = 0; i < settings.length; i++) {
+        DocumentBuilderSetting setting = settings[i];
+        boolean hasConflict = false;
+        for(int j = 0; j < newSettings.length; j++) {
+          DocumentBuilderSetting newSetting = newSettings[j];
+          if(newSetting.hasConflict(setting) || setting.hasConflict(newSetting)) {
+            hasConflict = true;
+            break;
+          }
+        }
+        if(!hasConflict) {
+          mergedSettings.add(setting);
+        }
+      }
+
+      DocumentBuilderSetting[] mergedArray =
+        new DocumentBuilderSetting[mergedSettings.size()];
+      for(int i = 0; i < mergedSettings.size(); i++) {
+        mergedArray[i] = (DocumentBuilderSetting) mergedSettings.get(i);
+      }
+      return mergedArray;
+    }
+
+
+    public String addExtension(String testFileName) {
+        return testFileName + ".xml";
+    }
+
+    public abstract boolean isCoalescing();
+
+    public abstract boolean isExpandEntityReferences();
+
+    public abstract boolean isIgnoringElementContentWhitespace();
+
+    public abstract boolean isNamespaceAware();
+
+    public abstract boolean isValidating();
+
+  /**
+   * Creates an array of all determinable settings for the DocumentBuilder
+   * including those at implementation defaults.
+   * @param builder must not be null
+   */
+  public final DocumentBuilderSetting[] getActualSettings() {
+
+    DocumentBuilderSetting[] allSettings = new DocumentBuilderSetting[] {
+      DocumentBuilderSetting.coalescing,
+      DocumentBuilderSetting.expandEntityReferences,
+      DocumentBuilderSetting.hasNullString,
+      DocumentBuilderSetting.ignoringElementContentWhitespace,
+      DocumentBuilderSetting.namespaceAware,
+      DocumentBuilderSetting.signed,
+      DocumentBuilderSetting.validating,
+      DocumentBuilderSetting.notCoalescing,
+      DocumentBuilderSetting.notExpandEntityReferences,
+      DocumentBuilderSetting.notHasNullString,
+      DocumentBuilderSetting.notIgnoringElementContentWhitespace,
+      DocumentBuilderSetting.notNamespaceAware,
+      DocumentBuilderSetting.notSigned,
+      DocumentBuilderSetting.notValidating
+      };
+
+      List list = new ArrayList(allSettings.length /2);
+      for(int i = 0; i < allSettings.length; i++) {
+        if(allSettings[i].hasSetting(this)) {
+          list.add(allSettings[i]);
+        }
+      }
+      DocumentBuilderSetting[] settings = new DocumentBuilderSetting[list.size()];
+      for(int i = 0; i < settings.length; i++) {
+        settings[i] = (DocumentBuilderSetting) list.get(i);
+      }
+      return settings;
+  }
 
 }
 

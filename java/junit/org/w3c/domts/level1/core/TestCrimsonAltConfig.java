@@ -28,18 +28,12 @@ public class TestCrimsonAltConfig extends TestSuite {
     Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-    String[] attrNames = {
-        "coalescing",
-        "expandEntityReferences",
-        "ignoringElementContentWhitespace",
-        "namespaceAware",
-        "validating" };
-    boolean[] attrValues = { false, true, true, true, true };
-
-    Class parserClass = ClassLoader.getSystemClassLoader().loadClass("org.apache.crimson.jaxp.DocumentBuilderFactoryImpl");
+    DocumentBuilderFactory crimsonFactory = (DocumentBuilderFactory)
+      ClassLoader.getSystemClassLoader().loadClass("org.apache.crimson.jaxp.DocumentBuilderFactoryImpl").newInstance();
 
     DOMTestDocumentBuilderFactory factory =
-        new DOMTestDocumentBuilderFactory(parserClass, attrNames, attrValues);
+        new JAXPDOMTestDocumentBuilderFactory(crimsonFactory,
+          JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 

@@ -28,18 +28,13 @@ public class TestGNUJAXPAltConfig extends TestSuite {
     Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-    String[] attrNames = {
-        "coalescing",
-        "expandEntityReferences",
-        "ignoringElementContentWhitespace",
-        "namespaceAware",
-        "validating" };
-    boolean[] attrValues = { false, true, true, true, true };
-
-    Class parserClass = ClassLoader.getSystemClassLoader().loadClass("gnu.xml.dom.JAXPFactory");
+    DocumentBuilderFactory gnujaxpFactory = (DocumentBuilderFactory)
+      ClassLoader.getSystemClassLoader().
+        loadClass("gnu.xml.dom.JAXPFactory").newInstance();
 
     DOMTestDocumentBuilderFactory factory =
-        new DOMTestDocumentBuilderFactory(parserClass, attrNames, attrValues);
+        new JAXPDOMTestDocumentBuilderFactory(gnujaxpFactory,
+          JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 

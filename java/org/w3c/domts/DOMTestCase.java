@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.10  2002-01-30 07:08:44  dom-ts-4
+ Revision 1.11  2002-02-03 04:22:35  dom-ts-4
+ DOM4J and Batik support added.
+ Rework of parser settings
+
+ Revision 1.10  2002/01/30 07:08:44  dom-ts-4
  Update for GNUJAXP
 
  Revision 1.9  2001/12/10 05:37:21  dom-ts-4
@@ -46,10 +50,8 @@
 
 package org.w3c.domts;
 
-import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.w3c.domts.*;
-import org.xml.sax.*;
 import java.util.*;
 import java.net.*;
 import java.lang.reflect.*;
@@ -57,16 +59,29 @@ import java.lang.reflect.*;
 /**
  *    This is an abstract base class for generated DOM tests
  */
-public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHandler {
-  private DocumentBuilder builder;
-  private DocumentBuilderFactory factory;
+public abstract class DOMTestCase extends DOMTest  {
   private DOMTestFramework framework;
-  private SAXParseException parseException;
 
+  /**
+   * This constructor is for DOMTestCase's that
+   * make specific demands for parser configuration.
+   * setFactory should be called before the end of the
+   * tests constructor to set the factory.
+   */
   public DOMTestCase() {
+    framework = null;
   }
 
-  
+  /**
+   * This constructor is for DOMTestCase's that
+   * do not add any requirements for parser configuration.
+   */
+  public DOMTestCase(DOMTestDocumentBuilderFactory factory) {
+    super(factory);
+    framework = null;
+  }
+
+
   /**
    *   This method is called by the main() for each test and
    *      locates the appropriate test framework and runs the specified test
@@ -100,7 +115,7 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
         }
     }
     else {
-        try 
+        try
         {
             //
             //   create the JUnitRunner
@@ -113,6 +128,9 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
             Method execMethod = runnerClass.getMethod("execute", new Class[] { argsClass });
             execMethod.invoke(junitRun, new Object[] { args });
         }
+        catch(InvocationTargetException ex) {
+            ex.getTargetException().printStackTrace();
+        }
         catch(Exception ex) {
             ex.printStackTrace();
         }
@@ -121,95 +139,17 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
 
   abstract public void runTest() throws Throwable;
 
-  public void setBuilder(DocumentBuilder builder) {
-    this.builder = builder;
-  }
-
-  public void setFactory(DocumentBuilderFactory factory) {
-    this.factory = factory;
-  }
 
   public void setFramework(DOMTestFramework framework) {
     this.framework = framework;
   }
 
 
-  public boolean hasFeature(String feature,
-        String version)  {
-     return framework.hasFeature(builder,feature,version);
-  }
-
-  public boolean getImplementationAttribute(String property) throws Exception {
-    boolean retval = false;
-    String accessorName = "is" +
-      property.substring(0,1).toUpperCase() +
-      property.substring(1);
-    try {
-      Method accessor = factory.getClass().getMethod(accessorName,new Class[] {} );
-      retval = ((Boolean) accessor.invoke(factory,new Object[] {} )).booleanValue();
-    }
-    catch(Exception ex) {
-      if(property.equals("signed")) {
-        return true;
-      }
-      else {
-        if(property.equals("hasNullString")) {
-          return true;
-        }
-        else {
-          retval = ((Boolean) factory.getAttribute(property)).booleanValue();
-        }
-      }
-    }
-    return retval;
-  }
 
   public void wait(int millisecond) {
     framework.wait(millisecond);
   }
 
-  public Document load(String docURI)
-    throws SAXException, java.io.IOException {
-
-    docURI = docURI + ".xml";
-    //
-    //   build a URL for a test file in the JAR
-    //
-    URL resolvedURI = getClass().getResource("/" + docURI);
-    if(resolvedURI == null) {
-        //
-        //   see if it is an absolute URI
-        //
-        int firstSlash = docURI.indexOf('/');
-        if(firstSlash == 0 ||
-            (firstSlash >= 1 && docURI.charAt(firstSlash-1) == ':')) {
-            resolvedURI = new URL(docURI);
-        }
-        else {
-            //
-            //  try the files/level?/spec directory
-            //
-            String filename = getClass().getPackage().getName();
-            filename = "tests/" + filename.substring(14).replace('.','/') + "/files/" + docURI;
-            resolvedURI = new java.io.File(filename).toURL();
-        }
-    }
-
-    if(resolvedURI == null) {
-        throw new java.io.FileNotFoundException(docURI);
-    }
-
-    builder.setErrorHandler(this);
-    parseException = null;
-    Document doc = null;
-
-    doc = builder.parse(resolvedURI.toString());
-
-    if(parseException != null) {
-      throw parseException;
-    }
-    return doc;
-  }
 
   public void assertTrue(String assertID, boolean actual) {
     framework.assertTrue(this,assertID,actual);
@@ -354,20 +294,6 @@ public abstract class DOMTestCase extends DOMTest implements org.xml.sax.ErrorHa
     return framework.size(collection);
   }
 
-  public void error(SAXParseException ex) {
-    if(parseException == null) {
-      parseException = ex;
-    }
-  }
-
-  public void warning(SAXParseException ex) {
-  }
-
-  public void fatalError(SAXParseException ex) {
-    if(parseException == null) {
-      parseException = ex;
-    }
-  }
 
 }
 

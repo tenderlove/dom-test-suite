@@ -12,29 +12,47 @@
 
  /*
  $Log: DOMTestSuite.java,v $
- Revision 1.2  2001-07-23 04:52:20  dom-ts-4
+ Revision 1.3  2002-02-03 04:22:35  dom-ts-4
+ DOM4J and Batik support added.
+ Rework of parser settings
+
+ Revision 1.2  2001/07/23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
 
 package org.w3c.domts;
 
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import org.w3c.domts.*;
-import java.util.*;
 
+/**
+ * Abstract base class for all test suites
+ * (that is any collection of DOMTest's)
+ *
+ * @author Curt Arnold
+ */
 public abstract class DOMTestSuite extends DOMTest {
-  private DOMTestDocumentBuilderFactory factory;
-
-  public DOMTestSuite() {
+  /**
+   * This constructor is used for suites that
+   * assert one or more implementation attributes or
+   * features.  setLibrary should be called before
+   * the completion of the constructor in the derived class.
+   */
+  protected DOMTestSuite() {
   }
-  public void setFactory(DOMTestDocumentBuilderFactory factory) {
-    this.factory = factory;
+  /**
+   * This constructor is used for suites that make no
+   * additional requirements on the parser configuration.
+   * @param factory may not be null
+   */
+  protected DOMTestSuite(DOMTestDocumentBuilderFactory factory) {
+    super(factory);
   }
-  public DOMTestDocumentBuilderFactory getFactory() {
-    return factory;
-  }
+  /**
+   * Adds a test to the test suite.  This method can
+   * only be run after the test suite has been attached
+   * to a test framework since each framework implements
+   * test suites in different manners.
+   */
   abstract public void build(DOMTestSink sink);
 }
 

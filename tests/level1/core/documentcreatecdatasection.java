@@ -43,13 +43,8 @@ import java.util.*;
 */
 public class documentcreatecdatasection extends DOMTestCase {
 
-   public documentcreatecdatasection(DOMTestDocumentBuilderFactory factory) throws Exception {
-      DocumentBuilderFactory myFactory = factory.newInstance();
-
-      DocumentBuilder builder = myFactory.newDocumentBuilder();
-
-      setFactory(myFactory);
-      setBuilder(builder);
+   public documentcreatecdatasection(DOMTestDocumentBuilderFactory factory)  {
+      super(factory);
    }
 
    public void runTest() throws java.lang.Throwable {

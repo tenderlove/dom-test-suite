@@ -1,6 +1,6 @@
 Manifest-Version: 2.0
 Main-Class: org.w3c.domts.level2.core.alltests
-Class-Path:  xmlParserAPIs.jar xercesImpl.jar xerces.jar xml4j.jar xmlparserv2.jar crimson.jar parser.jar jaxp.jar xml-apis.jar gnujaxp.jar  junit-run.jar avalon-run.jar
+Class-Path:  xmlParserAPIs.jar xercesImpl.jar xerces.jar xml4j.jar xmlparserv2.jar crimson.jar parser.jar jaxp.jar xml-apis.jar gnujaxp.jar dom4j-full.jar batik-svg-dom.jar crimson-parser.jar junit-run.jar avalon-run.jar
 
 Name: org/w3c/domts/level2/core
 Specification-Title: W3C/NIST Test Suite for DOM Level 2 Core

@@ -28,7 +28,11 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.18  2002-01-04 08:09:47  dom-ts-4
+Revision 1.19  2002-02-03 04:22:35  dom-ts-4
+DOM4J and Batik support added.
+Rework of parser settings
+
+Revision 1.18  2002/01/04 08:09:47  dom-ts-4
 Added import org.w3c.dom.html.* and .events.*;
 
 Revision 1.17  2001/12/10 05:37:22  dom-ts-4
@@ -148,47 +152,55 @@ The source document contained the following notice:
 </xsl:template>
 
 
+<!--   
+    this template assumes that the context node is an implementationAttribute
+    and emits something like DocumentBuilderSetting.validating or
+        DocumentBuilderSetting.notExpandEntityReferences
+
+-->
+<xsl:template name="emit-setting">
+    <xsl:text>DocumentBuilderSetting.</xsl:text>
+    <xsl:choose>
+        <xsl:when test="@value='true'">
+            <xsl:value-of select="@name"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text>not</xsl:text>
+            <xsl:value-of select="translate(substring(@name,1,1),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+            <xsl:value-of select="substring(@name,2)"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
 <xsl:template name="implCheck">
 <xsl:variable name="implAttrs" select="*[local-name() = 'implementationAttribute']"/>
 <xsl:choose>
 	<xsl:when test="$implAttrs">
 		<xsl:text>
-      String[] attrNames = { "</xsl:text>
-        <xsl:value-of select="$implAttrs[1]/@name"/>
-        <xsl:text>"</xsl:text>
-		<xsl:for-each select="$implAttrs[position() &gt; 1]">
-            <xsl:text> , "</xsl:text>
-            <xsl:value-of select="@name"/>
-            <xsl:text>"</xsl:text>
+      DocumentBuilderSetting[] settings = new DocumentBuilderSetting[] {
+</xsl:text>
+        <xsl:for-each select="$implAttrs">
+            <xsl:if test="position() &gt; 1">,
+</xsl:if>
+            <xsl:call-template name="emit-setting"/>
         </xsl:for-each>
-        <xsl:text> };
-      boolean[] attrValues = { </xsl:text>
-        <xsl:value-of select="$implAttrs[1]/@value"/>
-        <xsl:for-each select="$implAttrs[position() &gt; 1]">
-            <xsl:text> , </xsl:text>
-            <xsl:value-of select="@value"/>
-        </xsl:for-each>
-        <xsl:text> };
-      DocumentBuilderFactory myFactory = factory.newInstance(attrNames,attrValues);
+        <xsl:text>
+        };
+        DOMTestDocumentBuilderFactory testFactory = factory.newInstance(settings);
+        setFactory(testFactory);
 </xsl:text>
 	</xsl:when>
 	<xsl:otherwise>
-		<xsl:text>      DocumentBuilderFactory myFactory = factory.newInstance();
+		<xsl:text>      super(factory);
 </xsl:text>
 	</xsl:otherwise>
 </xsl:choose>
 
-<xsl:text>
-      DocumentBuilder builder = myFactory.newDocumentBuilder();
-</xsl:text>
-
 <xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
 
 <xsl:if test="$featureConditions">
-    <xsl:text>      DOMImplementation domImpl = builder.getDOMImplementation();
-</xsl:text>
     <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(!domImpl.hasFeature(</xsl:text>
+	    <xsl:text>      if(!factory.hasFeature(</xsl:text>
 	    <xsl:value-of select="@feature"/>
 	    <xsl:text>,</xsl:text>
 	    <xsl:choose>
@@ -239,12 +251,17 @@ import java.util.*;
 
    public </xsl:text>
     <xsl:value-of select="@name"/>
-   	<xsl:text>(DOMTestDocumentBuilderFactory factory) throws Exception {
+   	<xsl:text>(DOMTestDocumentBuilderFactory factory) 
+</xsl:text>
+    <!--  if there are any implementationAttribute or hasFeature (before a var) elements
+               then must declare that we might throw an incompatible test exception   -->
+    <xsl:if test="*[local-name() = 'implementationAttribute' or (local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var']))]">
+        <xsl:text> throws DOMTestIncompatibleException</xsl:text>
+    </xsl:if>
+    <xsl:text> {
 </xsl:text>
 <xsl:call-template name="implCheck"/>
 <xsl:text>
-      setFactory(myFactory);
-      setBuilder(builder);
    }
 </xsl:text>
 
@@ -1470,11 +1487,11 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='implementationAttribute']" mode="condition">
-	<xsl:text>(getImplementationAttribute("</xsl:text>
-	<xsl:value-of select="@name"/>
-    <xsl:text>") == </xsl:text>
-    <xsl:value-of select="@value"/>
-    <xsl:text>)</xsl:text>
+    <xsl:if test="@value='false'">!</xsl:if>
+	<xsl:text>is</xsl:text>
+    <xsl:value-of select="translate(substring(@name,1,1),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+    <xsl:value-of select="substring(@name,2)"/>
+    <xsl:text>()</xsl:text>
 </xsl:template>
 
 

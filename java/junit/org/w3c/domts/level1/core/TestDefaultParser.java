@@ -28,16 +28,9 @@ public class TestDefaultParser extends TestSuite {
     Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-    String[] attrNames = {
-        "coalescing",
-        "expandEntityReferences",
-        "ignoringElementContentWhitespace",
-        "namespaceAware",
-        "validating" };
-    boolean[] attrValues = { false, false, false, false, false };
-
     DOMTestDocumentBuilderFactory factory =
-        new DOMTestDocumentBuilderFactory(null, attrNames, attrValues);
+        new JAXPDOMTestDocumentBuilderFactory(null,
+          JAXPDOMTestDocumentBuilderFactory.getConfiguration1());
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 

@@ -12,7 +12,11 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.6  2002-01-30 06:31:59  dom-ts-4
+Revision 1.7  2002-02-03 04:22:35  dom-ts-4
+DOM4J and Batik support added.
+Rework of parser settings
+
+Revision 1.6  2002/01/30 06:31:59  dom-ts-4
 Changed main() to run Swing UI, added -noloading to args
 
 Revision 1.5  2002/01/11 17:05:46  plehegar
@@ -61,27 +65,21 @@ public class JUnitRunner {
     Constructor testConstructor = null;
     testConstructor = testClass.getConstructor(
          new Class[] { DOMTestDocumentBuilderFactory.class});
-        
 
-    String[] attrNames = {
-      "coalescing",
-      "expandEntityReferences",
-      "ignoringElementContentWhitespace",
-      "namespaceAware",
-      "validating" };
-    boolean[] attrValues1 = { false, false, false, false, false };
-    boolean[] attrValues2 = { false, true, true, true, true };
 
     DOMTestDocumentBuilderFactory factory1 =
-      new DOMTestDocumentBuilderFactory(null, attrNames, attrValues1);
+      new JAXPDOMTestDocumentBuilderFactory(null,
+      JAXPDOMTestDocumentBuilderFactory.getConfiguration1());
 
-    DOMTestDocumentBuilderFactory factory2 =
-      new DOMTestDocumentBuilderFactory(null, attrNames, attrValues2);
 
     printPrologue();
     printImplementation(factory1);
     printAttributes(factory1);
     runTest(testConstructor, factory1);
+
+    DOMTestDocumentBuilderFactory factory2 =
+      new JAXPDOMTestDocumentBuilderFactory(null,
+      JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
     printAttributes(factory2);
     runTest(testConstructor, factory2);
@@ -142,9 +140,7 @@ public class JUnitRunner {
 
   private static void printImplementation(DOMTestDocumentBuilderFactory factory) {
     try {
-      DocumentBuilderFactory docfactory = factory.newInstance();
-      DocumentBuilder builder = docfactory.newDocumentBuilder();
-      DOMImplementation domimpl = builder.getDOMImplementation();
+      DOMImplementation domimpl = factory.getDOMImplementation();
 
       if(domimpl != null) {
         Class domimplClass = domimpl.getClass();
@@ -201,17 +197,9 @@ public class JUnitRunner {
   }
 
   private void printAttributes(DOMTestDocumentBuilderFactory dsFactory) {
-    try {
-        DocumentBuilderFactory factory = dsFactory.newInstance();
-        System.out.println("isCoalescing() == " + String.valueOf(factory.isCoalescing()));
-        System.out.println("isExpandEntityReferences() == " + String.valueOf(factory.isExpandEntityReferences()));
-        System.out.println("isIgnoringComments() == " + String.valueOf(factory.isIgnoringComments()));
-        System.out.println("isIgnoringElementContentWhitespace() == " + String.valueOf(factory.isIgnoringElementContentWhitespace()));
-        System.out.println("isNamespaceAware() == " + String.valueOf(factory.isNamespaceAware()));
-        System.out.println("isValidating() == " + String.valueOf(factory.isValidating()));
-    }
-    catch(Exception ex) {
-        ex.printStackTrace();
+    DocumentBuilderSetting[] settings = dsFactory.getActualSettings();
+    for(int i = 0; i < settings.length; i++) {
+      System.out.println(settings[i].toString());
     }
   }
 
@@ -238,7 +226,7 @@ public class JUnitRunner {
 
   public static void main (String[] args) {
     //
-    //   SwingUI Test Runner needs -noloading attribute 
+    //   SwingUI Test Runner needs -noloading attribute
     //       or there will be problems loading test case
     String[] withNoLoading = new String[args.length+1];
     for(int i = 0; i < args.length; i++) {

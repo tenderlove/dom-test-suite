@@ -28,18 +28,12 @@ public class TestXercesAltConfig extends TestSuite {
     Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level1.core.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-    String[] attrNames = {
-        "coalescing",
-        "expandEntityReferences",
-        "ignoringElementContentWhitespace",
-        "namespaceAware",
-        "validating" };
-    boolean[] attrValues = { false, true, true, true, true };
-
-    Class parserClass = ClassLoader.getSystemClassLoader().loadClass("org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
+    DocumentBuilderFactory xercesFactory = (DocumentBuilderFactory)
+      ClassLoader.getSystemClassLoader().loadClass("org.apache.xerces.jaxp.DocumentBuilderFactoryImpl").newInstance();
 
     DOMTestDocumentBuilderFactory factory =
-        new DOMTestDocumentBuilderFactory(parserClass, attrNames, attrValues);
+        new JAXPDOMTestDocumentBuilderFactory(xercesFactory,
+          JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
 
     Object test = testConstructor.newInstance(new Object[] { factory });
 
