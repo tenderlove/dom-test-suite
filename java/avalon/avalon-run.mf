@@ -1,0 +1,11 @@
+Manifest-Version: 2.0
+Main-Class: org.w3c.domts.AvalonRunner
+Class-Path: dom1-core.jar xerces.jar xml4j.jar xmlparserv2.jar crimson.jar parser.jar testlet.jar
+
+Name: org/w3c/domts/AvalonRunner.class
+Specification-Title: Avalon adapter for DOM Test Suite
+Specification-Version: 0.0.1
+Specification-Vendor: World Wide Consortium
+Implementation-Vendor: World Wide Consortium
+Implementation-Version: 0.0.1
+Implementation-Title: Avalon adapter for DOM Test Suite
