@@ -33,18 +33,14 @@ Characters should be not normalized on serialization if normalize-characters is 
 <var name="lsSerializer" type="LSSerializer"/>
 <var name="docType" type="DocumentType" isNull="true"/>
 <var name="docElem" type="Element"/>
-<var name="newNode" type="Node"/>
 <var name="output" type="DOMString"/>
-<var name="retNode" type="Node"/>
-<var name="canSet" type="boolean"/>
 <implementation var="domImplLS"/>
 <createLSSerializer var="lsSerializer" obj="domImplLS"/>
 <domConfig obj="lsSerializer" var="domConfig" interface="LSSerializer"/>
-<canSetParameter var="canSet" obj="domConfig" name='"normalize-characters"' value="false"/>
 <createDocument var="doc" obj="domImplLS" namespaceURI='"http://www.example.org"' 
 	qualifiedName='"suc&#x327;on"' doctype="docType"/>
 <documentElement var="docElem" obj="doc"/>
-<setParameter obj="domConfig" name='"normalize-characters"' value="true"/>
+<setParameter obj="domConfig" name='"normalize-characters"' value="false"/>
 <writeToString var="output" obj="lsSerializer" nodeArg="doc"/>
 <assertTrue id="notNormalized"><contains obj="output" str='"suc&#x327;on"' interface="DOMString"/></assertTrue>
 </test>
