@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.42  2003-07-11 08:05:49  plehegar
+Revision 1.43  2003-10-24 17:10:16  dom-ts-4
+Changed copyright dates, bug 369
+
+Revision 1.42  2003/07/11 08:05:49  plehegar
 The test-to-java.xsl incorrectly transformed DOMStringList to Java String.
 
 Revision 1.41  2003/06/27 05:37:30  dom-ts-4

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -20,14 +20,17 @@ specifications is available within the .zip version of the specification.
 
 Usage:
 
-saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
+saxon -o build/dom3-interfaces.xml lib/specs/Level-3/Core/xml-source.xml transforms/dom3-combine.xsl
 
 
 -->
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.8  2003-06-11 03:20:18  dom-ts-4
+Revision 1.9  2003-10-24 17:10:16  dom-ts-4
+Changed copyright dates, bug 369
+
+Revision 1.8  2003/06/11 03:20:18  dom-ts-4
 Updated for the 09 June 2003 L3 Core Working Draft
 
 Revision 1.7  2003/02/28 06:26:49  dom-ts-4
@@ -66,7 +69,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--  match document root    -->
 	<xsl:template match="/">
 		<xsl:comment>
-Copyright (c) 2002 World Wide Web Consortium,
+Copyright (c) 2002-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Document

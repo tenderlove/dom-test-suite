@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -27,7 +27,10 @@ saxon -o dom2-interfaces.xml core/dom-spec.xml combine-dom2.xsl
 
 <!--
 $Log: dom2-combine.xsl,v $
-Revision 1.4  2003-01-21 15:27:54  dom-ts-4
+Revision 1.5  2003-10-24 17:10:16  dom-ts-4
+Changed copyright dates, bug 369
+
+Revision 1.4  2003/01/21 15:27:54  dom-ts-4
 Injected some missing exceptions from errata
 
 Revision 1.3  2003/01/20 06:14:36  dom-ts-4
@@ -45,7 +48,7 @@ All implementation conditions combined into implementationAttribute element
 	<!--  match document root    -->
 	<xsl:template match="/">
 		<xsl:comment>
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Document

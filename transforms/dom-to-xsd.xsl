@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>							  
 <!--                                                                 
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2003 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -71,7 +71,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
             _xmlns_test="{$schema-namespace}"
 			elementFormDefault="qualified">
 		<xsl:comment>
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
