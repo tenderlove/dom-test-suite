@@ -35,5 +35,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <load var="doc" href="document" willBeModified="false"/>
 <URL interface="HTMLDocument" obj="doc" var="vurl"/>
-<assertURIEquals actual="vurl" file='"document.html"' id="URLLink"/>
+<assertURIEquals actual="vurl" name='"document"' id="URLLink" isAbsolute="true"/>
 </test>
