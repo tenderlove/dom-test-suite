@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 /*
-Copyright (c) 2001-2004 World Wide Web Consortium,
-(Massachusetts Institute of Technology, Institut National de
-Recherche en Informatique et en Automatique, Keio University). All
-Rights Reserved. This program is distributed under the W3C's Software
-Intellectual Property License. This program is distributed in the
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-PURPOSE.
-See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+Copyright (c) 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, European Research Consortium 
+for Informatics and Mathematics, Keio University). All 
+Rights Reserved. This work is distributed under the W3C(r) Software License [1] in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+
+[1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
 */
 
   function assertSize(descr, expected, actual) {
@@ -390,7 +389,7 @@ SVGBuilder.prototype.preload = function(frame, varname, url) {
 }
 
 SVGBuilder.prototype.load = function(frame, varname, url) {
-  if (this.documentVarnames[0] = varname) {
+  if (this.documentVarnames[0] == varname) {
   	return document;
   }
   return document.cloneNode(true);
@@ -469,7 +468,7 @@ function preload(docRef, varname, href) {
 
 
 function load(docRef, varname, href) {
-   return document;
+   return builder.load(docRef, varname, href);
 }
 
 
@@ -538,7 +537,6 @@ function fail(id) {
     throw id + ": fail";
 }
 
-addMessage("0", "120", exposeTestFunctionNames()[0]);
 
 //
 //   invoke test setup
@@ -547,10 +545,12 @@ setUpPage();
 
 try {
 	runTest();
+	addMessage("0", "120", exposeTestFunctionNames()[0]);
 	if (builder.initializationError == null) {
 	   changeColor("green");
 	}
 } catch(ex) {
+	addMessage("0", "120", exposeTestFunctionNames()[0]);
     changeColor("red");
     addMessage("0", "140", ex);    
 }
