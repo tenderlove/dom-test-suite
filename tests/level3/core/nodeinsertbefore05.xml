@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,33 +21,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeinsertbefore05</title>
 <creator>IBM</creator>
 <description>
-	The method insertBefore inserts the node newChild before the existing child node refChild. 
-	If refChild is null, insert newChild at the end of the list of children.
-
-	Using insertBefore on a new Document node attempt to insert a DocumentType node before
-	this DocumentType node and verfiy if a HIERARCHY_REQUEST_ERR is raised.
+    Attempt to insert a second DocumentType node in a document using Node.insertBefore,
+    should raise either DOMException with either a HIERARCHY_REQUEST_ERR 
+    or NOT_SUPPORTED_ERR code.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Node3-insertBefore"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
-<var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="newDocType" type="DocumentType"/>
 <var name="inserted" type="Node"/>
 <var name="nullPubId" type="DOMString" isNull="true"/>
 <var name="nullSysId" type="DOMString" isNull="true"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="newDocType" obj="domImpl" qualifiedName='"dom3:docType"' publicId="nullPubId" systemId="nullSysId"/>
-<createDocument var="newDoc" obj="domImpl"  qualifiedName='"dom3:docType"' namespaceURI='"http://www.w3.org/DOM/Test"' doctype="newDocType" />
-<assertDOMException id="HIERARCHY_REQUEST_ERR_nodeinsertbefore05">
-<HIERARCHY_REQUEST_ERR>
-<insertBefore obj="newDoc" var="inserted" newChild="docType" refChild="newDocType"/>
-</HIERARCHY_REQUEST_ERR>
-</assertDOMException>
+<try>
+	<insertBefore obj="doc" var="inserted" newChild="newDocType" refChild="docType"/>
+    <assertSame id="retval_same" actual="inserted" expected="newDocType"/>
+	<catch>
+		<DOMException code="HIERARCHY_REQUEST_ERR"/>
+		<DOMException code="NOT_SUPPORTED_ERR"/>
+	</catch>
+</try>
 </test>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,17 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentgetdoctype01</title>
 <creator>IBM</creator>
 <description>
-	The getDocType method returns the document type declaration associated with this document. 
-	This node can be set at document creation time and later changed through the use of child 
-	nodes manipulation methods, such as insertBefore, or replaceChild. 
-	    
 	Retreive the doctype node, create a new Doctype node, call replaceChild and try replacing the
 	docType node with a new docType node.  Check if the docType node was correctly replaced with
 	the new one.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#ID-B63ED1A31"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-B63ED1A31"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
@@ -42,12 +39,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nullPubID" type="DOMString" isNull="true"/>
 <var name="nullSysID" type="DOMString" isNull="true"/>
 <var name="replaced" type="Node"/>
-<load var="doc" href="staffNS" willBeModified="false"/>
+<load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <implementation obj="doc" var="domImpl"/>
 <createDocumentType obj="domImpl" var="newDocType" qualifiedName='"dom:level3"' publicId="nullPubID" systemId="nullSysID"/>
-<replaceChild obj="doc" var="replaced" newChild="newDocType" oldChild="docType"/>
+<try>
+	<replaceChild obj="doc" var="replaced" newChild="newDocType" oldChild="docType"/>
+	<catch>
+		<DOMException code="NOT_SUPPORTED_ERR">
+			<return/>
+		</DOMException>
+	</catch>
+</try>
 <doctype var="replacedDocType" obj="doc"/>
 <name var="docTypeName" obj="replacedDocType" interface="DocumentType"/>
-<assertEquals actual="docTypeName" expected='"dom:level3"' id="documentgetdoctype01" ignoreCase="false"/>
+<assertEquals actual="docTypeName" expected='"dom:level3"' 
+	id="documentgetdoctype01" ignoreCase="false"/>
 </test>
