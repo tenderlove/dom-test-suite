@@ -34,10 +34,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testNode" type="Node"/>
 <var name="vform" type="HTMLFormElement" />
 <var name="doc" type="Document"/>
+<var name="prompt" type="DOMString"/>
 <load var="doc" href="isindex" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"isindex"'/>
-<assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
+<assertNotNull id="notnull" actual="testNode"/>
+<!--  check contents of prompt  -->
+<prompt interface="HTMLIsIndexElement" var="prompt" obj="testNode"/>
+<assertEquals id="IsIndex.Prompt" actual="prompt" expected='"Old Employee: "'/>
+<!--   check form == null since not in context of a form  -->
 <form interface="HTMLIsIndexElement" obj="testNode" var="vform"/>
 <assertNull actual="vform" id="formNullLink"/>
+<!--   check that we found 2 isindex elements  -->
+<assertSize collection="nodeList" size="2" id="Asize"/>
 </test>
