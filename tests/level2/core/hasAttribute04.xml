@@ -34,9 +34,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="testNode" type="Element"/>
 <var name="state" type="boolean"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"address"'/>
 <item interface="NodeList" obj="elementList" var="testNode" index="0"/>
-<hasAttribute obj="testNode" var="state" name="&quot;domestic&quot;"/>
-<assertTrue actual="state" id="throw_True"/>
+<hasAttribute obj="testNode" var="state" name='"dmstc:domestic"'/>
+<assertTrue actual="state" id="hasDomesticAttr"/>
 </test>
