@@ -102,6 +102,16 @@ The source document contained the following notice:
 var monitor;
 	 </xsl:text>
 	 </xsl:if>
+	<xsl:if test="*[local-name() = 'var' and @type='DOMErrorMonitor' and @name='errorMonitor']">
+		<xsl:text>//DOMErrorMonitor's require a document level variable named errorMonitor
+var errorMonitor;
+	 </xsl:text>
+	 </xsl:if>
+	<xsl:if test="*[local-name() = 'var' and @type='UserDataMonitor' and @name='userDataMonitor']">
+		<xsl:text>//UserDataMonitor's require a document level variable named userDataMonitor
+var userDataMonitor;
+	 </xsl:text>
+	 </xsl:if>
 
 	<!--   create anonymous inner classes  -->	
 <xsl:apply-templates mode="innerClass" select="*[local-name() = 'var'  and *[local-name() != 'member']]"/>
@@ -236,6 +246,25 @@ var monitor;
 </xsl:template>
 
 
+<xsl:template match="*[local-name()='DOMImplementationRegistry.newInstance']" mode="body">
+        <xsl:value-of select="@var"/>
+        <xsl:text> = DOMImplementationRegistry;
+         </xsl:text>
+</xsl:template>
+
+
+<xsl:template match="*[starts-with(local-name(),'getDOMImplementation')]" mode="body">
+        <xsl:value-of select="@var"/>
+        <xsl:text> = </xsl:text>
+        <xsl:value-of select="@obj"/>
+        <xsl:text>.</xsl:text>
+        <xsl:value-of select="local-name()"/>
+        <xsl:text>(</xsl:text>
+        <xsl:value-of select="@features"/>
+        <xsl:text>);
+         </xsl:text>
+</xsl:template>
+
 <!--    
 
 	test framework constructs
@@ -246,6 +275,8 @@ var monitor;
 	<xsl:choose>
 		<!-- EventMonitors, anon inner classes have document scope   -->
 		<xsl:when test="@type = 'EventMonitor'"/>
+		<xsl:when test="@type = 'UserDataMonitor'"/>
+		<xsl:when test="@type = 'DOMErrorMonitor'"/>
 		<xsl:when test="*"/>
 		<xsl:otherwise>
 			<xsl:text>var </xsl:text>
@@ -291,17 +322,35 @@ var monitor;
         </xsl:when>
 
 
-        <!--  DOMErrorMonitor type implies constructor    -->
+        <!--  error monitor type implies constructor    -->
         <xsl:when test="@type='DOMErrorMonitor'">
+        	<xsl:choose>
+        		<xsl:when test="@var != 'errorMonitor'">
+        			<xsl:message>DOMErrorMonitors must be named errorMonitor</xsl:message>
+        			<xsl:text>; fail("DOMErrorMonitors must be named errorMonitor");
+      </xsl:text>
+        		</xsl:when>
+        		<xsl:otherwise>
             		<xsl:text> = new DOMErrorMonitor();
       </xsl:text>
+      			</xsl:otherwise>
+      		</xsl:choose>
         </xsl:when>
 
 
-        <!--  UserDataMonitor type implies constructor    -->
+        <!--  error monitor type implies constructor    -->
         <xsl:when test="@type='UserDataMonitor'">
-            <xsl:text> = new UserDataMonitor();
+        	<xsl:choose>
+        		<xsl:when test="@var != 'userDataMonitor'">
+        			<xsl:message>UserDataMonitors must be named userDataMonitor</xsl:message>
+        			<xsl:text>; fail("UserDataMonitors must be named userDataMonitor");
       </xsl:text>
+        		</xsl:when>
+        		<xsl:otherwise>
+            		<xsl:text> = new UserDataMonitor();
+      </xsl:text>
+      			</xsl:otherwise>
+      		</xsl:choose>
         </xsl:when>
 		
 		<!--  virtual method indicates anonymous inner class, 
@@ -325,7 +374,7 @@ var monitor;
       </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[local-name()='addEventListener' or local-name() = 'removeEventListener']" mode="body">
+<xsl:template match="*[local-name()='' or local-name() = 'removeEventListener']" mode="body">
 	<xsl:value-of select="@obj"/>
 	<xsl:value-of select="concat('.', concat(local-name(), '('))"/>
 	<xsl:value-of select="@type"/>
@@ -335,6 +384,55 @@ var monitor;
 	<xsl:value-of select="@useCapture"/>
 	<xsl:text>);
 	 </xsl:text>
+</xsl:template>
+
+<xsl:template match="*[local-name()='setParameter']" mode="body">
+    <xsl:param name="vardefs"/>
+	<xsl:value-of select="@obj"/>
+	<xsl:text>.setParameter(</xsl:text>
+	<xsl:value-of select="@name"/>
+	<xsl:text>, </xsl:text>
+	<xsl:variable name="paramValue" select="@value"/>
+	<!-- xsl:variable name="paramType" select="$vardefs[@name = $paramValue]/@type"/ -->
+	<xsl:variable name="paramType" select="preceding::*[local-name() = 'var' and @name = $paramValue]/@type"/>
+	<xsl:value-of select="@value"/>
+	<xsl:choose>
+		<xsl:when test="$paramType = 'DOMErrorHandler' or $paramType = 'DOMErrorMonitor'">
+			<xsl:text>.handleError</xsl:text>
+		</xsl:when>
+		<xsl:when test="$paramType = 'ResourceResolver'">
+			<xsl:text>.resolveResource</xsl:text>
+		</xsl:when>
+	</xsl:choose>
+	<xsl:text>);
+	 </xsl:text>
+</xsl:template>
+
+
+<xsl:template match="*[local-name()='setUserData']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:text>if (null == </xsl:text>
+    <xsl:value-of select="@handler"/>
+    <xsl:text>) {
+         </xsl:text>
+         <xsl:value-of select="@obj"/>
+         <xsl:text>.setUserData(</xsl:text>
+         <xsl:value-of select="@key"/>
+         <xsl:text>, </xsl:text>
+         <xsl:value-of select="@data"/>
+         <xsl:text>, null);
+      } else {
+          </xsl:text>
+         <xsl:value-of select="@obj"/>
+         <xsl:text>.setUserData(</xsl:text>
+         <xsl:value-of select="@key"/>
+         <xsl:text>, </xsl:text>
+         <xsl:value-of select="@data"/>
+         <xsl:text>, </xsl:text>
+         <xsl:value-of select="@handler"/>
+         <xsl:text>.handle);
+      }
+       </xsl:text>
 </xsl:template>
 
 
@@ -957,7 +1055,7 @@ var monitor;
 	</xsl:call-template>
 </xsl:template>
 
-<!--  this builds an override for the handleEvent method of EventMonitor  -->
+<!--  this builds an override for the handleEvent method of EventListener  -->
 <xsl:template match="*[local-name()='handleEvent']" mode="anonInner">
 function handleEvent(listener, event, userObj) {
 <xsl:apply-templates mode="body"/>

@@ -336,14 +336,14 @@ function DOMErrorMonitor() {
 }
 
 DOMErrorMonitor.prototype.handleError = function(err) {
-    this.allErrors[this.allErrors.length] = new DOMErrorImpl(err);
+    errorMonitor.allErrors[errorMonitor.allErrors.length] = new DOMErrorImpl(err);
 }
 
 DOMErrorMonitor.prototype.assertLowerSeverity = function(id, severity) {
     var i;
-    for (i = 0; i < this.allErrors.length; i++) {
-        if (this.allErrors[i].severity >= severity) {
-           assertEquals(id, severity - 1, this.allErrors[i].severity);
+    for (i = 0; i < errorMonitor.allErrors.length; i++) {
+        if (errorMonitor.allErrors[i].severity >= severity) {
+           assertEquals(id, severity - 1, errorMonitor.allErrors[i].severity);
         }
     }
 }
@@ -361,7 +361,7 @@ function UserDataMonitor() {
 }
 
 UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
-    this.allNotifications[this.allNotifications.length] =
+    userDataMonitor.allNotifications[this.allNotifications.length] =
          new UserDataNotification(operation, key, data, src, dst);
 }
 

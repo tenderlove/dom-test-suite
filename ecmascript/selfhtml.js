@@ -296,7 +296,7 @@ function DOMErrorMonitor() {
 }
 
 DOMErrorMonitor.prototype.handleError = function(err) {
-    this.allErrors[this.allErrors.length] = new DOMErrorImpl(err);
+    errorMonitor.allErrors[errorMonitor.allErrors.length] = new DOMErrorImpl(err);
 }
 
 DOMErrorMonitor.prototype.assertLowerSeverity = function(id, severity) {
@@ -321,7 +321,7 @@ function UserDataMonitor() {
 }
 
 UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
-    this.allNotifications[this.allNotifications.length] =
+    userDataMonitor.allNotifications[userDataMonitor.allNotifications.length] =
          new UserDataNotification(operation, key, data, src, dst);
 }
 

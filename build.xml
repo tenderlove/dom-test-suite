@@ -117,10 +117,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <fileset dir="ecmascript" includes="DOMTest*.js"/>
     </copy>
     <copy todir="${build.dir}/ecmascript/level${level}/${module}/files">
-		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
-    </copy>
-    <copy todir="${build.dir}/ecmascript/level${level}/${module}/files/subdir">
-		<fileset dir="tests/level${level}/${module}/files/subdir" excludes="*.bak"/>
+		<fileset dir="tests/level${level}/${module}/files" includes="**/*" excludes="*.bak"/>
     </copy>
     <!--  copy XHTML 1.0 DTD's to output directory   -->
     <copy todir="${build.dir}/ecmascript/level${level}/${module}/files">
@@ -2759,6 +2756,8 @@ This target checks that the output of that implied transform is valid HTML
     <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;/elt" value="&amp;lt;/elt"/>
     <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;hello" value="&amp;lt;hello"/>
     <replace dir="${build.dir}/ecmascript/level3/ls" includes="*.html" token="&lt;/hello" value="&amp;lt;/hello"/>
+    <replace dir="${build.dir}/ecmascript/level3/ls" includes="cdatasections04.html" token='&gt;foo&lt;' value='&amp;gt;foo&amp;lt;'/>
+    <replace dir="${build.dir}/ecmascript/level3/ls" includes="comments03.html" token='&gt;&lt;!--foo--&gt;&lt;/' value='&amp;gt;&amp;lt;!--foo--&amp;gt;&amp;lt;/'/>
 
     <antcall target="validate-html">
     	<param name="dir" value="${build.dir}/ecmascript/level3/ls"/>
@@ -2822,6 +2821,8 @@ This target checks that the output of that implied transform is valid HTML
         <param name="interfacesURL" expression="dom3-interfaces.xml"/>
         <param name="specMetadataURL" expression="dom3-ls-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Load and Save Test Suite Matrix'/>
+        <param name="noTestInterfaces" expression="LSProgressEvent LSLoadEvent"/>
+        <param name="excludeInterfaces" expression="LSProgressEvent LSLoadEvent"/>
 	</style>
 	
 	<antcall target="validate-html">
