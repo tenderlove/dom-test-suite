@@ -16,40 +16,38 @@ This schema was generated from  by dom-to-dtd.xsl.
 
 <!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException">
 
-<!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor">
+<!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator">
 
 <!ENTITY % implementation-condition "hasFeature | implementationAttribute">
 
-<!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType| %implementation-condition;">
+<!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;">
 
 <!ENTITY % assertion "%framework-assertion;| assertDOMException| assertEventException| assertRangeException" >
-<!ENTITY % variable-type "int|boolean|DOMString|List|Collection|EventMonitor|AbstractView|Attr|CDATASection|CharacterData|Comment|Counter|CSS2Properties|CSSCharsetRule|CSSFontFaceRule|CSSImportRule|CSSMediaRule|CSSPageRule|CSSPrimitiveValue|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|CSSUnknownRule|CSSValue|CSSValueList|Document|DocumentCSS|DocumentEvent|DocumentFragment|DocumentRange|DocumentStyle|DocumentTraversal|DocumentType|DocumentView|DOMImplementation|DOMImplementationCSS|Element|ElementCSSInlineStyle|Entity|EntityReference|Event|EventListener|EventTarget|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBodyElement|HTMLBRElement|HTMLButtonElement|HTMLCollection|HTMLDirectoryElement|HTMLDivElement|HTMLDListElement|HTMLDocument|HTMLDOMImplementation|HTMLElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHeadElement|HTMLHeadingElement|HTMLHRElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLIsIndexElement|HTMLLabelElement|HTMLLegendElement|HTMLLIElement|HTMLLinkElement|HTMLMapElement|HTMLMenuElement|HTMLMetaElement|HTMLModElement|HTMLObjectElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOptionsCollection|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLUListElement|LinkStyle|MediaList|MouseEvent|MutationEvent|NamedNodeMap|Node|NodeFilter|NodeIterator|NodeList|Notation|ProcessingInstruction|Range|Rect|RGBColor|StringExtend|StyleSheet|StyleSheetList|Text|TreeWalker|UIEvent|ViewCSS">
-<!ENTITY % statement "%framework-statement;|%assertion; | abbr | accept | acceptCharset | accessKey | action | align | aLink | alt | altKey | anchors | applets | archive | areas | attrChange | attributes | attrName | axis | azimuth | background | backgroundAttachment | backgroundColor | backgroundImage | backgroundPosition | backgroundRepeat | bgColor | blue | body | border | borderBottom | borderBottomColor | borderBottomStyle | borderBottomWidth | borderCollapse | borderColor | borderLeft | borderLeftColor | borderLeftStyle | borderLeftWidth | borderRight | borderRightColor | borderRightStyle | borderRightWidth | borderSpacing | borderStyle | borderTop | borderTopColor | borderTopStyle | borderTopWidth | borderWidth | bottom | bubbles | button | cancelable | caption | captionSide | cellIndex | cellPadding | cells | cellSpacing | ch | charset | checked | childNodes | chOff | cite | className | clear | clientX | clientY | clip | code | codeBase | codeType | collapsed | color | cols | colSpan | commonAncestorContainer | compact | content | contentDocument | cookie | coords | counterIncrement | counterReset | cssFloat | cssRules | cssText | cssValueType | ctrlKey | cue | cueAfter | cueBefore | currentNode | currentTarget | cursor | data | dateTime | declare | defaultChecked | defaultSelected | defaultValue | defaultView | defer | detail | dir | direction | disabled | display | doctype | document | documentElement | domain | elements | elevation | emptyCells | encoding | enctype | endContainer | endOffset | entities | event | eventPhase | expandEntityReferences | face | filter | firstChild | font | fontFamily | fontSize | fontSizeAdjust | fontStretch | fontStyle | fontVariant | fontWeight | form | forms | frame | frameBorder | green | headers | height | href | hreflang | hspace | htmlFor | httpEquiv | id | identifier | images | implementation | index | internalSubset | isMap | label | lang | lastChild | left | length | letterSpacing | lineHeight | link | links | listStyle | listStyleImage | listStylePosition | listStyleType | localName | longDesc | margin | marginBottom | marginHeight | marginLeft | marginRight | marginTop | marginWidth | markerOffset | marks | maxHeight | maxLength | maxWidth | media | mediaText | metaKey | method | minHeight | minWidth | multiple | name | namespaceURI | newValue | nextSibling | nodeName | nodeType | nodeValue | noHref | noResize | noShade | notationName | notations | noWrap | object | options | orphans | outline | outlineColor | outlineStyle | outlineWidth | overflow | ownerDocument | ownerElement | ownerNode | ownerRule | padding | paddingBottom | paddingLeft | paddingRight | paddingTop | page | pageBreakAfter | pageBreakBefore | pageBreakInside | parentNode | parentRule | parentStyleSheet | pause | pauseAfter | pauseBefore | pitch | pitchRange | playDuring | position | prefix | previousSibling | prevValue | primitiveType | profile | prompt | publicId | quotes | readOnly | red | referrer | rel | relatedNode | relatedTarget | rev | richness | right | root | rowIndex | rows | rowSpan | rules | scheme | scope | screenX | screenY | scrolling | sectionRowIndex | selected | selectedIndex | selectorText | separator | shape | sheet | shiftKey | size | span | speak | speakHeader | speakNumeral | speakPunctuation | specified | speechRate | src | standby | start | startContainer | startOffset | stress | style | styleSheet | styleSheets | summary | systemId | tabIndex | tableLayout | tagName | target | tBodies | text | textAlign | textDecoration | textIndent | textShadow | textTransform | tFoot | tHead | timeStamp | title | top | type | unicodeBidi | URL | useMap | vAlign | value | valueType | version | verticalAlign | view | visibility | vLink | voiceFamily | volume | vspace | whatToShow | whiteSpace | widows | width | wordSpacing | zIndex | acceptNode | add | addEventListener | appendChild | appendData | appendMedium | blur | click | cloneContents | cloneNode | cloneRange | close | collapse | compareBoundaryPoints | createAttribute | createAttributeNS | createCaption | createCDATASection | createComment | createCSSStyleSheet | createDocument | createDocumentFragment | createDocumentType | createElement | createElementNS | createEntityReference | createEvent | createHTMLDocument | createNodeIterator | createProcessingInstruction | createRange | createTextNode | createTFoot | createTHead | createTreeWalker | deleteCaption | deleteCell | deleteContents | deleteData | deleteMedium | deleteRow | deleteRule | deleteTFoot | deleteTHead | detach | dispatchEvent | extractContents | findOffset16 | findOffset32 | focus | getAttribute | getAttributeNode | getAttributeNodeNS | getAttributeNS | getComputedStyle | getCounterValue | getElementById | getElementsByName | getElementsByTagName | getElementsByTagNameNS | getFloatValue | getNamedItem | getNamedItemNS | getOverrideStyle | getPropertyCSSValue | getPropertyPriority | getPropertyValue | getRectValue | getRGBColorValue | getStringValue | hasAttribute | hasAttributeNS | hasAttributes | hasChildNodes | hasFeature | importNode | initEvent | initMouseEvent | initMutationEvent | initUIEvent | insertBefore | insertCell | insertData | insertNode | insertRow | insertRule | isSupported | item | namedItem | nextNode | normalize | open | preventDefault | previousNode | remove | removeAttribute | removeAttributeNode | removeAttributeNS | removeChild | removeEventListener | removeNamedItem | removeNamedItemNS | removeProperty | replaceChild | replaceData | reset | select | selectNode | selectNodeContents | setAttribute | setAttributeNode | setAttributeNodeNS | setAttributeNS | setEnd | setEndAfter | setEndBefore | setFloatValue | setNamedItem | setNamedItemNS | setProperty | setStart | setStartAfter | setStartBefore | setStringValue | splitText | stopPropagation | submit | substringData | surroundContents | toString | write | writeln ">
+<!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor|AbstractView|Attr|CDATASection|CharacterData|Comment|Counter|CSS2Properties|CSSCharsetRule|CSSFontFaceRule|CSSImportRule|CSSMediaRule|CSSPageRule|CSSPrimitiveValue|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|CSSUnknownRule|CSSValue|CSSValueList|Document|DocumentCSS|DocumentEvent|DocumentFragment|DocumentRange|DocumentStyle|DocumentTraversal|DocumentType|DocumentView|DOMImplementation|DOMImplementationCSS|Element|ElementCSSInlineStyle|Entity|EntityReference|Event|EventListener|EventTarget|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBodyElement|HTMLBRElement|HTMLButtonElement|HTMLCollection|HTMLDirectoryElement|HTMLDivElement|HTMLDListElement|HTMLDocument|HTMLElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHeadElement|HTMLHeadingElement|HTMLHRElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLIsIndexElement|HTMLLabelElement|HTMLLegendElement|HTMLLIElement|HTMLLinkElement|HTMLMapElement|HTMLMenuElement|HTMLMetaElement|HTMLModElement|HTMLObjectElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOptionsCollection|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLUListElement|LinkStyle|MediaList|MouseEvent|MutationEvent|NamedNodeMap|Node|NodeFilter|NodeIterator|NodeList|Notation|ProcessingInstruction|Range|Rect|RGBColor|StringExtend|StyleSheet|StyleSheetList|Text|TreeWalker|UIEvent|ViewCSS">
+<!ENTITY % statement "%framework-statement;|%assertion; | abbr | accept | acceptCharset | accessKey | action | align | aLink | alt | altKey | anchors | applets | archive | areas | attrChange | attributes | attrName | axis | azimuth | background | backgroundAttachment | backgroundColor | backgroundImage | backgroundPosition | backgroundRepeat | bgColor | blue | body | border | borderBottom | borderBottomColor | borderBottomStyle | borderBottomWidth | borderCollapse | borderColor | borderLeft | borderLeftColor | borderLeftStyle | borderLeftWidth | borderRight | borderRightColor | borderRightStyle | borderRightWidth | borderSpacing | borderStyle | borderTop | borderTopColor | borderTopStyle | borderTopWidth | borderWidth | bottom | bubbles | button | cancelable | caption | captionSide | cellIndex | cellPadding | cells | cellSpacing | ch | charset | checked | childNodes | chOff | cite | className | clear | clientX | clientY | clip | code | codeBase | codeType | collapsed | color | cols | colSpan | commonAncestorContainer | compact | content | contentDocument | cookie | coords | counterIncrement | counterReset | cssFloat | cssRules | cssText | cssValueType | ctrlKey | cue | cueAfter | cueBefore | currentNode | currentTarget | cursor | data | dateTime | declare | defaultChecked | defaultSelected | defaultValue | defaultView | defer | detail | dir | direction | disabled | display | doctype | document | documentElement | domain | elements | elevation | emptyCells | encoding | enctype | endContainer | endOffset | entities | event | eventPhase | expandEntityReferences | face | filter | firstChild | font | fontFamily | fontSize | fontSizeAdjust | fontStretch | fontStyle | fontVariant | fontWeight | form | forms | frame | frameBorder | green | headers | height | href | hreflang | hspace | htmlFor | httpEquiv | id | identifier | images | implementation | index | internalSubset | isMap | label | lang | lastChild | left | length | letterSpacing | lineHeight | link | links | listStyle | listStyleImage | listStylePosition | listStyleType | localName | longDesc | margin | marginBottom | marginHeight | marginLeft | marginRight | marginTop | marginWidth | markerOffset | marks | maxHeight | maxLength | maxWidth | media | mediaText | metaKey | method | minHeight | minWidth | multiple | name | namespaceURI | newValue | nextSibling | nodeName | nodeType | nodeValue | noHref | noResize | noShade | notationName | notations | noWrap | object | options | orphans | outline | outlineColor | outlineStyle | outlineWidth | overflow | ownerDocument | ownerElement | ownerNode | ownerRule | padding | paddingBottom | paddingLeft | paddingRight | paddingTop | page | pageBreakAfter | pageBreakBefore | pageBreakInside | parentNode | parentRule | parentStyleSheet | pause | pauseAfter | pauseBefore | pitch | pitchRange | playDuring | position | prefix | previousSibling | prevValue | primitiveType | profile | prompt | publicId | quotes | readOnly | red | referrer | rel | relatedNode | relatedTarget | rev | richness | right | root | rowIndex | rows | rowSpan | rules | scheme | scope | screenX | screenY | scrolling | sectionRowIndex | selected | selectedIndex | selectorText | separator | shape | sheet | shiftKey | size | span | speak | speakHeader | speakNumeral | speakPunctuation | specified | speechRate | src | standby | start | startContainer | startOffset | stress | style | styleSheet | styleSheets | summary | systemId | tabIndex | tableLayout | tagName | target | tBodies | text | textAlign | textDecoration | textIndent | textShadow | textTransform | tFoot | tHead | timeStamp | title | top | type | unicodeBidi | URL | useMap | vAlign | value | valueType | version | verticalAlign | view | visibility | vLink | voiceFamily | volume | vspace | whatToShow | whiteSpace | widows | width | wordSpacing | zIndex | acceptNode | add | addEventListener | appendChild | appendData | appendMedium | blur | click | cloneContents | cloneNode | cloneRange | close | collapse | compareBoundaryPoints | createAttribute | createAttributeNS | createCaption | createCDATASection | createComment | createCSSStyleSheet | createDocument | createDocumentFragment | createDocumentType | createElement | createElementNS | createEntityReference | createEvent | createNodeIterator | createProcessingInstruction | createRange | createTextNode | createTFoot | createTHead | createTreeWalker | deleteCaption | deleteCell | deleteContents | deleteData | deleteMedium | deleteRow | deleteRule | deleteTFoot | deleteTHead | detach | dispatchEvent | extractContents | findOffset16 | findOffset32 | focus | getAttribute | getAttributeNode | getAttributeNodeNS | getAttributeNS | getComputedStyle | getCounterValue | getElementById | getElementsByName | getElementsByTagName | getElementsByTagNameNS | getFloatValue | getNamedItem | getNamedItemNS | getOverrideStyle | getPropertyCSSValue | getPropertyPriority | getPropertyValue | getRectValue | getRGBColorValue | getStringValue | hasAttribute | hasAttributeNS | hasAttributes | hasChildNodes | hasFeature | importNode | initEvent | initMouseEvent | initMutationEvent | initUIEvent | insertBefore | insertCell | insertData | insertNode | insertRow | insertRule | isSupported | item | namedItem | nextNode | normalize | open | preventDefault | previousNode | remove | removeAttribute | removeAttributeNode | removeAttributeNS | removeChild | removeEventListener | removeNamedItem | removeNamedItemNS | removeProperty | replaceChild | replaceData | reset | select | selectNode | selectNodeContents | setAttribute | setAttributeNode | setAttributeNodeNS | setAttributeNS | setEnd | setEndAfter | setEndBefore | setFloatValue | setNamedItem | setNamedItemNS | setProperty | setStart | setStartAfter | setStartBefore | setStringValue | splitText | stopPropagation | submit | substringData | surroundContents | toString | write | writeln ">
 <!ELEMENT assertDOMException (metadata?,(INDEX_SIZE_ERR|DOMSTRING_SIZE_ERR|HIERARCHY_REQUEST_ERR|WRONG_DOCUMENT_ERR|INVALID_CHARACTER_ERR|NO_DATA_ALLOWED_ERR|NO_MODIFICATION_ALLOWED_ERR|NOT_FOUND_ERR|NOT_SUPPORTED_ERR|INUSE_ATTRIBUTE_ERR|INVALID_STATE_ERR|SYNTAX_ERR|INVALID_MODIFICATION_ERR|NAMESPACE_ERR|INVALID_ACCESS_ERR))>
 <!ATTLIST assertDOMException id ID #REQUIRED>
+<!ELEMENT assertEventException (metadata?,(UNSPECIFIED_EVENT_TYPE_ERR))>
+<!ATTLIST assertEventException id ID #REQUIRED>
+<!ELEMENT assertRangeException (metadata?,(BAD_BOUNDARYPOINTS_ERR|INVALID_NODE_TYPE_ERR))>
+<!ATTLIST assertRangeException id ID #REQUIRED>
 <!ELEMENT INDEX_SIZE_ERR ( substringData | insertData | deleteData | replaceData | splitText | insertRule | deleteRule | insertRule | deleteRule | setStart | setEnd | insertRow | deleteRow | insertRow | deleteRow | insertCell | deleteCell )  >
-<!ELEMENT DOMSTRING_SIZE_ERR ( nodeValue | data | substringData )  >
-<!ELEMENT HIERARCHY_REQUEST_ERR ( cssText | caption | tHead | tFoot | insertBefore | replaceChild | appendChild | insertRule | insertRule | extractContents | cloneContents | insertNode | surroundContents )  >
+<!ELEMENT DOMSTRING_SIZE_ERR ( data | nodeValue | substringData )  >
+<!ELEMENT HIERARCHY_REQUEST_ERR ( caption | cssText | tFoot | tHead | insertBefore | replaceChild | appendChild | setNamedItem | setNamedItemNS | insertRule | insertRule | extractContents | cloneContents | insertNode | surroundContents )  >
 <!ELEMENT WRONG_DOCUMENT_ERR ( createDocument | insertBefore | replaceChild | appendChild | setNamedItem | setNamedItemNS | setAttributeNode | setAttributeNodeNS | compareBoundaryPoints | insertNode | surroundContents )  >
 <!ELEMENT INVALID_CHARACTER_ERR ( prefix | createDocumentType | createDocument | createElement | createProcessingInstruction | createAttribute | createEntityReference | createElementNS | createAttributeNS | setAttribute | setAttributeNS | appendMedium )  >
 <!ELEMENT NO_DATA_ALLOWED_ERR EMPTY  >
-<!ELEMENT NO_MODIFICATION_ALLOWED_ERR ( nodeValue | prefix | data | value | data | mediaText | cssText | selectorText | selectorText | encoding | cssText | cssText | azimuth | background | backgroundAttachment | backgroundColor | backgroundImage | backgroundPosition | backgroundRepeat | border | borderCollapse | borderColor | borderSpacing | borderStyle | borderTop | borderRight | borderBottom | borderLeft | borderTopColor | borderRightColor | borderBottomColor | borderLeftColor | borderTopStyle | borderRightStyle | borderBottomStyle | borderLeftStyle | borderTopWidth | borderRightWidth | borderBottomWidth | borderLeftWidth | borderWidth | bottom | captionSide | clear | clip | color | content | counterIncrement | counterReset | cue | cueAfter | cueBefore | cursor | direction | display | elevation | emptyCells | cssFloat | font | fontFamily | fontSize | fontSizeAdjust | fontStretch | fontStyle | fontVariant | fontWeight | height | left | letterSpacing | lineHeight | listStyle | listStyleImage | listStylePosition | listStyleType | margin | marginTop | marginRight | marginBottom | marginLeft | markerOffset | marks | maxHeight | maxWidth | minHeight | minWidth | orphans | outline | outlineColor | outlineStyle | outlineWidth | overflow | padding | paddingTop | paddingRight | paddingBottom | paddingLeft | page | pageBreakAfter | pageBreakBefore | pageBreakInside | pause | pauseAfter | pauseBefore | pitch | pitchRange | playDuring | position | quotes | richness | right | size | speak | speakHeader | speakNumeral | speakPunctuation | speechRate | stress | tableLayout | textAlign | textDecoration | textIndent | textShadow | textTransform | top | unicodeBidi | verticalAlign | visibility | voiceFamily | volume | whiteSpace | widows | width | wordSpacing | zIndex | insertBefore | replaceChild | removeChild | appendChild | setNamedItem | removeNamedItem | setNamedItemNS | removeNamedItemNS | appendData | insertData | deleteData | replaceData | setAttribute | removeAttribute | setAttributeNode | removeAttributeNode | setAttributeNS | removeAttributeNS | setAttributeNodeNS | splitText | deleteMedium | appendMedium | insertRule | deleteRule | insertRule | deleteRule | removeProperty | setProperty | setFloatValue | setStringValue | deleteContents | extractContents | insertNode | surroundContents )  >
+<!ELEMENT NO_MODIFICATION_ALLOWED_ERR ( azimuth | background | backgroundAttachment | backgroundColor | backgroundImage | backgroundPosition | backgroundRepeat | border | borderBottom | borderBottomColor | borderBottomStyle | borderBottomWidth | borderCollapse | borderColor | borderLeft | borderLeftColor | borderLeftStyle | borderLeftWidth | borderRight | borderRightColor | borderRightStyle | borderRightWidth | borderSpacing | borderStyle | borderTop | borderTopColor | borderTopStyle | borderTopWidth | borderWidth | bottom | captionSide | clear | clip | color | content | counterIncrement | counterReset | cssFloat | cssText | cssText | cssText | cue | cueAfter | cueBefore | cursor | data | data | direction | display | elevation | emptyCells | encoding | font | fontFamily | fontSize | fontSizeAdjust | fontStretch | fontStyle | fontVariant | fontWeight | height | left | letterSpacing | lineHeight | listStyle | listStyleImage | listStylePosition | listStyleType | margin | marginBottom | marginLeft | marginRight | marginTop | markerOffset | marks | maxHeight | maxWidth | mediaText | minHeight | minWidth | nodeValue | orphans | outline | outlineColor | outlineStyle | outlineWidth | overflow | padding | paddingBottom | paddingLeft | paddingRight | paddingTop | page | pageBreakAfter | pageBreakBefore | pageBreakInside | pause | pauseAfter | pauseBefore | pitch | pitchRange | playDuring | position | prefix | quotes | richness | right | selectorText | selectorText | size | speak | speakHeader | speakNumeral | speakPunctuation | speechRate | stress | tableLayout | textAlign | textDecoration | textIndent | textShadow | textTransform | top | unicodeBidi | value | verticalAlign | visibility | voiceFamily | volume | whiteSpace | widows | width | wordSpacing | zIndex | insertBefore | replaceChild | removeChild | appendChild | setNamedItem | removeNamedItem | setNamedItemNS | removeNamedItemNS | appendData | insertData | deleteData | replaceData | setAttribute | removeAttribute | setAttributeNode | removeAttributeNode | setAttributeNS | removeAttributeNS | setAttributeNodeNS | splitText | deleteMedium | appendMedium | insertRule | deleteRule | insertRule | deleteRule | removeProperty | setProperty | setFloatValue | setStringValue | deleteContents | extractContents | insertNode | surroundContents )  >
 <!ELEMENT NOT_FOUND_ERR ( insertBefore | replaceChild | removeChild | removeNamedItem | removeNamedItemNS | removeAttributeNode | deleteMedium | add )  >
-<!ELEMENT NOT_SUPPORTED_ERR ( currentNode | length | length | createCDATASection | createProcessingInstruction | createEntityReference | importNode | createEvent | createNodeIterator | createTreeWalker )  >
+<!ELEMENT NOT_SUPPORTED_ERR ( currentNode | length | length | createDocument | createCDATASection | createProcessingInstruction | createEntityReference | importNode | createEvent | createNodeIterator | createTreeWalker )  >
 <!ELEMENT INUSE_ATTRIBUTE_ERR ( setNamedItem | setNamedItemNS | setAttributeNode | setAttributeNodeNS )  >
-<!ELEMENT INVALID_STATE_ERR ( startContainer | startOffset | endContainer | endOffset | collapsed | commonAncestorContainer | nextNode | previousNode | setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | collapse | selectNode | selectNodeContents | compareBoundaryPoints | deleteContents | extractContents | cloneContents | insertNode | surroundContents | cloneRange | toString | detach )  >
-<!ELEMENT SYNTAX_ERR ( mediaText | cssText | selectorText | selectorText | encoding | cssText | cssText | azimuth | background | backgroundAttachment | backgroundColor | backgroundImage | backgroundPosition | backgroundRepeat | border | borderCollapse | borderColor | borderSpacing | borderStyle | borderTop | borderRight | borderBottom | borderLeft | borderTopColor | borderRightColor | borderBottomColor | borderLeftColor | borderTopStyle | borderRightStyle | borderBottomStyle | borderLeftStyle | borderTopWidth | borderRightWidth | borderBottomWidth | borderLeftWidth | borderWidth | bottom | captionSide | clear | clip | color | content | counterIncrement | counterReset | cue | cueAfter | cueBefore | cursor | direction | display | elevation | emptyCells | cssFloat | font | fontFamily | fontSize | fontSizeAdjust | fontStretch | fontStyle | fontVariant | fontWeight | height | left | letterSpacing | lineHeight | listStyle | listStyleImage | listStylePosition | listStyleType | margin | marginTop | marginRight | marginBottom | marginLeft | markerOffset | marks | maxHeight | maxWidth | minHeight | minWidth | orphans | outline | outlineColor | outlineStyle | outlineWidth | overflow | padding | paddingTop | paddingRight | paddingBottom | paddingLeft | page | pageBreakAfter | pageBreakBefore | pageBreakInside | pause | pauseAfter | pauseBefore | pitch | pitchRange | playDuring | position | quotes | richness | right | size | speak | speakHeader | speakNumeral | speakPunctuation | speechRate | stress | tableLayout | textAlign | textDecoration | textIndent | textShadow | textTransform | top | unicodeBidi | verticalAlign | visibility | voiceFamily | volume | whiteSpace | widows | width | wordSpacing | zIndex | cookie | insertRule | insertRule | setProperty | createCSSStyleSheet )  >
+<!ELEMENT INVALID_STATE_ERR ( collapsed | commonAncestorContainer | endContainer | endOffset | startContainer | startOffset | nextNode | previousNode | setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | collapse | selectNode | selectNodeContents | compareBoundaryPoints | deleteContents | extractContents | cloneContents | insertNode | surroundContents | cloneRange | toString | detach )  >
+<!ELEMENT SYNTAX_ERR ( azimuth | background | backgroundAttachment | backgroundColor | backgroundImage | backgroundPosition | backgroundRepeat | border | borderBottom | borderBottomColor | borderBottomStyle | borderBottomWidth | borderCollapse | borderColor | borderLeft | borderLeftColor | borderLeftStyle | borderLeftWidth | borderRight | borderRightColor | borderRightStyle | borderRightWidth | borderSpacing | borderStyle | borderTop | borderTopColor | borderTopStyle | borderTopWidth | borderWidth | bottom | captionSide | clear | clip | color | content | cookie | counterIncrement | counterReset | cssFloat | cssText | cssText | cssText | cue | cueAfter | cueBefore | cursor | direction | display | elevation | emptyCells | encoding | font | fontFamily | fontSize | fontSizeAdjust | fontStretch | fontStyle | fontVariant | fontWeight | height | left | letterSpacing | lineHeight | listStyle | listStyleImage | listStylePosition | listStyleType | margin | marginBottom | marginLeft | marginRight | marginTop | markerOffset | marks | maxHeight | maxWidth | mediaText | minHeight | minWidth | orphans | outline | outlineColor | outlineStyle | outlineWidth | overflow | padding | paddingBottom | paddingLeft | paddingRight | paddingTop | page | pageBreakAfter | pageBreakBefore | pageBreakInside | pause | pauseAfter | pauseBefore | pitch | pitchRange | playDuring | position | quotes | richness | right | selectorText | selectorText | size | speak | speakHeader | speakNumeral | speakPunctuation | speechRate | stress | tableLayout | textAlign | textDecoration | textIndent | textShadow | textTransform | top | unicodeBidi | verticalAlign | visibility | voiceFamily | volume | whiteSpace | widows | width | wordSpacing | zIndex | insertRule | insertRule | setProperty | createCSSStyleSheet )  >
 <!ELEMENT INVALID_MODIFICATION_ERR ( cssText | cssText )  >
 <!ELEMENT NAMESPACE_ERR ( prefix | createDocumentType | createDocument | createElementNS | createAttributeNS | setAttributeNS )  >
 <!ELEMENT INVALID_ACCESS_ERR ( setFloatValue | getFloatValue | setStringValue | getStringValue | getCounterValue | getRectValue | getRGBColorValue )  >
-<!ELEMENT assertEventException (metadata?,(UNSPECIFIED_EVENT_TYPE_ERR))>
-<!ATTLIST assertEventException id ID #REQUIRED>
-<!ELEMENT UNSPECIFIED_EVENT_TYPE_ERR ( dispatchEvent )
- >
-<!ELEMENT assertRangeException (metadata?,(BAD_BOUNDARYPOINTS_ERR|INVALID_NODE_TYPE_ERR))>
-<!ATTLIST assertRangeException id ID #REQUIRED>
-<!ELEMENT BAD_BOUNDARYPOINTS_ERR ( surroundContents )
- >
+<!ELEMENT UNSPECIFIED_EVENT_TYPE_ERR ( dispatchEvent )  >
+<!ELEMENT BAD_BOUNDARYPOINTS_ERR ( surroundContents )  >
 <!ELEMENT INVALID_NODE_TYPE_ERR ( setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | selectNode | selectNodeContents | insertNode | surroundContents )  >
 
 
@@ -491,7 +489,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST bottom
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Rect | CSS2Properties ) #REQUIRED>
 
 					
@@ -1155,7 +1154,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST firstChild
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Node | TreeWalker ) #REQUIRED>
 
 					
@@ -1236,7 +1236,7 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
 	obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    interface ( HTMLIsIndexElement | HTMLSelectElement | HTMLOptionElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLLabelElement | HTMLFieldSetElement | HTMLLegendElement ) #REQUIRED>
+    interface ( HTMLIsIndexElement | HTMLSelectElement | HTMLOptionElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLLabelElement | HTMLFieldSetElement | HTMLLegendElement | HTMLObjectElement ) #REQUIRED>
 
 					
 <!ELEMENT forms EMPTY>
@@ -1295,7 +1295,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST href
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( StyleSheet | CSSImportRule | HTMLLinkElement | HTMLBaseElement | HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
 
 					
@@ -1407,7 +1408,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST lastChild
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Node | TreeWalker ) #REQUIRED>
 
 					
@@ -1415,7 +1417,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST left
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Rect | CSS2Properties ) #REQUIRED>
 
 					
@@ -1423,7 +1426,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST length
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( NodeList | NamedNodeMap | CharacterData | StyleSheetList | MediaList | CSSRuleList | CSSStyleDeclaration | CSSValueList | HTMLCollection | HTMLOptionsCollection | HTMLFormElement | HTMLSelectElement | DOMString  ) #REQUIRED>
 
 					
@@ -1466,7 +1470,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST listStyle
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Counter | CSS2Properties ) #REQUIRED>
 
 					
@@ -1626,7 +1631,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST media
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( StyleSheet | CSSMediaRule | CSSImportRule | HTMLLinkElement | HTMLStyleElement ) #REQUIRED>
 
 					
@@ -1687,7 +1693,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST name
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Attr | DocumentType | HTMLMetaElement | HTMLFormElement | HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLAnchorElement | HTMLImageElement | HTMLObjectElement | HTMLParamElement | HTMLAppletElement | HTMLMapElement | HTMLFrameElement | HTMLIFrameElement ) #REQUIRED>
 
 					
@@ -1711,7 +1718,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST nextSibling
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Node | TreeWalker ) #REQUIRED>
 
 					
@@ -1980,7 +1988,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST parentNode
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Node | TreeWalker ) #REQUIRED>
 
 					
@@ -2076,7 +2085,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST previousSibling
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Node | TreeWalker ) #REQUIRED>
 
 					
@@ -2203,7 +2213,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST right
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Rect | CSS2Properties ) #REQUIRED>
 
 					
@@ -2555,7 +2566,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST target
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( ProcessingInstruction | Event | HTMLLinkElement | HTMLBaseElement | HTMLFormElement | HTMLAnchorElement | HTMLAreaElement ) #REQUIRED>
 
 					
@@ -2651,7 +2663,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST top
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Rect | CSS2Properties ) #REQUIRED>
 
 					
@@ -2659,7 +2672,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST type
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #REQUIRED
+    var CDATA #IMPLIED
+    value CDATA #IMPLIED
     interface ( Event | StyleSheet | CSSRule | HTMLLinkElement | HTMLStyleElement | HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | HTMLUListElement | HTMLOListElement | HTMLLIElement | HTMLAnchorElement | HTMLObjectElement | HTMLParamElement | HTMLScriptElement ) #REQUIRED>
 
 					
@@ -3101,16 +3115,6 @@ This schema was generated from  by dom-to-dtd.xsl.
     var CDATA #REQUIRED
     eventType CDATA #REQUIRED
     interface (DocumentEvent) #IMPLIED
->
-
-
-<!ELEMENT createHTMLDocument EMPTY >
-<!ATTLIST createHTMLDocument
-    id ID #IMPLIED
-    obj CDATA #REQUIRED
-    var CDATA #REQUIRED
-    title CDATA #REQUIRED
-    interface (HTMLDOMImplementation) #IMPLIED
 >
 
 
@@ -4256,6 +4260,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 	value CDATA #IMPLIED
 >
 
+<!ELEMENT get (var*, (%statement;)* )>
+<!ELEMENT set (var*, (%statement;)* )>
 
 
 <!ELEMENT var  (member+ | ( var* , ( ( handleEvent )  | ( acceptNode )  ) ) )? >
@@ -4278,7 +4284,7 @@ This schema was generated from  by dom-to-dtd.xsl.
     uri CDATA #IMPLIED
     obj CDATA #IMPLIED
     interface (DocumentLS) #IMPLIED
-	willBeModified (true | false) #REQUIRED
+	willBeModified (true | false) #IMPLIED
 >
 
 <!ELEMENT implementation EMPTY>
@@ -4302,6 +4308,7 @@ This schema was generated from  by dom-to-dtd.xsl.
 
 <!ELEMENT metadata (metadata | title | creator | subject | description | contributor | date | source | relation)*>
 <!ATTLIST metadata
+        xmlns CDATA #FIXED "http://www.w3.org/2001/DOM-Test-Suite/Level-2"
 	id ID #IMPLIED
 	about CDATA #IMPLIED
 >
@@ -4524,6 +4531,12 @@ This schema was generated from  by dom-to-dtd.xsl.
 	expected CDATA #REQUIRED
 >
 
+<!ELEMENT contains EMPTY>
+<!ATTLIST contains
+	id ID #IMPLIED
+	obj CDATA #REQUIRED
+	substring CDATA #REQUIRED
+>
 
 <!ELEMENT implementationAttribute EMPTY>
 <!ATTLIST implementationAttribute
@@ -4634,6 +4647,13 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST createEventMonitor
 	id ID #IMPLIED
 	var CDATA #REQUIRED
+>
+
+<!ELEMENT createXPathEvaluator EMPTY>
+<!ATTLIST createXPathEvaluator
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+    document CDATA #REQUIRED
 >
 
 	

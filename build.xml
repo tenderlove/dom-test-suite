@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.93  2003-04-24 05:02:05  dom-ts-4
+Revision 1.94  2003-05-21 05:00:32  dom-ts-4
+Add skeletal DOM 3 Core test suite
+http://www.w3.org/Bugs/Public/show_bug.cgi?id=211
+
+Revision 1.93  2003/04/24 05:02:05  dom-ts-4
 Xalan-J support for L3 XPath
 http://www.w3.org/Bugs/Public/show_bug.cgi?id=191
 
@@ -1869,6 +1873,9 @@ All implementation conditions combined into implementationAttribute element
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls"/>
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls"/>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/xpath"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/xpath"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/core"/>
 </target>
 
 <target name="dom3-ls-validate-tests" depends="dom3-dtd">
@@ -1883,6 +1890,13 @@ All implementation conditions combined into implementationAttribute element
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level3/xpath" includes="*.xml"/>  
+	</xmlvalidate>
+</target>
+
+<target name="dom3-core-validate-tests" depends="dom3-dtd">
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level3/core" includes="*.xml"/>  
 	</xmlvalidate>
 </target>
 
@@ -1917,7 +1931,26 @@ All implementation conditions combined into implementationAttribute element
 	<delete file="{build.dir}/dom3-subjects.xsl"/>
 </target>
 
-<target name="dom3-ls-gen-java" depends="dom3-interfaces,dom3-schema">
+<target name="dom3-core-gen-java" depends="dom3-interfaces,dom3-dtd">
+    <mkdir dir="${build.dir}/java/org/w3c/domts/level3/core"/>
+
+	<style basedir="${tests.dir}/level3/core" 
+		   destdir="${java.build.dir}/org/w3c/domts/level3/core" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-java.xsl" 
+	       extension=".java">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom3-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level3.core"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level3/core/"/>
+	</style>
+</target>
+
+
+<target name="dom3-ls-gen-java" depends="dom3-interfaces,dom3-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level3/ls"/>
 
 	<style basedir="${tests.dir}/level3/ls" 
@@ -1935,7 +1968,7 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom3-xpath-gen-java" depends="dom3-interfaces,dom3-schema">
+<target name="dom3-xpath-gen-java" depends="dom3-interfaces,dom3-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level3/xpath"/>
 
 	<style basedir="${tests.dir}/level3/xpath" 
@@ -1953,7 +1986,32 @@ All implementation conditions combined into implementationAttribute element
 	</style>
 </target>
 
-<target name="dom3-xpath-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-schema">
+<target name="dom3-core-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level3/core/files"/>
+    <copy todir="${build.dir}/ecmascript/level3/core">
+      <fileset dir="ecmascript" includes="*.js"/>
+    </copy>
+    <copy todir="${build.dir}/ecmascript/level3/core/files">
+      <fileset dir="tests/level3/core/files" excludes="*.bak"/>
+    </copy>
+    
+    <style basedir="${tests.dir}/level3/core" 
+      destdir="${build.dir}/ecmascript/level3/core" 
+      includes="*.xml" 
+      excludes="metadata.xml"
+      style="${transforms.dir}/test-to-jsunit.xsl" 
+      extension=".html">
+      <param name="interfaces-docname"
+	expression="../${build.dir}/dom3-interfaces.xml"/>
+      <param name="target-uri-base"
+	expression="http://www.w3.org/2001/DOM-Test-Suite/level3/core/"/>
+      <param name="testpath" expression="../level3/core/"/>
+    </style>
+</target>
+
+
+
+<target name="dom3-xpath-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
     <mkdir dir="${build.dir}/ecmascript/level3/xpath/files"/>
     <copy todir="${build.dir}/ecmascript/level3/xpath">
       <fileset dir="ecmascript" includes="*.js"/>
@@ -2022,6 +2080,66 @@ it would compile all DOM 3 java code
         <src path="${java.build.dir}"/>
         <include name="org/w3c/domts/level3/${module}/*"/>
     </javac>
+</target>
+
+<target name="dom3-core-javac" depends="common-javac,dom3-core-gen-java">
+
+	<javac 
+		destdir="${java.build.dir}" 
+		classpath="${java.build.dir};${jaxp.jar}"
+        debug="on"
+		encoding="UTF8">
+        <src path="${java.build.dir}"/>
+        <src path="${specs.dir}/Level-3/Core/java"/>
+        <src path="${specs.dir}/Level-3/LS/java"/>
+        <src path="${specs.dir}/Level-3/XPath/java"/>
+        <include name="org/w3c/domts/level3/core/*"/>
+        <include name="org/w3c/domts/*"/>
+        <include name="org/w3c/dom/**"/>
+    </javac>
+</target>
+
+<target name="dom3-core-checkstyle" depends="checkstyle-available, dom3-core-javac">
+    <taskdef resource="checkstyletask.properties"/>
+
+    <checkstyle>
+        <fileset dir="${java.build.dir}/org/w3c/domts/level3/core" includes="*.java"/>
+
+        <!-- Allow long lines  -->
+        <property key="checkstyle.maxlinelen" value="1024"/>
+
+        <!-- Allows wildcard imports -->
+        <property key="checkstyle.ignore.imports" value="true"/>
+
+        <!-- Allows test names that start with lowercase -->
+        <property key="checkstyle.pattern.type" value="^[a-zA-Z][a-zA-Z0-9_]*$"/>
+
+        <property key="checkstyle.maxmethodlen" value="5000"/>
+    </checkstyle>
+
+</target>
+
+
+<target name="dom3-core-jar" depends="dom3-core-javac">
+	<!--  will need to provide a manifest    -->
+	<jar jarfile="${build.dir}/dom3-core.jar"  manifest="java/dom3-core.mf">
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/domts/level3/core/*"
+		         excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/dom/*"
+		         excludes="*.bak"/>
+		<fileset dir="${java.build.dir}"
+		         includes="org/w3c/dom/core/*"
+		         excludes="*.bak"/>
+
+        <!--  leave commented until we have some associated files  -->
+		<!-- fileset dir="tests/level3/ls/files" excludes="*.bak"/ -->
+		<fileset dir="java"
+		         includes="org/w3c/domts/*" excludes="*.bak"/>
+	</jar>
 </target>
 
 

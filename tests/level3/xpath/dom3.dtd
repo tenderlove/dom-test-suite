@@ -16,7 +16,7 @@ This schema was generated from  by dom-to-dtd.xsl.
 
 <!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException">
 
-<!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor">
+<!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator">
 
 <!ENTITY % implementation-condition "hasFeature | implementationAttribute">
 
@@ -3252,6 +3252,13 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST createEventMonitor
 	id ID #IMPLIED
 	var CDATA #REQUIRED
+>
+
+<!ELEMENT createXPathEvaluator EMPTY>
+<!ATTLIST createXPathEvaluator
+	id ID #IMPLIED
+	var CDATA #REQUIRED
+    document CDATA #REQUIRED
 >
 
 	

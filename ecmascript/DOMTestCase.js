@@ -210,6 +210,10 @@ IFrameBuilder.prototype.hasFeature = function(feature, version) {
     return document.implementation.hasFeature(feature, version);
 }
 
+IFrameBuilder.prototype.getImplementation = function() {
+    return document.implementation;
+}
+
 
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
   if (url == "staff" && this.contentType == "text/html") {
@@ -279,6 +283,24 @@ SVGPluginBuilder.prototype.hasFeature = function(feature, version) {
             return true;
         }
     }
+}
+
+SVGPluginBuilder.prototype.getImplementation = function() {
+  var embed = document.createElement("embed");
+  embed.src = fileBase + url + getSuffix(this.contentType);
+  embed.height = 100;
+  embed.width = 100;
+  embed.type = "image/svg+xml";
+  embed.id = varname;
+  var child = document.documentElement.firstChild;
+  while(child != null) {
+      if (child.nodeName != null && child.nodeName.toUpperCase() == "BODY") {
+          child.appendChild(embed);
+          return child.getSVGDocument.implementation;
+      }
+      child = child.nextSibling;
+  }
+  return null;
 }
 
 var svgloadcount = 0;
@@ -484,6 +506,10 @@ MSXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
 }
             
 
+MSXMLBuilder.prototype.getImplementation = function() {
+    var doc = this.CreateMSXML();
+    return doc.implementation;
+}
 
 //
 //   Only used to select tests compatible with implementation
@@ -542,6 +568,11 @@ function MozillaXMLBuilder() {
     this.docnames = new Array();
     this.exception = null;
 }
+
+MozillaXMLBuilder.prototype.getImplementation = function() {
+    return document.implementation;
+}
+
 
 MozillaXMLBuilder.prototype.preload = function(frame, varname, url) {
   var domimpl = document.implementation;
@@ -605,6 +636,11 @@ function DOM3LSBuilder() {
     this.docnames = new Array();
     this.exception = null;
 }
+
+DOM3LSBuilder.prototype.getImplementation = function() {
+    return document.implementation;
+}
+
 
 DOM3LSBuilder.prototype.preload = function(frame, varname, url) {
   if (this.async) {
@@ -787,5 +823,7 @@ if (fileBase.indexOf('?') != -1) {
 }
 fileBase = fileBase.substring(0, fileBase.lastIndexOf('/') + 1) + "files/";
 
-
+function getImplementation() {
+    return builder.getImplementation();
+}
 
