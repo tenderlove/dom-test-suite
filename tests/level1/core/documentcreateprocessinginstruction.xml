@@ -33,7 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2001Apr/0020.html"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-135944439"/>
 </metadata>
-<hasFeature feature="XML"/>
+<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="newPINode" type="ProcessingInstruction"/>
 <var name="piValue" type="DOMString"/>

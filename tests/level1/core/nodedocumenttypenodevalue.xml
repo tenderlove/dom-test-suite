@@ -26,7 +26,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 </metadata>
-<hasFeature feature="XML"/>
+<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="attrList" type="NamedNodeMap"/>
