@@ -124,7 +124,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     if(host != null) {
         var actualHost = "";
         if(actualPath.startsWith("//")) {
-            int termSlash = actualPath.indexOf("/",2);
+            var termSlash = actualPath.substring(2).indexOf("/") + 2;
             actualHost = actualPath.substring(0,termSlash);
         }
         assertEquals(assertID, host, actualHost);
@@ -411,10 +411,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   //
   //
 
-  if(navigator.appName.indexOf("Microsoft") != -1) {
-    asvDefaultBuilder = new ASVDocumentBuilder(null,null);
-    factory = new ASVDocumentBuilderFactory();
-  }
+//  if(navigator.appName.indexOf("Microsoft") != -1) {
+//    asvDefaultBuilder = new ASVDocumentBuilder(null,null);
+//    factory = new ASVDocumentBuilderFactory();
+//  }
 
 
 
