@@ -12,7 +12,10 @@
 
 /*
 $Log: DOMTestFramework.java,v $
-Revision 1.10  2003-12-06 06:50:29  dom-ts-4
+Revision 1.11  2003-12-23 03:27:25  dom-ts-4
+Adds fail construct (bug 445)
+
+Revision 1.10  2003/12/06 06:50:29  dom-ts-4
 More fixes for L&S (Bug 396)
 
 Revision 1.9  2003/01/25 18:41:53  dom-ts-4
@@ -55,6 +58,7 @@ public interface DOMTestFramework {
 		String feature,
 		String version);
 	void wait(int millisecond);
+	void fail(DOMTestCase test, String assertID);
 	void assertTrue(DOMTestCase test, String assertID, boolean actual);
 	void assertFalse(DOMTestCase test, String assertID, boolean actual);
 	void assertNull(DOMTestCase test, String assertID, Object actual);

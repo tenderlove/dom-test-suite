@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.55  2003-12-19 22:20:49  dom-ts-4
+Revision 1.56  2003-12-23 03:27:25  dom-ts-4
+Adds fail construct (bug 445)
+
+Revision 1.55  2003/12/19 22:20:49  dom-ts-4
 willBeModified violation detection support (bug 412)
 
 Revision 1.54  2003/12/19 07:50:01  dom-ts-4
@@ -1311,6 +1314,14 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 </xsl:text>
 </xsl:template>
 
+
+<xsl:template match="*[local-name()='fail']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:text>fail("</xsl:text>
+    <xsl:value-of select="@id"/>
+    <xsl:text>");
+     </xsl:text>
+</xsl:template>
 
 
 

@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.9  2003-12-19 22:21:04  dom-ts-4
+ Revision 1.10  2003-12-23 03:27:25  dom-ts-4
+ Adds fail construct (bug 445)
+
+ Revision 1.9  2003/12/19 22:21:04  dom-ts-4
  willBeModified violation detection support (bug 412)
 
  Revision 1.8  2003/12/15 19:05:55  dom-ts-4
@@ -81,6 +84,10 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
   public void wait(int millisecond) {
   }
 
+  public void fail(DOMTestCase test, String assertID) {
+  	fail(assertID);
+  }
+  
   public void assertTrue(DOMTestCase test, String assertID, boolean actual) {
     assertTrue(assertID,actual);
   }

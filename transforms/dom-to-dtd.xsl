@@ -76,7 +76,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 --&gt;
 
-&lt;!ENTITY % framework-assertion "assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
+&lt;!ENTITY % framework-assertion "fail|assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
 &lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempFileURI|createTempHttpURI"&gt;
 
@@ -624,6 +624,11 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	qualifier (isVersionOf | hasVersion | isReplacedBy | isRequiredBy | requires | isPartOf | hasPart | isReferenceBy | references) #REQUIRED
 &gt;
 					
+&lt;!ELEMENT fail EMPTY&gt;
+&lt;!ATTLIST fail
+	id ID #REQUIRED
+&gt;
+
 &lt;!ELEMENT assertTrue ((%condition;)?)&gt;
 &lt;!ATTLIST assertTrue
 	id ID #REQUIRED

@@ -410,6 +410,14 @@ The source document contained the following notice:
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="*[local-name()='fail']" mode="body">
+    <xsl:param name="vardefs"/>
+    <xsl:text>fail("</xsl:text>
+    <xsl:value-of select="@id"/>
+    <xsl:text>");
+     </xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='assertTrue']" mode="body">
 	<xsl:param name="type"/>

@@ -896,6 +896,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				</xs:complexType>
 			</xs:element>
 
+			<xs:element name="fail">
+				<xs:annotation>
+					<xs:documentation>Will unconditionally fail the test.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="id" type="xs:ID" use="required"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:complexType name="assertTrueFalse">
 				<xs:sequence>
 					<xs:group ref="condition" minOccurs="0"/>
@@ -1022,6 +1030,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 			<xs:group name="framework-assertion">
 				<xs:choice>
+				    <xs:element ref="fail"/>
 					<xs:element ref="assertTrue"/>
 					<xs:element ref="assertFalse"/>
 					<xs:element ref="assertNull"/>

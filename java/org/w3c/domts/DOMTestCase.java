@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.15  2003-12-06 06:50:29  dom-ts-4
+ Revision 1.16  2003-12-23 03:27:25  dom-ts-4
+ Adds fail construct (bug 445)
+
+ Revision 1.15  2003/12/06 06:50:29  dom-ts-4
  More fixes for L&S (Bug 396)
 
  Revision 1.14  2003/11/18 08:14:55  dom-ts-4
@@ -162,7 +165,10 @@ public abstract class DOMTestCase extends DOMTest  {
     framework.wait(millisecond);
   }
 
-
+  public void fail(String assertID) {
+  	framework.fail(this, assertID);
+  }
+  
   public void assertTrue(String assertID, boolean actual) {
     framework.assertTrue(this,assertID,actual);
   }
