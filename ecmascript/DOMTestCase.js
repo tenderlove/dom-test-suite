@@ -188,14 +188,10 @@ function getSuffix(contentType) {
 
 function IFrameBuilder() {
     this.contentType = "text/html";
-    this.supportedContentTypes = [ "text/html", 
-        "text/xml", 
-        "image/svg+xml", 
-        "application/xhtml+xml",
-        "text/mathml" ];
+    this.supportedContentTypes = [ "text/html" ];
 
     this.supportsAsyncChange = false;
-    this.async = true;
+    this.async = false;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
         "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware" ];
@@ -219,8 +215,7 @@ IFrameBuilder.prototype.preload = function(frame, varname, url) {
   if (url == "staff" && this.contentType == "text/html") {
     throw "Tests using staff document are not supported by HTML processors";
   }
-  frame.document.location.href = fileBase + url + getSuffix(this.contentType);
-  return 0;
+  return 1;
 }
 
 IFrameBuilder.prototype.load = function(frame, varname, url) {
