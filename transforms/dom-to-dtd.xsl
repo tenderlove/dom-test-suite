@@ -253,6 +253,22 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 					<xsl:when test="@name = 'load'"/>
 					<xsl:when test="@name = 'contentType'"/>
 					<xsl:when test="@name = 'contains'"/>
+					<xsl:when test="@name = 'evaluate'">
+						<xsl:if test="@id = 'XPathEvaluator-evaluate'">
+&lt;!ELEMENT evaluate EMPTY &gt;
+&lt;!ATTLIST evaluate
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    expression CDATA #IMPLIED
+    contextNode CDATA #REQUIRED
+    resolver CDATA #IMPLIED
+    type CDATA #REQUIRED
+    result CDATA #REQUIRED
+    interface (XPathEvaluator|XPathExpression) #REQUIRED
+&gt;
+</xsl:if>
+					</xsl:when>
 
                     <!--   if the interface is something like EventListener
                              that might be defined using anonymous inner classes  
@@ -984,6 +1000,8 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	var CDATA #REQUIRED
 &gt;
 
+
+
 	</xsl:template>
 
 	<!--   This template produces assertion elements for each
@@ -1026,7 +1044,8 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				<xsl:variable name="code" select="@name"/>
 				<xsl:variable name="code-colon"><xsl:value-of select="@name"/>:</xsl:variable>
 				<xsl:variable name="attrraises" select="$attributes/*[name() = 'getraises' or name() = 'setraises']/exception[contains(string(.),$code-colon)]"/>
-				<xsl:variable name="methodraises" select="$methods/raises/exception[contains(string(.),$code-colon)]"/>
+                <!-- suppress production for XPathExpression.evaluate since it is a subset of XPathEvaluator.evaluate  -->
+				<xsl:variable name="methodraises" select="$methods[not(@id = 'XPathExpression-evaluate')]/raises/exception[contains(string(.),$code-colon)]"/>
 				<xsl:variable name="total" select="count($attrraises) + count($methodraises)"/>
 				<xsl:choose>
 					<xsl:when test="$total = 0">

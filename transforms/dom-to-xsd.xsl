@@ -266,6 +266,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                        				<xs:attribute name="substring" type="variableOrStringLiteral" use="optional"/>
                                     <xs:attribute name="str" type="variableOrStringLiteral" use="optional"/>
                                 </xsl:when>
+                                
+                                <xsl:when test="@name = 'evaluate'">
+				         			<xs:attribute name="var" type="variable" use="required"/>
+				         			<xs:attribute name="obj" type="variable" use="required"/>
+				         			<xs:attribute name="expression" type="variableOrStringLiteral" use="optional"/>
+				         			<xs:attribute name="contextNode" type="variable" use="required"/>
+				         			<xs:attribute name="resolver" type="variable" use="optional"/>
+				         			<xs:attribute name="type" type="variableOrIntLiteral" use="required"/>
+				         			<xs:attribute name="result" type="variable" use="required"/>
+                                </xsl:when>
 
                                 <xsl:otherwise>
 									<!--  If the method has a (non-void) return value then
@@ -1384,6 +1394,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             		<xs:attribute name="var" type="variable" use="required"/>
             	</xs:complexType>
             </xs:element>
+            
             <xs:element name="substring">
             	<xs:complexType>
             		<xs:attribute name="id" type="xs:ID" use="optional"/>
