@@ -12,7 +12,11 @@
 
  /*
  $Log: JAXPDOMTestDocumentBuilderFactory.java,v $
- Revision 1.1  2002-02-03 07:47:51  dom-ts-4
+ Revision 1.2  2003-04-24 05:02:05  dom-ts-4
+ Xalan-J support for L3 XPath
+ http://www.w3.org/Bugs/Public/show_bug.cgi?id=191
+
+ Revision 1.1  2002/02/03 07:47:51  dom-ts-4
  More missing files
 
  */
@@ -68,6 +72,12 @@ public class JAXPDOMTestDocumentBuilderFactory
     }
   }
 
+  protected DOMTestDocumentBuilderFactory createInstance(DocumentBuilderFactory newFactory,
+    DocumentBuilderSetting[] mergedSettings)
+    throws DOMTestIncompatibleException {
+    return new JAXPDOMTestDocumentBuilderFactory(newFactory,mergedSettings);
+  }
+
   public DOMTestDocumentBuilderFactory newInstance(DocumentBuilderSetting[] newSettings)
     throws DOMTestIncompatibleException {
     if(newSettings == null) {
@@ -75,7 +85,7 @@ public class JAXPDOMTestDocumentBuilderFactory
     }
     DocumentBuilderSetting[] mergedSettings = mergeSettings(newSettings);
     DocumentBuilderFactory newFactory = factory.newInstance();
-    return new JAXPDOMTestDocumentBuilderFactory(newFactory,mergedSettings);
+    return createInstance(newFactory, mergedSettings);
   }
 
   private class LoadErrorHandler implements org.xml.sax.ErrorHandler {

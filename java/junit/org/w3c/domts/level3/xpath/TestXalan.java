@@ -11,7 +11,7 @@
  */
 
 
-package org.w3c.domts.level3.ls;
+package org.w3c.domts.level3.xpath;
 
 import junit.framework.*;
 import java.lang.reflect.*;
@@ -21,19 +21,18 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 import org.w3c.domts.*;
 
-public class TestXerces extends TestSuite {
+public class TestXalan extends TestSuite {
 
   public static TestSuite suite() throws Exception
   {
-    Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level3.ls.alltests");
+    Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level3.xpath.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
-    DocumentBuilderFactory xercesFactory = (DocumentBuilderFactory)
-      ClassLoader.getSystemClassLoader().loadClass("org.apache.xerces.jaxp.DocumentBuilderFactoryImpl").newInstance();
+    DocumentBuilderFactory jaxpFactory = DocumentBuilderFactory.newInstance();
 
     DOMTestDocumentBuilderFactory factory =
-        new JAXPDOMTestDocumentBuilderFactory(xercesFactory,
-          JAXPDOMTestDocumentBuilderFactory.getConfiguration1());
+        new XalanDOMTestDocumentBuilderFactory(jaxpFactory,
+          XalanDOMTestDocumentBuilderFactory.getConfiguration1());
 
 
     Object test = testConstructor.newInstance(new Object[] { factory });

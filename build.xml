@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.92  2003-04-23 04:49:19  dom-ts-4
+Revision 1.93  2003-04-24 05:02:05  dom-ts-4
+Xalan-J support for L3 XPath
+http://www.w3.org/Bugs/Public/show_bug.cgi?id=191
+
+Revision 1.92  2003/04/23 04:49:19  dom-ts-4
 Restore SVG plugin support
 http://www.w3.org/Bugs/Public/show_bug.cgi?id=205
 
@@ -2133,11 +2137,10 @@ it would compile all DOM 3 java code
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/dom/xpath/*"
 		         excludes="*.bak"/>
-
-        <!--  leave commented until we have some associated files  -->
-		<!-- fileset dir="tests/level3/xpath/files" excludes="*.bak"/ -->
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
+
+		<fileset dir="tests/level3/xpath/files" excludes="*.bak"/>
 	</jar>
 </target>
 

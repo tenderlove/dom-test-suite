@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 World Wide Web Consortium,
+ * Copyright (c) 2001-2003 World Wide Web Consortium,
  * (Massachusetts Institute of Technology, Institut National de
  * Recherche en Informatique et en Automatique, Keio University). All
  * Rights Reserved. This program is distributed under the W3C's Software
@@ -12,7 +12,11 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.5  2003-04-23 05:48:24  dom-ts-4
+ Revision 1.6  2003-04-24 05:02:05  dom-ts-4
+ Xalan-J support for L3 XPath
+ http://www.w3.org/Bugs/Public/show_bug.cgi?id=191
+
+ Revision 1.5  2003/04/23 05:48:24  dom-ts-4
  DOMTSML and framework support for createXPathEvaluator
  http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
 
@@ -99,7 +103,7 @@ public abstract class DOMTest {
             return resolvedURI;
         }
     } catch(MalformedURLException ex) {
-        throw new DOMTestLoadException(ex);
+//        throw new DOMTestLoadException(ex);
     }
     //
     //   build a URL for a test file in the JAR
