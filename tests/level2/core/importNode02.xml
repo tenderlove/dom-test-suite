@@ -41,14 +41,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <var name="system" type="DOMString"/>
 <var name="value" type="DOMString"/>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
-<createCDATASection obj="aNewDoc" var="cDataSec" data="&quot;this is CDATASection data&quot;"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<createCDATASection obj="aNewDoc" var="cDataSec" data='"this is CDATASection data"'/>
 <importNode obj="doc" var="aNode" importedNode="cDataSec" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="dtdSystemId" ignoreCase="false"/>
 <nodeValue obj="aNode" var="value"/>
-<assertEquals actual="value" expected="&quot;this is CDATASection data&quot;" id="throw_Equals2" ignoreCase="false"/>
+<assertEquals actual="value" expected='"this is CDATASection data"' id="nodeValue" ignoreCase="false"/>
 </test>

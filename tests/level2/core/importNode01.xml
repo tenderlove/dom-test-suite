@@ -57,27 +57,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"elem:attr1"</member>
 <member>"importedText"</member>
 </var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="true"/>
-<createAttribute obj="aNewDoc" var="newAttr" name="&quot;elem:attr1&quot;"/>
-<createTextNode obj="aNewDoc" var="importedChild" data="&quot;importedText&quot;"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="true"/>
+<createAttribute obj="aNewDoc" var="newAttr" name='"elem:attr1"'/>
+<createTextNode obj="aNewDoc" var="importedChild" data='"importedText"'/>
 <appendChild obj="newAttr" var="aNode" newChild="importedChild"/>
 <importNode obj="doc" var="aNode" importedNode="newAttr" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>
 <doctype obj="ownerDocument" var="docType"/>
 <systemId interface="DocumentType" obj="docType" var="system"/>
-<assertNotNull actual="aNode" id="throw_Null1"/>
-<assertEquals actual="system" expected="&quot;staffNS.dtd&quot;" id="throw_Equals1" ignoreCase="false"/>
+<assertNotNull actual="aNode" id="aNode"/>
+<assertEquals actual="system" expected='"staffNS.dtd"' id="systemId" ignoreCase="false"/>
 <ownerElement obj="aNode" var="attrOwnerElement"/>
-<assertNull actual="attrOwnerElement" id="throw_Null2"/>
+<assertNull actual="attrOwnerElement" id="ownerElement"/>
 <specified obj="aNode" var="specified"/>
-<assertTrue actual="specified" id="throw_True"/>
+<assertTrue actual="specified" id="specified"/>
 <childNodes obj="aNode" var="childList"/>
-<assertSize collection="childList" size="1" id="throw_Size"/>
+<assertSize collection="childList" size="1" id="childList"/>
 <nodeName obj="aNode" var="nodeName"/>
-<append collection="result" obj="nodeName"/>
+<assertEquals actual="nodeName" id="nodeName" ignoreCase="false" expected='"elem:attr1"'/>
 <firstChild interface="Node" obj="aNode" var="child"/>
 <nodeValue obj="child" var="childValue"/>
-<append collection="result" obj="childValue"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals2" ignoreCase="false"/>
+<assertEquals actual="childValue" id="childValue" ignoreCase="false" expected='"importedText"'/>
 </test>
