@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.15  2001-10-25 09:29:28  dom-ts-4
+Revision 1.16  2001-11-16 08:23:20  dom-ts-4
+Eliminated spurious casts on method parameters
+
+Revision 1.15  2001/10/25 09:29:28  dom-ts-4
 test-to-java updates for DOM L2
 
 Revision 1.14  2001/10/18 14:21:59  dom-ts-4
@@ -1134,6 +1137,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 			        <xsl:text>)</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
+            <xsl:text>/*</xsl:text><xsl:value-of select="$vartype"/><xsl:text>*/</xsl:text>
 			<xsl:value-of select="$var"/>
 			<xsl:text>)</xsl:text>
 		</xsl:otherwise>
@@ -1179,11 +1183,12 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 
 <xsl:template name="produce-param">
 	<xsl:param name="value"/>
+    <xsl:param name="vartype"/>
 	<xsl:param name="reqtype"/>
 
 	<xsl:choose>
 		<!--  if value is true, false or starts with a quote  -->
-		<xsl:when test="$value = 'true' or $value = 'false' or substring($value,1,1) ='&quot;'">
+		<xsl:when test="$value = 'true' or $value = 'false' or $value = 'null' or substring($value,1,1) ='&quot;'">
 			<!--  just copy the literal  -->
 			<xsl:value-of select="$value"/>
 		</xsl:when>
@@ -1192,10 +1197,10 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 			<xsl:value-of select="$value"/>
 		</xsl:when>
 		<!--  is a declared variable, make sure that it is cast correctly  -->
-		<xsl:when test="$value/ancestor::*[local-name() = 'test']/*[local-name()='var' and @name = $value]">
+		<xsl:when test="$vartype">
 			<xsl:call-template name="cast">
 				<xsl:with-param name="var" select="$value"/>
-				<xsl:with-param name="vartype" select="ancestor::*[local-name() = 'test']/*[local-name()='var' and @name = $value]/@type"/>
+				<xsl:with-param name="vartype" select="$vartype"/>
 				<xsl:with-param name="reqtype" select="$reqtype"/>
 			</xsl:call-template>
 		</xsl:when>
@@ -1253,28 +1258,35 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 	<xsl:variable name="current" select="."/>
 	<xsl:variable name="obj" select="@obj"/>
 	<xsl:variable name="var" select="@var"/>
+    <xsl:variable name="test" select="ancestor::*[local-name() = 'test']"/>
+
+
 	<xsl:if test="@var">
 		<xsl:value-of select="@var"/>
 		<xsl:text> = </xsl:text>
 		<xsl:call-template name="retval-cast">
 			<xsl:with-param name="variable" select="$var"/>
-			<xsl:with-param name="vartype" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $var]/@type"/>
+			<xsl:with-param name="vartype" select="$test/*[local-name() = 'var' and @name = $var]/@type"/>
 			<xsl:with-param name="rettype" select="$method/returns/@type"/>
 		</xsl:call-template>
 	</xsl:if>
 	<xsl:call-template name="cast">
 		<xsl:with-param name="var" select="$obj"/>
-		<xsl:with-param name="vartype" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name = $obj]/@type"/>
+		<xsl:with-param name="vartype" select="$test/*[local-name() = 'var' and @name = $obj]/@type"/>
 		<xsl:with-param name="reqtype" select="$method/parent::interface/@name"/>
 	</xsl:call-template>
 	<xsl:text>.</xsl:text>
 	<xsl:value-of select="$method/@name"/>
 	<xsl:text>(</xsl:text>
+
+
 	<xsl:for-each select="$method/parameters/param">
 		<xsl:if test="position() &gt; 1">,</xsl:if>
 		<xsl:variable name="paramDef" select="."/>
+        <xsl:variable name="value" select="$current/@*[name() = $paramDef/@name]"/>
 		<xsl:call-template name="produce-param">
-			<xsl:with-param name="value" select="$current/@*[name() = $paramDef/@name]"/>
+			<xsl:with-param name="value" select="$value"/>
+            <xsl:with-param name="vartype" select="$test/*[local-name() = 'var' and @name = $value]/@type"/>
 			<xsl:with-param name="reqtype" select="$paramDef/@type"/>
 		</xsl:call-template>
 	</xsl:for-each>
