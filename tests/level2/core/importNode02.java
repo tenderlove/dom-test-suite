@@ -70,8 +70,8 @@ public class importNode02 extends DOMTestCase {
       ownerDocument = aNode.getOwnerDocument();
       docType = ownerDocument.getDoctype();
       system = docType.getSystemId();
-      assertURIEquals("dtdSystemId",null,null,null,"staffNS.dtd",null,null,null,system);
-value = aNode.getNodeValue();
+      assertURIEquals("dtdSystemId",null,null,null,"staffNS.dtd",null,null,null,null,system);
+      value = aNode.getNodeValue();
       assertEquals("nodeValue","this is CDATASection data",value);
       
    }
