@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.35  2003-02-10 05:04:54  dom-ts-4
+Revision 1.36  2003-02-13 03:24:57  dom-ts-4
+Added casting logic to return value of the framework's load method
+
+Revision 1.35  2003/02/10 05:04:54  dom-ts-4
 Removed spurious brace from production for assertFalse
 
 Revision 1.34  2003/02/04 05:51:35  dom-ts-4
@@ -1442,8 +1445,17 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 
 
 <xsl:template match="*[local-name()='load' and not(@interface)]" mode="body">
+    <xsl:param name="vardefs"/>
+
+    <xsl:variable name="var" select="@var"/>
     <xsl:value-of select="@var"/>
-    <xsl:text> = load("</xsl:text>
+    <xsl:text> = </xsl:text>
+    <xsl:call-template name="retval-cast">
+        <xsl:with-param name="variable" select="@var"/>
+        <xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
+        <xsl:with-param name="rettype" select="Document"/>
+    </xsl:call-template>
+    <xsl:text>load("</xsl:text>
     <xsl:value-of select="@href"/>
     <xsl:text>");
       </xsl:text>
