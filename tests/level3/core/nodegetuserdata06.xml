@@ -37,4 +37,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createTextNode var="txt" obj="doc" data='"TEXT"'/>
 <getUserData var="retUserData" obj="txt" key='""'/>
 <assertNull  actual="retUserData"  id="nodegetuserdata06"/>
-</test
+</test>

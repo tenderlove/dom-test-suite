@@ -48,4 +48,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <length var="adoptedLen" obj="adoptedNodeChild" interface="NodeList"/>
 <assertEquals actual="acronymElemLen" expected="adoptedLen" id="documentadoptnode23" ignoreCase="false"/>
 </if>
-</test
+</test>

@@ -45,4 +45,4 @@ is UTF-8.
 <!--  check that document's encoding is UTF-8   -->
 <inputEncoding obj="doc" var="encodingName" interface="Document"/>
 <assertEquals id="documentIsUTF8" actual="encodingName" expected='"UTF-8"' ignoreCase="true"/>
-</test
+</test>

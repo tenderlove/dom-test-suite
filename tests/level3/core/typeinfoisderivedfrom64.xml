@@ -45,4 +45,4 @@ and from its base type.
 <assertTrue actual="retValue" id="derivedFromClassType" />
 <isDerivedFrom obj="attrTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"' typeNameArg='"string"' derivationMethod="1"/>
 <assertTrue actual="retValue" id="derivedFromString" />
-</test
+</test>

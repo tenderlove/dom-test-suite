@@ -44,4 +44,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <schemaTypeInfo var="elemTypeInfo" obj="strongElem" interface="Element"/>
 <isDerivedFrom obj="elemTypeInfo" var="retValue" typeNamespaceArg='"http://www.w3.org/2001/XMLSchema"' typeNameArg='"string"' derivationMethod="8"/>
 <assertTrue actual="retValue" id="lisrDerivedFromString" />
-</test
+</test>

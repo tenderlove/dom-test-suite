@@ -54,4 +54,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<assertEquals actual="piTarget" expected='"PITarget"' id="documentadoptnode35_Target" ignoreCase="false"/>
 	<assertEquals actual="piData" expected='"PIData"' id="documentadoptnode35_Data" ignoreCase="false"/>
 </if>
-</test
+</test>

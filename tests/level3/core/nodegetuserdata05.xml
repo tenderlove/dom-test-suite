@@ -46,4 +46,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <setUserData obj="entity" var="prevUserData" key='"key"' data="attr" handler="nullHandler"/>
 <getUserData var="retUserData" obj="entity" key='"Key"'/>
 <assertNull  actual="retUserData"  id="nodegetuserdata05"/>
-</test
+</test>

@@ -50,4 +50,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <setUserData  var="returned" obj="comment" key='"Key1"' data="entity" handler="nullHandler"/>
 <isEqualNode var="success" obj="returned" arg="entity"/>
 <assertTrue  actual="success"  id="nodesetuserdata06"/>
-</test
+</test>

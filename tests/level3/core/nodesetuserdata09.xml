@@ -42,4 +42,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <setUserData obj="docElem" var="retUserData" key='"Key1"' data="doc" handler="nullHandler"/>
 <getUserData var="returned" obj="doc" key='"Key1"'/>
 <assertNull  actual="returned"  id="nodesetuserdata09"/>
-</test
+</test>

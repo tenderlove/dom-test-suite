@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
-
 <!--
 
 Copyright (c) 2001-2004 World Wide Web Consortium, 
@@ -46,4 +45,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeName var="nodeName" obj="attrImp"/>
 <assertEquals actual="nodeName" expected='"dir"' id="documentadoptnode28" ignoreCase="false"/>
 </if>
-</test
+</test>

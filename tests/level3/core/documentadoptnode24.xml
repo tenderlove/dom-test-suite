@@ -58,4 +58,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <length var="codeElemLen" obj="codeElemChildren" interface="NodeList"/>
 <length var="adoptedLen" obj="adoptedChildren" interface="NodeList"/>
 <assertEquals actual="codeElemLen" expected="adoptedLen" id="documentadoptnode24" ignoreCase="false"/>
-</test
+</test>

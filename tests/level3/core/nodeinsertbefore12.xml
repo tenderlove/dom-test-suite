@@ -50,4 +50,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <lastChild obj="docFrag" var="last" interface="Node"/>
 <nodeName obj="last" var="name" interface="Node"/>
 <assertEquals actual="name" expected='"dom3:elem"' id="nodeinsertbefore12" ignoreCase="false"/>
-</test
+</test>

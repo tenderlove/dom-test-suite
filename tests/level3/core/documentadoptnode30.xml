@@ -39,4 +39,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeValue var="nodeValue" obj="adoptedText"/>
 <assertEquals actual="nodeValue" expected='"Document.adoptNode test for a TEXT_NODE"' id="documentadoptnode30" ignoreCase="false"/>
 </if>
-</test
+</test>

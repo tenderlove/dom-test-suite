@@ -48,4 +48,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <xmlStandalone  obj="newDoc" value="true"/>
 <xmlStandalone var="standalone" obj="newDoc"/>
 <assertTrue actual="standalone" id="documentsetxmlstandalone02_true"/>
-</test
+</test>

@@ -42,4 +42,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <namespaceURI var="namespaceURI" obj="renamedNode" interface="Node"/>
 <assertEquals expected='"title"' actual="nodeName"  id="documentrenamenode04_nodeName" ignoreCase="false"/>
 <assertNull actual="namespaceURI"  id="documentrenamenode04_namespaceURI"/>
-</test
+</test>

@@ -53,4 +53,4 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <namespaceURI var="namespaceURI" obj="renamedNode" interface="Node"/>
 <assertEquals expected='"xml:dom"' actual="nodeName"  id="documentrenamenode07_nodeName" ignoreCase="false"/>
 <assertEquals expected='"http://www.w3.org/XML/1998/namespace"' actual="namespaceURI"  id="documentrenamenode07_namespaceURI" ignoreCase="false"/>
-</test
+</test>
