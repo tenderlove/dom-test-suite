@@ -196,7 +196,10 @@ function suite() {
                                     <option selected="selected" value="{@name}.html"><xsl:value-of select="@name"/></option>
                                     <xsl:for-each select="*[local-name() = 'suite.member']">
                                     	<xsl:sort select="@href"/>
-                                        <option value="{substring-before(@href,'.xml')}.html"><xsl:value-of select="substring-before(@href, '.')"/></option>
+                                    	<!-- have to call template recursively to strip out path  -->
+                                    	<xsl:call-template name="emit-option">
+                                    		<xsl:with-param name="href" select="@href"/>
+                                    	</xsl:call-template>
                                     </xsl:for-each>
                                 </select>
                             </td>
@@ -255,6 +258,21 @@ function suite() {
         </body>
     </html>
 </xsl:template>
+
+<xsl:template name="emit-option">
+	<xsl:param name="href"/>
+	<xsl:choose>
+		<xsl:when test="contains($href, '/')">
+			<xsl:call-template name="emit-option">
+				<xsl:with-param name="href" select="substring-after($href, '/')"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<option value="{substring-before($href,'.xml')}.html"><xsl:value-of select="substring-before($href, '.')"/></option>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+	
 
 <xsl:template match="*" mode="suite.member"/>
 <xsl:template match="text()" mode="suite.member"/>
