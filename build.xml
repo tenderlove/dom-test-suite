@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.120  2004-01-06 08:07:48  dom-ts-4
+Revision 1.121  2004-01-16 06:50:32  dom-ts-4
+DOMImplementationRegistry tests (bug 463)
+
+Revision 1.120  2004/01/06 08:07:48  dom-ts-4
 Support for no-network builds (L3 only) and validation spec update (bug 457)
 
 Revision 1.119  2004/01/05 08:27:14  dom-ts-4
@@ -1941,7 +1944,7 @@ All implementation conditions combined into implementationAttribute element
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
 		<param name="schema-location" expression="dom3.xsd"/>
-        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter|DOMUserData"/>
+        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter|DOMUserData|DOMImplementationRegistry"/>
 	</style>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls" overwrite="true"/>
     <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls" overwrite="true"/>

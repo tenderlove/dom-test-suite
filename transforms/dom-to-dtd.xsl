@@ -78,7 +78,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 
 &lt;!ENTITY % framework-assertion "fail|assertTrue|assertFalse|assertNull|assertNotNull|assertEquals|assertNotEquals|assertSame|assertInstanceOf|assertSize|assertEventCount|assertURIEquals|assertImplementationException"&gt;
 
-&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempURI"&gt;
+&lt;!ENTITY % framework-statement "assign|increment|decrement|append|plus|subtract|mult|divide|load|implementation|hasFeature|implementationAttribute|if|while|try|for-each|comment|return|userObj|atEvents|capturedEvents|bubbledEvents|allEvents|createEventMonitor|createXPathEvaluator|getResourceURI|substring|createTempURI|DOMImplementationRegistry.newInstance"&gt;
 
 &lt;!ENTITY % implementation-condition "hasFeature | implementationAttribute"&gt;
 
@@ -269,6 +269,17 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &gt;
 </xsl:if>
 					</xsl:when>
+					
+					<xsl:when test="@name = 'getDOMImplementation' or @name = 'getDOMImplementationList'">
+&lt;!ELEMENT <xsl:value-of select="@name"/> EMPTY &gt;
+&lt;!ATTLIST <xsl:value-of select="@name"/>
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    features CDATA #REQUIRED
+    interface (DOMImplementationSource|DOMImplementationRegistry) #IMPLIED
+&gt;
+					</xsl:when>
 
                     <!--   if the interface is something like EventListener
                              that might be defined using anonymous inner classes  
@@ -387,7 +398,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	-->
     <xsl:template name="static-elements">
 
-&lt;!ELEMENT test (metadata?,(%implementation-condition;)*,var*,(load|implementation),(%statement;)*) &gt;
+&lt;!ELEMENT test (metadata?,(%implementation-condition;)*,var*,(load|implementation|DOMImplementationRegistry.newInstance),(%statement;)*) &gt;
 &lt;!ATTLIST test 
    xmlns CDATA #FIXED "<xsl:value-of select="$schema-namespace"/>"
    id ID #IMPLIED
@@ -553,6 +564,11 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST implementation
 	var CDATA #REQUIRED
 	obj CDATA #IMPLIED
+&gt;
+
+&lt;!ELEMENT DOMImplementationRegistry.newInstance EMPTY&gt;
+&lt;!ATTLIST DOMImplementationRegistry.newInstance
+	var CDATA #REQUIRED
 &gt;
 
 

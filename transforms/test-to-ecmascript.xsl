@@ -180,6 +180,13 @@ The source document contained the following notice:
 <!--   implementation attribute doesn't do anything in the body of the test  -->
 <xsl:template match="*[local-name()='implementationAttribute']" mode="body"/>
 
+<xsl:template match="*[local-name()='DOMImplementationRegistry.newInstance']" mode="body">
+     <xsl:value-of select="@var"/>
+     <xsl:text> = DOMImplementationRegistry;
+      </xsl:text>
+</xsl:template>
+
+
 <!--  
      hasFeature is a little unusual as both an implementation
 	 condition and a DOM function.  This template should only

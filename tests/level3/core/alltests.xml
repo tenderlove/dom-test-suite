@@ -28,6 +28,31 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="domimplementationgetfeature05.xml"/> 
     <suite.member href="domimplementationgetfeature06.xml"/>	
 
+    <suite.member href="domimplementationregistry01.xml"/>	
+    <suite.member href="domimplementationregistry02.xml"/>	
+    <suite.member href="domimplementationregistry03.xml"/>	
+    <suite.member href="domimplementationregistry04.xml"/>	
+    <suite.member href="domimplementationregistry05.xml"/>	
+    <suite.member href="domimplementationregistry06.xml"/>	
+    <suite.member href="domimplementationregistry07.xml"/>	
+    <suite.member href="domimplementationregistry08.xml"/>	
+    <suite.member href="domimplementationregistry09.xml"/>	
+    <suite.member href="domimplementationregistry10.xml"/>	
+    <suite.member href="domimplementationregistry11.xml"/>	
+    <suite.member href="domimplementationregistry12.xml"/>	
+    <suite.member href="domimplementationregistry13.xml"/>	
+    <suite.member href="domimplementationregistry14.xml"/>	
+    <suite.member href="domimplementationregistry15.xml"/>	
+    <suite.member href="domimplementationregistry16.xml"/>	
+    <suite.member href="domimplementationregistry17.xml"/>	
+    <suite.member href="domimplementationregistry18.xml"/>	
+    <suite.member href="domimplementationregistry19.xml"/>	
+    <suite.member href="domimplementationregistry20.xml"/>	
+    <suite.member href="domimplementationregistry21.xml"/>	
+    <suite.member href="domimplementationregistry22.xml"/>	
+    <suite.member href="domimplementationregistry23.xml"/>	
+
+
 	<!-- Document tests -->
 	<!-- xml(Encoding|Version|Standalone), inputEncoding -->
 	<suite.member href="documentgetxmlencoding01.xml"/>

@@ -299,24 +299,38 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 							<!--  produce interface attribute   -->
-							<xsl:variable name="dups" select="key('methodByName',@name)"/>
-							<xs:attribute name="interface">
-								<xsl:choose>
-									<xsl:when test="count($dups) &gt; 1 and @name != 'load' and @name != 'contains'">
-										<xsl:attribute name="use">required</xsl:attribute>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:attribute name="use">optional</xsl:attribute>
-									</xsl:otherwise>
-								</xsl:choose>
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-										<xsl:for-each select="$dups">
-											<xs:enumeration value="{parent::interface/@name}"/>
-										</xsl:for-each>
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:attribute>
+							<xsl:choose>
+								<xsl:when test="contains(@name, 'getDOMImplementation')">
+									<xs:attribute name="interface" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+													<xs:enumeration value="DOMImplementationSource"/>
+													<xs:enumeration value="DOMImplementationRegistry"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:variable name="dups" select="key('methodByName',@name)"/>
+									<xs:attribute name="interface">
+										<xsl:choose>
+											<xsl:when test="count($dups) &gt; 1 and @name != 'load' and @name != 'contains'">
+												<xsl:attribute name="use">required</xsl:attribute>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:attribute name="use">optional</xsl:attribute>
+											</xsl:otherwise>
+										</xsl:choose>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xsl:for-each select="$dups">
+													<xs:enumeration value="{parent::interface/@name}"/>
+												</xsl:for-each>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xsl:otherwise>
+							</xsl:when>
 						</xs:complexType>
 					</xs:element>
 				</xsl:if>
@@ -428,13 +442,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>An implementation of EventListener that will capture and store all events encountered.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
-                    <!--   DOM 3 LS defines some new platform pseudo types   -->
+                    <!--   DOM 3 Core and LS defines some new platform pseudo types   -->
                     <xsl:if test="$schema-namespace='http://www.w3.org/2001/DOM-Test-Suite/Level-3'">
 					    <xs:enumeration value="LSInputStream"/>
                         <xs:enumeration value="LSOutputStream"/>
                         <xs:enumeration value="LSReader"/>
                         <xs:enumeration value="LSWriter"/>
                         <xs:enumeration value="DOMUserData"/>
+                        <xs:enumeration value="DOMImplementationRegistry"/>
                     </xsl:if>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
@@ -489,6 +504,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xs:choice>
 							<xs:element ref="load"/>
 							<xs:element ref="implementation"/>
+							<xs:element ref="DOMImplementationRegistry.newInstance"/>
 						</xs:choice>
 						<xs:group ref="statement" maxOccurs="unbounded"/>
 					</xs:sequence>
@@ -781,6 +797,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:complexType>
 					<xs:attribute name="var" type="variable" use="required"/>
 					<xs:attribute name="obj" type="variable" use="optional"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DOMImplementationRegistry.newInstance">
+				<xs:annotation>
+					<xs:documentation>Gets a DOMImplementationRegistry instance.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="var" type="variable" use="required"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="metadata">

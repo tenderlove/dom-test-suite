@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.58  2004-01-05 08:27:15  dom-ts-4
+Revision 1.59  2004-01-16 06:50:32  dom-ts-4
+DOMImplementationRegistry tests (bug 463)
+
+Revision 1.58  2004/01/05 08:27:15  dom-ts-4
 XHTML compatible L3 Core tests  (bug 455)
 
 Revision 1.57  2003/12/30 06:17:07  dom-ts-4
@@ -800,6 +803,25 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     </xsl:if>
 </xsl:template>
 
+
+<xsl:template match="*[local-name()='DOMImplementationRegistry.newInstance']" mode="body">
+        <xsl:value-of select="@var"/>
+        <xsl:text> = org.w3c.dom.bootstrap.DOMImplementationRegistry.newInstance();
+         </xsl:text>
+</xsl:template>
+
+
+<xsl:template match="*[starts-with(local-name(),'getDOMImplementation')]" mode="body">
+        <xsl:value-of select="@var"/>
+        <xsl:text> = </xsl:text>
+        <xsl:value-of select="@obj"/>
+        <xsl:text>.</xsl:text>
+        <xsl:value-of select="local-name()"/>
+        <xsl:text>(</xsl:text>
+        <xsl:value-of select="@features"/>
+        <xsl:text>);
+         </xsl:text>
+</xsl:template>
 
 <!--    
 
@@ -1661,6 +1683,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:when test="contains($type, 'LSOutputStream')">java.io.OutputStream</xsl:when>
         <xsl:when test="contains($type, 'LSReader')">java.io.Reader</xsl:when>
         <xsl:when test="contains($type, 'LSWriter')">java.io.Writer</xsl:when>
+        <xsl:when test="contains($type, 'DOMImplementationRegistry')">org.w3c.dom.bootstrap.DOMImplementationRegistry</xsl:when>
         <xsl:when test="$type='Collection'">java.util.Collection</xsl:when>
         <xsl:when test="$type='List'">java.util.List</xsl:when>
         <xsl:when test="$type='EventMonitor'">org.w3c.domts.EventMonitor</xsl:when>
