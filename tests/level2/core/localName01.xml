@@ -33,15 +33,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN"/>
 </metadata>
+<!--  this test requires namespace awareness  -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Element"/>
 <var name="addrAttr" type="Attr"/>
 <var name="localName" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"emp:address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
-<getAttributeNode obj="testAddr" name="&quot;emp:domestic&quot;" var="addrAttr"/>
+<getAttributeNode obj="testAddr" name='"emp:domestic"' var="addrAttr"/>
 <localName obj="addrAttr" var="localName"/>
-<assertEquals actual="localName" expected="&quot;domestic&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="localName" expected='"domestic"' id="localName" ignoreCase="false"/>
 </test>
