@@ -51,6 +51,8 @@
    <suite.member href="DOMWriterTest2.xml"/>
    <suite.member href="DOMWriterTest3.xml"/>
    <suite.member href="DOMWriterTest4.xml"/>
+   <suite.member href="DOMWriterTest5.xml"/>
+   <suite.member href="DOMWriterTest6.xml"/>
    <suite.member href="GetFeature1.xml"/>
    <suite.member href="GetFeature2.xml"/>
    <suite.member href="HasFeature01.xml"/>
