@@ -166,12 +166,56 @@ function toUpperCaseArray() {
     return upperCased;
 }
 
-function IFrameBuilder() {
-    this.suffix = ".html";
+function getSuffix(contentType) {
+    switch(contentType) {
+        case "text/html":
+        return ".html";
+
+        case "text/xml":
+        return ".xml";
+
+        case "application/xhtml+xml":
+        return ".xhtml";
+
+        case "image/svg+xml":
+        return ".svg";
+
+        case "text/mathml":
+        return ".mml";
+    }
+    return ".html";
 }
 
+function IFrameBuilder() {
+    this.contentType = "text/html";
+    this.supportedContentTypes = [ "text/html", 
+        "text/xml", 
+        "image/svg+xml", 
+        "application/xhtml+xml",
+        "text/mathml" ];
+
+    this.supportsAsyncChange = false;
+    this.async = true;
+    this.fixedAttributeNames = [
+        "validating",  "expandEntityReferences", "coalescing", 
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware" ];
+
+    this.fixedAttributeValues = [false,  true, false, true, true , false, false ];
+    this.configurableAttributeNames = [ ];
+    this.configurableAttributeValues = [ ];
+
+}
+
+IFrameBuilder.prototype.hasFeature = function(feature, version) {
+    return document.implementation.hasFeature(feature, version);
+}
+
+
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
-  frame.document.location.href = fileBase + url + suffix;
+  if (url == "staff" && !(this.contentType == "text/xml" || this.contentType == 'image/svg+xml')) {
+    throw "Tests using staff document are only supported for XML or SVG processors";
+  }
+  frame.document.location.href = fileBase + url + getSuffix(this.contentType);
   return 0;
 }
 
@@ -180,20 +224,12 @@ IFrameBuilder.prototype.load = function(frame, varname, url) {
 }
 
 IFrameBuilder.prototype.getImplementationAttribute = function(attr) {
-        var supportedAttributes = [
-        [ "validating", false ],
-        [ "expandEntityReferences", true],
-        [ "coalescing", false],
-        [ "signed", true],
-        [ "hasNullString", true ],
-        [ "ignoringElementContentWhitespace", false] ];
-
-    for (var i = 0; i < supportedAttributes.length; i++) {
-        if (supportedAttributes[i][0] == attr) {
-            return supportedAttributes[i][1];
+    for (var i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attr) {
+            return this.fixedAttributeValues[i];
         }
     }
-    return false;
+    throw "Unrecognized implementation attribute: " + attr;
 }
 
 
@@ -205,9 +241,175 @@ IFrameBuilder.prototype.toAutoCaseArray = function(s) {
     return toUpperCaseArray(s);
 }
 
+IFrameBuilder.prototype.setImplementationAttribute = function(attribute, value) {
+    var supported = this.getImplementationAttribute(attribute);
+    if (supported != value) {
+        throw "IFrame loader does not support " + attribute + "=" + value;
+    }
+}
+
+
+function MSXMLBuilder(progID) {
+    this.progID = progID;
+    this.configurableAttributeNames = [
+        "validating", "ignoringElementContentWhitespace"];
+    this.configurableAttributeValues = [ false, false ];
+    this.fixedAttributeNames = [ "signed", "hasNullString", 
+        "expandEntityReferences", "coalescing", "namespaceAware" ];
+    this.fixedAttributeValues = [ true, true, false, false, false ];
+
+    this.contentType = "text/xml";
+    this.supportedContentTypes = [ 
+        "text/xml", 
+        "image/svg+xml", 
+        "application/xhtml+xml",
+        "text/mathml" ];
+
+    this.async = false;
+    this.supportsAsyncChange = true;
+    this.parser = null;
+}
+
+MSXMLBuilder.prototype.createMSXML = function() {
+    var parser = new ActiveXObject(this.progid);
+    parser.async = this.async;
+    parser.preserveWhiteSpace = !this.configurableAttributeValues[1];
+    parser.validateOnParse = this.configurableAttributeValues[0];
+    return parser;
+  }
+
+MSXMLBuilder.prototype.preload = function(frame, varname, url) {
+  if (this.async) {
+     this.parser = this.createMSXML();
+     parser.async = true;
+     parser.onreadystatechange = MSXMLBuilder_onreadystatechange;
+     parser.load(fileBase + url + getSuffix(this.contentType));
+     if (parser.readystate != 4) {
+        return 0;
+     }
+  }
+  return 1;
+}
+
+MSXMLBuilder.prototype.load = function(frame, varname, url) {
+    var parser = this.CreateMSXML();
+	if(!parser.load(fileBase + url + getSuffix(this.contentType))) {
+		throw parser.parseError.reason;
+	}
+    //
+    //   if the first child of the document is a PI representing
+    //      the XML Declaration, remove it from the tree.
+    //
+    //   According to the DOM FAQ, this behavior is not wrong,
+    //      but the tests are written assuming that it is not there.
+    //
+    var xmlDecl = parser.firstChild;
+    if(xmlDecl != null && xmlDecl.nodeType == 7 && xmlDecl.target.toLowerCase() == "xml") {
+        parser.removeChild(xmlDecl);
+    }
+	return parser;
+}
+
+MSXMLBuilder.prototype.getImplementationAttribute = function(attr) {
+    var i;
+    for (i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attr) {
+            return this.fixedAttributeValues[i];
+        }
+    }
+
+    for (i = 0; i < this.configurableAttributeNames.length; i++) {
+        if (this.configurableAttributeNames[i] == attr) {
+            return this.configurableAttributeValues[i];
+        }
+    }
+
+    throw "Unrecognized implementation attribute: " + attr;
+}
+
+
+MSXMLBuilder.prototype.toAutoCase = function(s) {
+    return s;
+}
+
+MSXMLBuilder.prototype.toAutoCaseArray = function(s) {
+    return s;
+}
+
+MSXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
+    var i;
+    for (i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attr) {
+            if (this.fixedAttributeValues[i] != value) {
+                throw "MSXML does not support " + attribute + "=" + value;
+            }
+            return;
+        }
+    }
+    for (i = 0; i < this.configurableAttributeNames.length; i++) {
+        if (this.configurableAttributeNames[i] == attribute) {
+            this.configurableAttributeValues[i] = value;
+            return;
+        }
+    }
+    throw "Unrecognized implementation attribute: " + attr;
+}
+            
+
+
+//
+//   Only used to select tests compatible with implementation
+//      not used on tests that actually test hasFeature()
+//
+MSXMLBuilder.prototype.hasFeature = function(feature, version) {
+    //
+    //   MSXML will take null, unfortunately 
+    //      there is no way to get it to there from script
+    //      without a type mismatch error
+    if(version == null) {
+		switch(feature.toUpperCase()) {
+		   case "XML":
+		   case "CORE":
+		   return true;
+		   
+		   case "HTML":
+		   case "ORG.W3C.DOM":
+		   return false;
+		}
+		if(this.getDOMImplementation().hasFeature(feature,"1.0")) {
+		   return true;
+		}
+		if(this.getDOMImplementation().hasFeature(feature,"2.0")) {
+		   return true;
+		}
+		if(this.getDOMImplementation().hasFeature(feature,"3.0")) {
+		   return true;
+		}
+    }
+	return this.getDOMImplementation().hasFeature(feature,version);
+  }
+
+
 
 function MozillaXMLBuilder() {
-    this.suffix = ".xml";
+    this.contentType = "text/xml";
+
+    this.configurableAttributeNames = [ ];
+    this.configurableAttributeValues = [ ];
+    this.fixedAttributeNames = [ "validating", "ignoringElementContentWhitespace", "signed", 
+        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware" ];
+    this.fixedAttributeValues = [ false, false, true, true, false, false, false ];
+
+    this.contentType = "text/xml";
+    this.supportedContentTypes = [ 
+        "text/xml", 
+        "image/svg+xml", 
+        "application/xhtml+xml",
+        "text/mathml" ];
+
+    this.async = true;
+    this.supportsAsyncChange = false;
+
     this.docs = new Array();
     this.docnames = new Array();
 }
@@ -216,7 +418,7 @@ MozillaXMLBuilder.prototype.preload = function(frame, varname, url) {
   var domimpl = document.implementation;
   var doc = domimpl.createDocument("", "temp", null);
   doc.addEventListener("load", loadComplete, false);
-  doc.load(fileBase + url + this.suffix);
+  doc.load(fileBase + url + getSuffix(this.contentType));
   this.docs[this.docs.length] = doc;
   this.docnames[this.docnames.length] = varname;
   return 0;
@@ -245,9 +447,37 @@ MozillaXMLBuilder.prototype.toAutoCaseArray = function(s) {
     return s;
 }
 
+function createBuilder(implementation) {
+  switch(implementation) {
+    case "msxml3":
+    return new MSXMLBuilder("Msxml.DOMDocument.3.0");
+    
+    case "msxml4":
+    return new MSXMLBuilder("Msxml2.DOMDocument.4.0");
 
-var builder = new IFrameBuilder();
-//var builder = new MozillaXMLBuilder();
+    case "mozilla":
+    return new MozillaXMLBuilder();
+
+    case "adobeSVG":
+//    return new AdobeSVGBuilder();
+    return new IFrameBuilder();
+
+    case "dom3ls":
+//    return new DOM3LSBuilder();
+    return new IFrameBuilder();
+  }
+  return new IFrameBuilder();
+}
+
+var builder = null;
+
+if (top && top.jsUnitParmHash)
+{
+    builder = createBuilder(top.jsUnitParmHash.implementation);
+} else {
+    builder = new IFrameBuilder();
+}
+
 
 function preload(frame, varname, url) {
   return builder.preload(frame, varname, url);
@@ -270,5 +500,13 @@ function toAutoCaseArray(s) {
     return builder.toAutoCaseArray(s);
 }
 
-var suffix = builder.suffix;
+function setImplementationAttribute(attribute, value) {
+    builder.setImplementationAttribute(attribute, value);
+}
 
+
+function MSXMLBuilder_onreadystatechange() {
+    if (builder.parser.readyState == 4) {
+        loadComplete();
+    }
+}

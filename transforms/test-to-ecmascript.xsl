@@ -100,6 +100,7 @@ The source document contained the following notice:
    <xsl:text>function </xsl:text>
    <xsl:value-of select="@name"/>
    <xsl:text>() {
+    checkSetUp();
     </xsl:text>
 <xsl:apply-templates mode="body"/>
     <xsl:text>
