@@ -150,7 +150,7 @@ The source document contained the following notice:
 
 <xsl:if test="$featureConditions">
     <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(!this.builder.hasFeature("</xsl:text>
+	    <xsl:text>      if(this.builder.hasFeature("</xsl:text>
 	    <xsl:value-of select="@feature"/>
 	    <xsl:choose>
 		    <xsl:when test="@version">
@@ -162,7 +162,12 @@ The source document contained the following notice:
 			    <xsl:text>",null</xsl:text>
 		    </xsl:otherwise>
 	    </xsl:choose>
-	    <xsl:text>)) {
+	    <xsl:text>) != </xsl:text>
+        <xsl:choose>
+            <xsl:when test="@value='false'">false</xsl:when>
+            <xsl:otherwise>true</xsl:otherwise>
+        </xsl:choose>
+	    <xsl:text>) {
          throw new DOMTestIncompatibleException("</xsl:text>
         <xsl:value-of select="@feature"/>
 	    <xsl:choose>

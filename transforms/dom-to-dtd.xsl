@@ -682,6 +682,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	id ID #IMPLIED
 	feature CDATA #REQUIRED
 	version CDATA #IMPLIED
+    value (true | false) #IMPLIED
 	var CDATA #IMPLIED
 	obj CDATA #IMPLIED
 &gt;

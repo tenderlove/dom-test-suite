@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.19  2002-02-03 04:22:35  dom-ts-4
+Revision 1.20  2002-02-26 05:25:52  dom-ts-4
+Support for hasFeature("HTML","2.0") == "false" conditions on tests
+
+Revision 1.19  2002/02/03 04:22:35  dom-ts-4
 DOM4J and Batik support added.
 Rework of parser settings
 
@@ -200,7 +203,7 @@ The source document contained the following notice:
 
 <xsl:if test="$featureConditions">
     <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(!factory.hasFeature(</xsl:text>
+	    <xsl:text>      if(factory.hasFeature(</xsl:text>
 	    <xsl:value-of select="@feature"/>
 	    <xsl:text>,</xsl:text>
 	    <xsl:choose>
@@ -211,7 +214,12 @@ The source document contained the following notice:
 			    <xsl:text>null</xsl:text>
 		    </xsl:otherwise>
 	    </xsl:choose>
-	    <xsl:text>)) {
+	    <xsl:text>) != </xsl:text>
+        <xsl:choose>
+            <xsl:when test="@value='false'">false</xsl:when>
+            <xsl:otherwise>true</xsl:otherwise>
+        </xsl:choose>
+	    <xsl:text>) {
          throw new DOMTestIncompatibleException(</xsl:text>
         <xsl:value-of select="@feature"/>
 	    <xsl:choose>
