@@ -907,7 +907,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                         <xs:annotation>
                             <xs:documentation>If auto, the comparision will perform case folding 
                             as appropriate for the content type.  Case insensitive for contentType="text/html",
-                            case sensitive for all others.</xsl:documentation>
+                            case sensitive for all others.</xs:documentation>
                         </xs:annotation>
                     </xs:enumeration>
                 </xs:restriction>
