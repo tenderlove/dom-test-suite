@@ -250,8 +250,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
      <suite.member href="HTMLFormElement05.xml"/>
      <suite.member href="HTMLFormElement06.xml"/>
      <suite.member href="HTMLFormElement07.xml"/>
-=======
->>>>>>> 1.4
      <suite.member href="HTMLFormElement08.xml"/>
      <suite.member href="HTMLFrameElement01.xml"/>
      <suite.member href="HTMLFrameElement02.xml"/>
