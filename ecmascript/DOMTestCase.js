@@ -226,29 +226,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     }
   }
 
-function toUpperCaseArray(expected) {
-    var upperCased = new Array(expected.length);
-    for(var i = 0; i < expected.length; i++) {
-        if (expected[i].substring(0,1) != "#") {
-            upperCased[i] = expected[i].toUpperCase();
-        } else {
-            upperCased[i] = expected[i];
-        }
-    }
-    return upperCased;
-}
-
-function toLowerArray(expected) {
-    var lowerCased = new Array(expected.length);
-    for(var i = 0; i < expected.length; i++) {
-        if (expected[i].substring(0,1) != "#") {
-            lowerCased[i] = expected[i].toLowerCase();
-        } else {
-            lowerCased[i] = expected[i];
-        }
-    }
-    return lowerCased;
-}
 
 // size() used by assertSize element
 function size(collection)
@@ -281,6 +258,43 @@ function getSuffix(contentType) {
     return ".html";
 }
 
+function equalsAutoCase(context, expected, actual) {
+	if (builder.contentType == "text/html") {
+		if (content == "attribute") {
+			return expected.toLowerCase() == actual;
+		}
+		return expected.toUpperCase() == actual;
+	}
+	return expected == actual;
+}
+
+function catchInitializationError(blder, ex) {
+	blder.initializationError = ex;
+	blder.initializationFatalError = ex;
+}
+
+function checkInitialization(blder, testname) {
+    if (blder.initializationError != null) {
+        if (blder.skipIncompatibleTests) {
+        	info(testname + " not run:" + blder.initializationError);
+        	return blder.initializationError;
+        } else {
+        	//
+        	//   if an exception was thrown
+        	//        rethrow it and do not run the test
+            if (blder.initializationFatalError != null) {
+        		throw blder.initializationFatalError;
+        	} else {
+        		//
+        		//   might be recoverable, warn but continue the test
+        		warn(testname + ": " +  blder.initializationError);
+        	}
+        }
+    }
+    return null;
+}
+
+
 function IFrameBuilder() {
     this.contentType = "text/html";
     this.supportedContentTypes = [ "text/html", 
@@ -293,12 +307,14 @@ function IFrameBuilder() {
     this.async = true;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
-        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments" ];
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments"];
 
     this.fixedAttributeValues = [false,  true, false, true, true , false, false, true ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
-    this.exception = null;
+    this.initializationError = null;
+    this.initializationFatalError = null;
+    this.skipIncompatibleTests = false;
 }
 
 IFrameBuilder.prototype.hasFeature = function(feature, version) {
@@ -312,17 +328,17 @@ IFrameBuilder.prototype.getImplementation = function() {
 IFrameBuilder.prototype.setContentType = function(contentType) {
     this.contentType = contentType;
     if (contentType == "text/html") {
-    	this.fixedAttributeValues[this.fixedAttributeValues.length - 1] = true;
+        this.fixedAttributeValues[6] = false;
     } else {
-    	this.fixedAttributeValues[this.fixedAttributeValues.length - 1] = false;
+        this.fixedAttributeValues[6] = true;
     }
 }
 
 
 
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
-  if (this.contentType == "text/html") {
-  	if (url == "staff" || url == "nodtdstaff") {
+  if (this.contentType == "text/html" || this.contentType == "application/xhtml+xml") {
+  	if (url.substring(0,5) == "staff" || url == "nodtdstaff" || url == "datatype_normalization") {
     	throw "Tests using staff or nodtdstaff are not supported by HTML processors";
   	}  
   	return 1;
@@ -367,27 +383,19 @@ IFrameBuilder.prototype.getImplementationAttribute = function(attr) {
 }
 
 
-IFrameBuilder.prototype.toAutoCase = function(s) {
-    if (this.contentType == "text/html") {
-        return s.toUpperCase();
-    }
-    return s;
-}
-
-IFrameBuilder.prototype.toAutoCaseArray = function(s) {
-    if (this.contentType == "text/html") {
-        return toUpperCaseArray(s);
-    }
-    return s;
-}
 
 IFrameBuilder.prototype.setImplementationAttribute = function(attribute, value) {
     var supported = this.getImplementationAttribute(attribute);
     if (supported != value) {
-        throw "IFrame loader does not support " + attribute + "=" + value;
+        this.initializationError = "IFrame loader does not support " + attribute + "=" + value;
     }
 }
 
+
+IFrameBuilder.prototype.canSetImplementationAttribute = function(attribute, value) {
+    var supported = this.getImplementationAttribute(attribute);
+    return (supported == value);
+}
 
 
 
@@ -401,10 +409,12 @@ function SVGPluginBuilder() {
         "validating",  "expandEntityReferences", "coalescing", 
         "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments"];
 
-    this.fixedAttributeValues = [false,  true, false, true, true , false, false, false ];
+    this.fixedAttributeValues = [false,  true, false, true, true , false, true, false ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
-    this.exception = null;
+    this.initializationError = null;
+    this.initializationFatalError = null;
+    this.skipIncompatibleTests = false;
 }
 
 SVGPluginBuilder.prototype.hasFeature = function(feature, version) {
@@ -514,21 +524,17 @@ SVGPluginBuilder.prototype.getImplementationAttribute = function(attr) {
 }
 
 
-SVGPluginBuilder.prototype.toAutoCase = function(s) {
-    return s;
-}
-
-SVGPluginBuilder.prototype.toAutoCaseArray = function(s) {
-    return s;
-}
-
 SVGPluginBuilder.prototype.setImplementationAttribute = function(attribute, value) {
     var supported = this.getImplementationAttribute(attribute);
     if (supported != value) {
-        throw "SVG Plugin loader does not support " + attribute + "=" + value;
+        this.initializationError = "SVG Plugin loader does not support " + attribute + "=" + value;
     }
 }
 
+SVGPluginBuilder.prototype.canSetImplementationAttribute = function(attribute, value) {
+    var supported = this.getImplementationAttribute(attribute);
+    return (supported == value);
+}
 
 
 
@@ -552,7 +558,9 @@ function MSXMLBuilder(progID) {
     this.async = false;
     this.supportsAsyncChange = true;
     this.parser = null;
-    this.exception = null;
+    this.initializationError = null;
+    this.initializationFatalError = null;
+    this.skipIncompatibleTests = false;
 }
 
 MSXMLBuilder.prototype.createMSXML = function() {
@@ -618,20 +626,12 @@ MSXMLBuilder.prototype.getImplementationAttribute = function(attr) {
 }
 
 
-MSXMLBuilder.prototype.toAutoCase = function(s) {
-    return s;
-}
-
-MSXMLBuilder.prototype.toAutoCaseArray = function(s) {
-    return s;
-}
-
 MSXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
     var i;
     for (i = 0; i < this.fixedAttributeNames.length; i++) {
         if (this.fixedAttributeNames[i] == attribute) {
             if (this.fixedAttributeValues[i] != value) {
-                throw "MSXML does not support " + attribute + "=" + value;
+                this.initializationError = "MSXML does not support " + attribute + "=" + value;
             }
             return;
         }
@@ -642,9 +642,25 @@ MSXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
             return;
         }
     }
-    throw "Unrecognized implementation attribute: " + attr;
+    this.initializationError = "Unrecognized implementation attribute: " + attr;
 }
             
+
+MSXMLBuilder.prototype.canSetImplementationAttribute = function(attribute, value) {
+    var i;
+    for (i = 0; i < this.fixedAttributeNames.length; i++) {
+        if (this.fixedAttributeNames[i] == attribute) {
+            return (this.fixedAttributeValues[i] == value);
+        }
+    }
+    for (i = 0; i < this.configurableAttributeNames.length; i++) {
+        if (this.configurableAttributeNames[i] == attribute) {
+        	return true;
+        }
+    }
+    return false;
+}
+
 
 MSXMLBuilder.prototype.getImplementation = function() {
     var doc = this.CreateMSXML();
@@ -706,7 +722,9 @@ function MozillaXMLBuilder() {
 
     this.docs = new Array();
     this.docnames = new Array();
-    this.exception = null;
+    this.initializationError = null;
+    this.initializationFatalError = null;
+    this.skipIncompatibleTests = false;
 }
 
 MozillaXMLBuilder.prototype.getImplementation = function() {
@@ -749,14 +767,6 @@ MozillaXMLBuilder.prototype.getImplementationAttribute = function(attr) {
 }
 
 
-MozillaXMLBuilder.prototype.toAutoCase = function(s) {
-    return s;
-}
-
-MozillaXMLBuilder.prototype.toAutoCaseArray = function(s) {
-    return s;
-}
-
 MozillaXMLBuilder.prototype.hasFeature = function(feature, version)
 {
   return this.getImplementation().hasFeature(feature, version);
@@ -765,18 +775,27 @@ MozillaXMLBuilder.prototype.hasFeature = function(feature, version)
 MozillaXMLBuilder.prototype.setImplementationAttribute = function(attribute, value) {
     var supported = this.getImplementationAttribute(attribute);
     if (supported != value) {
-        throw "Mozilla XML loader does not support " + attribute + "=" + value;
+        this.initializationError = "Mozilla XML loader does not support " + attribute + "=" + value;
     }
+}
+
+
+MozillaXMLBuilder.prototype.canSetImplementationAttribute = function(attribute, value) {
+    var supported = this.getImplementationAttribute(attribute);
+    return (supported == value);
 }
 
 function DOM3LSBuilder() {
     this.contentType = "text/xml";
 
-    this.configurableAttributeNames = [ ];
-    this.configurableAttributeValues = [ ];
-    this.fixedAttributeNames = [ "validating", "ignoringElementContentWhitespace", "signed", 
-        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
-    this.fixedAttributeValues = [ false, false, true, true, false, false, true, false ];
+    this.fixedAttributeNames = [ signed, "hasNullString" ];
+    this.fixedAttributeValues = [ true, true ];
+    this.configurableAttributeNames = [ "validating", "ignoringElementContentWhitespace", 
+        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
+    this.configurableAttributeValues = [ false, false, true, true, false, false, true, false ];
+    this.domConfigNames = [ "validate", "element-content-whitespace", 
+        "entities", "cdata-sections", "namespaces", "comments" ];
+    this.domConfigSense = [ true, false, false, false, true, false ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -785,12 +804,15 @@ function DOM3LSBuilder() {
         "application/xhtml+xml",
         "text/mathml" ];
 
-    this.async = true;
+    this.async = false;
     this.supportsAsyncChange = true;
 
     this.docs = new Array();
     this.docnames = new Array();
-    this.exception = null;
+    this.lsparser = null;
+    this.initializationError = null;
+    this.initializationFatalError = null;
+    this.skipIncompatibleTests = false;    
 }
 
 DOM3LSBuilder.prototype.getImplementation = function() {
@@ -803,17 +825,17 @@ DOM3LSBuilder.prototype.setContentType = function(contentType) {
 }
 
 DOM3LSBuilder.prototype.preload = function(frame, varname, url) {
-  if (this.async) {
-      var domimpl = document.implementation;
-      var dombuilder = domimpl.createDOMBuilder(2, null);
-      dombuilder.addEventListener("load", loadComplete, false);
-      var uri = fileBase + url + getSuffix(this.contentType);
-      var doc = dombuilder.parseURI(uri);
-      this.docs[this.docs.length] = doc;
-      this.docnames[this.docnames.length] = varname;
-      return 0;
-   }
-   return 1;
+  if (!this.async) {
+  	 return 1;
+  }
+  var domimpl = document.implementation;
+  this.lsparser = domimpl.createLSParser(2, null);
+  this.lsparser.addEventListener("load", loadComplete, false);
+  var uri = fileBase + url + getSuffix(this.contentType);
+  var doc = this.lsparser.parseURI(uri);
+  this.docs[this.docs.length] = doc;
+  this.docnames[this.docnames.length] = varname;
+  return 0;
 }
 
 DOM3LSBuilder.prototype.load = function(frame, varname, url) {
@@ -825,28 +847,29 @@ DOM3LSBuilder.prototype.load = function(frame, varname, url) {
         }
         return null;
     }
-    var dombuilder = document.implementation.createDOMBuilder(1, null);
+    this.lsparser = document.implementation.createLSParser(1, null);
     var uri = fileBase + url + getSuffix(this.contentType);
-    return dombuilder.parseURI(uri);
+    return this.lsparser.parseURI(uri);
 }
 
 
 DOM3LSBuilder.prototype.getImplementationAttribute = function(attr) {
-    for (var i = 0; i < this.fixedAttributeNames.length; i++) {
-        if (this.fixedAttributeNames[i] == attr) {
-            return this.fixedAttributeValues[i];
+    var i;
+    for (i = 0; i < this.fixedAttributeNames.length; i++) {
+       if (this.fixedAttributeNames[i] == attr) {
+           return this.fixedAttributeValues[i];
         }
     }
-    return null;
-}
-
-
-DOM3LSBuilder.prototype.toAutoCase = function(s) {
-    return s;
-}
-
-DOM3LSBuilder.prototype.toAutoCaseArray = function(s) {
-    return s;
+    for (i = 0; i < this.configurableAttributeNames.length; i++) {
+        if (this.configurableAttributeNames[i] == attr) {
+        	if(this.lsparser.domConfig.getParameter(this.domConfigNames[i])) {
+        		return this.domConfigSense[i];
+        	} else {
+        		return !this.domConfigSense[i];
+        	}
+        }
+    }
+    throw "unrecognized implementation attribute " + att;
 }
 
 DOM3LSBuilder.prototype.hasFeature = function(feature, version) {
@@ -854,7 +877,11 @@ DOM3LSBuilder.prototype.hasFeature = function(feature, version) {
 }
 
 
+
 function createBuilder(implementation) {
+  if (implementation == null) {
+  	return new IFrameBuilder();
+  }
   switch(implementation) {
     case "msxml3":
     return new MSXMLBuilder("Msxml2.DOMDocument.3.0");
@@ -873,90 +900,105 @@ function createBuilder(implementation) {
     
     case "iframe":
     return new IFrameBuilder();
+    
+    default:
+    alert ("unrecognized implementation " + implementation);
   }
-  return null;
+  return new IFrameBuilder();
 }
 
 function checkFeature(feature, version)
 {
   if (!builder.hasFeature(feature, version))
   {
-    throw "builder does not support feature " + feature + " version " + version;
+    //
+    //   don't throw exception so that users can select to ignore the precondition
+    //
+    builder.initializationError = "builder does not support feature " + feature + " version " + version;
   }
 }
 
-var builder = null;
-
-if (top && typeof(top.jsUnitParmHash) != 'undefined')
-{
-    builder = createBuilder(top.jsUnitGetParm('implementation'));
-    try {
-        if (top.jsUnitParmHash.asynchronous == 'true' && builder.supportAsync) {
-            builder.async = true;
-        }
-        if (top.jsUnitGetParm('expandentityreferences')) {
-            if (top.jsUnitGetParm('expandEntityReferences') == 'true') {
-                builder.setImplementationAttribute('expandEntityReferences', true);
-            } else {
-                builder.setImplementationAttribute('expandEntityReferences', false);
+function createConfiguredBuilder() {
+	var builder = null;
+	var contentType = null;
+	var i;
+	var contentTypeSet = false;
+	var parm = null;
+	if (top && typeof(top.jsUnitParmHash) != 'undefined') {
+    	builder = createBuilder(top.jsUnitGetParm('implementation'));
+    	
+    	parm = top.jsUnitGetParm("skipincompatibletests");
+    	if (parm) {
+        	if (parm == 'true') {
+        	    builder.skipIncompatibleTests = true;
+        	} else {
+        	    builder.skipIncompatibleTests = false;
+        	}
+    	}
+    	
+    	if (top.jsUnitGetParm('asynchronous') == 'true' && builder.supportAsync) {
+        	builder.async = true;
+    	}
+    	if (top.jsUnitGetParm('expandentityreferences')) {
+        	if (top.jsUnitGetParm('expandEntityReferences') == 'true') {
+            	builder.setImplementationAttribute('expandEntityReferences', true);
+        	} else {
+            	builder.setImplementationAttribute('expandEntityReferences', false);
+        	}
+    	}
+    	if (top.jsUnitGetParm('ignoringelementcontentwhitespace')) {
+        	if (top.jsUnitGetParm('ignoringElementContentWhitespace') == 'true') {
+            	builder.setImplementationAttribute('ignoringElementContentWhitespace', true);
+        	} else {
+            	builder.setImplementationAttribute('ignoringElementContentWhitespace', false);
             }
         }
-        if (top.jsUnitGetParm('ignoringelementcontentwhitespace')) {
-            if (top.jsUnitGetParm('ignoringElementContentWhitespace') == 'true') {
-                builder.setImplementationAttribute('ignoringElementContentWhitespace', true);
-            } else {
-                builder.setImplementationAttribute('ignoringElementContentWhitespace', false);
-            }
-        }
-        if (top.jsUnitGetParm('validating')) {
-            if (top.jsUnitGetParm('validating') == 'true') {
-                builder.setImplementationAttribute('validating', true);
-            } else {
-                builder.setImplementationAttribute('validating', false);
-            }
-        }
-        if (top.jsUnitGetParm('coalescing')) {
-            if (top.jsUnitGetParm('coalescing') == 'true') {
-                builder.setImplementationAttribute('coalescing', true);
-            } else {
-                builder.setImplementationAttribute('coalescing', false);
-            }
-        }
-        if (top.jsUnitGetParm('namespaceaware')) {
-            if (top.jsUnitGetParm('namespaceaware') == 'true') {
-                builder.setImplementationAttribute('namespaceAware', true);
-            } else {
-                builder.setImplementationAttribute('namespaceAware', false);
-            }
-        }
-        var contentType = top.jsUnitGetParm('contenttype');
-        if (contentType != null) {
-            var contentTypeSet = false;
-            for (var i = 0; i < builder.supportedContentTypes.length; i++) {
-                if (builder.supportedContentTypes[i] == contentType) {
-                    builder.setContentType(contentType);
-                    contentTypeSet = true;
-                    break;
-                }
-            }
-            if (!contentTypeSet) {
-                builder.exception = "Builder does not support content type " + contentType;
-            }
-        }
-        if (top.jsUnitGetParm('ignoringcomments')) {
-            if (top.jsUnitGetParm('ignoringcomments') == 'true') {
-                builder.setImplementationAttribute('ignoringComments', true);
-            } else {
-                builder.setImplementationAttribute('ignoringComments', false);
-            }
-        }
-        
-    }
-    catch(ex) {
-        builder.exception = ex;
-    }
-} else {
-    builder = new IFrameBuilder();
+    	if (top.jsUnitGetParm('validating')) {
+        	if (top.jsUnitGetParm('validating') == 'true') {
+            	builder.setImplementationAttribute('validating', true);
+        	} else {
+            	builder.setImplementationAttribute('validating', false);
+        	}
+    	}
+    	if (top.jsUnitGetParm('coalescing')) {
+        	if (top.jsUnitGetParm('coalescing') == 'true') {
+            	builder.setImplementationAttribute('coalescing', true);
+        	} else {
+            	builder.setImplementationAttribute('coalescing', false);
+        	}
+    	}
+    	if (top.jsUnitGetParm('namespaceaware')) {
+        	if (top.jsUnitGetParm('namespaceaware') == 'true') {
+            	builder.setImplementationAttribute('namespaceAware', true);
+        	} else {
+            	builder.setImplementationAttribute('namespaceAware', false);
+        	}
+    	}
+    	contentType = top.jsUnitGetParm('contenttype');
+    	if (contentType != null) {
+        	contentTypeSet = false;
+        	for (i = 0; i < builder.supportedContentTypes.length; i++) {
+            	if (builder.supportedContentTypes[i] == contentType) {
+                	builder.setContentType(contentType);
+                	contentTypeSet = true;
+                	break;
+            	}
+        	}
+        	if (!contentTypeSet) {
+            	this.exception = "Builder does not support content type " + contentType;
+        	}
+    	}
+    	if (top.jsUnitGetParm('ignoringcomments')) {
+        	if (top.jsUnitGetParm('ignoringcomments') == 'true') {
+            	builder.setImplementationAttribute('ignoringComments', true);
+        	} else {
+            	builder.setImplementationAttribute('ignoringComments', false);
+        	}
+    	}
+	} else {
+    	builder = new IFrameBuilder();
+	}
+	return builder;
 }
 
 
@@ -972,14 +1014,6 @@ function getImplementationAttribute(attr) {
     return builder.getImplementationAttribute(attr);
 }
 
-
-function toAutoCase(s) {
-    return builder.toAutoCase(s);
-}
-
-function toAutoCaseArray(s) {
-    return builder.toAutoCaseArray(s);
-}
 
 function setImplementationAttribute(attribute, value) {
     builder.setImplementationAttribute(attribute, value);

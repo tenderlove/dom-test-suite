@@ -101,7 +101,7 @@ The source document contained the following notice:
    <xsl:value-of select="@name"/>
    <xsl:text>() {
    var success;
-    checkSetUp();
+    if(checkInitialization(builder, "</xsl:text><xsl:value-of select="@name"/><xsl:text>") != null) return;
     </xsl:text>
 <xsl:apply-templates mode="body"/>
     <xsl:text>
@@ -1125,60 +1125,62 @@ function handleEvent(listener, event, userObj) {
 	same(<xsl:value-of select="@expected"/>,<xsl:value-of select="@actual"/>)
 </xsl:template>
 
+
 <xsl:template match="*[local-name()='equals']" mode="condition">
-    <xsl:text>(</xsl:text>
-    <xsl:value-of select="@expected"/>
+	<xsl:call-template name="equalsCondition"/>
+</xsl:template>
+
+<xsl:template name="equalsCondition">
 	<xsl:choose>
-		<xsl:when test="@ignoreCase='true'">
-			<xsl:text>.toUpperCase() == </xsl:text>
-		</xsl:when>
-		<xsl:when test="@bitmask">
-			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text> == </xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text> == </xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
-    <xsl:value-of select="@actual"/>
-	<xsl:choose>
-		<xsl:when test="@ignoreCase='true'">
-			<xsl:text>.toUpperCase())</xsl:text>
-		</xsl:when>
-		<xsl:when test="@bitmask">
-			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
+		<xsl:when test="@ignoreCase='auto'">
+			<xsl:text>equalsAutoCase("</xsl:text>
+			<xsl:choose>
+				<xsl:when test="@context">
+					<xsl:value-of select="@context"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>element</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text>", </xsl:text>
+			<xsl:value-of select="@expected"/>
+			<xsl:text>, </xsl:text>
+			<xsl:value-of select="@actual"/>
 			<xsl:text>)</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+    		<xsl:text>(</xsl:text>
+    		<xsl:value-of select="@expected"/>
+			<xsl:choose>
+				<xsl:when test="@ignoreCase='true'">
+					<xsl:text>.toUpperCase() == </xsl:text>
+				</xsl:when>
+				<xsl:when test="@bitmask">
+					<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text> == </xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text> == </xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+    		<xsl:value-of select="@actual"/>
+			<xsl:choose>
+				<xsl:when test="@ignoreCase='true'">
+					<xsl:text>.toUpperCase())</xsl:text>
+				</xsl:when>
+				<xsl:when test="@bitmask">
+					<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>)</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
 <xsl:template match="*[local-name()='notEquals']" mode="condition">
-    <xsl:text>(</xsl:text>
-    <xsl:value-of select="@expected"/>
-	<xsl:choose>
-		<xsl:when test="@ignoreCase='true'">
-			<xsl:text>.toUpperCase() != </xsl:text>
-		</xsl:when>
-		<xsl:when test="@bitmask">
-			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text> == </xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text> != </xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
-    <xsl:value-of select="@actual"/>
-	<xsl:choose>
-		<xsl:when test="@ignoreCase='true'">
-			<xsl:text>.toUpperCase())</xsl:text>
-		</xsl:when>
-		<xsl:when test="@bitmask">
-			<xsl:text> &amp; </xsl:text><xsl:value-of select="@bitmask"/><xsl:text>)</xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>)</xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
+	<xsl:text>!</xsl:text>
+	<xsl:call-template name="equalsCondition"/>
 </xsl:template>
 
 

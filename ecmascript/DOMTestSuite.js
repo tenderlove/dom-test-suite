@@ -22,26 +22,23 @@ function updateImplementationAttribute(options, implAttribute) {
    updateTrueFalse(options, builderVal, disabled);
 }
 
-function updateTrueFalse(options, builderVal, disabled) {
-   for(var i = 0; i < options.length; i++) {
-      if (options[i].value == "true") {
-         options[i].checked = builderVal;
-      } else {
-         options[i].checked = !builderVal;
-      }
-      options[i].disabled = disabled;
-   }
+function updateTrueFalse(checkbox, builderVal, disabled) {
+   checkbox.checked = builderVal;
+   checkbox.disabled = disabled;
 }
 
 
 function onImplementationChange() {
     var implOptions = document.forms[0].implementation;
+    var implName = null;
     for(var i = 0; i < implOptions.length; i++) {
         if (implOptions[i].checked) {
-            builder = createBuilder(implOptions[i].value);
+        	implName = implOptions[i].value;
+            builder = createBuilder(implName);
             break;
         }
     }
+    document.forms[0].dom3lsFeatures.disabled = !(implName == "dom3ls");
     update();
 }
 
@@ -70,7 +67,6 @@ function update() {
         }
         contentTypes[i].disabled = disabled;
     }
-    updateIncompatibleTests();
 
     if (typeof(ActiveXObject) == 'undefined')
     {
@@ -80,7 +76,7 @@ function update() {
     if (typeof(document.implementation) != 'undefined')
     {
       var impl = document.implementation;
-      if (impl && typeof(impl.createDOMBuilder) == 'undefined')
+      if (impl && typeof(impl.createLSParser) == 'undefined')
       {
         document.getElementById('dom3lsImpl').disabled = true;
       }
@@ -89,44 +85,19 @@ function update() {
         document.getElementById('mozillaXMLImpl').disabled = true;
       }
     }
-    if (document.location.href.indexOf('/core/') == -1 &&
-    document.location.href.indexOf('/level2/events/') == -1)
+    if (document.location.href.indexOf('/html/') != -1)
     {
-      // only core and level 2 events has svg files
+      // HTML test suites do not have SVG files
       document.getElementById('svgpluginImpl').disabled = true;
       document.getElementById('contentTypeSVG').disabled = true;
     }
     
 }
 
-function updateIncompatibleTests() {
-    var incompatibleTests = new Array();
-    checkTests(null, incompatibleTests);
-    var i = 0;
-    var existingTests = document.forms[0].incompatible.options;
-    var overlapCount = existingTests.length;
-    if (overlapCount > incompatibleTests.length) {
-        overlapCount = incompatibleTests.length;
-        existingTests.length = overlapCount;
-    }
-    for (i = 0; i < overlapCount; i++) {
-        if (existingTests[i].text != incompatibleTests[i]) {
-            existingTests[i].text = incompatibleTests[i];
-        }
-    }
-    if (incompatibleTests.length > overlapCount) {
-        for (; i < incompatibleTests.length; i++) {
-            var newOption = document.createElement("option");
-            newOption.text = incompatibleTests[i];
-            document.forms[0].incompatible.insertBefore(newOption, null);
-        }
-    }
-}
 
 function setImplementationAttribute(implAttr, implValue) {
     try {
         builder.setImplementationAttribute(implAttr, implValue);
-        updateIncompatibleTests();
     } catch(msg) {
         alert(msg);
         update();
@@ -145,58 +116,6 @@ function setContentType(contentType) {
     update();
 }
 
-function checkTest(activeTests, inactiveTests, testName, loadedDocs, 
-    featureNames, featureVersions, 
-    implementationAttrNames, implementationAttrValues) {
-    var active = true;
-    var i;
-    if (loadedDocs != null) {
-        for (i = 0; i < loadedDocs.length; i++) {
-            if ((loadedDocs[i] == "staff" || loadedDocs[i] == "nodtdstaff") && 
-            	!(builder.contentType == "text/xml" || builder.contentType == "image/svg+xml")) {
-                active = false;
-                break;
-            }
-        }
-    }
-    if (active && featureNames != null) {
-        for (i = 0; i < featureNames.length; i++) {
-            if (!builder.hasFeature(featureNames[i], featureVersions[i])) {
-                active = false;
-            }
-        }
-    }
-    if (active && implementationAttrNames != null) {
-        for (i = 0; i < implementationAttrNames.length; i++) {
-            var existing = builder.getImplementationAttribute(implementationAttrNames[i]);
-            //
-            //   if the setting doesn't equal the current (possibly fixed) setting
-            //
-            if (existing != implementationAttrValues[i]) {
-                //
-                //  see if it is settable
-                //
-                var settable = false;
-                for (var j = 0; j < builder.configurableAttributeNames.length; j++) {
-                    if (builder.configurableAttributeNames[i] == implementationAttrNames[i]) {
-                        settable = true;
-                        break;
-                    }
-                }
-                active = settable;
-            }
-        }
-    }
-    if (active) {
-        if (activeTests != null) {
-            activeTests[activeTests.length] = testName;
-        }
-    } else {
-        if (inactiveTests != null) {
-            inactiveTests[inactiveTests.length] = testName;
-        }
-    }
-}
 
 function fixTestPagePath() {
     var options = document.forms[0].testpage.options;
@@ -211,6 +130,22 @@ function fixTestPagePath() {
         }
     }
     return true;
+}
+
+function updateTestSubmission() {
+   var hostname = "localhost";
+   if (document.forms[0].submitCheckbox.checked) {
+   	  document.forms[0].resultid.disabled = false;
+   	  document.forms[0].submitresults.disabled = false;
+   	  if (document.location.protocol == "http") {
+   	  	hostname = document.location.hostname;
+   	  }
+   	  document.forms[0].submitresults.value = hostname + ":8080/jsunit/acceptor";
+   } else {
+   	  document.forms[0].resultid.disabled = true;
+   	  document.forms[0].submitresults.disabled = true;
+   	  document.forms[0].submitresults.value = "";
+   }
 }
 
 
