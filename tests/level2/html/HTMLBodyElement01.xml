@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-03</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-59424581"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="valink" type="DOMString" />
+<var name="valink" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="body" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"body"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;body&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <aLink interface="HTMLBodyElement" obj="testNode" var="valink"/>
-<assertEquals actual="valink" expected='"#0000ff"' id="aLinkLink" ignoreCase="false"/>
+<assertEquals actual="valink" expected="&quot;#0000ff&quot;" id="aLinkLink" ignoreCase="false"/>
 </test>

@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-18</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-53459732"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vcharoff" type="DOMString" />
+<var name="vcharoff" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="tablesection" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"thead"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;thead&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <chOff interface="HTMLTableSectionElement" obj="testNode" var="vcharoff"/>
-<assertEquals actual="vcharoff" expected='"1"' id="chOffLink" ignoreCase="false"/>
+<assertEquals actual="vcharoff" expected="&quot;1&quot;" id="chOffLink" ignoreCase="false"/>
 </test>

@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-18</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-95362176"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vclassname" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="element" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"kbd"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;kbd&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <className interface="HTMLElement" obj="testNode" var="vclassname"/>
-<assertEquals actual="vclassname" expected='"KBD-class"' id="classNameLink" ignoreCase="false"/>
+<assertEquals actual="vclassname" expected="&quot;KBD-class&quot;" id="classNameLink" ignoreCase="false"/>
 </test>

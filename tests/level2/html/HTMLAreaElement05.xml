@@ -26,13 +26,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-03</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-61826871"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vnohref" type="boolean" />
+<var name="vnohref" type="boolean"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="area" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"area"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;area&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <noHref interface="HTMLAreaElement" obj="testNode" var="vnohref"/>

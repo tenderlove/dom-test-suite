@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-03</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-82703081"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vclear" type="DOMString" />
+<var name="vclear" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="br" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"br"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;br&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <clear interface="HTMLBRElement" obj="testNode" var="vclear"/>
-<assertEquals actual="vclear" expected='"none"' id="clearLink" ignoreCase="false"/>
+<assertEquals actual="vclear" expected="&quot;none&quot;" id="clearLink" ignoreCase="false"/>
 </test>

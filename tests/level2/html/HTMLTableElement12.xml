@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-16</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-50969400"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vborder" type="DOMString" />
+<var name="vborder" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="table" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;table&quot;"/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <border interface="HTMLTableElement" obj="testNode" var="vborder"/>
-<assertEquals actual="vborder" expected='"4"' id="borderLink" ignoreCase="false"/>
+<assertEquals actual="vborder" expected="&quot;4&quot;" id="borderLink" ignoreCase="false"/>
 </test>

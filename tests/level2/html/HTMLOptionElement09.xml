@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-07</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-6185554"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vvalue" type="DOMString" />
+<var name="vvalue" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="option" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"option"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;option&quot;"/>
 <assertSize collection="nodeList" size="10" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <value interface="HTMLOptionElement" obj="testNode" var="vvalue"/>
-<assertEquals actual="vvalue" expected='"10001"' id="valueLink" ignoreCase="false"/>
+<assertEquals actual="vvalue" expected="&quot;10001&quot;" id="valueLink" ignoreCase="false"/>
 </test>

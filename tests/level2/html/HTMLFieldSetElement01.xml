@@ -26,17 +26,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-03</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-75392630"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vform" type="DOMString" />
+<var name="vform" type="DOMString"/>
 <var name="fNode" type="Node"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="fieldset" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"fieldset"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;fieldset&quot;"/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <form interface="HTMLFieldSetElement" obj="testNode" var="fNode"/>
 <name interface="HTMLFormElement" obj="fNode" var="vform"/>
-<assertEquals actual="vform" expected='"form2"' id="formLink" ignoreCase="false"/>
+<assertEquals actual="vform" expected="&quot;form2&quot;" id="formLink" ignoreCase="false"/>
 </test>

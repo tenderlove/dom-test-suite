@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-12-18</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-59132807"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
 <var name="vlang" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="element" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"strong"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;strong&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <lang interface="HTMLElement" obj="testNode" var="vlang"/>
-<assertEquals actual="vlang" expected='"en"' id="langLink" ignoreCase="false"/>
+<assertEquals actual="vlang" expected="&quot;en&quot;" id="langLink" ignoreCase="false"/>
 </test>

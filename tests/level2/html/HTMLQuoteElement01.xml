@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-07</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-53895598"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vcite" type="DOMString" />
+<var name="vcite" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="quote" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"q"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;q&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <cite interface="HTMLQuoteElement" obj="testNode" var="vcite"/>
-<assertURIEquals actual="vcite" file='"Q.html"' id="citeLink"/>
+<assertURIEquals actual="vcite" file="&quot;Q.html&quot;" id="citeLink"/>
 </test>

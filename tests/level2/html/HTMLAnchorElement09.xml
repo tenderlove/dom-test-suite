@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-11-30</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-49899808"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vshape" type="DOMString" />
+<var name="vshape" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="anchor" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"a"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;a&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <shape interface="HTMLAnchorElement" obj="testNode" var="vshape"/>
-<assertEquals actual="vshape" expected='"rect"' id="shapeLink" ignoreCase="false"/>
+<assertEquals actual="vshape" expected="&quot;rect&quot;" id="shapeLink" ignoreCase="false"/>
 </test>

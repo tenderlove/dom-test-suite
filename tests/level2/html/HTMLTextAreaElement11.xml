@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-18</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vtype" type="DOMString" />
+<var name="vtype" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="textarea" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"textarea"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;textarea&quot;"/>
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <type interface="HTMLTextAreaElement" obj="testNode" var="vtype"/>
-<assertEquals actual="vtype" expected='"textarea"' id="typeLink" ignoreCase="false"/>
+<assertEquals actual="vtype" expected="&quot;textarea&quot;" id="typeLink" ignoreCase="false"/>
 </test>

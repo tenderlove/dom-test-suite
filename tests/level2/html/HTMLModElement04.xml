@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-02</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-88432678"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vdatetime" type="DOMString" />
+<var name="vdatetime" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="mod" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"del"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;del&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <dateTime interface="HTMLModElement" obj="testNode" var="vdatetime"/>
-<assertEquals actual="vdatetime" expected='"January 2, 2002"' id="dateTimeLink" ignoreCase="false"/>
+<assertEquals actual="vdatetime" expected="&quot;January 2, 2002&quot;" id="dateTimeLink" ignoreCase="false"/>
 </test>

@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-10</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-57779225"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vchoff" type="DOMString" />
+<var name="vchoff" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="tablecol" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"col"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;col&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <chOff interface="HTMLTableColElement" obj="testNode" var="vchoff"/>
-<assertEquals actual="vchoff" expected='"20"' id="chLink" ignoreCase="false"/>
+<assertEquals actual="vchoff" expected="&quot;20&quot;" id="chLink" ignoreCase="false"/>
 </test>

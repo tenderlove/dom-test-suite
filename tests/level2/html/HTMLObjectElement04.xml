@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-02</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-47783837"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="varchive" type="DOMString" />
+<var name="varchive" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="object" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"object"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;object&quot;"/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <archive interface="HTMLObjectElement" obj="testNode" var="varchive"/>
-<assertEquals actual="varchive" expected='""' id="archiveLink" ignoreCase="false"/>
+<assertEquals actual="varchive" expected="&quot;&quot;" id="archiveLink" ignoreCase="false"/>
 </test>

@@ -27,15 +27,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-02</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-76448506"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vcompact" type="boolean" />
+<var name="vcompact" type="boolean"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="olist" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"ol"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;ol&quot;"/>
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <compact interface="HTMLOListElement" obj="testNode" var="vcompact"/>
-<assertTrue actual="vcompact"  id="compactLink"/>
+<assertTrue actual="vcompact" id="compactLink"/>
 </test>

@@ -26,15 +26,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2002-01-02</date>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-33532588"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vhref" type="DOMString" />
+<var name="vhref" type="DOMString"/>
 <var name="doc" type="Node"/>
 <load var="doc" href="link" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"link"'/>
+<getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;link&quot;"/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <href interface="HTMLLinkElement" obj="testNode" var="vhref"/>
-<assertURIEquals actual="vhref" file='"glossary.html"' id="hrefLink"/>
+<assertURIEquals actual="vhref" file="&quot;glossary.html&quot;" id="hrefLink"/>
 </test>
