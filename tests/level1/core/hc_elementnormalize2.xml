@@ -23,7 +23,7 @@ and check that the attribute node has eliminated the empty text.
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083"/>
 </metadata>
-<hasFeature feature="XML"/>
+<hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
 <var name="elementList" type="NodeList"/>
@@ -31,11 +31,12 @@ and check that the attribute node has eliminated the empty text.
 <var name="firstChild" type="Node"/>
 <var name="secondChild" type="Node"/>
 <var name="childValue" type="DOMString"/>
-<var name="emptyText" type="TextNode"/>
+<var name="emptyText" type="Text"/>
 <var name="attrNode" type="Attr"/>
+<var name="retval" type="Node"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement obj="doc" var="root"/>
-<createTextNode var="emptyText" obj="doc"/>
+<createTextNode var="emptyText" obj="doc" data='""'/>
 <getElementsByTagName interface="Element" obj="root" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="element"/>
 <getAttributeNode var="attrNode" obj="element" name='"title"'/>
