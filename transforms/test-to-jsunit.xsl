@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2001-2003 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -261,6 +261,11 @@ function suite() {
                                 <td>Namespace aware</td>
                                 <td align="center"><input type="radio" name="namespaceAware" value="true"  disabled="disabled" onclick="setImplementationAttribute('namespaceAware', true)"></input></td>
                                 <td align="center"><input type="radio" name="namespaceAware" value="false"  disabled="disabled" checked="checked" onclick="setImplementationAttribute('namespaceAware', true)"></input></td>
+                            </tr>
+                            <tr>
+                                <td>Ignoring comments</td>
+                                <td align="center"><input type="radio" name="ignoringComments" value="true" disabled="disabled" checked="checked" onclick="setImplementationAttribute('ignoringComments', true)"></input></td>
+                                <td align="center"><input type="radio" name="ignoringComments" value="false"  disabled="disabled" onclick="setImplementationAttribute('ignoringComments', false)"></input></td>
                             </tr>
                         </table>
                     </td>

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.122  2004-01-21 17:46:03  dom-ts-4
+Revision 1.123  2004-01-28 23:22:31  dom-ts-4
+Support for ignoringComments impl attribute (bug 509)
+
+Revision 1.122  2004/01/21 17:46:03  dom-ts-4
 Add UserDataHandler and DOMErrorHandler tests (bug 477)
 
 Revision 1.121  2004/01/16 06:50:32  dom-ts-4
@@ -507,7 +510,7 @@ All implementation conditions combined into implementationAttribute element
 		<fileset dir="tests/level${level}/${module}/files" excludes="*.bak"/>
     </copy>
     <!--  copy XHTML 1.0 DTD's to output directory   -->
-    <copy todir="${build.dir}/ecmascript/level${level}/${module}">
+    <copy todir="${build.dir}/ecmascript/level${level}/${module}/files">
 		<fileset dir="${lib.dir}/xhtml1-dtd"/>
     </copy>
 
@@ -871,7 +874,7 @@ All implementation conditions combined into implementationAttribute element
 
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
-		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml *.svg" excludes="nodtdstaff.*"/>  
+		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml *.svg" excludes="hc_nodtdstaff.*"/>  
 	</xmlvalidate>
 </target>
 

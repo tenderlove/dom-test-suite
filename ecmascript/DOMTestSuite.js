@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003 World Wide Web Consortium,
+Copyright (c) 2003-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -54,6 +54,7 @@ function update() {
     updateImplementationAttribute(document.forms[0].validating, "validating");
     updateImplementationAttribute(document.forms[0].coalescing, "coalescing");
     updateImplementationAttribute(document.forms[0].namespaceAware, "namespaceAware");
+    updateImplementationAttribute(document.forms[0].ignoringComments, "ignoringComments");
 
     var contentTypes = document.forms[0].contentType;
     for(i = 0; i < contentTypes.length; i++) {
@@ -109,8 +110,9 @@ function setImplementationAttribute(implAttr, implValue) {
 function setContentType(contentType) {
     for (var i = 0; i < builder.supportedContentTypes.length; i++) {
         if (builder.supportedContentTypes[i] == contentType) {
-            builder.contentType = contentType;
+            builder.setContentType(contentType);
             updateIncompatibleTests();
+            update();
             return;
         }
     }
@@ -125,7 +127,8 @@ function checkTest(activeTests, inactiveTests, testName, loadedDocs,
     var i;
     if (loadedDocs != null) {
         for (i = 0; i < loadedDocs.length; i++) {
-            if (loadedDocs[i] == "staff" && !(builder.contentType == "text/xml" || builder.contentType == "image/svg+xml")) {
+            if ((loadedDocs[i] == "staff" || loadedDocs[i] == "nodtdstaff") && 
+            	!(builder.contentType == "text/xml" || builder.contentType == "image/svg+xml")) {
                 active = false;
                 break;
             }

@@ -1217,6 +1217,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 								<xs:enumeration value="signed"/>
 								<xs:enumeration value="hasNullString"/>
 								<xs:enumeration value="schemaValidating"/>
+								<xs:enumeration value="ignoringComments"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>

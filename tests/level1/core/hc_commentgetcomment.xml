@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -13,7 +13,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_commentgetcomment">
 <metadata>
-<title>hc_commentGetComment</title>
+<title>hc_commentgetcomment</title>
 <creator>Curt Arnold</creator>
 <description>
     A comment is all the characters between the starting
@@ -31,7 +31,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
 <!--Node.nodeType attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=509"/>
 </metadata>
+<implementationAttribute name="ignoringComments" value="false"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="child" type="Node"/>
@@ -39,6 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childValue" type="DOMString"/>
 <var name="commentCount" type="int" value="0"/>
 <var name="childType" type="int"/>
+<var name="attributes" type="NamedNodeMap"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <childNodes obj="doc" var="elementList"/>
 <for-each collection="elementList" member="child">
@@ -49,6 +53,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertEquals actual="childName" expected='"#comment"' ignoreCase="false" id="nodeName"/>
 <nodeValue obj="child" var="childValue"/>
 <assertEquals actual="childValue" expected='" This is comment number 1."' id="nodeValue" ignoreCase="false"/>
+<attributes var="attributes" obj="child"/>
+<assertNull actual="attributes" id="attributes"/>
 <plus var="commentCount" op1="commentCount" op2="1"/>
 </if>
 </for-each>

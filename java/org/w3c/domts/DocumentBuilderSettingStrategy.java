@@ -74,6 +74,22 @@ public abstract class DocumentBuilderSettingStrategy {
 		}
 	};
 
+	public static final DocumentBuilderSettingStrategy ignoringComments =
+		new DocumentBuilderSettingStrategy() {
+		public void applySetting(DocumentBuilderFactory factory, boolean value)
+			throws DOMTestIncompatibleException {
+			if (value) {
+				throw new DOMTestIncompatibleException(
+					new Exception("ignoreComments=true not supported"),
+					DocumentBuilderSetting.ignoringComments);
+			}
+		}
+		public boolean hasSetting(DOMTestDocumentBuilderFactory factory) {
+			return false;
+		}
+	};
+
+	
 	public static final DocumentBuilderSettingStrategy namespaceAware =
 		new DocumentBuilderSettingStrategy() {
 		public void applySetting(DocumentBuilderFactory factory, boolean value)

@@ -223,9 +223,9 @@ function IFrameBuilder() {
     this.async = true;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
-        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware" ];
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments" ];
 
-    this.fixedAttributeValues = [false,  true, false, true, true , false, false ];
+    this.fixedAttributeValues = [false,  true, false, true, true , false, false, true ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.exception = null;
@@ -238,6 +238,16 @@ IFrameBuilder.prototype.hasFeature = function(feature, version) {
 IFrameBuilder.prototype.getImplementation = function() {
     return document.implementation;
 }
+
+IFrameBuilder.prototype.setContentType = function(contentType) {
+    this.contentType = contentType;
+    if (contentType == "text/html") {
+    	this.fixedAttributeValues[this.fixedAttributeValues.length - 1] = true;
+    } else {
+    	this.fixedAttributeValues[this.fixedAttributeValues.length - 1] = false;
+    }
+}
+
 
 
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
@@ -312,9 +322,9 @@ function SVGPluginBuilder() {
     this.async = true;
     this.fixedAttributeNames = [
         "validating",  "expandEntityReferences", "coalescing", 
-        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware" ];
+        "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments"];
 
-    this.fixedAttributeValues = [false,  true, false, true, true , false, false ];
+    this.fixedAttributeValues = [false,  true, false, true, true , false, false, false ];
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.exception = null;
@@ -326,6 +336,10 @@ SVGPluginBuilder.prototype.hasFeature = function(feature, version) {
             return true;
         }
     }
+}
+
+SVGPluginBuilder.prototype.setContentType = function(contentType) {
+    this.contentType = contentType;
 }
 
 SVGPluginBuilder.prototype.getImplementation = function() {
@@ -447,8 +461,8 @@ function MSXMLBuilder(progID) {
         "validating", "ignoringElementContentWhitespace"];
     this.configurableAttributeValues = [ false, false ];
     this.fixedAttributeNames = [ "signed", "hasNullString", 
-        "expandEntityReferences", "coalescing", "namespaceAware" ];
-    this.fixedAttributeValues = [ true, true, false, false, false ];
+        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
+    this.fixedAttributeValues = [ true, true, false, false, false, false ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -470,6 +484,11 @@ MSXMLBuilder.prototype.createMSXML = function() {
     parser.validateOnParse = this.configurableAttributeValues[0];
     return parser;
   }
+  
+MSXMLBuilder.prototype.setContentType = function(contentType) {
+    this.contentType = contentType;
+}
+  
 
 MSXMLBuilder.prototype.preload = function(frame, varname, url) {
   if (this.async) {
@@ -594,8 +613,8 @@ function MozillaXMLBuilder() {
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.fixedAttributeNames = [ "validating", "ignoringElementContentWhitespace", "signed", 
-        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware" ];
-    this.fixedAttributeValues = [ false, false, true, true, false, false, false ];
+        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
+    this.fixedAttributeValues = [ false, false, true, true, false, false, false, false ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -615,6 +634,11 @@ function MozillaXMLBuilder() {
 MozillaXMLBuilder.prototype.getImplementation = function() {
     return document.implementation;
 }
+
+MozillaXMLBuilder.prototype.setContentType = function(contentType) {
+    this.contentType = contentType;
+}
+
 
 
 MozillaXMLBuilder.prototype.preload = function(frame, varname, url) {
@@ -662,8 +686,8 @@ function DOM3LSBuilder() {
     this.configurableAttributeNames = [ ];
     this.configurableAttributeValues = [ ];
     this.fixedAttributeNames = [ "validating", "ignoringElementContentWhitespace", "signed", 
-        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware" ];
-    this.fixedAttributeValues = [ false, false, true, true, false, false, true ];
+        "hasNullString", "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments" ];
+    this.fixedAttributeValues = [ false, false, true, true, false, false, true, false ];
 
     this.contentType = "text/xml";
     this.supportedContentTypes = [ 
@@ -684,6 +708,10 @@ DOM3LSBuilder.prototype.getImplementation = function() {
     return document.implementation;
 }
 
+
+DOM3LSBuilder.prototype.setContentType = function(contentType) {
+    this.contentType = contentType;
+}
 
 DOM3LSBuilder.prototype.preload = function(frame, varname, url) {
   if (this.async) {
@@ -813,7 +841,7 @@ if (top && top.jsUnitParmHash)
             var contentTypeSet = false;
             for (var i = 0; i < builder.supportedContentTypes.length; i++) {
                 if (builder.supportedContentTypes[i] == contentType) {
-                    builder.contentType = contentType;
+                    builder.setContentType(contentType);
                     contentTypeSet = true;
                     break;
                 }
@@ -822,6 +850,14 @@ if (top && top.jsUnitParmHash)
                 builder.exception = "Builder does not support content type " + contentType;
             }
         }
+        if (top.jsUnitParmHash.ignoringcomments) {
+            if (top.jsUnitParmHash.ignoringcomments == 'true') {
+                builder.setImplementationAttribute('ignoringComments', true);
+            } else {
+                builder.setImplementationAttribute('ignoringComments', false);
+            }
+        }
+        
     }
     catch(ex) {
         builder.exception = ex;

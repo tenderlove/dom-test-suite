@@ -845,7 +845,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST implementationAttribute
 	id ID #IMPLIED
 	value (true|false) #REQUIRED
-	name (validating|coalescing|expandEntityReferences|namespaceAware|ignoringElementContentWhitespace|signed|hasNullString|schemaValidating) #REQUIRED
+	name (validating|coalescing|expandEntityReferences|namespaceAware|ignoringElementContentWhitespace|signed|hasNullString|schemaValidating|ignoringComments) #REQUIRED
 &gt;
 
 

@@ -117,6 +117,19 @@ public final class DocumentBuilderSetting {
 			"schemaValidating",
 			false,
 			DocumentBuilderSettingStrategy.schemaValidating);
+
+	public final static DocumentBuilderSetting ignoringComments =
+		new DocumentBuilderSetting(
+			"ignoringComments",
+			true,
+			DocumentBuilderSettingStrategy.ignoringComments);
+
+	public final static DocumentBuilderSetting notIgnoringComments =
+		new DocumentBuilderSetting(
+			"ignoringComments",
+			false,
+			DocumentBuilderSettingStrategy.ignoringComments);
+
 	
 	/**
 	 * Protected constructor, use static members for supported settings.
