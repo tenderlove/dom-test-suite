@@ -124,6 +124,10 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 				<xsl:sort select="@name"/>
 
                 <xsl:choose>
+                	<!--  ElementEditVal.contentType conflicts with contentType conditional
+                	           contentType element appears in fixed section   -->
+                	<xsl:when test="@name = 'contentType'"/>
+                	
                     <xsl:when test="contains($sink-interfaces, 
                             concat(' ',concat(parent::interface/@name,' ')))">
                         <xsl:choose>
@@ -238,7 +242,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
         <xsl:param name="content">EMPTY</xsl:param>
 
 			<!--  produce an element for all methods  -->
-			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'load']">
+			<xsl:for-each select="$methods[@name != 'hasFeature' and @name != 'load' and @name != 'contentType']">
 				<xsl:sort select="@name"/>
 
                 <xsl:choose>
@@ -761,6 +765,16 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	obj CDATA #REQUIRED
 	expected CDATA #REQUIRED
 &gt;
+
+&lt;!ELEMENT contentType EMPTY&gt;
+&lt;!ATTLIST contentType
+	id ID #IMPLIED
+	type CDATA #IMPLIED
+	obj CDATA #IMPLIED
+	var CDATA #IMPLIED
+	interface (ElementEditVal) #IMPLIED
+&gt;
+
 
 &lt;!ELEMENT contains EMPTY&gt;
 &lt;!ATTLIST contains

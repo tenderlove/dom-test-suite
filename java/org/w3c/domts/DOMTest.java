@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTest.java,v $
- Revision 1.6  2003-04-24 05:02:05  dom-ts-4
+ Revision 1.7  2003-06-27 05:36:05  dom-ts-4
+ contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
+
+ Revision 1.6  2003/04/24 05:02:05  dom-ts-4
  Xalan-J support for L3 XPath
  http://www.w3.org/Bugs/Public/show_bug.cgi?id=191
 
@@ -182,6 +185,10 @@ public abstract class DOMTest {
 
   public final boolean isHasNullString() {
     return true;
+  }
+  
+  public final String getContentType() {
+  	  return factory.getContentType();
   }
 
 }

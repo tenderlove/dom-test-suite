@@ -12,7 +12,10 @@
 
 /*
 $Log: BatikTestDocumentBuilderFactory.java,v $
-Revision 1.2  2003-01-25 18:41:53  dom-ts-4
+Revision 1.3  2003-06-27 05:36:05  dom-ts-4
+contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
+
+Revision 1.2  2003/01/25 18:41:53  dom-ts-4
 Removed tabs and other code cleanup
 
 Revision 1.1  2002/02/03 04:22:35  dom-ts-4
@@ -235,5 +238,10 @@ public class BatikTestDocumentBuilderFactory
     public boolean isValidating() {
         return false;
     }
+    
+	public String getContentType() {
+		return "image/svg+xml";
+	}
+    
 
 }

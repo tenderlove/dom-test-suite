@@ -1139,7 +1139,7 @@ function handleEvent(listener, event, userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='contentType']" mode="condition">
-	(contentType == <xsl:value-of select="@type"/>)
+	(builder.contentType == "<xsl:value-of select="@type"/>")
 </xsl:template>
 
 

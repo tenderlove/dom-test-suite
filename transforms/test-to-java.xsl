@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.40  2003-04-23 05:48:24  dom-ts-4
+Revision 1.41  2003-06-27 05:37:30  dom-ts-4
+contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
+
+Revision 1.40  2003/04/23 05:48:24  dom-ts-4
 DOMTSML and framework support for createXPathEvaluator
 http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
 
@@ -1972,6 +1975,11 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 <xsl:template match="*[local-name()='hasSize']" mode="condition">
     <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.size() == <xsl:value-of select="@expected"/><xsl:text>)</xsl:text>
 </xsl:template>
+
+<xsl:template match="*[local-name()='contentType']" mode="condition">
+    <xsl:text>("</xsl:text><xsl:value-of select="@type"/><xsl:text>".equals(getContentType()))</xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*[local-name()='contains']" mode="condition">
     <xsl:text>(</xsl:text><xsl:value-of select="@obj"/>.indexOf(<xsl:value-of select="@substring"/><xsl:text>) >= 0)</xsl:text>

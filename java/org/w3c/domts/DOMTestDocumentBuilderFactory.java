@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestDocumentBuilderFactory.java,v $
- Revision 1.5  2003-04-23 05:48:24  dom-ts-4
+ Revision 1.6  2003-06-27 05:36:05  dom-ts-4
+ contentType condition fixes: http://www.w3.org/Bugs/Public/show_bug.cgi?id=241
+
+ Revision 1.5  2003/04/23 05:48:24  dom-ts-4
  DOMTSML and framework support for createXPathEvaluator
  http://www.w3.org/Bugs/Public/show_bug.cgi?id=190
 
@@ -162,6 +165,10 @@ public abstract class DOMTestDocumentBuilderFactory {
     public abstract boolean isNamespaceAware();
 
     public abstract boolean isValidating();
+    
+    public String getContentType() {
+    	return "text/xml";
+    }
 
   /**
    * Creates an array of all determinable settings for the DocumentBuilder
