@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.77  2002-11-26 20:17:00  plehegar
+Revision 1.78  2003-01-16 06:37:39  dom-ts-4
+Update for DOM 2 HTML REC, new LS draft
+
+Revision 1.77  2002/11/26 20:17:00  plehegar
 Fixed dom2-html-matrix.
  The value of param must be inside the expression attribute, and no
 inside its content.
@@ -654,10 +657,10 @@ All implementation conditions combined into implementationAttribute element
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-2"/>
-	<get src="http://www.w3.org/TR/2002/PR-DOM-Level-2-HTML-20021108/DOM2-HTML.zip"
+	<get src="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
 		usetimestamp="yes"/>
-    <get src="http://www.w3.org/TR/2002/PR-DOM-Level-2-HTML-20021108/java-binding.zip"
+    <get src="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/java-binding.zip"
         dest="${specs.dir}/DOM2-HTML-Java-Binding.zip"
         usetimestamp="yes"/>
 </target>
@@ -1654,7 +1657,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom3-val" depends="dom3-available" unless="dom3-val-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Val-20020725/DOM3-Val.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Val-20021008/DOM3-Val.zip"
 		dest="${specs.dir}/DOM3-Val.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1733,13 +1736,6 @@ All implementation conditions combined into implementationAttribute element
 
 	<unzip src="${specs.dir}/DOM3-Val.zip"
 	       dest="${specs.dir}/Level-3/Val"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/Val/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/validation"/>
-
-
 
 
     <!--   These files are missing   -->
