@@ -401,10 +401,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     <xs:selector xpath="//*"/>
                     <xs:field xpath="@collection"/>
                 </xs:keyref>
-                <!--  all collection attributes must correspond to a previously declared variable  -->
+                <!--  all member attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="member-attrib" refer="var-name">
                     <xs:selector xpath="//*"/>
                     <xs:field xpath="@member"/>
+                </xs:keyref>
+                <!--  all refChild attributes must correspond to a previously declared variable  -->
+                <xs:keyref name="refChild-attrib" refer="var-name">
+                    <xs:selector xpath="//*"/>
+                    <xs:field xpath="@refChild"/>
+                </xs:keyref>
+                <!--  all doctype attributes must correspond to a previously declared variable  -->
+                <xs:keyref name="doctype-attrib" refer="var-name">
+                    <xs:selector xpath="//*"/>
+                    <xs:field xpath="@doctype"/>
                 </xs:keyref>
 			</xs:element>
 
