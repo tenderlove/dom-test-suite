@@ -22,7 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>Curt Arnold</creator>
 <description>
 DOMImplementationRegistry.getDOMImplementationList("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS") 
-should return an empty list of a list of DOMImplementation that implements the specified features.
+should return an empty list or a list of DOMImplementation that implements the specified features.
 </description>
 <date qualifier="created">2004-01-15</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding"/>

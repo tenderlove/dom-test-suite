@@ -237,6 +237,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="domimplementationregistry21.xml"/>
 <suite.member href="domimplementationregistry22.xml"/>
 <suite.member href="domimplementationregistry23.xml"/>
+<suite.member href="domimplementationregistry24.xml"/>
+<suite.member href="domimplementationregistry25.xml"/>
 <suite.member href="domstringlistcontains01.xml"/>
 <suite.member href="domstringlistcontains02.xml"/>
 <suite.member href="domstringlistgetlength01.xml"/>
