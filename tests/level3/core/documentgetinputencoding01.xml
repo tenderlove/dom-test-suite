@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2003 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -21,18 +21,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentgetinputencoding01</title>
 <creator>IBM</creator>
 <description>
-	The method getInputEncoding returns the encoding used for this document at the time of the parsing.
-	
 	Call the getInputEncoding method on a UTF-8 encoded document and check if the 
 	value returned is UTF-8.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core.html#Document3-inputEncoding"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="encodingName" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <inputEncoding obj="doc" var="encodingName" interface="Document"/>
-<assertEquals expected='"UTF-8"' actual="encodingName" id="documentgetinputencoding01" ignoreCase="false"/>
+<assertEquals expected='"UTF-8"' actual="encodingName" id="documentgetinputencoding01" ignoreCase="true"/>
 </test>
