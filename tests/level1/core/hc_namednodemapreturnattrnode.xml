@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -19,7 +19,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     The "getNamedItem(name)" method returns a node of any 
    type specified by name. 
    
-   Retrieve the second employee and create a NamedNodeMap 
+   Retrieve the second p element and create a NamedNodeMap 
    listing of the attributes of the last child.  Once the
    list is created an invocation of the "getNamedItem(name)"
    method is done with name="class".  This should result
@@ -35,6 +35,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024"/>
 <!--name attribute -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -42,14 +43,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributes" type="NamedNodeMap"/>
 <var name="streetAttr" type="Node"/>
 <var name="attrName" type="DOMString"/>
+<var name="attrNodeName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testEmployee" index="1"/>
 <attributes obj="testEmployee" var="attributes"/>
 <getNamedItem obj="attributes" var="streetAttr" name='"class"'/>
 <assertInstanceOf obj="streetAttr" type="Attr" id="typeAssert"/>
-<nodeName obj="streetAttr" var="attrName"/>
-<assertEquals actual="attrName" expected='"class"' id="nodeName" ignoreCase="false"/>
+<nodeName obj="streetAttr" var="attrNodeName"/>
 <name obj="streetAttr" var="attrName" interface="Attr"/>
-<assertEquals actual="attrName" expected='"class"' id="attrName" ignoreCase="false"/>
+<assertEquals actual="attrName" expected='attrNodeName' id="nameAndNodeNameEqual" ignoreCase="false"/>
+<if>
+	<contentType type="text/html"/>
+	<assertEquals actual="attrName" expected='"class"' id="attrNameHTML" ignoreCase="true"/>
+	<else>
+		<assertEquals actual="attrName" expected='"class"' id="attrName" ignoreCase="true"/>
+	</else>
+</if>
 </test>
