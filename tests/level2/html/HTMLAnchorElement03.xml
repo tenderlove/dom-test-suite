@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <coords interface="HTMLAnchorElement" obj="testNode" var="vcoords"/>
-<assertEquals actual="vcoords" expected='"0,0,100,100"' id="coordsLink" ignoreCase="auto"/>
+<assertEquals actual="vcoords" expected='"0,0,100,100"' id="coordsLink" ignoreCase="false"/>
 </test>

@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="4" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <scope interface="HTMLTableCellElement" obj="testNode" var="vscope"/>
-<assertEquals actual="vscope" expected='"col"' id="scopeLink" ignoreCase="auto"/>
+<assertEquals actual="vscope" expected='"col"' id="scopeLink" ignoreCase="false"/>
 </test>

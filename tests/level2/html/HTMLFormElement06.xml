@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <enctype interface="HTMLFormElement" obj="testNode" var="venctype"/>
-<assertEquals actual="venctype" expected='"application/x-www-form-urlencoded"' id="enctypeLink" ignoreCase="auto"/>
+<assertEquals actual="venctype" expected='"application/x-www-form-urlencoded"' id="enctypeLink" ignoreCase="false"/>
 </test>

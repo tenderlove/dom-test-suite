@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <clear interface="HTMLBRElement" obj="testNode" var="vclear"/>
-<assertEquals actual="vclear" expected='"none"' id="clearLink" ignoreCase="auto"/>
+<assertEquals actual="vclear" expected='"none"' id="clearLink" ignoreCase="false"/>
 </test>

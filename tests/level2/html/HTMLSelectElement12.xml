@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <size interface="HTMLSelectElement" obj="testNode" var="vsize"/>
-<assertEquals actual="vsize" expected="1" id="sizeLink" ignoreCase="auto"/>
+<assertEquals actual="vsize" expected="1" id="sizeLink" ignoreCase="false"/>
 </test>

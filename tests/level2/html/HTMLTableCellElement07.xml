@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="4" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <axis interface="HTMLTableCellElement" obj="testNode" var="vaxis"/>
-<assertEquals actual="vaxis" expected='"center"' id="axisLink" ignoreCase="auto"/>
+<assertEquals actual="vaxis" expected='"center"' id="axisLink" ignoreCase="false"/>
 </test>

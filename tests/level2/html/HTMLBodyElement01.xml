@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <aLink interface="HTMLBodyElement" obj="testNode" var="valink"/>
-<assertEquals actual="valink" expected='"#0000ff"' id="aLinkLink" ignoreCase="auto"/>
+<assertEquals actual="valink" expected='"#0000ff"' id="aLinkLink" ignoreCase="false"/>
 </test>

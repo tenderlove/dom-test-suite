@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <areas interface="HTMLMapElement" obj="testNode" var="areasnodeList"/>
 <length interface="HTMLCollection" obj="areasnodeList" var="vareas"/>
-<assertEquals actual="vareas" expected="3" id="areasLink" ignoreCase="auto"/>
+<assertEquals actual="vareas" expected="3" id="areasLink" ignoreCase="false"/>
 </test>

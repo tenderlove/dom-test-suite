@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <standby interface="HTMLObjectElement" obj="testNode" var="vstandby"/>
-<assertEquals actual="vstandby" expected='"Loading Image ..."' id="alignLink" ignoreCase="auto"/>
+<assertEquals actual="vstandby" expected='"Loading Image ..."' id="alignLink" ignoreCase="false"/>
 </test>

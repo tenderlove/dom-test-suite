@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <charset interface="HTMLLinkElement" obj="testNode" var="vcharset"/>
-<assertEquals actual="vcharset" expected='"Latin-1"' id="charsetLink" ignoreCase="auto"/>
+<assertEquals actual="vcharset" expected='"Latin-1"' id="charsetLink" ignoreCase="false"/>
 </test>

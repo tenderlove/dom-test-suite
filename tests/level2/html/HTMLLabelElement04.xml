@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <htmlFor interface="HTMLLabelElement" obj="testNode" var="vhtmlfor"/>
-<assertEquals actual="vhtmlfor" expected='"input1"' id="htmlForLink" ignoreCase="auto"/>
+<assertEquals actual="vhtmlfor" expected='"input1"' id="htmlForLink" ignoreCase="false"/>
 </test>

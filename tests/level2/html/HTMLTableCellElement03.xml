@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="4" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <abbr interface="HTMLTableCellElement" obj="testNode" var="vabbr"/>
-<assertEquals actual="vabbr" expected='"hd1"' id="abbrLink" ignoreCase="auto"/>
+<assertEquals actual="vabbr" expected='"hd1"' id="abbrLink" ignoreCase="false"/>
 </test>

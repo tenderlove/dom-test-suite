@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <border interface="HTMLTableElement" obj="testNode" var="vborder"/>
-<assertEquals actual="vborder" expected='"4"' id="borderLink" ignoreCase="auto"/>
+<assertEquals actual="vborder" expected='"4"' id="borderLink" ignoreCase="false"/>
 </test>

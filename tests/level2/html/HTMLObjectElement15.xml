@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <useMap interface="HTMLObjectElement" obj="testNode" var="vusemap"/>
-<assertEquals actual="vusemap" expected='"#DivLogo-map"' id="useMapLink" ignoreCase="auto"/>
+<assertEquals actual="vusemap" expected='"#DivLogo-map"' id="useMapLink" ignoreCase="false"/>
 </test>

@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <id interface="HTMLElement" obj="testNode" var="vid"/>
-<assertEquals actual="vid" expected='"Test-U"' id="idLink" ignoreCase="auto"/>
+<assertEquals actual="vid" expected='"Test-U"' id="idLink" ignoreCase="false"/>
 </test>

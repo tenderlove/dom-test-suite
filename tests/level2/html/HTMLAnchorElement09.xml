@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <shape interface="HTMLAnchorElement" obj="testNode" var="vshape"/>
-<assertEquals actual="vshape" expected='"rect"' id="shapeLink" ignoreCase="auto"/>
+<assertEquals actual="vshape" expected='"rect"' id="shapeLink" ignoreCase="false"/>
 </test>

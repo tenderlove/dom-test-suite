@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="9" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <alt interface="HTMLInputElement" obj="testNode" var="valt"/>
-<assertEquals actual="valt" expected='"Password entry"' id="altLink" ignoreCase="auto"/>
+<assertEquals actual="valt" expected='"Password entry"' id="altLink" ignoreCase="false"/>
 </test>

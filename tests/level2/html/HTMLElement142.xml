@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <className interface="HTMLElement" obj="testNode" var="vclassname"/>
-<assertEquals actual="vclassname" expected='"NOFRAMES-class"' id="classNameLink" ignoreCase="auto"/>
+<assertEquals actual="vclassname" expected='"NOFRAMES-class"' id="classNameLink" ignoreCase="false"/>
 </test>

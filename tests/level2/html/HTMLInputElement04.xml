@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="9" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="8"/>
 <accept interface="HTMLInputElement" obj="testNode" var="vaccept"/>
-<assertEquals actual="vaccept" expected='"GIF,JPEG"' id="acceptLink" ignoreCase="auto"/>
+<assertEquals actual="vaccept" expected='"GIF,JPEG"' id="acceptLink" ignoreCase="false"/>
 </test>

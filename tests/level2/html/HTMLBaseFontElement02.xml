@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <face interface="HTMLBaseFontElement" obj="testNode" var="vface"/>
-<assertEquals actual="vface" expected='"arial,helvitica"' id="faceLink" ignoreCase="auto"/>
+<assertEquals actual="vface" expected='"arial,helvitica"' id="faceLink" ignoreCase="false"/>
 </test>

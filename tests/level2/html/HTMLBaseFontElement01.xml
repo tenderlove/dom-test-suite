@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <color interface="HTMLBaseFontElement" obj="testNode" var="vcolor"/>
-<assertEquals actual="vcolor" expected='"#000000"' id="colorLink" ignoreCase="auto"/>
+<assertEquals actual="vcolor" expected='"#000000"' id="colorLink" ignoreCase="false"/>
 </test>

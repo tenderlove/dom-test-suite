@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <rules interface="HTMLTableElement" obj="testNode" var="vrules"/>
-<assertEquals actual="vrules" expected='"all"' id="rulesLink" ignoreCase="auto"/>
+<assertEquals actual="vrules" expected='"all"' id="rulesLink" ignoreCase="false"/>
 </test>

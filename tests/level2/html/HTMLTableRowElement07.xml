@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="5" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <bgColor interface="HTMLTableRowElement" obj="testNode" var="vbgcolor"/>
-<assertEquals actual="vbgcolor" expected='"#00FFFF"' id="bgColorLink" ignoreCase="auto"/>
+<assertEquals actual="vbgcolor" expected='"#00FFFF"' id="bgColorLink" ignoreCase="false"/>
 </test>

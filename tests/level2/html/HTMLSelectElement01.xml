@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <type interface="HTMLSelectElement" obj="testNode" var="vtype"/>
-<assertEquals actual="vtype" expected='"select-multiple"' id="typeLink" ignoreCase="auto"/>
+<assertEquals actual="vtype" expected='"select-multiple"' id="typeLink" ignoreCase="false"/>
 </test>

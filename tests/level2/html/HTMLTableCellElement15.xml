@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="4" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <colSpan interface="HTMLTableCellElement" obj="testNode" var="vcolspan"/>
-<assertEquals actual="vcolspan" expected="1" id="colSpanLink" ignoreCase="auto"/>
+<assertEquals actual="vcolspan" expected="1" id="colSpanLink" ignoreCase="false"/>
 </test>

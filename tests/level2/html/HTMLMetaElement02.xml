@@ -36,5 +36,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <httpEquiv interface="HTMLMetaElement" obj="testNode" var="vhttpequiv"/>
-<assertEquals actual="vhttpequiv" expected='"Content-Type"' id="httpEquivLink" ignoreCase="auto"/>
+<assertEquals actual="vhttpequiv" expected='"Content-Type"' id="httpEquivLink" ignoreCase="false"/>
 </test>

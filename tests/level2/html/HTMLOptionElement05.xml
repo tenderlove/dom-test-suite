@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="10" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="6"/>
 <index interface="HTMLOptionElement" obj="testNode" var="vindex"/>
-<assertEquals actual="vindex" expected="1" id="indexLink" ignoreCase="auto"/>
+<assertEquals actual="vindex" expected="1" id="indexLink" ignoreCase="false"/>
 </test>

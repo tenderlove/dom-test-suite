@@ -38,5 +38,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="3" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <value interface="HTMLTextAreaElement" obj="testNode" var="vvalue"/>
-<assertEquals actual="vvalue" expected='"TEXTAREA1"' id="valueLink" ignoreCase="auto"/>
+<assertEquals actual="vvalue" expected='"TEXTAREA1"' id="valueLink" ignoreCase="false"/>
 </test>

@@ -37,5 +37,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <chOff interface="HTMLTableSectionElement" obj="testNode" var="vcharoff"/>
-<assertEquals actual="vcharoff" expected='"3"' id="chOffLink" ignoreCase="auto"/>
+<assertEquals actual="vcharoff" expected='"3"' id="chOffLink" ignoreCase="false"/>
 </test>

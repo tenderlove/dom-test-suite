@@ -39,5 +39,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="3"/>
 <cells interface="HTMLTableRowElement" obj="testNode" var="cellsnodeList"/>
 <length interface="HTMLCollection" obj="cellsnodeList" var="vcells"/>
-<assertEquals actual="vcells" expected="6" id="cellsLink" ignoreCase="auto"/>
+<assertEquals actual="vcells" expected="6" id="cellsLink" ignoreCase="false"/>
 </test>
