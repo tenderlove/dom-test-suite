@@ -27,7 +27,7 @@ CDATA content.
 </description>
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
-<source resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359"/>
 </metadata>
 <implementationAttribute name="coalescing" value="false"/>
 <var name="doc" type="Document"/>
