@@ -28,19 +28,15 @@ DOM Test Suite
   
   <project name="dom1">
     <description>DOM Level 1 test suites</description>
-    <mkdir dir="build/java"/>
     <ant target="dom1-gump" />
 
     <depend project="ant" inherit="runtime"/>
     <depend project="xml-xerces"/>
     <depend project="xml-xalan2"/>
-    <depend project="junit"/>
-    <work nested="build/java"/>
 
     <home nested="build"/>
     <jar name="dom1-core.jar" />
     <jar name="dom1-html.jar" />
-    <jar name="junit-run.jar"/>
     <license name="docs/resources/COPYRIGHT.html"/>
 
     <nag from="Curt Arnold &lt;carnold@houston.rr.com&gt;"
@@ -79,6 +75,21 @@ DOM Test Suite
     <jar name="dom3-events.jar" />
     <jar name="dom3-validation.jar" />
     <jar name="dom3-xpath.jar" />
+    <license name="docs/resources/COPYRIGHT.html"/>
+
+    <nag from="Curt Arnold &lt;carnold@houston.rr.com&gt;"
+      to="www-dom-ts@w3.org"/>
+  </project>
+
+  <project name="domts-junit">
+    <description>JUnit adapter for DOM test suites</description>
+    <ant target="domts-junit-gump" />
+
+    <depend project="ant" inherit="runtime"/>
+    <depend project="junit"/>
+
+    <home nested="build"/>
+    <jar name="junit-run.jar" />
     <license name="docs/resources/COPYRIGHT.html"/>
 
     <nag from="Curt Arnold &lt;carnold@houston.rr.com&gt;"

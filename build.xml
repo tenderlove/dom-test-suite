@@ -57,7 +57,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
     <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
-    <available property="jtidy-available" file="${lib.dir}/jtidy.zip"/>
+    <available property="jtidy-available" classname="org.w3c.tidy.Tidy"/>
+    <available property="junit-in-classpath" classname="junit.framework.TestCase"/>
 	<condition property="ant-15" value="true">
 		<contains string="${ant.version}" substring="1.5"/>
 	</condition>
@@ -296,9 +297,29 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 -->
 
-<target name="validate-html">
-    <echo message="HTML validation temporarily disabled"/>
+<target name="check-jtidy" unless="jtidy-available">
+    <echo message="JTidy is not available, no HTML validation performed."/>
 </target>
+
+<target name="validate-html" depends="check-jtidy">
+	<property name="dir" value="."/>
+	<property name="file" value="*.html"/>
+	<property name="filespec" location="${dir}/${file}"/>
+	<java classname="org.w3c.tidy.Tidy" 
+		failonerror="yes" 
+		fork="yes" 
+		dir="${dir}"
+		classpath="${java.class.path}">
+		<arg value="-e"/>
+		<arg value="-q"/>
+		<arg value="${file}"/>
+	</java> 
+</target>
+
+
+<!-- target name="validate-html">
+    <echo message="HTML validation temporarily disabled"/>
+</target -->
 
 <target name="checkstyle-available">
     <available property="checkstyle-task" resource="checkstyletask.properties"/>
@@ -401,12 +422,6 @@ This target checks that the output of that implied transform is valid HTML
     <fail unless="jsunit-available" 
         message="download jsunit.zip from http://www.jsunit.net and place in lib directory"/>
     <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit.zip"/>
-    <replace file="${build.dir}/ecmascript/jsunit/app/jsUnitCore.js" 
-        token="top.xbDEBUG.on &amp;&amp; top.testManager"
-        value="top != null &amp;&amp; top.xbDEBUG != null &amp;&amp; top.xbDEBUG.on &amp;&amp; top.testManager"/>
-    <replace file="${build.dir}/ecmascript/jsunit/app/jsUnitTestManager.js" 
-        token="SETUPAGE_INTERVAL"
-        value="SETUPPAGE_INTERVAL"/>
 </target>
 
 <target name="common-javac" depends="init">
@@ -455,27 +470,44 @@ This target checks that the output of that implied transform is valid HTML
 		dest="${lib.dir}/junit.zip"
         ignoreerrors="yes"
 		usetimestamp="yes"/>
+	<unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
 </target>
 
-<target name="junit-run" depends="common-javac,get-junit">
-	<unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
+<target name="get-junit-for-compilation" depends="init" unless="junit-in-classpath">
+	<antcall target="get-junit"/>
+</target>
 
-    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}"/>
-
-    <mkdir dir="${java.build.dir}/junit"/>
+<target name="junit-run" depends="get-junit-for-compilation">
+    <mkdir dir="${java.build.dir}/junit"/>		
 
     <javac srcdir="java/junit"
 		   includes="org/w3c/domts/**/*.java"
            destdir="${java.build.dir}/junit"
-           classpath="${lib.dir}/junit3.7/junit.jar;${java.build.dir}"           
+           classpath="${lib.dir}/junit3.7/junit.jar"           
            debug="on"
            target="1.1"
-		   encoding="UTF8"/>
+		   encoding="UTF8">
+		   <src path="java/junit"/>
+		   <src path="java"/>
+		   <exclude name="org/w3c/domts/DOMErrorImpl.java"/>
+		   <exclude name="org/w3c/domts/DOMErrorMonitor.java"/>
+		   <exclude name="org/w3c/domts/DOMLocatorImpl.java"/>
+		   <exclude name="org/w3c/domts/UserDataMonitor.java"/>		   
+	</javac>
 
 
+    <!--  exclude the compiled files from the ./java tree  -->
     <jar jarfile="${build.dir}/junit-run.jar"
         manifest="java/junit/junit-run.mf">
-        <fileset dir="${java.build.dir}/junit"/>
+        <fileset dir="${java.build.dir}/junit">
+        	<include name="org/w3c/domts/level1/**/*.class"/>
+        	<include name="org/w3c/domts/level2/**/*.class"/>
+        	<include name="org/w3c/domts/level3/**/*.class"/>
+        	<include name="org/w3c/domts/JUnitRunner.class"/>
+        	<include name="org/w3c/domts/JUnitTestCaseAdapter.class"/>
+        	<include name="org/w3c/domts/JUnitTestSuiteAdapter.class"/>
+        </fileset>
+        	
         <!--  include source files for easier debugging  -->
         <fileset dir="java/junit" includes="**/*.java"/>
     </jar>
@@ -629,12 +661,14 @@ This target checks that the output of that implied transform is valid HTML
 	</antcall>
 </target>
 
-<target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,dom1-core-validate-files">
+<target name="dom1-core-gen-jsunit-base" depends="dom1-interfaces,dom1-dtd,dom1-core-validate-files">
     <antcall target="gen-jsunit">
     	<param name="level" value="1"/>
     	<param name="module" value="core"/>
     </antcall>
 </target>
+
+<target name="dom1-core-gen-jsunit" depends="jsunit-get, dom1-core-gen-jsunit-base"/>
 
 <target name="dom1-core-gen-svgunit" depends="dom1-interfaces,dom1-dtd">
     <antcall target="gen-svgunit">
@@ -763,6 +797,7 @@ This target checks that the output of that implied transform is valid HTML
               dom1-core-validate-test-html,
               dom1-core-matrix,
               dom1-core-doxygen,
+              get-junit,
               junit-run,
               get-junit-license,
               dom1-schema,
@@ -874,7 +909,7 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="dom1-html-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
+<target name="dom1-html-gen-jsunit-base" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="1"/>
     	<param name="module" value="html"/>
@@ -890,6 +925,7 @@ This target checks that the output of that implied transform is valid HTML
     </copy>
 </target>
 
+<target name="dom1-html-gen-jsunit" depends="jsunit-get, dom1-html-gen-jsunit-base"/>
 
 
 <target name="dom1-html-checkstyle" depends="checkstyle-available, dom1-html-javac">
@@ -928,6 +964,7 @@ This target checks that the output of that implied transform is valid HTML
 	         dom1-html-gen-jsunit,
 	         dom1-html-matrix,
 	         dom1-html-doxygen,
+	         get-junit,
 	         junit-run,
 	         get-junit-license,
 	         dom1-schema">
@@ -944,7 +981,10 @@ This target checks that the output of that implied transform is valid HTML
 								  dom1-html-validate-tests,
 								  dom1-core-jar,
 								  dom1-html-jar,
-								  junit-run"/>
+								  dom1-core-gen-jsunit-base,
+								  dom1-html-gen-jsunit-base"/>
+								  
+<target name="domts-junit-gump" depends="junit-run"/>								  
 
 
 <target name="dom1-dist" depends="dom1-core-dist,dom1-html-dist">
@@ -1268,12 +1308,14 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="dom2-core-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd">
+<target name="dom2-core-gen-jsunit-base" depends="dom2-interfaces,dom2-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="2"/>
     	<param name="module" value="core"/>
     </antcall>
 </target>
+
+<target name="dom2-core-gen-jsunit" depends="jsunit-get, dom2-core-gen-jsunit-base"/>
 
 <target name="dom2-core-gen-svgunit" depends="dom2-interfaces,dom2-dtd">
     <antcall target="gen-svgunit">
@@ -1358,6 +1400,7 @@ This target checks that the output of that implied transform is valid HTML
 	         dom2-core-gen-jsunit,
 	         dom2-core-matrix,
 	         dom2-core-doxygen,
+	         get-junit,
 	         junit-run,
 	         get-junit-license,
 	         dom2-schema,
@@ -1443,7 +1486,7 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="dom2-html-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
+<target name="dom2-html-gen-jsunit-base" depends="dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level2/html/files"/>
     <copy todir="${build.dir}/ecmascript/level2/html/files">
 		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
@@ -1489,6 +1532,8 @@ This target checks that the output of that implied transform is valid HTML
         <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
     </copy>
 </target>
+
+<target name="dom2-html-gen-jsunit" depends="jsunit-get, dom2-html-gen-jsunit-base"/>
 
 <target name="dom2-html-javac" depends="common-javac, dom2-html-gen-java">
 	<javac srcdir="${java.build.dir}"
@@ -1577,7 +1622,14 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="dom2-html-dist" depends="dom2-html-jar,dom2-html-gen-jsunit,dom2-html-matrix,dom2-html-doxygen,junit-run,get-junit-license,dom2-schema">
+<target name="dom2-html-dist" depends="dom2-html-jar,
+		dom2-html-gen-jsunit,
+		dom2-html-matrix,
+		dom2-html-doxygen,
+		get-junit,
+		junit-run,
+		get-junit-license,
+		dom2-schema">
     <antcall target="dist">
     	<param name="level" value="2"/>
     	<param name="module" value="html"/>
@@ -1658,12 +1710,14 @@ This target checks that the output of that implied transform is valid HTML
 	</antcall>
 </target>
 
-<target name="dom2-events-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd">
+<target name="dom2-events-gen-jsunit-base" depends="dom2-interfaces,dom2-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="2"/>
     	<param name="module" value="events"/>
     </antcall>
 </target>
+
+<target name="dom2-events-gen-jsunit" depends="jsunit-get, dom2-events-gen-jsunit-base"/>
 
 <target name="dom2-events-gen-svgunit" depends="dom2-interfaces,dom2-dtd">
     <antcall target="gen-svgunit">
@@ -1723,6 +1777,7 @@ This target checks that the output of that implied transform is valid HTML
               dom2-events-gen-jsunit,
               dom2-events-matrix,
               dom2-events-doxygen,
+              get-junit,
               junit-run,
               get-junit-license,
               dom2-schema,
@@ -1738,7 +1793,10 @@ This target checks that the output of that implied transform is valid HTML
 								  dom2-html-validate-tests,
 								  dom2-core-jar,
 								  dom2-events-jar,
-								  dom2-html-jar"/>
+								  dom2-html-jar,
+								  dom2-core-gen-jsunit-base,
+								  dom2-html-gen-jsunit-base,
+								  dom2-events-gen-jsunit-base"/>
 
 <target name="dom2-dist" depends="dom2-core-dist,dom2-html-dist,dom2-events-dist">
 </target>
@@ -2026,13 +2084,15 @@ This target checks that the output of that implied transform is valid HTML
 </target>
 
 
-<target name="dom3-core-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+<target name="dom3-core-gen-jsunit-base" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="core"/>
     	<param name="hideHTML" value="yes"/>
     </antcall>
 </target>
+
+<target name="dom3-core-gen-jsunit" depends="jsunit-get, dom3-core-gen-jsunit-base"/>
 
 <target name="dom3-core-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-svgunit">
@@ -2126,6 +2186,7 @@ This target checks that the output of that implied transform is valid HTML
 	         dom3-core-gen-jsunit,
 	         dom3-core-matrix,
 	         dom3-core-doxygen,
+	         get-junit,
 	         junit-run,
 	         get-junit-license,
 	         dom3-schema,
@@ -2180,13 +2241,15 @@ This target checks that the output of that implied transform is valid HTML
 
 
 
-<target name="dom3-events-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+<target name="dom3-events-gen-jsunit-base" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="events"/>
     	<param name="hideHTML" value="yes"/>
     </antcall>
 </target>
+
+<target name="dom3-events-gen-jsunit" depends="jsunit-get,dom3-events-gen-jsunit-base"/>
 
 <target name="dom3-events-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-svgunit">
@@ -2265,6 +2328,7 @@ This target checks that the output of that implied transform is valid HTML
 		     dom3-events-gen-jsunit,
 		     dom3-events-matrix,
 		     dom3-events-doxygen,
+		     get-junit,
 		     junit-run,
 		     get-junit-license,
 		     dom3-schema,
@@ -2328,7 +2392,7 @@ This target checks that the output of that implied transform is valid HTML
 	</antcall>
 </target>
 
-<target name="dom3-ls-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+<target name="dom3-ls-gen-jsunit-base" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-jsunit-no-validation">
     	<param name="level" value="3"/>
     	<param name="module" value="ls"/>
@@ -2346,6 +2410,8 @@ This target checks that the output of that implied transform is valid HTML
     </antcall>
 
 </target>
+
+<target name="dom3-ls-gen-jsunit" depends="jsunit-get,dom3-ls-gen-jsunit-base"/>
 
 <target name="dom3-ls-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-svgunit">
@@ -2425,6 +2491,7 @@ This target checks that the output of that implied transform is valid HTML
                 dom3-ls-gen-jsunit,
                 dom3-ls-matrix,
                 dom3-ls-doxygen,
+                get-junit,
                 junit-run,
                 get-junit-license,
                 dom3-schema,
@@ -2480,13 +2547,16 @@ This target checks that the output of that implied transform is valid HTML
 	</antcall>
 </target>
 
-<target name="dom3-xpath-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+<target name="dom3-xpath-gen-jsunit-base" depends="jsunit-get,dom3-interfaces,dom3-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="xpath"/>
     	<param name="hideHTML" value=".xhtml"/>
     </antcall>
 </target>
+
+<target name="dom3-xpath-gen-jsunit" depends="jsunit-get,dom3-xpath-gen-jsunit-base"/>
+
 
 <target name="dom3-xpath-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-svgunit">
@@ -2564,6 +2634,7 @@ This target checks that the output of that implied transform is valid HTML
 	         dom3-xpath-gen-jsunit,
 	         dom3-xpath-matrix,
 	         dom3-xpath-doxygen,
+	         get-junit,
 	         junit-run,
 	         get-junit-license,
 	         dom3-schema,
@@ -2626,7 +2697,7 @@ This target checks that the output of that implied transform is valid HTML
 
 
 
-<target name="dom3-val-gen-jsunit" depends="jsunit-get,dom3-interfaces,dom3-dtd">
+<target name="dom3-val-gen-jsunit-base" depends="dom3-interfaces,dom3-dtd">
     <antcall target="gen-jsunit">
     	<param name="level" value="3"/>
     	<param name="module" value="validation"/>
@@ -2634,6 +2705,7 @@ This target checks that the output of that implied transform is valid HTML
     </antcall>
 </target>
 
+<target name="dom3-val-gen-jsunit" depends="jsunit-get,dom3-val-gen-jsunit-base"/>
 
 
 <target name="dom3-val-validate-tests" depends="dom3-dtd">
@@ -2705,6 +2777,7 @@ This target checks that the output of that implied transform is valid HTML
 		     dom3-val-gen-jsunit,
 		     dom3-val-matrix,
 		     dom3-val-doxygen,
+		     get-junit,
 		     junit-run,
 		     get-junit-license,
 		     dom3-schema">
@@ -2782,7 +2855,12 @@ it would compile all DOM 3 java code
 								  dom3-ls-jar,
 								  dom3-xpath-jar,
 								  dom3-val-jar,
-								  dom3-events-jar"/>
+								  dom3-events-jar,
+								  dom3-core-gen-jsunit-base,
+								  dom3-ls-gen-jsunit-base,
+								  dom3-xpath-gen-jsunit-base,
+								  dom3-val-gen-jsunit-base,
+								  dom3-events-gen-jsunit-base"/>
 
 
 <!--   SVG 1.0   -->
