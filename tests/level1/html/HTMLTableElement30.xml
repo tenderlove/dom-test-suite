@@ -37,8 +37,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeList" type="NodeList"/>
 <var name="tbodiesnodeList" type="HTMLCollection"/>
 <var name="testNode" type="Node"/>
+<var name="newRow" type="HTMLElement"/>
 <var name="rowsnodeList" type="HTMLCollection"/>
-<var name="vsection1" type="HTMLTableSection"/>
+<var name="vsection1" type="HTMLTableSectionElement"/>
 <var name="vrows" type="int" />
 <var name="doc" type="Document"/>
 <load var="doc" href="table" willBeModified="true"/>
@@ -47,7 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="nodeList" var="testNode" index="1"/>
 <rows interface="HTMLTableSectionElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="4" id="rowsLink" ignoreCase="false"/>
+<assertEquals actual="vrows" expected="4" id="rowsLink1" ignoreCase="false"/>
 <tFoot interface="HTMLTableElement" obj="testNode" var="vsection1"/>
 <rows interface="HTMLTableSectionElement" obj="vsection1" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
@@ -55,9 +56,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <insertRow interface="HTMLTableElement" obj="testNode" var="newRow" index="4"/>
 <rows interface="HTMLTableSectionElement" obj="testNode" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="5" id="rowsLink" ignoreCase="false"/>
+<assertEquals actual="vrows" expected="5" id="rowsLink2" ignoreCase="false"/>
 <tFoot interface="HTMLTableElement" obj="testNode" var="vsection1"/>
 <rows interface="HTMLTableSectionElement" obj="vsection1" var="rowsnodeList"/>
 <length interface="HTMLCollection" obj="rowsnodeList" var="vrows"/>
-<assertEquals actual="vrows" expected="2" id="rowsLink" ignoreCase="false"/>
+<assertEquals actual="vrows" expected="2" id="rowsLink3" ignoreCase="false"/>
 </test>
