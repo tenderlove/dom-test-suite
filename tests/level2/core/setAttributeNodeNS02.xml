@@ -36,8 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS"/>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-ElSetAtNodeNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;www.xyz.com&quot;"/>
-<var name="qualifiedName" type="DOMString" value="&quot;emp:local1&quot;"/>
+<implementationAttribute name="namespaceAware" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
@@ -48,13 +47,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newAttr" type="Attr"/>
 <var name="setAttr1" type="Attr"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
+<if>
+<implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <childNodes obj="gender" var="genList"/>
 <item interface="NodeList" obj="genList" var="gen" index="0"/>
+<else>
+<createEntityReference var="gen" name='"ent4"' obj="doc"/>
+</else>
+</if>
 <childNodes obj="gen" var="gList"/>
 <item interface="NodeList" obj="gList" var="genElement" index="0"/>
-<createAttributeNS obj="doc" var="newAttr" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
+<assertNotNull actual="genElement" id="notnull"/>
+<createAttributeNS obj="doc" var="newAttr" namespaceURI='"www.xyz.com"' qualifiedName='"emp:local1"'/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <setAttributeNodeNS var="setAttr1" obj="genElement" newAttr="newAttr"/>

@@ -46,12 +46,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="gList" type="NodeList"/>
 <var name="genElement" type="Element"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
+<if>
+<implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <childNodes obj="gender" var="genList"/>
 <item interface="NodeList" obj="genList" var="gen" index="0"/>
+<else>
+<createEntityReference var="gen" name='"ent4"' obj="doc"/>
+</else>
+</if>
 <childNodes obj="gen" var="gList"/>
 <item interface="NodeList" obj="gList" var="genElement" index="0"/>
+<assertNotNull actual="genElement" id="notnull"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <setAttributeNS obj="genElement" namespaceURI="namespaceURI" qualifiedName="qualifiedName" value="&quot;newValue&quot;"/>

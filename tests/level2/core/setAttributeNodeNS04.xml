@@ -35,8 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.nist.gov&quot;"/>
-<var name="qualifiedName" type="DOMString" value="&quot;xxx:domestic&quot;"/>
+<!--   test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Node"/>
@@ -44,10 +44,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newAddrAttr" type="Attr"/>
 <var name="newName" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;emp:address&quot;"/>
+<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"emp:address"'/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
-<createAttributeNS obj="doc" var="newAttr" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
+<createAttributeNS obj="doc" var="newAttr" namespaceURI='"http://www.nist.gov"' qualifiedName='"xxx:domestic"'/>
 <setAttributeNodeNS obj="testAddr" newAttr="newAttr" var="newAddrAttr"/>
 <nodeName obj="newAddrAttr" var="newName"/>
-<assertEquals actual="newName" expected="&quot;emp:domestic&quot;" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="newName" expected='"emp:domestic"' id="nodeName" ignoreCase="false"/>
 </test>
