@@ -47,11 +47,12 @@ the content "EMP0004".
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
 <firstChild interface="Node" obj="testEmployee" var="firstC"/>
-<nodeType var="nodeType" obj="testEmployee"/>
+<nodeType var="nodeType" obj="firstC"/>
 <!--   if a text node, get the next sibling  -->
-<if><equals actual="nodeType" expected="3"/>
-<nextSibling interface="Node" var="testEmployee" obj="testEmployee"/>
-</if> 
+<while><equals actual="nodeType" expected="3"/>
+<nextSibling interface="Node" var="firstC" obj="firstC"/>
+<nodeType var="nodeType" obj="firstC"/>
+</while>
 <nodeName obj="firstC" var="childName"/>
 <assertEquals actual="childName" expected='"em"' id="childName" ignoreCase="auto"/>
 <firstChild interface="Node" var="employeeIDNode" obj="firstC"/>
