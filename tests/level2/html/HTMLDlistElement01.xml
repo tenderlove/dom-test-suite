@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLDListElement01">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="HTMLDlistElement01">
 <metadata>
 <title>HTMLDListElement01</title>
 <creator>NIST</creator>
@@ -30,7 +30,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vcompact" type="Boolean" />
+<var name="vcompact" type="boolean" />
 <var name="doc" type="Node"/>
 <load var="doc" href="dl" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"dl"'/>
