@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.45  2002-02-13 08:32:31  dom-ts-4
+Revision 1.46  2002-02-13 16:26:16  dom-ts-4
+Updated for move of doxygen config files to doxygen, svgfix.sed to patches
+
+Revision 1.45  2002/02/13 08:32:31  dom-ts-4
 Copied jsunit/images and jsunit/tests to distribution
 
 Revision 1.44  2002/02/13 08:01:15  dom-ts-4
@@ -796,7 +799,7 @@ All implementation conditions combined into implementationAttribute element
     <!--  doxygen must be on path  
           download from http://www.doxygen.org    -->
     <exec executable="doxygen">
-        <arg line="dom1-core.doxygen"/>
+        <arg line="doxygen/dom1-core.doxygen"/>
     </exec>
 
 </target>
@@ -955,7 +958,7 @@ All implementation conditions combined into implementationAttribute element
     <!--  doxygen must be on path  
           download from http://www.doxygen.org    -->
     <exec executable="doxygen">
-        <arg line="dom2-core.doxygen"/>
+        <arg line="doxygen/dom2-core.doxygen"/>
     </exec>
 
 </target>
@@ -1256,28 +1259,28 @@ All implementation conditions combined into implementationAttribute element
 	<unzip src="${specs.dir}/SVG.zip" dest="${specs.dir}/SVG1.0"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/coords.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/coords.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/coords.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/coords.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/animate.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/animate.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/animate.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/animate.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/color.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/color.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/color.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/color.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/extend.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/extend.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/extend.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/extend.xml"
 	             lenient="yes" failonerror="yes"
@@ -1285,70 +1288,70 @@ All implementation conditions combined into implementationAttribute element
 
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/interact.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/interact.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/interact.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/interact.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/linking.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/linking.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/linking.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/linking.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/masking.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/masking.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/masking.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/masking.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/painting.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/painting.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/painting.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/painting.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/paths.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/paths.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/paths.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/paths.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/pservers.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/pservers.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/pservers.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/pservers.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/script.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/script.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/script.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/script.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/shapes.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/shapes.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/shapes.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/shapes.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/struct.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/struct.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/struct.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/struct.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 <exec executable="sed" output="${specs.dir}/SVG1.0/types.xml">
-		<arg line="-f svgfix.sed ${specs.dir}/SVG1.0/types.html"/>
+		<arg line="-f patches/svgfix.sed ${specs.dir}/SVG1.0/types.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/types.xml"
 	             lenient="yes" failonerror="yes"
@@ -1356,7 +1359,7 @@ All implementation conditions combined into implementationAttribute element
 
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/text.xml">
-		<arg line="-e'23,5269d' -f svgfix.sed ${specs.dir}/SVG1.0/text.html"/>
+		<arg line="-e'23,5269d' -f patches/svgfix.sed ${specs.dir}/SVG1.0/text.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/text.xml"
 	             lenient="yes" failonerror="yes"
@@ -1364,14 +1367,14 @@ All implementation conditions combined into implementationAttribute element
 
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/filters.xml">
-		<arg line="-e'24,4785d' -f svgfix.sed ${specs.dir}/SVG1.0/filters.html"/>
+		<arg line="-e'24,4785d' -f patches/svgfix.sed ${specs.dir}/SVG1.0/filters.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/filters.xml"
 	             lenient="yes" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser"/>
 
 	<exec executable="sed" output="${specs.dir}/SVG1.0/styling.xml">
-		<arg line="-e'23,1563d' -f svgfix.sed ${specs.dir}/SVG1.0/styling.html"/>
+		<arg line="-e'23,1563d' -f patches/svgfix.sed ${specs.dir}/SVG1.0/styling.html"/>
 	</exec>
 	<xmlvalidate file="${specs.dir}/SVG1.0/styling.xml"
 	             lenient="yes" failonerror="yes"
