@@ -370,6 +370,8 @@ UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
 function IFrameBuilder() {
     this.contentType = "text/html";
     this.supportedContentTypes = [ "text/html", 
+        "text/xml",
+        "image/svg+xml",
         "application/xhtml+xml" ];    
 
     this.supportsAsyncChange = false;
@@ -415,6 +417,12 @@ IFrameBuilder.prototype.preload = function(frame, varname, url) {
   var srcname = url + getSuffix(this.contentType);
   iframe.setAttribute("name", srcname);
   iframe.setAttribute("src", fileBase + srcname);
+  //
+  //   HTML and XHTML have onload attributes that will invoke loadComplete
+  //       
+  if (this.contentType != "text/html" && this.contentType != "application/xhtml+xml") {
+     iframe.addEventListener("load", loadComplete, false);       
+  }
   document.getElementsByTagName("body").item(0).appendChild(iframe);
   return 0; 
 }
