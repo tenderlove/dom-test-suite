@@ -32,15 +32,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS"/>
 </metadata>
-<var name="namespaceURI" type="DOMString" value="&quot;http://www.nist.gov&quot;"/>
-<var name="localName" type="DOMString" value="&quot;domestic&quot;"/>
+<!--  test requires namespace awareness   -->
+<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="testAddr" type="Element"/>
 <var name="attrValue" type="DOMString"/>
 <load var="doc" href="staffNS.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"emp:address"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
-<getAttributeNS obj="testAddr" var="attrValue" namespaceURI="namespaceURI" localName="localName"/>
-<assertEquals actual="attrValue" expected="&quot;Yes&quot;" id="throw_Equals" ignoreCase="false"/>
+<getAttributeNS obj="testAddr" var="attrValue" namespaceURI='"http://www.nist.gov"' localName='"domestic"'/>
+<assertEquals actual="attrValue" expected='"Yes"' id="attrValue" ignoreCase="false"/>
 </test>
