@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.36  2001-11-17 04:28:15  dom-ts-4
+Revision 1.37  2001-11-27 19:42:27  dom-ts-2
+Added targets for dom2-html.
+
+
+Revision 1.36  2001/11/17 04:28:15  dom-ts-4
 Added dom2-core-gen-jsunit target
 
 Revision 1.35  2001/11/16 05:46:09  dom-ts-4
@@ -715,6 +719,41 @@ All implementation conditions combined into implementationAttribute element
 		       expression="../${build.dir}/dom2-interfaces.xml"/>
 		<param name="target-uri-base"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/core/"/>
+	</style>
+</target>
+
+<target name="dom2-html-gen-ecmascript" depends="dom2-interfaces,dom2-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level2/html"/>
+	<style basedir="${tests.dir}/level2/html" 
+		   destdir="${build.dir}/ecmascript/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-ecmascript.xsl" 
+	       extension=".js">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
+	</style>
+</target>
+
+<target name="dom2-html-gen-jsunit" depends="jsunit-init,dom2-interfaces,dom2-dtd">
+    <mkdir dir="${build.dir}/ecmascript/level2/html"/>
+	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/html"/>
+    <copy todir="${build.dir}/ecmascript/level2/html">
+		<fileset dir="tests/level2/html/files" excludes="*.bak"/>
+    </copy>
+
+	<style basedir="${tests.dir}/level2/html" 
+		   destdir="${build.dir}/ecmascript/level2/html" 
+		   includes="*.xml" 
+           excludes="metadata.xml"
+	       style="${transforms.dir}/test-to-jsunit.xsl" 
+	       extension=".html">
+		<param name="interfaces-docname"
+		       expression="../${build.dir}/dom2-interfaces.xml"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
 	</style>
 </target>
 
