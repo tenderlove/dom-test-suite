@@ -46,19 +46,13 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 	<!--  methods defined in DOM recommendation  -->
 	<xsl:variable name="methods" select="//method"/>
 
-	<!--  interfaces keyed by super class -->
-	<xsl:key name="bysuper" match="//interface[@inherits]" use="@inherits"/>
-	<!--  attributes keyed by name        -->
-	<xsl:key name="attrByName" match="//attribute[@name]" use="@name"/>
-	<!--  methods keyed by name           -->
-	<xsl:key name="methodByName" match="//method[@name]" use="@name"/>
 	<!--  attributes and methods keyed by name        -->
 	<xsl:key name="featureByName" match="//*[(name()='attribute' or name()='method') and @name]" use="@name"/>
 
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter DOMErrorHandler </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMWriterFilter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -487,10 +481,10 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
                 <xsl:if test="position() &gt; 1">
                     <xsl:text> | ( </xsl:text>
                 </xsl:if>
-                <xsl:for-each select="method|attribute">
-                    <xsl:if test="position() &gt; 1"> , </xsl:if>
-                    <xsl:value-of select="@name"/>
-                </xsl:for-each>
+                <xsl:call-template name="produce-sink">
+                    <xsl:with-param name="interface" select="@name"/>
+                    <xsl:with-param name="sinks" select="$sinks"/>
+                </xsl:call-template>
                 <xsl:text> ) </xsl:text>
             </xsl:for-each>
             <xsl:text> ) ) )? &gt;</xsl:text>
@@ -1014,4 +1008,42 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 </xsl:text>
 	</xsl:template>
 
+    <xsl:template name="produce-sink">
+        <xsl:param name="sinks"/>
+        <xsl:param name="interface"/>
+        <xsl:for-each select="$sinks[@name=$interface]">
+            <!-- if interface inherits from another sink interface then
+                       produce its methods and attributes first   -->
+            <xsl:choose>
+                <!--   if inherits contains a namespace scope   -->
+                <xsl:when test="contains(@inherits,'::')">
+                    <xsl:call-template name="produce-sink">
+                        <xsl:with-param name="sinks" select="$sinks"/>
+                        <xsl:with-param name="interface" select="substring-after(@inherits, '::')"/>
+                    </xsl:call-template>
+                    <xsl:for-each select="method|attribute">
+                        <xsl:text> , </xsl:text>
+                        <xsl:value-of select="@name"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <!--  inherits in the same module   -->
+                <xsl:when test="@inherits">
+                    <xsl:call-template name="produce-sink">
+                        <xsl:with-param name="sinks" select="$sinks"/>
+                        <xsl:with-param name="interface" select="@inherits"/>
+                    </xsl:call-template>
+                    <xsl:for-each select="method|attribute">
+                        <xsl:text> , </xsl:text>
+                        <xsl:value-of select="@name"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each select="method|attribute">
+                        <xsl:if test="position() &gt; 1"> , </xsl:if>
+                        <xsl:value-of select="@name"/>
+                    </xsl:for-each>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
 </xsl:stylesheet>

@@ -54,10 +54,6 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<xsl:variable name="methods" select="//method"/>
     <xsl:variable name="features" select="//*[name() = 'method' or name() = 'attribute']"/>
 
-	<!--  interfaces keyed by super class -->
-	<xsl:key name="bysuper" match="//interface[@inherits]" use="@inherits"/>
-	<!--  attributes keyed by name        -->
-	<xsl:key name="attrByName" match="//attribute[@name]" use="@name"/>
 	<!--  methods keyed by name           -->
 	<xsl:key name="methodByName" match="//method[@name]" use="@name"/>
 	<!--  attributes and methods keyed by name        -->
@@ -66,7 +62,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMFilterWriter NodeFilter DOMErrorHandler </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMWriterFilter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -666,19 +662,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                 <xs:choice>
                                     <xsl:for-each select="$sinks">
                                         <xs:sequence>
-                                            <xsl:for-each select="method|attribute">
-                                                <xsl:choose>
-                                                    <xsl:when test="name() = 'method'">
-                                                        <xs:element name="{@name}" type="sinkMethod"/>
-                                                    </xsl:when>
-                                                    <xsl:when test="@readonly='yes'">
-                                                        <xs:element name="{@name}" type="sinkReadOnlyAttribute"/>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <xs:element name="{@name}" type="sinkAttribute"/>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:for-each>
+                                            <xsl:call-template name="produce-sink">
+                                                <xsl:with-param name="sinks" select="$sinks"/>
+                                                <xsl:with-param name="interface" select="@name"/>
+                                            </xsl:call-template>
                                         </xs:sequence>
                                     </xsl:for-each>
                                 </xs:choice>
@@ -1399,5 +1386,42 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
+
+    <xsl:template name="produce-sink">
+        <xsl:param name="sinks"/>
+        <xsl:param name="interface"/>
+        <xsl:for-each select="$sinks[@name=$interface]">
+            <!-- produce methods and attributes of superclass, if any   -->
+            <xsl:choose>
+                <xsl:when test="contains(@inherits, '::')">
+                    <xsl:call-template name="produce-sink">
+                        <xsl:with-param name="sinks" select="$sinks"/>
+                        <xsl:with-param name="interface" select="substring-after(@inherits, '::')"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:when test="@inherits">
+                    <xsl:call-template name="produce-sink">
+                        <xsl:with-param name="sinks" select="$sinks"/>
+                        <xsl:with-param name="interface" select="@inherits"/>
+                    </xsl:call-template>
+                </xsl:when>
+            </xsl:choose>
+            <!--  produce methods and attributes of this class  -->
+            <xsl:for-each select="method|attribute">
+                <xsl:choose>
+                    <xsl:when test="name() = 'method'">
+                        <xs:element name="{@name}" type="sinkMethod"/>
+                    </xsl:when>
+                    <xsl:when test="@readonly='yes'">
+                        <xs:element name="{@name}" type="sinkReadOnlyAttribute"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xs:element name="{@name}" type="sinkAttribute"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:for-each>
+    </xsl:template>
 
 </xsl:stylesheet>
