@@ -10,14 +10,6 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 */
 
-  function assertTrue(descr, actual) {
-    assert(descr,actual);
-  }
-
-  function assertFalse(descr, actual) {
-    assert(descr, !actual);
-  }
-
   function assertSize(descr, expected, actual) {
     var actualSize;
     actualSize = actual.length;
@@ -210,7 +202,150 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     MozAdvanceLoad("staff.xml");
     MozAdvanceLoad("staff.xml");
   }
+
+
+  //
+  //   Adobe SVG Viewer support 
+  //
+  //
+  //
     
+  function ASVApplyParserAttributes(parser, attrNames, attrValues) {
+  }
+ 
+  //
+  //   actually, array of <EMBED> elements
+  //
+  var asvStaffDocs = new Array();
+
+  //
+  //   get a document ready for the next test
+  //
+  function ASVStartLoad(sourceURL) {
+    //
+    //   must create embed element in containing HTML
+    //
+    var embed = document.createElement("embed");
+    embed.src = sourceURL + ".svg";
+    embed.height= 100;
+    embed.width = 100;
+    embed.type = "image/svg+xml";
+    var htmlelem = document.documentElement;
+    var child = htmlelem.firstChild;
+    while(child != null) {
+		if(child.nodeName == "BODY") {
+			child.appendChild(embed);
+			break;
+		}
+		child = child.nextSibling;
+	}
+	return embed;
+  }
+
+  function ASVDocumentBuilder_load(sourceURL, willBeModified) {
+    if(sourceURL == 'staff.xml' && this.attrNames == null && this.attrValues == null) {
+        var embed = null;
+        for(var i = 0; i < asvStaffDocs.length; i++) {
+            embed = asvStaffDocs[i];
+            if(embed != null && embed.readyState == "complete") {
+                if(willBeModified) {
+                    asvStaffDocs[i] = ASVStartLoad(sourceURL);
+                }
+                return embed.getSVGDocument();
+            }
+        }
+    }
+    var embed = ASVStartLoad(sourceURL);
+    for(var i = 0; i < 5; i++) {
+        alert("Document loading: Press OK continue.");
+        if(embed.readyState == "complete") break;
+    }
+
+	doc = embed.getSVGDocument();
+
+    if(sourceURL == "staff.xml") {
+        if(willBeModified) {
+            for(var i = 0; i <= asvStaffDocs.length; i++) {
+                if(i == asvStaffDocs.length || asvStaffDocs[i] == null) {
+                    asvStaffDocs[i] = ASVStartLoad(sourceURL);
+                    break;
+                }
+            }
+        }
+        else {
+            asvStaffDocs[asvStaffDocs.length] = embed;
+        }
+    }
+    return doc;
+  }
+
+   function ASVDocumentBuilder_getDOMImplementation() {
+        for(var i = 0; i < asvStaffDocs.length; i++) {
+            if(asvStaffDocs[i] != null && asvStaffDocs[i].readyState == "complete") {
+                return asvStaffDocs[i].getSVGDocument().implementation;
+            }
+        }
+        var embed = ASVStaffLoad("staff.xml");
+        asvStaffDocs[asvStaffDocs.length] = embed;
+        return embed.getSVGDocument().implementation;
+   }
+
+  function ASVDocumentBuilder_isDOMExceptionCode(ex, code) {
+    return true;
+  }
+
+  function ASVDocumentBuilder_getImplementationAttribute(attr) {
+    if(attr == "expandEntityReferences") {
+        return true;
+    }
+    return false;
+  }
+
+  function ASVDocumentBuilder(attrNames, attrValues) {
+    this.attrNames = attrNames;
+    this.attrValues = attrValues;
+    this.load = ASVDocumentBuilder_load;
+    this.isDOMExceptionCode = ASVDocumentBuilder_isDOMExceptionCode;
+    this.getDOMImplementation = ASVDocumentBuilder_getDOMImplementation;
+    this.getImplementationAttribute = ASVDocumentBuilder_getImplementationAttribute;
+    if(attrNames != null) {
+        for(var i = 0; i < attrNames.length; i++) {
+            if(attrNames[i] == "expandEntityReferences" && attrValues[i] == false) {
+                throw "Adobe SVG Viewer can not preserve entities";
+            }
+            if(attrNames[i] == "ignoringElementContentWhitespace" && attrValues[i] == true) {
+                throw "Adobe SVG Viewer can not preserve ignorable whitespace";
+            }
+        }
+    }
+  }
+
+  var asvDefaultBuilder = null;
+
+  function ASVDocumentBuilderFactory_newDocumentBuilder(attrNames, attrValues) {
+    if(attrNames == null && attrValues == null) {
+        return asvDefaultBuilder;
+    }
+    return new ASVDocumentBuilder(attrNames, attrValues);
+  }
+
+  function ASVDocumentBuilderFactory() {
+    this.newDocumentBuilder = ASVDocumentBuilderFactory_newDocumentBuilder;
+  }
+
+
+  //
+  //
+  //    Uncomment the following 4 lines to test Adobe SVG Viewer
+  //
+  //
+  //
+
+//  if(navigator.appName.indexOf("Microsoft") != -1) {
+//    asvDefaultBuilder = new ASVDocumentBuilder(null,null);
+//    factory = new ASVDocumentBuilderFactory();
+//  }
+
 
 
   function IE5ApplyParserAttributes(parser, attrNames, attrValues) {
@@ -255,6 +390,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         return this.parser.domImplementation;
    }
 
+  //
+  //   This function checks the exception raised in the test
+  //   If this function returns true, then the exception is 
+  //      consistent with the exception code parameter
+  //
+  //   This code attempts to determine the reason for the exception
+  //      to reduce the chance that an unrelated exception causes
+  //      the test to pass.
   function IE5DocumentBuilder_isDOMExceptionCode(ex, code) {
 	var retval;
     switch(code) {

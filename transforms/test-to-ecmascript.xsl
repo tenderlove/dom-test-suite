@@ -543,14 +543,14 @@ function </xsl:text>
 	<xsl:value-of select="@id"/>",
 	<xsl:value-of select="@actual"/>
 	<xsl:text>);
-</xsl:text>
+    </xsl:text>
 	<xsl:if test="*">
 		<xsl:text>if(</xsl:text>
 		<xsl:value-of select="@actual"/>
 		<xsl:text> == null) {</xsl:text>
 		<xsl:apply-templates mode="body"/>
 		<xsl:text>}
-</xsl:text>
+    </xsl:text>
 	</xsl:if>
 </xsl:template>
 
@@ -835,8 +835,21 @@ function </xsl:text>
 	<xsl:variable name="varname" select="@collection"/>
 	<xsl:value-of select="@collection"/>
 	<xsl:text>.length; _index++) {
-</xsl:text>
-	<xsl:value-of select="@member"/> = <xsl:value-of select="@collection"/>[_index];
+      </xsl:text>
+	<xsl:value-of select="@member"/>
+	<xsl:text> = </xsl:text>
+    <xsl:value-of select="@collection"/>
+    <xsl:variable name="collType" select="ancestor::*[local-name() = 'test']/*[local-name() = 'var' and @name=$varname]/@type"/>
+    <xsl:choose>
+        <xsl:when test="$collType = 'List' or $collType='Collection'">
+            <xsl:text>[_index];
+      </xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text>.item(_index);
+      </xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
 	<xsl:apply-templates select="*" mode="body"/>
 	}
 </xsl:template>
