@@ -72,6 +72,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </var>
 <var name="svgExpectedNames" type="List">
     <member>"svg"</member>
+    <member>"rect"</member>
     <member>"script"</member>
     <member>"head"</member>
     <member>"meta"</member>

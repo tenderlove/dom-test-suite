@@ -39,21 +39,29 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <member>"ent4"</member>
 <member>"ent5"</member>
 </var>
+<var name="expectedResultSVG" type="Collection">
+<member>"ent1"</member>
+<member>"ent2"</member>
+<member>"ent3"</member>
+<member>"ent4"</member>
+<member>"ent5"</member>
+<member>"svgunit"</member>
+<member>"svgtest"</member>
+</var>
 <var name="nameList" type="Collection"/>
 <var name="entity" type="Node"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
 <assertNotNull actual="docType" id="docTypeNotNull"/>
 <entities obj="docType" var="entityList"/>
+<for-each collection="entityList" member="entity">
+	<nodeName obj="entity" var="name"/>
+	<append collection="nameList" item="name"/>
+</for-each>
 <if><contentType type="image/svg+xml"/>
-	<assertSize collection="entityList" size="7" id="entitySizeSVG"/>
+	<assertEquals actual="nameList" expected="expectedResultSVG" id="entityNamesSVG" ignoreCase="false"/>
 	<else>
-		<assertSize collection="entityList" size="5" id="entitySize"/>
+		<assertEquals actual="nameList" expected="expectedResult" id="entityNames" ignoreCase="false"/>
 	</else>
 </if>
-<for-each collection="entityList" member="entity">
-<nodeName obj="entity" var="name"/>
-<append collection="nameList" item="name"/>
-</for-each>
-<assertEquals actual="nameList" expected="expectedResult" id="entityNames" ignoreCase="false"/>
 </test>

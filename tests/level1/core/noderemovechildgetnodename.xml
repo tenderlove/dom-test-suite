@@ -43,9 +43,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <removeChild obj="employeeNode" oldChild="oldChild" var="removedChild"/>
 <nodeName obj="removedChild" var="childName"/>
 <if><equals actual="length" expected="6" ignoreCase="false"/>
-	<assertEquals actual="childName" expected="&quot;employeeId&quot;" id="nowhitespace" ignoreCase="false"/>
+	<assertEquals actual="childName" expected='"employeeId"' id="nowhitespace" ignoreCase="false"/>
 <else>
-	<assertEquals actual="childName" expected='"text"' id="whitespace" ignoreCase="false"/>
+	<assertEquals actual="childName" expected='"#text"' id="whitespace" ignoreCase="false"/>
 </else>
 </if>
 </test>

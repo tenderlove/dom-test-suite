@@ -40,6 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <nodeType obj="entRefNode" var="nodeType"/>
 <if><equals actual="nodeType" expected="3" ignoreCase="false"/>
 	<createEntityReference var="entRefNode" obj="doc" name='"ent2"'/>
+	<nodeType obj="entRefNode" var="nodeType"/>
 </if>
 <assertEquals actual="nodeType" expected="5" id="entityNodeType" ignoreCase="false"/>
 </test>
