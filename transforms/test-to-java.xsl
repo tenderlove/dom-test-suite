@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.61  2004-02-09 07:12:22  dom-ts-4
+Revision 1.62  2004-02-09 21:41:14  dom-ts-4
+Tweak for src production (bug 513)
+
+Revision 1.61  2004/02/09 07:12:22  dom-ts-4
 Changed tests to expect LSException (bug 518)
 
 Revision 1.60  2004/01/21 17:46:03  dom-ts-4
@@ -1757,7 +1760,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getKey();
 </xsl:template>
 
-<xsl:template match="*[local-name()='src']" mode="body">
+<xsl:template match="*[local-name()='src' and @interface='UserDataNotification']" mode="body">
     <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getSrc();
 </xsl:template>
 
