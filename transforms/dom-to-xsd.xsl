@@ -595,14 +595,46 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             <xs:complexType name="sinkMethod">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
-                    <xs:group maxOccurs="unbounded" ref="statement"/>
+                    <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
                 </xs:sequence>
             </xs:complexType>
 
             <xs:complexType name="sinkAttribute">
-                <xs:sequence/>
-                <xs:attribute use="required" type="literal" name="value"/>
+                <xs:sequence>
+                    <xs:element name="get">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                                <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+                                <xs:element ref="return"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="set">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                                <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
             </xs:complexType>
+
+            <xs:complexType name="sinkReadOnlyAttribute">
+                <xs:sequence>
+                    <xs:element name="get">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" ref="var"/>
+                                <xs:group maxOccurs="unbounded" minOccurs="0" ref="statement"/>
+                                <xs:element ref="return"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+
 
             <xs:element name="return">
                 <xs:complexType>
@@ -630,6 +662,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                                                 <xsl:choose>
                                                     <xsl:when test="name() = 'method'">
                                                         <xs:element name="{@name}" type="sinkMethod"/>
+                                                    </xsl:when>
+                                                    <xsl:when test="@readonly='yes'">
+                                                        <xs:element name="{@name}" type="sinkReadOnlyAttribute"/>
                                                     </xsl:when>
                                                     <xsl:otherwise>
                                                         <xs:element name="{@name}" type="sinkAttribute"/>
