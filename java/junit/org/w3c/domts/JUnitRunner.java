@@ -12,7 +12,10 @@
 
 /*
 $Log: JUnitRunner.java,v $
-Revision 1.5  2002-01-11 17:05:46  plehegar
+Revision 1.6  2002-01-30 06:31:59  dom-ts-4
+Changed main() to run Swing UI, added -noloading to args
+
+Revision 1.5  2002/01/11 17:05:46  plehegar
 cleaned the DOMImplementation features to match the recommendations.
 Note that DOM Level 3 is still a WD
 
@@ -51,7 +54,7 @@ public class JUnitRunner {
   }
 
   public JUnitRunner(String[] args) throws Exception {
-    testClass = JUnitRunner.class.getClassLoader().loadClass(args[0]);
+      testClass = ClassLoader.getSystemClassLoader().loadClass(args[0]);
   }
 
   public void execute(String[] args) throws Exception {
@@ -70,10 +73,10 @@ public class JUnitRunner {
     boolean[] attrValues2 = { false, true, true, true, true };
 
     DOMTestDocumentBuilderFactory factory1 =
-      new DOMTestDocumentBuilderFactory(attrNames, attrValues1);
+      new DOMTestDocumentBuilderFactory(null, attrNames, attrValues1);
 
     DOMTestDocumentBuilderFactory factory2 =
-      new DOMTestDocumentBuilderFactory(attrNames, attrValues2);
+      new DOMTestDocumentBuilderFactory(null, attrNames, attrValues2);
 
     printPrologue();
     printImplementation(factory1);
@@ -138,8 +141,8 @@ public class JUnitRunner {
 
 
   private static void printImplementation(DOMTestDocumentBuilderFactory factory) {
-    DocumentBuilderFactory docfactory = factory.newInstance();
     try {
+      DocumentBuilderFactory docfactory = factory.newInstance();
       DocumentBuilder builder = docfactory.newDocumentBuilder();
       DOMImplementation domimpl = builder.getDOMImplementation();
 
@@ -198,13 +201,18 @@ public class JUnitRunner {
   }
 
   private void printAttributes(DOMTestDocumentBuilderFactory dsFactory) {
-    DocumentBuilderFactory factory = dsFactory.newInstance();
-    System.out.println("isCoalescing() == " + String.valueOf(factory.isCoalescing()));
-    System.out.println("isExpandEntityReferences() == " + String.valueOf(factory.isExpandEntityReferences()));
-    System.out.println("isIgnoringComments() == " + String.valueOf(factory.isIgnoringComments()));
-    System.out.println("isIgnoringElementContentWhitespace() == " + String.valueOf(factory.isIgnoringElementContentWhitespace()));
-    System.out.println("isNamespaceAware() == " + String.valueOf(factory.isNamespaceAware()));
-    System.out.println("isValidating() == " + String.valueOf(factory.isValidating()));
+    try {
+        DocumentBuilderFactory factory = dsFactory.newInstance();
+        System.out.println("isCoalescing() == " + String.valueOf(factory.isCoalescing()));
+        System.out.println("isExpandEntityReferences() == " + String.valueOf(factory.isExpandEntityReferences()));
+        System.out.println("isIgnoringComments() == " + String.valueOf(factory.isIgnoringComments()));
+        System.out.println("isIgnoringElementContentWhitespace() == " + String.valueOf(factory.isIgnoringElementContentWhitespace()));
+        System.out.println("isNamespaceAware() == " + String.valueOf(factory.isNamespaceAware()));
+        System.out.println("isValidating() == " + String.valueOf(factory.isValidating()));
+    }
+    catch(Exception ex) {
+        ex.printStackTrace();
+    }
   }
 
   private static void printFeature(DOMImplementation impl,String desc, String upperFeature, String lowerFeature, String version) {
@@ -229,18 +237,16 @@ public class JUnitRunner {
 
 
   public static void main (String[] args) {
-    if(args.length != 1) {
-      printPrologue();
-      printHelp();
-      return;
+    //
+    //   SwingUI Test Runner needs -noloading attribute 
+    //       or there will be problems loading test case
+    String[] withNoLoading = new String[args.length+1];
+    for(int i = 0; i < args.length; i++) {
+        withNoLoading[i+1] = args[i];
     }
-    try {
-      JUnitRunner runner = new JUnitRunner(args);
-      runner.execute(args);
-    }
-    catch(Exception ex) {
-      ex.printStackTrace();
-    }
+    withNoLoading[0] = "-noloading";
+
+    junit.swingui.TestRunner.main(withNoLoading);
   }
 
 
