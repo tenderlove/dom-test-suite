@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -28,6 +28,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="rootNode" type="Element"/>
@@ -41,5 +42,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="childList" index="1" var="childToRemove"/>
 <removeChild obj="rootNode" var="removedChild" oldChild="childToRemove"/>
 <parentNode interface="Node" obj="removedChild" var="parentNode"/>
-<assertNull actual="parentNode" id="nodeRemoveChildAssert1"/>
+<assertNull actual="parentNode" id="parentNodeNull"/>
 </test>
