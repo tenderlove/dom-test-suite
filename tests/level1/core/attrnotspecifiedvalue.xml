@@ -28,7 +28,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <contributor>Mary Brady</contributor>
 <date qualifier="created">2001-08-17</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-862529273"/>
+<!--  DOM WG opinion on default attributes -->
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html"/>
 </metadata>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="addressList" type="NodeList"/>
 <var name="testNode" type="Node"/>

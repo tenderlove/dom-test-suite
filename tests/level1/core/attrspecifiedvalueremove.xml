@@ -33,7 +33,10 @@ method from the NamedNodeMap interface.
 <date qualifier="created">2001-08-17</date>
 <!--removeAttribute-->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9"/>
+<!--  DOM WG opinion on default attributes -->
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html"/>
 </metadata>
+<implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>
 <var name="addressList" type="NodeList"/>
 <var name="testNode" type="Node"/>
