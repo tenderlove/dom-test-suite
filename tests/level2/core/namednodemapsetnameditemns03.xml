@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -33,6 +33,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-04-28</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=408"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -55,6 +56,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item var="elementAlt" obj="elementListAlt" index="1"  interface="NodeList"/>
 <attributes var="attributesAlt" obj="elementAlt"/>
 <getNamedItemNS var="attr" obj="attributesAlt" namespaceURI="nullNS" localName='"street"'/>
+<removeNamedItemNS obj="attributesAlt" namespaceURI="nullNS" localName='"street"'/>
 <assertDOMException id="namednodemapsetnameditemns03">
 <WRONG_DOCUMENT_ERR>
 <setNamedItemNS var="newNode" obj="attributes" arg="attr"/>
