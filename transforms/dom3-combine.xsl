@@ -27,7 +27,10 @@ saxon -o dom3-interfaces.xml core/dom-spec.xml combine-dom3.xsl
 
 <!--
 $Log: dom3-combine.xsl,v $
-Revision 1.6  2003-01-28 06:08:15  dom-ts-4
+Revision 1.7  2003-02-28 06:26:49  dom-ts-4
+Update for 2003-02-26 Level 3 WD
+
+Revision 1.6  2003/01/28 06:08:15  dom-ts-4
 Combines DOM L2 traversal/range
 Removes :: from inherits attribute
 
@@ -78,14 +81,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
             <!--   
                 views seems to be stagnant and is missing an entity reference
                     skipping it for now
-			<xsl:apply-templates select="document('../views/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../xml/views/dom-spec.xml',.)/spec/*"/>
             -->
-			<xsl:apply-templates select="document('../events/dom-spec.xml',.)/spec/*"/>
-			<xsl:apply-templates select="document('../ls/dom-spec.xml',.)/spec/*"/>
-			<xsl:apply-templates select="document('../../Val/xml-source.xml',.)/spec/*"/>
-			<xsl:apply-templates select="document('../xpath/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../xml/events/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../LS/xml-source.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../Val/xml-source.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../xml/xpath/dom-spec.xml',.)/spec/*"/>
             <!--  traversal range from DOM 2   -->
-			<xsl:apply-templates select="document('../../../Level-2/xml/traversal-range/dom-spec.xml',.)/spec/*"/>
+			<xsl:apply-templates select="document('../../Level-2/xml/traversal-range/dom-spec.xml',.)/spec/*"/>
 
 		</library>
 	</xsl:template>

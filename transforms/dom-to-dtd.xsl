@@ -34,6 +34,7 @@ saxon -o dom1-test.dtd wd-dom.xml dom-to-dtd.xsl
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:param name="schema-namespace">http://www.w3.org/2001/DOM-Test-Suite/Level-X</xsl:param>
+    <xsl:param name="additional-types"/>
 
 	<!--   symbolic constant for schema namespace   -->
 	<xsl:variable name="source" select="/spec/header/publoc/loc[1]/@href"/>
@@ -342,12 +343,13 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 		   the allowable types for variables    -->
 	<xsl:template name="dynamic-simpleTypes">
 		<xsl:text>&lt;!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
-					<xsl:for-each select="$interfaces">
-						<xsl:sort select="@name"/>
-						<xsl:text>|</xsl:text>
-						<xsl:value-of select="@name"/>
-					</xsl:for-each>
-			<xsl:text>"&gt;
+        <xsl:value-of select="$additional-types"/>
+		<xsl:for-each select="$interfaces">
+			<xsl:sort select="@name"/>
+			<xsl:text>|</xsl:text>
+			<xsl:value-of select="@name"/>
+		</xsl:for-each>
+		<xsl:text>"&gt;
 </xsl:text>
 	</xsl:template>
 

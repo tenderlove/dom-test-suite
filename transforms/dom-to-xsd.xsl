@@ -375,6 +375,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 							<xs:documentation>An implementation of EventListener that will capture and store all events encountered.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
+                    <!--   DOM 3 LS defines some new platform pseudo types   -->
+                    <xsl:if test="$schema-namespace='http://www.w3.org/2001/DOM-Test-Suite/Level-3'">
+					    <xs:enumeration value="DOMInputStream"/>
+                        <xs:enumeration value="DOMOutputStream"/>
+                        <xs:enumeration value="DOMReader"/>
+                    </xsl:if>
 					<xsl:for-each select="$interfaces">
 						<xsl:sort select="@name"/>
 						<xs:enumeration value="{@name}"/>
