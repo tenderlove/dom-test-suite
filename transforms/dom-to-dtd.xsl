@@ -89,9 +89,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ENTITY % assertion "%framework-assertion;</xsl:text>
 	<xsl:variable name="exceptions" select="//exception[@id]"/>
 	<xsl:if test="$exceptions">
- 		<xsl:text>| assert</xsl:text>
-		<xsl:value-of select="$exceptions[1]/@name"/>
-		<xsl:for-each select="$exceptions[position() &gt; 1]">
+		<xsl:for-each select="$exceptions">
 			<xsl:text>| assert</xsl:text>
 			<xsl:value-of select="@name"/>
 		</xsl:for-each>
