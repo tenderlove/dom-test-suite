@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.82  2003-01-25 18:00:03  dom-ts-4
+Revision 1.83  2003-01-28 06:07:45  dom-ts-4
+Added dependency on dom2-init to dom3-interfaces (needs DOM 2 Traversal/Range)
+
+Revision 1.82  2003/01/25 18:00:03  dom-ts-4
 Added checkstyle tasks
 Eliminated use of pregenerated tests
 
@@ -1850,7 +1853,7 @@ All implementation conditions combined into implementationAttribute element
 
 </target>
 
-<target name="dom3-interfaces" depends="dom3-init">
+<target name="dom3-interfaces" depends="dom3-init,dom2-init">
     <delete file="${build.dir}/dom3-interfaces.xml"/>
 
 	<style in="${specs.dir}/Level-3/xml/core/dom-spec.xml"
