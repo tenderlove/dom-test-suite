@@ -51,7 +51,7 @@ normalize document with infoset set to true.
 <assertDOMException id="xml10InvalidName">
 	<INVALID_CHARACTER_ERR>
 		<createAttribute var="attr" obj="doc" 
-			name='"LegalName&#2190;"'/>
+			name='"LegalName&#218F;"'/>
 	</INVALID_CHARACTER_ERR>
 </assertDOMException>
 <try>
@@ -62,8 +62,8 @@ normalize document with infoset set to true.
 		</DOMException>
 	</catch>
 </try> 
-<setAttribute obj="docElem" name='"LegalName&#2190;"' value='"foo"'/>
-<getAttributeNode var="attr" obj="docElem" name='"LegalName&#2190;"'/>
+<setAttribute obj="docElem" name='"LegalName&#218F;"' value='"foo"'/>
+<getAttributeNode var="attr" obj="docElem" name='"LegalName&#218F;"'/>
 <xmlVersion obj="doc" value='"1.0"' interface="Document"/>
 <domConfig var="domConfig" obj="doc" interface="Document"/>
 <setParameter obj="domConfig" name='"infoset"' value="true"/>
