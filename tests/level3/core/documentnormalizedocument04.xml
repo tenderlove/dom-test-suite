@@ -21,44 +21,41 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentnormalizedocument04</title>
 <creator>IBM</creator>
 <description>
-	Create an Element and a Comment node and verify the nodeName of this node and append these to
-	this Document.  Invoke the setNormalizationFeature method on this document to set the 
-	"cdata-sections"  feature to false.  Invoke the normalizeDocume method and verify if 
-	the CDATASection node has been transformed to a Text node.
+	Append a Comment node and normalize with "comments" set to false.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
 <var name="newComment" type="Comment"/>
-<var name="comment" type="Comment"/>
+<var name="lastChild" type="Node"/>
 <var name="text" type="Text"/>
 <var name="nodeName" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <var name="domConfig" type="DOMConfiguration"/>
-<!--
-<var name="nullUserData" type="DOMUserData" isNull="true"/>
--->
-<load var="doc" href="hc_staff" willBeModified="true"/>
-<createElement var="elem" obj="doc" tagName='"newElem"'/>
+<var name="pList" type="NodeList"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="pList" index="0" interface="NodeList"/>
 <createComment var="newComment" obj="doc" data='"COMMENT_NODE"'/>
 <appendChild obj="elem" var="appendedChild" newChild="newComment"/>
-<appendChild obj="doc" var="appendedChild" newChild="elem"/>
-<firstChild var="comment" obj="elem" interface="Node"/>
-<nodeName var="nodeName" obj="comment"/>
-<assertEquals actual="nodeName" expected='"#comment"' id="documentnormalizedocument04" ignoreCase="false"/>
 <domConfig interface="Document" obj="doc" var="domConfig" />
 <setParameter obj="domConfig" name='"comments"' value="true"/>
 <normalizeDocument obj="doc"/>
-<firstChild var="comment" obj="elem" interface="Node"/>
-<nodeName var="nodeName" obj="comment"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="pList" index="0" interface="NodeList"/>
+<lastChild var="lastChild" obj="elem" interface="Node"/>
+<nodeName var="nodeName" obj="lastChild"/>
 <assertEquals actual="nodeName" expected='"#comment"' id="documentnormalizedocument04_true" ignoreCase="false"/>
 <setParameter obj="domConfig" name='"comments"' value="false"/>
 <normalizeDocument obj="doc"/>
-<firstChild var="comment" obj="elem" interface="Node"/>
-<assertNull actual="comment" id="documentnormalizedocument04_false"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="pList" index="0" interface="NodeList"/>
+<lastChild var="lastChild" obj="elem" interface="Node"/>
+<nodeName var="nodeName" obj="lastChild"/>
+<assertEquals actual="nodeName" expected='"#text"' id="documentnormalizedocument04_true" ignoreCase="false"/>
 </test> 
  

@@ -21,33 +21,33 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodereplacechild12</title>
 <creator>IBM</creator>
 <description>
-
-
-
-	Using replaceChild on this Document node attempt to replace a new ProcessingInstruction
-	node with new Elemet node and verify if the name of the replaced element Node.
+	Using replaceChild on this Document node, attempt to replace a new ProcessingInstruction
+	node with new Comment node.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="pi" type="ProcessingInstruction"/>
-<var name="replaced" type="Element"/>
-<var name="elem" type="Element"/>
-<var name="childList" type="NodeList"/>
-<var name="namespaceURI" type="DOMString"/>
+<var name="replaced" type="Node"/>
+<var name="comment" type="Comment"/>
+<var name="lastChild" type="Node"/>
+<var name="nodeName" type="DOMString"/>
 <var name="replacedNode" type="Node"/>
 <var name="appendedChild" type="Node"/>
-<load var="doc" href="hc_staff" willBeModified="true"/>
-<createElementNS var="elem" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom3:doc"'/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<createComment var="comment" obj="doc" data='"dom3:doc"'/>
 <createProcessingInstruction var="pi" obj="doc" target='"PITarget"' data='"PIData"'/>
-<appendChild obj="doc" var="appendedChild" newChild="elem"/>
+<appendChild obj="doc" var="appendedChild" newChild="comment"/>
 <appendChild obj="doc" var="appendedChild" newChild="pi"/>
-<replaceChild obj="doc" var="replacedNode" oldChild="pi" newChild="elem"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"doc"' interface="Document"/>
-<item var="replaced" obj="childList" index="0" interface="NodeList"/>
-<namespaceURI obj="replaced" var="namespaceURI" interface="Node"/>
-<assertEquals actual="namespaceURI" expected='"http://www.w3.org/DOM/Test"' id="nodereplacechild12" ignoreCase="false"/>
+<replaceChild obj="doc" var="replacedNode" oldChild="pi" newChild="comment"/>
+<assertNotNull actual="replacedNode" id="returnValueNotNull"/>
+<nodeName var="nodeName" obj="replacedNode"/>
+<assertEquals actual="nodeName" expected='"PITarget"' id="returnValueIsPI"/>
+<lastChild var="lastChild" obj="doc" interface="Node"/>
+<assertNotNull actual="lastChild" id="lastChildNotNull"/>
+<nodeName var="nodeName" obj="lastChild"/>
+<assertEquals actual="nodeName" expected='"#comment"' id="lastChildIsComment"/>
 </test>

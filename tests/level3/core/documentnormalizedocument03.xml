@@ -21,45 +21,47 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>documentnormalizedocument03</title>
 <creator>IBM</creator>
 <description>
-	Create an Element and a CDATASection node and verify the nodeName of this node and append these to
-	this Document.  Invoke the setNormalizationFeature method on this document to set the 
-	"cdata-sections"  feature to false.  Invoke the normalizeDocume method and verify if 
+	Appends a CDATASection to an ekenent.  Invoke the setNormalizationFeature method on this document to set the 
+	"cdata-sections" feature to false.  Invoke the normalizeDocume method and verify if 
 	the CDATASection node has been transformed to a Text node.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="elem" type="Element"/>
 <var name="newCdata" type="CDATASection"/>
 <var name="cdata" type="CDATASection"/>
-<var name="text" type="Text"/>
+<var name="text" type="Node"/>
 <var name="nodeName" type="DOMString"/>
+<var name="nodeValue" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <var name="domConfig" type="DOMConfiguration"/>
-<!--
-<var name="nullUserData" type="DOMUserData" isNull="true"/>
--->
-<load var="doc" href="hc_staff" willBeModified="true"/>
-<createElement var="elem" obj="doc" tagName='"newElem"'/>
+<var name="pList" type="NodeList"/>
+<load var="doc" href="barfoo" willBeModified="true"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="pList" index="0" interface="NodeList"/>
 <createCDATASection var="newCdata" obj="doc" data='"CDATA"'/>
 <appendChild obj="elem" var="appendedChild" newChild="newCdata"/>
-<appendChild obj="doc" var="appendedChild" newChild="elem"/>
-<firstChild var="cdata" obj="elem" interface="Node"/>
-<nodeName var="nodeName" obj="cdata"/>
-<assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument03" ignoreCase="false"/>
 <domConfig obj="doc" var="domConfig" interface="Document"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="true"/>
 <normalizeDocument obj="doc"/>
-<firstChild var="cdata" obj="elem" interface="Node"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="pList" index="0" interface="NodeList"/>
+<lastChild var="cdata" obj="elem" interface="Node"/>
 <nodeName var="nodeName" obj="cdata"/>
 <assertEquals actual="nodeName" expected='"#cdata-section"' id="documentnormalizedocument03_true" ignoreCase="false"/>
 <setParameter obj="domConfig" name='"cdata-sections"' value="false"/>
 <normalizeDocument obj="doc"/>
-<firstChild var="text" obj="elem" interface="Node"/>
+<getElementsByTagName var="pList" obj="doc" tagname='"p"' interface="Document"/>
+<item var="elem" obj="pList" index="0" interface="NodeList"/>
+<lastChild var="text" obj="elem" interface="Node"/>
 <nodeName var="nodeName" obj="text"/>
 <assertEquals actual="nodeName" expected='"#text"' id="documentnormalizedocument03_false" ignoreCase="false"/>
+<nodeValue var="nodeValue" obj="text"/>
+<assertEquals actual="nodeValue" expected='"barCDATA"' id="normalizedValue"/>
 </test> 
  
