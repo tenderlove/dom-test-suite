@@ -31,9 +31,15 @@ Element.schemaTypeInfo should return null if not validating or schema validating
 <var name="elemList" type="NodeList"/>
 <var name="elem" type="Element"/>
 <var name="typeInfo" type="TypeInfo"/>
+<var name="typeName" type="DOMString"/>
+<var name="typeNS" type="DOMString"/>
 <load var="doc" href="hc_nodtdstaff" willBeModified="false"/>
 <getElementsByTagName var="elemList" obj="doc" tagname='"em"' interface="Document"/>
 <item var="elem" obj="elemList" index="0" interface="NodeList"/>
 <schemaTypeInfo var="typeInfo" obj="elem" interface="Element"/>
-<assertNull actual="typeInfo" id="typeInfoNull"/>
+<assertNotNull actual="typeInfo" id="typeInfoNotNull"/>
+<typeName var="typeName" obj="typeInfo"/>
+<assertNull actual="typeName" id="typeName"/>
+<typeNamespace var="typeNS" obj="typeInfo"/>
+<assertNull actual="typeNS" id="typeNS"/>
 </test>
