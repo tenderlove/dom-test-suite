@@ -1,48 +1,60 @@
 <?xml version="1.0" standalone="no"?>
-
-<!DOCTYPE test [
-  <!ENTITY % entities SYSTEM "dom3tests.ent">
-  %entities;
-]>
-
-
-<test xmlns="&level3;" name="builderfilter">
+<!--   MSV was having a problem with the entities 
+         so I expanded them for my personal convienience    -->
+<!--   test name was not the same as the file name   -->
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="test1">
   <metadata>
     <title>attrSpecifiedValue</title>
-    &creator; 
+    <creator>X-Hive Corporation</creator>
     <description>DOM Builder Filter test</description> 
-    &contributor; &date;
-    <subject spec="&spec;#LS-Interfaces-DOMBuilderFilter"/>
+    <contributor>X-Hive Corporation</contributor>
+    <date qualifier='created'>2002-03-23</date>
+    <!--   resource attribute was called specs   -->
+    <subject resource="http://www.w3.org/TR/DOM-Level-3-LS/load-save#LS-Interfaces-DOMBuilderFilter"/>
   </metadata>
-  &vars;
-
+  <!--   implementation variable was not needed -->
+  <var name='lsImplementation' type='DOMImplementationLS'/> 
+  <var name='inputSource'      type='DOMInputSource'/> 
+  <var name='document'         type='Document'/>            
+  <var name='writer'           type='DOMWriter'/>            
+  <var name='builder'          type='DOMBuilder'/>
+  <var name='testfile1'        type='DOMString' value='"test1.xml"'/>
+  <var name='mode'             type='int'     value='1'/>
+  <var name='schemaType'       type='DOMString' value='null'/>
   <var name="myfilter"         type="DOMBuilderFilter"> 
-     <var name="name"            type="String"/>
-
-     <startElement elt="element">
-        <nodeName var="name" obj="element"/>
+    <!--   startElement had elt attribute that is only appropriate
+                when calling startElement   -->
+    <startElement>
+        <!--  moved variable definition here to make it a
+                 method scoped variable instead of a class scoped variable  -->
+        <var name="name"             type="DOMString"/>
+        <!--  changed obj="element" to obj="elt" 
+                 parameter name is obtained from spec   -->
+        <nodeName var="name" obj="elt"/>
         <if>
             <equals actual="name" expected='"elt2"' ignoreCase="false"/>
-            <return value="&FILTER_REJECT;"/>            
-          <else>
-            <return value="&FILTER_ACCEPT;"/>            
-          </else>
+            <return value="2"/>            
         </if>
+        <return value="1"/>            
      </startElement>
-
-
-     <acceptNode/>
-     <whatToShow>            
-        <return value="&SHOW_ELEMENT;"/>
+     <acceptNode>
+        <!--  did not have a return statement -->
+        <return value="1"/>
+     </acceptNode>
+     <whatToShow>
+        <!--  added get [and set when read-write] intermediate elements   
+                 for user implemented properties   -->
+        <get>            
+            <return value="1"/>
+        </get>
      </whatToShow>
-
   </var>
-
-  &init;
-  &builder.setFilter_myfilter;
-
+  <implementation var="lsImplementation"/>
+  <createDOMBuilder      var='builder'     obj='lsImplementation' mode='mode' schemaType='schemaType'/>
+  <createDOMWriter       var='writer'      obj='lsImplementation'/>
+  <createDOMInputSource  var='inputSource' obj='lsImplementation'/>
+  <filter obj='builder' value='myfilter' interface='DOMBuilder'/>
   <parseURI  var="document" obj="builder" uri="testfile1"/>
-
 </test>
 
 
