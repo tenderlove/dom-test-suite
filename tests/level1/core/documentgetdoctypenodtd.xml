@@ -33,5 +33,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <load var="doc" href="nodtdstaff.xml" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
-<assertNull actual="doctype" id="documentGetDocTypeNoDTDAssert"/>
+<assertNull actual="docType" id="documentGetDocTypeNoDTDAssert"/>
 </test>

@@ -63,7 +63,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
 	<!--   match document root   -->
 	<xsl:template match="/">
 		<xsd:schema targetNamespace="{$schema-namespace}" 
-			_xmlns="{$schema-namespace}">
+			_xmlns="{$schema-namespace}" elementFormDefault="qualified">
 		<xsl:comment>
 Copyright (c) 2001 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
@@ -306,23 +306,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<xsd:simpleType name="variableOrBoolLiteral">
 				<xsd:union memberTypes="xsd:boolean variable"/>
 			</xsd:simpleType>
-			<xsd:simpleType name="feature">
-				<xsd:restriction base="xsd:string">
-					<xsd:enumeration value="XML"/>
-					<xsd:enumeration value="Core"/>
-					<xsd:enumeration value="Events"/>
-					<xsd:enumeration value="MutationEvents"/>
-					<xsd:enumeration value="Traversal"/>
-					<xsd:enumeration value="Range"/>
-				</xsd:restriction>
-			</xsd:simpleType>
-			<xsd:simpleType name="version">
-				<xsd:restriction base="xsd:string">
-					<xsd:enumeration value="1.0"/>
-					<xsd:enumeration value="2.0"/>
-					<xsd:enumeration value="3.0"/>
-				</xsd:restriction>
-			</xsd:simpleType>
    </xsl:template>
 
 	<!--   this template generates any simple types
@@ -390,6 +373,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						</xsd:annotation>
 					</xsd:attribute>
 				</xsd:complexType>
+                <!--  variables must be uniquely named   -->
+                <xsd:key name="var-name">
+                    <xsd:selector xpath="var"/>
+                    <xsd:field xpath="@name"/>
+                </xsd:key>
+                <!--  all var attributes must correspond to a previously declared variable  -->
+                <xsd:keyref name="var-attrib" refer="var-name">
+                    <xsd:selector xpath="//*"/>
+                    <xsd:field xpath="@var"/>
+                </xsd:keyref>
+                <!--  all obj attributes must correspond to a previously declared variable  -->
+                <xsd:keyref name="obj-attrib" refer="var-name">
+                    <xsd:selector xpath="//*"/>
+                    <xsd:field xpath="@obj"/>
+                </xsd:keyref>
+                <!--  all actual attributes must correspond to a previously declared variable  -->
+                <xsd:keyref name="actual-attrib" refer="var-name">
+                    <xsd:selector xpath="//*"/>
+                    <xsd:field xpath="@actual"/>
+                </xsd:keyref>
 			</xsd:element>
 
 			<xsd:element name="suite.member">
@@ -890,13 +893,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xsd:attribute name="name" use="required">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:string">
-								<xsd:enumeration>validating</xsd:enumeration>
-								<xsd:enumeration>coalescing</xsd:enumeration>
-								<xsd:enumeration>expandEntityReferences</xsd:enumeration>
-								<xsd:enumeration>namespaceAware</xsd:enumeration>
-								<xsd:enumeration>ignoreElementContentWhitespace</xsd:enumeration>
-								<xsd:enumeration>signed</xsd:enumeration>
-								<xsd:enumeration>hasNullString</xsd:enumeration>
+								<xsd:enumeration value="validating"/>
+								<xsd:enumeration value="coalescing"/>
+								<xsd:enumeration value="expandEntityReferences"/>
+								<xsd:enumeration value="namespaceAware"/>
+								<xsd:enumeration value="ignoreElementContentWhitespace"/>
+								<xsd:enumeration value="signed"/>
+								<xsd:enumeration value="hasNullString"/>
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:attribute>

@@ -44,7 +44,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<var name="testAddress" type="Element"/>
 	<var name="newElement" type="Element"/>
 	<var name="attrAddress" type="Attr"/>
-	<var name="newAttribute" type="Attr"/>
 	<var name="appendedChild" type="Node"/>
 	<var name="setAttr1" type="Attr"/>
 	<var name="setAttr2" type="Attr"/>
@@ -54,7 +53,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<createElement obj="doc" var="newElement" tagName="&quot;newElement&quot;"/>
 	<appendChild var="appendedChild" obj="testAddress" newChild="newElement"/>
 	<createAttribute obj="doc" var="newAttribute" name="&quot;newAttribute&quot;"/>
-	<setAttributeNode var="setAttr1" obj="Element" newAttr="newAttribute"/>
+	<setAttributeNode var="setAttr1" obj="testAddress" newAttr="newAttribute"/>
 	<assertDOMException id="elementInUseAttributeErrAssert">
 		<INUSE_ATTRIBUTE_ERR>
 			<setAttributeNode var="setAttr2" obj="testAddress" newAttr="newAttribute"/>

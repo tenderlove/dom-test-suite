@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xsd:schema PUBLIC "-//W3C//DTD XMLSCHEMA 200102//EN" "http://www.w3.org/2001/XMLSchema.dtd">
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" targetNamespace="http://www.w3.org/2001/DOM-Test-Suite/Level-1">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" targetNamespace="http://www.w3.org/2001/DOM-Test-Suite/Level-1">
 <!--
 Copyright (c) 2001 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
@@ -70,29 +70,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <xsd:simpleType name="variableOrBoolLiteral">
 <xsd:union memberTypes="xsd:boolean variable"/>
 </xsd:simpleType>
-<xsd:simpleType name="feature">
-<xsd:restriction base="xsd:string">
-<xsd:enumeration value="XML"/>
-<xsd:enumeration value="Core"/>
-<xsd:enumeration value="Events"/>
-<xsd:enumeration value="MutationEvents"/>
-<xsd:enumeration value="Traversal"/>
-<xsd:enumeration value="Range"/>
-</xsd:restriction>
-</xsd:simpleType>
-<xsd:simpleType name="version">
-<xsd:restriction base="xsd:string">
-<xsd:enumeration value="1.0"/>
-<xsd:enumeration value="2.0"/>
-<xsd:enumeration value="3.0"/>
-</xsd:restriction>
-</xsd:simpleType>
 <xsd:simpleType name="variableType">
 <xsd:annotation>
 <xsd:documentation>All known DOM interfaces plus int, DOMString maybe some others.</xsd:documentation>
 </xsd:annotation>
 <xsd:restriction base="xsd:string">
 <xsd:enumeration value="int"/>
+<xsd:enumeration value="boolean"/>
 <xsd:enumeration value="DOMString"/>
 <xsd:enumeration value="List">
 <xsd:annotation>
@@ -209,6 +193,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsd:annotation>
 </xsd:attribute>
 </xsd:complexType>
+<xsd:key name="var-name">
+<xsd:selector xpath="var"/>
+<xsd:field xpath="@name"/>
+</xsd:key>
+<xsd:keyref refer="var-name" name="var-attrib">
+<xsd:selector xpath="//*"/>
+<xsd:field xpath="@var"/>
+</xsd:keyref>
+<xsd:keyref refer="var-name" name="obj-attrib">
+<xsd:selector xpath="//*"/>
+<xsd:field xpath="@obj"/>
+</xsd:keyref>
+<xsd:keyref refer="var-name" name="actual-attrib">
+<xsd:selector xpath="//*"/>
+<xsd:field xpath="@actual"/>
+</xsd:keyref>
 </xsd:element>
 <xsd:element name="suite.member">
 <xsd:annotation>
@@ -687,13 +687,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <xsd:attribute use="required" name="name">
 <xsd:simpleType>
 <xsd:restriction base="xsd:string">
-<xsd:enumeration>validating</xsd:enumeration>
-<xsd:enumeration>coalescing</xsd:enumeration>
-<xsd:enumeration>expandEntityReferences</xsd:enumeration>
-<xsd:enumeration>namespaceAware</xsd:enumeration>
-<xsd:enumeration>ignoreElementContentWhitespace</xsd:enumeration>
-<xsd:enumeration>signed</xsd:enumeration>
-<xsd:enumeration>hasNullString</xsd:enumeration>
+<xsd:enumeration value="validating"/>
+<xsd:enumeration value="coalescing"/>
+<xsd:enumeration value="expandEntityReferences"/>
+<xsd:enumeration value="namespaceAware"/>
+<xsd:enumeration value="ignoreElementContentWhitespace"/>
+<xsd:enumeration value="signed"/>
+<xsd:enumeration value="hasNullString"/>
 </xsd:restriction>
 </xsd:simpleType>
 </xsd:attribute>
@@ -707,8 +707,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </xsd:annotation>
 <xsd:complexType>
 <xsd:attribute use="optional" type="xsd:ID" name="id"/>
-<xsd:attribute use="required" type="feature" name="feature"/>
-<xsd:attribute use="optional" type="version" name="version"/>
+<xsd:attribute use="required" type="stringLiteral" name="feature"/>
+<xsd:attribute use="optional" type="stringLiteral" name="version"/>
 <xsd:attribute use="optional" type="variable" name="var"/>
 <xsd:attribute use="optional" type="variable" name="obj"/>
 </xsd:complexType>

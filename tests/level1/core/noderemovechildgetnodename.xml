@@ -45,6 +45,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="employeeNode" var="childList"/>
 <item interface="NodeList" obj="childList" index="0" var="oldChild"/>
 <removeChild obj="employeeNode" oldChild="oldChild" var="removedChild"/>
-<nodeName obj="removeChild" var="childName"/>
+<nodeName obj="removedChild" var="childName"/>
 <assertEquals actual="childName" expected="&quot;#text&quot;" id="nodeReplaceChildGetNodeNameAssert1" ignoreCase="false"/>
 </test>

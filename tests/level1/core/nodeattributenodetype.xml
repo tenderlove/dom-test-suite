@@ -39,7 +39,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
-<getAttributeNode obj="testAttr" name="&quot;domestic&quot;" var="addrAttr"/>
-<nodeType obj="addrAddrr" var="nodeType"/>
+<getAttributeNode obj="testAddr" name="&quot;domestic&quot;" var="addrAttr"/>
+<nodeType obj="addrAttr" var="nodeType"/>
 <assertEquals actual="nodeType" expected="2" id="nodeAttrNodeTypeAssert1" ignoreCase="false"/>
 </test>

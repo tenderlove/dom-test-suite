@@ -23,7 +23,7 @@ This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-1998100
 <!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize| %implementation-condition;">
 
 <!ENTITY % assertion "%framework-assertion;| assertDOMException" >
-<!ENTITY % variable-type "int|DOMString|List|Collection|EventMonitor|Attr|CDATASection|CharacterData|Comment|Document|DocumentFragment|DocumentType|DOMImplementation|Element|Entity|EntityReference|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBlockquoteElement|HTMLBodyElement|HTMLBRElement|HTMLButtonElement|HTMLCollection|HTMLDirectoryElement|HTMLDivElement|HTMLDListElement|HTMLDocument|HTMLElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHeadElement|HTMLHeadingElement|HTMLHRElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLIsIndexElement|HTMLLabelElement|HTMLLegendElement|HTMLLIElement|HTMLLinkElement|HTMLMapElement|HTMLMenuElement|HTMLMetaElement|HTMLModElement|HTMLObjectElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLUListElement|NamedNodeMap|Node|NodeList|Notation|ProcessingInstruction|Text">
+<!ENTITY % variable-type "int|boolean|DOMString|List|Collection|EventMonitor|Attr|CDATASection|CharacterData|Comment|Document|DocumentFragment|DocumentType|DOMImplementation|Element|Entity|EntityReference|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBlockquoteElement|HTMLBodyElement|HTMLBRElement|HTMLButtonElement|HTMLCollection|HTMLDirectoryElement|HTMLDivElement|HTMLDListElement|HTMLDocument|HTMLElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHeadElement|HTMLHeadingElement|HTMLHRElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLIsIndexElement|HTMLLabelElement|HTMLLegendElement|HTMLLIElement|HTMLLinkElement|HTMLMapElement|HTMLMenuElement|HTMLMetaElement|HTMLModElement|HTMLObjectElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLUListElement|NamedNodeMap|Node|NodeList|Notation|ProcessingInstruction|Text">
 <!ENTITY % statement "%framework-statement;|%assertion; | abbr | accept | acceptCharset | accessKey | action | align | aLink | alt | anchors | applets | archive | areas | attributes | axis | background | bgColor | body | border | caption | cellIndex | cellPadding | cells | cellSpacing | ch | charset | checked | childNodes | chOff | cite | className | clear | code | codeBase | codeType | color | cols | colSpan | compact | content | cookie | coords | data | dateTime | declare | defaultChecked | defaultSelected | defaultValue | defer | dir | disabled | doctype | documentElement | domain | elements | enctype | entities | event | face | firstChild | form | forms | frame | frameBorder | headers | height | href | hreflang | hspace | htmlFor | httpEquiv | id | images | implementation | index | isMap | label | lang | lastChild | length | link | links | longDesc | lowSrc | marginHeight | marginWidth | maxLength | media | method | multiple | name | nextSibling | nodeName | nodeType | nodeValue | noHref | noResize | noShade | notationName | notations | noWrap | object | options | ownerDocument | parentNode | previousSibling | profile | prompt | publicId | readOnly | referrer | rel | rev | rowIndex | rows | rowSpan | rules | scheme | scope | scrolling | sectionRowIndex | selected | selectedIndex | shape | size | span | specified | src | standby | start | summary | systemId | tabIndex | tagName | target | tBodies | text | tFoot | tHead | title | type | URL | useMap | vAlign | value | valueType | version | vLink | vspace | width | add | appendChild | appendData | blur | click | cloneNode | close | createAttribute | createCaption | createCDATASection | createComment | createDocumentFragment | createElement | createEntityReference | createProcessingInstruction | createTextNode | createTFoot | createTHead | deleteCaption | deleteCell | deleteData | deleteRow | deleteTFoot | deleteTHead | focus | getAttribute | getAttributeNode | getElementById | getElementsByName | getElementsByTagName | getNamedItem | hasChildNodes | hasFeature | insertBefore | insertCell | insertData | insertRow | item | namedItem | normalize | open | remove | removeAttribute | removeAttributeNode | removeChild | removeNamedItem | replaceChild | replaceData | reset | select | setAttribute | setAttributeNode | setNamedItem | splitText | submit | substringData | write | writeln ">
 <!ELEMENT assertDOMException (metadata?,(INDEX_SIZE_ERR|DOMSTRING_SIZE_ERR|HIERARCHY_REQUEST_ERR|WRONG_DOCUMENT_ERR|INVALID_CHARACTER_ERR|NO_DATA_ALLOWED_ERR|NO_MODIFICATION_ALLOWED_ERR|NOT_FOUND_ERR|NOT_SUPPORTED_ERR|INUSE_ATTRIBUTE_ERR))>
 <!ATTLIST assertDOMException id ID #REQUIRED>
@@ -2064,13 +2064,13 @@ This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-1998100
 	qualifier (isVersionOf | hasVersion | isReplacedBy | isRequiredBy | requires | isPartOf | hasPart | isReferenceBy | references) #REQUIRED
 >
 					
-<!ELEMENT assertTrue ((%condition;),(%statement;)*)>
+<!ELEMENT assertTrue ((%condition;)?,(%statement;)*)>
 <!ATTLIST assertTrue
 	id ID #REQUIRED
 	actual CDATA #IMPLIED
 >
 							
-<!ELEMENT assertFalse ((%condition;),(%statement;)*)>
+<!ELEMENT assertFalse ((%condition;)?,(%statement;)*)>
 <!ATTLIST assertFalse
 	id ID #REQUIRED
 	actual CDATA #IMPLIED
@@ -2223,8 +2223,8 @@ This schema was generated from http://www.w3.org/TR/1998/REC-DOM-Level-1-1998100
 <!ELEMENT hasFeature EMPTY>
 <!ATTLIST hasFeature
 	id ID #IMPLIED
-	feature (XML | Core | Events | MutationEvents | Traversal | Range) #REQUIRED
-	version (1.0 | 2.0 | 3.0) #IMPLIED
+	feature CDATA #REQUIRED
+	version CDATA #IMPLIED
 	var CDATA #IMPLIED
 	obj CDATA #IMPLIED
 >

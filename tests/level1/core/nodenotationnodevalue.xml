@@ -42,5 +42,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <notations obj="docType" var="testName"/>
 <getNamedItem obj="testName" name="&quot;notation1&quot;" var="notationNode"/>
 <nodeValue obj="notationNode" var="notationValue"/>
-<assertNull actual="notationName" id="nodeNotationNodeValueAssert1"/>
+<assertNull actual="notationValue" id="nodeNotationNodeValueAssert1"/>
 </test>

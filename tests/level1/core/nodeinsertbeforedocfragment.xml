@@ -62,10 +62,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<appendChild var="appendedChild" obj="newdocFragment" newChild="newChild1"/>
 	<appendChild var="appendedChild" obj="newdocFragment" newChild="newChild2"/>
 	<insertBefore var="insertedNode" obj="employeeNode" newChild="newdocFragment" refChild="refChild"/>
-	<item interface="NodeList" obj="ChildList" index="3" var="child"/>
+	<item interface="NodeList" obj="childList" index="3" var="child"/>
 	<nodeName obj="child" var="childName"/>
 	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="ChildList" index="4" var="child"/>
+	<item interface="NodeList" obj="childList" index="4" var="child"/>
 	<nodeName obj="child" var="childName"/>
 	<append collection="result" obj="childName"/>
 	<assertEquals actual="result" expected="expectedResult" id="nodeInsertBeforeDocFragmentAssert1" ignoreCase="false"/>

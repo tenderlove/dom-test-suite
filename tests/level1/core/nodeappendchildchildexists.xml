@@ -50,7 +50,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<nodeName obj="fchild" var="fchildName"/>
 	<lastChild obj="childNode" var="lchild"/>
 	<nodeName obj="lchild" var="lchildName"/>
-	<append collection="result" obj="fchildName"/>
-	<append collection="result" obj="lchildName"/>
-	<assertEquals actual="result" expected="employeeId #text" id="nodeAppendChildChildExistsAssert1" ignoreCase="false"/>
+    <assertEquals id="assert1" actual="fchildName" expected='"employeeId"' ignoreCase="false"/>
+    <assertEquals id="assert2" actual="lchildName" expected='"#text"' ignoreCase="false"/>
 </test>

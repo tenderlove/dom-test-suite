@@ -32,5 +32,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docType" type="DocumentType"/>
 <load var="doc" href="staff.html" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
-<assertNull actual="doctype" id="documentHTMLNullAssert"/>
+<assertNull actual="docType" id="documentHTMLNullAssert"/>
 </test>
