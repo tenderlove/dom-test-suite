@@ -135,7 +135,7 @@ sorted alphabetically.
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="$featureURI" title="{descr}">
+                                        <a href="{$featureURI}" title="{descr}">
                                             <xsl:value-of select="@name"/>
                                         </a>
                                     </td>

@@ -331,12 +331,12 @@ function suite() {
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="@version">
-                        <xsl:text>, "</xsl:text>
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="@version"/>
-                        <xsl:text>" </xsl:text>
+                        <xsl:text> </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>, null </xsl:text>
+                        <xsl:text> null </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each>

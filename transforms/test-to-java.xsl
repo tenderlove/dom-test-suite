@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.49  2003-12-09 08:22:27  dom-ts-4
+Revision 1.50  2003-12-15 21:37:45  dom-ts-4
+test-matrix and test-to-jsunit transform, list member type (Bug 429)
+
+Revision 1.49  2003/12/09 08:22:27  dom-ts-4
 Additional L&S tests, mostly configuration (Bug 401)
 
 Revision 1.48  2003/12/08 07:50:50  dom-ts-4
@@ -824,21 +827,46 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:for-each select="*[local-name()='member']">
                 <xsl:value-of select="$varname"/><xsl:text>.add(</xsl:text>
                 <xsl:choose>
-                    <!--  member is not a number, just add it to collection  -->
-                    <xsl:when test="string(number(text())) = 'NaN'">
+                	<!-- if explicitly declared a short -->
+                    <xsl:when test="@type = 'short'">
+                    	<xsl:text>new Short(</xsl:text>
                         <xsl:value-of select="text()"/>
+                        <xsl:text>)</xsl:text>
                     </xsl:when>
-                    <!--   if a decimal point, add it as a Double   -->
-                    <xsl:when test="contains(text(), '.')">
+                    <!--  if value is NaN  -->
+                    <xsl:when test="text() = 'NaN'">
+                    	<xsl:text>new Double(Double.NaN)</xsl:text>
+                    </xsl:when>
+                    <!--  if value is -Infinity  -->
+                    <xsl:when test="text() = '-Infinity'">
+                    	<xsl:text>new Double(Double.NEGATIVE_INFINITY)</xsl:text>
+                    </xsl:when>
+                    <!--  if value Infinity or +Infinity  -->
+                    <xsl:when test="text() = 'Infinity' or text() = '+Infinity'">
+                    	<xsl:text>new Double(Double.POSITIVE_INFINITY)</xsl:text>
+                    </xsl:when>
+                    <!--  if value is declared as a double or looks like a double   -->
+                    <xsl:when test="@type = 'double' or contains(text(), '.')">
                         <xsl:text>new Double(</xsl:text>
                         <xsl:value-of select="text()"/>
                         <xsl:text>)</xsl:text>
                     </xsl:when>
-                    <!--   otherwise an Integer   -->
-                    <xsl:otherwise>
+                    <!--  if value is declared a boolean or looks like a boolean   -->
+                    <xsl:when test="text() = 'true'">
+                    	<xsl:text>Boolean.TRUE</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="text() = 'false'">
+                    	<xsl:text>Boolean.FALSE</xsl:text>
+                    </xsl:when>
+                    <!--  if value is declared an integer or looks like an integer -->
+                    <xsl:when test="@type = 'int' or string(number(text())) != 'NaN'">
                         <xsl:text>new Integer(</xsl:text>
                         <xsl:value-of select="text()"/>
                         <xsl:text>)</xsl:text>
+                    </xsl:when>
+                    <!--  member is not a number, just add it to collection  -->
+                    <xsl:otherwise>
+                        <xsl:value-of select="text()"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:text>);

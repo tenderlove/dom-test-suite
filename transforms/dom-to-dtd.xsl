@@ -354,7 +354,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 	       that are dependent on the source document.  Currently only
 		   the allowable types for variables    -->
 	<xsl:template name="dynamic-simpleTypes">
-		<xsl:text>&lt;!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
+		<xsl:text>&lt;!ENTITY % variable-type "int|short|double|boolean|DOMString|List|Collection|EventMonitor</xsl:text>
         <xsl:value-of select="$additional-types"/>
 		<xsl:for-each select="$interfaces">
 			<xsl:sort select="@name"/>
@@ -518,6 +518,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 </xsl:text>
 
 &lt;!ELEMENT member (#PCDATA)&gt;
+&lt;!ATTLIST member
+    type (int|short|double|boolean|DOMString) #IMPLIED
+&gt;    
 
 
 &lt;!ELEMENT load EMPTY&gt;

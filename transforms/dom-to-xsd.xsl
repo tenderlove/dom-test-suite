@@ -355,7 +355,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:annotation>
 					<xs:documentation>The union of accepted literal types</xs:documentation>
 				</xs:annotation>
-				<xs:union memberTypes="xs:integer xs:boolean stringLiteral"/>
+				<xs:union memberTypes="xs:integer xs:boolean xs:double stringLiteral"/>
 			</xs:simpleType>
 			<xs:simpleType name="variableOrLiteral">
 				<xs:union memberTypes="literal variable"/>
@@ -369,6 +369,23 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 			<xs:simpleType name="variableOrBoolLiteral">
 				<xs:union memberTypes="xs:boolean variable"/>
 			</xs:simpleType>
+			<xs:simpleType name="variableOrDoubleLiteral">
+				<xs:union memberTypes="xs:double variable"/>
+			</xs:simpleType>
+
+			<xs:simpleType name="literalTypes">
+				<xs:annotation>
+					<xs:documentation>All types with literal representations.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="int"/>
+					<xs:enumeration value="short"/>
+					<xs:enumeration value="double"/>
+                    <xs:enumeration value="boolean"/>
+					<xs:enumeration value="DOMString"/>
+				</xs:restriction>
+			</xs:simpleType>
+
    </xsl:template>
 
 	<!--   this template generates any simple types
@@ -382,6 +399,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="int"/>
 					<xs:enumeration value="short"/>
+					<xs:enumeration value="double"/>
                     <xs:enumeration value="boolean"/>
 					<xs:enumeration value="DOMString"/>
 					<xs:enumeration value="List">
@@ -708,10 +726,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                     <xs:attribute name="isNull" type="xs:boolean" use="optional"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="member" type="literal">
+			<xs:element name="member">
 				<xs:annotation>
 					<xs:documentation>Member children are used to initialize List and Collection types.</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="literal">
+							<xs:attribute name="type" type="literalTypes" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
 			</xs:element>
             <!--   
                 if there is not a load method in the spec
