@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.56  2002-04-09 01:30:38  dom-ts-4
+Revision 1.57  2002-04-19 05:17:42  dom-ts-4
+Updated for 04/09 DOM 3 working drafts
+
+Revision 1.56  2002/04/09 01:30:38  dom-ts-4
 dom1-core-metadata didn't declare dependence on dom1-dtd
 updated URL for new XPath WD
 
@@ -1302,13 +1305,13 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="get-dom3-core" depends="dom3-available" unless="dom3-core-available">
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Core-20020114/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Core-20020409/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 </target>
 
 <target name="get-dom3-asls" depends="dom3-available" unless="dom3-asls-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-ASLS-20020114/DOM3-ASLS.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-ASLS-20020409/DOM3-ASLS.zip"
 		dest="${specs.dir}/DOM3-ASLS.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1401,9 +1404,15 @@ All implementation conditions combined into implementationAttribute element
 	<echo file="${specs.dir}/Level-3/xml/toc.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
+    <delete file="${specs.dir}/Level-3/xml/core/definitions/element.xml.orig"/>
+
+    <!--   this patch is needed so the parameter names are the same
+               for getElementsByTagName    -->
 	<patch patchfile="./patches/level-3-element.patch"
 	       originalfile="${specs.dir}/Level-3/xml/core/definitions/element.xml"/>
 
+    <!--   these patches are missing entity declarations
+             and similar issues that should be fixed    -->
 	<patch patchfile="./patches/level-3-version.patch"
 	       originalfile="${specs.dir}/Level-3/xml/version.xml"/>
 
@@ -1412,14 +1421,6 @@ All implementation conditions combined into implementationAttribute element
 
     <patch patchfile="./patches/level-3-core-dom-spec.patch"
            originalfile="${specs.dir}/Level-3/xml/core/dom-spec.xml"/>
-
-    <!--  text.xml is missing   -->
-    <copy file="${specs.dir}/Level-2/xml/core/definitions/text.xml"
-          todir="${specs.dir}/Level-3/xml/core/definitions"/>
-
-    <!--  textevent.xml is missing, just put empty file   -->
-    <echo message="" file="${specs.dir}/Level-3/xml/events/definitions/textevent.xml"/>
-
 
 </target>
 
