@@ -40,6 +40,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entElement" type="Node"/>
 <var name="createdNode" type="Node"/>
 <var name="insertedNode" type="Node"/>
+<var name="refChild" type="Node" isNull="true"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
 <item obj="genderList" index="2" var="genderNode" interface="NodeList"/>
@@ -48,7 +49,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createElement obj="doc" tagName="&quot;text3&quot;" var="createdNode"/>
 <assertDOMException id="nodeInsertBeforeNoModificationAllowedErrAssert">
 <NO_MODIFICATION_ALLOWED_ERR>
-<insertBefore var="insertedNode" obj="entElement" newChild="createdNode" refChild="null"/>
+<insertBefore var="insertedNode" obj="entElement" newChild="createdNode" refChild="refChild"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

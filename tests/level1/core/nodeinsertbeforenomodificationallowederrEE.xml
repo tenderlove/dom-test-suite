@@ -34,12 +34,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="Node"/>
 <var name="createdNode" type="Node"/>
 <var name="insertedNode" type="Node"/>
+<var name="refChild" type="Node" isNull="true"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
-<createEntityReference var="entRef" obj="doc" name="&quot;ent3&quot;"/>
-<createElement obj="doc" tagName="&quot;text3&quot;" var="createdNode"/>
-<assertDOMException id="nodeInsertBeforeNoModificationAllowedErrAssert">
+<createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+<createElement obj="doc" tagName='"text3"' var="createdNode"/>
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
-<insertBefore var="insertedNode" obj="entRef" newChild="createdNode" refChild="null"/>
+<insertBefore var="insertedNode" obj="entRef" newChild="createdNode" refChild="refChild"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>
