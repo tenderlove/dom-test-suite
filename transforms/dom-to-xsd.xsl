@@ -403,37 +403,37 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
                 </xs:key>
                 <!--  all var attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="var-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@var"/>
                 </xs:keyref>
                 <!--  all obj attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="obj-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@obj"/>
                 </xs:keyref>
                 <!--  all actual attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="actual-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@actual"/>
                 </xs:keyref>
                 <!--  all collection attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="collection-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@collection"/>
                 </xs:keyref>
                 <!--  all member attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="member-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@member"/>
                 </xs:keyref>
                 <!--  all refChild attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="refChild-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@refChild"/>
                 </xs:keyref>
                 <!--  all doctype attributes must correspond to a previously declared variable  -->
                 <xs:keyref name="doctype-attrib" refer="var-name">
-                    <xs:selector xpath="//*"/>
+                    <xs:selector xpath=".//*"/>
                     <xs:field xpath="@doctype"/>
                 </xs:keyref>
 			</xs:element>
