@@ -7,11 +7,11 @@
 <!ENTITY vars        "
                       <var name='implementation'   type='DOMImplementation'/> 
                       <var name='lsImplementation' type='DOMImplementationLS'/> 
-                      <var name='inputSource'      type='DOMInputSource'/> 
+                      <var name='inputSource'      type='DOMInput'/> 
                       <var name='document'         type='Document'/>            
-                      <var name='writer'           type='DOMWriter'/>            
-                      <var name='builder'          type='DOMBuilder'/>
-                      <var name='schemaType'       type='DOMString' value='null'/>
+                      <var name='writer'           type='DOMSerializer'/>            
+                      <var name='builder'          type='DOMParser'/>
+                      <var name='schemaType'       type='DOMString' isNull='true'/>
                      
                       <!-- constants  -->
                       <var name='MODE_SYNCHRONOUS'  type='short'  value='1'/>
@@ -19,7 +19,7 @@
                       <var name='DTD_SCHEMATYPE'    type='DOMString' value='&quot;http://www.w3.org/TR/REC-xml&quot;'/>
                       <var name='SCHEMA_SCHEMATYPE' type='DOMString' value='&quot;http://www.w3.org/2001/XMLSchema&quot;'/>
 
-                      <!-- action types DOMBuilder.parseWithContext -->
+                      <!-- action types DOMParser.parseWithContext -->
                       <var name='ACTION_REPLACE'             type='short' value='1'/>
                       <var name='ACTION_APPEND_AS_CHILDREN'  type='short' value='2'/>
                       <var name='ACTION_INSERT_AFTER'        type='short' value='3'/>
@@ -65,11 +65,11 @@
                       ">
 
 
-<!ENTITY init        "<createDOMBuilder      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
-                      <createDOMWriter       var='writer'      obj='lsImplementation'/>
-                      <createDOMInputSource  var='inputSource' obj='lsImplementation'/>">
+<!ENTITY init        "<createDOMParser      var='builder'     obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+                      <createDOMSerializer       var='writer'      obj='lsImplementation'/>
+                      <createDOMInput  var='inputSource' obj='lsImplementation'/>">
 
-<!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='DOMBuilder'/>">
+<!ENTITY builder.setFilter_myfilter "<filter obj='builder' value='myfilter' interface='DOMParser'/>">
 
 
 

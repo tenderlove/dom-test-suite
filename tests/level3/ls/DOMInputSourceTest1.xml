@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest1">
   <metadata>
-    <title>DOMInputSource</title>
+    <title>DOMInput</title>
     &creator; 
     <description>test the builder by using a characterstream inputsource</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
   <!-- todo create reader -->
   <var name="myReader" type="DOMReader"/>
@@ -35,7 +35,7 @@
   &init;
 
   
-  <characterStream obj="inputSource" var="myReader"/> 
+  <characterStream obj="inputSource" var="myReader" interface="DOMInput"/> 
 
   <parse var="document" obj="builder" is="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>

@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMWriterTest2">
   <metadata>
-    <title>DOMWriter</title>
+    <title>DOMSerializer</title>
     &creator; 
-    <description>DOMWriter test</description> 
+    <description>DOMSerializer test</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMWriter"/>
+    <subject resource="&spec;#LS-Interfaces-DOMSerializer"/>
   </metadata>
 
   <var name="configuration"   type="DOMConfiguration"/>
@@ -37,19 +37,19 @@
   &init;
 
   <!-- parse the string -->
-  <stringData obj="inputSource" value="stringDoc" interface="DOMInputSource"/>
+  <stringData obj="inputSource" value="stringDoc"/>
   <parse  var="document" obj="builder" is="inputSource"/>
  
   <!-- include xml declaration on serialization --> 
-  <config var="configuration" obj="writer" interface="DOMWriter"/> 
+  <config var="configuration" obj="writer" interface="DOMSerializer"/> 
 
   <setParameter obj="configuration" name="XML_DECLARATION" value="false"/>
-  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+  <writeToString var="writeResult" obj="writer" node="document"/> 
   <length var="length" obj="writeResult" interface="DOMString"/>
   <assertEquals actual="length" expected="23" id="length_without_xml_declaration" ignoreCase="false"/>
 
   <setParameter obj="configuration" name="XML_DECLARATION" value="true"/>
-  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+  <writeToString var="writeResult" obj="writer" node="document"/> 
   <length var="length" obj="writeResult" interface="DOMString"/>
   <assertNotEquals actual="length" expected="23" id="length_with_xml_declaration" ignoreCase="false"/>
 

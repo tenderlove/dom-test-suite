@@ -18,11 +18,11 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest5">
   <metadata>
-    <title>DOMBuilder</title>
+    <title>DOMParser</title>
     &creator; 
     <description>DOM Builder test, tests unsupported media types. DOMConfiguration has an option to check media types. A pdf file is loaded which should generate error using the registered error handler</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMBuilder"/>
+    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
   </metadata>
 
 
@@ -49,7 +49,7 @@
 
   &init;
 
-  <config var="configuration" obj="builder" interface="DOMBuilder"/> 
+  <config var="configuration" obj="builder" interface="DOMParser"/> 
 
   <setParameter obj="configuration" name="ERROR_HANDLER"             value="errorHandler"/>
   <setParameter obj="configuration" name="SUPPORTED_MEDIATYPES_ONLY" value="atrue"/>

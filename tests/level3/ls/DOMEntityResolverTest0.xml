@@ -28,17 +28,17 @@
   </metadata>
 
 
-  <var name="myentityresolver" type="DOMEntityResolver"> 
-     <var name="erInputSource" type="DOMInputSource"/>
-     <resolveEntity>
+  <var name="myentityresolver" type="DOMResourceResolver"> 
+     <resolveResource>
+     	<var name="nullInput" type="DOMInput" isNull="true"/>
 
         <assertEquals actual="publicId"  expected='"public"' ignoreCase="false" id="er_public"/>
         <assertEquals actual="systemId"  expected='"system"' ignoreCase="false" id="er_system"/>
         <assertEquals actual="baseURI" expected='"base"'   ignoreCase="false" id="er_base"/>
         
 
-        <return value="null"/>            
-     </resolveEntity>
+        <return value="nullInput"/>            
+     </resolveResource>
 
   </var>
 
@@ -48,7 +48,7 @@
   &vars;
   &init;
 
-  <config var="configuration" obj="builder" interface="DOMBuilder"/> 
+  <config var="configuration" obj="builder" interface="DOMParser"/> 
 
   <setParameter obj="configuration" name="ENTITY_RESOLVER" value="myentityresolver"/>
   

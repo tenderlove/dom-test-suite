@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest2">
   <metadata>
-    <title>DOMInputSource</title>
+    <title>DOMInput</title>
     &creator; 
     <description>test the builder by using a string inputsource</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
 
   <var name="elementList" type="NodeList"/>
@@ -32,7 +32,7 @@
   &vars;
   &init;
 
-  <stringData obj="inputSource" value="myString" interface="DOMInputSource"/> 
+  <stringData obj="inputSource" value="myString" interface="DOMInput"/> 
 
   <parse var="document" obj="builder" is="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>

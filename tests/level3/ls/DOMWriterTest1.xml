@@ -20,17 +20,17 @@
 
 <test xmlns="&level3;" name="DOMWriterTest1">
   <metadata>
-    <title>DOMWriter</title>
+    <title>DOMSerializer</title>
     &creator; 
     <description>A Simple writer test, serializes a specific node in the tree and parses it back in</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMWriter"/>
+    <subject resource="&spec;#LS-Interfaces-DOMSerializer"/>
   </metadata>
   <var name="stringDoc"    type="DOMString"/>
   <var name="writeResult"  type="boolean"/>
   <var name="elementList"  type="NodeList"/>
   <var name="firstElt3"    type="Node"/>
-  <var name="outputStream" type="DOMOutputStream" value="null"/>
+  <var name="outputStream" type="DOMOutputStream" isNull="true"/>
   <var name="inputURI"     type="DOMString" value='"output/mytempoutput"'/>
 
   &vars;
@@ -42,7 +42,7 @@
   <item interface="NodeList" obj="elementList" var="firstElt3" index="0"/>
 
 
-  <writeNode var="writeResult" obj="writer" destination="outputStream" wnode="firstElt3"/> 
+  <write var="writeResult" obj="writer" destination="outputStream" node="firstElt3"/> 
   <parseURI  var="document" obj="builder" uri="inputURI"/>
  
   <!-- no elt2 may be found --> 

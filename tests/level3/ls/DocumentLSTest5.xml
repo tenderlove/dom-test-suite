@@ -44,7 +44,7 @@
 
   <assertDOMException id="wrong_document_on_savexml">
    <WRONG_DOCUMENT_ERR>
-     <saveXML var="stringResult" obj="documentls" snode="document1" interface="DocumentLS"/>
+     <saveXML var="stringResult" obj="documentls" node="document1" interface="DocumentLS"/>
    </WRONG_DOCUMENT_ERR>
   </assertDOMException>
 

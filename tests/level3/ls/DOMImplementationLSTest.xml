@@ -27,21 +27,21 @@
     <subject resource="&spec;#LS-Interfaces-DOMImplementationLS"/>
   </metadata>
   &vars;
-
-  <createDOMBuilder var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
-  <createDOMBuilder var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='schemaType'/>
+  
+  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_ASYNCHRONOUS' schemaType='schemaType'/>
   
   
   <assign var='schemaType' value='DTD_SCHEMATYPE'/> 
-  <createDOMBuilder var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
   
   <assign var='schemaType' value='SCHEMA_SCHEMATYPE'/> 
-  <createDOMBuilder var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
   
   <assign var='schemaType' value='&quot;nobody_should_support_this_schematype_this_should_throw_a_not_supported_err&quot;'/> 
   <assertDOMException id="NOT_SUPPORTED_ERR0">
   <NOT_SUPPORTED_ERR>
-  <createDOMBuilder var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
+  <createDOMParser var='builder' obj='lsImplementation' mode='MODE_SYNCHRONOUS' schemaType='schemaType'/>
   </NOT_SUPPORTED_ERR>
   </assertDOMException>
 

@@ -19,11 +19,11 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest4">
   <metadata>
-    <title>DOMBuilder</title>
+    <title>DOMParser</title>
     &creator; 
     <description>DOM Builder test</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMBuilder"/>
+    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
   </metadata>
   
   <var name="elementList" type="NodeList"/>
@@ -49,8 +49,8 @@
   <nodeName obj="firstElt1" var="nodeName"/>
   <assertEquals actual="nodeName" expected="&quot;elt1&quot;" id="previousSibling_before_insert_before" ignoreCase="false"/>
 
-  <systemId obj="inputSource" value="TEST2" interface="DOMInputSource"/>
-  <parseWithContext  obj="builder" is="inputSource" cnode="secondElt1" action="ACTION_INSERT_BEFORE" var="returnNode"/>
+  <systemId obj="inputSource" value="TEST2" interface="DOMInput"/>
+  <parseWithContext  obj="builder" input="inputSource" context="secondElt1" action="ACTION_INSERT_BEFORE" var="returnNode"/>
 
   <previousSibling interface="Node" obj="secondElt1" var="firstElt1"/>
   <nodeName obj="firstElt1" var="nodeName"/>

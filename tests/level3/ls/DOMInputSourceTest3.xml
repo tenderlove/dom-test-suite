@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest3">
   <metadata>
-    <title>DOMInputSource</title>
+    <title>DOMInput</title>
     &creator; 
     <description>test the builder by using a string inputsource overriding the encoding type, using characterStream however nothing should change</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
 
   <var name="elementList" type="NodeList"/>
@@ -44,19 +44,19 @@
 
 
 
-  <stringData obj="inputSource" value="myString" interface="DOMInputSource"/> 
-  <encoding   obj="inputSource" value="iso" interface="DOMInputSource"/> 
+  <stringData obj="inputSource" value="myString" interface="DOMInput"/> 
+  <encoding   obj="inputSource" value="iso" interface="DOMInput"/> 
 
   <parse var="document" obj="builder" is="inputSource"/>
 
   <!-- encoding should be changed for a DOMString inputsource -->
-  <encoding var="encodingString" obj="document" interface="Document"/> 
+  <actualEncoding var="encodingString" obj="document" interface="Document"/> 
   <assertEquals actual="encodingString" expected="iso" ignoreCase="false" id="encodingstringcheck0"/>
 
   <!-- using a characterStream nothing should change-->
-  <createDOMInputSource  var="inputSource" obj="lsImplementation"/>
-  <encoding   obj="inputSource" value="iso" interface="DOMInputSource"/> 
-  <characterStream obj="inputSource" var="myReader"/> 
+  <createDOMInput  var="inputSource" obj="lsImplementation"/>
+  <encoding   obj="inputSource" value="iso" interface="DOMInput"/> 
+  <characterStream obj="inputSource" var="myReader" interface="DOMInput"/> 
   <parse var="document" obj="builder" is="inputSource"/>
   <assertEquals actual="encodingString" expected="utf" ignoreCase="false" id="encodingstringcheck1"/>
 

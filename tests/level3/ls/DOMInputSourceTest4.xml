@@ -20,11 +20,11 @@
 
 <test xmlns="&level3;" name="DOMInputSourceTest4">
   <metadata>
-    <title>DOMInputSource</title>
+    <title>DOMInput</title>
     &creator; 
-    <description>tests whether DOMInputSource whether abort can be called even if loading is finished already</description> 
+    <description>tests whether DOMInput whether abort can be called even if loading is finished already</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
+    <subject resource="&spec;#LS-Interfaces-DOMInput"/>
   </metadata>
 
   <var name="elementList" type="NodeList"/>
@@ -33,12 +33,12 @@
   &vars;
   &init;
 
-  <stringData obj="inputSource" value="myString" interface="DOMInputSource"/> 
+  <stringData obj="inputSource" value="myString" interface="DOMInput"/> 
 
   <parse var="document" obj="builder" is="inputSource"/>
 
   <!-- abort should be possible even in synchronous load -->
-  <abort obj="builder" interface="DOMBuilder"/> 
+  <abort obj="builder" interface="DOMParser"/> 
 
 </test>
 

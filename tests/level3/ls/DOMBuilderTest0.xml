@@ -19,11 +19,11 @@
 
 <test xmlns="&level3;" name="DOMBuilderTest0">
   <metadata>
-    <title>DOMBuilder</title>
+    <title>DOMParser</title>
     &creator; 
     <description>DOM Builder test</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMBuilder"/>
+    <subject resource="&spec;#LS-Interfaces-DOMParser"/>
   </metadata>
   
   <var name="elementList" type="NodeList"/>
@@ -37,8 +37,8 @@
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_1"/>
   
-  <writeToString var="stringDoc" obj="writer" wnode="document"/>
-  <stringData obj="inputSource" value="stringDoc" interface="DOMInputSource"/>
+  <writeToString var="stringDoc" obj="writer" node="document"/>
+  <stringData obj="inputSource" value="stringDoc"/>
   <parse  var="document" obj="builder" is="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt1&quot;" var="elementList"/>
   <assertSize collection="elementList" size="2" id="count_elt1_2"/>

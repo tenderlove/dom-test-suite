@@ -36,7 +36,7 @@
   &vars;
   &init;
 
-  <stringData obj="inputSource" value="myString" interface="DOMInputSource"/> 
+  <stringData obj="inputSource" value="myString"/> 
   <parse var="document" obj="builder" is="inputSource"/>
 
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>

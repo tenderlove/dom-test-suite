@@ -62,7 +62,7 @@ saxon -o dom1-test.xsd wd-dom.xml dom-to-schema.xsl
     <!--   list method names (such as EventHandler) that
                are implemented by the caller, not by the DOM implementation
                must provide leading and trailing space    -->              
-    <xsl:variable name="sink-interfaces"> EventListener DOMEntityResolver DOMBuilderFilter DOMWriterFilter NodeFilter DOMErrorHandler </xsl:variable>
+    <xsl:variable name="sink-interfaces"> EventListener DOMResourceResolver DOMParserFilter DOMSerializerFilter NodeFilter DOMErrorHandler </xsl:variable>
 
 	<!--   match document root   -->
 	<xsl:template match="/">
@@ -305,7 +305,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 					<xs:documentation>A variable name</xs:documentation>
 				</xs:annotation>
 				<xs:restriction base="xs:string">
-					<xs:pattern value="([A-Za-mo-z][A-Za-z0-9_]*)|(n[^u].*)|(nu[^l].*)|(nul[^l].*)|(null.+)"/>
+					<xs:pattern value="([A-Za-mo-z][A-Za-z0-9_]*)|(n)|(n[^u].*)|(nu[^l].*)|(nul[^l].*)|(null.+)"/>
 				</xs:restriction>
 			</xs:simpleType>
 

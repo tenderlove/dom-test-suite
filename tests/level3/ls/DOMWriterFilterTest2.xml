@@ -20,15 +20,15 @@
 
 <test xmlns="&level3;" name="DOMWriterFilterTest2">
   <metadata>
-    <title>DOMWriterFilter</title>
+    <title>DOMSerializerFilter</title>
     &creator; 
-    <description>DOMWriterFilter test, this test eliminates all text through whatToShow. All structure should be remained</description> 
+    <description>DOMSerializerFilter test, this test eliminates all text through whatToShow. All structure should be remained</description> 
     &contributor; &date;
-    <subject resource="&spec;#LS-Interfaces-DOMWriterFilter"/>
+    <subject resource="&spec;#LS-Interfaces-DOMSerializerFilter"/>
   </metadata>
 
 
-  <var name="myfilter" type="DOMWriterFilter"> 
+  <var name="myfilter" type="DOMSerializerFilter"> 
      <var name="name" type="DOMString"/>
      &filterVars;
 
@@ -60,17 +60,17 @@
   &init;
 
   <!-- parse the string -->
-  <stringData obj="inputSource" value="stringDoc" interface="DOMInputSource"/>
+  <stringData obj="inputSource" value="stringDoc"/>
   <parse  var="document" obj="builder" is="inputSource"/>
 
   <!-- apply the filter -->
-  <filter obj="writer" value="myfilter" interface="DOMWriter"/>
+  <filter obj="writer" value="myfilter" interface="DOMSerializer"/>
 
   <!-- serialize result -->
-  <writeToString var="writeResult" obj="writer" wnode="document"/> 
+  <writeToString var="writeResult" obj="writer" node="document"/> 
 
   <!-- parse result -->
-  <stringData obj="inputSource" value="writeResult" interface="DOMInputSource"/>
+  <stringData obj="inputSource" value="writeResult" interface="DOMInput"/>
   <parse  var="document" obj="builder" is="inputSource"/>
 
   <!-- tests no child of elt1-->
