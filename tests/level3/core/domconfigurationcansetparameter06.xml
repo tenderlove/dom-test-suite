@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+<!--
+
+Copyright (c) 2001-2004 World Wide Web Consortium, 
+(Massachusetts Institute of Technology, Institut National de
+Recherche en Informatique et en Automatique, Keio University).  All 
+Rights Reserved.  This program is distributed under the W3C's Software
+Intellectual Property License.  This program is distributed in the 
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE.  
+
+See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+
+-->
+
+<!DOCTYPE test SYSTEM "dom3.dtd">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="domconfigurationcansetparameter06">
+<metadata>
+<title>domconfigurationcansetparameter06</title>
+<creator>IBM</creator>
+<description>
+	The canSetParameter method checks if setting a parameter to a specific value is supported.
+	
+	The parameter element-content-whitespace is turned on by default. Set this parameter to false will
+	discard all Text nodes that contain whitespaces in element content, as described in [element content whitespace].
+	Check to see if this feature can be set	to false by invoking canSetParameter method.  Verify that the text node
+	still exist after invoking canSetParameter.
+</description>
+<contributor>Jenny Hsu</contributor>
+<date qualifier="created">2003-11-04</date>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration"/>
+</metadata>
+<implementationAttribute name="namespaceAware" value="true"/>
+<var name="doc" type="Document"/>
+<var name="domConfig" type="DOMConfiguration"/>
+<var name="itemList" type="NodeList"/>
+<var name="elementStrong" type="Element"/>
+<var name="textNode" type="Text"/>
+<var name="canSet" type="boolean"/>
+<var name="hasWhitespace" type="boolean"/>
+<load var="doc" href="hc_staff" willBeModified="false"/>
+<domConfig obj="doc" var="domConfig" interface="Document"/>
+<canSetParameter obj="domConfig" var="canSet" name='"element-content-whitespace"' value="true"/>
+<assertTrue actual="canSet" id="domconfigurationcansetparameter06_1"/>
+<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
+<item var="elementStrong" obj="itemList" index="0" interface="NodeList"/>
+<firstChild var="textNode" obj="elementStrong" interface="Node"/>
+<textContent obj="textNode" value='"    
+                                        
+
+ "' />
+<isElementContentWhitespace obj="textNode" var="hasWhitespace"/>
+<assertTrue actual="hasWhitespace" id="domconfigurationsetparameter06_2"/>
+<normalizeDocument obj="doc"/>
+<getElementsByTagNameNS var="itemList" obj="doc" namespaceURI='"*"' localName='"strong"' interface="Document"/>
+<item var="elementStrong" obj="itemList" index="0" interface="NodeList"/>
+<firstChild var="textNode" obj="elementStrong" interface="Node"/>
+<isElementContentWhitespace obj="textNode" var="hasWhitespace"/>
+<assertTrue actual="hasWhitespace" id="domconfigurationsetparameter06_3"/>
+</test>
