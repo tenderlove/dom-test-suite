@@ -11,30 +11,39 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 --><!DOCTYPE test SYSTEM "dom1.dtd">
 
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_elementnormalize">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="hc_elementnormalize2">
 <metadata>
-<title>hc_elementnormalize</title>
+<title>hc_elementnormalize2</title>
 <creator>Curt Arnold</creator>
 <description>
-   Normalize the document element and check that the third var element has
-   been changed to a single text node.
+Add an empty text node to an existing attribute node, normalize the containing element
+and check that the attribute node has eliminated the empty text.
 </description>
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083"/>
 </metadata>
+<hasFeature feature="XML"/>
 <var name="doc" type="Document"/>
 <var name="root" type="Element"/>
 <var name="elementList" type="NodeList"/>
-<var name="testName" type="Element"/>
+<var name="element" type="Element"/>
 <var name="firstChild" type="Node"/>
+<var name="secondChild" type="Node"/>
 <var name="childValue" type="DOMString"/>
+<var name="emptyText" type="TextNode"/>
+<var name="attrNode" type="Attr"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <documentElement obj="doc" var="root"/>
-<normalize obj="root"/>
-<getElementsByTagName interface="Element" obj="root" tagname='"var"' var="elementList"/>
-<item interface="NodeList" obj="elementList" index="2" var="testName"/>
-<firstChild interface="Node" obj="testName" var="firstChild"/>
+<createTextNode var="emptyText" obj="doc"/>
+<getElementsByTagName interface="Element" obj="root" tagname='"acronym"' var="elementList"/>
+<item interface="NodeList" obj="elementList" index="0" var="element"/>
+<getAttributeNode var="attrNode" obj="element" name='"title"'/>
+<appendChild var="retval" obj="attrNode" newChild="emptyText"/>
+<normalize obj="element"/>
+<firstChild interface="Node" obj="element" var="firstChild"/>
 <nodeValue obj="firstChild" var="childValue"/>
-<assertEquals actual="childValue" expected='"&#948;"' id="elementNormalizeAssert" ignoreCase="false"/>
+<assertEquals actual="childValue" expected='"Yes"' id="firstChild" ignoreCase="false"/>
+<nextSibling var="secondChild" obj="firstChild" interface="Node"/>
+<assertNull actual="secondChild" id="secondChildNull"/>
 </test>
