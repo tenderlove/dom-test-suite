@@ -32,12 +32,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="testNode" type="Node"/>
 <var name="vform" type="DOMString"/>
 <var name="fNode" type="HTMLFormElement"/>
-<var name="doc" type="Node"/>
+<var name="doc" type="Document"/>
 <load var="doc" href="label" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname="&quot;label&quot;"/>
 <assertSize collection="nodeList" size="2" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <form interface="HTMLLabelElement" obj="testNode" var="fNode"/>
-<name interface="HTMLFormElement" obj="fNode" var="vform"/>
+<id obj="fNode" var="vform"/>
 <assertEquals actual="vform" expected="&quot;form1&quot;" id="formLink" ignoreCase="false"/>
 </test>
