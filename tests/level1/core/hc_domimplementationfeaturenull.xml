@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -32,6 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7"/>
 <subject resource="http://www.w3.org/2000/11/DOM-Level-2-errata#core-14"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=245"/>
 </metadata>
 <implementationAttribute name="hasNullString" value="true"/>
 <var name="doc" type="Document"/>
@@ -40,6 +41,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="false"/>
 <implementation obj="doc" var="domImpl"/>
 <!--  version (omitted) = null   -->
+<if><contentType type="text/html"/>
+<hasFeature obj="domImpl" var="state" feature='"HTML"'/>
+<assertTrue actual="state" id="supports_HTML_null"/>
+<else>
 <hasFeature obj="domImpl" var="state" feature='"XML"'/>
-<assertTrue actual="state" id="hasXMLnull"/>
+<assertTrue actual="state" id="supports_XML_null"/>
+</else>
+</if>
 </test>
