@@ -31,7 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </description>
 <contributor>Rick Rivello</contributor>
 <date qualifier="created">2002-05-01</date>
-<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-"/>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-21069976"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
