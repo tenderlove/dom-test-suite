@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.64  2002-06-29 18:40:01  dom-ts-4
+Revision 1.65  2002-06-29 19:13:33  dom-ts-4
+Bad copy task
+
+Revision 1.64  2002/06/29 18:40:01  dom-ts-4
 Added dom1-[core|html]-validate-files and DOMTSApplet
 
 Revision 1.63  2002/06/25 06:59:26  dom-ts-4
@@ -929,7 +932,7 @@ All implementation conditions combined into implementationAttribute element
     </copy>
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
     <copy todir="${build.dir}/level1/html/ecmascript/tests/applets/org/w3c/domts">
-        <fileset dir="java/applets/org/w3c/domts/DOMTSApplet.class"/>
+        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
     </copy>
        
 
