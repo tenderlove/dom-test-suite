@@ -48,7 +48,7 @@ is false.
 <if><isTrue value="canSet"/>
 <setParameter obj="domConfig" name='"disallow-doctype"' value="true"/>
 <setParameter obj="domConfig" name='"error-handler"' value="errorMonitor"/>
-<getResourceURI var="resourceURI" href='"barfoo"' contentType="text/xml"/>
+<getResourceURI var="resourceURI" href='"test3"' contentType="text/xml"/>
 <assertLSException id="throw_PARSE_ERR">
 	<PARSE_ERR>
 		<parseURI var="doc" obj="lsParser" uri="resourceURI"/>
