@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.39  2001-12-10 05:37:20  dom-ts-4
+Revision 1.40  2001-12-10 17:15:20  dom-ts-4
+URL for DOM Level 2 HTML updated
+
+Revision 1.39  2001/12/10 05:37:20  dom-ts-4
 Added xml_alltests, svg_alltests, and html_alltests suites to run all tests
 using a particular content type.
 
@@ -418,7 +421,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
 	<mkdir dir="${specs.dir}"/>
 	<mkdir dir="${specs.dir}/Level-2"/>
-	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-2-HTML-20011207/DOM2-HTML.zip"
+	<get src="http://www.w3.org/TR/2001/WD-DOM-Level-2-HTML-20011210/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
 		usetimestamp="yes"/>
 </target>
