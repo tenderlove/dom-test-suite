@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.63  2004-02-17 05:39:21  dom-ts-4
+Revision 1.64  2004-02-17 16:57:58  dom-ts-4
+Refined criteria for detection of doubles in list members (bug 532)
+
+Revision 1.63  2004/02/17 05:39:21  dom-ts-4
 normalization error instrumentation and req NS awareness (bug 531)
 
 Revision 1.62  2004/02/09 21:41:14  dom-ts-4
@@ -931,7 +934,7 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
                     	<xsl:text>new Double(Double.POSITIVE_INFINITY)</xsl:text>
                     </xsl:when>
                     <!--  if value is declared as a double or looks like a double   -->
-                    <xsl:when test="@type = 'double' or contains(text(), '.')">
+                    <xsl:when test="@type = 'double' or (substring(text(), 1, 1) != '&quot;' and contains(text(), '.'))">
                         <xsl:text>new Double(</xsl:text>
                         <xsl:value-of select="text()"/>
                         <xsl:text>)</xsl:text>
