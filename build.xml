@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.30  2001-11-01 15:02:50  dom-ts-4
+Revision 1.31  2001-11-01 16:41:05  dom-ts-4
+Added dom2-core-doxygen, updated usage
+
+Revision 1.30  2001/11/01 15:02:50  dom-ts-4
 Doxygen and Avalon support
 
 Revision 1.29  2001/10/30 06:03:39  dom-ts-4
@@ -109,11 +112,22 @@ All implementation conditions combined into implementationAttribute element
 <project default="usage" basedir=".">
 
 <target name="usage">
-	<echo message="domconftest build"/>
-	<echo message=""/>
 	<echo message="common targets:"/>
-    <echo message="usage - shows this message"/>
-    <echo message="clean - deletes all generated files"/>
+    <echo message="usage                displays this message"/>
+    <echo message="clean                deletes all generated files"/>
+    <echo message="junit-run            builds JUnit adapter for DOM Tests for Java"/>
+    <echo message="avalon-run           builds Avalon Testlet adapter for DOM tests"/>
+    <echo message="dom1-core-jar        builds DOM Level 1 Core tests for Java"/>
+    <echo message="dom1-schema          builds W3C XML Schema for DOM 1 tests"/>
+    <echo message="dom1-core-matrix     builds test matrix for DOM Level 1 Core"/>
+    <echo message="dom1-core-validate-tests"/>
+    <echo message="                     validates DOM Level 1 Core tests against DTD"/>
+    <echo message="dom1-core-gen-ecmascript"/>
+    <echo message="                     builds DOM Level 1 Core tests for ECMAScript"/>
+    <echo message="dom1-core-gen-jsunit"/>
+    <echo message="                     builds JSUnit adapters for DOM Level 1 Core"/>
+    <echo message="dom1-core-doxygen    builds documentation for DOM Level 1 Core"/>
+    <echo message="dom2-core-*          Same as above but for DOM Level 2 Core"/>
 	<echo message=""/>
 </target>
 
@@ -576,24 +590,16 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom1-core-doxygen" depends="dom1-core-gen-java">
-    <mkdir dir="${build.dir}/doxygen"/>
+    <mkdir dir="${build.dir}/doxygen/level1"/>
 
-    <!--   These next steps tend to time out   -->
-
-    <!--
-	<get src="ftp://ftp.stack.nl/pub/users/dimitri/doxygen-1.2.11.windows.bin.zip"
-	     dest="${lib.dir}/doxygen.zip"
-	     usetimestamp="yes"/>
-
-	<unzip src="${lib.dir}/doxygen.zip" dest="${lib.dir}"/>
-    -->
-
-    <exec executable="${lib.dir}/doxygen-1.2.11/bin/doxygen">
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
         <arg line="dom1-core.doxygen"/>
     </exec>
 
     <zip zipfile="${dist.dir}/dom1-core-doxygen.zip"
-         basedir="${build.dir}/doxygen/html"/>
+         basedir="${build.dir}/doxygen/level1/html"/>
 
 </target>
 
@@ -660,6 +666,20 @@ All implementation conditions combined into implementationAttribute element
 	</jar>
 </target>
 
+
+<target name="dom2-core-doxygen" depends="dom2-core-gen-java">
+    <mkdir dir="${build.dir}/doxygen/level2"/>
+
+    <!--  doxygen must be on path  
+          download from http://www.doxygen.org    -->
+    <exec executable="doxygen">
+        <arg line="dom2-core.doxygen"/>
+    </exec>
+
+    <zip zipfile="${dist.dir}/dom2-core-doxygen.zip"
+         basedir="${build.dir}/doxygen/level2/html"/>
+
+</target>
 
 
 
