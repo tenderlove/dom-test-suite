@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.26  2002-08-13 04:46:44  dom-ts-4
+Revision 1.27  2002-11-26 07:17:24  dom-ts-4
+Fixed improper placement of a few xsl:param elements.
+
+Revision 1.26  2002/08/13 04:46:44  dom-ts-4
 Added intermediate get and set elements for attributes
 on user implemented interfaces
 Other load-save support
@@ -803,8 +806,8 @@ import java.util.*;
 
 <xsl:template match="*[local-name()='assertTrue']" mode="body">
     <xsl:param name="vardefs"/>
-	<xsl:value-of select="@var"/>
 	<xsl:param name="type"/>
+	<xsl:value-of select="@var"/>
 	<xsl:choose>
 		<xsl:when test="@actual">
 			<xsl:text>assertTrue("</xsl:text>
@@ -853,8 +856,8 @@ import java.util.*;
 
 <xsl:template match="*[local-name()='assertFalse']" mode="body">
     <xsl:param name="vardefs"/>
-	<xsl:value-of select="@var"/>
 	<xsl:param name="type"/>
+	<xsl:value-of select="@var"/>
 	<xsl:choose>
 		<xsl:when test="@actual">
 			<xsl:text>assertFalse("</xsl:text>
