@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.44  2003-11-10 07:34:13  dom-ts-4
+Revision 1.45  2003-11-18 08:39:58  dom-ts-4
+Fix Java production for attributes that start with is (bug 379)
+
+Revision 1.44  2003/11/10 07:34:13  dom-ts-4
 Update for 2003-11-07 CRs (bug 375)
 
 Revision 1.43  2003/10/24 17:10:16  dom-ts-4
@@ -1731,16 +1734,28 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:param name="attribute"/>
     <xsl:variable name="obj" select="@obj"/>
     <xsl:variable name="value" select="@value"/>
+    <!--  check if attribute name starts with is  -->
+    <xsl:variable name="startsWithIs" select="substring($attribute/@name, 1, 2) = 'is' and $attribute/@name != 'isMap' and contains('ABCDEFGHIJKLMNOPQRSTUVWXYZ', substring($attribute/@name, 3, 1))"/>
     <xsl:if test="@value">
         <xsl:call-template name="cast">
             <xsl:with-param name="var" select="$obj"/>
             <xsl:with-param name="vartype" select="$vardefs[@name = $obj]/@type"/>
             <xsl:with-param name="reqtype" select="$attribute/parent::interface/@name"/>
         </xsl:call-template>
-        <xsl:call-template name="build-accessor">
-            <xsl:with-param name="prefix">.set</xsl:with-param>
-            <xsl:with-param name="attribute" select="$attribute/@name"/>
-        </xsl:call-template>
+	<xsl:choose>
+	   <xsl:when test="$startsWithIs">ls ls /.
+        	<xsl:call-template name="build-accessor">
+            		<xsl:with-param name="prefix">.set</xsl:with-param>
+            		<xsl:with-param name="attribute" select="substring($attribute/@name, 3)"/>
+        	</xsl:call-template>
+           </xsl:when>
+	   <xsl:otherwise>
+        	<xsl:call-template name="build-accessor">
+            		<xsl:with-param name="prefix">.set</xsl:with-param>
+            		<xsl:with-param name="attribute" select="$attribute/@name"/>
+        	</xsl:call-template>
+           </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>(</xsl:text>
             <xsl:call-template name="produce-param">
                 <xsl:with-param name="value" select="@value"/>
@@ -1764,10 +1779,20 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
             <xsl:with-param name="vartype" select="$vardefs[@name = $obj]/@type"/>
             <xsl:with-param name="reqtype" select="$attribute/parent::interface/@name"/>
         </xsl:call-template>
-        <xsl:call-template name="build-accessor">
-            <xsl:with-param name="prefix">.get</xsl:with-param>
-            <xsl:with-param name="attribute" select="$attribute/@name"/>
-        </xsl:call-template>
+        <xsl:choose>
+	     <xsl:when test="$startsWithIs">
+        	<xsl:call-template name="build-accessor">
+            		<xsl:with-param name="prefix">.is</xsl:with-param>
+            		<xsl:with-param name="attribute" select="substring($attribute/@name, 3)"/>
+        	</xsl:call-template>
+             </xsl:when>
+	     <xsl:otherwise>
+        	<xsl:call-template name="build-accessor">
+            		<xsl:with-param name="prefix">.get</xsl:with-param>
+            		<xsl:with-param name="attribute" select="$attribute/@name"/>
+        	</xsl:call-template>
+	     </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>();</xsl:text>
     </xsl:if>
 </xsl:template>
