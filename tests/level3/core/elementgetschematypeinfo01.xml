@@ -25,6 +25,8 @@ Call getSchemaTypeInfo on title attribute for the first "em" element from DTD va
 </description>
 <date qualifier="created">2004-01-11</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace"/>
 </metadata>
 <implementationAttribute name="validating" value="true"/>
 <var name="doc" type="Document"/>

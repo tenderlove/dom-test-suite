@@ -25,6 +25,8 @@ Element.schemaTypeInfo should return null if not validating or schema validating
 </description>
 <date qualifier="created">2004-02-14</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace"/>
 </metadata>
 <implementationAttribute name="validating" value="false"/>
 <var name="doc" type="Document"/>

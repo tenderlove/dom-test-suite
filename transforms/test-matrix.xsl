@@ -30,6 +30,7 @@ and combine-metadata.xsl
      <xsl:param name="doxySuffix">_8java-source.html</xsl:param>
      <xsl:param name="title">DOM Level 1 Core Test Suite Matrix</xsl:param>
      <xsl:param name="specVersion"></xsl:param>
+     <xsl:param name="excludeInterfaces"></xsl:param>
 
 	<xsl:output method="html"/>
 
@@ -38,7 +39,7 @@ and combine-metadata.xsl
 
     <xsl:variable name="interfacesDoc" select="document($interfacesURL,.)"/>
 
-    <xsl:variable name="interfaces" select="$interfacesDoc//interface[concat($specURI,@id) = $subjects/@rdf:about]"/>
+    <xsl:variable name="interfaces" select="$interfacesDoc//interface[concat($specURI,@id) = $subjects/@rdf:about and not(contains($excludeInterfaces, @name))]"/>
     <xsl:variable name="methods" select="$interfaces/method"/>
     <xsl:variable name="attributes" select="$interfaces/attribute"/>
     <xsl:variable name="descriptions" select="/rdf:RDF/rdf:Description"/>
@@ -56,7 +57,9 @@ and combine-metadata.xsl
 sorted alphabetically. 
 </p>
 
-                <xsl:variable name="untestedMethods" select="$methods[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion)]"/>
+                <xsl:variable name="untestedMethods" select="$methods[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and 
+                  (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion or ancestor::interface/@since = $specVersion) and
+                  not(contains($excludeInterfaces, ancestor::interface/@name))]"/>
                 <xsl:if test="$untestedMethods">
                     <table col="3" border="1">
                         <thead>Methods with no corresponding test metadata</thead>
@@ -67,7 +70,9 @@ sorted alphabetically.
                         </xsl:call-template>
                     </table>
                 </xsl:if>
-                <xsl:variable name="untestedAttributes" select="$attributes[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion)]"/>
+                <xsl:variable name="untestedAttributes" select="$attributes[not(concat($specURI,@id) = $descriptions/dc:subject/@rdf:resource) and 
+                       (string-length($specVersion) = 0 or @since= $specVersion or @version = $specVersion  or ancestor::interface/@since = $specVersion) and
+                       not(contains($excludeInterfaces, ancestor::interface/@name))]"/>
                 <xsl:if test="$untestedAttributes">
                     <table col="3" border="1">
                         <thead>Attributes with no corresponding test metadata</thead>

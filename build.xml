@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.131  2004-02-26 22:53:16  dom-ts-4
+Revision 1.132  2004-02-27 05:40:42  dom-ts-4
+Test matrix improvements (bug 575)
+
+Revision 1.131  2004/02/26 22:53:16  dom-ts-4
 Add 'canonical-form' parameter tests (bug 577)
 
 Revision 1.130  2004/02/26 15:08:08  dom-ts-4
@@ -2299,6 +2302,7 @@ All implementation conditions combined into implementationAttribute element
         <param name="specMetadataURL" expression="dom3-core-subjects.xml"/>
         <param name="title" expression='DOM Level 3 Core Test Suite Matrix'/>
         <param name="specVersion" expression="DOM Level 3"/>
+        <param name="excludeInterfaces" expression="NameList"/>
 	</style>
 </target>
 
