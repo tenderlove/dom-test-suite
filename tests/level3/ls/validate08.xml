@@ -25,8 +25,8 @@ Load a document with a DTD that doesn't match content, then attempt to serialize
 should result in a SERIALIZE_ERR.
 </description>
 <date qualifier="created">2004-04-01</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-parseURI"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-parseURI"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSSerializer-writeToString"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-validate"/>
 </metadata>
 <var name="doc" type="Document"/>

@@ -25,7 +25,7 @@
     <description>Tests a custom entity resolver. The entity resolver creates an input source that supplies 2 elt1 elements. The original entity reference referes to 1 elt1</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-LSResourceResolver-resolveResource"/>
-    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#parameter-resource-resolver"/>
+    <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#parameter-resource-resolver"/>
   </metadata>
   <implementationAttribute name="validating" value="true"/>
 

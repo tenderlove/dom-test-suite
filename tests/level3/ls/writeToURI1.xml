@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <description>Writes a document to a URL for a temporary file 
     using LSSerializer.writeToURI and rereads the document.</description>
 	<date qualifier="created">2003-12-30</date>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToURI"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSSerializer-writeToURI"/>
   </metadata>
   <implementationAttribute name="validating" value="false"/>
 

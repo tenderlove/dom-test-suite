@@ -25,8 +25,8 @@
     <description>DOM Builder Filter test, test whether incorrect node types are never passed to the filter.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-filter"/>    
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-acceptNode"/>    
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-filter"/>    
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParserFilter-acceptNode"/>    
   </metadata>
 
   <var name="resourceURI" type="DOMString"/>

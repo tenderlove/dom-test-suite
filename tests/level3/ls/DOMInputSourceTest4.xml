@@ -24,7 +24,7 @@
     &creator; 
     <description>tests whether DOMInput whether abort can be called even if loading is finished already</description> 
     &contributor; &date;
-    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParser-abort"/>
+    <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParser-abort"/>
   </metadata>
 
   <var name="elementList" type="NodeList"/>

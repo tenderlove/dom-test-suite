@@ -25,7 +25,7 @@
     <description>Checks that attributes are visible when elements are passed to LSParserFilter.startElement.</description> 
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-LSParserFilter"/>
-    <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSParserFilter-startElement"/>
+    <subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSParserFilter-startElement"/>
   </metadata>
   <var name="resourceURI" type="DOMString"/>
 

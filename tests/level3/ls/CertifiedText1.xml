@@ -23,8 +23,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <creator>Curt Arnold</creator>
     <description>Changes certifiedText on LSInput.</description>
 	<date qualifier="created">2003-12-08</date>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-DOMImplementationLS-createLSInput"/>
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSInput-certifiedText"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-DOMImplementationLS-createLSInput"/>
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSInput-certifiedText"/>
   </metadata>
   <var name="domImpl" type="DOMImplementationLS"/>
   <var name="input" type="LSInput"/>

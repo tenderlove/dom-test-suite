@@ -24,9 +24,9 @@
     &creator; 
     <description>Eliminates comments on serialization, parses results and checks for comments.</description> 
     &contributor; &date;
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-LSSerializerFilter"/>    
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-acceptNode"/>    
-	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializerFilter-whatToShow"/>    	
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSSerializer-LSSerializerFilter"/>    
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSSerializerFilter-acceptNode"/>    
+	<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSSerializerFilter-whatToShow"/>    	
   </metadata>
 
 

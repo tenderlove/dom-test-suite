@@ -25,7 +25,7 @@ CDATASections containing unrepresentable characters raise a SERIALIZE_ERR when
 split-cdata-sections is false and well-formed is true.
 </description>
 <date qualifier="created">2004-03-31</date>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-LS-20031107/load-save#LS-LSSerializer-writeToString"/>
+<subject resource="http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407/load-save#LS-LSSerializer-writeToString"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections"/>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed"/>
 </metadata>
@@ -73,4 +73,4 @@ split-cdata-sections is false and well-formed is true.
 <assertTrue id="hasWfErrors"><greater actual="errorCount" expected="0"/></assertTrue>
 </test> 
  
- 
+
