@@ -42,21 +42,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="name" type="DOMString"/>
 <var name="child" type="Node"/>
 <var name="value" type="DOMString"/>
-<var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"emp:address"</member>
-<member>"27 South Road. Dallas, texas 98556"</member>
-</var>
-<load var="doc" href="staff.xml" willBeModified="false"/>
-<load var="aNewDoc" href="staff.xml" willBeModified="false"/>
-<getElementById interface="Document" obj="aNewDoc" var="element" elementId="&quot;CANADA&quot;"/>
+<load var="doc" href="staffNS.xml" willBeModified="false"/>
+<load var="aNewDoc" href="staffNS.xml" willBeModified="false"/>
+<getElementById interface="Document" obj="aNewDoc" var="element" elementId='"CANADA"'/>
 <importNode obj="doc" var="aNode" importedNode="element" deep="true"/>
 <hasChildNodes obj="aNode" var="hasChild"/>
 <assertTrue actual="hasChild" id="throw_True"/>
 <nodeName obj="aNode" var="name"/>
-<append collection="result" obj="name"/>
+<assertEquals actual="name" expected='"emp:address"' id="nodeName" ignoreCase="false"/>
 <firstChild interface="Node" obj="aNode" var="child"/>
 <nodeValue obj="child" var="value"/>
-<append collection="result" obj="value"/>
-<assertEquals actual="result" expected="expectedResult" id="throw_Equals" ignoreCase="false"/>
+<assertEquals actual="value" expected='"27 South Road. Dallas, texas 98556"' id="nodeValue" ignoreCase="false"/>
 </test>
