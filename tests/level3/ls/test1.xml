@@ -17,26 +17,24 @@
   &vars;
 
   <var name="myfilter"         type="DOMBuilderFilter"> 
-
-     <var name='show_element'    type='long'     value='SHOW_ELEMENT'/>
-     <var name='filter_reject'   type='short'    value='FILTER_REJECT'/>
-     <var name='filter_accept'   type='short'    value='FILTER_ACCEPT'/>
      <var name="name"            type="String"/>
 
      <startElement elt="element">
         <nodeName var="name" obj="element"/>
         <if>
-            <equals actual="name" expected="&quot;elt2&quot;" ignoreCase="false"/>
-            <return value="filter_reject"/>            
+            <equals actual="name" expected='"elt2"' ignoreCase="false"/>
+            <return value="&FILTER_REJECT;"/>            
           <else>
-            <return value="filter_accept"/>            
+            <return value="&FILTER_ACCEPT;"/>            
           </else>
         </if>
      </startElement>
 
 
      <acceptNode/>
-     <whatToShow obj="xxx" var="show_element" interface="DOMBuilderFilter"/>            
+     <whatToShow>            
+        <return value="&SHOW_ELEMENT;"/>
+     </whatToShow>
 
   </var>
 
