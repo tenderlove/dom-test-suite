@@ -1,4 +1,5 @@
 <?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!-- 
  Copyright (c) 2003 X-Hive Corporation
 
@@ -34,7 +35,7 @@
   &init;
 
   
-  <byteStream var="inputSource" obj="myByteStream"/> 
+  <byteStream obj="inputSource" var="myByteStream"/> 
 
   <parse var="document" obj="builder" is="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>

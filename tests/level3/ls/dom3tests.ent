@@ -43,7 +43,7 @@
 
 <!ENTITY filterVars  "
                       <var name='SHOW_ELEMENT'      type='int'    value='1'/>
-                      <var name='SHOW_ALL'          type='int'    value='0xFFFFFFFF'/>
+                      <var name='SHOW_ALL'          type='int'    value='65535'/>
                       <var name='FILTER_ACCEPT'     type='short'  value='1'/>
                       <var name='FILTER_REJECT'     type='short'  value='2'/>
                       <var name='FILTER_SKIP'       type='short'  value='3'/>

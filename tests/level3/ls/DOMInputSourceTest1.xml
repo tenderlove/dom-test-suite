@@ -1,4 +1,5 @@
 <?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!-- 
  Copyright (c) 2003 X-Hive Corporation
 
@@ -17,7 +18,7 @@
 ]>
 
 
-<test xmlns="&level3;" name="DOMInputSourceTest0">
+<test xmlns="&level3;" name="DOMInputSourceTest1">
   <metadata>
     <title>DOMInputSource</title>
     &creator; 
@@ -25,16 +26,16 @@
     &contributor; &date;
     <subject resource="&spec;#LS-Interfaces-DOMInputSource"/>
   </metadata>
-  &vars;
-
   <!-- todo create reader -->
   <var name="myReader" type="DOMReader"/>
   <var name="elementList" type="NodeList"/>
+  &vars;
+
 
   &init;
 
   
-  <characterStream var="inputSource" obj="myReader"/> 
+  <characterStream obj="inputSource" var="myReader"/> 
 
   <parse var="document" obj="builder" is="inputSource"/>
   <getElementsByTagName interface="Document" obj="document" tagname="&quot;elt0&quot;" var="elementList"/>

@@ -1,4 +1,7 @@
 <?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
+<!DOCTYPE test SYSTEM "dom3.dtd">
+
 <!--   MSV was having a problem with the entities 
          so I expanded them for my personal convienience    -->
 <!--   test name was not the same as the file name   -->

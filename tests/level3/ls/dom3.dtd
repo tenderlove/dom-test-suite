@@ -23,40 +23,40 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ENTITY % condition "same|equals|notEquals|less|lessOrEquals|greater|greaterOrEquals|isNull|notNull|and|or|xor|instanceOf|isTrue|isFalse|hasSize|contentType|contains| %implementation-condition;">
 
 <!ENTITY % assertion "%framework-assertion;| assertDOMException| assertEventException| assertExceptionVAL| assertXPathException| assertRangeException" >
-<!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor|Attr|CDATASection|CharacterData|CharacterDataEditVAL|Comment|CustomEvent|Document|DocumentEditVAL|DocumentEvent|DocumentFragment|DocumentLS|DocumentRange|DocumentTraversal|DocumentType|DOMBuilder|DOMBuilderFilter|DOMConfiguration|DOMEntityResolver|DOMError|DOMErrorHandler|DOMImplementation|DOMImplementationList|DOMImplementationLS|DOMImplementationSource|DOMInputSource|DOMLocator|DOMStringList|DOMWriter|DOMWriterFilter|Element|ElementEditVAL|ElementLS|Entity|EntityReference|Event|EventListener|EventListenerGroup|EventTarget|LSLoadEvent|LSProgressEvent|MouseEvent|MutationEvent|NamedNodeMap|NameList|Node|NodeEditVAL|NodeFilter|NodeIterator|NodeList|Notation|ProcessingInstruction|Range|StringExtend|Text|TreeWalker|TypeInfo|UIEvent|UserDataHandler|XPathEvaluator|XPathExpression|XPathNamespace|XPathNSResolver|XPathResult">
-<!ENTITY % statement "%framework-statement;|%assertion; | actualEncoding | altKey | async | attrChange | attributes | attrName | baseURI | booleanValue | bubbles | busy | button | byteStream | cancelable | characterStream | childNodes | clientX | clientY | collapsed | columnNumber | commonAncestorContainer | config | continuousValidityChecking | ctrlKey | currentNode | currentTarget | data | definedElementTypes | detail | doctype | documentElement | documentURI | encoding | endContainer | endOffset | entities | entityResolver | errorHandler | eventPhase | expandEntityReferences | filter | firstChild | implementation | inputSource | internalSubset | invalidIteratorState | isWhitespaceOnly | lastChild | length | lineNumber | localName | location | markupContent | message | metaKey | name | namespaceURI | newDocument | newLine | newValue | nextSibling | nodeName | nodeType | nodeValue | notationName | notations | numberValue | offset | ownerDocument | ownerElement | parentNode | position | prefix | previousSibling | prevValue | publicId | relatedData | relatedException | relatedNode | relatedTarget | resultType | root | schemaTypeInfo | screenX | screenY | severity | shiftKey | singleNodeValue | snapshotLength | specified | standalone | startContainer | startOffset | strictErrorChecking | stringData | stringValue | systemId | tagName | target | textContent | timeStamp | totalSize | type | typeName | typeNamespace | uri | value | version | view | whatToShow | wholeText | abort | acceptNode | addEventListener | addEventListenerNS | adoptNode | appendChild | appendData | canAppendChild | canAppendData | canDeleteData | canInsertBefore | canInsertData | canRemoveAttribute | canRemoveAttributeNode | canRemoveAttributeNS | canRemoveChild | canReplaceChild | canReplaceData | canSetAttribute | canSetAttributeNode | canSetAttributeNS | canSetData | canSetParameter | canTriggerNS | cloneContents | cloneNode | cloneRange | collapse | compareBoundaryPoints | compareDocumentPosition | contentType | createAttribute | createAttributeNS | createCDATASection | createComment | createDocument | createDocumentFragment | createDocumentType | createDOMBuilder | createDOMInputSource | createDOMWriter | createElement | createElementNS | createEntityReference | createEvent | createEventListenerGroup | createExpression | createNodeIterator | createNSResolver | createProcessingInstruction | createRange | createTextNode | createTreeWalker | deleteContents | deleteData | detach | dispatchEvent | evaluate | extractContents | findOffset16 | findOffset32 | getAttribute | getAttributeList | getAttributeNode | getAttributeNodeNS | getAttributeNS | getChildElements | getDOMImplementation | getDOMImplementations | getElementById | getElementsByTagName | getElementsByTagNameNS | getInterface | getName | getNamedItem | getNamedItemNS | getNamespaceURI | getParameter | getParentElements | getUserData | handle | handleError | hasAttribute | hasAttributeNS | hasAttributes | hasChildNodes | hasFeature | importNode | initEvent | initEventNS | initMouseEvent | initMouseEventNS | initMutationEvent | initMutationEventNS | initUIEvent | initUIEventNS | insertBefore | insertData | insertNode | isDefaultNamespace | isElementDefined | isElementDefinedNS | isEqualNode | isId | isNodeValid | isRegisteredHereNS | isSameEventListenerGroup | isSameNode | isSupported | isWhitespaceInElementContent | item | iterateNext | load | loadXML | lookupNamespaceURI | lookupPrefix | nextNode | normalize | normalizeDocument | parse | parseURI | parseWithContext | preventDefault | previousNode | removeAttribute | removeAttributeNode | removeAttributeNS | removeChild | removeEventListener | removeEventListenerNS | removeNamedItem | removeNamedItemNS | renameNode | replaceChild | replaceData | replaceWholeText | resolveEntity | saveXML | selectNode | selectNodeContents | setAttribute | setAttributeNode | setAttributeNodeNS | setAttributeNS | setCurrentTarget | setEnd | setEndAfter | setEndBefore | setEventPhase | setIdAttribute | setIdAttributeNode | setIdAttributeNS | setNamedItem | setNamedItemNS | setParameter | setStart | setStartAfter | setStartBefore | setUserData | snapshotItem | splitText | startElement | stopPropagation | substringData | surroundContents | toString | validateInDocument | writeNode | writeToString ">
+<!ENTITY % variable-type "int|short|boolean|DOMString|List|Collection|EventMonitor|DOMInputStream|DOMOutputStream|DOMReader|Attr|CDATASection|CharacterData|CharacterDataEditVAL|Comment|CustomEvent|Document|DocumentEditVAL|DocumentEvent|DocumentFragment|DocumentLS|DocumentRange|DocumentTraversal|DocumentType|DOMBuilder|DOMBuilderFilter|DOMConfiguration|DOMEntityResolver|DOMError|DOMErrorHandler|DOMImplementation|DOMImplementationList|DOMImplementationLS|DOMImplementationSource|DOMInputSource|DOMLocator|DOMStringList|DOMWriter|DOMWriterFilter|Element|ElementEditVAL|ElementLS|Entity|EntityReference|Event|EventListener|EventListenerGroup|EventTarget|LSLoadEvent|LSProgressEvent|MouseEvent|MutationEvent|NamedNodeMap|NameList|Node|NodeEditVAL|NodeFilter|NodeIterator|NodeList|Notation|ProcessingInstruction|Range|RangeVAL|StringExtend|Text|TreeWalker|TypeInfo|UIEvent|UserDataHandler|XPathEvaluator|XPathExpression|XPathNamespace|XPathNSResolver|XPathResult">
+<!ENTITY % statement "%framework-statement;|%assertion; | actualEncoding | allowedAttributes | allowedChildren | allowedNextSiblings | allowedParents | allowedPreviousSiblings | altKey | async | attrChange | attributes | attrName | baseURI | booleanValue | bubbles | busy | button | byteStream | cancelable | characterStream | childNodes | clientX | clientY | collapsed | columnNumber | commonAncestorContainer | config | continuousValidityChecking | ctrlKey | currentNode | currentTarget | data | defaultValue | detail | doctype | documentElement | documentURI | encoding | endContainer | endOffset | entities | enumeratedValues | eventPhase | expandEntityReferences | filter | firstChild | implementation | inputSource | internalSubset | invalidIteratorState | isWhitespaceOnly | lastChild | length | lineNumber | localName | location | markupContent | message | metaKey | name | namespaceURI | newDocument | newLine | newValue | nextSibling | nodeName | nodeType | nodeValue | notationName | notations | numberValue | offset | ownerDocument | ownerElement | parentNode | position | prefix | previousSibling | prevValue | publicId | relatedData | relatedException | relatedNode | relatedTarget | requiredAttributes | resultType | root | schemaTypeInfo | screenX | screenY | severity | shiftKey | singleNodeValue | snapshotLength | specified | standalone | startContainer | startOffset | strictErrorChecking | stringData | stringValue | systemId | tagName | target | textContent | timeStamp | totalSize | type | typeName | typeNamespace | uri | value | version | view | whatToShow | wholeText | abort | acceptNode | addEventListener | addEventListenerNS | adoptNode | appendChild | appendData | canAppendChild | canAppendData | canDeleteData | canInsertBefore | canInsertData | canRemoveAttribute | canRemoveAttributeNode | canRemoveAttributeNS | canRemoveChild | canReplaceChild | canReplaceData | canSetAttribute | canSetAttributeNode | canSetAttributeNS | canSetData | canSetParameter | canSurroundContents | canTriggerNS | cloneContents | cloneNode | cloneRange | collapse | compareBoundaryPoints | compareDocumentPosition | contentType | createAttribute | createAttributeNS | createCDATASection | createComment | createDocument | createDocumentFragment | createDocumentType | createDOMBuilder | createDOMInputSource | createDOMWriter | createElement | createElementNS | createEntityReference | createEvent | createEventListenerGroup | createExpression | createNodeIterator | createNSResolver | createProcessingInstruction | createRange | createTextNode | createTreeWalker | deleteContents | deleteData | detach | dispatchEvent | evaluate | extractContents | findOffset16 | findOffset32 | getAlternativeElements | getAttribute | getAttributeNode | getAttributeNodeNS | getAttributeNS | getDefinedElementTypes | getDOMImplementation | getDOMImplementations | getElementById | getElementsByTagName | getElementsByTagNameNS | getFeature | getName | getNamedItem | getNamedItemNS | getNamespaceURI | getParameter | getUserData | handle | handleError | hasAttribute | hasAttributeNS | hasAttributes | hasChildNodes | hasFeature | importNode | initEvent | initEventNS | initMouseEvent | initMouseEventNS | initMutationEvent | initMutationEventNS | initUIEvent | initUIEventNS | insertBefore | insertData | insertNode | isDefaultNamespace | isElementDefined | isElementDefinedNS | isEqualNode | isId | isNodeValid | isRegisteredHereNS | isSameEventListenerGroup | isSameNode | isSupported | isWhitespaceInElementContent | item | iterateNext | load | loadXML | lookupNamespaceURI | lookupPrefix | nextNode | normalize | normalizeDocument | parse | parseURI | parseWithContext | preventDefault | previousNode | removeAttribute | removeAttributeNode | removeAttributeNS | removeChild | removeEventListener | removeEventListenerNS | removeNamedItem | removeNamedItemNS | renameNode | replaceChild | replaceData | replaceWholeText | resolveEntity | saveXML | selectNode | selectNodeContents | setAttribute | setAttributeNode | setAttributeNodeNS | setAttributeNS | setCurrentTarget | setEnd | setEndAfter | setEndBefore | setEventPhase | setIdAttribute | setIdAttributeNode | setIdAttributeNS | setNamedItem | setNamedItemNS | setParameter | setStart | setStartAfter | setStartBefore | setUserData | snapshotItem | splitText | startElement | stopPropagation | substringData | surroundContents | toString | validateDocument | writeNode | writeToString ">
 <!ELEMENT assertDOMException (metadata?,(INDEX_SIZE_ERR|DOMSTRING_SIZE_ERR|HIERARCHY_REQUEST_ERR|WRONG_DOCUMENT_ERR|INVALID_CHARACTER_ERR|NO_DATA_ALLOWED_ERR|NO_MODIFICATION_ALLOWED_ERR|NOT_FOUND_ERR|NOT_SUPPORTED_ERR|INUSE_ATTRIBUTE_ERR|INVALID_STATE_ERR|SYNTAX_ERR|INVALID_MODIFICATION_ERR|NAMESPACE_ERR|INVALID_ACCESS_ERR|VALIDATION_ERR))>
 <!ATTLIST assertDOMException id ID #REQUIRED>
 <!ELEMENT assertEventException (metadata?,(UNSPECIFIED_EVENT_TYPE_ERR))>
 <!ATTLIST assertEventException id ID #REQUIRED>
-<!ELEMENT assertExceptionVAL (metadata?,(NO_GRAMMAR_AVAILABLE|VALIDATION_ERR))>
+<!ELEMENT assertExceptionVAL (metadata?,(NO_GRAMMAR_AVAILABLE_ERR))>
 <!ATTLIST assertExceptionVAL id ID #REQUIRED>
 <!ELEMENT assertXPathException (metadata?,(INVALID_EXPRESSION_ERR|TYPE_ERR))>
 <!ATTLIST assertXPathException id ID #REQUIRED>
 <!ELEMENT assertRangeException (metadata?,(BAD_BOUNDARYPOINTS_ERR|INVALID_NODE_TYPE_ERR))>
 <!ATTLIST assertRangeException id ID #REQUIRED>
 <!ELEMENT INDEX_SIZE_ERR ( getName | getNamespaceURI | substringData | insertData | deleteData | replaceData | splitText | setStart | setEnd )  >
-<!ELEMENT DOMSTRING_SIZE_ERR ( nodeValue | textContent | data | substringData | writeToString )  >
+<!ELEMENT DOMSTRING_SIZE_ERR ( data | nodeValue | textContent | substringData | writeToString )  >
 <!ELEMENT HIERARCHY_REQUEST_ERR ( insertBefore | replaceChild | appendChild | setNamedItem | setNamedItemNS | extractContents | cloneContents | insertNode | surroundContents )  >
 <!ELEMENT WRONG_DOCUMENT_ERR ( createDocument | renameNode | insertBefore | replaceChild | appendChild | setNamedItem | setNamedItemNS | setAttributeNode | setAttributeNodeNS | saveXML | evaluate | evaluate | compareBoundaryPoints | insertNode | surroundContents )  >
 <!ELEMENT INVALID_CHARACTER_ERR ( prefix | createDocumentType | createDocument | createElement | createProcessingInstruction | createAttribute | createEntityReference | importNode | createElementNS | createAttributeNS | setAttribute | setAttributeNS )  >
 <!ELEMENT NO_DATA_ALLOWED_ERR EMPTY  >
-<!ELEMENT NO_MODIFICATION_ALLOWED_ERR ( nodeValue | prefix | textContent | data | value | data | adoptNode | insertBefore | replaceChild | removeChild | appendChild | setNamedItem | removeNamedItem | setNamedItemNS | removeNamedItemNS | appendData | insertData | deleteData | replaceData | setAttribute | removeAttribute | setAttributeNode | removeAttributeNode | setAttributeNS | removeAttributeNS | setAttributeNodeNS | setIdAttribute | setIdAttributeNS | setIdAttributeNode | splitText | replaceWholeText | parseWithContext | deleteContents | extractContents | insertNode | surroundContents )  >
+<!ELEMENT NO_MODIFICATION_ALLOWED_ERR ( data | data | nodeValue | prefix | textContent | value | adoptNode | insertBefore | replaceChild | removeChild | appendChild | setNamedItem | removeNamedItem | setNamedItemNS | removeNamedItemNS | appendData | insertData | deleteData | replaceData | setAttribute | removeAttribute | setAttributeNode | removeAttributeNode | setAttributeNS | removeAttributeNS | setAttributeNodeNS | setIdAttribute | setIdAttributeNS | setIdAttributeNode | splitText | replaceWholeText | parseWithContext | deleteContents | extractContents | insertNode | surroundContents )  >
 <!ELEMENT NOT_FOUND_ERR ( insertBefore | replaceChild | removeChild | removeNamedItem | removeNamedItemNS | removeAttributeNode | setIdAttribute | setIdAttributeNS | setIdAttributeNode | setParameter | getParameter )  >
-<!ELEMENT NOT_SUPPORTED_ERR ( version | async | currentNode | createDocumentType | createDocument | createCDATASection | createProcessingInstruction | createEntityReference | importNode | createElementNS | createAttributeNS | adoptNode | renameNode | insertBefore | replaceChild | removeChild | compareDocumentPosition | setNamedItemNS | setAttributeNS | setAttributeNodeNS | setParameter | createEvent | createDOMBuilder | parseWithContext | evaluate | evaluate | createNodeIterator | createTreeWalker )  >
+<!ELEMENT NOT_SUPPORTED_ERR ( async | currentNode | version | createDocumentType | createDocument | createCDATASection | createProcessingInstruction | createEntityReference | importNode | createElementNS | createAttributeNS | adoptNode | renameNode | insertBefore | replaceChild | removeChild | compareDocumentPosition | getNamedItemNS | setNamedItemNS | removeNamedItemNS | getAttributeNS | setAttributeNS | removeAttributeNS | getAttributeNodeNS | setAttributeNodeNS | getElementsByTagNameNS | hasAttributeNS | setParameter | createEvent | createDOMBuilder | parseWithContext | evaluate | evaluate | createNodeIterator | createTreeWalker )  >
 <!ELEMENT INUSE_ATTRIBUTE_ERR ( setNamedItem | setNamedItemNS | setAttributeNode | setAttributeNodeNS )  >
-<!ELEMENT INVALID_STATE_ERR ( startContainer | startOffset | endContainer | endOffset | collapsed | commonAncestorContainer | parse | parseURI | parseWithContext | iterateNext | nextNode | previousNode | setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | collapse | selectNode | selectNodeContents | compareBoundaryPoints | deleteContents | extractContents | cloneContents | insertNode | surroundContents | cloneRange | toString | detach )  >
+<!ELEMENT INVALID_STATE_ERR ( collapsed | commonAncestorContainer | endContainer | endOffset | startContainer | startOffset | parse | parseURI | parseWithContext | iterateNext | nextNode | previousNode | setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | collapse | selectNode | selectNodeContents | compareBoundaryPoints | deleteContents | extractContents | cloneContents | insertNode | surroundContents | cloneRange | toString | detach )  >
 <!ELEMENT SYNTAX_ERR EMPTY  >
 <!ELEMENT INVALID_MODIFICATION_ERR EMPTY  >
 <!ELEMENT NAMESPACE_ERR ( prefix | createDocumentType | createDocument | createElementNS | createAttributeNS | renameNode | setAttributeNS | createExpression | evaluate )  >
 <!ELEMENT INVALID_ACCESS_ERR EMPTY  >
-<!ELEMENT VALIDATION_ERR ( validateInDocument )  >
+<!ELEMENT VALIDATION_ERR EMPTY  >
 <!ELEMENT SEVERITY_ERROR EMPTY  >
 <!ELEMENT SEVERITY_FATAL_ERROR EMPTY  >
 <!ELEMENT UNSPECIFIED_EVENT_TYPE_ERR ( dispatchEvent )  >
-<!ELEMENT NO_GRAMMAR_AVAILABLE ( validateInDocument | isNodeValid )  >
+<!ELEMENT NO_GRAMMAR_AVAILABLE_ERR ( validateDocument | isNodeValid )  >
 <!ELEMENT INVALID_EXPRESSION_ERR ( createExpression | evaluate )  >
-<!ELEMENT TYPE_ERR ( numberValue | stringValue | booleanValue | singleNodeValue | snapshotLength | dispatchEvent | evaluate | evaluate | iterateNext | snapshotItem | setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | selectNode | selectNodeContents | insertNode | surroundContents )  >
+<!ELEMENT TYPE_ERR ( booleanValue | numberValue | singleNodeValue | snapshotLength | stringValue | dispatchEvent | evaluate | evaluate | iterateNext | snapshotItem | setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | selectNode | selectNodeContents | insertNode | surroundContents )  >
 <!ELEMENT BAD_BOUNDARYPOINTS_ERR ( surroundContents )  >
 <!ELEMENT INVALID_NODE_TYPE_ERR ( setStart | setEnd | setStartBefore | setStartAfter | setEndBefore | setEndAfter | selectNode | selectNodeContents | insertNode | surroundContents )  >
 
@@ -69,6 +69,46 @@ This schema was generated from  by dom-to-dtd.xsl.
     var CDATA #IMPLIED
     value CDATA #IMPLIED
     interface ( Document | Entity ) #REQUIRED>
+
+					
+<!ELEMENT allowedAttributes EMPTY>
+<!ATTLIST allowedAttributes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedChildren EMPTY>
+<!ATTLIST allowedChildren
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedNextSiblings EMPTY>
+<!ATTLIST allowedNextSiblings
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedParents EMPTY>
+<!ATTLIST allowedParents
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
+<!ELEMENT allowedPreviousSiblings EMPTY>
+<!ATTLIST allowedPreviousSiblings
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
 
 					
 <!ELEMENT altKey EMPTY>
@@ -85,7 +125,7 @@ This schema was generated from  by dom-to-dtd.xsl.
 	obj CDATA #REQUIRED
     var CDATA #IMPLIED
     value CDATA #IMPLIED
-    interface ( DocumentLS | DOMBuilder ) #REQUIRED>
+    interface ( DOMBuilder | DocumentLS ) #REQUIRED>
 
 					
 <!ELEMENT attrChange EMPTY>
@@ -278,12 +318,12 @@ This schema was generated from  by dom-to-dtd.xsl.
     interface ( CharacterData | ProcessingInstruction ) #REQUIRED>
 
 					
-<!ELEMENT definedElementTypes EMPTY>
-<!ATTLIST definedElementTypes
+<!ELEMENT defaultValue EMPTY>
+<!ATTLIST defaultValue
     id ID #IMPLIED
 	obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    interface ( ElementEditVAL ) #IMPLIED>
+    interface ( NodeEditVAL ) #IMPLIED>
 
 					
 <!ELEMENT detail EMPTY>
@@ -352,22 +392,12 @@ This schema was generated from  by dom-to-dtd.xsl.
     interface ( DocumentType ) #IMPLIED>
 
 					
-<!ELEMENT entityResolver EMPTY>
-<!ATTLIST entityResolver
+<!ELEMENT enumeratedValues EMPTY>
+<!ATTLIST enumeratedValues
     id ID #IMPLIED
 	obj CDATA #REQUIRED
-    var CDATA #IMPLIED
-    value CDATA #IMPLIED
-    interface ( DOMBuilder ) #IMPLIED>
-
-					
-<!ELEMENT errorHandler EMPTY>
-<!ATTLIST errorHandler
-    id ID #IMPLIED
-	obj CDATA #REQUIRED
-    var CDATA #IMPLIED
-    value CDATA #IMPLIED
-    interface ( DOMBuilder ) #IMPLIED>
+    var CDATA #REQUIRED
+    interface ( NodeEditVAL ) #IMPLIED>
 
 					
 <!ELEMENT eventPhase EMPTY>
@@ -409,7 +439,7 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
 	obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    interface ( LSLoadEvent | LSProgressEvent ) #REQUIRED>
+    interface ( LSProgressEvent | LSLoadEvent ) #REQUIRED>
 
 					
 <!ELEMENT internalSubset EMPTY>
@@ -709,6 +739,14 @@ This schema was generated from  by dom-to-dtd.xsl.
     interface ( MouseEvent ) #IMPLIED>
 
 					
+<!ELEMENT requiredAttributes EMPTY>
+<!ATTLIST requiredAttributes
+    id ID #IMPLIED
+	obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    interface ( ElementEditVAL ) #IMPLIED>
+
+					
 <!ELEMENT resultType EMPTY>
 <!ATTLIST resultType
     id ID #IMPLIED
@@ -966,7 +1004,7 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ATTLIST abort
     id ID #IMPLIED
     obj CDATA #REQUIRED
-    interface (DocumentLS|DOMBuilder) #REQUIRED
+    interface (DOMBuilder|DocumentLS) #REQUIRED
 >
 
 
@@ -1111,8 +1149,8 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    attrname CDATA #REQUIRED
     namespaceURI CDATA #REQUIRED
+    localName CDATA #REQUIRED
     interface (ElementEditVAL) #IMPLIED
 >
 
@@ -1176,9 +1214,9 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    name CDATA #REQUIRED
-    attrval CDATA #REQUIRED
     namespaceURI CDATA #REQUIRED
+    qualifiedName CDATA #REQUIRED
+    value CDATA #REQUIRED
     interface (ElementEditVAL) #IMPLIED
 >
 
@@ -1188,7 +1226,6 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    offset CDATA #REQUIRED
     arg CDATA #REQUIRED
     interface (CharacterDataEditVAL) #IMPLIED
 >
@@ -1202,6 +1239,18 @@ This schema was generated from  by dom-to-dtd.xsl.
     name CDATA #REQUIRED
     value CDATA #REQUIRED
     interface (DOMConfiguration) #IMPLIED
+>
+
+
+<!ELEMENT canSurroundContents EMPTY >
+<!ATTLIST canSurroundContents
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    node1 CDATA #REQUIRED
+    node2 CDATA #REQUIRED
+    b CDATA #REQUIRED
+    interface (RangeVAL) #IMPLIED
 >
 
 
@@ -1592,6 +1641,16 @@ This schema was generated from  by dom-to-dtd.xsl.
 >
 
 
+<!ELEMENT getAlternativeElements EMPTY >
+<!ATTLIST getAlternativeElements
+    id ID #IMPLIED
+    obj CDATA #REQUIRED
+    var CDATA #REQUIRED
+    refChild CDATA #REQUIRED
+    interface (RangeVAL) #IMPLIED
+>
+
+
 <!ELEMENT getAttribute EMPTY >
 <!ATTLIST getAttribute
     id ID #IMPLIED
@@ -1599,15 +1658,6 @@ This schema was generated from  by dom-to-dtd.xsl.
     var CDATA #REQUIRED
     name CDATA #REQUIRED
     interface (Element) #IMPLIED
->
-
-
-<!ELEMENT getAttributeList EMPTY >
-<!ATTLIST getAttributeList
-    id ID #IMPLIED
-    obj CDATA #REQUIRED
-    var CDATA #REQUIRED
-    interface (ElementEditVAL) #IMPLIED
 >
 
 
@@ -1643,12 +1693,13 @@ This schema was generated from  by dom-to-dtd.xsl.
 >
 
 
-<!ELEMENT getChildElements EMPTY >
-<!ATTLIST getChildElements
+<!ELEMENT getDefinedElementTypes EMPTY >
+<!ATTLIST getDefinedElementTypes
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    interface (ElementEditVAL) #IMPLIED
+    namespaceURI CDATA #REQUIRED
+    interface (DocumentEditVAL) #IMPLIED
 >
 
 
@@ -1703,12 +1754,13 @@ This schema was generated from  by dom-to-dtd.xsl.
 >
 
 
-<!ELEMENT getInterface EMPTY >
-<!ATTLIST getInterface
+<!ELEMENT getFeature EMPTY >
+<!ATTLIST getFeature
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
     feature CDATA #REQUIRED
+    version CDATA #REQUIRED
     interface (DOMImplementation|Node) #REQUIRED
 >
 
@@ -1761,15 +1813,6 @@ This schema was generated from  by dom-to-dtd.xsl.
     var CDATA #REQUIRED
     name CDATA #REQUIRED
     interface (DOMConfiguration) #IMPLIED
->
-
-
-<!ELEMENT getParentElements EMPTY >
-<!ATTLIST getParentElements
-    id ID #IMPLIED
-    obj CDATA #REQUIRED
-    var CDATA #REQUIRED
-    interface (ElementEditVAL) #IMPLIED
 >
 
 
@@ -2040,7 +2083,7 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    elemTypeName CDATA #REQUIRED
+    name CDATA #REQUIRED
     interface (ElementEditVAL) #IMPLIED
 >
 
@@ -2050,7 +2093,6 @@ This schema was generated from  by dom-to-dtd.xsl.
     id ID #IMPLIED
     obj CDATA #REQUIRED
     var CDATA #REQUIRED
-    elemTypeName CDATA #REQUIRED
     namespaceURI CDATA #REQUIRED
     name CDATA #REQUIRED
     interface (ElementEditVAL) #IMPLIED
@@ -2684,8 +2726,8 @@ This schema was generated from  by dom-to-dtd.xsl.
 >
 
 
-<!ELEMENT validateInDocument EMPTY >
-<!ATTLIST validateInDocument
+<!ELEMENT validateDocument EMPTY >
+<!ATTLIST validateDocument
     id ID #IMPLIED
     obj CDATA #REQUIRED
     interface (DocumentEditVAL) #IMPLIED
@@ -2827,7 +2869,7 @@ This schema was generated from  by dom-to-dtd.xsl.
 <!ELEMENT set (var*, (%statement;)* )>
 
 
-<!ELEMENT var  (member+ | ( var* , ( ( handleError )  | ( handleEvent )  | ( resolveEntity )  | ( startElement , acceptNode , whatToShow )  | ( acceptNode , whatToShow )  | ( acceptNode )  ) ) )? >
+<!ELEMENT var  (member+ | ( var* , ( ( startElement , acceptNode , whatToShow )  | ( resolveEntity )  | ( handleError )  | ( acceptNode , whatToShow )  | ( handleEvent )  | ( acceptNode )  ) ) )? >
 <!ATTLIST var
 	id ID #IMPLIED
 	name CDATA #REQUIRED

@@ -1,4 +1,5 @@
 <?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!-- 
  Copyright (c) 2003 X-Hive Corporation
 
@@ -47,7 +48,7 @@
             <return value="FILTER_ACCEPT"/>            
      </acceptNode>
 
-     <whatToShow interface="DOMBuilderFilter">            
+     <whatToShow>            
        <get>
         <return value="SHOW_ELEMENT"/>
        </get>

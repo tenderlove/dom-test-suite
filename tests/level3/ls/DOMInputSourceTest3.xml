@@ -1,4 +1,5 @@
 <?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="test-to-html.xsl" type="text/xml"?>
 <!-- 
  Copyright (c) 2003 X-Hive Corporation
 
@@ -55,7 +56,7 @@
   <!-- using a characterStream nothing should change-->
   <createDOMInputSource  var="inputSource" obj="lsImplementation"/>
   <encoding   obj="inputSource" value="iso" interface="DOMInputSource"/> 
-  <characterStream var="inputSource" obj="myReader"/> 
+  <characterStream obj="inputSource" var="myReader"/> 
   <parse var="document" obj="builder" is="inputSource"/>
   <assertEquals actual="encodingString" expected="utf" ignoreCase="false" id="encodingstringcheck1"/>
 
