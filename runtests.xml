@@ -16,7 +16,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: runtests.xml,v $
-Revision 1.12  2004-03-28 07:12:33  dom-ts-4
+Revision 1.13  2004-05-06 19:47:02  dom-ts-4
+Fix L2 Core tests that did not compensate for SVG docs (bug 699)
+
+Revision 1.12  2004/03/28 07:12:33  dom-ts-4
 Refinement of self-hosting, improved L1 Core diagnostics (bug 638)
 
 Revision 1.11  2004/03/10 07:34:01  dom-ts-4
@@ -67,6 +70,7 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
     <property name="crimson.lib.dir" location="${implbase.dir}/crimson-1.1.3"/>
     <property name="dom4j.lib.dir" location="${implbase.dir}/dom4j-1.4"/>
     <property name="gnujaxp.lib.dir" location="${implbase.dir}/gnujaxp-1.0beta1"/>
+    <property name="jtidy.lib.dir" location="${implbase.dir}/jtidy-04aug2000r7-dev"/>
     <property name="testsrc.dir" location="tests"/>
     <property name="doxygensrc.dir" location="build"/>
 
@@ -839,10 +843,11 @@ L&S support for Oracle XDK 10.0.1.0A, metadata fixes, test results matrix (bug 3
 	         dom2-core-batik,
 	         dom2-core-xerces2_svg,
 	         dom2-core-xerces2_svg-alt,
+	         dom2-core-xerces2_xhtml,
+	         dom2-core-xerces2_xhtml-alt,
 	         dom2-core-gnujaxp,
 	         dom2-core-gnujaxp-alt,
-	         dom2-core-dom4j,
-	         dom2-core-jtidy"/>
+	         dom2-core-dom4j"/>
 	         
 <target name="dom2-core-results" depends="dom2-core-all">	         
 	<copy file="${transforms.dir}/dom2-core-results.xml" todir="${results.dir}"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,13 +38,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <var name="namespaceURI" type="DOMString"/>
+<var name="nullNS" type="DOMString" isNull="true"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
-<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
+<getElementsByTagName interface="Document" obj="doc" tagname='"employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
+<!--   element has a NS in staffNS.svg, create an null NS'd element  -->
+<if><contentType type="image/svg+xml"/>
+<createElementNS var="employeeNode" obj="doc"
+     namespaceURI="nullNS" qualifiedName='"employee"'/>
+</if>
 <namespaceURI obj="employeeNode" var="namespaceURI"/>
 <assertDOMException id="throw_NAMESPACE_ERR">
 <NAMESPACE_ERR>
-<prefix obj="employeeNode" value="&quot;employee1&quot;"/>
+<prefix obj="employeeNode" value='"employee1"'/>
 </NAMESPACE_ERR>
 </assertDOMException>
+<assertNull actual="namespaceURI" id="employeeNS"/>
 </test>

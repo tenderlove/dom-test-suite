@@ -17,7 +17,6 @@
 <!ENTITY dom2-core-gnujaxp-alt SYSTEM 'dom2-core-gnujaxpAltConfig.xml'>
 <!ENTITY dom2-core-dom4j SYSTEM 'dom2-core-dom4j.xml'>
 <!ENTITY dom2-core-batik SYSTEM 'dom2-core-batik.xml'>
-<!ENTITY dom2-core-jtidy SYSTEM 'dom2-core-jtidy.xml'>
 ]>
 <results>
 <implementation name="Xerces-J 2.6.0">
@@ -56,6 +55,9 @@
 <implementation name="Xerces-J 2.6.0 SVG Alt">
 &dom2-core-xerces2_svg-alt;
 </implementation>
+<implementation name="Batik">
+&dom2-core-batik;
+</implementation>
 <implementation name="Xerces-J 2.6.0 XHTML">
 &dom2-core-xerces2_xhtml;
 </implementation>
@@ -73,8 +75,5 @@
 </implementation>
 <implementation name="Xerces-J CVS DOM3">
 &dom2-core-xerces_dom3-alt;
-</implementation>
-<implementation name="JTidy2 CVS">
-&dom2-core-jtidy;
 </implementation>
 </results>
