@@ -88,105 +88,6 @@ The source document contained the following notice:
 </xsl:template>
 
 
-<xsl:template name="implCheck">
-<xsl:variable name="implAttrs" select="*[local-name() = 'implementationAttribute']"/>
-<xsl:if test="$implAttrs[@name = 'signed' and @value='false']">
-	<xsl:text>      throw new DOMTestIncompatibleException("Test requires unsigned implementation");
-</xsl:text>
-</xsl:if>
-
-<xsl:if test="$implAttrs[@name = 'hasNullString' and @value='false']">
-	<xsl:text>      throw new DOMTestIncompatibleException("Test requires an implementation that does not support null strings");
-</xsl:text>
-</xsl:if>
-
-<xsl:variable name="adjImplAttrs" select="$implAttrs[@name != 'signed' and @name != 'hasNullString']"/>
-<xsl:choose>
-	<xsl:when test="$adjImplAttrs">
-		<xsl:text>
-      var attrNames = new Array(</xsl:text>
-      <xsl:value-of select="count($adjImplAttrs)"/>
-      <xsl:text>);</xsl:text>
-      <xsl:for-each select="$adjImplAttrs">
-            <xsl:text>
-      attrNames[</xsl:text>
-            <xsl:value-of select="position() -1"/>
-            <xsl:text>] = "</xsl:text>
-            <xsl:value-of select="@name"/>
-            <xsl:text>";</xsl:text>
-      </xsl:for-each>
-      <xsl:text>
-      var attrValues = new Array(</xsl:text>
-      <xsl:value-of select="count($adjImplAttrs)"/>
-      <xsl:text>);</xsl:text>
-      <xsl:for-each select="$adjImplAttrs">
-            <xsl:text>
-      attrValues[</xsl:text>
-            <xsl:value-of select="position() -1"/>
-            <xsl:text>] = </xsl:text>
-            <xsl:value-of select="@value"/>
-            <xsl:text>;</xsl:text>
-       </xsl:for-each>
-       <xsl:text>
-      this.builder = factory.newDocumentBuilder(attrNames,attrValues,contentType);
-</xsl:text>
-	</xsl:when>
-	<xsl:otherwise>
-		<xsl:text>      this.builder = factory.newDocumentBuilder(null,null,contentType);
-</xsl:text>
-	</xsl:otherwise>
-</xsl:choose>
-
-<!--  for each <load> in the body of the test, 
-          check to see if the file is available for the selected content type  -->
-<xsl:for-each select="descendant::*[local-name() = 'load']">
-    <xsl:text>     this.builder.checkAvailability("</xsl:text>
-    <xsl:value-of select="@href"/>
-    <xsl:text>");
-</xsl:text>
-</xsl:for-each>
-
-<xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
-
-<xsl:if test="$featureConditions">
-    <xsl:for-each select="$featureConditions">
-	    <xsl:text>      if(this.builder.hasFeature("</xsl:text>
-	    <xsl:value-of select="@feature"/>
-	    <xsl:choose>
-		    <xsl:when test="@version">
-                <xsl:text>","</xsl:text>
-			    <xsl:value-of select="@version"/>
-                <xsl:text>"</xsl:text>
-		    </xsl:when>
-		    <xsl:otherwise>
-			    <xsl:text>",null</xsl:text>
-		    </xsl:otherwise>
-	    </xsl:choose>
-	    <xsl:text>) != </xsl:text>
-        <xsl:choose>
-            <xsl:when test="@value='false'">false</xsl:when>
-            <xsl:otherwise>true</xsl:otherwise>
-        </xsl:choose>
-	    <xsl:text>) {
-         throw new DOMTestIncompatibleException("</xsl:text>
-        <xsl:value-of select="@feature"/>
-	    <xsl:choose>
-		    <xsl:when test="@version">
-			    <xsl:text>","</xsl:text>
-			    <xsl:value-of select="@version"/>
-			    <xsl:text>"</xsl:text>
-		    </xsl:when>
-		    <xsl:otherwise>
-			    <xsl:text>",null</xsl:text>
-		    </xsl:otherwise>
-	    </xsl:choose>
-	    <xsl:text>);
-      }
-</xsl:text>
-    </xsl:for-each>
-</xsl:if>
-
-</xsl:template>
 
 
 <!--   when encountering a test   -->
@@ -202,29 +103,94 @@ The source document contained the following notice:
     <xsl:text>_runTest()  {
     </xsl:text>
 <xsl:apply-templates mode="body"/>
-    <!--  now close all modified documents   -->
-    <xsl:for-each select="*[local-name() = 'load' and @willBeModified = 'true']">
-        <xsl:text>     this.builder.close(</xsl:text>
-        <xsl:value-of select="@var"/>
-        <xsl:text>);
-</xsl:text>
-    </xsl:for-each>
     <xsl:text>
 }
 
 function </xsl:text>
     <xsl:value-of select="@name"/>
-    <xsl:text>(factory,contentType) {
+    <xsl:text>_setUp() {
 </xsl:text>
-<xsl:call-template name="implCheck"/>
-<xsl:text>
-  this.runTest = </xsl:text>
-  <xsl:value-of select="@name"/>
-  <xsl:text>_runTest;
-  this.targetURI = "</xsl:text>
-  <xsl:value-of select="concat($target-uri-base,@name)"/>
-  <xsl:text>";
+    <xsl:variable name="implAttrs" select="*[local-name() = 'implementationAttribute']"/>
+    <xsl:variable name="featureConditions" select="*[local-name() = 'hasFeature' and not(preceding-sibling::*[local-name()='var'])]"/>
+
+    <xsl:text>    var attrs = [ </xsl:text>
+    <xsl:for-each select="$implAttrs">
+        <xsl:if test="position() &gt; 1">, </xsl:if>
+        <xsl:text>[ "</xsl:text>
+        <xsl:value-of select="@name"/>
+        <xsl:text>" ,</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text> ] </xsl:text>
+    </xsl:for-each>
+    <xsl:text> ];
+    var features = [ </xsl:text>
+    <xsl:for-each select="$featureConditions">
+        <xsl:if test="position() &gt; 1">, </xsl:if>
+        <xsl:text>[ "</xsl:text>
+        <xsl:value-of select="@feature"/>
+        <xsl:text>", "</xsl:text>
+        <xsl:value-of select="@version"/>
+        <xsl:text>", </xsl:text>
+        <xsl:choose>
+            <xsl:when test="@value='false'">
+                <xsl:text>false</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>true</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text> ] </xsl:text>
+    </xsl:for-each>
+    <xsl:text> ];
+    this.builder = getBuilder(this, null, attrs, features);
+    if (!this.ignored) {
+        this.ready = this.ready &amp;&amp; !this.builder.async;
+</xsl:text>
+    <xsl:for-each select="*[local-name() = 'load' and @href]">
+        <xsl:text>        this.</xsl:text>
+        <xsl:value-of select="@var"/>
+        <xsl:text> = this.builder.startLoad("</xsl:text>
+        <xsl:value-of select="@var"/>
+        <xsl:text>", "</xsl:text>
+        <xsl:value-of select="@href"/>
+        <xsl:text>");
+</xsl:text>
+    </xsl:for-each>
+    <xsl:text>    }
 }
+
+
+function </xsl:text>
+    <xsl:value-of select="@name"/>
+    <xsl:text>_tearDown() { 
+</xsl:text>
+    <xsl:for-each select="*[local-name() = 'load' and @href]">
+        <xsl:text>    this.builder.close(this.</xsl:text>
+        <xsl:value-of select="@var"/>
+        <xsl:text>);
+    this.</xsl:text>
+        <xsl:value-of select="@var"/>
+        <xsl:text> = null;
+</xsl:text>
+    </xsl:for-each>
+    <xsl:text>}
+
+function suite() {
+    var test = new DOMTestCase("</xsl:text>
+    <xsl:value-of select="@name"/>
+    <xsl:text>");
+    test.runTest = </xsl:text>
+    <xsl:value-of select="@name"/>
+    <xsl:text>_runTest;
+    test.tearDown = </xsl:text>
+    <xsl:value-of select="@name"/>
+    <xsl:text>_tearDown;
+    test.setUp = </xsl:text>
+    <xsl:value-of select="@name"/>
+    <xsl:text>_setUp;
+    return test;
+}
+
 </xsl:text>
 </xsl:template>
 
@@ -236,9 +202,31 @@ function </xsl:text>
           produce documentation comments    -->
     <xsl:apply-templates select="*[local-name()='metadata']"/>
 
+    <xsl:text>
+    function getURL(sourceURL)
+    {
+	    var URL = location.href;
+        if (URL.indexOf('?') != -1)
+        {
+            URL = URL.substring(0, URL.indexOf('?'));
+        }
+        URL = URL.substring(0, URL.lastIndexOf("/") + 1) + sourceURL;
+
+        return URL;
+    }
+    
+    function suite() {
+        var newsuite = new top.jsUnitTestSuite();       
+</xsl:text>
     <xsl:for-each select="*[local-name() = 'suite.member']">
-        <xsl:apply-templates select="document(@href,.)/*"/>
+        <xsl:text>        newsuite.addTestPage(getURL("</xsl:text>
+        <xsl:value-of select="substring-before(@href,'.xml')"/>
+        <xsl:text>.html"));
+</xsl:text>
     </xsl:for-each>
+
+    return newsuite;
+}
 </xsl:template>
 
 
@@ -907,11 +895,13 @@ function handleEvent(listener, event, userObj) {
 
 <xsl:template match="*[local-name()='load']" mode="body">
 	<xsl:value-of select="@var"/>
-	<xsl:text> = this.builder.load("</xsl:text>
+	<xsl:text> = this.builder.load(this.</xsl:text>
+    <xsl:value-of select="@var"/>
+    <xsl:text>, "</xsl:text>
+    <xsl:value-of select="@var"/>
+    <xsl:text>", "</xsl:text>
 	<xsl:value-of select="@href"/>
-	<xsl:text>",</xsl:text>
-    <xsl:value-of select="@willBeModified"/>
-	<xsl:text>);
+	<xsl:text>");
       </xsl:text>
 </xsl:template>
 
@@ -924,7 +914,7 @@ function handleEvent(listener, event, userObj) {
 	<xsl:apply-templates select="*/*" mode="body"/>
     <xsl:text>  }
 		catch(ex) {            
-			success = this.builder.isDOMExceptionCode(ex,</xsl:text>
+			success = (ex.code == </xsl:text>
     <xsl:variable name="excode" select="local-name(*)"/>
 	<xsl:value-of select="$domspec/library/group/constant[@name = $excode]/@value"/>
 	<xsl:text>);
