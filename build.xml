@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.87  2003-02-12 21:57:52  plehegar
+Revision 1.88  2003-02-28 07:42:06  dom-ts-4
+Update for 2003-02-26 L3 Working Drafts
+
+Revision 1.87  2003/02/12 21:57:52  plehegar
 Added
 xmlspec-v22-dom-available
 and
@@ -618,7 +621,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom2-html" depends="dom2-check-spec" unless="dom2-html-available">
-	<mkdir dir="${specs.dir}"/>
+	<mkdir dir="${specs.dir}/pubtext"/>
 	<mkdir dir="${specs.dir}/Level-2"/>
 	<get src="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/DOM2-HTML.zip"
 		dest="${specs.dir}/DOM2-HTML.zip"
@@ -626,6 +629,9 @@ All implementation conditions combined into implementationAttribute element
     <get src="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/java-binding.zip"
         dest="${specs.dir}/DOM2-HTML-Java-Binding.zip"
         usetimestamp="yes"/>
+    <!-- get src="http://www.w3.org/2002/08/xmlspec-v22-dom.dtd"
+        dest="${specs.dir}/pubtext/xmlspec-v22-dom.dtd"
+        usetimestamp="yes"/ -->
 </target>
 
 <target name="get-xmlspec-v22-dom-dtd" unless="xmlspec-v22-dom-available">
@@ -1687,15 +1693,15 @@ All implementation conditions combined into implementationAttribute element
     <available property="dom3-views-available" file="${specs.dir}/DOM3-Views.zip"/>
 </target>
 
-<target name="get-dom3-core" depends="dom3-available" unless="dom3-core-available">
+<target name="get-dom3-core" depends="dom3-available"><!-- unless="dom3-core-available" -->
 	<!--   download DOM 3 Core spec to specs directory   -->
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Core-20020409/DOM3-Core.zip"
+	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.zip"
 		dest="${specs.dir}/DOM3-Core.zip"
 		usetimestamp="yes"/>
 </target>
 
-<target name="get-dom3-ls" depends="dom3-available" unless="dom3-ls-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-LS-20020725/DOM3-LS.zip"
+<target name="get-dom3-ls" depends="dom3-available"><!-- unless="dom3-ls-available" -->
+	<get src="http://www.w3.org/TR/2003/WD-DOM-Level-3-LS-20030226/DOM3-LS.zip"
 		dest="${specs.dir}/DOM3-LS.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1763,20 +1769,10 @@ All implementation conditions combined into implementationAttribute element
 
 	<unzip src="${specs.dir}/DOM3-Core.zip"
 	       dest="${specs.dir}/Level-3/Core"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/Core/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/core"/>
-
 
 	<unzip src="${specs.dir}/DOM3-LS.zip"
 	       dest="${specs.dir}/Level-3/LS"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/LS/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/ls"/>
+
 
 	<unzip src="${specs.dir}/DOM3-Val.zip"
 	       dest="${specs.dir}/Level-3/Val"/>
@@ -1799,8 +1795,6 @@ All implementation conditions combined into implementationAttribute element
 	<echo file="${specs.dir}/Level-3/xml/events/definitions/mutationnameevent.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
-
-    <delete file="${specs.dir}/Level-3/xml/core/definitions/element.xml.orig"/>
 
 
     <mkdir dir="${specs.dir}/Level-3/Core/java"/>
@@ -1832,7 +1826,7 @@ All implementation conditions combined into implementationAttribute element
 <target name="dom3-interfaces" depends="dom3-init,dom2-init">
     <delete file="${build.dir}/dom3-interfaces.xml"/>
 
-	<style in="${specs.dir}/Level-3/xml/core/dom-spec.xml"
+	<style in="${specs.dir}/Level-3/Core/xml-source.xml"
 	       out="${build.dir}/dom3-interfaces.xml"
 	       style="${transforms.dir}/dom3-combine.xsl"/>
 	<xmlvalidate file="${build.dir}/dom3-interfaces.xml"
@@ -1861,8 +1855,10 @@ All implementation conditions combined into implementationAttribute element
 	       style="${transforms.dir}/dom-to-dtd.xsl">
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
+        <param name="additional-types" expression="|DOMInputStream|DOMOutputStream|DOMReader"/>
 	</style>
 	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls"/>
 </target>
 
 <target name="dom3-ls-validate-tests" depends="dom3-dtd">

@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.36  2003-02-13 03:24:57  dom-ts-4
+Revision 1.37  2003-02-28 07:42:59  dom-ts-4
+Update for 2003-02-26 L3 Working Drafts
+
+Revision 1.36  2003/02/13 03:24:57  dom-ts-4
 Added casting logic to return value of the framework's load method
 
 Revision 1.35  2003/02/10 05:04:54  dom-ts-4
@@ -1423,6 +1426,10 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:choose>
         <xsl:when test="contains($type, 'DOMString')">String</xsl:when>
         <xsl:when test="contains($type, 'DOMObject')">Object</xsl:when>
+        <xsl:when test="contains($type, 'DOMUserData')">Object</xsl:when>
+        <xsl:when test="contains($type, 'DOMInputStream')">java.io.InputStream</xsl:when>
+        <xsl:when test="contains($type, 'DOMOutputStream')">java.io.OutputStream</xsl:when>
+        <xsl:when test="contains($type, 'DOMReader')">java.io.Reader</xsl:when>
         <xsl:when test="$type='Collection'">java.util.Collection</xsl:when>
         <xsl:when test="$type='List'">java.util.List</xsl:when>
         <xsl:when test="$type='EventMonitor'">org.w3c.domts.EventMonitor</xsl:when>
@@ -1554,6 +1561,9 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
         <xsl:when test="contains($vartype, 'short') and contains($reqtype, 'short')">
             <xsl:value-of select="$var"/>
         </xsl:when>
+        <xsl:when test="$reqtype='DOMUserData' and $vartype='boolean'">
+            <xsl:text>(new Boolean(</xsl:text><xsl:value-of select="$var"/><xsl:text>))</xsl:text>
+        </xsl:when>
 
         <!--  if the vartype inherits from another interface, see if it matches the required type  -->
         <xsl:when test="$domspec/library/interface[@name = $vartype and @inherits]">
@@ -1624,6 +1634,12 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     <xsl:param name="reqtype"/>
 
     <xsl:choose>
+        <xsl:when test="$reqtype='DOMUserData' and $value='true'">
+            <xsl:text>Boolean.TRUE</xsl:text>
+        </xsl:when>
+        <xsl:when test="$reqtype='DOMUserData' and $value='false'">
+            <xsl:text>Boolean.FALSE</xsl:text>
+        </xsl:when>
         <!--  if value is true, false or starts with a quote  -->
         <xsl:when test="$value = 'true' or $value = 'false' or $value = 'null' or substring($value, 1, 1) ='&quot;'">
             <!--  just copy the literal  -->
