@@ -23,9 +23,15 @@
 <var name="entRefNode" type="Node"/>
 <var name="entRefValue" type="DOMString"/>
 <load var="doc" href="staff.xml" willBeModified="false"/>
-<getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
-<item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
-<firstChild obj="entRefAddr" var="entRefNode"/>
+<if>
+    <implementationAttribute name="expandEntityReferences" value="true"/>
+    <createEntityReference var="entRefNode" obj="doc" name='"ent2"'/>
+    <else>
+        <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
+        <item interface="NodeList" obj="elementList" index="1" var="entRefAddr"/>
+        <firstChild obj="entRefAddr" var="entRefNode"/>
+    </else>
+</if>
 <nodeValue obj="entRefNode" var="entRefValue"/>
 <assertNull actual="entRefValue" id="nodeEntityReferenceNodeValueAssert1"/>
 </test>

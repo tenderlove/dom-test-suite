@@ -28,7 +28,13 @@
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="7" var="childNode"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <item interface="NodeList" obj="childList" index="3" var="childNode"/>
+    <else>
+        <item interface="NodeList" obj="childList" index="7" var="childNode"/>
+    </else>
+</if>
 <cloneNode obj="childNode" deep="true" var="clonedNode"/>
 <lastChild obj="clonedNode" var="lastChildNode"/>
 <nodeValue obj="lastChildNode" var="childValue"/>

@@ -30,7 +30,15 @@
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;employee&quot;"/>
 <item interface="NodeList" obj="elementList" var="employeeNode" index="2"/>
 <childNodes obj="employeeNode" var="employeeList"/>
-<item interface="NodeList" obj="employeeList" var="child" index="12"/>
-<nodeName obj="child" var="childName"/>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="nodelistReturnLastItemAssert" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <item interface="NodeList" obj="employeeList" var="child" index="5"/>
+    <nodeName obj="child" var="childName"/>
+    <assertEquals actual="childName" expected='"address"' id="nodeName1" ignoreCase="false"/>
+    <else>
+        <item interface="NodeList" obj="employeeList" var="child" index="12"/>
+        <nodeName obj="child" var="childName"/>
+        <assertEquals actual="childName" expected="&quot;#text&quot;" id="nodeName2" ignoreCase="false"/>
+    </else>
+</if>
 </test>

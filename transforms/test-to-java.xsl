@@ -28,7 +28,10 @@ saxon -o someTest.java someTest.xml test-to-java.xsl
 
 <!--
 $Log: test-to-java.xsl,v $
-Revision 1.10  2001-08-22 22:12:50  dom-ts-4
+Revision 1.11  2001-08-23 08:01:49  dom-ts-4
+Test fixups for ignoring whitespace, et al
+
+Revision 1.10  2001/08/22 22:12:50  dom-ts-4
 Now passing all tests with default settings
 
 Revision 1.9  2001/08/21 06:06:12  dom-ts-4
@@ -121,32 +124,21 @@ The source document contained the following notice:
 
 <xsl:template name="implCheck">
 <xsl:variable name="implAttrs" select="*[local-name() = 'implementationAttribute']"/>
-<xsl:if test="$implAttrs[@name = 'signed' and @value='false']">
-	<xsl:text>      throw new DOMTestIncompatibleException("Test requires unsigned implementation");
-</xsl:text>
-</xsl:if>
-
-<xsl:if test="$implAttrs[@name = 'hasNullString' and @value='false']">
-	<xsl:text>      throw new DOMTestIncompatibleException("Test requires an implementation that does not support null strings");
-</xsl:text>
-</xsl:if>
-
-<xsl:variable name="adjImplAttrs" select="$implAttrs[@name != 'signed' and @name != 'hasNullString']"/>
 <xsl:choose>
-	<xsl:when test="$adjImplAttrs">
+	<xsl:when test="$implAttrs">
 		<xsl:text>
       String[] attrNames = { "</xsl:text>
-        <xsl:value-of select="$adjImplAttrs[1]/@name"/>
+        <xsl:value-of select="$implAttrs[1]/@name"/>
         <xsl:text>"</xsl:text>
-		<xsl:for-each select="$adjImplAttrs[position() &gt; 1]">
+		<xsl:for-each select="$implAttrs[position() &gt; 1]">
             <xsl:text> , "</xsl:text>
             <xsl:value-of select="@name"/>
             <xsl:text>"</xsl:text>
         </xsl:for-each>
         <xsl:text> };
       boolean[] attrValues = { </xsl:text>
-        <xsl:value-of select="$adjImplAttrs[1]/@value"/>
-        <xsl:for-each select="$adjImplAttrs[position() &gt; 1]">
+        <xsl:value-of select="$implAttrs[1]/@value"/>
+        <xsl:for-each select="$implAttrs[position() &gt; 1]">
             <xsl:text> , </xsl:text>
             <xsl:value-of select="@value"/>
         </xsl:for-each>
@@ -1334,7 +1326,7 @@ void handleEvent(EventListener listener, Event event, Object userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='isNull']" mode="condition">
-	(<xsl:value-of select="@obj"/> == null>)
+	(<xsl:value-of select="@obj"/> == null)
 </xsl:template>
 
 

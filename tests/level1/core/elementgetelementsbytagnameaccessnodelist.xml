@@ -11,5 +11,11 @@
 <item interface="NodeList" obj="elementList" index="3" var="testEmployee"/>
 <firstChild obj="testEmployee" var="firstC"/>
 <nodeName obj="firstC" var="childName"/>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="elementGetElementsByTagNameAccessNodeListAssert" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="childName" expected='"employeeId"' id="nodename_nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="childName" expected="&quot;#text&quot;" id="nodename_whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

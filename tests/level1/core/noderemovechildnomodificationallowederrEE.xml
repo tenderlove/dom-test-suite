@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="noderemovechildnomodificationallowederr">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="noderemovechildnomodificationallowederrEE">
 	<metadata>
-<title>nodeRemoveChildNoModificationAllowedErr</title>
+<title>nodeRemoveChildNoModificationAllowedErrEE</title>
 <creator>NIST</creator>
 <description>
     The "removeChild(oldChild)" method causes the 
     DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
     if the node is readonly.
     
-    Obtain the children of the THIRD "gender" element.   The elements
-    content is an entity reference.   Get the FIRST item 
-    from the entity reference and execute the "removeChild(oldChild)" method.
+    Create an entity reference and execute the "removeChild(oldChild)" method.
     This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
 <contributor>Mary Brady</contributor>
@@ -22,19 +20,15 @@
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
 </metadata>
 	<var name="doc" type="Document"/>
-	<var name="genderList" type="NodeList"/>
-	<var name="genderNode" type="Node"/>
 	<var name="entRef" type="Node"/>
-	<var name="entElement" type="Node"/>
+	<var name="entText" type="Node"/>
 	<var name="removedNode" type="Node"/>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
-	<getElementsByTagName interface="Document" obj="doc" tagname="&quot;gender&quot;" var="genderList"/>
-	<item obj="genderList" index="2" var="genderNode" interface="NodeList"/>
-    <firstChild var="entRef" obj="genderNode"/>
-    <firstChild var="entElement" obj="entRef"/>
+    <createEntityReference var="entRef" obj="doc" name='"ent3"'/>
+    <firstChild var="entText" obj="entRef"/>
 	<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 		<NO_MODIFICATION_ALLOWED_ERR>
-			<removeChild var="removedNode" obj="entRef" oldChild="entElement"/>
+			<removeChild var="removedNode" obj="entRef" oldChild="entText"/>
 		</NO_MODIFICATION_ALLOWED_ERR>
 	</assertDOMException>
 </test>

@@ -33,5 +33,11 @@
 	<childNodes obj="employeeNode" var="childList"/>
 	<createElement obj="doc" var="createdNode" tagName="&quot;text3&quot;"/>
 	<appendChild obj="employeeNode" newChild="createdNode" var="employeeNode"/>
-	<assertSize collection="childList" size="14" id="nodeChildNodesAppendChildAssert1"/>
+    <if>
+        <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+	    <assertSize collection="childList" size="7" id="elementCountNoWhitespace"/>
+        <else>
+	        <assertSize collection="childList" size="14" id="elementCountWhitespace"/>
+        </else>
+    </if>
 </test>

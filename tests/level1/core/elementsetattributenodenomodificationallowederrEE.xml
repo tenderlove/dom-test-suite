@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementsetattributenodenomodificationallowederr">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementsetattributenodenomodificationallowederrEE">
 	<metadata>
 <title>elementSetAttributeNodeNoModificationAllowedErr</title>
 <creator>NIST</creator>
@@ -9,7 +9,7 @@
    DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
    if the node is readonly.
    
-   Obtain the children of the THIRD "gender" element.  The elements
+   Create an entity reference and add to the THIRD "gender" element.  The elements
    content is an entity reference.  Try to remove the "domestic" attribute
    from the entity reference by executing the "setAttributeNode(newAttr)" method.
    This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
@@ -30,10 +30,12 @@
 	<var name="entElement" type="Element"/>
 	<var name="newAttr" type="Attr"/>
 	<var name="badAttr" type="Attr"/>
+    <var name="appendedChild" type="Node"/>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
 	<getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 	<item interface="NodeList" obj="genderList" var="gender" index="2"/>
-    <firstChild var="entRef" obj="gender"/>
+    <createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+    <appendChild obj="gender" newChild="entRef" var="appendedChild"/>
     <firstChild var="entElement" obj="entRef"/>
 	<createAttribute obj="doc" var="newAttr" name="&quot;newAttr&quot;"/>
 	<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">

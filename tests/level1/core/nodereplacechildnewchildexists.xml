@@ -62,7 +62,7 @@
         <assign var="expected" value="expectedWithWhitespace"/>
         <else>
 	        <item interface="NodeList" obj="childList" index="0" var="newChild"/>
-	        <item interface="NodeList" obj="childList" index="6" var="oldChild"/>
+	        <item interface="NodeList" obj="childList" index="5" var="oldChild"/>
             <assign var="expected" value="expectedWithoutWhitespace"/>
         </else>
     </if>

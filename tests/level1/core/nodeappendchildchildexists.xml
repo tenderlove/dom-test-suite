@@ -36,6 +36,13 @@
 	<nodeName obj="fchild" var="fchildName"/>
 	<lastChild obj="childNode" var="lchild"/>
 	<nodeName obj="lchild" var="lchildName"/>
-    <assertEquals id="assert1" actual="fchildName" expected="&quot;employeeId&quot;" ignoreCase="false"/>
-    <assertEquals id="assert2" actual="lchildName" expected="&quot;#text&quot;" ignoreCase="false"/>
+    <if>
+        <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+            <assertEquals id="assert1_nowhitespace" actual="fchildName" expected='"name"' ignoreCase="false"/>
+            <assertEquals id="assert2_nowhitespace" actual="lchildName" expected='"employeeId"' ignoreCase="false"/>
+        <else>
+            <assertEquals id="assert1" actual="fchildName" expected="&quot;employeeId&quot;" ignoreCase="false"/>
+            <assertEquals id="assert2" actual="lchildName" expected="&quot;#text&quot;" ignoreCase="false"/>
+        </else>
+    </if>
 </test>

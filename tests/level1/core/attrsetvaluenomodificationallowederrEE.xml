@@ -1,48 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="attrsetvaluenomodificationallowederr">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="attrsetvaluenomodificationallowederrEE">
 <metadata>
-<title>attrSetValueNoModificationAllowedErr</title>
+<title>attrSetValueNoModificationAllowedErrEE</title>
 <creator>NIST</creator>
 <description>
     The "setValue()" method for an attribute causes the 
   DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
   if the node is readonly.
-  Obtain the children of the THIRD "gender" element.  The elements
-  content is an entity reference.  Get the "domestic" attribute
-  from the entity reference and execute the "setValue()" method.
+
+  Create an entity reference using document.createEntityReference()
+  Get the "domestic" attribute from the entity 
+  reference and execute the "setValue()" method.
   This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
 <contributor>Mary Brady</contributor>
-<date qualifier="created">2001-08-17</date>
+<contributor>Curt Arnold</contributor>
+<date qualifier="created">2001-08-22</date>
 <subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#ID-221662474"/>
 <subject resource="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core#xpointer(id('ID-221662474')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/DOM/updates/REC-DOM-Level-1-19981001-errata.html"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474"/>
 </metadata>
-<!--  this test depends on entity references being maintained on parsing  -->
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
-<var name="genderList" type="NodeList"/>
-<var name="gender" type="Node"/>
-<var name="genList" type="NodeList"/>
-<var name="gen" type="Node"/>
-<var name="gList" type="NodeList"/>
-<var name="g" type="Node"/>
+<var name="entRef" type="EntityReference"/>
+<var name="entElement" type="Element"/>
 <var name="attrList" type="NamedNodeMap"/>
-<var name="attrNode" type="Attr"/>
+<var name="attrNode" type="Node"/>
+<var name="gender" type="Node"/>
+<var name="genderList" type="NodeList"/>
+<var name="appendedChild" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
-<childNodes obj="gender" var="genList"/>
-<item interface="NodeList" obj="genList" var="gen" index="0"/>
-<childNodes obj="gen" var="gList"/>
-<item interface="NodeList" obj="gList" var="g" index="0"/>
-<attributes obj="g" var="attrList"/>
+<createEntityReference obj="doc" var="entRef" name='"ent4"'/>
+<appendChild obj="gender" newChild="entRef" var="appendedChild"/> 
+<firstChild obj="entRef" var="entElement" interface="Node"/>
+<attributes obj="entElement" var="attrList"/>
 <getNamedItem obj="attrList" var="attrNode" name="&quot;domestic&quot;"/>
-
-<assertDOMException id="attrSetValueNoModificationAllowedErrAssert">
+<assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
 <value interface="Attr" obj="attrNode" value="&quot;newvalue&quot;"/>
 </NO_MODIFICATION_ALLOWED_ERR>

@@ -26,5 +26,11 @@
 <item interface="NodeList" obj="elementList" index="1" var="employeeIdNode"/>
 <nextSibling obj="employeeIdNode" var="nsNode"/>
 <nodeName obj="nsNode" var="nsName"/>
-<assertEquals actual="nsName" expected="&quot;#text&quot;" id="nodeGetNextSiblingAssert1" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="nsName" expected='"name"' id="nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="nsName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

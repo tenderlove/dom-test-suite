@@ -26,5 +26,11 @@
 <item interface="NodeList" obj="elementList" index="1" var="nameNode"/>
 <previousSibling obj="nameNode" var="psNode"/>
 <nodeName obj="psNode" var="psName"/>
-<assertEquals actual="psName" expected="&quot;#text&quot;" id="nodeGetPreviousSiblingAssert1" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="psName" expected='"employeeId"' id="nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="psName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

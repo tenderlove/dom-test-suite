@@ -27,20 +27,28 @@
 <var name="clonedChild" type="Node"/>
 <var name="clonedChildName" type="DOMString"/>
 <var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"#text"</member>
-<member>"employeeId"</member>
-<member>"#text"</member>
-<member>"name"</member>
-<member>"#text"</member>
-<member>"position"</member>
-<member>"#text"</member>
-<member>"salary"</member>
-<member>"#text"</member>
-<member>"gender"</member>
-<member>"#text"</member>
-<member>"address"</member>
-<member>"#text"</member>
+<var name="expectedWhitespace" type="List">
+    <member>"#text"</member>
+    <member>"employeeId"</member>
+    <member>"#text"</member>
+    <member>"name"</member>
+    <member>"#text"</member>
+    <member>"position"</member>
+    <member>"#text"</member>
+    <member>"salary"</member>
+    <member>"#text"</member>
+    <member>"gender"</member>
+    <member>"#text"</member>
+    <member>"address"</member>
+    <member>"#text"</member>
+</var>
+<var name="expectedNoWhitespace" type="List">
+    <member>"employeeId"</member>
+    <member>"name"</member>
+    <member>"position"</member>
+    <member>"salary"</member>
+    <member>"gender"</member>
+    <member>"address"</member>
 </var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
@@ -51,5 +59,11 @@
 <nodeName obj="clonedChild" var="clonedChildName"/>
 <append collection="result" obj="clonedChildName"/>
 </for-each>
-<assertEquals actual="result" expected="expectedResult" id="nodeCloneNodeTrueAssert1" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="result" expected="expectedNoWhitespace" id="nowhitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="result" expected="expectedWhitespace" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

@@ -22,33 +22,43 @@
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
 <var name="addressNode" type="Node"/>
-<var name="childList" type="Node"/>
+<var name="childList" type="NodeList"/>
 <var name="child" type="Node"/>
 <var name="value" type="DOMString"/>
+<var name="grandChild" type="Node"/>
 <var name="result" type="List"/>
-<var name="expectedResult" type="List">
-<member>"1900 Dallas Road"</member>
-<member>" Dallas, "</member>
-<member>"Texas"</member>
-<member>"\n 98554"</member>
+<var name="expectedNormal" type="List">
+    <member>"1900 Dallas Road"</member>
+    <member>" Dallas, "</member>
+    <member>"Texas"</member>
+    <member>"\n 98554"</member>
+</var>
+<var name="expectedCoalescing" type="List">
+    <member>"1900 Dallas Road Dallas, Texas\n 98554"</member>
 </var>
 <load var="doc" href="staff.xml" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;address&quot;"/>
 <item interface="NodeList" obj="elementList" var="addressNode" index="1"/>
 <childNodes obj="addressNode" var="childList"/>
-<item interface="NodeList" obj="childList" var="child" index="0"/>
-<firstChild obj="child" var="child"/>
-<nodeValue obj="child" var="value"/>
-<append collection="result" obj="value"/>
-<item interface="NodeList" obj="childList" var="child" index="1"/>
-<nodeValue obj="child" var="value"/>
-<append collection="result" obj="value"/>
-<item interface="NodeList" obj="childList" var="child" index="2"/>
-<firstChild obj="child" var="child"/>
-<nodeValue obj="child" var="value"/>
-<append collection="result" obj="value"/>
-<item interface="NodeList" obj="childList" var="child" index="3"/>
-<nodeValue obj="child" var="value"/>
-<append collection="result" obj="value"/>
-<assertEquals actual="result" expected="expectedResult" id="textParseIntoListOfElementsAssert" ignoreCase="false"/>
+<for-each collection="childList" member="child">
+    <nodeValue obj="child" var="value"/>
+    <if>
+        <isNull obj="value"/>
+        <!--  this branch should get hit for entity references  -->
+        <firstChild obj="child" var="grandChild"/>
+        <nodeValue obj="grandChild" var="value"/>
+        <append collection="result" obj="value"/>
+        <!--  this branch for text nodes   -->
+        <else>
+            <append collection="result" obj="value"/>
+        </else>
+    </if>
+</for-each>
+<if>
+    <implementationAttribute name="coalescing" value="true"/>
+    <assertEquals actual="result" expected="expectedCoalescing" ignoreCase="false" id="assertEqCoalescing"/>
+    <else>
+        <assertEquals actual="result" expected="expectedNormal" ignoreCase="false" id="assertEqNormal"/>
+    </else>
+</if>
 </test>

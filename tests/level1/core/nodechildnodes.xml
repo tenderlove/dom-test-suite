@@ -25,5 +25,11 @@
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childNodes"/>
-<assertSize collection="childNodes" size="13" id="nodeChildNodesAssert1"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertSize collection="childNodes" size="6" id="childCountNoWhitespace"/>
+    <else>
+        <assertSize collection="childNodes" size="13" id="childCountWhitespace"/>
+    </else>
+</if>
 </test>

@@ -26,5 +26,11 @@
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <lastChild obj="employeeNode" var="lchildNode"/>
 <nodeName obj="lchildNode" var="childName"/>
-<assertEquals actual="childName" expected="&quot;#text&quot;" id="nodeGetLastChildAssert1" ignoreCase="false"/>
+<if>
+    <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+    <assertEquals actual="childName" expected='"address"' id="no_whitespace" ignoreCase="false"/>
+    <else>
+        <assertEquals actual="childName" expected="&quot;#text&quot;" id="whitespace" ignoreCase="false"/>
+    </else>
+</if>
 </test>

@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.16  2001-08-22 22:12:46  dom-ts-4
+Revision 1.17  2001-08-23 08:01:49  dom-ts-4
+Test fixups for ignoring whitespace, et al
+
+Revision 1.16  2001/08/22 22:12:46  dom-ts-4
 Now passing all tests with default settings
 
 Revision 1.15  2001/08/22 01:46:10  dom-ts-4
@@ -386,7 +389,7 @@ All implementation conditions combined into implementationAttribute element
 	<xmlvalidate lenient="no" failonerror="yes"
 	             classname="org.apache.xerces.parsers.SAXParser">
 		<fileset dir="${tests.dir}/level1/core" includes="*.xml" 
-		    excludes="attrsetvaluenomodificationallowederr.xml"/>  
+		    excludes="attrsetvaluenomodificationallowederr.xml,attrsetvaluenomodificationallowederrEE.xml"/>  
 	</xmlvalidate>
 </target>
 

@@ -28,7 +28,10 @@ saxon -o someTest.js someTest.xml test-to-ecmascript.xsl
 
 <!--
 $Log: test-to-ecmascript.xsl,v $
-Revision 1.3  2001-08-22 22:12:50  dom-ts-4
+Revision 1.4  2001-08-23 08:01:49  dom-ts-4
+Test fixups for ignoring whitespace, et al
+
+Revision 1.3  2001/08/22 22:12:50  dom-ts-4
 Now passing all tests with default settings
 
 Revision 1.2  2001/08/15 04:44:03  dom-ts-4
@@ -1174,7 +1177,7 @@ function handleEvent(listener, event, userObj) {
 </xsl:template>
 
 <xsl:template match="*[local-name()='isNull']" mode="condition">
-	(<xsl:value-of select="@obj"/> == null>)
+	(<xsl:value-of select="@obj"/> == null)
 </xsl:template>
 
 

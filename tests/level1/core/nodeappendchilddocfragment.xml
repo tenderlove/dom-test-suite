@@ -29,10 +29,33 @@
 	<var name="childName" type="DOMString"/>
 	<var name="result" type="List"/>
 	<var name="appendedChild" type="Node"/>
-	<var name="expectedResult" type="List">
-		<member>"newChild1"</member>
-		<member>"newChild2"</member>
-	</var>
+    <var name="expectedWithWhitespace" type="List">
+        <member>"#text"</member>
+        <member>"employeeId"</member>
+        <member>"#text"</member>
+        <member>"name"</member>
+        <member>"#text"</member>
+        <member>"position"</member>
+        <member>"#text"</member>
+        <member>"salary"</member>
+        <member>"#text"</member>
+        <member>"gender"</member>
+        <member>"#text"</member>
+        <member>"address"</member>
+        <member>"#text"</member>
+        <member>"newChild1"</member>
+        <member>"newChild2"</member>
+    </var>
+    <var name="expectedWithoutWhitespace" type="List">
+        <member>"employeeId"</member>
+        <member>"name"</member>
+        <member>"position"</member>
+        <member>"salary"</member>
+        <member>"gender"</member>
+        <member>"address"</member>
+        <member>"newChild1"</member>
+        <member>"newChild2"</member>
+    </var>
 	<load var="doc" href="staff.xml" willBeModified="true"/>
 	<getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 	<item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
@@ -43,11 +66,15 @@
 	<appendChild var="appendedChild" obj="newdocFragment" newChild="newChild1"/>
 	<appendChild var="appendedChild" obj="newdocFragment" newChild="newChild2"/>
 	<appendChild var="appendedChild" obj="employeeNode" newChild="newdocFragment"/>
-	<item interface="NodeList" obj="childList" index="13" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<item interface="NodeList" obj="childList" index="14" var="child"/>
-	<nodeName obj="child" var="childName"/>
-	<append collection="result" obj="childName"/>
-	<assertEquals actual="result" expected="expectedResult" id="nodeAppendChildDocFragmentAssert1" ignoreCase="false"/>
+    <for-each collection="childList" member="child">
+        <nodeName var="childName" obj="child"/>
+        <append collection="result" obj="childName"/>
+    </for-each>
+    <if>
+        <implementationAttribute name="ignoringElementContentWhitespace" value="true"/>
+        <assertEquals actual="result" expected="expectedWithoutWhitespace" ignoreCase="false" id="nodeNamesNoWhitespace"/>
+        <else>
+            <assertEquals actual="result" expected="expectedWithWhitespace" ignoreCase="false" id="nodeNamesWithWhitespace"/>
+        </else>
+    </if>
 </test>

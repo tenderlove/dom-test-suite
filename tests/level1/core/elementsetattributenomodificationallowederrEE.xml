@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test SYSTEM "dom1.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementsetattributenomodificationallowederr">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-1" name="elementsetattributenomodificationallowederrEE">
 <metadata>
 <title>elementSetAttributeNoModificationAllowedErr</title>
 <creator>NIST</creator>
@@ -9,8 +9,8 @@
    DOMException NO_MODIFICATION_ALLOWED_ERR to be raised
    if the node is readonly.
    
-   Obtain the children of the THIRD "gender" element.  The elements
-   content is an entity reference.  Try to remove the "domestic" attribute
+   Add an ent4 reference to the children of the THIRD "gender" element.  
+   Try to remove the "domestic" attribute
    from the entity reference by executing the "setAttribute(name,value)" method.
    This causes a NO_MODIFICATION_ALLOWED_ERR DOMException to be thrown.
 </description>
@@ -21,16 +21,17 @@
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-F68F082')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NO_MODIFICATION_ALLOWED_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68F082"/>
 </metadata>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
 <var name="genderList" type="NodeList"/>
 <var name="gender" type="Node"/>
 <var name="entRef" type="EntityReference"/>
 <var name="entElement" type="Element"/>
+<var name="appendedChild" type="Node"/>
 <load var="doc" href="staff.xml" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
-<firstChild var="entRef" obj="gender"/>
+<createEntityReference var="entRef" obj="doc" name='"ent4"'/>
+<appendChild obj="gender" newChild="entRef" var="appendedChild"/>
 <firstChild var="entElement" obj="entRef"/>
 <assertDOMException id="throw_NO_MODIFICATION_ALLOWED_ERR">
 <NO_MODIFICATION_ALLOWED_ERR>
