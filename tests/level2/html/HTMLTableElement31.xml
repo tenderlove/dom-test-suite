@@ -36,6 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-39872903"/>
 <!--  comments on the commented out sections   -->
 <subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Aug/0019.html"/>
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2002Nov/0013.html"/>
+<subject resource="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jan/0012.html"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <!--
@@ -48,6 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="table" type="Element"/>
 <var name="tbodiesLength" type="int"/>
+<var name="testNodeParentNode" type="Node"/>
 <load var="doc" href="table1" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
 <assertSize collection="nodeList" size="1" id="tableSize1"/>
@@ -59,7 +62,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <childNodes obj="testNode" var="tableList"/>
 -->
 <createElement obj="doc" var="table" tagName='"table"'/>
-<appendChild obj="testNode.parentNode" newChild="table" var="tableNode"/>
+<parentNode var="testNodeParentNode" obj="testNode" interface="Node"/>
+<appendChild obj="testNodeParentNode" newChild="table" var="tableNode"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"table"'/>
 <assertSize collection="nodeList" size="2" id="tableSize2"/>
 <tBodies interface="HTMLTableElement" obj="tableNode" var="tbodiesnodeList"/>
