@@ -177,6 +177,10 @@ public class DOMTestInnerClass  {
     return test.size(collection);
   }
 
+  public DOMImplementation getImplementation() {
+    return test.getImplementation();
+  }
+
 
 }
 
