@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <!--getNamedItem-->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -42,5 +43,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <item interface="NodeList" obj="elementList" var="testEmployee" index="1"/>
 <attributes obj="testEmployee" var="attributes"/>
 <getNamedItem obj="attributes" var="districtNode" name='"lang"'/>
-<assertNull actual="districtNode" id="namednodemapReturnNullAssert"/>
+<assertNull actual="districtNode" id="langAttrNull"/>
 </test>

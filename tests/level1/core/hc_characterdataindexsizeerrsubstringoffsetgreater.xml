@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INDEX_SIZE_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6531BCCF"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-6531BCCF')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INDEX_SIZE_ERR'])"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=242"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -41,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="nameNode"/>
 <firstChild interface="Node" obj="nameNode" var="child"/>
-<assertDOMException id="characterdataIndexSizeErrSubstringOffsetGreaterAssert">
+<assertDOMException id="throw_INDEX_SIZE_ERR">
 <INDEX_SIZE_ERR>
 <substringData var="badString" obj="child" offset="40" count="3"/>
 </INDEX_SIZE_ERR>

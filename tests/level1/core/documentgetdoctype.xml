@@ -28,6 +28,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31"/>
 <!--   Node.nodeValue   -->
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
@@ -36,6 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeValue" type="DOMString"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <doctype obj="doc" var="docType"/>
+<assertNotNull actual="docType" id="docTypeNotNull"/>
 <name interface="DocumentType" obj="docType" var="docTypeName"/>
 <assertEquals actual="docTypeName" expected="&quot;staff&quot;" id="documentGetDocTypeAssert" ignoreCase="false"/>
 <nodeValue obj="docType" var="nodeValue"/>

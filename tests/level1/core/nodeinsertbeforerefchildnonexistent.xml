@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-952280727')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="refChild" type="Node"/>
@@ -43,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createElement obj="doc" tagName="&quot;refChild&quot;" var="refChild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="elementNode"/>
-<assertDOMException id="nodeInsertBeforeRefChildNonexistentAssert1">
+<assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>
 <insertBefore var="insertedNode" obj="elementNode" newChild="newChild" refChild="refChild"/>
 </NOT_FOUND_ERR>

@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INUSE_ATTRIBUTE_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D589198"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-D589198')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="oldAttribute" type="Attr"/>
@@ -40,8 +41,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"acronym"' var="addressElementList"/>
 <item interface="NodeList" obj="addressElementList" index="4" var="testAddress"/>
-<createAttribute obj="doc" var="oldAttribute" name='"oldAttribute"'/>
-<assertDOMException id="elementNotFoundErrAssert">
+<createAttribute obj="doc" var="oldAttribute" name='"title"'/>
+<assertDOMException id="throw_NOT_FOUND_ERR">
 <NOT_FOUND_ERR>
 <removeAttributeNode obj="testAddress" oldAttr="oldAttribute" var="attrAddress"/>
 </NOT_FOUND_ERR>

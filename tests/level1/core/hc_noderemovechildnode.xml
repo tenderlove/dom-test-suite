@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -27,9 +27,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <date qualifier="created">2002-06-09</date>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
+<var name="emList" type="NodeList"/>
 <var name="employeeNode" type="Node"/>
 <var name="childList" type="NodeList"/>
 <var name="oldChild" type="Node"/>
@@ -38,17 +40,36 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="length" type="int"/>
 <var name="removedChild" type="Node"/>
 <var name="removedName" type="DOMString"/>
+<var name="oldName" type="DOMString"/>
+<var name="nodeType" type="int"/>
+<var name="expected" type="List">
+<member>"strong"</member>
+<member>"code"</member>
+<member>"sup"</member>
+<member>"var"</member>
+<member>"acronym"</member>
+</var>
+<var name="actual" type="List"/>
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"p"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
 <childNodes obj="employeeNode" var="childList"/>
-<item interface="NodeList" obj="childList" index="0" var="oldChild"/>
+<getElementsByTagName interface="Element" var="emList" obj="employeeNode" tagname='"em"'/>
+<item interface="NodeList" obj="emList" index="1" var="oldChild"/>
+<nodeName var="oldName" obj="oldChild"/>
 <removeChild var="removedChild" obj="employeeNode" oldChild="oldChild"/>
 <nodeName obj="removedChild" var="removedName"/>
-<item interface="NodeList" obj="childList" index="0" var="child"/>
-<nodeName obj="child" var="childName"/>
-<length interface="NodeList" obj="childList" var="length"/>
 <assertEquals actual="removedName" expected='"#text"' ignoreCase="false" id="removedName"/>
-<assertEquals actual="childName" expected='"em"' ignoreCase="auto" id="childName"/>
-<assertEquals actual="length" expected="12" ignoreCase="false" id="length"/>
+<for-each collection="childList" member="child">
+<nodeType var="nodeType" obj="child"/>
+<nodeName var="childName" obj="child"/>
+<if><equals expected="1" actual="nodeType"/>
+<append collection="actual" obj="childName"/>
+<else>
+<assertEquals expected="3" actual="nodeType" id="textNodeType" ignoreCase="false"/>
+<assertEquals expected='"#text"' actual="childName" id="textNodeName" ignoreCase="false"/>
+</else>
+</if>
+</for-each>
+<assertEquals actual="actual" expected='expected' ignoreCase="auto" id="childNames"/>
 </test>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -30,6 +30,7 @@ employee.  This should raise the desired exception.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INUSE_ATTRIBUTE_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-1025163788')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="elementList" type="NodeList"/>
@@ -48,7 +49,7 @@ employee.  This should raise the desired exception.
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname='"acronym"'/>
 <item interface="NodeList" obj="elementList" var="testNode" index="2"/>
 <attributes obj="testNode" var="attributes"/>
-<assertDOMException id="namednodemapInUseAttributeErrAssert">
+<assertDOMException id="throw_INUSE_ATTRIBUTE_ERR">
 <INUSE_ATTRIBUTE_ERR>
 <setNamedItem var="setNode" interface="NamedNodeMap" obj="attributes" arg="domesticAttr"/>
 </INUSE_ATTRIBUTE_ERR>

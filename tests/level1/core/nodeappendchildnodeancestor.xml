@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -31,6 +31,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-184E7107')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='HIERARCHY_REQUEST_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newChild" type="Node"/>
@@ -41,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <documentElement obj="doc" var="newChild"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;employee&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="1" var="employeeNode"/>
-<assertDOMException id="nodeAppendChildNodeAncestorAssert1">
+<assertDOMException id="throw_HIERARCHY_REQUEST_ERR">
 <HIERARCHY_REQUEST_ERR>
 <appendChild var="appendedChild" obj="employeeNode" newChild="newChild"/>
 </HIERARCHY_REQUEST_ERR>

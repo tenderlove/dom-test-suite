@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2003 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -30,12 +30,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='INVALID_CHARACTER_ERR'])"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-392B75AE')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249"/>
 </metadata>
 <hasFeature feature='"XML"'/>
 <var name="doc" type="Document"/>
 <var name="badEntityRef" type="EntityReference"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<assertDOMException id="documentInvalidCharacterExceptionCreateEntRefAssert">
+<assertDOMException id="throw_INVALID_CHARACTER_ERR">
 <INVALID_CHARACTER_ERR>
 <createEntityReference var="badEntityRef" obj="doc" name="&quot;invalid^Name&quot;"/>
 </INVALID_CHARACTER_ERR>
