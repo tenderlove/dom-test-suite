@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - OPTGROUP</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <form id="Form1" action="test.pl" method="post">
 <p>
 <select name="select2">

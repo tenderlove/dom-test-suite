@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - TEXTAREA</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <form id="form1" action="./files/getData.pl" method="post">
 <p>
 <textarea name="text1" cols="20" rows="7" accesskey="c" tabindex="5">TEXTAREA1</textarea>

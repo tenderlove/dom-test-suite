@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - IFRAME</title>
 </head>
-<body>
+<body onload="parent.loadComplete()">
 <iframe id="Iframe1" name="Iframe1" src="iframe.html">IFRAME1</iframe>
 <iframe id="Iframe2" src="frame.html" name="Iframe2">IFRAME2</iframe>
 </body>

@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - MENU</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <menu compact="compact">
 <li>Interview</li>
 <li>Paperwork</li>

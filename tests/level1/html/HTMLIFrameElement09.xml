@@ -39,5 +39,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <src interface="HTMLIFrameElement" obj="testNode" var="vsrc"/>
-<assertURIEquals actual="vsrc" path='"//www.w3.org/Icons/right"' id="srcLink"/>
+<assertURIEquals actual="vsrc" name='"right"' id="srcLink"/>
 </test>

@@ -417,7 +417,6 @@ IFrameBuilder.prototype.preload = function(frame, varname, url) {
   var srcname = url + getSuffix(this.contentType);
   iframe.setAttribute("name", srcname);
   iframe.setAttribute("src", fileBase + srcname);
-  jsUnitSetOnLoad(iframe, loadComplete);
   document.getElementsByTagName("body").item(0).appendChild(iframe);
   return 0; 
 }

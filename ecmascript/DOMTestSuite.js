@@ -45,6 +45,7 @@ function onImplementationChange() {
 
 
 function update() {
+    var svgOption;
     updateTrueFalse(document.forms[0].asynchronous, builder.async, !builder.supportsAsyncChange);
     updateImplementationAttribute(document.forms[0].expandEntityReferences, "expandEntityReferences");
     updateImplementationAttribute(document.forms[0].ignoringElementContentWhitespace, "ignoringElementContentWhitespace");
@@ -88,8 +89,14 @@ function update() {
     if (document.location.href.indexOf('/html/') != -1)
     {
       // HTML test suites do not have SVG files
-      document.getElementById('svgpluginImpl').disabled = true;
-      document.getElementById('contentTypeSVG').disabled = true;
+      svgOption = document.getElementById('svgpluginImpl');
+      if (svgOption != null) {
+         svgOption.disabled = true;
+      }
+      svgOption = document.getElementById('contentTypeSVG');
+      if (svgOption != null) {
+         svgOption.disabled = true;
+      }
     }
     
 }

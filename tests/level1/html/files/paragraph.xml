@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - PARAGRAPH</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p align="center">
 TEXT
 </p>

@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - BR</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <table id="table-1" border="4" frame="border" cellpadding="2" cellspacing="2" summary="HTML Control Table" rules="all">
 <caption>Table Caption</caption>
 <thead align="center" valign="middle">
@@ -53,7 +53,7 @@
 <select id="selectId" dir="ltr" tabindex="7" name="select1" multiple="multiple" size="1">
 <option selected="selected" value="EMP1">EMP10001</option>
 <option>EMP10002</option>
-<option>EMP10003</option> 
+<option>EMP10003</option>
 <option>EMP10004</option>
 <option>EMP10005</option>
 </select>

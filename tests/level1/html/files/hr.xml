@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - HR</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <hr align="center" noshade="noshade" size="5" width="400"/>
 </body>
 </html>

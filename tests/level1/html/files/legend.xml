@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - LEGEND</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <form id="form1" action="./files/getData.pl" method="post">
 <fieldset>
 <legend accesskey="b" align="top">Enter Password1:</legend>

@@ -7,7 +7,7 @@
 <style media="screen" type="text/css"></style>
 <title>NIST DOM HTML Test - BR</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p>Hello, World.</p>
 </body>
 </html>

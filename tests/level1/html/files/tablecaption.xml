@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - BR</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <table summary="Table 1">
 <caption align="top">CAPTION 1</caption>
 <tr>

@@ -6,7 +6,7 @@
 <head profile="http://xw2k.sdct.itl.nist.gov/brady/dom/files/profile">
 <title>NIST DOM HTML Test - HEAD</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p>Hello, World.</p>
 </body>
 </html>

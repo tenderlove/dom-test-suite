@@ -8,7 +8,7 @@
 <link charset="Latin-1" target="dynamic" href="./files/glossary.html" hreflang="en" media="screen" rel="Glossary" type="text/html"/>
 <link charset="Latin-1" href="./files/style1.css" hreflang="en" media="screen" rev="stylesheet" type="text/css"/>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p>
 <br/>
 </p>

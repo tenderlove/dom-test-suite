@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - Anchor</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p>
 <a id="Anchor" dir="ltr" href="./pix/submit.gif" accesskey="g" type="image/gif" coords="0,0,100,100" shape="rect" rel="GLOSSARY" rev="STYLESHEET" hreflang="en" charset="US-ASCII" tabindex="22" name="Anchor">View Submit Button</a>
 </p>

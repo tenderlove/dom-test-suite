@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - ULIST</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <ol>
 <li>EMP0001
 <ul compact="compact" type="disc">
@@ -16,9 +16,9 @@
 <dd>56,000</dd>
 <dd>Female</dd>
 <dd>1230 North Ave. Dallas, Texas 98551</dd>
-</dl> 
+</dl>
 </li>
-</ul> 
+</ul>
 </li>
 <li>EMP0002
 <ul>

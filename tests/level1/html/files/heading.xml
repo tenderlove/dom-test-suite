@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - HEADING</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <h1 align="center">Head Element 1</h1>
 <h2 align="left">Head Element 2</h2>
 <h3 align="right">Head Element 3</h3>

@@ -14,7 +14,7 @@
 <head>
 <title>replaceWholeText sample</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p>bar</p>
 </body>
 </html>

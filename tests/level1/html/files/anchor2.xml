@@ -6,7 +6,7 @@
 <head>
 <title>NIST DOM HTML Test - Anchor</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <p>
 <a href="./pix/submit.gif" target="dynamic">View Submit Button</a>
 </p>

@@ -6,13 +6,13 @@
 <head>
 <title>NIST DOM HTML Test - SELECT</title>
 </head>
-<body> 
+<body onload="parent.loadComplete()">
 <form id="form1" action="./files/getData.pl" method="post">
 <p>
 <select id="selectId" dir="ltr" tabindex="7" name="select1" multiple="multiple" size="1">
 <option selected="selected" value="EMP1">EMP10001</option>
 <option>EMP10002</option>
-<option>EMP10003</option> 
+<option>EMP10003</option>
 <option>EMP10004</option>
 <option>EMP10005</option>
 </select>
