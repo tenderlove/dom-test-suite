@@ -13,7 +13,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.9  2001-08-10 18:53:25  dom-ts-3
+Revision 1.10  2001-08-14 18:49:35  dom-ts-4
+Changed location of resource files
+Remove spurious required ID's from DTD
+Added xmlns:xsi and xsi:schema location to DTD
+Removed package and targetURI attributes from Schema/DTD
+
+Revision 1.9  2001/08/10 18:53:25  dom-ts-3
 
 Attempt to make indentation more consistent, and limit line length to about
 80 characters, for those of us who still need to live in an 80-column world
@@ -97,6 +103,8 @@ All implementation conditions combined into implementationAttribute element
 		<arg line="'s/_xmlns/xmlns/g' ${build.dir}/_dom1.xsd"/>
 	</exec>
 	<delete file="${build.dir}/_dom1.xsd"/>
+	<copy file="${build.dir}/dom1.xsd" todir="${tests.dir}/level1/core"/>
+
 	<!-- xmlvalidate file="${build.dir}/dom1.xsd" lenient="no"
 	     failonerror="yes"
 	     classname="org.apache.xerces.parsers.SAXParser"/ -->
@@ -311,6 +319,10 @@ All implementation conditions combined into implementationAttribute element
 	       extension=".java">
 		<param name="interfaces-docname"
 		       expression="../${build.dir}/dom1-interfaces.xml"/>
+		<param name="package"
+		       expression="org.w3c.domts.level1.core"/>
+		<param name="target-uri-base"
+		       expression="http://www.w3.org/2001/DOM-Test-Suite/level1/core/"/>
 	</style>
 </target>
 
@@ -335,7 +347,7 @@ All implementation conditions combined into implementationAttribute element
 		<fileset dir="${java.build.dir}"
 		         includes="org/w3c/domts/level1/core/*"
 		         excludes="*.bak"/>
-		<fileset dir="files/level1/core" excludes="*.bak"/>
+		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
 		<fileset dir="java"
 		         includes="org/w3c/domts/*" excludes="*.bak"/>
 	</jar>

@@ -383,19 +383,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						<xsd:group ref="statement" maxOccurs="unbounded"/>
 					</xsd:sequence>
 					<xsd:attribute name="id" type="xsd:ID" use="optional"/>
-					<xsd:attribute name="targetURI" type="absoluteURI" use="optional">
-						<xsd:annotation>
-							<xsd:documentation>Intended URI identifier for the test.</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
 					<xsd:attribute name="name" type="className" use="required">
 						<xsd:annotation>
 							<xsd:documentation>Used in method name in generated code.</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-					<xsd:attribute name="package" type="packageName" use="optional">
-						<xsd:annotation>
-							<xsd:documentation>May be used  in code generation.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:attribute>
 				</xsd:complexType>
@@ -426,19 +416,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 						</xsd:choice>
 					</xsd:sequence>
 					<xsd:attribute name="id" type="xsd:ID" use="optional"/>
-					<xsd:attribute name="targetURI" type="absoluteURI" use="required">
-						<xsd:annotation>
-							<xsd:documentation>Intended URI identifier for the suite.</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
 					<xsd:attribute name="name" type="className" use="required">
 						<xsd:annotation>
 							<xsd:documentation>Used in method name in generated code.</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-					<xsd:attribute name="package" type="packageName" use="optional">
-						<xsd:annotation>
-							<xsd:documentation>May be used  in code generation.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:attribute>
 				</xsd:complexType>

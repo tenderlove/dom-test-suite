@@ -218,7 +218,7 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 					<xsl:text>
 &lt;!ELEMENT </xsl:text><xsl:value-of select="$name"/><xsl:text> EMPTY &gt;
 &lt;!ATTLIST </xsl:text><xsl:value-of select="$name"/><xsl:text>
-    id ID #REQUIRED
+    id ID #IMPLIED
     obj CDATA #REQUIRED
 </xsl:text>
 
@@ -299,9 +299,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST test 
    xmlns CDATA #FIXED "<xsl:value-of select="$schema-namespace"/>"
    id ID #IMPLIED
-   targetURI CDATA #IMPLIED
    name CDATA #REQUIRED
-   package CDATA #IMPLIED
+   xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT package (metadata?, (test|suite)*)&gt;
@@ -314,9 +314,9 @@ This schema was generated from </xsl:text><xsl:value-of select="$source"/><xsl:t
 &lt;!ATTLIST suite
    xmlns CDATA #FIXED "<xsl:value-of select="$schema-namespace"/>"
    id ID #IMPLIED
-   targetURI CDATA #REQUIRED
    name CDATA #REQUIRED
-   package CDATA #IMPLIED
+   xmlns:xsi CDATA #FIXED "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation CDATA #IMPLIED
 &gt;
 
 &lt;!ELEMENT suite.member EMPTY&gt;
