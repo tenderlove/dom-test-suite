@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -24,7 +24,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     if there is any and it is available, or null otherwise.
 
     Retrieve the contentDocument attribute of the first FRAME element
-    and examine it's TITLE value.  
+    and examine its TITLE value.  
 </description>
 <contributor>Rick Rivello</contributor>
 <date qualifier="created">2002-07-03</date>

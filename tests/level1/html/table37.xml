@@ -24,7 +24,7 @@ Specifies the horizontal and vertical space between cell content and cell border
 </description>
 <contributor>Sivakiran Tummala</contributor>
 <date qualifier="created">2002-02-15</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html.html"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#ID-59162158"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>

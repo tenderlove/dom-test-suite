@@ -25,7 +25,7 @@ The value of attribute archive of the object element is read and checked against
 </description>
 <contributor>Sivakiran Tummala</contributor>
 <date qualifier="created">2002-02-15</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html.html"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#ID-47783837"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>

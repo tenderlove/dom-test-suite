@@ -25,6 +25,7 @@ Checks that Node.isSupported("hTmL", "2.0") returns true.
 </description>
 <date qualifier="created">2002-03-18</date>
 <subject resource="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports"/>
+<subject resource="http://www.w3.org/TR/DOM-Level-2-HTML/html#ID-62018039"/>
 </metadata>
 <var name="doc" type="Document"/>
 <var name="body" type="Element"/>

@@ -284,6 +284,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLFrameElement06.xml"/>
 <suite.member href="../../level1/html/HTMLFrameElement07.xml"/>
 <suite.member href="../../level1/html/HTMLFrameElement08.xml"/>
+<suite.member href="HTMLFrameElement09.xml"/>
 <suite.member href="../../level1/html/HTMLFrameSetElement01.xml"/>
 <suite.member href="../../level1/html/HTMLFrameSetElement02.xml"/>
 <suite.member href="../../level1/html/HTMLHRElement01.xml"/>
@@ -308,6 +309,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLIFrameElement08.xml"/>
 <suite.member href="../../level1/html/HTMLIFrameElement09.xml"/>
 <suite.member href="../../level1/html/HTMLIFrameElement10.xml"/>
+<suite.member href="HTMLIFrameElement11.xml"/>
 <suite.member href="../../level1/html/HTMLImageElement01.xml"/>
 <suite.member href="../../level1/html/HTMLImageElement02.xml"/>
 <suite.member href="../../level1/html/HTMLImageElement03.xml"/>
@@ -530,6 +532,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLTableElement31.xml"/>
 <suite.member href="../../level1/html/HTMLTableElement32.xml"/>
 <suite.member href="../../level1/html/HTMLTableElement33.xml"/>
+<suite.member href="HTMLTableElement34.xml"/>
 <suite.member href="HTMLTableElement35.xml"/>
 <suite.member href="HTMLTableElement36.xml"/>
 <suite.member href="HTMLTableElement37.xml"/>
@@ -606,12 +609,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <suite.member href="../../level1/html/HTMLTitleElement01.xml"/>
 <suite.member href="../../level1/html/HTMLUListElement01.xml"/>
 <suite.member href="../../level1/html/HTMLUListElement02.xml"/>
-<suite.member href="../../level1/html/documentgetdocumentelementhtml.xml"/>
-<suite.member href="../../level1/html/documenthtmlnull.xml"/>
-<suite.member href="../../level1/html/documentnotsupportederrcreatecdata.xml"/>
-<suite.member href="../../level1/html/documentnotsupportederrcreateentityref.xml"/>
-<suite.member href="../../level1/html/documentnotsupportederrcreatepi.xml"/>
-<suite.member href="../../level1/html/domimplementationfeaturehtml.xml"/>
 
 
      <suite.member href="../../level1/html/anchor01.xml"/>

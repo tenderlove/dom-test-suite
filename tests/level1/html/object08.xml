@@ -27,7 +27,7 @@ The value of attribute hspace of the object element is read and checked against 
 </description>
 <contributor>Sivakiran Tummala</contributor>
 <date qualifier="created">2002-02-15</date>
-<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html.html"/>
+<subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#ID-17085376"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=504"/>
 </metadata>
 <var name="nodeList" type="NodeList"/>
