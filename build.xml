@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.98  2003-07-18 03:20:52  dom-ts-4
+Revision 1.99  2003-09-23 03:44:21  dom-ts-4
+Per http://www.w3.org/Bugs/Public/show_bug.cgi?id=345
+
+Revision 1.98  2003/07/18 03:20:52  dom-ts-4
 Bug 277: Schema validation fixups for DOM L3 Validation tests
 
 Revision 1.97  2003/06/30 03:49:43  dom-ts-4
@@ -1006,7 +1009,7 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom1-html-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level1/html/files"/>
-	<copy dir="ecmascript" todir="${build.dir}/ecmascript/level1/html">
+	<copy todir="${build.dir}/ecmascript/level1/html">
         <fileset dir="ecmascript" includes="*.js"/>
     </copy>
     <copy todir="${build.dir}/ecmascript/level1/html/files">
@@ -1049,6 +1052,9 @@ All implementation conditions combined into implementationAttribute element
     <replace file="${build.dir}/ecmascript/jsunit/app/jsUnitCore.js" 
         token="top.xbDEBUG.on &amp;&amp; top.testManager"
         value="top != null &amp;&amp; top.xbDEBUG != null &amp;&amp; top.xbDEBUG.on &amp;&amp; top.testManager"/>
+    <replace file="${build.dir}/ecmascript/jsunit/app/jsUnitTestManager.js" 
+        token="SETUPAGE_INTERVAL"
+        value="SETUPPAGE_INTERVAL"/>
 </target>
 
 
