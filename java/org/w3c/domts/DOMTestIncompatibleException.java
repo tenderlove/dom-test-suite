@@ -12,7 +12,10 @@
 
   /*
  $Log: DOMTestIncompatibleException.java,v $
- Revision 1.2  2002-02-03 04:22:35  dom-ts-4
+ Revision 1.3  2002-06-03 23:48:48  dom-ts-4
+ Support for Events tests
+
+ Revision 1.2  2002/02/03 04:22:35  dom-ts-4
  DOM4J and Batik support added.
  Rework of parser settings
 
@@ -33,8 +36,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Curt Arnold
  */
 public class DOMTestIncompatibleException extends Exception {
-  private final Throwable exception;
-  private final DocumentBuilderSetting setting;
+  private final String msg;
 
 
   /**
@@ -42,18 +44,28 @@ public class DOMTestIncompatibleException extends Exception {
    *  or reflection exception
    */
   public DOMTestIncompatibleException(Throwable ex,DocumentBuilderSetting setting) {
-    exception = ex;
-    this.setting = setting;
+    if (ex != null) {
+        msg = ex.toString();
+    } else {
+        if (setting != null) {
+            msg = setting.toString();
+        } else {
+            msg = super.toString();
+        }
+    }
+  }
+
+  public DOMTestIncompatibleException(String feature, String version) {
+    StringBuffer buf = new StringBuffer("Implementation does not support feature \"");
+    buf.append(feature);
+    buf.append("\" version=\"");
+    buf.append(version);
+    buf.append("\".");
+    msg = buf.toString();
   }
 
   public String toString() {
-    if(exception != null) {
-      return exception.toString();
-    }
-    if(setting != null) {
-      return setting.toString();
-    }
-    return super.toString();
+    return msg;
   }
 
 }

@@ -12,7 +12,10 @@
 
   /*
  $Log: DOMTestFramework.java,v $
- Revision 1.6  2001-10-18 07:58:17  dom-ts-4
+ Revision 1.7  2002-06-03 23:48:48  dom-ts-4
+ Support for Events tests
+
+ Revision 1.6  2001/10/18 07:58:17  dom-ts-4
  assertURIEquals added
  Can now run from dom1-core.jar
 
@@ -55,11 +58,13 @@ public interface DOMTestFramework {
 	void assertEqualsIgnoreCase(DOMTestCase test, String assertID, List expected, List actual);
 	void assertEquals(DOMTestCase test, String assertID, String expected, String actual);
 	void assertEquals(DOMTestCase test, String assertID, int expected, int actual);
+	void assertEquals(DOMTestCase test, String assertID, boolean expected, boolean actual);
 	void assertEquals(DOMTestCase test, String assertID, double expected, double actual);
 	void assertEquals(DOMTestCase test, String assertID, Collection expected, Collection actual);
 	void assertNotEqualsIgnoreCase(DOMTestCase test, String assertID, String expected, String actual);
 	void assertNotEquals(DOMTestCase test, String assertID, String expected, String actual);
 	void assertNotEquals(DOMTestCase test, String assertID, int expected, int actual);
+	void assertNotEquals(DOMTestCase test, String assertID, boolean expected, boolean actual);
 	void assertNotEquals(DOMTestCase test, String assertID, double expected, double actual);
     void assertURIEquals(DOMTestCase test, String assertID, String scheme, String path, String host, String file, String query, String fragment, Boolean isAbsolute, String actual) throws java.net.MalformedURLException; 
 
@@ -70,6 +75,7 @@ public interface DOMTestFramework {
 	boolean equalsIgnoreCase(List expected, List actual);
 	boolean equals(String expected, String actual);
 	boolean equals(int expected, int actual);
+	boolean equals(boolean expected, boolean actual);
 	boolean equals(double expected, double actual);
 	boolean equals(Collection expected, Collection actual);
 	boolean equals(List expected, List actual);

@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestCaseAdapter.java,v $
- Revision 1.3  2001-10-18 07:58:17  dom-ts-4
+ Revision 1.4  2002-06-03 23:48:48  dom-ts-4
+ Support for Events tests
+
+ Revision 1.3  2001/10/18 07:58:17  dom-ts-4
  assertURIEquals added
  Can now run from dom1-core.jar
 
@@ -173,6 +176,10 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
     assertEquals(assertID,expected,actual);
   }
 
+  public void assertEquals(DOMTestCase test, String assertID, boolean expected, boolean actual) {
+    assertEquals(assertID,expected,actual);
+  }
+
   public void assertEquals(DOMTestCase test, String assertID, double expected, double actual) {
     if(expected != actual) {
       assertEquals(assertID,String.valueOf(expected), String.valueOf(actual));
@@ -220,6 +227,11 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
   public void assertNotEquals(DOMTestCase test, String assertID, int expected, int actual) {
     assertTrue(assertID,expected !=actual);
   }
+
+  public void assertNotEquals(DOMTestCase test, String assertID, boolean expected, boolean actual) {
+    assertTrue(assertID,expected !=actual);
+  }
+
 
   public void assertNotEquals(DOMTestCase test, String assertID, double expected, double actual) {
     if(expected == actual) {
@@ -358,6 +370,10 @@ public class JUnitTestCaseAdapter extends TestCase implements DOMTestFramework {
   }
 
   public boolean equals(int expected, int actual) {
+    return expected == actual;
+  }
+
+  public boolean equals(boolean expected, boolean actual) {
     return expected == actual;
   }
 

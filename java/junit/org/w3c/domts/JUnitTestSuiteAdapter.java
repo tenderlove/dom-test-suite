@@ -12,7 +12,10 @@
 
  /*
  $Log: JUnitTestSuiteAdapter.java,v $
- Revision 1.1  2001-07-23 04:52:20  dom-ts-4
+ Revision 1.2  2002-06-03 23:48:48  dom-ts-4
+ Support for Events tests
+
+ Revision 1.1  2001/07/23 04:52:20  dom-ts-4
  Initial test running using JUnit.
 
  */
@@ -37,7 +40,17 @@ public class JUnitTestSuiteAdapter extends TestSuite implements DOMTestSink  {
     try {
       Constructor testConstructor = testclass.getConstructor(
           new Class[] { DOMTestDocumentBuilderFactory.class } );
-      Object domtest = testConstructor.newInstance(new Object[] { factory });
+        //
+        //   since this is done with reflection 
+        //     any exception on construction is wrapped with
+        //     an InvocationTargetException and must be unwrapped
+      Object domtest;
+      try {
+        domtest = testConstructor.newInstance(new Object[] { factory });
+      } catch(InvocationTargetException ex) {
+        throw ex.getTargetException();
+      } 
+
       if(domtest instanceof DOMTestCase) {
         TestCase test = new JUnitTestCaseAdapter((DOMTestCase) domtest);
         addTest(test);
@@ -49,7 +62,7 @@ public class JUnitTestSuiteAdapter extends TestSuite implements DOMTestSink  {
         }
       }
     }
-    catch(Exception ex) {
+    catch(Throwable ex) {
       if(!(ex instanceof DOMTestIncompatibleException)) {
         ex.printStackTrace();
       }

@@ -12,7 +12,10 @@
 
  /*
  $Log: DOMTestCase.java,v $
- Revision 1.11  2002-02-03 04:22:35  dom-ts-4
+ Revision 1.12  2002-06-03 23:48:48  dom-ts-4
+ Support for Events tests
+
+ Revision 1.11  2002/02/03 04:22:35  dom-ts-4
  DOM4J and Batik support added.
  Rework of parser settings
 
@@ -211,6 +214,12 @@ public abstract class DOMTestCase extends DOMTest  {
   public void assertEquals(String assertID, double expected, double actual) {
     framework.assertEquals(this, assertID, expected,actual);
   }
+
+  public void assertEquals(String assertID, boolean expected, boolean actual) {
+    framework.assertEquals(this, assertID, expected,actual);
+  }
+
+
 
   public void assertEquals(String assertID, Collection expected, NodeList actual) {
     Collection actualList = new ArrayList();
