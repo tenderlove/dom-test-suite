@@ -168,6 +168,24 @@ function toUpperCaseArray(expected) {
     return upperCased;
 }
 
+function toLowerArray(expected) {
+    var lowerCased = new Array(expected.length);
+    for(var i = 0; i < expected.length; i++) {
+        if (expected[i].substring(0,1) != "#") {
+            lowerCased[i] = expected[i].toLowerCase();
+        } else {
+            lowerCased[i] = expected[i];
+        }
+    }
+    return lowerCased;
+}
+
+// size() used by assertSize element
+function size(collection)
+{
+  return collection.length;
+}
+
 function getSuffix(contentType) {
     switch(contentType) {
         case "text/html":
