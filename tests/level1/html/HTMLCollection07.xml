@@ -43,7 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertSize collection="nodeList" size="1" id="Asize"/>
 <item interface="NodeList" obj="nodeList" var="testNode" index="0"/>
 <rows interface="HTMLTableElement" obj="testNode" var="rowsnodeList"/>
-<item interface="NodeList" obj="rowsnodeList" var="rowNode" index="3"/>
+<item interface="HTMLCollection" obj="rowsnodeList" var="rowNode" index="3"/>
 <rowIndex interface="HTMLTableRowElement" obj="rowNode" var="vrowindex"/>
 <assertEquals actual="vrowindex" expected="3" id="rowIndexLink" ignoreCase="false"/>
 </test>
