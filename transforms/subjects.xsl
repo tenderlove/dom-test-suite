@@ -37,11 +37,11 @@ saxon -o subjects.xml wd-dom.xml subjects.xsl
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     <xsl:param name="specURI" select="/spec/header/publoc/loc[1]/@href"/>
+     <xsl:param name="specTitle" select="/spec/header/title"/>
 
 	<xsl:output method="xml" indent="yes"/>
 
-	<xsl:variable name="specURI" select="/spec/header/publoc/loc[1]/@href"/>
-	<xsl:variable name="specTitle" select="/spec/header/title"/>
 
 	<!--  match document root    -->
 	<xsl:template match="/">
