@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -46,11 +46,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="true"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
+<assertNotNull actual="entities" id="entitiesNotNull"/>
 <getNamedItem var="entity" obj="entities" name='"ent1"'/>
 <getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"address"' interface="Document"/>
 <item var="element" obj="elementList" index="0" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
-<assertDOMException id="namednodemapsetnameditemns10_entity">
+<assertDOMException id="throw_HIERARCHY_REQUEST_ERR">
 <HIERARCHY_REQUEST_ERR>
 <setNamedItemNS var="newNode" obj="attributes" arg="entity"/>
 </HIERARCHY_REQUEST_ERR>

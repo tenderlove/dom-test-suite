@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="docImported" type="Document"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
-<assertDOMException id="documentimportnode06">
+<assertDOMException id="throw_NOT_SUPPORTED_ERR">
 <NOT_SUPPORTED_ERR>
 <importNode var="docImported" obj="doc" importedNode="doc" deep="false"/>
 </NOT_SUPPORTED_ERR>

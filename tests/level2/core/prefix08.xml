@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -42,17 +42,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRef" type="Node"/>
 <var name="entElement" type="Node"/>
 <var name="createdNode" type="Node"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="staff" willBeModified="true"/>
-<if>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"gender"' var="genderList"/>
 <item interface="NodeList" obj="genderList" index="2" var="genderNode"/>
 <firstChild interface="Node" obj="genderNode" var="entRef"/>
-<else>
-<createEntityReference var="entRef" name='"ent4"' obj="doc"/>
-</else>
+<nodeType var="nodeType" obj="entRef"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="entRef" name='"ent4"' obj="doc"/>
+	<assertNotNull actual="entRef" id="createdEntRefNotNull"/>
 </if>
-<assertNotNull actual="entRef" id="entityRef"/>
 <firstChild interface="Node" obj="entRef" var="entElement"/>
 <assertNotNull actual="entElement" id="entElement"/>
 <createElement obj="doc" tagName='"text3"' var="createdNode"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -63,7 +63,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementation var="domImpl" obj="doc" />
 <doctype var="docType" obj="doc"/>
 <createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="docTypeNull"/>
-<notations var="nodeMap" obj="docType"/>		
+<notations var="nodeMap" obj="docType"/>	
+<assertNotNull actual="nodeMap" id="notationsNotNull"/>	
 <getNamedItem var="notation1" obj="nodeMap" name='"notation1"'/>		
 <getNamedItem var="notation2" obj="nodeMap" name='"notation2"'/>		
 <importNode  var="notationImp1" obj="doc" importedNode="notation1" deep="true"/>

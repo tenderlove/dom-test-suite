@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -38,6 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" tagname='"emp:employee"' var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testEmployee"/>
+<assertNotNull actual="testEmployee" id="empEmployeeNotNull"/>
 <prefix obj="testEmployee" var="prefix"/>
 <assertEquals actual="prefix" expected='"emp"' id="prefix" ignoreCase="false"/>
 </test>

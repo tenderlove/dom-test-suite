@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -50,6 +50,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="aNewDoc" href="staffNS" willBeModified="true"/>
 <doctype obj="aNewDoc" var="docType"/>
 <entities obj="docType" var="entityList"/>
+<assertNotNull actual="entityList" id="entitiesNotNull"/>
 <getNamedItem obj="entityList" var="entity2" name='"ent6"'/>
 <importNode obj="doc" var="entity1" importedNode="entity2" deep="false"/>
 <ownerDocument obj="entity1" var="ownerDocument"/>

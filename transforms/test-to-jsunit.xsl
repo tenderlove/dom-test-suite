@@ -150,6 +150,7 @@ function loadComplete() {
             	<xsl:choose>
             		<!--  theses files don't have [X]HTML equivalents   -->
             		<xsl:when test="@href = 'staff'"/>
+            		<xsl:when test="@href = 'staff2'"/>
             		<xsl:when test="@href = 'nodtdstaff'"/>
             		<xsl:when test="@href = 'staffNS'"/>
             		<xsl:when test="@href = 'datatype-normalization'"/>

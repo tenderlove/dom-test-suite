@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -48,16 +48,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="child2" type="Node"/>
 <var name="attributes" type="NamedNodeMap"/>
 <var name="removedNode" type="Node"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
-<if>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddress" index="2"/>
 <childNodes obj="testAddress" var="nList"/>
 <item interface="NodeList" obj="nList" var="child" index="0"/>
-<else>
-<createEntityReference var="child" name='"ent4"' obj="doc"/>
-</else>
+<nodeType var="nodeType" obj="child"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="child" name='"ent4"' obj="doc"/>
+	<assertNotNull actual="child" id="createdEntRefNotNull"/>
 </if>
 <childNodes obj="child" var="n2List"/>
 <item interface="NodeList" obj="n2List" var="child2" index="0"/>

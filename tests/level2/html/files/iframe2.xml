@@ -5,6 +5,8 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
 <title>NIST DOM HTML Test - IFRAME2</title>
+<!--  required by frame contents  -->
+<script type="text/javascript">function loadComplete() { }</script>
 </head>
 <body onload="parent.loadComplete()">
 <iframe id="Iframe1" name="Iframe1" src="iframe.html">IFRAME1</iframe>

@@ -57,7 +57,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <attributes var="attributesAlt" obj="elementAlt"/>
 <getNamedItemNS var="attr" obj="attributesAlt" namespaceURI="nullNS" localName='"street"'/>
 <removeNamedItemNS var="newNode" obj="attributesAlt" namespaceURI="nullNS" localName='"street"'/>
-<assertDOMException id="namednodemapsetnameditemns03">
+<assertDOMException id="throw_WRONG_DOCUMENT_ERR">
 <WRONG_DOCUMENT_ERR>
 <setNamedItemNS var="newNode" obj="attributes" arg="attr"/>
 </WRONG_DOCUMENT_ERR>

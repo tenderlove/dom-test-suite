@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001-2003 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -39,5 +39,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="docType" obj="domImpl" qualifiedName='"l2:root"' publicId="nullNS" systemId="nullNS" />
 <internalSubset var="internal" obj="docType"/>
-<assertNull actual="internal" id="documenttypeinternalSubset01"/>
+<assertNull actual="internal" id="internalSubsetNull"/>
 </test>

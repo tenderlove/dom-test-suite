@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -45,16 +45,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="gen" type="Node"/>
 <var name="gList" type="NodeList"/>
 <var name="genElement" type="Element"/>
+<var name="nodeType" type="int"/>
 <load var="doc" href="staffNS" willBeModified="true"/>
-<if>
-<implementationAttribute name="expandEntityReferences" value="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="genderList" tagname="&quot;gender&quot;"/>
 <item interface="NodeList" obj="genderList" var="gender" index="2"/>
 <childNodes obj="gender" var="genList"/>
 <item interface="NodeList" obj="genList" var="gen" index="0"/>
-<else>
-<createEntityReference var="gen" name='"ent4"' obj="doc"/>
-</else>
+<nodeType var="nodeType" obj="gen"/>
+<if><equals actual="nodeType" expected="1" ignoreCase="false"/>
+	<createEntityReference var="gen" name='"ent4"' obj="doc"/>
+	<assertNotNull actual="gen" id="createdEntRefNotNull"/>
 </if>
 <childNodes obj="gen" var="gList"/>
 <item interface="NodeList" obj="gList" var="genElement" index="0"/>

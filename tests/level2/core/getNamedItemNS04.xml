@@ -37,6 +37,7 @@ getNamedItemNS.
 <load var="doc" href="staffNS" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <notations var="notations" obj="docType"/>
+<assertNotNull actual="notations" id="notationsNotNull"/>
 <getNamedItemNS var="notation" obj="notations" namespaceURI="nullNS" localName='"notation1"'/>
 <assertNull actual="notation" id="notationNull"/>
 </test>

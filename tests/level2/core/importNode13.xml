@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -48,6 +48,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="aNewDoc" href="staffNS" willBeModified="true"/>
 <doctype obj="aNewDoc" var="doc1Type"/>
 <notations obj="doc1Type" var="notationList"/>
+<assertNotNull actual="notationList" id="notationsNotNull"/>
 <getNamedItem obj="notationList" var="notation" name='"notation1"'/>
 <importNode obj="doc" var="aNode" importedNode="notation" deep="false"/>
 <ownerDocument obj="aNode" var="ownerDocument"/>

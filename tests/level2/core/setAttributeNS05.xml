@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -47,6 +47,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="true"/>
 <getElementsByTagName interface="Document" obj="doc" var="elementList" tagname="&quot;emp:address&quot;"/>
 <item interface="NodeList" obj="elementList" var="testAddr" index="0"/>
+<assertNotNull actual="testAddr" id="empAddrNotNull"/>
 <setAttributeNS obj="testAddr" namespaceURI="namespaceURI" qualifiedName="qualifiedName" value="&quot;&lt;newValue&gt;&quot;"/>
 <getAttributeNS obj="testAddr" var="resultAttr" namespaceURI="namespaceURI" localName="localName"/>
 <assertEquals actual="resultAttr" expected="&quot;&lt;newValue&gt;&quot;" id="throw_Equals" ignoreCase="false"/>

@@ -2,7 +2,7 @@
 
 <!--
 
-Copyright (c) 2001 World Wide Web Consortium, 
+Copyright (c) 2001-2004 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University).  All 
 Rights Reserved.  This program is distributed under the W3C's Software
@@ -46,6 +46,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createAttributeNS obj="doc" var="newAttribute" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
+<assertNotNull actual="testAddr" id="empAddrNotNull"/>
 <setAttributeNodeNS obj="testAddr" var="districtAttr" newAttr="newAttribute"/>
 <getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:address&quot;" var="elementList"/>
 <item interface="NodeList" obj="elementList" index="0" var="testAddr"/>
