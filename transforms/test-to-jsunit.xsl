@@ -28,7 +28,6 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 	<!--  relative to transform   -->
 
     <xsl:import href="test-to-ecmascript.xsl"/>
-    <xsl:variable name="jsunitapp">../../../../lib/jsunit/app/</xsl:variable>
 
 
 <xsl:output method="html"/>
@@ -36,10 +35,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
 <xsl:template match="/">
     <html>
         <head>
-            <link rel="stylesheet" href="{$jsunitapp}jsUnitStyle.css"/>
             <title>JsUnit Assertion Tests</title>
-            <script language="JavaScript" src="{$jsunitapp}jsUnitCore.js"></script>
-            <script language="JavaScript" src="{$jsunitapp}jsUnitUtility.js"></script>
             <script language="JavaScript" src="DOMTestCase.js"></script>
             <script language="JavaScript">
                 <xsl:apply-templates/>
