@@ -22,8 +22,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <creator>IBM</creator>
 <description>
 	Invoke replaceWholeText on an new Text Node to replace its value with an 
-	empty value.  Verify the repalceWholeText by verifying the values returned by 
-	wholeText.
+	empty value.   
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-05-30</date>
@@ -36,6 +35,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="hc_staff" willBeModified="true"/>
 <createTextNode var="textNode" obj="doc" data='"New Text"'/>
 <replaceWholeText obj="textNode" var="replacedText" content='""'/>
-<wholeText var="wholeText" obj="replacedText"/>
-<assertEquals actual="wholeText" expected='""' id="textreplacewholetext04" ignoreCase="false"/>
+<assertNull actual="replacedText" id="retvalIsNull"/>
 </test>
