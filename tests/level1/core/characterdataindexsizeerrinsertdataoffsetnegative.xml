@@ -42,7 +42,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <firstChild interface="Node" obj="nameNode" var="child"/>
 <assertDOMException id="throws_INDEX_SIZE_ERR">
 <INDEX_SIZE_ERR>
-<replaceData obj="child" offset="-5" arg="&quot;ABC&quot;" count="3"/>
+<insertData obj="child" offset="-5" arg="&quot;ABC&quot;"/>
 </INDEX_SIZE_ERR>
 </assertDOMException>
 </test>

@@ -44,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <firstChild interface="Node" obj="nameNode" var="child"/>
 <assertDOMException id="throw_INDEX_SIZE_ERR">
 <INDEX_SIZE_ERR>
-<deleteData obj="child" offset="40" count="3"/>
+<replaceData obj="child" offset="40" count="3" arg="&quot;ABC&quot;"/>
 </INDEX_SIZE_ERR>
 </assertDOMException>
 </test>
