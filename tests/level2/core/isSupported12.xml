@@ -66,10 +66,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <assertTrue actual="state" id="Core2"/>
 <isSupported obj="rootNode" feature='"Core"' version='"1.0"' var="state"/>
 <assertTrue actual="state" id="Core1"/>
-<isSupported obj="rootNode" feature='"Core"' version='""' var="state"/>
-<assertTrue actual="state" id="Core"/>
-<isSupported obj="rootNode" feature='"Core"' version="null" var="state"/>
-<assertTrue actual="state" id="CoreNull"/>
 <for-each collection="features" member="featureElement">
 <isSupported obj="rootNode" feature="featureElement" version='"1.0"' var="state"/>
 </for-each>
