@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.101  2003-11-10 07:34:13  dom-ts-4
+Revision 1.102  2003-11-10 21:39:11  dom-ts-4
+Bug 230, update to 2003-06-19 LS draft (second iteration)
+
+Revision 1.101  2003/11/10 07:34:13  dom-ts-4
 Update for 2003-11-07 CRs (bug 375)
 
 Revision 1.100  2003/10/24 17:09:38  dom-ts-4
@@ -1916,16 +1919,16 @@ All implementation conditions combined into implementationAttribute element
 	       style="${transforms.dir}/dom-to-dtd.xsl">
 		<param name="schema-namespace"
 		   expression="http://www.w3.org/2001/DOM-Test-Suite/Level-3"/>
-        <param name="additional-types" expression="|DOMInputStream|DOMOutputStream|DOMReader"/>
+        <param name="additional-types" expression="|LSInputStream|LSOutputStream|LSReader|LSWriter"/>
 	</style>
-	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls"/>
-    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls"/>
-	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/xpath"/>
-    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/xpath"/>
-	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core"/>
-    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/core"/>
-	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/validation"/>
-    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/validation"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/ls" overwrite="true"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/ls" overwrite="true"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/xpath" overwrite="true"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/xpath" overwrite="true"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/core" overwrite="true"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/core" overwrite="true"/>
+	<copy file="${build.dir}/dom3.dtd" todir="${tests.dir}/level3/validation" overwrite="true"/>
+    <copy file="${transforms.dir}/test-to-html.xsl" todir="${tests.dir}/level3/validation" overwrite="true"/>
 </target>
 
 <target name="dom3-ls-validate-tests" depends="dom3-dtd">

@@ -40,5 +40,5 @@ PURPOSE.
 <assign var="elemVAL" value="root"/>
 <allowedAttributes obj="elemVAL" var="attrlist"/>
 <length var="allowedAttributesLength" obj="attrlist" interface="NameList"/>
-<assertEquals actual="allowedAttributesLength" expected="2" id="allowedAttributes"/>
+<assertEquals actual="allowedAttributesLength" expected="2" id="allowedAttributes" ignoreCase="false"/>
 </test>

@@ -40,7 +40,7 @@ PURPOSE.
 <assign var="nodeVAL" value="elem"/>
 <enumeratedValues interface="NodeEditVAL" obj="nodeVAL" var="strlist"/>
 <length var="enumeratedValuesLength" obj="strlist" interface="DOMStringList"/>
-<assertEquals actual="enumeratedValuesLength" expected="5" id="enumeratedValues"/>
+<assertEquals actual="enumeratedValuesLength" expected="5" id="enumeratedValues" ignoreCase="false"/>
 </test>
 
 

@@ -37,6 +37,6 @@ PURPOSE.
 <assign var="docVAL" value="doc"/>
 <getDefinedElements obj="docVAL" interface="DocumentEditVAL" namespaceURI="nullNS" var="nameList"/>
 <length var="definedElementsLength" obj="nameList" interface="NameList"/>
-<assertEquals expected="8" actual="definedElementsLength" id="definedElements"/>
+<assertEquals expected="8" actual="definedElementsLength" id="definedElements" ignoreCase="false"/>
 </test>
 

@@ -38,7 +38,7 @@ PURPOSE.
 <assign var="elemVAL" value="root"/>
 <allowedChildren obj="elemVAL" var="nlist"/>
 <length var="allowedChildrenLength" obj="nlist" interface="NameList"/>
-<assertEquals actual="allowedChildrenLength" expected="7" id="allowedChildren"/>
+<assertEquals actual="allowedChildrenLength" expected="7" id="allowedChildren" ignoreCase="false"/>
 </test>
 
 
