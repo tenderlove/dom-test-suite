@@ -21,12 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodeisequalnode09</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Retreive an element node of this Document having nodeName as employeeId and 
-	namespaceURI as http://www.nist.gov.  Create a new Element node having the same attributes
-	in a new Document and using isEqualNode check if 2 Element nodes are not equal since their
-	baseURIs will not be equal.
+Get the first "em" node, construct an equivalent in a new document and see if isEqualNode
+returns true.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
@@ -44,14 +40,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="isEqual" type="boolean"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <var name="appendedChild" type="Node"/>
+<var name="docElem" type="Element"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
 <load var="doc" href="hc_staff" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<localName var="rootName" obj="docElem" interface="Node"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"dom3:doc"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootName' doctype="nullDocType"/>
 <getElementsByTagNameNS var="employeeList" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' localName='"em"' interface="Document"/>
 <item var="elem1" obj="employeeList" index="0" interface="NodeList"/>
 <createElementNS var="elem2" obj="newDoc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"em"'/>
 <createTextNode var="text" obj="newDoc" data='"EMP0001"'/>
 <appendChild obj="elem2" var="appendedChild" newChild="text"/>
 <isEqualNode var="isEqual" obj="elem1" arg="elem2"/>
-<assertFalse  actual="isEqual"  id="nodeisequalnode09"/>
+<assertTrue actual="isEqual"  id="nodesAreEqual"/>
 </test>
