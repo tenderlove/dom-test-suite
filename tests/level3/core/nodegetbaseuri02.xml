@@ -21,23 +21,32 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri02</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Using getBaseURI check if the baseURI attribute of a new Document node is null.
+	Using getBaseURI check if the baseURI attribute of a new Document node is null
+	and if affected by changes in Document.documentURI.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Document"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="baseURI" type="DOMString"/>
+<var name="rootNS" type="DOMString"/>
+<var name="rootName" type="DOMString"/>
+<var name="docElem" type="Element"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
+<load var="doc" href="barfoo" willBeModified="false"/>
+<documentElement var="docElem" obj="doc"/>
+<namespaceURI var="rootNS" obj="docElem" interface="Node"/>
+<tagName var="rootName" obj="docElem"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"l3:doc"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='rootNS' qualifiedName='rootName' doctype="nullDocType"/>
 <baseURI var="baseURI" obj="newDoc" interface="Node"/>
-<assertNull  actual="baseURI"  id="nodegetbaseuri02"/>
+<assertNull  actual="baseURI"  id="baseURIIsNull"/>
+<documentURI obj="newDoc" value='"http://www.example.com/sample.xml"'/>
+<baseURI var="baseURI" obj="newDoc" interface="Node"/>
+<assertEquals expected='"http://www.example.com/sample.xml"'  actual="baseURI" ignoreCase="true"  id="baseURISameAsDocURI"/>
 </test>

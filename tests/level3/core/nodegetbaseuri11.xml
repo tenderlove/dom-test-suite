@@ -21,12 +21,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri11</title>
 <creator>IBM</creator>
 <description>
-	Import a new Processing Instruction of a new Document into this Document.  Using getBaseURI 
-	check if the baseURI attribute of the new Processing Instruction node is not null .
+	Import a new Processing Instruction of a new Document after the document element.  Using getBaseURI 
+	check if the baseURI attribute of the new Processing Instruction node is the same as Document.documentURI.
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
@@ -35,15 +37,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newPI" type="ProcessingInstruction"/>
 <var name="imported" type="ProcessingInstruction"/>
 <var name="baseURI" type="DOMString"/>
+<var name="docURI" type="DOMString"/>
 <var name="appendedChild" type="Node"/>
 <var name="nullDocType" type="DocumentType" isNull="true"/>
 <load var="doc" href="barfoo_base" willBeModified="true"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"doc:root"' doctype="nullDocType"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"meta"' doctype="nullDocType"/>
 <createProcessingInstruction var="newPI" obj="newDoc" target='"TARGET"' data='"DATA"'/>
 <importNode var="imported" obj="doc" importedNode="newPI" deep="true"/>
 <appendChild obj="doc" var="appendedChild" newChild="imported"/>
 <baseURI var="baseURI" obj="imported" interface="Node"/>
-<assertNotNull  actual="baseURI" id="nodegetbaseuri11"/>
+<assertURIEquals actual="baseURI" isAbsolute="true" name='"barfoo_base"' id="equalsBarfooBase"/>
+<documentURI var="docURI" obj="doc"/>
+<assertEquals actual="baseURI" expected="docURI" ignoreCase="false" id="equalsDocURI"/>
 </test>
  

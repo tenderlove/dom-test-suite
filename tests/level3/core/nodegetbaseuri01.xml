@@ -21,20 +21,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri01</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Using getBaseURI check if the baseURI attribute of this Document node is not null.???
-	A document node should be contained in the DocumentEntity and the baseURI of the
-	documentEntity should not be null so I guess this too should not be null.
+Call Node.getBaseURI() on a test document.  Should be not-null and same as Document.getDocumentURI().
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Document"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="baseURI" type="DOMString"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
+<var name="documentURI" type="DOMString"/>
+<load var="doc" href="barfoo" willBeModified="false"/>
 <baseURI var="baseURI" obj="doc" interface="Node"/>
-<assertNotNull  actual="baseURI"  id="nodegetbaseuri01"/>
+<assertURIEquals actual="baseURI" name='"barfoo"' isAbsolute="true"  id="notNull"/>
+<documentURI var="documentURI" obj="doc"/>
+<assertEquals actual="baseURI" expected="documentURI" ignoreCase="false" id="sameAsDocumentURI"/>
 </test>

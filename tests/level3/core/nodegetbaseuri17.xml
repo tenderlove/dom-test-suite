@@ -16,31 +16,33 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 -->
 
 <!DOCTYPE test SYSTEM "dom3.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodegetbaseuri10">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-3" name="nodegetbaseuri17">
 <metadata>
-<title>nodegetbaseuri10</title>
-<creator>IBM</creator>
+<title>nodegetbaseuri17</title>
+<creator>Curt Arnold</creator>
 <description>
-	Append as a child of this documentElement a new Processing Instruction.  Using getBaseURI 
-	check if the baseURI attribute of the new Processing Instruction node is "'http://www.w3.org/DOM/L3Test".
+Node.getBaseURI for an text node is the same as baseURI for the parent node.
 </description>
-<contributor>Neil Delima</contributor>
-<date qualifier="created">2002-06-10</date>
+<contributor>Curt Arnold</contributor>
+<date qualifier="created">2004-01-07</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
 <subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
-<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Text"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
-<var name="docElem" type="Element"/>
-<var name="newPI" type="ProcessingInstruction"/>
 <var name="baseURI" type="DOMString"/>
-<var name="appendedChild" type="Node"/>
+<var name="textNode" type="Text"/>
+<var name="pList" type="NodeList"/>
+<var name="pElem" type="Element"/>
+<var name="htmlNS" type="DOMString" value='"http://www.w3.org/1999/xhtml"'/>
 <load var="doc" href="barfoo_base" willBeModified="true"/>
-<documentElement var="docElem" obj="doc"/>
-<createProcessingInstruction var="newPI" obj="doc" target='"TARGET"' data='"DATA"'/>
-<appendChild obj="docElem" var="appendedChild" newChild="newPI"/>
-<baseURI var="baseURI" obj="newPI" interface="Node"/>
-<assertEquals  actual="baseURI" expected='"http://www.w3.org/DOM/L3Test"' id="nodegetbaseuri10" ignoreCase="false"/>
+<getElementsByTagNameNS var="pList" obj="doc" 
+    namespaceURI='htmlNS'
+    localName='"p"' interface="Document"/>
+<item var="pElem" obj="pList" index="0" interface="NodeList"/>
+<firstChild var="textNode" obj="pElem" interface="Node"/>
+<baseURI var="baseURI" obj="textNode" interface="Node"/>
+<assertEquals  actual="baseURI" expected='"http://www.w3.org/DOM/EmployeeID"' id="baseURIFromParent" ignoreCase="false"/>
 </test>
  

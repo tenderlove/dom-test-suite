@@ -21,21 +21,18 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri03</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Using getBaseURI check if the baseURI attribute of this DocType node is null.???
-	A document node should be contained in the DocumentEntity and the baseURI of the
-	documentEntity should not be null so I guess this too should not be null.
+Check that Node.baseURI is null for a DocumentType as defined in the Infoset Mapping (Appendix C).
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2DocumentType"/>
 </metadata>
-<implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="docType" type="DocumentType"/>
 <var name="baseURI" type="DOMString"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
+<load var="doc" href="barfoo" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <baseURI var="baseURI" obj="docType" interface="Node"/>
 <assertNull  actual="baseURI"  id="nodegetbaseuri03"/>

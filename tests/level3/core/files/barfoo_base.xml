@@ -8,7 +8,8 @@
 <!ELEMENT head (title)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT body (p)>
-<!ATTLIST body xml:base CDATA #IMPLIED>
+<!ATTLIST body xml:base CDATA #IMPLIED
+               id ID #IMPLIED>
 <!ELEMENT p (#PCDATA|br)*>
 <!ELEMENT br EMPTY>
 ]>
@@ -16,7 +17,7 @@
 <head>
 <title>XML Base sample</title>
 </head>
-<body xml:base="http://www.w3.org/DOM/EmployeeID"> 
-<p>bar</p>
+<body xml:base="http://www.w3.org/DOM/EmployeeID" id="body"> 
+<p>bar</p><!-- keep comment adjacent to p  -->
 </body>
 </html>

@@ -21,22 +21,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodegetbaseuri06</title>
 <creator>IBM</creator>
 <description>
-
-	
-	Create a new Element in this document.  Since its baseURI should be the baseURI of
+	TODO Clarification: Create a new Element in this document.  Since its baseURI should be the baseURI of
 	the Document Entity which I assume is not null, using getBaseURI check if the baseURI 
 	attribute of this Element node is not null.???
 </description>
 <contributor>Neil Delima</contributor>
 <date qualifier="created">2002-06-10</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI"/>
+<subject resource="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419"/>
+<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Element"/>
 </metadata>
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newElement" type="Element"/>
 <var name="baseURI" type="DOMString"/>
-<load var="doc" href="hc_staff" willBeModified="false"/>
-<createElementNS var="newElement" obj="doc" namespaceURI='"http://www.w3.org/DOM"' qualifiedName='"new:Elem"'/>
+<load var="doc" href="barfoo" willBeModified="false"/>
+<createElementNS var="newElement" obj="doc" namespaceURI='"http://www.w3.org/1999/xhtml"' qualifiedName='"br"'/>
 <baseURI var="baseURI" obj="doc" interface="Node"/>
 <assertNotNull  actual="baseURI"  id="nodegetbaseuri06"/>
 </test>
