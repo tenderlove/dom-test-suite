@@ -124,6 +124,9 @@ public class JTidyDOMImplementation implements DOMImplementation {
         return this;
     }
     
+    public Node getFeature(String feature, String version) {
+        return null;
+    }
 
 }
 
