@@ -9,7 +9,7 @@
  * PURPOSE.
  * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
-package org.w3c.domts.level3.core;
+package org.w3c.domts.level3.xpath;
 import java.lang.reflect.Constructor;
 
 import junit.framework.TestSuite;
@@ -34,7 +34,7 @@ public class TestBatik extends TestSuite {
      */
 	public static TestSuite suite() throws Exception {
 		Class testClass = ClassLoader.getSystemClassLoader().loadClass(
-				"org.w3c.domts.level3.core.alltests");
+				"org.w3c.domts.level3.xpath.alltests");
 		Constructor testConstructor = testClass
 				.getConstructor(new Class[]{DOMTestDocumentBuilderFactory.class});
 		DOMTestDocumentBuilderFactory factory = new BatikTestDocumentBuilderFactory(

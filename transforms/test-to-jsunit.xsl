@@ -28,6 +28,7 @@ saxon -o someTest.html someTest.xml test-to-jsunit.xsl
     <xsl:import href="test-to-ecmascript.xsl"/>
     <xsl:param name="testpath">../level1/core/</xsl:param>
     <xsl:param name="hideHTML">no</xsl:param>
+    <xsl:param name="hideSVG">no</xsl:param>
 
 <xsl:output method="html"/>
 
@@ -257,7 +258,9 @@ function suite() {
                             	<input type="radio" name="contentType" id="contentTypeHTML" value="text/html" checked="true" onclick="setContentType('text/html')">HTML</input><br/>
                             </xsl:if>
                             <input type="radio" name="contentType" id="contentTypeXHTML" value="application/xhtml+xml" onclick="setContentType('application/xhtml+xml')">XHTML</input><br/>
-                            <input type="radio" name="contentType" id="contentTypeSVG" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input><br/>
+                            <xsl:if test="$hideSVG = 'no'">
+                            	<input type="radio" name="contentType" id="contentTypeSVG" value="image/svg+xml" onclick="setContentType('image/svg+xml')">SVG</input><br/>
+                            </xsl:if>
                     </td>
                 </tr>
                 </table>

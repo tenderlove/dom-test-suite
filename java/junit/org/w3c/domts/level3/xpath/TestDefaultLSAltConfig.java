@@ -9,7 +9,7 @@
  * http://www.w3.org/Consortium/Legal/ for more details.
  */
 
-package org.w3c.domts.level3.core;
+package org.w3c.domts.level3.xpath;
 
 import java.lang.reflect.Constructor;
 
@@ -23,8 +23,8 @@ import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
 import org.w3c.domts.JUnitTestSuiteAdapter;
 
 /**
- * Test suite that runs all DOM L3 Core tests using a
- * parser provided by DOM L3 Core bootstrapping
+ * Test suite that runs all DOM L3 XPath tests using a
+ * parser provided by DOM L3 XPath bootstrapping
  * in alternative configuration
  * 
  * @author Curt Arnold
@@ -40,7 +40,7 @@ public class TestDefaultLSAltConfig extends TestSuite {
 	public static TestSuite suite() throws Exception {
 		Class testClass =
 			ClassLoader.getSystemClassLoader().loadClass(
-				"org.w3c.domts.level3.core.alltests");
+				"org.w3c.domts.level3.xpath.alltests");
 		Constructor testConstructor =
 			testClass.getConstructor(
 				new Class[] { DOMTestDocumentBuilderFactory.class });

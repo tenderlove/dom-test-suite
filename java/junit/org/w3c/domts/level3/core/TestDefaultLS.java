@@ -24,13 +24,19 @@ import org.w3c.domts.JUnitTestSuiteAdapter;
 
 /**
  * Test suite that runs all DOM L3 Core tests using the
- * Default LS parser in default configuration.
+ * a parser provided by DOM L3 Core bootstrapping.
  * 
  * @author Curt Arnold
  * 
  */
 public class TestDefaultLS extends TestSuite {
 
+    /**
+     * Create instance of test suite.
+     * 
+     * @return test suite
+     * @throws Exception if tests or implementation could not be loaded
+     */
 	public static TestSuite suite() throws Exception {
 		Class testClass =
 			ClassLoader.getSystemClassLoader().loadClass(

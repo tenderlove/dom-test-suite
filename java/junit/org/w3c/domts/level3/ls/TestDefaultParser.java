@@ -11,7 +11,7 @@
  */
 
 
-package org.w3c.domts.level2.core;
+package org.w3c.domts.level3.ls;
 
 import java.lang.reflect.Constructor;
 
@@ -36,7 +36,7 @@ public class TestDefaultParser extends TestSuite {
     */
   public static TestSuite suite() throws Exception
   {
-    Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level2.core.alltests");
+    Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level3.ls.alltests");
     Constructor testConstructor = testClass.getConstructor(new Class[] { DOMTestDocumentBuilderFactory.class });
 
     DOMTestDocumentBuilderFactory factory =

@@ -22,8 +22,21 @@ import org.w3c.domts.DOMTestSuite;
 import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
 import org.w3c.domts.JUnitTestSuiteAdapter;
 
+
+
+/**
+ * Test suite using the default JAXP parser in the alternative configuration
+ * 
+ * 
+ */
 public class TestDefaultParserAltConfig extends TestSuite {
 
+    /**
+     * Create a new instance of the test suite
+     * @return new test suite
+     * @exception Exception if tests or implementation can be created. 
+     */
+    
   public static TestSuite suite() throws Exception
   {
     Class testClass = ClassLoader.getSystemClassLoader().loadClass("org.w3c.domts.level2.core.alltests");

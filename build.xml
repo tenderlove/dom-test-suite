@@ -108,6 +108,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
     <property name="hideHTML" value="no"/>
+    <property name="hideSVG" value="no"/>
 	
     <mkdir dir="${build.dir}/ecmascript/level${level}/${module}/files"/>
 	<copy todir="${build.dir}/ecmascript/level${level}/${module}">
@@ -133,6 +134,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level${level}/${module}/"/>
         <param name="testpath" expression="../level${level}/${module}/"/>
         <param name="hideHTML" expression="${hideHTML}"/>
+        <param name="hideSVG" expression="${hideSVG}"/>
 	</style>
 </target>
 
@@ -252,7 +254,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 </target>
 
-<target name="dist">
+<target name="dist-prep">
 	<property name="level" value="1"/>
 	<property name="module" value="core"/>
     <mkdir dir="${build.dir}/level${level}/${module}/resources"/>
@@ -287,14 +289,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
         <fileset dir="${tests.dir}/level${level}/${module}/files" excludes="*.bak"/>
     </copy>
 
-
-    <mkdir dir="${dist.dir}"/>
-    <zip  zipfile="${dist.dir}/dom${level}-${module}.zip" basedir="${build.dir}/level${level}/${module}"/>
-    <tar tarfile="${dist.dir}/dom${level}-${module}.tar" basedir="${build.dir}/level${level}/${module}"/>
-    <gzip src="${dist.dir}/dom${level}-${module}.tar" zipfile="${dist.dir}/dom${level}-${module}.tar.gz"/>
+    <available property="dist-includes-svg" file="${build.dir}/svg/level${level}/${module}/alltests.ant"/>
 </target>
 
+<target name="dist-prep-svg" depends="dist-prep" if="dist-includes-svg">
+    <mkdir dir="${build.dir}/level${level}/${module}/svg/level${level}/${module}"/>
+    <copy todir="${build.dir}/level${level}/${module}/svg/level${level}/${module}">
+        <fileset dir="${build.dir}/svg/level${level}/${module}" excludes="*.ant"/>
+    </copy>
+</target>
 
+<target name="dist" depends="dist-prep-svg">
+    <mkdir dir="${dist.dir}"/>
+    <zip  zipfile="${dist.dir}/dom${level}-${module}.zip" basedir="${build.dir}/level${level}/${module}"/>
+    <tar tarfile="${dist.dir}/dom${level}-${module}.tar.gz" basedir="${build.dir}/level${level}/${module}" compression="gzip"/>
+</target>
 
 <target name="jsunit-get" depends="init">
     <fail unless="jsunit-available" 
@@ -641,7 +650,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 
-<target name="dom1-core-dist" depends="dom1-core-jar,dom1-core-gen-jsunit,dom1-core-matrix,dom1-core-doxygen,junit-run,get-junit-license,dom1-schema">
+<target name="dom1-core-dist" 
+     depends="dom1-core-jar,
+              dom1-core-gen-jsunit,
+              dom1-core-matrix,
+              dom1-core-doxygen,
+              junit-run,
+              get-junit-license,
+              dom1-schema,
+              dom1-core-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="1"/>
     	<param name="module" value="core"/>
@@ -729,6 +746,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <antcall target="gen-jsunit">
     	<param name="level" value="1"/>
     	<param name="module" value="html"/>
+    	<param name="hideSVG" value="yes"/>    	
     </antcall>
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
     <mkdir dir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts"/>
@@ -773,7 +791,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-<target name="dom1-html-dist" depends="dom1-html-jar,dom1-html-gen-jsunit,dom1-html-matrix,dom1-html-doxygen,junit-run,get-junit-license,dom1-schema">
+<target name="dom1-html-dist" 
+	depends="dom1-html-jar,
+	         dom1-html-gen-jsunit,
+	         dom1-html-matrix,
+	         dom1-html-doxygen,
+	         junit-run,
+	         get-junit-license,
+	         dom1-schema">
     <antcall target="dist">
     	<param name="level" value="1"/>
     	<param name="module" value="html"/>
@@ -783,7 +808,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-<target name="dom1-gump" depends="dom1-core-validate-tests, 
+<target name="dom1-gump" depends="dom1-core-validate-tests,
 								  dom1-html-validate-tests,
 								  dom1-core-jar,
 								  dom1-html-jar,
@@ -1185,7 +1210,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 
-<target name="dom2-core-dist" depends="dom2-core-jar,dom2-core-gen-jsunit,dom2-core-matrix,dom2-core-doxygen,junit-run,get-junit-license,dom2-schema">
+<target name="dom2-core-dist" 
+	depends="dom2-core-jar,
+	         dom2-core-gen-jsunit,
+	         dom2-core-matrix,
+	         dom2-core-doxygen,
+	         junit-run,
+	         get-junit-license,
+	         dom2-schema,
+	         dom2-core-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="2"/>
     	<param name="module" value="core"/>
@@ -1297,6 +1330,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <antcall target="gen-jsunit">
     	<param name="level" value="2"/>
     	<param name="module" value="html"/>
+    	<param name="hideSVG" value="yes"/>    	
     </antcall>
     <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
     <copy todir="${build.dir}/ecmascript/level2/html/applets/org/w3c/domts">
@@ -1354,6 +1388,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		<param name="baseURI"
 		       expression="http://www.w3.org/2001/DOM-Test-Suite/level2/html/"/>
         <param name="externalMetadata" expression="metadata.xml"/>
+		<param name="newSpecURI"
+		       expression="http://www.w3.org/TR/DOM-Level-2-HTML/html#"/>
+		<param name="oldSpecURI"
+		       expression="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-html#"/>
 	</style>
 </target>
 
@@ -1515,7 +1553,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 
-<target name="dom2-events-dist" depends="dom2-events-jar,dom2-events-gen-jsunit,dom2-events-matrix,dom2-events-doxygen,junit-run,get-junit-license,dom2-schema">
+<target name="dom2-events-dist" 
+     depends="dom2-events-jar,
+              dom2-events-gen-jsunit,
+              dom2-events-matrix,
+              dom2-events-doxygen,
+              junit-run,
+              get-junit-license,
+              dom2-schema,
+              dom2-events-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="2"/>
     	<param name="module" value="events"/>
@@ -1523,7 +1569,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 <target name="dom2-gump" depends="dom2-core-validate-tests, 
-                                  dom2-events-validate-tests, 
+                                  dom2-events-validate-tests,
 								  dom2-html-validate-tests,
 								  dom2-core-jar,
 								  dom2-events-jar,
@@ -1894,7 +1940,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 </target>
 
-<target name="dom3-core-dist" depends="dom3-core-jar,dom3-core-gen-jsunit,dom3-core-matrix,dom3-core-doxygen,junit-run,get-junit-license,dom3-schema">
+<target name="dom3-core-dist" 
+	depends="dom3-core-jar,
+	         dom3-core-gen-jsunit,
+	         dom3-core-matrix,
+	         dom3-core-doxygen,
+	         junit-run,
+	         get-junit-license,
+	         dom3-schema,
+	         dom3-core-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="core"/>
@@ -2010,7 +2064,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </target>
 
 
-<target name="dom3-events-dist" depends="dom3-events-jar,dom3-events-gen-jsunit,dom3-events-matrix,dom3-events-doxygen,junit-run,get-junit-license,dom3-schema">
+<target name="dom3-events-dist" 
+	depends="dom3-events-jar,
+		     dom3-events-gen-jsunit,
+		     dom3-events-matrix,
+		     dom3-events-doxygen,
+		     junit-run,
+		     get-junit-license,
+		     dom3-schema,
+		     dom3-events-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="events"/>
@@ -2130,7 +2192,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 </target>
 
-<target name="dom3-ls-dist" depends="dom3-ls-jar,dom3-ls-gen-jsunit,dom3-ls-matrix,dom3-ls-doxygen,junit-run,get-junit-license,dom3-schema">
+<target name="dom3-ls-dist" 
+       depends="dom3-ls-jar,
+                dom3-ls-gen-jsunit,
+                dom3-ls-matrix,
+                dom3-ls-doxygen,
+                junit-run,
+                get-junit-license,
+                dom3-schema,
+                dom3-ls-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="ls"/>
@@ -2244,7 +2314,15 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 </target>
 
-<target name="dom3-xpath-dist" depends="dom3-xpath-jar,dom3-xpath-gen-jsunit,dom3-xpath-matrix,dom3-xpath-doxygen,junit-run,get-junit-license,dom3-schema">
+<target name="dom3-xpath-dist" 
+	depends="dom3-xpath-jar,
+	         dom3-xpath-gen-jsunit,
+	         dom3-xpath-matrix,
+	         dom3-xpath-doxygen,
+	         junit-run,
+	         get-junit-license,
+	         dom3-schema,
+	         dom3-xpath-gen-svgunit">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="xpath"/>
@@ -2297,13 +2375,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     	<param name="level" value="3"/>
     	<param name="module" value="validation"/>
     	<param name="hideHTML" value="yes"/>
-    </antcall>
-</target>
-
-<target name="dom3-val-gen-svgunit" depends="dom3-interfaces,dom3-dtd">
-    <antcall target="gen-svgunit">
-    	<param name="level" value="3"/>
-    	<param name="module" value="val"/>
     </antcall>
 </target>
 
@@ -2367,7 +2438,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 
 
-<target name="dom3-val-dist" depends="dom3-val-jar,dom3-val-gen-jsunit,dom3-val-matrix,dom3-val-doxygen,junit-run,get-junit-license,dom3-schema">
+<target name="dom3-val-dist" 
+	depends="dom3-val-jar,
+		     dom3-val-gen-jsunit,
+		     dom3-val-matrix,
+		     dom3-val-doxygen,
+		     junit-run,
+		     get-junit-license,
+		     dom3-schema">
     <antcall target="dist">
     	<param name="level" value="3"/>
     	<param name="module" value="validation"/>

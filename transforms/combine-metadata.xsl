@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -22,6 +22,8 @@ in the specified suite and one file passed as a parameter
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
      <xsl:param name="externalMetadata"/>
      <xsl:param name="baseURI">http://www.w3.org/2001/DOM-Test-Suite/level1/core/</xsl:param>
+     <xsl:param name="oldSpecURI">http://www.example.example</xsl:param>
+     <xsl:param name="newSpecURI"/>
 
 	<xsl:output method="xml" indent="yes"/>
 
@@ -29,7 +31,7 @@ in the specified suite and one file passed as a parameter
 	<xsl:template match="/">
 		<!--  the copyright notice placed in the output file.    -->
 		<xsl:comment>
-Copyright (c) 2001 World Wide Web Consortium,
+Copyright (c) 2001-2004 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Document
@@ -88,7 +90,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
     <xsl:template match="@resource">
         <xsl:attribute name="resource" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-            <xsl:value-of select="."/>
+        	<xsl:choose>
+        		<xsl:when test="contains(., $oldSpecURI)">
+        			<xsl:value-of select="concat($newSpecURI, substring-after(., $oldSpecURI))"/>
+        		</xsl:when>
+        		<xsl:otherwise>
+            		<xsl:value-of select="."/>
+            	</xsl:otherwise>
+            </xsl:choose>
         </xsl:attribute>
     </xsl:template>
 

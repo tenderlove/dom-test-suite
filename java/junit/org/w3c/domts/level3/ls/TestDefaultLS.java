@@ -9,7 +9,7 @@
  * http://www.w3.org/Consortium/Legal/ for more details.
  */
 
-package org.w3c.domts.level3.core;
+package org.w3c.domts.level3.ls;
 
 import java.lang.reflect.Constructor;
 
@@ -23,31 +23,31 @@ import org.w3c.domts.JAXPDOMTestDocumentBuilderFactory;
 import org.w3c.domts.JUnitTestSuiteAdapter;
 
 /**
- * Test suite that runs all DOM L3 Core tests using a
- * parser provided by DOM L3 Core bootstrapping
- * in alternative configuration
+ * Test suite that runs all DOM L3 Core tests using the
+ * a parser provided by DOM L3 Core bootstrapping.
  * 
  * @author Curt Arnold
  * 
  */
-public class TestDefaultLSAltConfig extends TestSuite {
+public class TestDefaultLS extends TestSuite {
 
     /**
-     * Create a new instance of the test suite
+     * Create instance of test suite.
+     * 
      * @return test suite
-     * @throws Exception if tests or implementation not loaded
+     * @throws Exception if tests or implementation could not be loaded
      */
 	public static TestSuite suite() throws Exception {
 		Class testClass =
 			ClassLoader.getSystemClassLoader().loadClass(
-				"org.w3c.domts.level3.core.alltests");
+				"org.w3c.domts.level3.ls.alltests");
 		Constructor testConstructor =
 			testClass.getConstructor(
 				new Class[] { DOMTestDocumentBuilderFactory.class });
 
 		DOMTestDocumentBuilderFactory factory =
 			new LSDocumentBuilderFactory(
-				JAXPDOMTestDocumentBuilderFactory.getConfiguration2());
+				JAXPDOMTestDocumentBuilderFactory.getConfiguration1());
 
 		Object test = testConstructor.newInstance(new Object[] { factory });
 
