@@ -26,6 +26,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter"/>
 	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections"/>
+	<subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities"/>
   </metadata>
   <var name="domImpl" type="DOMImplementation"/>
   <var name="doc" type="Document"/>

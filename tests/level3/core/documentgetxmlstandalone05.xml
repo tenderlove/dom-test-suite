@@ -44,7 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <namespaceURI var="rootNS" obj="docElem" interface="Node"/>
 <tagName var="rootName" obj="docElem"/>
 <doctype var="docType" obj="doc"/>
-<systemId var="sysId" obj="docType"/>
+<systemId var="sysId" obj="docType" interface="DocumentType"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="newDocType" obj="domImpl" qualifiedName="rootName" publicId="nullPubId" systemId="sysId"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI="rootNS" qualifiedName="rootName" doctype="newDocType"/>

@@ -21,6 +21,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="attrgetschematypeinfo04.xml"/>
     <suite.member href="attrgetschematypeinfo05.xml"/>
     <suite.member href="attrgetschematypeinfo06.xml"/>
+    
+	<suite.member href="checkcharacternormalization01.xml"/>
+	<suite.member href="checkcharacternormalization02.xml"/>
+    
 
 	<suite.member href="datatypenormalization01.xml"/>	
 	<suite.member href="datatypenormalization02.xml"/>	
@@ -201,6 +205,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="domconfiginfoset1.xml"/>
     <suite.member href="domconfignamespacedeclarations1.xml"/>
     <suite.member href="domconfignamespaces1.xml"/>
+    <suite.member href="domconfignamespaces2.xml"/>
     <suite.member href="domconfignormalizecharacters1.xml"/>
     <suite.member href="domconfigschemalocation1.xml"/>
     <suite.member href="domconfigschematype1.xml"/>
@@ -209,15 +214,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
     <suite.member href="domconfigvalidateifschema1.xml"/>
     <suite.member href="domconfigwellformed1.xml"/>
 
+    <suite.member href="elementcontentwhitespace01.xml"/>
+    <suite.member href="elementcontentwhitespace02.xml"/>
 
     <suite.member href="elementgetschematypeinfo01.xml"/>
     <suite.member href="elementgetschematypeinfo02.xml"/>
     <suite.member href="elementgetschematypeinfo03.xml"/>
+
+    <suite.member href="entities01.xml"/>
+    <suite.member href="entities02.xml"/>
+    <suite.member href="entities03.xml"/>
+
     
     <suite.member href="hasFeature01.xml"/>
     <suite.member href="hasFeature02.xml"/>
     <suite.member href="hasFeature03.xml"/>
     <suite.member href="hasFeature04.xml"/>
+
+    <suite.member href="namespacedeclarations01.xml"/>
+    <suite.member href="namespacedeclarations02.xml"/>
+
  	
  	<suite.member href="nodeappendchild01.xml"/>
  	<suite.member href="nodeappendchild02.xml"/>
@@ -524,6 +540,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="nodesetuserdata10.xml"/>
 	
 	
+	<suite.member href="normalizecharacters01.xml"/>
+	<suite.member href="normalizecharacters02.xml"/>
+	
 	<!-- Attr Tests -->
 	<!-- isID -->
 	<suite.member href="attrisid01.xml"/>
@@ -687,5 +706,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="userdatahandler02.xml"/>
 	<suite.member href="userdatahandler03.xml"/>
 	<suite.member href="userdatahandler04.xml"/>
+	
+	<suite.member href="wellformed01.xml"/>
+	<suite.member href="wellformed02.xml"/>
 		
 </suite>
