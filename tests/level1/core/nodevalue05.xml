@@ -16,7 +16,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>nodevalue05</title>
 <creator>Curt Arnold</creator>
 <description>
-An document type accessed, setNodeValue is called with a non-null argument, but getNodeValue
+A document fragment is created, setNodeValue is called with a non-null argument, but getNodeValue
 should still return null.
 </description>
 <date qualifier="created">2001-10-24</date>
