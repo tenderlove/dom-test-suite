@@ -3,7 +3,7 @@
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
    <!ENTITY ent3 "Texas">
-   <!ENTITY ent4 "<entElement>Element data</entElement><?PItarget PIdata?>">
+   <!ENTITY ent4 "<entElement domestic='Yes'>Element data</entElement><?PItarget PIdata?>">
    <!ENTITY ent5 PUBLIC "entityURI" "entityFile" NDATA notation1>
    <!ENTITY ent1 "This entity should be discarded">
    <!NOTATION notation1 PUBLIC "notation1File">
@@ -35,7 +35,7 @@
  Jones</name>
   <position>Department Manager</position>
   <salary>100,000</salary>
-  <gender>Male</gender>
+  <gender>&ent4;</gender>
   <address domestic="Yes" street="No">PO Box 27 Irving, texas 98553</address>
  </employee>
  <employee>
