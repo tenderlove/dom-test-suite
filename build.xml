@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.65  2002-06-29 19:13:33  dom-ts-4
+Revision 1.66  2002-07-31 04:58:38  dom-ts-4
+Update for July DOM 3 drafts
+
+Revision 1.65  2002/06/29 19:13:33  dom-ts-4
 Bad copy task
 
 Revision 1.64  2002/06/29 18:40:01  dom-ts-4
@@ -1505,7 +1508,8 @@ All implementation conditions combined into implementationAttribute element
 
 <target name="dom3-available" depends="init">
     <available property="dom3-core-available" file="${specs.dir}/DOM3-Core.zip"/>
-    <available property="dom3-asls-available" file="${specs.dir}/DOM3-ASLS.zip"/>
+    <available property="dom3-ls-available" file="${specs.dir}/DOM3-LS.zip"/>
+    <available property="dom3-val-available" file="${specs.dir}/DOM3-Val.zip"/>
     <available property="dom3-xpath-available" file="${specs.dir}/DOM3-XPath.zip"/>
     <available property="dom3-events-available" file="${specs.dir}/DOM3-Events.zip"/>
     <available property="dom3-views-available" file="${specs.dir}/DOM3-Views.zip"/>
@@ -1518,11 +1522,18 @@ All implementation conditions combined into implementationAttribute element
 		usetimestamp="yes"/>
 </target>
 
-<target name="get-dom3-asls" depends="dom3-available" unless="dom3-asls-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-ASLS-20020409/DOM3-ASLS.zip"
-		dest="${specs.dir}/DOM3-ASLS.zip"
+<target name="get-dom3-ls" depends="dom3-available" unless="dom3-ls-available">
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-LS-20020725/DOM3-LS.zip"
+		dest="${specs.dir}/DOM3-LS.zip"
 		usetimestamp="yes"/>
 </target>
+
+<target name="get-dom3-val" depends="dom3-available" unless="dom3-val-available">
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Val-20020725/DOM3-Val.zip"
+		dest="${specs.dir}/DOM3-Val.zip"
+		usetimestamp="yes"/>
+</target>
+
 
 <target name="get-dom3-xpath" depends="dom3-available" unless="dom3-xpath-available">
 	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-XPath-20020328/DOM3-XPath.zip"
@@ -1531,7 +1542,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="get-dom3-events" depends="dom3-available" unless="dom3-events-available">
-	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Events-20020208/DOM3-Events.zip"
+	<get src="http://www.w3.org/TR/2002/WD-DOM-Level-3-Events-20020712/DOM3-Events.zip"
 		dest="${specs.dir}/DOM3-Events.zip"
 		usetimestamp="yes"/>
 </target>
@@ -1544,7 +1555,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="get-dom3" depends="get-dom3-core,get-dom3-asls,get-dom3-xpath,get-dom3-events,get-dom3-views">
+<target name="get-dom3" depends="get-dom3-core,get-dom3-ls,get-dom3-val,get-dom3-xpath,get-dom3-events,get-dom3-views">
 </target>
 
 <target name="dom3-init" depends="init,get-dom3">
@@ -1578,16 +1589,6 @@ All implementation conditions combined into implementationAttribute element
 	       dest="${specs.dir}/Level-3/xml/events"/>
 
 
-
-
-	<unzip src="${specs.dir}/DOM3-ASLS.zip"
-	       dest="${specs.dir}/Level-3/ASLS"/>
-	<!--  XML source has unusual ../../whatever paths,
-	        must put in several layers deep to prevent writing out
-			of build tree   -->
-	<unzip src="${specs.dir}/Level-3/ASLS/xml-source.zip"
-	       dest="${specs.dir}/Level-3/xml/as-ls"/>
-
 	<unzip src="${specs.dir}/DOM3-Core.zip"
 	       dest="${specs.dir}/Level-3/Core"/>
 	<!--  XML source has unusual ../../whatever paths,
@@ -1597,6 +1598,25 @@ All implementation conditions combined into implementationAttribute element
 	       dest="${specs.dir}/Level-3/xml/core"/>
 
 
+	<unzip src="${specs.dir}/DOM3-LS.zip"
+	       dest="${specs.dir}/Level-3/LS"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/LS/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/ls"/>
+
+	<unzip src="${specs.dir}/DOM3-Val.zip"
+	       dest="${specs.dir}/Level-3/Val"/>
+	<!--  XML source has unusual ../../whatever paths,
+	        must put in several layers deep to prevent writing out
+			of build tree   -->
+	<unzip src="${specs.dir}/Level-3/Val/xml-source.zip"
+	       dest="${specs.dir}/Level-3/xml/validation"/>
+
+
+
+
     <!--   These files are missing   -->
 	<echo file="${specs.dir}/Level-3/xml/status.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
@@ -1604,16 +1624,10 @@ All implementation conditions combined into implementationAttribute element
 	<echo file="${specs.dir}/Level-3/xml/toc.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
-	<echo file="${specs.dir}/Level-3/xml/as-ls/definitions/as-constants.xml"
+	<echo file="${specs.dir}/Level-3/xml/events/definitions/textevent.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
-	<echo file="${specs.dir}/Level-3/xml/as-ls/definitions/asw-named-object-map.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
-
-	<echo file="${specs.dir}/Level-3/xml/as-ls/definitions/as-named-object-map.xml"
-	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
-
-    <echo file="${specs.dir}/Level-3/xml/events/definitions/textevent.xml"
+	<echo file="${specs.dir}/Level-3/xml/events/definitions/mutationnameevent.xml"
 	      message="&lt;?xml version='1.0'  encoding='UTF-8'?&gt;"/>
 
 
@@ -1624,18 +1638,6 @@ All implementation conditions combined into implementationAttribute element
 	<patch patchfile="./patches/level-3-element.patch"
 	       originalfile="${specs.dir}/Level-3/xml/core/definitions/element.xml"/>
 
-    <!--   these patches are missing entity declarations
-             and similar issues that should be fixed    -->
-<!--
-	<patch patchfile="./patches/level-3-version.patch"
-	       originalfile="${specs.dir}/Level-3/xml/version.xml"/>
-
-	<patch patchfile="./patches/level-3-part-entities.patch"
-	       originalfile="${specs.dir}/Level-3/xml/part-entities.xml"/>
-
-    <patch patchfile="./patches/level-3-core-dom-spec.patch"
-           originalfile="${specs.dir}/Level-3/xml/core/dom-spec.xml"/>
--->
 </target>
 
 <target name="dom3-interfaces" depends="dom3-init">
@@ -1676,7 +1678,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 <target name="dom3-subjects" depends="dom3-init">
-	<!--  create a DOM 2 version of subjects.xsl  -->
+	<!--  create a DOM 3 version of subjects.xsl  -->
 	<exec executable="sed" output="${build.dir}/dom3-subjects.xsl">
 		<arg line="'{s/dom1.dtd/dom3.dtd/;s/Level-1/Level-3/;}' ${transforms.dir}/subjects.xsl"/>
 	</exec>
@@ -1693,10 +1695,13 @@ All implementation conditions combined into implementationAttribute element
 	<style in="${specs.dir}/Level-3/xml/xpath/dom-spec.xml"
 	       out="${build.dir}/dom3-xpath-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
-	<style in="${specs.dir}/Level-3/xml/asls/dom-spec.xml"
-	       out="${build.dir}/dom3-asls-subjects.xml"
+	<style in="${specs.dir}/Level-3/xml/ls/dom-spec.xml"
+	       out="${build.dir}/dom3-ls-subjects.xml"
 	       style="${build.dir}/dom3-subjects.xsl"/>
-	<!--  remove DOM 2 version of subjects.xsl  -->
+	<style in="${specs.dir}/Level-3/xml/val/dom-spec.xml"
+	       out="${build.dir}/dom3-val-subjects.xml"
+	       style="${build.dir}/dom3-subjects.xsl"/>
+	<!--  remove DOM 3 version of subjects.xsl  -->
 	<delete file="{build.dir}/dom3-subjects.xsl"/>
 </target>
 
