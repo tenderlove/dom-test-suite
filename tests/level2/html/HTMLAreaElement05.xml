@@ -29,7 +29,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="nodeList" type="NodeList"/>
 <var name="testNode" type="Node"/>
-<var name="vnohref" type="Boolean" />
+<var name="vnohref" type="boolean" />
 <var name="doc" type="Node"/>
 <load var="doc" href="area" willBeModified="false"/>
 <getElementsByTagName interface="Document" obj="doc" var="nodeList" tagname='"area"'/>
