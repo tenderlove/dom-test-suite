@@ -101,7 +101,7 @@ sorted alphabetically.
                                 <xsl:variable name="featureURI" select="concat($specURI,@id)"/>
                                 <tr>
                                     <td>
-                                        <a href="$featureURI" title="{descr}">
+                                        <a href="{$featureURI}" title="{descr}">
                                             <xsl:value-of select="@name"/>
                                         </a>
                                     </td>
@@ -263,7 +263,8 @@ sorted alphabetically.
         <tr>
             <xsl:for-each select="$subjects[position() &gt; $index and position() &lt; ($index + $columns + 1)]"> 
                 <td>
-                    <a href="{@rdf:about}" title="{dc:description}">
+                    <a title="{dc:description}">
+						<xsl:call-template name="emit-href"/>
                         <xsl:call-template name="emit-title"/>
                     </a>
                 </td>
@@ -284,13 +285,32 @@ sorted alphabetically.
         <xsl:when test="dc:title">
             <xsl:value-of select="dc:title"/>
         </xsl:when>
-	<xsl:when test="dc:description">
-		<xsl:value-of select="dc:description"/>
-	</xsl:when>
+		<xsl:when test="dc:description">
+			<xsl:value-of select="substring-before(dc:description,':')"/>
+		</xsl:when>
         <xsl:otherwise>
             <xsl:value-of select="@rdf:about"/>
         </xsl:otherwise>
     </xsl:choose>
+</xsl:template>
+
+<xsl:template name="emit-href">
+	<xsl:choose>
+		<!--  if we have an XPointer, change it to a fragment identifier -->
+		<xsl:when test="contains(@rdf:about,'#xpointer(id(')">
+			<xsl:attribute name="href">
+				<xsl:value-of select="substring-before(@rdf:about,'#xpointer')"/>
+				<xsl:text>#</xsl:text>
+				<xsl:variable name="after" select="substring-after(@rdf:about,&quot;#xpointer(id(&apos;&quot;)"/>
+				<xsl:value-of select="substring-before($after,&quot;')&quot;)"/>
+			</xsl:attribute>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:attribute name="href">
+				<xsl:value-of select="@rdf:about"/>
+			</xsl:attribute>
+		</xsl:otherwise>
+	</xsl:choose>				
 </xsl:template>
 
 </xsl:stylesheet>
