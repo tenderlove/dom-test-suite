@@ -21,7 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>datatypenormalization05</title>
 <creator>Curt Arnold</creator>
 <description>
-Normalize document with datatype-normalization set to true.  Check if dateTime values where correctly normalized.
+Normalize document with datatype-normalization set to true.  
+Check if dateTime values were correctly normalized.
 </description>
 <date qualifier="created">2004-01-21</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
@@ -64,23 +65,23 @@ Normalize document with datatype-normalization set to true.  Check if dateTime v
 		interface="Document"/>
 	<item var="element" obj="elemList" interface="NodeList" index="0"/>
 	<getAttribute var="str" obj="element" name='"value"'/>
-	<assertEquals actual="str" expected='"2004-01-21T20:30:00Z"' ignoreCase="false" id="firstValue"/>
+	<assertEquals actual="str" expected='"2004-01-21T15:30:00-05:00"' ignoreCase="false" id="firstValue"/>
 	<getAttribute var="str" obj="element" name='"union"'/>
-	<assertEquals actual="str" expected='"2004-01-22T01:30:00Z"' ignoreCase="false" id="firstUnion"/>
+	<assertEquals actual="str" expected='"2004-01-21T20:30:00-05:00"' ignoreCase="false" id="firstUnion"/>
 	<textContent var="str" obj="element"/>
 	<assertEquals actual="str" expected='"2004-01-21T15:30:00 2004-01-21T15:30:00Z"' ignoreCase="false" id="firstList"/>	
 	<item var="element" obj="elemList" interface="NodeList" index="1"/>
 	<getAttribute var="str" obj="element" name='"value"'/>
-	<assertEquals actual="str" expected='"2004-01-21T20:30:00Z"' ignoreCase="false" id="secondValue"/>
+	<assertEquals actual="str" expected='"2004-01-21T15:30:00.0000-05:00"' ignoreCase="false" id="secondValue"/>
 	<getAttribute var="str" obj="element" name='"union"'/>
-	<assertEquals actual="str" expected='"2004-01-21T20:30:00Z"' ignoreCase="false" id="secondUnion"/>
+	<assertEquals actual="str" expected='"2004-01-21T15:30:00.0000-05:00"' ignoreCase="false" id="secondUnion"/>
 	<textContent var="str" obj="element"/>
-	<assertEquals actual="str" expected='"2004-01-21T15:30:00"' ignoreCase="false" id="secondList"/>	
+	<assertEquals actual="str" expected='"2004-01-21T15:30:00.0000"' ignoreCase="false" id="secondList"/>	
 	<item var="element" obj="elemList" interface="NodeList" index="2"/>
 	<getAttribute var="str" obj="element" name='"value"'/>
-	<assertEquals actual="str" expected='"2004-01-21T20:30:00.0001Z"' ignoreCase="false" id="thirdValue"/>
+	<assertEquals actual="str" expected='"2004-01-21T15:30:00.0001-05:00"' ignoreCase="false" id="thirdValue"/>
 	<getAttribute var="str" obj="element" name='"union"'/>
-	<assertEquals actual="str" expected='"2004-01-21T20:30:00.0001Z"' ignoreCase="false" id="thirdUnion"/>
+	<assertEquals actual="str" expected='"2004-01-21T15:30:00.0001-05:00"' ignoreCase="false" id="thirdUnion"/>
 	<textContent var="str" obj="element"/>
 	<assertEquals actual="str" expected='"2004-01-21T15:30:00.0001"' ignoreCase="false" id="thirdList"/>	
 </if>

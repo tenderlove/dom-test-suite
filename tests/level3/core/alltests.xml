@@ -38,6 +38,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 	<suite.member href="datatypenormalization10.xml"/>	
 	<suite.member href="datatypenormalization11.xml"/>	
 	<suite.member href="datatypenormalization12.xml"/>	
+	<suite.member href="datatypenormalization13.xml"/>	
+	<suite.member href="datatypenormalization14.xml"/>	
+	<suite.member href="datatypenormalization15.xml"/>	
+	<suite.member href="datatypenormalization16.xml"/>	
 
 	<!-- DOMImplementation tests -->
     <suite.member href="domimplementationgetfeature01.xml"/>

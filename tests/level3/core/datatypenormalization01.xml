@@ -21,7 +21,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <title>datatypenormalization01</title>
 <creator>Curt Arnold</creator>
 <description>
-Normalize document with datatype-normalization set to true.  Check if double values where correctly normalized.
+Normalize document with datatype-normalization set to true.  
+Check if double values were normalized.
 </description>
 <date qualifier="created">2004-01-21</date>
 <subject resource="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument"/>
@@ -65,11 +66,11 @@ Normalize document with datatype-normalization set to true.  Check if double val
 		interface="Document"/>
 	<item var="element" obj="elemList" interface="NodeList" index="0"/>
 	<getAttribute var="str" obj="element" name='"value"'/>
-	<assertEquals actual="str" expected='"3.1415926E0"' ignoreCase="false" id="firstValue"/>
+	<assertEquals actual="str" expected='"+0003.141592600E+0000"' ignoreCase="false" id="firstValue"/>
 	<getAttribute var="str" obj="element" name='"union"'/>
-	<assertEquals actual="str" expected='"3.1415926E0"' ignoreCase="false" id="firstUnion"/>
+	<assertEquals actual="str" expected='"+0003.141592600E+0000"' ignoreCase="false" id="firstUnion"/>
 	<textContent var="str" obj="element"/>
-	<assertEquals actual="str" expected='"3.1415926E0 2.718E0"' ignoreCase="false" id="firstList"/>	
+	<assertEquals actual="str" expected='"-31415926.00E-7 2.718"' ignoreCase="false" id="firstList"/>	
 	<item var="element" obj="elemList" interface="NodeList" index="1"/>
 	<getAttribute var="str" obj="element" name='"value"'/>
 	<assertEquals actual="str" expected='"NaN"' ignoreCase="false" id="secondValue"/>
@@ -79,11 +80,11 @@ Normalize document with datatype-normalization set to true.  Check if double val
 	<assertEquals actual="str" expected='"INF -INF"' ignoreCase="false" id="secondList"/>	
 	<item var="element" obj="elemList" interface="NodeList" index="2"/>
 	<getAttribute var="str" obj="element" name='"value"'/>
-	<assertEquals actual="str" expected='"1.0E0"' ignoreCase="false" id="thirdValue"/>
+	<assertEquals actual="str" expected='"1"' ignoreCase="false" id="thirdValue"/>
 	<getAttribute var="str" obj="element" name='"union"'/>
-	<assertEquals actual="str" expected='"1.0E0"' ignoreCase="false" id="thirdUnion"/>
+	<assertEquals actual="str" expected='"1"' ignoreCase="false" id="thirdUnion"/>
 	<textContent var="str" obj="element"/>
-	<assertEquals actual="str" expected='"-0.0E0"' ignoreCase="false" id="thirdList"/>	
+	<assertEquals actual="str" expected='"-0"' ignoreCase="false" id="thirdList"/>	
 </if>
 </test> 
  

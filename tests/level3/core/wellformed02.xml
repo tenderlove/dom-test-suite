@@ -37,10 +37,6 @@ normalize document with well-formed set to false.
 <var name="domConfig" type="DOMConfiguration"/>
 <var name="errorMonitor" type="DOMErrorMonitor"/>
 <var name="errors" type="List"/>
-<var name="error" type="DOMError"/>
-<var name="severity" type="int"/>
-<var name="type" type="DOMString"/>
-<var name="relatedNode" type="Node"/>
 <var name="canSet" type="boolean"/>
 <implementation var="domImpl"/>
 <createDocument var="doc" obj="domImpl"

@@ -11,7 +11,10 @@
 
 /*
  * $Log: DOMTest.java,v $
- * Revision 1.13  2004-02-09 19:06:21  dom-ts-4
+ * Revision 1.14  2004-02-25 23:37:07  dom-ts-4
+ * Removed expectations of datatype canonicalization + new tests (bug 568)
+ *
+ * Revision 1.13  2004/02/09 19:06:21  dom-ts-4
  * Test results improvment (bug 446)
  *
  * Revision 1.12  2004/01/05 08:27:14  dom-ts-4
@@ -238,7 +241,7 @@ public abstract class DOMTest /* wBM: implements EventListener */ {
 	public void preload(String contentType, String docURI, boolean willBeModified) 
 		throws DOMTestIncompatibleException {
 		if ("text/html".equals(contentType) || "application/xhtml+xml".equals(contentType)) {
-			if (docURI.startsWith("staff")) {
+			if (docURI.startsWith("staff") || docURI.equals("datatype_normalization")) {
 				throw DOMTestIncompatibleException.incompatibleLoad(docURI, contentType);
 			}
 		}
