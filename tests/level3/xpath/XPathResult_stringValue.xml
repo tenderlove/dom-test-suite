@@ -22,7 +22,7 @@
     <creator>Bob Clary</creator>
     <description>
     Create an XPathResult STRING_VALUE XPathResultType for expression
-    /staff/employee/string(salary) = '56,000' checking that the 
+    /staff/employee/salary[text()='56,000'] checking that the 
     XPathResult.stringValue == "56,000"
     </description>
     <date qualifier="created">2003-12-02</date>
@@ -54,7 +54,7 @@
 
   <!-- Inputs -->
 
-  <var name="expression"  type="DOMString" value="&quot;string(/staff/employee/salary)='56,000'&quot;"/>
+  <var name="expression"  type="DOMString" value="&quot;/staff/employee/salary[text()='56,000']&quot;"/>
   <var name="xpathType"  type="short"     value="STRING_TYPE" />
 
   <!-- Test Variables -->
@@ -89,7 +89,7 @@
 
   <assertEquals id="same" 
                actual="stringValue"
-               expected="&quot;35,000&quot;"
+               expected="&quot;56,000&quot;"
                ignoreCase="false"
 	       />
 
