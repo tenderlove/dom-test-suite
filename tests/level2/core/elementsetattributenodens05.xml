@@ -36,6 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="docAlt" type="Document"/>
   <var name="element" type="Element"/>
   <var name="attribute" type="Attr"/>
+  <var name="newAttribute" type="Attr"/>
   <load var="doc" href="staffNS" willBeModified="false"/>
   <load var="docAlt" href="staffNS" willBeModified="false"/>
   <createElementNS var="element" obj="doc" 
@@ -46,7 +47,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		     qualifiedName='"attr"'/>
   <assertDOMException id="elementsetattributenodens05">
     <WRONG_DOCUMENT_ERR>
-      <setAttributeNodeNS obj="element"  newAttr="attribute"/>
+      <setAttributeNodeNS var="newAttribute" obj="element"  newAttr="attribute"/>
     </WRONG_DOCUMENT_ERR>
   </assertDOMException>
 </test>

@@ -41,7 +41,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="nodeValue" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <createAttributeNS obj="doc" var="attribute" namespaceURI="namespaceURI" qualifiedName="qualifiedName"/>
-<name var="name" obj="attribute" />
 <nodeName var="nodeName" obj="attribute" />
 <nodeValue var="nodeValue" obj="attribute" />
 <assertEquals actual="nodeName" expected='"test"' id="documentcreateattributeNS01" ignoreCase="false"/>

@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodesetprefix02">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodesetprefix02">
 <metadata>
 <title>nodesetprefix02</title>
 <creator>IBM</creator>
@@ -38,18 +38,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="attribute" type="Attr"/>
 <var name="newAttribute" type="Attr"/>
+<var name="setNode" type="Node"/>
 <var name="elementList" type="NodeList"/>
 <var name="attrName" type="DOMString"/>
 <var name="newAttrName" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagName var="elementList" obj="doc" tagname='"address"' />
-<item var="element" obj="elementList" index="1"/>
+<getElementsByTagName var="elementList" obj="doc" tagname='"address"' interface="Document"/>
+<item var="element" obj="elementList" index="1" interface="NodeList"/>
 <createAttributeNS var="newAttribute" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test:address"'/>
-<setAttributeNodeNS obj="element" newAttr="newAttribute"/>
+<setAttributeNodeNS var="setNode" obj="element" newAttr="newAttribute"/>
 <prefix obj="newAttribute" value='"dom"'/>
 <getAttributeNodeNS var="attribute" obj="element" namespaceURI='"http://www.usa.com"' localName='"domestic"'/>
 <nodeName var="attrName" obj="attribute"/>
 <nodeName var="newAttrName" obj="newAttribute"/>
-<assertEquals actual="attrName" expected='"dmstc:domestic"' id="nodesetprefix02"/>
-<assertEquals actual="newAttrName" expected='"dom:address"' id="nodesetprefix02"/>
+<assertEquals actual="attrName" expected='"dmstc:domestic"' id="nodesetprefix02_attrName" ignoreCase="false"/>
+<assertEquals actual="newAttrName" expected='"dom:address"' id="nodesetprefix02_newAttrName" ignoreCase="false"/>
 </test>

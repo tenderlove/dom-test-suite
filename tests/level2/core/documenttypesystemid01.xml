@@ -37,8 +37,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
 <createDocumentType var="docType" obj="domImpl" qualifiedName='"l2:root"' publicId='"PUB"' systemId='"SYS"' />
-<publicId var="publicId" obj="docType"/>
-<systemId var="systemId" obj="docType"/>
-<assertEquals actual="publicId" expected='"PUB"' id="documenttypesystemid01"/>
-<assertEquals actual="systemId" expected='"SYS"' id="documenttypesystemid01"/>
+<publicId var="publicId" obj="docType" interface="DocumentType"/>
+<systemId var="systemId" obj="docType"  interface="DocumentType"/>
+<assertEquals actual="publicId" expected='"PUB"' id="documenttypepublicid01" ignoreCase="false"/>
+<assertEquals actual="systemId" expected='"SYS"' id="documenttypesystemid01"  ignoreCase="false"/>
 </test>

@@ -53,16 +53,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <documentElement obj="doc" var="element"/>
 <for-each collection="featuresXML" member="featureXML">
 <isSupported obj="element" var="success" feature="featureXML" version="version"/>
-<assertTrue actual="success" id="nodeissupported01_XML"/>
+<assertTrue actual="success" id="nodeissupported01_XML1"/>
 <isSupported obj="element" var="success" feature="featureXML" version="version1"/>
-<assertTrue actual="success" id="nodeissupported01_XML"/>
+<assertTrue actual="success" id="nodeissupported01_XML2"/>
 </for-each>
 <for-each collection="featuresCore" member="featureCore">
 <isSupported obj="element" var="success" feature="featureCore" version="version"/>
-<assertTrue actual="success" id="nodeissupported01_Core"/>
+<assertTrue actual="success" id="nodeissupported01_Core1"/>
 <isSupported obj="element" var="success" feature="featureCore" version="version1"/>
-<assertTrue actual="success" id="nodeissupported01_Core"/>
+<assertTrue actual="success" id="nodeissupported01_Core2"/>
 <isSupported obj="element" var="success" feature="featureCore" version="version2"/>
-<assertTrue actual="success" id="nodeissupported01_Core"/>
+<assertTrue actual="success" id="nodeissupported01_Core3"/>
 </for-each>
 </test>

@@ -41,13 +41,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="imported" type="Node"/>
 <var name="success" type="boolean"/>
 <var name="nodeNameOrig" type="DOMString"/>
-<var name="nodeName" type="DOMString"/>
+<var name="nodeNameImported" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <documentElement var="docElement" obj="doc"/>
 <importNode var="imported" obj="doc" importedNode="docElement" deep="false"/>
 <hasChildNodes var="success" obj="imported"/>
 <assertFalse actual="success" id="documentimportnode11"/>
-<nodeName var="nodeName" obj="imported"/>
+<nodeName var="nodeNameImported" obj="imported"/>
 <nodeName var="nodeNameOrig" obj="docElement"/>
-<assertEquals actual="nodeNameOrig" expected="nodeName" id="documentimportnode11"/>
+<assertEquals actual="nodeNameOrig" expected="nodeNameImported" id="documentimportnode11_NodeName"  ignoreCase="false"/>
 </test>

@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodesetprefix08">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodesetprefix08">
 <metadata>
 <title>nodesetprefix08</title>
 <creator>IBM</creator>
@@ -35,8 +35,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="attribute" type="Attr"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagName var="elementList" obj="doc" tagname='"employee"'/>
-<item var="element" obj="elementList" index="0"/>
+<getElementsByTagName var="elementList" obj="doc" tagname='"employee"' interface="Document"/>
+<item var="element" obj="elementList" index="0" interface="NodeList"/>
 <getAttributeNode var="attribute" obj="element" name='"xmlns"'/>
 <assertDOMException id="nodesetprefix08">
 <NAMESPACE_ERR>

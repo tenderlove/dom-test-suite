@@ -43,19 +43,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
   <getElementsByTagNameNS var="elementList" obj="doc" 
 			  namespaceURI='"http://www.nist.gov"' 
-			  localName='"address"'/>
+			  localName='"address"' interface="Document"/>
 
-  <item var="element" obj="elementList" index="1"/>
+  <item var="element" obj="elementList" index="1"  interface="NodeList"/>
 
   <getAttributeNodeNS var="attribute" obj="element" 
 		      namespaceURI="null" localName='"street"'/>
 
   <cloneNode var="attributeCloned" obj="attribute" deep="true"/>
 
-  <item var="element2" obj="elementList" index="2"/>
+  <item var="element2" obj="elementList" index="2" interface="NodeList"/>
   <setAttributeNodeNS var="newAttr" obj="element2" newAttr="attributeCloned"/>
   <nodeName var="attrName" obj="newAttr"/>
   <nodeValue var="attrValue" obj="newAttr"/>
-  <assertEquals actual="attrName" expected='"street"' id="elementsetattributenodens02"/>
-  <assertEquals actual="attrValue" expected='"Yes"' id="elementsetattributenodens01"/>
+  <assertEquals actual="attrName" expected='"street"' id="elementsetattributenodens02_attrName" ignoreCase="false"/>
+  <assertEquals actual="attrValue" expected='"Yes"' id="elementsetattributenodens02_attrValue" ignoreCase="false"/>
 </test>

@@ -43,10 +43,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attrImp" type="Attr"/>
 <var name="nodeName" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"'/>
-<item var="employeeElem" obj="childList" index="3"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<item var="employeeElem" obj="childList" index="3" interface="NodeList"/>
 <importNode var="imported" obj="doc" importedNode="employeeElem" deep="true"/>
 <getAttributeNodeNS var="attrImp" obj="imported" namespaceURI="null" localName='"defaultAttr"'/>
 <nodeName var="nodeName" obj="attrImp"/>
-<assertEquals actual='"defaultAttr"' expected="nodeName" id="documentimportnode14"/>
+<assertEquals expected='"defaultAttr"' actual="nodeName" id="documentimportnode14" ignoreCase="false"/>
 </test>

@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodegetlocalname03">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodegetlocalname03">
 <metadata>
 <title>nodegetlocalname03</title>
 <creator>IBM</creator>
@@ -49,8 +49,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <localName var="localQElemName" obj="qelement"/>
 <localName var="localAttrName" obj="attr"/>
 <localName var="localQAttrName" obj="qattr"/>
-<assertEquals actual="localElemName" expected='"elem"' id="nodegetlocalname03"/>
-<assertEquals actual="localQElemName" expected='"qelem"' id="nodegetlocalname03"/>
-<assertEquals actual="localAttrName" expected='"attr"' id="nodegetlocalname03"/>
-<assertEquals actual="localQAttrName" expected='"qattr"' id="nodegetlocalname03"/>
+<assertEquals actual="localElemName" expected='"elem"' id="nodegetlocalname03_localElemName" ignoreCase="false"/>
+<assertEquals actual="localQElemName" expected='"qelem"' id="nodegetlocalname03_localQElemName" ignoreCase="false"/>
+<assertEquals actual="localAttrName" expected='"attr"' id="nodegetlocalname03_localAttrName" ignoreCase="false"/>
+<assertEquals actual="localQAttrName" expected='"qattr"' id="nodegetlocalname03_localQAttrName" ignoreCase="false"/>
 </test>

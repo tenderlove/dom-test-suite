@@ -47,16 +47,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="namespaceURI" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <load var="docImported" href="staff" willBeModified="false"/>
-<createAttributeNS var="attr" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a_:b0"'/>
+<createAttributeNS var="attr" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a_:b0"' />
 <importNode var="importedAttr" obj="docImported" importedNode="attr" deep="false"/>
 <nodeName var="nodeName" obj="importedAttr"/>
 <nodeValue var="nodeValue" obj="importedAttr"/>
 <nodeType var="nodeType" obj="importedAttr"/>
 <namespaceURI var="namespaceURI" obj="importedAttr"/>
-<assertEquals actual='"a_:b0"' expected="nodeName"  id="documentimportnode05_nodeName"/>
-<assertEquals actual="2" expected="nodeType"  id="documentimportnode05_nodeType"/>
-<assertEquals actual='""' expected="nodeValue"  id="documentimportnode05_nodeValue"/>
-<assertEquals actual='"http://www.w3.org/DOM/Test"' expected="namespaceURI"  id="documentimportnode05_nodeValue"/>
+<assertEquals expected='"a_:b0"' actual="nodeName"  id="documentimportnode05_nodeName"  ignoreCase="false"/>
+<assertEquals expected="2" actual="nodeType"  id="documentimportnode05_nodeType"  ignoreCase="false"/>
+<assertEquals expected='""' actual="nodeValue"  id="documentimportnode05_nodeValue"  ignoreCase="false"/>
+<assertEquals expected='"http://www.w3.org/DOM/Test"' actual="namespaceURI"  id="documentimportnode05_namespaceURI"  ignoreCase="false"/>
 </test>
 
 

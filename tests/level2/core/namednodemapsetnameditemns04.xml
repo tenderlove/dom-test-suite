@@ -37,20 +37,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="docAlt" type="Document"/>
+<var name="docType" type="DocumentType" isNull="true"/>
 <var name="attributes" type="NamedNodeMap"/>
 <var name="elementList" type="NodeList"/>
 <var name="element" type="Element"/>
 <var name="attrAlt" type="Attr"/>
+<var name="newNode" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"address"'/>
-<item var="element" obj="elementList" index="1"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"address"'  interface="Document"/>
+<item var="element" obj="elementList" index="1"  interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="docAlt" obj="domImpl" namespaceURI="null" qualifiedName='"newDoc"' doctype="null"/>
+<createDocument var="docAlt" obj="domImpl" namespaceURI="null" qualifiedName='"newDoc"' doctype="docType"/>
 <createAttributeNS var="attrAlt" obj="docAlt" namespaceURI="null" qualifiedName='"street"'/>
 <assertDOMException id="namednodemapsetnameditemns04">
 <WRONG_DOCUMENT_ERR>
-<setNamedItemNS obj="attributes" arg="attrAlt"/>
+<setNamedItemNS var="newNode" obj="attributes" arg="attrAlt"/>
 </WRONG_DOCUMENT_ERR>
 </assertDOMException>
 </test>

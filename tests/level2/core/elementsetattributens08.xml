@@ -39,14 +39,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <createElementNS var="element" obj="doc" 
 		   namespaceURI='"http://www.w3.org/DOMTest/level2"' 
 		   qualifiedName='"dom:elem"'/>
-  <assertDOMException id="elementsetattributens08">
+  <assertDOMException id="elementsetattributens08_Err1">
     <NAMESPACE_ERR>
       <setAttributeNS obj="element"  
 		      namespaceURI='"http://www.w3.org/DOMTest/level2"' 
 		      qualifiedName='"xmlns"' value='"test"'/>
     </NAMESPACE_ERR>
   </assertDOMException>
-  <assertDOMException id="elementsetattributens08">
+  <assertDOMException id="elementsetattributens08_Err2">
     <NAMESPACE_ERR>
       <setAttributeNS obj="element"  
 		      namespaceURI='"http://www.w3.org/DOMTest/level2"' 

@@ -43,6 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <implementationAttribute name="expandEntityReferences" value="false"/>
 <var name="doc" type="Document"/>
+<var name="docTypeNull" type="DocumentType" isNull="true"/>
 <var name="docImp" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="addressList" type="NodeList"/>
@@ -52,20 +53,39 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="entRefImp2" type="EntityReference"/>
 <var name="entRef3" type="EntityReference"/>
 <var name="entRefImp3" type="EntityReference"/>
+<var name="nodeName2" type="DOMString"/>
+<var name="nodeName3" type="DOMString"/>
+<var name="nodeNameImp2" type="DOMString"/>
+<var name="nodeNameImp3" type="DOMString"/>
+<var name="nodes" type="NodeList"/>
+<var name="nodeImp3" type="Node"/>
+<var name="nodeImp2" type="Node"/>
+<var name="nodeValueImp2" type="DOMString"/>
+<var name="nodeValueImp3" type="DOMString"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation var="domImpl" obj="doc" />
-<createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="null"/>
-<getElementsByTagName var="addressList" obj="doc" tagname='"address"'/>
-<item var="element" obj="addressList" index="1"/>
+<createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="docTypeNull"/>
+<getElementsByTagName var="addressList" obj="doc" tagname='"address"' interface="Document"/>
+<item var="element" obj="addressList" index="1" interface="NodeList"/>
 <childNodes var="addressChildList" obj="element"/>
-<item var="entRef2" obj="addressChildList" index="0"/>
-<item var="entRef3" obj="addressChildList" index="2"/>
+<item var="entRef2" obj="addressChildList" index="0" interface="NodeList"/>
+<item var="entRef3" obj="addressChildList" index="2" interface="NodeList"/>
 <importNode  var="entRefImp2" obj="docImp" importedNode="entRef2" deep="true"/>
 <importNode  var="entRefImp3" obj="docImp" importedNode="entRef3" deep="false"/>
-<assertEquals expected="entRef2.getNodeName()" actual="entRefImp2.getNodeName()" id="documentimportnode21_Ent2NodeName"/>
-<assertEquals expected="entRef3.getNodeName()" actual="entRefImp3.getNodeName()" id="documentimportnode21_Ent3NodeName"/>
+<nodeName var="nodeName2" obj="entRef2"/>
+<nodeName var="nodeName3" obj="entRef3"/>
+<nodeName var="nodeNameImp2" obj="entRefImp2"/>
+<nodeName var="nodeNameImp3" obj="entRefImp3"/>
+<assertEquals expected="nodeName2" actual="nodeNameImp2" id="documentimportnode21_Ent2NodeName" ignoreCase="false"/>
+<assertEquals expected="nodeName3" actual="nodeNameImp3" id="documentimportnode21_Ent3NodeName" ignoreCase="false"/>
 <importNode  var="entRefImp2" obj="doc" importedNode="entRef2" deep="true"/>
 <importNode  var="entRefImp3" obj="doc" importedNode="entRef3" deep="false"/>
-<assertEquals expected="entRefImp2.getChildNodes().item(0).getNodeValue()" actual='"1900 Dallas Road"' id="documentimportnode21_Ent3NodeName"/>
-<assertEquals expected="entRefImp3.getChildNodes().item(0).getNodeValue()" actual='"Texas"' id="documentimportnode21_Ent3NodeName"/>
+<childNodes var="nodes" obj="entRefImp2" interface="Node"/>
+<item var="nodeImp2" obj="nodes" index="0" interface="NodeList"/>
+<nodeValue var="nodeValueImp2" obj="nodeImp2"/>
+<childNodes var="nodes" obj="entRefImp3" interface="Node"/>
+<item var="nodeImp3" obj="nodes" index="0" interface="NodeList"/>
+<nodeValue var="nodeValueImp3" obj="nodeImp3"/>
+<assertEquals actual="nodeValueImp2" expected='"1900 Dallas Road"' id="documentimportnode21_Ent2NodeValue"  ignoreCase="false"/>
+<assertEquals actual="nodeValueImp3" expected='"Texas"' id="documentimportnode21_Ent3Nodevalue"  ignoreCase="false"/>
 </test>

@@ -35,11 +35,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
+<var name="docType" type="DocumentType" isNull="true"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="childList" type="NodeList"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI="null" qualifiedName='"root"' doctype="null"/>
-<getElementsByTagNameNS var="childList" obj="newDoc" namespaceURI ='"*"' localName  ='"*"'/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI="null" qualifiedName='"root"' doctype="docType"/>
+<getElementsByTagNameNS var="childList" obj="newDoc" namespaceURI ='"*"' localName  ='"*"' interface="Document"/>
 <assertSize size="1" collection="childList"  id="documentgetelementsbytagnameNS01"/>
 </test>

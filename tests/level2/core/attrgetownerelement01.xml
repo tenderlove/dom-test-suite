@@ -39,11 +39,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="attributes" type="NamedNodeMap"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"employee"'/>
-<item var="element" obj="elementList" index="1"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"employee"' interface="Document"/>
+<item var="element" obj="elementList" index="1" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <getNamedItemNS var="attr" obj="attributes" namespaceURI="null" localName='"defaultAttr"'/>
 <ownerElement var="ownerElement" obj="attr"/>
 <nodeName var="ownerElementName" obj="ownerElement"/>
-<assertEquals actual="ownerElementName" expected='"emp:employee"' id="attrgetownerelement01"/>
+<assertEquals actual="ownerElementName" expected='"emp:employee"' id="attrgetownerelement01" ignoreCase="false"/>
 </test>

@@ -33,11 +33,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 </metadata>
 <var name="doc" type="Document"/>		
 <var name="domImpl" type="DOMImplementation"/>
-<var name="version" type="DOMString" value="&quot;&quot;"/>		
-<var name="feature" type="DOMString" value="&quot;Blah Blah&quot;"/>		
 <var name="success" type="boolean"/>		
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation obj="doc" var="domImpl"/>
-<hasFeature obj="domImpl" var="success" feature="feature" version="version"/>
+<hasFeature obj="domImpl" var="success" feature="&quot;Blah Blah&quot;" version="&quot;&quot;"/>
 <assertFalse actual="success" id="domimplementationhasfeature02"/>
 </test>

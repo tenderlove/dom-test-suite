@@ -33,8 +33,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="hasAttributes" type="boolean"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagName var="elementList" obj="doc" tagname='"emp:employee"'/>
-<item var="element" obj="elementList" index="0"/>
+<getElementsByTagName var="elementList" obj="doc" tagname='"emp:employee"' interface="Document"/>
+<item var="element" obj="elementList" index="0" interface="NodeList"/>
 <hasAttributes var="hasAttributes" obj="element"/>
 <assertTrue actual="hasAttributes" id="nodehasattributes03"/>
 </test>

@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodegetprefix03">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodegetprefix03">
 <metadata>
 <title>nodegetprefix03</title>
 <creator>IBM</creator>
@@ -49,8 +49,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <prefix var="elemPrefix" obj="qelement"/>
 <prefix var="attrNoPrefix" obj="attr"/>
 <prefix var="attrPrefix" obj="qattr"/>
-<assertNull actual="elemNoPrefix" id="nodegetprefix03"/>
-<assertEquals actual="elemPrefix" expected='"qual"' id="nodegetprefix03"/>
-<assertNull actual="attrNoPrefix" id="nodegetprefix03"/>
-<assertEquals actual="attrPrefix" expected='"qual"' id="nodegetprefix03"/>
+<assertNull actual="elemNoPrefix" id="nodegetprefix03_1"/>
+<assertEquals actual="elemPrefix" expected='"qual"' id="nodegetprefix03_2" ignoreCase="false"/>
+<assertNull actual="attrNoPrefix" id="nodegetprefix03_3"/>
+<assertEquals actual="attrPrefix" expected='"qual"' id="nodegetprefix03_4"  ignoreCase="false"/>
 </test>

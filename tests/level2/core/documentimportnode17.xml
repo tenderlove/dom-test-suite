@@ -46,5 +46,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createComment var="commentToImport" obj="doc" data='"Document.importNode test for a COMMENT_NODE"'/>
 <importNode  var="commentImport" obj="doc" importedNode="commentToImport" deep="true"/>
 <nodeValue var="nodeValue" obj="commentImport"/>
-<assertEquals actual='"Document.importNode test for a COMMENT_NODE"' expected="nodeValue" id="documentimportnode17"/>
+<assertEquals expected='"Document.importNode test for a COMMENT_NODE"' actual="nodeValue" id="documentimportnode17" ignoreCase="false"/>
 </test>

@@ -36,8 +36,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attribute" type="Attr"/>
 <var name="elementList" type="NodeList"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"address"' />
-<item var="element" obj="elementList" index="1"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"address"' interface="Document"/>
+<item var="element" obj="elementList" index="1" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <removeNamedItemNS var="attribute" obj="attributes" namespaceURI='"http://www.nist.gov"' localName='"domestic"'/>
 <getNamedItemNS var="attribute" obj="attributes" namespaceURI='"http://www.nist.gov"' localName='"domestic"'/>

@@ -38,6 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="notations" type="NamedNodeMap"/>
 <var name="entity" type="Entity"/>
 <var name="notation" type="Notation"/>
+<var name="newNode" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
@@ -46,12 +47,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getNamedItemNS var="notation" obj="notations" namespaceURI="null" localName='"notation1"'/>
 <assertDOMException id="namednodemapsetnameditemns05_entities">
 <NO_MODIFICATION_ALLOWED_ERR>
-<setNamedItemNS obj="entities" arg="notation"/>
+<setNamedItemNS var="newNode" obj="entities" arg="notation"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 <assertDOMException id="namednodemapsetnameditemns05_notations">
 <NO_MODIFICATION_ALLOWED_ERR>
-<setNamedItemNS obj="notations" arg="entity"/>
+<setNamedItemNS var="newNode" obj="notations" arg="entity"/>
 </NO_MODIFICATION_ALLOWED_ERR>
 </assertDOMException>
 </test>

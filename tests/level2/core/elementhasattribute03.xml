@@ -35,12 +35,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="element" type="Element"/>
   <var name="state" type="boolean"/>
   <var name="attribute" type="Attr"/>
+  <var name="newAttribute" type="Attr"/>
   <load var="doc" href="staff" willBeModified="false"/>
   <createElement var="element" obj="doc" tagName='"address"'/>
   <createAttribute var="attribute" obj="doc" name='"domestic"'/>
   <hasAttribute var="state" obj="element" name='"domestic"'/>
-  <assertFalse actual="state" id="elementhasattribute03"/>
-  <setAttributeNode obj="element" newAttr="attribute"/>
+  <assertFalse actual="state" id="elementhasattribute03_False"/>
+  <setAttributeNode var="newAttribute" obj="element" newAttr="attribute"/>
   <hasAttribute var="state" obj="element" name='"domestic"'/>
-  <assertTrue actual="state" id="elementhasattribute03"/>
+  <assertTrue actual="state" id="elementhasattribute03_True"/>
 </test>

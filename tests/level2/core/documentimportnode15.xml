@@ -46,5 +46,5 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createTextNode var="textToImport" obj="doc" data='"Document.importNode test for a TEXT_NODE"'/>
 <importNode  var="textImport" obj="doc" importedNode="textToImport" deep="true"/>
 <nodeValue var="nodeValue" obj="textImport"/>
-<assertEquals actual='"Document.importNode test for a TEXT_NODE"' expected="nodeValue" id="documentimportnode15"/>
+<assertEquals expected='"Document.importNode test for a TEXT_NODE"' actual="nodeValue" id="documentimportnode15" ignoreCase="false"/>
 </test>

@@ -40,16 +40,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="elementList" type="NodeList"/>
 <var name="element" type="Element"/>
 <var name="attr" type="Attr"/>
+<var name="newNode" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"address"'/>
-<item var="element" obj="elementList" index="0"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"address"'  interface="Document"/>
+<item var="element" obj="elementList" index="0"  interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <getNamedItemNS var="attr" obj="attributes" namespaceURI='"http://www.usa.com"' localName='"domestic"'/>
-<item var="element" obj="elementList" index="1"/>
+<item var="element" obj="elementList" index="1" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <assertDOMException id="namednodemapsetnameditemns06">
 <INUSE_ATTRIBUTE_ERR>
-<setNamedItemNS obj="attributes" arg="attr"/>
+<setNamedItemNS var="newNode" obj="attributes" arg="attr"/>
 </INUSE_ATTRIBUTE_ERR>
 </assertDOMException>
 </test>

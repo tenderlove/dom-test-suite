@@ -38,11 +38,12 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="element" type="Element"/>
   <var name="state" type="boolean"/>
   <var name="attribute" type="Attr"/>
+  <var name="newAttribute" type="Attr"/>
   <load var="doc" href="staff" willBeModified="false"/>
   <createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM"' 
 		   qualifiedName='"address"'/>
   <createAttributeNS var="attribute" obj="doc" namespaceURI='null' qualifiedName='"domestic"'/>
-  <setAttributeNode obj="element" newAttr="attribute"/>
+  <setAttributeNode var="newAttribute" obj="element" newAttr="attribute"/>
   <hasAttributeNS var="state" obj="element" namespaceURI="null" localName='"domestic"'/>
   <assertTrue actual="state" id="elementhasattributens03"/>
 </test>

@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodegetnamespaceuri03">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodegetnamespaceuri03">
 <metadata>
 <title>nodegetnamespaceuri03</title>
 <creator>IBM</creator>
@@ -50,8 +50,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <namespaceURI var="elemNSURINull" obj="element"/>
 <namespaceURI var="attrNSURI" obj="attrNS"/>
 <namespaceURI var="attrNSURINull" obj="attr"/>
-<assertEquals actual="elemNSURI" expected='"http://www.w3.org/DOM/Test/elem"' id="nodegetnamespaceuri03"/>
-<assertNull actual="elemNSURINull" id="nodegetnamespaceuri03"/>
-<assertEquals actual="attrNSURI" expected='"http://www.w3.org/DOM/Test/attr"' id="nodegetnamespaceuri03"/>
-<assertNull actual="attrNSURINull" id="nodegetnamespaceuri03"/>
+<assertEquals actual="elemNSURI" expected='"http://www.w3.org/DOM/Test/elem"' id="nodegetnamespaceuri03_elemNSURI" ignoreCase="false"/>
+<assertNull actual="elemNSURINull" id="nodegetnamespaceuri03_1"/>
+<assertEquals actual="attrNSURI" expected='"http://www.w3.org/DOM/Test/attr"' id="nodegetnamespaceuri03_attrNSURI" ignoreCase="false"/>
+<assertNull actual="attrNSURINull" id="nodegetnamespaceuri03_2"/>
 </test>

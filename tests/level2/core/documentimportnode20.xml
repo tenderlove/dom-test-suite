@@ -43,6 +43,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docImp" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="docType" type="DocumentType"/>
+<var name="docTypeNull" type="DocumentType" isNull="true"/>
 <var name="nodeMap" type="NamedNodeMap"/>
 <var name="entity4" type="Entity"/>
 <var name="entityImp4" type="Entity"/>
@@ -59,22 +60,22 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation var="domImpl" obj="doc" />
 <doctype var="docType" obj="doc"/>
-<createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="null"/>
+<createDocument var="docImp" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"a:b"' doctype="docTypeNull"/>
 <entities var="nodeMap" obj="docType"/>
 <getNamedItem var="entity4" obj="nodeMap" name='"ent4"'/>
 <importNode  var="entityImp4" obj="docImp" importedNode="entity4" deep="true"/>
 <childNodes var="childList" obj="entityImp4" />
-<item var="element" obj="childList" index="0"/>
+<item var="element" obj="childList" index="0" interface="NodeList"/>
 <childNodes var="elemchildList" obj="element"/>
-<item var="cdata" obj="elemchildList" index="0"/>
-<item var="pi" obj="childList" index="1"/>
+<item var="cdata" obj="elemchildList" index="0" interface="NodeList"/>
+<item var="pi" obj="childList" index="1" interface="NodeList"/>
 <nodeName var="ent4Name" obj="entity4"/>
 <nodeName var="ent4ImpName" obj="entityImp4"/>
-<data var="cdataVal" obj="cdata"/>
-<target var="piTargetVal" obj="pi"/>
-<data var="piDataVal" obj="pi"/>
-<assertEquals actual="ent4Name" expected="ent4ImpName" id="documentimportnode20_Ent4NodeName"/>
-<assertEquals actual='"Element data"' expected="cdataVal" id="documentimportnode20_Cdata"/>
-<assertEquals actual='"PItarget"' expected="piTargetVal" id="documentimportnode20_PITarget"/>
-<assertEquals actual='"PIdata"' expected="piDataVal" id="documentimportnode20_PIData"/>
+<data var="cdataVal" obj="cdata" interface="CharacterData"/>
+<target var="piTargetVal" obj="pi" interface="ProcessingInstruction"/>
+<data var="piDataVal" obj="pi"  interface="ProcessingInstruction"/>
+<assertEquals expected="ent4Name" actual="ent4ImpName" id="documentimportnode20_Ent4NodeName" ignoreCase="false"/>
+<assertEquals expected='"Element data"' actual="cdataVal" id="documentimportnode20_Cdata"  ignoreCase="false"/>
+<assertEquals expected='"PItarget"' actual="piTargetVal" id="documentimportnode20_PITarget"  ignoreCase="false"/>
+<assertEquals expected='"PIdata"' actual="piDataVal" id="documentimportnode20_PIData"  ignoreCase="false"/>
 </test>

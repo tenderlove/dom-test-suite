@@ -46,6 +46,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		      localName='"attr"'/>
   <nodeName var="attrName" obj="attribute"/>
   <nodeValue var="attrValue" obj="attribute"/>
-  <assertEquals actual="attrName" expected='"attr"' id="elementsetattributens01"/>
-  <assertEquals actual="attrValue" expected='"value"' id="elementsetattributens01"/>
+  <assertEquals actual="attrName" expected='"attr"' id="elementsetattributens01_attrName" ignoreCase="false"/>
+  <assertEquals actual="attrValue" expected='"value"' id="elementsetattributens01_attrValue" ignoreCase="false"/>
 </test>

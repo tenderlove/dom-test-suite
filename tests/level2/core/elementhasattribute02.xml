@@ -37,7 +37,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <load var="doc" href="staffNS" willBeModified="false"/>
   <getElementsByTagName interface="Document" obj="doc" tagname="&quot;emp:employee&quot;" 
 			var="elementList"/>
-  <item var="element" obj="elementList" index="0"/>
+  <item var="element" obj="elementList" index="0" interface="NodeList"/>
   <hasAttribute var="state" obj="element" name='"defaultAttr"'/>
   <assertTrue actual="state" id="elementhasattribute02"/>
 </test>

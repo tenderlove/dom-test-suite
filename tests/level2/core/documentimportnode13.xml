@@ -39,12 +39,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="doc" type="Document"/>
 <var name="childList" type="NodeList"/>
 <var name="imported" type="Node"/>
+<var name="importedList" type="NodeList"/>
 <var name="employeeElem" type="Node"/>
 <var name="importedLen" type="int"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"'/>
-<item var="employeeElem" obj="childList" index="0"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<item var="employeeElem" obj="childList" index="0"  interface="NodeList"/>
 <importNode var="imported" obj="doc" importedNode="employeeElem" deep="false"/>
-<length var="importedLen" obj="imported"/>
-<assertEquals actual="0" expected="importedLen" id="documentimportnode13"/>
+<childNodes var="importedList" obj="imported"/>
+<length var="importedLen" obj="importedList"  interface="NodeList"/>
+<assertEquals expected="0" actual="importedLen" id="documentimportnode13" ignoreCase="false"/>
 </test>

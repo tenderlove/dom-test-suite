@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodegetownerdocument02">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodegetownerdocument02">
 <metadata>
 <title>nodegetownerdocument02</title>
 <creator>IBM</creator>
@@ -43,8 +43,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createDocumentType var="docType" obj="domImpl" qualifiedName='"mydoc"' publicId="null" systemId="null"/>
 <createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"mydoc"' doctype="docType"/>
 <ownerDocument var="ownerDocDoc" obj="newDoc"/>
-<assertNull actual="ownerDocDoc" id="nodegetownerdocument02"/>
+<assertNull actual="ownerDocDoc" id="nodegetownerdocument02_1"/>
 <createElementNS var="newElem" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"myelem"'/>
 <ownerDocument var="ownerDocElem" obj="newElem"/>
-<assertNotNull actual="ownerDocElem" id="nodegetownerdocument02"/>
+<assertNotNull actual="ownerDocElem" id="nodegetownerdocument02_2"/>
 </test>

@@ -37,13 +37,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="attributeRemoved" type="Attr"/>
 <var name="elementList" type="NodeList"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"employee"'/>
-<item var="element" obj="elementList" index="0"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"employee"' interface="Document"/>
+<item var="element" obj="elementList" index="0" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <removeNamedItemNS var="attributeRemoved" obj="attributes" namespaceURI='"http://www.w3.org/2000/xmlns/"' localName='"xmlns"'/>
 <getNamedItemNS var="attribute" obj="attributes"  namespaceURI='"http://www.w3.org/2000/xmlns/"' localName='"xmlns"'/>
-<assertNull actual="attribute" id="namednodemapremovenameditemns04"/>
+<assertNull actual="attribute" id="namednodemapremovenameditemns04_1"/>
 <removeNamedItemNS var="attributeRemoved" obj="attributes" namespaceURI='"http://www.w3.org/2000/xmlns/"' localName='"dmstc"'/>
 <getNamedItemNS var="attribute" obj="attributes"  namespaceURI='"http://www.w3.org/2000/xmlns/"' localName='"dmstc"'/>
-<assertNull actual="attribute" id="namednodemapremovenameditemns04"/>
+<assertNull actual="attribute" id="namednodemapremovenameditemns04_2"/>
 </test>

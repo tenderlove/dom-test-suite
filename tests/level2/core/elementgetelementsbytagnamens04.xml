@@ -38,6 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="child1" type="Element"/>
   <var name="child2" type="Element"/>
   <var name="child3" type="Element"/>
+  <var name="appendedChild" type="Node"/>
   <var name="elementList" type="NodeList"/>
   <load var="doc" href="staffNS" willBeModified="false"/>
   <createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM"' 
@@ -48,13 +49,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		   qualifiedName='"child"'/>
   <createElementNS var="child3" obj="doc" namespaceURI='"http://www.w3.org/DOM/Level2"' 
 		   qualifiedName='"dom:child"'/>
-  <appendChild obj="element" newChild="child1"/>
-  <appendChild obj="element" newChild="child2"/>
-  <appendChild obj="element" newChild="child3"/>
+  <appendChild var="appendedChild" obj="element" newChild="child1"/>
+  <appendChild var="appendedChild" obj="element" newChild="child2"/>
+  <appendChild var="appendedChild" obj="element" newChild="child3"/>
   <getElementsByTagNameNS var="elementList" obj="element" namespaceURI="null" 
 			  localName='"child"'  interface="Element" />
-  <assertSize size="1" collection="elementList" id="elementgetelementsbytagnamens04"/>
+  <assertSize size="1" collection="elementList" id="elementgetelementsbytagnamens04_1"/>
   <getElementsByTagNameNS var="elementList" obj="element" namespaceURI='"*"' 
 			  localName='"child"'  interface="Element" />
-  <assertSize size="3" collection="elementList" id="elementgetelementsbytagnamens04"/>
+  <assertSize size="3" collection="elementList" id="elementgetelementsbytagnamens04_2"/>
 </test>

@@ -43,18 +43,19 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="elementAlt" type="Element"/>
 <var name="attr" type="Attr"/>
+<var name="newNode" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"address"'/>
-<item var="element" obj="elementList" index="1"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"*"' localName='"address"' interface="Document"/>
+<item var="element" obj="elementList" index="1"  interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <load var="docAlt" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="elementListAlt" obj="docAlt" namespaceURI='"*"' localName='"address"'/>
-<item var="elementAlt" obj="elementListAlt" index="1"/>
+<getElementsByTagNameNS var="elementListAlt" obj="docAlt" namespaceURI='"*"' localName='"address"'  interface="Document"/>
+<item var="elementAlt" obj="elementListAlt" index="1"  interface="NodeList"/>
 <attributes var="attributesAlt" obj="elementAlt"/>
 <getNamedItemNS var="attr" obj="attributesAlt" namespaceURI="null" localName='"street"'/>
 <assertDOMException id="namednodemapsetnameditemns03">
 <WRONG_DOCUMENT_ERR>
-<setNamedItemNS obj="attributes" arg="attr"/>
+<setNamedItemNS var="newNode" obj="attributes" arg="attr"/>
 </WRONG_DOCUMENT_ERR>
 </assertDOMException>
 </test>

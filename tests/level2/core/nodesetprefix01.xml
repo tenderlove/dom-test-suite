@@ -15,7 +15,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
 <!DOCTYPE test SYSTEM "dom2.dtd">
-<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2/ID-NodeNSLocalN" name="nodesetprefix01">
+<test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="nodesetprefix01">
 <metadata>
 <title>nodesetprefix01</title>
 <creator>IBM</creator>
@@ -37,13 +37,14 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="element" type="Element"/>
 <var name="elementTagName" type="DOMString"/>
 <var name="elementNodeName" type="DOMString"/>
+<var name="appendedChild" type="Node"/>
 <load var="doc" href="staff" willBeModified="false"/>
 <createDocumentFragment var="docFragment" obj="doc" />
 <createElementNS var="element" obj="doc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"emp:address"'/>
-<appendChild obj="docFragment" newChild="element"/>
+<appendChild var="appendedChild" obj="docFragment" newChild="element"/>
 <prefix obj="element" value='"dmstc"'/>
 <tagName var="elementTagName" obj="element"/>
 <nodeName var="elementNodeName" obj="element"/>
-<assertEquals actual="elementTagName" expected='"dmstc:address"' id="nodesetprefix01"/>
-<assertEquals actual="elementNodeName" expected='"dmstc:address"' id="nodesetprefix01"/>
+<assertEquals actual="elementTagName" expected='"dmstc:address"' id="nodesetprefix01_tagname" ignoreCase="false"/>
+<assertEquals actual="elementNodeName" expected='"dmstc:address"' id="nodesetprefix01_nodeName" ignoreCase="false"/>
 </test>

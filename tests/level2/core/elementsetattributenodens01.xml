@@ -44,6 +44,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="attrNS" type="DOMString"/>
   <var name="attrValue" type="DOMString"/>
   <var name="attributes" type="NamedNodeMap"/>
+  <var name="newAttribute" type="Attr"/>
   <var name="length" type="int"/>
   <load var="doc" href="staff" willBeModified="false"/>
   <createElementNS var="element" obj="doc" 
@@ -56,20 +57,20 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		     namespaceURI='"http://www.w3.org/DOM/Test/att1"' 
 		     qualifiedName='"p2:att"'/>
 
-  <setValue var="value2" obj="attribute2" value='"value2"'/>
+  <value obj="attribute2" value='"value2"' interface="Attr"/>
 
-  <setAttributeNodeNS obj="element" newAttr="attribute1"/>
+  <setAttributeNodeNS var="newAttribute" obj="element" newAttr="attribute1"/>
 
-  <setAttributeNodeNS obj="element" newAttr="attribute2"/>
+  <setAttributeNodeNS var="newAttribute" obj="element" newAttr="attribute2"/>
   <getAttributeNodeNS var="attrNode" obj="element" 
 		      namespaceURI='"http://www.w3.org/DOM/Test/att1"' 
 		      localName='"att"'/>
   
   <nodeName var="attrName" obj="attrNode"/>
   <namespaceURI var="attrNS" obj="attrNode"/>
-  <assertEquals actual="attrName" expected='"p2:att"' id="elementsetattributenodens01"/>
+  <assertEquals actual="attrName" expected='"p2:att"' id="elementsetattributenodens01_attrName" ignoreCase="false"/>
   <assertEquals actual="attrNS" expected='"http://www.w3.org/DOM/Test/att1"' 
-		id="elementsetattributenodens01"/>
+		id="elementsetattributenodens01_attrNS" ignoreCase="false"/>
   
   <attributes var="attributes" obj="element"/>
   <length var="length" obj="attributes" interface="NamedNodeMap"/>

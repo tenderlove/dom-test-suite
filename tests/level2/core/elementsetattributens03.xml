@@ -39,8 +39,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="attrName" type="DOMString"/>
   <var name="attrValue" type="DOMString"/>
   <load var="doc" href="staffNS" willBeModified="false"/>
-  <getElementsByTagName var="elementList" obj="doc" tagname='"emp:employee"'/>
-  <item var="element" obj="elementList" index="0"/>
+  <getElementsByTagName var="elementList" obj="doc" tagname='"emp:employee"' interface="Document"/>
+  <item var="element" obj="elementList" index="0"  interface="NodeList"/>
   <setAttributeNS obj="element"  
 		  namespaceURI='"http://www.w3.org/DOM/Test/1"' 
 		  qualifiedName ='"defaultAttr"' value='"default1"'/>
@@ -51,6 +51,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		      namespaceURI='"http://www.w3.org/DOM/Test/1"' localName='"defaultAttr"'/>
   <nodeName var="attrName" obj="attribute"/>
   <nodeValue var="attrValue" obj="attribute"/>
-  <assertEquals actual="attrName" expected='"defaultAttr"' id="elementsetattributens03"/>
-  <assertEquals actual="attrValue" expected='"default1"' id="elementsetattributens03"/>
+  <assertEquals actual="attrName" expected='"defaultAttr"' id="elementsetattributens03_attrName" ignoreCase="false"/>
+  <assertEquals actual="attrValue" expected='"default1"' id="elementsetattributens03_attrValue" ignoreCase="false"/>
 </test>

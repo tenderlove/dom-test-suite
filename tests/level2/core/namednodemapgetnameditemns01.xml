@@ -47,6 +47,6 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <getNamedItemNS var="notation" obj="notations" namespaceURI="null" localName='"notation1"'/>
 <nodeName var="entityName" obj="entity"/>
 <nodeName var="notationName" obj="notation"/>
-<assertEquals actual="entityName" expected='"ent1"' id="namednodemapgetnameditemns01"/>
-<assertEquals actual="notationName" expected='"notation1"' id="namednodemapgetnameditemns01"/>
+<assertEquals actual="entityName" expected='"ent1"' id="namednodemapgetnameditemns01_entityName" ignoreCase="false"/>
+<assertEquals actual="notationName" expected='"notation1"' id="namednodemapgetnameditemns01_notationName" ignoreCase="false"/>
 </test>

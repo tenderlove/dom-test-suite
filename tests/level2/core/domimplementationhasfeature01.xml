@@ -53,16 +53,16 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementation obj="doc" var="domImpl"/>
 <for-each collection="featuresXML" member="featureXML">
 <hasFeature obj="domImpl" var="success" feature="featureXML" version="version"/>
-<assertTrue actual="success" id="domimplementationhasfeature01_XML"/>
+<assertTrue actual="success" id="domimplementationhasfeature01_XML_1"/>
 <hasFeature obj="domImpl" var="success" feature="featureXML" version="version1"/>
-<assertTrue actual="success" id="domimplementationhasfeature01_XML"/>
+<assertTrue actual="success" id="domimplementationhasfeature01_XML_2"/>
 </for-each>
 <for-each collection="featuresCore" member="featureCore">
 <hasFeature obj="domImpl" var="success" feature="featureCore" version="version"/>
-<assertTrue actual="success" id="domimplementationhasfeature01_Core"/>
+<assertTrue actual="success" id="domimplementationhasfeature01_Core_1"/>
 <hasFeature obj="domImpl" var="success" feature="featureCore" version="version1"/>
-<assertTrue actual="success" id="domimplementationhasfeature01_Core"/>
+<assertTrue actual="success" id="domimplementationhasfeature01_Core_2"/>
 <hasFeature obj="domImpl" var="success" feature="featureCore" version="version2"/>
-<assertTrue actual="success" id="domimplementationhasfeature01_Core"/>
+<assertTrue actual="success" id="domimplementationhasfeature01_Core_3"/>
 </for-each>
 </test>

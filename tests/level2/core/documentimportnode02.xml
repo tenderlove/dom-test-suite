@@ -14,7 +14,6 @@ PURPOSE.
 See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 -->
-
 <!DOCTYPE test SYSTEM "dom2.dtd">
 <test xmlns="http://www.w3.org/2001/DOM-Test-Suite/Level-2" name="documentimportnode02">
 <metadata>
@@ -57,9 +56,9 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <parentNode var="attrsParent" obj="importedAttr"/>
 <assertNull actual="attrsParent" id="documentimportnode02_parentNull"/>
 -->
-<assertEquals actual='"emp:zone"' expected="nodeName"  id="documentimportnode02_nodeName"/>
-<assertEquals actual="2" expected="nodeType"  id="documentimportnode02_nodeType"/>
-<assertEquals actual='"CANADA"' expected="nodeValue"  id="documentimportnode02_nodeValue"/>
+<assertEquals expected='"emp:zone"' actual="nodeName"  id="documentimportnode02_nodeName"  ignoreCase="false"/>
+<assertEquals expected="2" actual="nodeType"  id="documentimportnode02_nodeType"  ignoreCase="false"/>
+<assertEquals expected='"CANADA"' actual="nodeValue"  id="documentimportnode02_nodeValue"  ignoreCase="false"/>
 </test>
 
 

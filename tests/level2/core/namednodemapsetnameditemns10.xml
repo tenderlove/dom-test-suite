@@ -42,23 +42,24 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="notation" type="Notation"/>
 <var name="element" type="Element"/>
 <var name="elementList" type="NodeList"/>
+<var name="newNode" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <doctype var="docType" obj="doc"/>
 <entities var="entities" obj="docType"/>
 <notations var="notations" obj="docType"/>
 <getNamedItemNS var="entity" obj="entities" namespaceURI="null" localName='"ent1"'/>
 <getNamedItemNS var="notation" obj="notations" namespaceURI="null" localName='"notation1"'/>
-<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"address"'/>
-<item var="element" obj="elementList" index="0"/>
+<getElementsByTagNameNS var="elementList" obj="doc" namespaceURI='"http://www.nist.gov"' localName='"address"' interface="Document"/>
+<item var="element" obj="elementList" index="0" interface="NodeList"/>
 <attributes var="attributes" obj="element"/>
 <assertDOMException id="namednodemapsetnameditemns10_entity">
 <HIERARCHY_REQUEST_ERR>
-<setNamedItemNS obj="attributes" arg="entity"/>
+<setNamedItemNS var="newNode" obj="attributes" arg="entity"/>
 </HIERARCHY_REQUEST_ERR>
 </assertDOMException>
 <assertDOMException id="namednodemapsetnameditemns10_notation">
 <HIERARCHY_REQUEST_ERR>
-<setNamedItemNS obj="attributes" arg="notation"/>
+<setNamedItemNS var="newNode" obj="attributes" arg="notation"/>
 </HIERARCHY_REQUEST_ERR>
 </assertDOMException>
 </test>

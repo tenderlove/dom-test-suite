@@ -38,6 +38,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="newDoc" type="Document"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="docType" type="DocumentType"/>
+<var name="docTypeNull" type="DocumentType" isNull="true"/>
 <var name="documentElement" type="Element"/>
 <var name="element1" type="Element"/>
 <var name="element2" type="Element"/>
@@ -54,9 +55,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="comment" type="Comment"/>
 <var name="entRef" type="EntityReference"/>
 <var name="elementList" type="NodeList"/>
+<var name="appendedChild" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:root"' doctype="null"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:root"' doctype="docTypeNull"/>
 <createElement var="element1" obj="newDoc" tagName='"element1"'/>
 <createElement var="element2" obj="newDoc" tagName='"element2"'/>
 <createElement var="element3" obj="newDoc" tagName='"element3"'/>
@@ -72,38 +74,38 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <createProcessingInstruction var="pi" obj="newDoc" target='"PITarget"' data='"PIData"'/>
 <createEntityReference var="entRef" obj="newDoc" name='"EntRef"'/>
 <documentElement var="documentElement" obj="newDoc"/>
-<appendChild obj="documentElement" newChild="element1"/>
+<appendChild var="appendedChild" obj="documentElement" newChild="element1"/>
 
-<appendChild obj="element2" newChild="text1"/>
-<appendChild obj="element2" newChild="text2"/>
-<appendChild obj="element2" newChild="text3"/>
-<appendChild obj="element1" newChild="element2"/>
+<appendChild var="appendedChild" obj="element2" newChild="text1"/>
+<appendChild var="appendedChild" obj="element2" newChild="text2"/>
+<appendChild var="appendedChild" obj="element2" newChild="text3"/>
+<appendChild var="appendedChild" obj="element1" newChild="element2"/>
 
-<appendChild obj="element3" newChild="entRef"/>
-<appendChild obj="element3" newChild="text1"/>
-<appendChild obj="element3" newChild="text2"/>
-<appendChild obj="element1" newChild="element3"/>
+<appendChild var="appendedChild" obj="element3" newChild="entRef"/>
+<appendChild var="appendedChild" obj="element3" newChild="text1"/>
+<appendChild var="appendedChild" obj="element3" newChild="text2"/>
+<appendChild var="appendedChild" obj="element1" newChild="element3"/>
 
-<appendChild obj="element4" newChild="cData"/>
-<appendChild obj="element4" newChild="text1"/>
-<appendChild obj="element4" newChild="text2"/>
-<appendChild obj="element1" newChild="element4"/>
+<appendChild var="appendedChild" obj="element4" newChild="cData"/>
+<appendChild var="appendedChild" obj="element4" newChild="text1"/>
+<appendChild var="appendedChild" obj="element4" newChild="text2"/>
+<appendChild var="appendedChild" obj="element1" newChild="element4"/>
 
-<appendChild obj="element5" newChild="comment"/>
-<appendChild obj="element5" newChild="text2"/>
-<appendChild obj="element5" newChild="text3"/>
-<appendChild obj="element1" newChild="element5"/>
+<appendChild var="appendedChild" obj="element5" newChild="comment"/>
+<appendChild var="appendedChild" obj="element5" newChild="text2"/>
+<appendChild var="appendedChild" obj="element5" newChild="text3"/>
+<appendChild var="appendedChild" obj="element1" newChild="element5"/>
 				
-<appendChild obj="element6" newChild="pi"/>
-<appendChild obj="element6" newChild="text2"/>
-<appendChild obj="element6" newChild="text3"/>
-<appendChild obj="element1" newChild="element6"/>
+<appendChild var="appendedChild" obj="element6" newChild="pi"/>
+<appendChild var="appendedChild" obj="element6" newChild="text2"/>
+<appendChild var="appendedChild" obj="element6" newChild="text3"/>
+<appendChild var="appendedChild" obj="element1" newChild="element6"/>
 
-<appendChild obj="element7" newChild="entRef"/>
-<appendChild obj="element7" newChild="text1"/>
-<appendChild obj="element7" newChild="text2"/>
-<appendChild obj="element7" newChild="text3"/>
-<appendChild obj="element1" newChild="element7"/>
+<appendChild var="appendedChild" obj="element7" newChild="entRef"/>
+<appendChild var="appendedChild" obj="element7" newChild="text1"/>
+<appendChild var="appendedChild" obj="element7" newChild="text2"/>
+<appendChild var="appendedChild" obj="element7" newChild="text3"/>
+<appendChild var="appendedChild" obj="element1" newChild="element7"/>
 
 <childNodes var="elementList" obj="element1"/>
 <assertSize  size="6" collection="elementList" id="nodeNormalize01_1Bef"/>

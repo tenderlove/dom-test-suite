@@ -36,6 +36,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="element1" type="Element"/>
   <var name="element2" type="Element"/>
   <var name="attribute" type="Attr"/>
+  <var name="newAttribute" type="Attr"/>
   <load var="doc" href="staffNS" willBeModified="false"/>
   <createElementNS var="element1" obj="doc" 
 		   namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"elem1"'/>
@@ -43,10 +44,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		   namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"elem2"'/>
   <createAttributeNS var="attribute" obj="doc" 
 		     namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"attr"'/>
-  <setAttributeNodeNS obj="element1"  newAttr="attribute"/>
+  <setAttributeNodeNS var="newAttribute" obj="element1"  newAttr="attribute"/>
   <assertDOMException id="elementsetattributenodens04">
     <INUSE_ATTRIBUTE_ERR>
-      <setAttributeNodeNS obj="element2"  newAttr="attribute"/>
+      <setAttributeNodeNS var="newAttribute" obj="element2"  newAttr="attribute"/>
     </INUSE_ATTRIBUTE_ERR>
   </assertDOMException>
 </test>

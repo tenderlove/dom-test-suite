@@ -41,12 +41,13 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childList" type="NodeList"/>
 <var name="success" type="boolean"/>
 <var name="addressNode" type="Node"/>
+<var name="appendedChild" type="Node"/>
 <var name="importedDocFrag" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <createDocumentFragment var="docFragment" obj="doc"/>
-<getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"*"'/>
-<item var="addressNode" obj="childList" index="0"/>
-<appendChild obj="docFragment" newChild="addressNode"/>
+<getElementsByTagNameNS var="childList" obj="doc" localName='"address"' namespaceURI='"*"' interface="Document"/>
+<item var="addressNode" obj="childList" index="0"  interface="NodeList"/>
+<appendChild var="appendedChild" obj="docFragment" newChild="addressNode"/>
 <importNode var="importedDocFrag" obj="doc" importedNode="docFragment" deep="false"/>
 <hasChildNodes var="success" obj="importedDocFrag"/>
 <assertFalse actual="success" id="documentimportnode09"/>

@@ -41,10 +41,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="docElem" type="Element"/>
 <var name="element" type="Element"/>
 <var name="childList" type="NodeList"/>
+<var name="appendedChild" type="Node"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <documentElement var="docElem" obj="doc"/>
 <createElementNS var="element" obj="doc" namespaceURI='"test"' qualifiedName='"employeeId"'/>
-<appendChild obj="docElem" newChild="element"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI ='"*"' localName  ='"employeeId"'/>
+<appendChild var="appendedChild" obj="docElem" newChild="element"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI ='"*"' localName  ='"employeeId"' interface="Document"/>
 <assertSize size="6" collection="childList"  id="documentgetelementsbytagnameNS02"/>
 </test>

@@ -33,23 +33,26 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <implementationAttribute name="namespaceAware" value="true"/>
 <var name="doc" type="Document"/>
 <var name="newDoc" type="Document"/>
+<var name="docType" type="DocumentType" isNull="true"/>
 <var name="domImpl" type="DOMImplementation"/>
 <var name="element" type="Element"/>
 <var name="elementTest" type="Element"/>
 <var name="elementDoc" type="Element"/>
 <var name="attribute" type="Attr"/>
+<var name="setNode" type="Node"/>
+<var name="appendedChild" type="Node"/>
 <var name="elementList" type="NodeList"/>
 <var name="hasAttributes" type="boolean"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
 <implementation var="domImpl" obj="doc"/>
-<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test"' doctype="null"/>
+<createDocument var="newDoc" obj="domImpl" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"test"' doctype="docType"/>
 <createElementNS var="element" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' qualifiedName='"dom:elem"'/>
 <createAttribute var="attribute" obj="newDoc" name='"attr"'/>
-<setAttributeNode obj="element" newAttr="attribute"/>
+<setAttributeNode var="setNode" obj="element" newAttr="attribute"/>
 <documentElement var="elementDoc" obj="newDoc"/>
-<appendChild obj="elementDoc" newChild="element"/>
-<getElementsByTagNameNS var="elementList" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' localName='"elem"'/>
-<item var="elementTest" obj="elementList" index="0"/>
+<appendChild var="appendedChild" obj="elementDoc" newChild="element"/>
+<getElementsByTagNameNS var="elementList" obj="newDoc" namespaceURI='"http://www.w3.org/DOM/Test"' localName='"elem"' interface="Document"/>
+<item var="elementTest" obj="elementList" index="0" interface="NodeList"/>
 <hasAttributes var="hasAttributes" obj="elementTest"/>
 <assertTrue actual="hasAttributes" id="nodehasattributes04"/>
 </test>

@@ -46,9 +46,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <load var="docImp" href="staffNS" willBeModified="false"/>
 <createProcessingInstruction var="piToImport" obj="doc" target='"Target"' data='"Data"'/>
 <importNode  var="piImport" obj="doc" importedNode="piToImport" deep="false"/>
-<target var="PITarget" obj="piImport"/>
-<data var="PIData" obj="piImport"/>
-<Data var="PIData" obj="piImport"/>
-<assertEquals actual='"Target"' expected="PITarget" id="documentimportnode18_Target"/>
-<assertEquals actual='"Data"' expected="PIData" id="documentimportnode18_Data"/>
+<target var="PITarget" obj="piImport" interface="ProcessingInstruction"/>
+<data var="PIData" obj="piImport" interface="ProcessingInstruction"/>
+<assertEquals expected='"Target"' actual="PITarget" id="documentimportnode18_Target" ignoreCase="false"/>
+<assertEquals expected='"Data"' actual="PIData" id="documentimportnode18_Data" ignoreCase="false"/>
 </test>

@@ -40,13 +40,17 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <var name="childList" type="NodeList"/>
 <var name="imported" type="Node"/>
 <var name="addressElem" type="Node"/>
+<var name="addressElemChildren" type="NodeList"/>
+<var name="importedChildren" type="NodeList"/>
 <var name="addressElemLen" type="int"/>
 <var name="importedLen" type="int"/>
 <load var="doc" href="staffNS" willBeModified="false"/>
-<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"address"'/>
-<item var="addressElem" obj="childList" index="0"/>
+<getElementsByTagNameNS var="childList" obj="doc" namespaceURI='"*"' localName='"address"' interface="Document"/>
+<item var="addressElem" obj="childList" index="0" interface="NodeList"/>
 <importNode var="imported" obj="doc" importedNode="addressElem" deep="true"/>
-<length var="addressElemLen" obj="addressElem"/>
-<length var="importedLen" obj="imported"/>
-<assertEquals actual="addressElemLen" expected="importedLen" id="documentimportnode12"/>
+<childNodes var="addressElemChildren" obj="addressElem"/>
+<childNodes var="importedChildren" obj="imported"/>
+<length var="addressElemLen" obj="addressElemChildren"  interface="NodeList"/>
+<length var="importedLen" obj="importedChildren"  interface="NodeList"/>
+<assertEquals actual="addressElemLen" expected="importedLen" id="documentimportnode12" ignoreCase="false"/>
 </test>

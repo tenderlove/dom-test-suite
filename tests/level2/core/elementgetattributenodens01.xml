@@ -34,6 +34,8 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
   <var name="element" type="Element"/>
   <var name="attribute1" type="Attr"/>
   <var name="attribute2" type="Attr"/>
+   <var name="newAttribute1" type="Attr"/>
+  <var name="newAttribute2" type="Attr"/> 
   <var name="attribute" type="Attr"/>
   <var name="attrValue" type="DOMString"/>
   <var name="attrName" type="DOMString"/>
@@ -45,21 +47,21 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 		   qualifiedName='"root"'/>
   <createAttributeNS var="attribute1" obj="doc" 
 		     namespaceURI='"http://www.w3.org/DOM/Level2"' qualifiedName='"l2:att"'/>
-  <setAttributeNodeNS obj="element" newAttr="attribute1"/>
+  <setAttributeNodeNS var="newAttribute1" obj="element" newAttr="attribute1"/>
   <createAttributeNS var="attribute2" obj="doc" namespaceURI='"http://www.w3.org/DOM/Level1"' 
 		     qualifiedName='"att"'/>
-  <setAttributeNodeNS obj="element" newAttr="attribute2"/>
+  <setAttributeNodeNS var="newAttribute2" obj="element" newAttr="attribute2"/>
   <getAttributeNodeNS var="attribute" obj="element" 
 		      namespaceURI='"http://www.w3.org/DOM/Level2"' localName='"att"'/>
   <nodeValue var="attrValue" obj="attribute"/>
-  <name var="attrName" obj="attribute"/>
+  <name var="attrName" obj="attribute" interface="Attr"/>
   <nodeName var="attNodeName" obj="attribute"/>
   <localName var="attrLocalName" obj="attribute"/>
   <namespaceURI var="attrNS" obj="attribute"/>
-  <assertEquals actual="attrValue" expected='""' id="elementgetattributenodens01"/>
-  <assertEquals actual="attrName" expected='"l2:att"' id="elementgetattributenodens01"/>
-  <assertEquals actual="attNodeName" expected='"l2:att"' id="elementgetattributenodens01"/>
-  <assertEquals actual="attrLocalName" expected='"att"' id="elementgetattributenodens01"/>
-  <assertEquals actual="attrNS" expected='"http://www.w3.org/DOM/Level2"' id="elementgetattributenodens01"/>
+  <assertEquals actual="attrValue" expected='""' id="elementgetattributenodens01_attrValue" ignoreCase="false"/>
+  <assertEquals actual="attrName" expected='"l2:att"' id="elementgetattributenodens01_attrName" ignoreCase="false"/>
+  <assertEquals actual="attNodeName" expected='"l2:att"' id="elementgetattributenodens01_attrNodeName" ignoreCase="false"/>
+  <assertEquals actual="attrLocalName" expected='"att"' id="elementgetattributenodens01_attrLocalName" ignoreCase="false"/>
+  <assertEquals actual="attrNS" expected='"http://www.w3.org/DOM/Level2"' id="elementgetattributenodens01_attrNs" ignoreCase="false"/>
 </test>
 
