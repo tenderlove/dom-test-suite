@@ -13,7 +13,11 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.85  2003-02-10 07:08:12  dom-ts-4
+Revision 1.86  2003-02-12 06:25:20  dom-ts-4
+Typo resulting in buildecmascript directory
+Missing  unzips for jsunit.zip in some -gen-jsunits
+
+Revision 1.85  2003/02/10 07:08:12  dom-ts-4
 Change to JSUnit 1.3.3
 
 Revision 1.84  2003/02/06 05:58:30  dom-ts-4
@@ -933,10 +937,10 @@ All implementation conditions combined into implementationAttribute element
 	</jar>
 </target>
 
-<target name="dom1-html-gen-jsunit" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
+<target name="dom1-html-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level1/html/files"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level1/html"/>
-    <copy todir="${build.dir}ecmascript/level1/html/files">
+    <copy todir="${build.dir}/ecmascript/level1/html/files">
 		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
     </copy>
     <!--  copy XHTML 1.0 DTD's to output directory   -->
@@ -969,14 +973,15 @@ All implementation conditions combined into implementationAttribute element
 
 
 
-<target name="jsunit-get" depends="init" unless="jsunit-available">
-    <fail message="download jsunit.zip from http://www.jsunit.net and place in lib directory"/>
+<target name="jsunit-get" depends="init">
+    <fail unless="jsunit-available" 
+        message="download jsunit.zip from http://www.jsunit.net and place in lib directory"/>
+    <unzip dest="${build.dir}/ecmascript" src="${lib.dir}/jsunit.zip"/>
 </target>
 
 
 <target name="dom1-core-gen-jsunit" depends="jsunit-get,dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level1/core/files"/>
-    <unzip src="${lib.dir}/jsunit.zip" dest="${build.dir}/ecmascript"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level1/core"/>
     <copy todir="${build.dir}/ecmascript/level1/core/files">
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
@@ -1167,9 +1172,8 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-core-gen-jsunit" depends="dom2-interfaces,dom2-dtd">
+<target name="dom2-core-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd">
     <mkdir dir="${build.dir}/ecmascript/level2/core/files"/>
-    <unzip src="${lib.dir}/jsunit.zip" dest="${build.dir}/ecmascript"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/core"/>
     <copy todir="${build.dir}/ecmascript/level2/core/files">
 		<fileset dir="tests/level2/core/files" excludes="*.bak"/>
@@ -1208,7 +1212,7 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom2-html-gen-jsunit" depends="dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
+<target name="dom2-html-gen-jsunit" depends="jsunit-get,dom2-interfaces,dom2-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/ecmascript/level2/html/files"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/ecmascript/level2/html"/>
     <copy todir="${build.dir}/ecmascript/level2/html/files">
