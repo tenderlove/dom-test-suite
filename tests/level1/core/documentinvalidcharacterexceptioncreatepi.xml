@@ -32,6 +32,7 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-135944439"/>
 <subject resource="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-135944439')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])"/>
 </metadata>
+<hasFeature feature="XML"/>
 <var name="doc" type="Document"/>
 <var name="badPI" type="ProcessingInstruction"/>
 <load var="doc" href="staff" willBeModified="true"/>
