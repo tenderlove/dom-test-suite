@@ -13,7 +13,10 @@ See W3C License http://www.w3.org/Consortium/Legal/ for more details.
 
 <!--
 $Log: build.xml,v $
-Revision 1.63  2002-06-25 06:59:26  dom-ts-4
+Revision 1.64  2002-06-29 18:40:01  dom-ts-4
+Added dom1-[core|html]-validate-files and DOMTSApplet
+
+Revision 1.63  2002/06/25 06:59:26  dom-ts-4
 Added dom1-html-gen-jsunit, other cleanup
 
 Revision 1.62  2002/06/10 04:24:01  dom-ts-4
@@ -256,12 +259,18 @@ All implementation conditions combined into implementationAttribute element
     <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
     <available property="jsunit-available" file="${lib.dir}/jsunit.zip"/>
     <available property="avalon-available" file="${lib.dir}/avalon.zip"/>
-    <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-strict.dtd"/>
+    <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
 </target>
 
 
-<target name="get-xhtml1-dtd" unless="xhtml1-dtd-available">
+<target name="get-xhtml1-dtd" depends="init" unless="xhtml1-dtd-available">
     <mkdir dir="${lib.dir}/xhtml1-dtd"/>
+    <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"
+        dest="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"
+        usetimestamp="yes"/>
+    <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+        dest="${lib.dir}/xhtml1-dtd/xhtml1-transitional.dtd"
+        usetimestamp="yes"/>
     <get src="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
         dest="${lib.dir}/xhtml1-dtd/xhtml1-strict.dtd"
         usetimestamp="yes"/>
@@ -795,6 +804,16 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
+<target name="dom1-core-validate-files" depends="get-xhtml1-dtd">
+    <copy todir="${tests.dir}/level1/core/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level1/core/files" includes="*.xml" excludes="nodtdstaff.xml"/>  
+	</xmlvalidate>
+</target>
 
 <target name="dom1-core-gen-java" depends="dom1-interfaces, dom1-dtd">
     <mkdir dir="${build.dir}/java/org/w3c/domts/level1/core"/>
@@ -832,6 +851,17 @@ All implementation conditions combined into implementationAttribute element
 	</xmlvalidate>
 </target>
 
+
+<target name="dom1-html-validate-files" depends="get-xhtml1-dtd">
+    <copy todir="${tests.dir}/level1/html/files">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+
+	<xmlvalidate lenient="no" failonerror="yes"
+	             classname="org.apache.xerces.parsers.SAXParser">
+		<fileset dir="${tests.dir}/level1/html/files" includes="*.xml" excludes="nodtdstaff.xml"/>  
+	</xmlvalidate>
+</target>
 
 
 <target name="dom1-html-gen-java" depends="dom1-interfaces,dom1-dtd">
@@ -887,13 +917,21 @@ All implementation conditions combined into implementationAttribute element
 	</jar>
 </target>
 
-<target name="dom1-html-gen-jsunit" depends="dom1-interfaces,dom1-dtd">
-    <mkdir dir="${build.dir}/level1/html/ecmascript/tests"/>
+<target name="dom1-html-gen-jsunit" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
+    <mkdir dir="${build.dir}/level1/html/ecmascript/tests/applets/org/w3c/domts"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/html/ecmascript/tests"/>
     <copy todir="${build.dir}/level1/html/ecmascript/tests">
 		<fileset dir="tests/level1/html/files" excludes="*.bak"/>
     </copy>
-
+    <!--  copy XHTML 1.0 DTD's to output directory   -->
+    <copy todir="${build.dir}/level1/html/ecmascript/tests">
+		<fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
+    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
+    <copy todir="${build.dir}/level1/html/ecmascript/tests/applets/org/w3c/domts">
+        <fileset dir="java/applets/org/w3c/domts/DOMTSApplet.class"/>
+    </copy>
+       
 
 	<style basedir="${tests.dir}/level1/html" 
 		   destdir="${build.dir}/level1/html/ecmascript/tests" 
@@ -917,19 +955,15 @@ All implementation conditions combined into implementationAttribute element
 </target>
 
 
-<target name="dom1-core-gen-jsunit" depends="dom1-interfaces,dom1-dtd">
+<target name="dom1-core-gen-jsunit" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
     <mkdir dir="${build.dir}/level1/core/ecmascript/tests"/>
 	<copy file="ecmascript/DOMTestCase.js" todir="${build.dir}/level1/core/ecmascript/tests"/>
     <copy todir="${build.dir}/level1/core/ecmascript/tests">
 		<fileset dir="tests/level1/core/files" excludes="*.bak"/>
     </copy>
-
-    <!--  a prefabricated documentcreatecdatasection.html
-             is provided since some versions of Xalan-J
-                   will stall when processing it    -->
-    <!-- copy file="${tests.dir}/level1/core/documentcreatecdatasection.html" 
-            todir="${build.dir}/level1/core/ecmascript/tests"/ -->
-
+    <copy todir="${build.dir}/level1/core/ecmascript/tests">
+        <fileset dir="${lib.dir}/xhtml1-dtd"/>
+    </copy>
 
 	<style basedir="${tests.dir}/level1/core" 
 		   destdir="${build.dir}/level1/core/ecmascript/tests" 
