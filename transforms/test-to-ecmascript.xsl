@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-Copyright © 2001-2004 World Wide Web Consortium, 
+Copyright &#xA9; 2001-2005 World Wide Web Consortium,
 (Massachusetts Institute of Technology, European Research Consortium 
 for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+Rights Reserved. This work is distributed under the W3C&#xAE; Software License [1] in the 
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 
@@ -374,7 +374,7 @@ var userDataMonitor;
       </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[local-name()='' or local-name() = 'removeEventListener']" mode="body">
+<xsl:template match="*[local-name()='addEventListener' or local-name() = 'removeEventListener']" mode="body">
 	<xsl:value-of select="@obj"/>
 	<xsl:value-of select="concat('.', concat(local-name(), '('))"/>
 	<xsl:value-of select="@type"/>
