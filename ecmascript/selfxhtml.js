@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2001-2004 World Wide Web Consortium, 
+Copyright (c) 2001-2005 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, European Research Consortium 
 for Informatics and Mathematics, Keio University). All 
 Rights Reserved. This work is distributed under the W3C(r) Software License [1] in the 
@@ -237,10 +237,6 @@ function size(collection)
 function same(expected, actual)
 {
   return expected === actual;
-}
-
-function getSuffix(contentType) {
-        return ".html";
 }
 
 function equalsAutoCase(context, expected, actual) {
@@ -560,6 +556,37 @@ function assertNotNull(id, actual) {
 function fail(id) {
     throw "failure:" + id +  ": fail";
 }
+
+
+
+function getSuffix(contentType) {
+    switch(contentType) {
+        case "text/html":
+        return ".html";
+
+        case "text/xml":
+        return ".xml";
+
+        case "image/svg+xml":
+        return ".svg";
+
+        case "text/mathml":
+        return ".mml";
+    }
+    return ".xhtml";
+}
+
+
+function getResourceURI(name, scheme, contentType) {
+    var base = document.documentURI;
+    if (base == null) {
+       base = "";
+    } else {
+	   base = base.substring(0, base.lastIndexOf('/') + 1) + "files/";
+    }
+    return base + name + getSuffix(contentType);
+}
+
 
 
 function startTest() {

@@ -1587,6 +1587,26 @@ function handleEvent(listener, event, userObj) {
     <xsl:value-of select="@var"/>
     <xsl:text> = getResourceURI(</xsl:text>
     <xsl:value-of select="@href"/>
+    <xsl:text>, "</xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@scheme">
+    		<xsl:value-of select="@scheme"/>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>file</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>", </xsl:text>
+    <xsl:choose>
+    	<xsl:when test="@contentType">
+    		<xsl:text>"</xsl:text>
+    		<xsl:value-of select="@contentType"/>
+    		<xsl:text>"</xsl:text>
+    	</xsl:when>
+    	<xsl:otherwise>
+    		<xsl:text>builder.contentType</xsl:text>
+    	</xsl:otherwise>
+    </xsl:choose>
     <xsl:text>);
       </xsl:text>
 </xsl:template>

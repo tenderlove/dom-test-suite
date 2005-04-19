@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 /*
-Copyright (c) 2001-2004 World Wide Web Consortium, 
+Copyright (c) 2001-2005 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, European Research Consortium 
 for Informatics and Mathematics, Keio University). All 
 Rights Reserved. This work is distributed under the W3C(r) Software License [1] in the 
@@ -535,6 +535,35 @@ function assertNotNull(id, actual) {
 
 function fail(id) {
     throw id + ": fail";
+}
+
+
+function getSuffix(contentType) {
+    switch(contentType) {
+        case "text/html":
+        return ".html";
+
+        case "application/xhtml+xml":
+        return ".xhtml";
+
+        case "image/svg+xml":
+        return ".svg";
+
+        case "text/mathml":
+        return ".mml";
+    }
+    return ".xml";
+}
+
+
+function getResourceURI(name, scheme, contentType) {
+    var base = document.documentURI;
+    if (base == null) {
+       base = "";
+    } else {
+	   base = base.substring(0, base.lastIndexOf('/') + 1) + "files/";
+    }
+    return base + name + getSuffix(contentType);
 }
 
 
