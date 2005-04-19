@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2001-2004 World Wide Web Consortium,
+Copyright (c) 2001-2005 World Wide Web Consortium,
 (Massachusetts Institute of Technology, Institut National de
 Recherche en Informatique et en Automatique, Keio University). All
 Rights Reserved. This program is distributed under the W3C's Software
@@ -270,8 +270,12 @@ function equalsAutoCase(context, expected, actual) {
 }
 
 function catchInitializationError(blder, ex) {
-	blder.initializationError = ex;
-	blder.initializationFatalError = ex;
+       if (blder == null) {
+          alert(ex);
+       } else {
+	      blder.initializationError = ex;
+	      blder.initializationFatalError = ex;
+	   }
 }
 
 function checkInitialization(blder, testname) {
@@ -869,7 +873,7 @@ MozillaXMLBuilder.prototype.canSetImplementationAttribute = function(attribute, 
 function DOM3LSBuilder() {
     this.contentType = "text/xml";
 
-    this.fixedAttributeNames = [ signed, "hasNullString" ];
+    this.fixedAttributeNames = [ "signed", "hasNullString" ];
     this.fixedAttributeValues = [ true, true ];
     this.configurableAttributeNames = [ "validating", "ignoringElementContentWhitespace", 
         "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments", "schemaValidating" ];
@@ -890,10 +894,11 @@ function DOM3LSBuilder() {
 
     this.docs = new Array();
     this.docnames = new Array();
-    this.lsparser = null;
     this.initializationError = null;
     this.initializationFatalError = null;
     this.skipIncompatibleTests = false;    
+    var domimpl = document.implementation;
+    this.lsparser = domimpl.createLSParser(2, null);
 }
 
 DOM3LSBuilder.prototype.getImplementation = function() {
@@ -910,7 +915,6 @@ DOM3LSBuilder.prototype.preload = function(frame, varname, url) {
   	 return 1;
   }
   var domimpl = document.implementation;
-  this.lsparser = domimpl.createLSParser(2, null);
   this.lsparser.addEventListener("load", loadComplete, false);
   var uri = fileBase + url + getSuffix(this.contentType);
   var doc = this.lsparser.parseURI(uri);
@@ -981,10 +985,15 @@ DOM3LSBuilder.prototype.setImplementationAttribute = function(attr, value) {
     }
     for (i = 0; i < this.configurableAttributeNames.length; i++) {
         if (this.configurableAttributeNames[i] == attr) {
-            if (this.domConfigSense[i]) {
-                this.lsparser.domConfig.setParameter(this.domConfigNames[i], value);
-            } else {
-                this.lsparser.domConfig.setParameter(this.domConfigNames[i], !value);
+            var paramValue = value;
+            if (!this.domConfigSense[i]) {
+                paramValue = !value;
+            }
+            var oldValue = this.lsparser.domConfig.getParameter(this.domConfigNames[i]);
+            if (paramValue != oldValue) {
+                if (this.lsparser.domConfig.canSetParameter(this.domConfigNames[i], paramValue)) {
+                	this.lsparser.domConfig.setParameter(this.domConfigNames[i], paramValue);
+                }
             }
             return;
         }
@@ -992,6 +1001,19 @@ DOM3LSBuilder.prototype.setImplementationAttribute = function(attr, value) {
     throw "Unrecognized configuration attribute " + attr;
 }
 
+
+DOM3LSBuilder.prototype.canSetImplementationAttribute = function(attr, value) {
+    for (i = 0; i < this.configurableAttributeNames.length; i++) {
+        if (this.configurableAttributeNames[i] == attr) {
+            var paramValue = value;
+            if (!this.domConfigSense[i]) {
+                paramValue = !value;
+            }
+            return this.lsparser.domConfig.canSetParameter(this.domConfigNames[i], paramValue);
+         }
+     }
+     return false;
+}
 
 
 function createBuilder(implementation) {
@@ -1165,6 +1187,11 @@ if (fileBase.indexOf('?') != -1) {
    fileBase = fileBase.substring(0, fileBase.indexOf('?'));
 }
 fileBase = fileBase.substring(0, fileBase.lastIndexOf('/') + 1) + "files/";
+
+function getResourceURI(name, scheme, contentType) {
+    return fileBase + name + getSuffix(contentType);
+}
+
 
 function getImplementation() {
     return builder.getImplementation();
