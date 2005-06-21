@@ -52,11 +52,12 @@ the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
         <mkdir dir="${lib.dir}"/>
         <mkdir dir="${specs.dir}"/>
         <mkdir dir="${dist.dir}"/>
-    <available property="junit-available" file="${lib.dir}/junit.zip"/>
-    <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
-    <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
-    <available property="jtidy-available" classname="org.w3c.tidy.Tidy"/>
-    <available property="junit-in-classpath" classname="junit.framework.TestCase"/>
+        <property name="junit.version" value="3.8.1"/>
+        <available property="junit-available" file="${lib.dir}/junit${junit.version}/junit.jar"/>
+        <available property="junit-license-available" file="${lib.dir}/junit-license.html"/>
+        <available property="xhtml1-dtd-available" file="${lib.dir}/xhtml1-dtd/xhtml1-frameset.dtd"/>
+        <available property="jtidy-available" classname="org.w3c.tidy.Tidy"/>
+        <available property="junit-in-classpath" classname="junit.framework.TestCase"/>
         <condition property="ant-15" value="true">
                 <contains string="${ant.version}" substring="1.5"/>
         </condition>
@@ -484,7 +485,7 @@ This target checks that the output of that implied transform is valid HTML
     </copy>
     <copy file="${build.dir}/dom${level}-${module}.jar" todir="${build.dir}/level${level}/${module}/java"/>
     <copy file="${build.dir}/junit-run.jar" todir="${build.dir}/level${level}/${module}/java"/>
-    <copy file="${lib.dir}/junit3.7/junit.jar" todir="${build.dir}/level${level}/${module}/java"/>
+    <copy file="${lib.dir}/junit${junit.version}/junit.jar" todir="${build.dir}/level${level}/${module}/java"/>
     <copy file="${lib.dir}/junit-license.html" todir="${build.dir}/level${level}/${module}/java"/>
 
     <copy todir="${build.dir}/level${level}/${module}/ecmascript/jsunit">
@@ -607,12 +608,11 @@ This target checks that the output of that implied transform is valid HTML
 
 
 <target name="get-junit" depends="init" unless="junit-available">
-        <!--  get JUnit 3.7 into lib directory  -->
-        <get src="http://download.sourceforge.net/junit/junit3.7.zip"
-                dest="${lib.dir}/junit.zip"
-        ignoreerrors="yes"
-                usetimestamp="yes"/>
-        <unzip src="${lib.dir}/junit.zip" dest="${lib.dir}"/>
+        <available property="junit.zip-available" file="${lib.dir}/junit${junit.version}.zip"/>
+        <fail unless="junit.zip-available">
+ Download junit${junit.version}.zip from http://www.junit.org and place in DOM-Test-Suite/lib directory.
+ </fail>
+        <unzip src="${lib.dir}/junit${junit.version}.zip" dest="${lib.dir}"/>
 </target>
 
 <target name="get-junit-for-compilation" depends="init" unless="junit-in-classpath">
@@ -625,7 +625,7 @@ This target checks that the output of that implied transform is valid HTML
     <javac srcdir="java/junit"
                    includes="org/w3c/domts/**/*.java"
                    destdir="${java.build.dir}/junit"
-                   classpath="${lib.dir}/junit3.7/junit.jar"
+                   classpath="${lib.dir}/junit${junit.version}/junit.jar"
                    debug="on"
                    target="1.1"
                    source="1.2"
@@ -929,7 +929,7 @@ This target checks that the output of that implied transform is valid HTML
 <target name="dom1-core-javadoc" depends="dom1-core-gen-java">
     <mkdir dir="${build.dir}/javadoc"/>
     <javadoc packagenames="org.w3c.domts.*"
-             sourcepath="java/org/w3c/domts/level1/core;java/junit;${lib.dir}/junit3.7/junit.jar;${lib.dir}/testlet.dir"
+             sourcepath="java/org/w3c/domts/level1/core;java/junit;${lib.dir}/junit${junit.version}/junit.jar;${lib.dir}/testlet.dir"
              destdir="${build.dir}/javadoc"
              author="true"
              version="true"
