@@ -2020,8 +2020,8 @@ This target checks that the output of that implied transform is valid HTML
                 junit-run,
                 get-junit-license,
                 dom2-schema,
-                dom2-core-gen-selfxhtml,
-                dom2-core-gen-selfhtml">
+                dom2-html-gen-selfxhtml,
+                dom2-html-gen-selfhtml">
     <antcall target="dist">
         <param name="level" value="2"/>
         <param name="module" value="html"/>
