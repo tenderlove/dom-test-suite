@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-Copyright  2001-2004 World Wide Web Consortium,
+Copyright  2001-2005 World Wide Web Consortium,
 (Massachusetts Institute of Technology, European Research Consortium
 for Informatics and Mathematics, Keio University). All
 Rights Reserved. This work is distributed under the W3C Software License [1] in the
@@ -249,7 +249,7 @@ This target checks that the output of that implied transform is valid HTML
     </copy>
     <replace file="${dst.dir}/alltests.html"
          token="SuiteName" value="DOM Level ${level} ${module} - HTML"/>
-        <copy todir="${dst.dir}">
+    <copy todir="${dst.dir}">
         <fileset dir="docs/resources" includes="COPYRIGHT.html"/>
     </copy>
     <replace file="${dst.dir}/COPYRIGHT.html"
@@ -315,10 +315,10 @@ This target checks that the output of that implied transform is valid HTML
     </copy>
     <replace file="${dst.dir}/alltests.xhtml"
          token="SuiteName" value="DOM Level ${level} ${module} - XHTML"/>
-        <copy todir="${dst.dir}">
-        <fileset dir="docs/resources" includes="COPYRIGHT.html"/>
+    <copy todir="${dst.dir}">
+        <fileset dir="docs/resources" includes="COPYRIGHT.xhtml"/>
     </copy>
-    <replace file="${dst.dir}/COPYRIGHT.html"
+    <replace file="${dst.dir}/COPYRIGHT.xhtml"
          token="Level 1 Core" value="Level ${level} ${module}"/>
     <copy todir="${dst.dir}">
          <fileset dir="tests/level${level}/${module}/files"
@@ -347,6 +347,8 @@ This target checks that the output of that implied transform is valid HTML
                    includes="alltests.xml"
                style="${transforms.dir}/suite-to-selfhtml_ant.xsl"
                extension=".ant">
+               <param name="level" expression="${level}"/>
+               <param name="module" expression="${module}"/>
                <param name="extension" expression=".xhtml"/>
         </style>
 
@@ -362,6 +364,7 @@ This target checks that the output of that implied transform is valid HTML
         <ant antfile="${dst.dir}/alltests.ant">
                 <property name="html.dir" value="${dst.dir}"/>
                 <property name="files.dir" value="${tests.dir}/level${level}/${module}/files"/>
+                <property name="l1files.dir" value="${tests.dir}/level1/${module}/files"/>
                 <property name="ecmascript.dir" location="ecmascript"/>
         </ant>
 
@@ -1074,6 +1077,17 @@ This target checks that the output of that implied transform is valid HTML
                 encoding="UTF8"/>
 </target>
 
+<target name="compile-applet">
+        <mkdir dir="${applet.dest.dir}"/>
+        <javac srcdir="java/applets"
+                   destdir="${applet.dest.dir}"
+                   target="1.1"
+                   source="1.2"
+                   debug="on"
+                   encoding="UTF8"/>
+
+        <copy todir="${applet.dest.dir}" file="java/applets/DOMTSApplet.dat"/>
+</target>
 
 <target name="dom1-html-gen-jsunit-base" depends="dom1-interfaces,dom1-dtd,get-xhtml1-dtd">
     <antcall target="gen-jsunit-no-validation">
@@ -1101,15 +1115,10 @@ This target checks that the output of that implied transform is valid HTML
     </antcall>
 
 
+    <antcall target="compile-applet">
+        <param name="applet.dest.dir" value="${build.dir}/ecmascript/level1/html/applets"/>
+    </antcall>
 
-    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
-    <mkdir dir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts"/>
-    <copy todir="${build.dir}/ecmascript/level1/html/applets/org/w3c/domts">
-        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
-    </copy>
-    <copy todir="${build.dir}/ecmascript/level1/html/applets">
-        <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
-    </copy>
 </target>
 
 <target name="dom1-html-gen-jsunit" depends="jsunit-get, dom1-html-gen-jsunit-base"/>
@@ -1119,6 +1128,17 @@ This target checks that the output of that implied transform is valid HTML
         <param name="level" value="1"/>
         <param name="module" value="html"/>
     </antcall>
+    <copy todir="${build.dir}/self-hosted/html/level1/html">
+        <fileset dir="tests/level1/html/files" includes="*.png"/>
+    </copy>
+    <!--  Name field of URL of document is no longer "document"  --> 
+    <replace file="${build.dir}/self-hosted/html/level1/html/HTMLDocument04.js"
+             token='"document"'
+             value='"HTMLDocument04"'/>
+    <replace dir="${build.dir}/self-hosted/html/level1/html" includes="HTMLScriptElement*.js">
+        <replacefilter token="1,nodeList" value="4,nodeList"/>
+        <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
+    </replace>
 </target>
 
 <target name="dom1-html-gen-selfxhtml" depends="dom1-interfaces,dom1-dtd">
@@ -1126,6 +1146,18 @@ This target checks that the output of that implied transform is valid HTML
         <param name="level" value="1"/>
         <param name="module" value="html"/>
     </antcall>
+    <copy todir="${build.dir}/self-hosted/xhtml/level1/html">
+        <fileset dir="tests/level1/html/files" includes="*.png"/>
+    </copy>
+    <!--  Name field of URL of document is no longer "document"  --> 
+    <replace file="${build.dir}/self-hosted/xhtml/level1/html/HTMLDocument04.js"
+             token='"document"'
+             value='"HTMLDocument04"'/>
+    <replace dir="${build.dir}/self-hosted/xhtml/level1/html" includes="HTMLScriptElement*.js">
+        <replacefilter token="1,nodeList" value="4,nodeList"/>
+        <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
+    </replace>
+    
 </target>
 
 
@@ -1776,26 +1808,17 @@ This target checks that the output of that implied transform is valid HTML
         <param name="dir" value="${build.dir}/ecmascript/level2/html"/>
     </antcall>
 
+    <antcall target="compile-applet">
+        <param name="applet.dest.dir" value="${build.dir}/ecmascript/level2/html/applets"/>
+    </antcall>
 
-
-    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
-    <copy todir="${build.dir}/ecmascript/level2/html/applets/org/w3c/domts">
-        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
-    </copy>
-    <copy todir="${build.dir}/ecmascript/level2/html/applets">
-        <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
-    </copy>
 </target>
 
 <target name="dom2-html-gen-jsunit" depends="jsunit-get, dom2-html-gen-jsunit-base"/>
 
 <target name="dom2-html-gen-selfhtml" depends="dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
-    <mkdir dir="${build.dir}/selfhtml/level2/html/files"/>
-    <copy todir="${build.dir}/selfhtml/level2/html/files">
-                <fileset dir="tests/level1/html/files" excludes="*.bak"/>
-    </copy>
         <style basedir="${tests.dir}/level1/html"
-               destdir="${build.dir}/selfhtml/level2/html"
+               destdir="${build.dir}/self-hosted/html/level2/html"
                includes="*.xml"
                excludes="metadata.xml
                      alltests.xml
@@ -1827,19 +1850,30 @@ This target checks that the output of that implied transform is valid HTML
         <param name="module" value="html"/>
     </antcall>
 
-    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
-    <copy todir="${build.dir}/selfhtml/level2/html/applets/org/w3c/domts">
-        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
+    <antcall target="compile-applet">
+        <param name="applet.dest.dir" value="${build.dir}/self-hosted/html/level2/html/applets"/>
+    </antcall>
+    
+    <copy todir="${build.dir}/self-hosted/html/level2/html">
+        <fileset dir="tests/level1/html/files" includes="*.png frame.html iframe.html"/>
     </copy>
-    <copy todir="${build.dir}/selfhtml/level2/html/applets">
-        <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
-    </copy>
+    
+    <!--  Name field of URL of document is no longer "document"  --> 
+    <replace file="${build.dir}/self-hosted/html/level2/html/HTMLDocument04.js"
+             token='"document"'
+             value='"HTMLDocument04"'/>
+    <!--  test document now has four script elements, not just one  -->
+    <replace dir="${build.dir}/self-hosted/html/level2/html" includes="HTMLScriptElement*.js">
+        <replacefilter token="1,nodeList" value="4,nodeList"/>
+        <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
+    </replace>
+
+
 </target>
 
 <target name="dom2-html-gen-selfxhtml" depends="dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
-    <mkdir dir="${build.dir}/selfxhtml/level2/html"/>
         <style basedir="${tests.dir}/level1/html"
-               destdir="${build.dir}/selfxhtml/level2/html"
+               destdir="${build.dir}/self-hosted/xhtml/level2/html"
                includes="*.xml"
                excludes="metadata.xml
                      alltests.xml
@@ -1871,13 +1905,23 @@ This target checks that the output of that implied transform is valid HTML
         <param name="module" value="html"/>
     </antcall>
 
-    <!--  copy simple Java 1.1 applet to satisfy applet test cases -->
-    <copy todir="${build.dir}/selfxhtml/level2/html/applets/org/w3c/domts">
-        <fileset dir="java/applets/org/w3c/domts" includes="DOMTSApplet.class"/>
+    <antcall target="compile-applet">
+        <param name="applet.dest.dir" value="${build.dir}/self-hosted/xhtml/level2/html/applets"/>
+    </antcall>
+    
+    <copy todir="${build.dir}/self-hosted/xhtml/level2/html">
+        <fileset dir="tests/level1/html/files" includes="*.png frame.xhtml iframe.xhtml"/>
     </copy>
-    <copy todir="${build.dir}/selfxhtml/level2/html/applets">
-        <fileset dir="java/applets" includes="DOMTSApplet.dat"/>
-    </copy>
+
+    <!--  Name field of URL of document is no longer "document"  --> 
+    <replace file="${build.dir}/self-hosted/xhtml/level2/html/HTMLDocument04.html"
+             token='"document"'
+             value='"HTMLDocument04"'/>
+    <!--  test document now has four script elements, not just one  -->
+    <replace dir="${build.dir}/self-hosted/xhtml/level2/html" includes="HTMLScriptElement*.js">
+        <replacefilter token="1,nodeList" value="4,nodeList"/>
+        <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
+    </replace>
 </target>
 
 <target name="dom2-html-javac" depends="common-javac, dom2-html-gen-java">
