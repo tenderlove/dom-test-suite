@@ -1914,7 +1914,7 @@ This target checks that the output of that implied transform is valid HTML
     </copy>
 
     <!--  Name field of URL of document is no longer "document"  --> 
-    <replace file="${build.dir}/self-hosted/xhtml/level2/html/HTMLDocument04.html"
+    <replace file="${build.dir}/self-hosted/xhtml/level2/html/HTMLDocument04.js"
              token='"document"'
              value='"HTMLDocument04"'/>
     <!--  test document now has four script elements, not just one  -->
