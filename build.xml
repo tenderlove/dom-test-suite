@@ -502,7 +502,7 @@ This target checks that the output of that implied transform is valid HTML
     </copy>
 
     <mkdir dir="${build.dir}/level${level}/${module}/tests/files"/>
-    <copy todir="${build.dir}/level${level}/${module}/tests">
+    <copy todir="${build.dir}/level${level}/${module}/tests" overwrite="true">
         <fileset dir="${tests.dir}/level${level}/${module}" includes="*.xml *.ent"/>
         <fileset dir="${build.dir}" includes="dom${level}.dtd"/>
         <fileset dir="${build.dir}" includes="dom${level}.xsd"/>
@@ -1139,6 +1139,13 @@ This target checks that the output of that implied transform is valid HTML
         <replacefilter token="1,nodeList" value="4,nodeList"/>
         <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
     </replace>
+    
+    <!--  HTMLBaseElement01 and 02 need scripts inlined since BASE element
+            interferes with resolution   -->
+    <antcall target="fix-html-base-element-tests">
+        <param name="level" value="1"/>
+    </antcall>
+
 </target>
 
 <target name="dom1-html-gen-selfxhtml" depends="dom1-interfaces,dom1-dtd">
@@ -1157,6 +1164,12 @@ This target checks that the output of that implied transform is valid HTML
         <replacefilter token="1,nodeList" value="4,nodeList"/>
         <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
     </replace>
+
+    <!--  HTMLBaseElement01 and 02 need scripts inlined since BASE element
+            interferes with resolution   -->
+    <antcall target="fix-xhtml-base-element-tests">
+        <param name="level" value="1"/>
+    </antcall>
     
 </target>
 
@@ -1867,8 +1880,10 @@ This target checks that the output of that implied transform is valid HTML
         <replacefilter token="1,nodeList" value="4,nodeList"/>
         <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
     </replace>
-
-
+    
+    <!--  HTMLBaseElement01 and 02 need scripts inlined since BASE element
+            interferes with resolution   -->
+    <antcall target="fix-html-base-element-tests"/>
 </target>
 
 <target name="dom2-html-gen-selfxhtml" depends="dom2-interfaces,dom1-dtd,dom2-dtd,get-xhtml1-dtd">
@@ -1922,6 +1937,82 @@ This target checks that the output of that implied transform is valid HTML
         <replacefilter token="1,nodeList" value="4,nodeList"/>
         <replacefilter token="nodeList.item(0)" value="nodeList.item(3)"/>
     </replace>
+    
+    
+    <!--  HTMLBaseElement01 and 02 need scripts inlined since BASE element
+            interferes with resolution   -->
+    <antcall target="fix-xhtml-base-element-tests"/>
+
+</target>
+
+<target name="fix-html-base-element-tests">
+    <property name="level" value="2"/>
+    <property name="dest.dir" value="${build.dir}/self-hosted/html/level${level}/html"/>
+    
+    <!-- wrap selfhtml.js in an CDATA section so it can be used as an entity  -->
+    <concat destfile="${dest.dir}/framework.ent">
+         <header>&lt;![CDATA[</header>
+         <footer>]]&gt;</footer>
+         <fileset dir="ecmascript" includes="selfhtml.js"/>
+    </concat>
+    <replace file="${dest.dir}/framework.ent"
+         token="&lt;/" value="&lt;\/"/>
+         
+    <antcall target="fix-base-element-tests">
+         <param name="contentType" value="html"/>
+         <param name="dest.dir" value="${dest.dir}"/>
+    </antcall>
+</target>
+
+
+<target name="fix-xhtml-base-element-tests">
+    <property name="level" value="2"/>
+    <property name="dest.dir" value="${build.dir}/self-hosted/xhtml/level${level}/html"/>
+    
+    <!-- wrap selfxhtml.js in an CDATA section so it can be used as an entity  -->
+    <concat destfile="${dest.dir}/framework.ent">
+         <header>&amp;lt;![CDATA[&lt;![CDATA[</header>
+         <footer>]]&gt;]]&amp;gt;</footer>
+         <fileset dir="ecmascript" includes="selfxhtml.js"/>
+    </concat>
+         
+    <antcall target="fix-base-element-tests">
+         <param name="contentType" value="xhtml"/>
+         <param name="dest.dir" value="${dest.dir}"/>
+    </antcall>
+</target>
+
+<target name="fix-base-element-tests">
+    <!--  HTMLBaseElement01 and 02 need scripts inlined since BASE element
+            interferes with resolution   -->
+    <!--  copy the test script   -->
+    <copy tofile="${dest.dir}/script.ent"
+        file="${dest.dir}/HTMLBaseElement01.js"
+        overwrite="true"/>
+    <!--  copy the Ant file referencing the prepared entities  -->
+    <copy todir="${dest.dir}"
+        file="ecmascript/inline-script.xml"/>
+    <!--   inline the references -->
+    <ant antfile="inline-script.xml"
+         dir="${dest.dir}">
+        <property name="test" value="HTMLBaseElement01.${contentType}"/>
+        <property name="script" value="HTMLBaseElement01.js"/>
+        <property name="framework" value="self${contentType}.js"/>
+    </ant>
+    <!--  do it again for HTMLBaseElement02.html    -->
+    <copy tofile="${dest.dir}/script.ent"
+        file="${dest.dir}/HTMLBaseElement02.js"
+        overwrite="true"/>
+    <ant antfile="inline-script.xml" 
+         dir="${dest.dir}">
+        <property name="test" value="HTMLBaseElement02.${contentType}"/>
+        <property name="script" value="HTMLBaseElement02.js"/>
+        <property name="framework" value="self${contentType}.js"/>
+    </ant>
+    <delete>
+        <fileset dir="${dest.dir}" includes="script.ent framework.ent 
+            inline-script.xml HTMLBaseElement01.js HTMLBaseElement02.js"/>
+    </delete>
 </target>
 
 <target name="dom2-html-javac" depends="common-javac, dom2-html-gen-java">
@@ -2022,6 +2113,22 @@ This target checks that the output of that implied transform is valid HTML
                 dom2-schema,
                 dom2-html-gen-selfxhtml,
                 dom2-html-gen-selfhtml">
+
+    <!--  copy L1 HTML tests over to distribution directory
+             conflicting ones will be overwritten  -->                
+    <mkdir dir="${build.dir}/level1/html/tests/files"/>
+    <copy todir="${build.dir}/level2/html/tests">
+        <fileset dir="${tests.dir}/level1/html" includes="*.xml *.ent"/>
+    </copy>
+    <copy todir="${build.dir}/level2/html/tests/files">
+        <fileset dir="${tests.dir}/level1/html/files" excludes="*.bak"/>
+    </copy>
+    <replace dir="${build.dir}/level2/html/tests" includes="*.xml">
+        <replacefilter token="dom1.dtd" value="dom2.dtd"/>
+        <replacefilter token="http://www.w3.org/2001/DOM-Test-Suite/Level-1"
+                value="http://www.w3.org/2001/DOM-Test-Suite/Level-2"/>
+    </replace>
+                
     <antcall target="dist">
         <param name="level" value="2"/>
         <param name="module" value="html"/>
