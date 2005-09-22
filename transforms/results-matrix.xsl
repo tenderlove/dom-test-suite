@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-Copyright Â© 2004 World Wide Web Consortium, 
+Copyright © 2004-2005 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, European Research Consortium 
 for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the W3CÂ® Software License [1] in the 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 
@@ -36,7 +36,7 @@ and combine-metadata.xsl
 
     <xsl:variable name="descriptions" select="/rdf:RDF/rdf:Description"/>
     <xsl:variable name="results" select="document($resultsURL,.)//testsuite"/>
-    <xsl:variable name="tests" select="$descriptions[not(contains(@rdf:about, 'alltests')) and substring(@rdf-about, string-length(@rdf:about)) != '/']"/>
+    <xsl:variable name="tests" select="$descriptions[not(contains(@rdf:about, 'alltests')) and substring(@rdf:about, string-length(@rdf:about)) != '/']"/>
 
 	<!--  match document root    -->
 	<xsl:template match="/">
@@ -210,10 +210,10 @@ and combine-metadata.xsl
 href="resources/COPYRIGHT.html">W3C Software 
 Copyright Notice and License</a><xsl:text>:</xsl:text>
 			<br />
-			<xsl:text>Copyright Â© 2001-2004 World Wide Web Consortium, 
+			<xsl:text>Copyright © 2001-2005 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, European Research Consortium 
 for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the W3CÂ® Software License [1] in the 
+Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
 hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</xsl:text>
 			<br />

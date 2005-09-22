@@ -1,3 +1,13 @@
+<!--
+    Copyright © 2001-2005 World Wide Web Consortium, 
+    (Massachusetts Institute of Technology, European Research Consortium 
+    for Informatics and Mathematics, Keio University). All 
+    Rights Reserved. This work is distributed under the W3C® Software License [1] in the 
+    hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+    
+    [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+    -->
 <!DOCTYPE results [
 <!ENTITY dom2-core-xerces1 SYSTEM 'dom2-core-xerces1.xml'>
 <!ENTITY dom2-core-xerces1-alt SYSTEM 'dom2-core-xerces1AltConfig.xml'>
@@ -7,73 +17,89 @@
 <!ENTITY dom2-core-xerces2_svg-alt SYSTEM 'dom2-core-xerces2_svgAltConfig.xml'>
 <!ENTITY dom2-core-xerces2_xhtml SYSTEM 'dom2-core-xerces2_xhtml.xml'>
 <!ENTITY dom2-core-xerces2_xhtml-alt SYSTEM 'dom2-core-xerces2_xhtmlAltConfig.xml'>
-<!ENTITY dom2-core-xerces_dom3 SYSTEM 'dom2-core-xerces_dom3.xml'>
-<!ENTITY dom2-core-xerces_dom3-alt SYSTEM 'dom2-core-xerces_dom3AltConfig.xml'>
-<!ENTITY dom2-core-oracle SYSTEM 'dom2-core-oracle.xml'>
-<!ENTITY dom2-core-oracle-alt SYSTEM 'dom2-core-oracleAltConfig.xml'>
+<!ENTITY dom2-core-oracle SYSTEM 'dom2-core-xdk.xml'>
+<!ENTITY dom2-core-oracle-alt SYSTEM 'dom2-core-xdkAltConfig.xml'>
 <!ENTITY dom2-core-crimson SYSTEM 'dom2-core-crimson.xml'>
 <!ENTITY dom2-core-crimson-alt SYSTEM 'dom2-core-crimsonAltConfig.xml'>
-<!ENTITY dom2-core-gnujaxp SYSTEM 'dom2-core-gnujaxp.xml'>
-<!ENTITY dom2-core-gnujaxp-alt SYSTEM 'dom2-core-gnujaxpAltConfig.xml'>
+<!ENTITY dom2-core-kaffe SYSTEM 'dom2-core-kaffe.xml'>
+<!ENTITY dom2-core-kaffe-alt SYSTEM 'dom2-core-kaffeAltConfig.xml'>
 <!ENTITY dom2-core-dom4j SYSTEM 'dom2-core-dom4j.xml'>
 <!ENTITY dom2-core-batik SYSTEM 'dom2-core-batik.xml'>
+<!ENTITY dom2-core-firefox_html SYSTEM 'dom2-core-firefox_html.xml'>
+<!ENTITY dom2-core-firefox_xhtml SYSTEM 'dom2-core-firefox_xhtml.xml'>
+<!ENTITY dom2-core-firefox_xml SYSTEM 'dom2-core-firefox_xml.xml'>
+<!ENTITY dom2-core-opera_html SYSTEM 'dom2-core-opera_html.xml'>
+<!ENTITY dom2-core-opera_xml SYSTEM 'dom2-core-opera_xml.xml'>
+<!ENTITY dom2-core-opera_xhtml SYSTEM 'dom2-core-opera_xhtml.xml'>
 ]>
 <results>
-<implementation name="Xerces-J 2.6.0">
+<implementation name="Xerces-J 2">
 &dom2-core-xerces2;
 </implementation>
-<implementation name="Xerces-J 2.6.0 Alt">
+<implementation name="Xerces-J 2 Alt">
 &dom2-core-xerces2-alt;
 </implementation>
-<implementation name="Oracle XDK 9.2.0.5.0">
+<implementation name="Oracle XDK">
 &dom2-core-oracle;
 </implementation>
-<implementation name="Oracle XDK 9.2.0.5.0 Alt">
+<implementation name="Oracle XDK Alt">
 &dom2-core-oracle-alt;
 </implementation>
-<implementation name="Crimson 1.1.6">
+<implementation name="Crimson">
 &dom2-core-crimson;
 </implementation>
-<implementation name="Crimson 1.1.6 Alt">
+<implementation name="Crimson Alt">
 &dom2-core-crimson-alt;
 </implementation>
-<implementation name="GNUJAXP 1.0beta1">
-&dom2-core-gnujaxp;
+<implementation name="Kaffe">
+&dom2-core-kaffe;
 </implementation>
-<implementation name="GNUJAXP 1.0beta1 alt">
-&dom2-core-gnujaxp-alt;
+<implementation name="Kaffe Alt">
+&dom2-core-kaffe-alt;
 </implementation>
-<implementation name="DOM4J 1.4">
+<implementation name="DOM4J">
 &dom2-core-dom4j;
 </implementation>
-<implementation name="DOM4J 1.4 Alt">
+<implementation name="DOM4J Alt">
 &dom2-core-batik;
 </implementation>
-<implementation name="Xerces-J 2.6.0 SVG">
+<implementation name="Xerces-J 2 SVG">
 &dom2-core-xerces2_svg;
 </implementation>
-<implementation name="Xerces-J 2.6.0 SVG Alt">
+<implementation name="Xerces-J 2 SVG Alt">
 &dom2-core-xerces2_svg-alt;
 </implementation>
 <implementation name="Batik">
 &dom2-core-batik;
 </implementation>
-<implementation name="Xerces-J 2.6.0 XHTML">
+<implementation name="Xerces-J 2 XHTML">
 &dom2-core-xerces2_xhtml;
 </implementation>
-<implementation name="Xerces-J 2.6.0 XHTML Alt">
+<implementation name="Xerces-J 2 XHTML Alt">
 &dom2-core-xerces2_xhtml-alt;
 </implementation>
-<implementation name="Xerces-J 1.4.4">
+<implementation name="Xerces-J 1">
 &dom2-core-xerces1;
 </implementation>
-<implementation name="Xerces-J 1.4.4 Alt">
+<implementation name="Xerces-J 1 Alt">
 &dom2-core-xerces1-alt;
 </implementation>
-<implementation name="Xerces-J CVS DOM3">
-&dom2-core-xerces_dom3;
+<implementation name="Firefox HTML">
+&dom2-core-firefox_html;
 </implementation>
-<implementation name="Xerces-J CVS DOM3">
-&dom2-core-xerces_dom3-alt;
+<implementation name="Firefox XHTML">
+  &dom2-core-firefox_xhtml;
+</implementation>
+<implementation name="Firefox XML">
+  &dom2-core-firefox_xml;
+</implementation>
+<implementation name="Opera HTML">
+  &dom2-core-opera_html;
+</implementation>
+<implementation name="Opera XHTML">
+  &dom2-core-opera_xhtml;
+</implementation>
+<implementation name="Opera XML">
+  &dom2-core-opera_xml;
 </implementation>
 </results>
