@@ -228,6 +228,7 @@ function suite() {
                             <input type="radio" name="implementation" id="iframeImpl" value="iframe" checked="checked" onclick="onImplementationChange()"/> iframe<br/>
                             <input type="radio" name="implementation" id="dom3lsImpl" value="dom3ls" onclick="onImplementationChange()"/> DOM 3 Load/Save<br/> 
                             	Features: <input type="text" name="dom3lsFeatures" disabled="disabled"/><br/>
+                            <input type="radio" name="implementation" id="xmlhttprequest" value="xmlhttprequest" onclick="onImplementationChange()"/> XMLHttpRequest<br/>
                             <input type="radio" name="implementation" id="mozillaXMLImpl" value="mozillaXML" onclick="onImplementationChange()"/> Mozilla XML<br/>
                             <input type="radio" name="implementation" id="msxml3Impl" value="msxml3" onclick="onImplementationChange()"/> MSXML 3.0<br/>
                             <input type="radio" name="implementation" id="msxml4Impl" value="msxml4" onclick="onImplementationChange()"/> MSXML 4.0<br/>
@@ -346,7 +347,7 @@ function suite() {
 
 <xsl:template name="copyright-comment">
 <xsl:comment>
-Copyright © 2001-2004 World Wide Web Consortium, 
+Copyright © 2001-2005 World Wide Web Consortium, 
 (Massachusetts Institute of Technology, European Research Consortium 
 for Informatics and Mathematics, Keio University). All 
 Rights Reserved. This work is distributed under the W3C® Software License [1] in the 

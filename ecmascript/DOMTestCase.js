@@ -1016,6 +1016,125 @@ DOM3LSBuilder.prototype.canSetImplementationAttribute = function(attr, value) {
 }
 
 
+function XMLHttpRequestBuilder() {
+    this.contentType = "text/xml";
+
+    this.fixedAttributeNames = [ "signed", "hasNullString",
+        "validating", "ignoringElementContentWhitespace", 
+        "expandEntityReferences", "coalescing", "namespaceAware", "ignoringComments", "schemaValidating" ];
+    this.fixedAttributeValues = [ true, true, false, false, 
+        true, true, false, false, true, false, false ];
+    this.configurableAttributeNames = [  ];
+    this.configurableAttributeValues = [  ];
+
+    this.supportedContentTypes = [ 
+        "text/xml", 
+        "image/svg+xml", 
+        "application/xhtml+xml",
+        "text/mathml" ];
+
+    this.async = false;
+    this.supportsAsyncChange = true;
+
+    this.docs = new Array();
+    this.docnames = new Array();
+    this.initializationError = null;
+    this.initializationFatalError = null;
+    this.skipIncompatibleTests = false;    
+}
+
+XMLHttpRequestBuilder.prototype.getImplementation = function() {
+    return this.req.responseXML.implementation;
+}
+
+
+XMLHttpRequestBuilder.prototype.setContentType = function(contentType) {
+    this.contentType = contentType;
+}
+
+XMLHttpRequestBuilder.prototype.createParser = function() {
+  var req = false;
+  if (window.XMLHttpRequest) {
+    try {
+      req = new XMLHttpRequest();
+    } catch(e) {
+      req = false;
+    }
+  } else if(window.ActiveXObject) {
+    try {
+       req = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch(e) {
+       try {
+         req = new ActiveXObject("Microsoft.XMLHTTP");
+       } catch(e) {
+         req = false;
+       }
+    }
+  }
+  return req;
+}
+
+XMLHttpRequestBuilder.prototype.preload = function(frame, varname, url) {
+  if (!this.async) {
+  	 return 1;
+  }
+  var uri = fileBase + url + getSuffix(this.contentType);
+  var req = this.createParser();
+  req.onreadystatechange =  MSXMLBuilder_onreadystatechange;
+  req.open("GET", uri, true);
+  req.send("");
+  this.docs[this.docs.length] = req;
+  this.docnames[this.docnames.length] = varname;
+  return 0;
+}
+
+XMLHttpRequestBuilder.prototype.load = function(frame, varname, url) {
+    if (this.async) {
+        for(i = 0; i < this.docnames.length; i++) {
+            if (this.docnames[i] == varname) {
+                return this.docs[i];
+            }
+        }
+        return null;
+    }
+    var req = this.createParser();
+    var uri = fileBase + url + getSuffix(this.contentType);
+    req.open("GET", uri, false);
+    req.send("");
+    return req.responseXML;
+}
+
+
+XMLHttpRequestBuilder.prototype.getImplementationAttribute = function(attr) {
+    var i;
+    for (i = 0; i < this.fixedAttributeNames.length; i++) {
+       if (this.fixedAttributeNames[i] == attr) {
+           return this.fixedAttributeValues[i];
+        }
+    }
+    throw "unrecognized implementation attribute " + att;
+}
+
+XMLHttpRequestBuilder.prototype.hasFeature = function(feature, version) {
+    if (feature == "XML" || 
+      (feature.length == 3 && feature.toUpperCase() == "XML")) {
+      return true;
+    }
+    return document.implementation.hasFeature(feature, version); 
+}
+
+
+XMLHttpRequestBuilder.prototype.setImplementationAttribute = function(attr, value) {
+    throw "Unrecognized configuration attribute " + attr;
+}
+
+
+XMLHttpRequestBuilder.prototype.canSetImplementationAttribute = function(attr, value) {
+    return false;
+}
+
+
+
 function createBuilder(implementation) {
   if (implementation == null) {
   	return new IFrameBuilder();
@@ -1038,6 +1157,9 @@ function createBuilder(implementation) {
     
     case "iframe":
     return new IFrameBuilder();
+
+    case "xmlhttprequest":
+    return new XMLHttpRequestBuilder();
     
     default:
     alert ("unrecognized implementation " + implementation);
@@ -1157,6 +1279,15 @@ function setImplementationAttribute(attribute, value) {
     builder.setImplementationAttribute(attribute, value);
 }
 
+function setAsynchronous(value) {
+    if (builder.supportsAsyncChange) {
+      builder.async = value;
+    } else {
+      update();
+    }
+}
+
+
 function createXPathEvaluator(doc) {
     try {
         return doc.getFeature("XPath", null);
@@ -1180,6 +1311,7 @@ function MSXMLBuilder_onreadystatechange() {
         loadComplete();
     }
 }
+
 
 
 var fileBase = location.href;
