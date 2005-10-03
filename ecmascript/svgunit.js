@@ -623,6 +623,12 @@ function assertTrue(id, actual) {
    }
 }
 
+function assert(id, actual) {
+   if (!actual) {
+       throw id + ": assert failed";
+   }
+}
+
 
 function assertFalse(id, actual) {
    if (actual) {
