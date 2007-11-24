@@ -106,11 +106,11 @@ function setUpPage() {
         </xsl:text>
        </xsl:for-each>
        if (docsLoaded == <xsl:value-of select="count($loads)"/>) {
-          setUpPage = 'complete';
+          setUpPageStatus = 'complete';
        }
     } catch(ex) {
     	catchInitializationError(builder, ex);
-        setUpPage = 'complete';
+        setUpPageStatus = 'complete';
     }
 }
 
