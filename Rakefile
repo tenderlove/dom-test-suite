@@ -8,8 +8,9 @@ BUILD_DIR = File.join(BASE, "build")
 TRANSFORMS_DIR = File.join(BASE, "transforms")
 SPECS_DIR = File.join(BASE, 'lib', 'specs')
 TEST_DIR = File.join(BASE, 'tests')
+RUBY_DIR = File.join(BUILD_DIR, 'ruby')
 
-FileUtils.mkdir_p(BUILD_DIR)
+FileUtils.mkdir_p(RUBY_DIR)
 FileUtils.mkdir_p(SPECS_DIR)
 FileUtils.mkdir_p(File.join(TEST_DIR, 'level1', 'core'))
 FileUtils.mkdir_p(File.join(TEST_DIR, 'level1', 'html'))
@@ -115,7 +116,14 @@ task :to_ruby => :dom1_dtd do
   chdir(File.join(TEST_DIR, 'level1', 'core'))
   Dir['**/*.xml'].each do |f|
     doc = Nokogiri::XML.parse(File.read(f))
-    puts xslt.apply_to(doc, ['interfaces-docname', "'#{File.join(BUILD_DIR, 'dom1-interfaces.xml')}'"])
+    filename = File.basename(f, '.xml')
+    File.open(File.join(RUBY_DIR, "test_#{filename}.rb"), 'wb') do |test_file|
+      test_file.write(
+        xslt.apply_to(doc,
+          ['interfaces-docname', "'#{File.join(BUILD_DIR, 'dom1-interfaces.xml')}'"]
+        )
+      )
+    end
   end
 end
 
