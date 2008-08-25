@@ -80,7 +80,9 @@ task :dom1_dtd => :dom1_interfaces do
     f.write(
       xslt.apply_to(doc,
         [
-          'schema-location', 'dom1.xsd']
+          'schema-namespace', '"http://www.w3.org/2001/DOM-Test-Suite/Level-1"',
+          'schema-location', '"dom1.xsd"'
+        ]
       )
     )
   end
