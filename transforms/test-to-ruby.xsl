@@ -458,12 +458,8 @@ end
 
 <!--   when encountering a test suite   -->
 <xsl:template match="*[local-name()='suite']">
-package <xsl:value-of select="$package"/>;
 
-import org.w3c.domts.DOMTestCase;
-import org.w3c.domts.DOMTestSuite;
-import org.w3c.domts.DOMTestSink;
-import org.w3c.domts.DOMTestDocumentBuilderFactory;
+require 'helper'
 
 <!--  if there is a metadata child element then
           produce documentation comments    -->
@@ -479,55 +475,13 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
     </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
-    <xsl:text>public class </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text> extends DOMTestSuite {
-
-    ###
-    # Constructor
-    # @param factory document factory, may not be null
-    # @throws Exception Thrown if test is not compatible with settings
-    ##
-   public </xsl:text>
-    <xsl:value-of select="@name"/>
-    <xsl:text>(DOMTestDocumentBuilderFactory factory) throws Exception {
-</xsl:text>
-    <xsl:call-template name="implCheck"/>
-    <xsl:text>
-      setFactory(factory);
-   }
-
-   ###
-   #   Build test suite by adding each test to the test sink
-   #   @param sink test sink
-   ##
-   public void build(DOMTestSink sink) {
-</xsl:text>
     <xsl:for-each select="*[local-name() = 'suite.member']">
         <xsl:variable name="testDef" select="document(@href, .)/*"/>
-         <xsl:text>      sink.addTest(</xsl:text>
+         <xsl:text> require 'test_</xsl:text>
          <xsl:value-of select="$testDef/@name"/>
-         <xsl:text>.class);
+         <xsl:text>'
 </xsl:text>
     </xsl:for-each>
-   }
-   ###
-   #  Gets URI that identifies the test suite
-   #  @return uri identifier of test suite
-   ##
-   public String getTargetURI() {
-      return "<xsl:value-of select="concat($target-uri-base, @name)"/>";
-   }
-
-   ###
-   # Runs individual test
-   # @param args command line arguments
-   ##
-   public static void main(String[] args) {
-        DOMTestCase.doMain(<xsl:value-of select="@name"/>.class, args);
-   }
-
-}
 </xsl:template>
 
 

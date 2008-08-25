@@ -127,4 +127,10 @@ task :to_ruby => :dom1_dtd do
   end
 end
 
+task :test_ruby => :to_ruby do
+  chdir(BASE)
+  all = File.join(RUBY_DIR, 'test_alltests.rb')
+  ruby("-I ruby:#{RUBY_DIR} #{all}")
+end
+
 task :default => [:to_ruby]
