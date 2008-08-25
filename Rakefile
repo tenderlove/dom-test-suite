@@ -110,12 +110,12 @@ end
 
 task :to_ruby => :dom1_dtd do
   xslt = Nokogiri::XSLT.parse(
-    File.read(File.join(TRANSFORMS_DIR, 'test-to-java.xsl'))
+    File.read(File.join(TRANSFORMS_DIR, 'test-to-ruby.xsl'))
   )
   chdir(File.join(TEST_DIR, 'level1', 'core'))
   Dir['**/*.xml'].each do |f|
     doc = Nokogiri::XML.parse(File.read(f))
-    xslt.apply_to(doc, ['interfaces-docname', "'#{File.join(BUILD_DIR, 'dom1-interfaces.xml')}'"])
+    puts xslt.apply_to(doc, ['interfaces-docname', "'#{File.join(BUILD_DIR, 'dom1-interfaces.xml')}'"])
   end
 end
 
