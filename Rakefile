@@ -13,8 +13,6 @@ FileUtils.mkdir_p(BUILD_DIR)
 FileUtils.mkdir_p(SPECS_DIR)
 FileUtils.mkdir_p(File.join(TEST_DIR, 'level1', 'core'))
 FileUtils.mkdir_p(File.join(TEST_DIR, 'level1', 'html'))
-FileUtils.mkdir_p(File.join(BUILD_DIR, 'level1', 'core'))
-FileUtils.mkdir_p(File.join(BUILD_DIR, 'level1', 'html'))
 
 DOM_ZIP = File.join(SPECS_DIR, 'DOM.zip')
 
@@ -86,14 +84,12 @@ task :dom1_dtd => :dom1_interfaces do
       )
     )
   end
-  cp(dom1_dtd, File.join(BUILD_DIR, 'level1', 'core'))
-  cp(dom1_dtd, File.join(BUILD_DIR, 'level1', 'html'))
+  cp(dom1_dtd, File.join(TEST_DIR, 'level1', 'core'))
+  cp(dom1_dtd, File.join(TEST_DIR, 'level1', 'html'))
 end
 
 #
 #dom1-core-gen-java:
-
-
 task :dom1_schema => [:dom_interfaces_gen] do
   xsd_file = File.join(BUILD_DIR, 'dom1.xsd')
   doc = Nokogiri::XML.parse(
@@ -117,10 +113,9 @@ task :to_ruby => :dom1_dtd do
     File.read(File.join(TRANSFORMS_DIR, 'test-to-java.xsl'))
   )
   chdir(File.join(TEST_DIR, 'level1', 'core'))
-  cp(File.join(BUILD_DIR, 'dom1.dtd'), '.')
   Dir['**/*.xml'].each do |f|
     doc = Nokogiri::XML.parse(File.read(f))
-    xslt.apply_to(doc, ['interfaces-docname', '../../../build/dom1-interfaces.xml'])
+    xslt.apply_to(doc, ['interfaces-docname', "'#{File.join(BUILD_DIR, 'dom1-interfaces.xml')}'"])
   end
 end
 
