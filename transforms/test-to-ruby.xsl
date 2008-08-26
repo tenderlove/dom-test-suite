@@ -577,7 +577,9 @@ require 'helper'
 
 -->
 <xsl:template match="*[local-name()='var']" mode="body">
-    <xsl:variable name="varname" select="@name"/><xsl:choose>
+  <xsl:variable name="varname" select="@name"/>
+  <xsl:value-of select="$varname"/>
+  <xsl:choose>
         <xsl:when test="@isNull='true'">
             <xsl:text> = null;
 </xsl:text>
@@ -699,7 +701,12 @@ require 'helper'
             </xsl:for-each>
             <xsl:text>)</xsl:text>
         </xsl:when>
+        <xsl:otherwise>
+            <xsl:text> = nil</xsl:text>
+        </xsl:otherwise>
     </xsl:choose>
+    <xsl:text>
+    </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='comment']" mode="body">
