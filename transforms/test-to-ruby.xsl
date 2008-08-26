@@ -1773,14 +1773,7 @@ require 'helper'
 
         <!--  cast and hope for the best  -->       
         <xsl:otherwise>
-            <xsl:text>((</xsl:text>
-            <xsl:call-template name="produce-type">
-                <xsl:with-param name="type" select="$reqtype"/>
-            </xsl:call-template>
-            <xsl:text>) </xsl:text>
-            <xsl:text>/*</xsl:text><xsl:value-of select="$vartype"/><xsl:text> */</xsl:text>
             <xsl:value-of select="$var"/>
-            <xsl:text>)</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
