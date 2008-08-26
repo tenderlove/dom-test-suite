@@ -1356,9 +1356,9 @@ require 'helper'
 <xsl:template match="*[local-name()='for-each']" mode="body">
     <xsl:param name="vardefs"/>
     <xsl:variable name="indexvar" select="concat('index', generate-id(.))"/>
-    <xsl:text>for (int </xsl:text>
-    <xsl:value-of select="$indexvar"/>
-    <xsl:text> = 0; </xsl:text>
+  <xsl:value-of select="$indexvar"/>
+    <xsl:text> = 0
+    while </xsl:text>
     <xsl:value-of select="$indexvar"/>
     <xsl:text> &lt; </xsl:text>
     <xsl:variable name="varname" select="@collection"/>
@@ -1373,8 +1373,10 @@ require 'helper'
             <xsl:text>.getLength()</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
+    <xsl:text>
+      </xsl:text>
     <xsl:value-of select="$indexvar"/>
-    <xsl:text>++) {
+    <xsl:text> += 1
           </xsl:text>
     <xsl:value-of select="$member"/>
     <xsl:text> = </xsl:text>
@@ -1420,7 +1422,7 @@ require 'helper'
     <xsl:apply-templates select="*" mode="body">
         <xsl:with-param name="vardefs" select="$vardefs"/>
     </xsl:apply-templates>
-    <xsl:text>  }
+    <xsl:text>  end
       </xsl:text>
 </xsl:template>
 
