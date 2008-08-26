@@ -702,8 +702,6 @@ require 'helper'
             <xsl:text>);</xsl:text>
         </xsl:when>
     </xsl:choose>
-    <xsl:text>
-      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='comment']" mode="body">
@@ -783,8 +781,6 @@ require 'helper'
             </xsl:call-template>
             <xsl:text> </xsl:text>
             <xsl:value-of select="@value"/>
-            <xsl:text>;
-      </xsl:text>
         </xsl:otherwise>
     </xsl:choose>   
 </xsl:template>
@@ -803,8 +799,6 @@ require 'helper'
     <xsl:value-of select="@var"/>
     <xsl:text> += </xsl:text>
     <xsl:value-of select="@value"/>
-    <xsl:text>;
-      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='decrement']" mode="body">
@@ -812,8 +806,6 @@ require 'helper'
     <xsl:value-of select="@var"/>
     <xsl:text> -= </xsl:text>
     <xsl:value-of select="@value"/>
-    <xsl:text>;
-      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='plus']" mode="body">
@@ -823,8 +815,6 @@ require 'helper'
     <xsl:value-of select="@op1"/>
     <xsl:text> + </xsl:text>
     <xsl:value-of select="@op2"/>
-    <xsl:text>;
-      </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='subtract']" mode="body">
@@ -834,8 +824,6 @@ require 'helper'
     <xsl:value-of select="@op1"/>
     <xsl:text> - </xsl:text>
     <xsl:value-of select="@op2"/>
-    <xsl:text>;
-      </xsl:text>
 </xsl:template>
 
 
@@ -846,8 +834,6 @@ require 'helper'
     <xsl:value-of select="@op1"/>
     <xsl:text> * </xsl:text>
     <xsl:value-of select="@op2"/>
-    <xsl:text>;
-      </xsl:text>
 </xsl:template>
 
 
