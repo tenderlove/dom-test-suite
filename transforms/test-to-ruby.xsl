@@ -150,8 +150,6 @@
 </xsl:text>
     </xsl:when>
     <xsl:otherwise>
-        <xsl:text>      super(factory);
-</xsl:text>
     </xsl:otherwise>
 </xsl:choose>
 
@@ -216,22 +214,20 @@ require 'helper'
   </xsl:text>
     </xsl:if>
     <xsl:text>##
-  def setup
-  </xsl:text>
+  def setup</xsl:text>
 <xsl:call-template name="implCheck"/>
 <xsl:text>
     ##
     ##   check if loaded documents are supported for content type
     ##
-    String contentType = getContentType();
+    contentType = getContentType();
     </xsl:text>
 	<xsl:for-each select="*[local-name() = 'load' and @href]">
 		<xsl:text>preload(contentType, "</xsl:text>
 		<xsl:value-of select="@href"/>
 		<xsl:text>", </xsl:text>
 		<xsl:value-of select="@willBeModified"/>
-		<xsl:text>);
-    </xsl:text>
+		<xsl:text>)</xsl:text>
 	</xsl:for-each>
 <xsl:text>
   end
