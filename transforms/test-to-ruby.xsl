@@ -135,6 +135,7 @@
 <xsl:choose>
     <xsl:when test="$implAttrs">
         <xsl:text>
+=begin
       org.w3c.domts.DocumentBuilderSetting[] settings = 
           new org.w3c.domts.DocumentBuilderSetting[] {
 </xsl:text>
@@ -147,6 +148,7 @@
         };
         DOMTestDocumentBuilderFactory testFactory = factory.newInstance(settings)
         setFactory(testFactory)
+=end
 </xsl:text>
     </xsl:when>
     <xsl:otherwise>
@@ -1602,36 +1604,36 @@ require 'helper'
 
 <xsl:template match="*[local-name()='assertImplementationException']" mode="body">
     <xsl:param name="vardefs"/>
-      {
-         boolean success = false;
-         try {
-            <xsl:apply-templates mode="body">
-                <xsl:with-param name="vardefs" select="$vardefs"/>
-            </xsl:apply-templates>    } catch (DOMException ex) {
-              //   allow to fall through and fail test
-         } catch (EventException ex) {
-              //   allow to fall through and fail test
-         } catch (Throwable ex) {
-            success = true;
-         }
-         assertTrue("<xsl:value-of select="@id"/><xsl:text>", success)
-      }
+    begin
+      success = false;
+      begin
+         <xsl:apply-templates mode="body">
+             <xsl:with-param name="vardefs" select="$vardefs"/>
+           </xsl:apply-templates>   rescue DOMException => ex
+        # allow to fall through and fail test
+      rescue EventException => ex
+        # allow to fall through and fail test
+      rescue Exception => ex
+         success = true;
+      end
+      assert(success, "<xsl:value-of select="@id"/><xsl:text>")
+    end
       </xsl:text>
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='assertDOMException']" mode="body">
     <xsl:param name="vardefs"/>
-      {
-         boolean success = false;
-         try {
-            <xsl:apply-templates select="*/*" mode="body">
-                <xsl:with-param name="vardefs" select="$vardefs"/>
-            </xsl:apply-templates>    } catch (DOMException ex) {
-            success = (ex.code == DOMException.<xsl:value-of select="name(*)"/>)
-         }
-         assertTrue("<xsl:value-of select="@id"/>", success)
-      }
+    begin
+      success = false;
+      begin
+        <xsl:apply-templates select="*/*" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>rescue DOMException => ex
+        success = (ex.code == DOMException.<xsl:value-of select="name(*)"/>)
+      end 
+      assert(success, "<xsl:value-of select="@id"/>")
+    end
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertLSException']" mode="body">
