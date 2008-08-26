@@ -145,8 +145,8 @@
         </xsl:for-each>
         <xsl:text>
         };
-        DOMTestDocumentBuilderFactory testFactory = factory.newInstance(settings);
-        setFactory(testFactory);
+        DOMTestDocumentBuilderFactory testFactory = factory.newInstance(settings)
+        setFactory(testFactory)
 </xsl:text>
     </xsl:when>
     <xsl:otherwise>
@@ -185,7 +185,7 @@
                 <xsl:text>, null</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>);
+        <xsl:text>)
       }
 </xsl:text>
     </xsl:for-each>
@@ -220,7 +220,7 @@ require 'helper'
     ##
     ##   check if loaded documents are supported for content type
     ##
-    contentType = getContentType();
+    contentType = getContentType()
     </xsl:text>
 	<xsl:for-each select="*[local-name() = 'load' and @href]">
 		<xsl:text>preload(contentType, "</xsl:text>
@@ -314,7 +314,7 @@ end
         <xsl:value-of select="@name"/>
    </xsl:for-each>
    <xsl:text>) { 
-        super(test);
+        super(test)
            </xsl:text>
    <xsl:for-each select="*[local-name() = 'var' and @value]">
         <xsl:text>this.</xsl:text>
@@ -509,7 +509,7 @@ require 'helper'
     <xsl:value-of select="@var"/>
     <xsl:text> = </xsl:text>
     <xsl:value-of select="@obj"/>
-    <xsl:text>.length();
+    <xsl:text>.length()
       </xsl:text>
 </xsl:template>
 
@@ -544,7 +544,7 @@ require 'helper'
                 <xsl:text>null</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>);
+        <xsl:text>)
 </xsl:text>
     </xsl:if>
 </xsl:template>
@@ -552,7 +552,7 @@ require 'helper'
 
 <xsl:template match="*[local-name()='DOMImplementationRegistry.newInstance']" mode="body">
         <xsl:value-of select="@var"/>
-        <xsl:text> = org.w3c.dom.bootstrap.DOMImplementationRegistry.newInstance();
+        <xsl:text> = org.w3c.dom.bootstrap.DOMImplementationRegistry.newInstance()
          </xsl:text>
 </xsl:template>
 
@@ -565,7 +565,7 @@ require 'helper'
         <xsl:value-of select="local-name()"/>
         <xsl:text>(</xsl:text>
         <xsl:value-of select="@features"/>
-        <xsl:text>);
+        <xsl:text>)
          </xsl:text>
 </xsl:template>
 
@@ -584,21 +584,21 @@ require 'helper'
         <xsl:when test="@value and @type = 'LSInputStream'">
             <xsl:text> = createStream(</xsl:text>
             <xsl:value-of select="@value"/>
-            <xsl:text>);</xsl:text>
+            <xsl:text>)</xsl:text>
         </xsl:when>
         
         <xsl:when test="@value and @type = 'LSReader'">
         	<xsl:text> = new java.io.StringReader(</xsl:text>
         	<xsl:value-of select="@value"/>
-        	<xsl:text>);</xsl:text>
+        	<xsl:text>)</xsl:text>
         </xsl:when>
         
         <xsl:when test="@type = 'LSOutputStream' and (not(@isNull) or @isNull='false')">
-           <xsl:text> = new java.io.ByteArrayOutputStream();</xsl:text>
+           <xsl:text> = new java.io.ByteArrayOutputStream()</xsl:text>
         </xsl:when>
         
         <xsl:when test="@type = 'LSWriter' and (not(@isNull) or @isNull='false')">
-           <xsl:text> = new java.io.StringWriter();</xsl:text>
+           <xsl:text> = new java.io.StringWriter()</xsl:text>
         </xsl:when>
 
         <!--  explict value, just add it  -->
@@ -606,27 +606,27 @@ require 'helper'
 
         <!--  event monitor type implies constructor    -->
         <xsl:when test="@type='EventMonitor'">
-            <xsl:text> = new org.w3c.domts.EventMonitor();
+            <xsl:text> = new org.w3c.domts.EventMonitor()
       </xsl:text>
         </xsl:when>
 
 
         <!--  DOMErrorMonitor type implies constructor    -->
         <xsl:when test="@type='DOMErrorMonitor'">
-            <xsl:text> = new org.w3c.domts.DOMErrorMonitor();
+            <xsl:text> = new org.w3c.domts.DOMErrorMonitor()
       </xsl:text>
         </xsl:when>
 
 
         <!--  UserDataMonitor type implies constructor    -->
         <xsl:when test="@type='UserDataMonitor'">
-            <xsl:text> = new org.w3c.domts.UserDataMonitor();
+            <xsl:text> = new org.w3c.domts.UserDataMonitor()
       </xsl:text>
         </xsl:when>
 
         <!--  member, allocate collection or list and populate it  -->
         <xsl:when test="@type='List' or @type='Collection'">
-            <xsl:text> = new java.util.ArrayList();
+            <xsl:text> = new java.util.ArrayList()
       </xsl:text>
             <xsl:for-each select="*[local-name()='member']">
                 <xsl:value-of select="$varname"/><xsl:text>.add(</xsl:text>
@@ -673,7 +673,7 @@ require 'helper'
                         <xsl:value-of select="text()"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:text>);
+                <xsl:text>)
       </xsl:text>
             </xsl:for-each>
         </xsl:when>
@@ -695,7 +695,7 @@ require 'helper'
                 </xsl:if>
                 <xsl:value-of select="@value"/>
             </xsl:for-each>
-            <xsl:text>);</xsl:text>
+            <xsl:text>)</xsl:text>
         </xsl:when>
     </xsl:choose>
 </xsl:template>
@@ -710,7 +710,7 @@ require 'helper'
 <xsl:template match="*[local-name()='wait']" mode="body">
     <xsl:text>wait(</xsl:text>
     <xsl:value-of select="@milliseconds"/>
-    <xsl:text>);
+    <xsl:text>)
 </xsl:text>
 </xsl:template>
 
@@ -724,16 +724,16 @@ require 'helper'
         <xsl:when test="$type = 'int'">
             <xsl:text>new Integer(</xsl:text>
             <xsl:value-of select="@item"/>
-            <xsl:text>));</xsl:text>
+            <xsl:text>))</xsl:text>
         </xsl:when>
         <xsl:when test="$type = 'double'">
             <xsl:text>new Double(</xsl:text>
             <xsl:value-of select="@item"/>
-            <xsl:text>));</xsl:text>
+            <xsl:text>))</xsl:text>
         </xsl:when>
         <xsl:otherwise>
             <xsl:value-of select="@item"/>
-            <xsl:text>);</xsl:text>
+            <xsl:text>)</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
     <xsl:text>
@@ -755,7 +755,7 @@ require 'helper'
         <xsl:when test="$vardefs[@name = current()/@var]/@type = 'LSInputStream' and $vardefs[@name = current()/@value]/@type = 'LSOutputStream'">
         	<xsl:text> new java.io.ByteArrayInputStream(((java.io.ByteArrayOutputStream) </xsl:text>
         	<xsl:value-of select="@value"/>
-        	<xsl:text>).toByteArray());
+        	<xsl:text>).toByteArray())
        </xsl:text>
         </xsl:when>
 
@@ -763,7 +763,7 @@ require 'helper'
         <xsl:when test="$vardefs[@name = current()/@var]/@type = 'LSReader' and $vardefs[@name = current()/@value]/@type = 'LSWriter'">
         	<xsl:text> new java.io.StringReader(((java.io.StringWriter) </xsl:text>
         	<xsl:value-of select="@value"/>
-        	<xsl:text>).toString());
+        	<xsl:text>).toString())
        </xsl:text>
         </xsl:when>
         
@@ -855,7 +855,7 @@ require 'helper'
     	<xsl:text>, </xsl:text>
     	<xsl:value-of select="@endIndex"/>
     </xsl:if>
-    <xsl:text>);
+    <xsl:text>)
       </xsl:text>
 </xsl:template>
 
@@ -873,7 +873,7 @@ require 'helper'
         <xsl:value-of select="@obj"/>
         <xsl:text>.</xsl:text>
     </xsl:if>
-    <xsl:text>getImplementation();
+    <xsl:text>getImplementation()
       </xsl:text>
 </xsl:template>
 
@@ -882,7 +882,7 @@ require 'helper'
     <xsl:value-of select="@var"/>
     <xsl:text> = (XPathEvaluator) createXPathEvaluator(</xsl:text>
     <xsl:value-of select="@document"/>
-    <xsl:text>);
+    <xsl:text>)
       </xsl:text>
 </xsl:template>
 
@@ -897,7 +897,7 @@ require 'helper'
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:value-of select="@actual"/>
-            <xsl:text>);
+            <xsl:text>)
       </xsl:text>
         </xsl:when>
         <xsl:otherwise>
@@ -905,7 +905,7 @@ require 'helper'
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:apply-templates select="*[1]" mode="condition"/>
-            <xsl:text>);
+            <xsl:text>)
       </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
@@ -922,7 +922,7 @@ require 'helper'
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:value-of select="@actual"/>
-            <xsl:text>);
+            <xsl:text>)
 </xsl:text>
         </xsl:when>
         <xsl:otherwise>
@@ -930,7 +930,7 @@ require 'helper'
             <xsl:value-of select="@id"/>
             <xsl:text>", </xsl:text>
             <xsl:apply-templates select="*[1]" mode="condition"/>
-            <xsl:text>);
+            <xsl:text>)
 </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
@@ -942,7 +942,7 @@ require 'helper'
     <xsl:value-of select="@id"/>
     <xsl:text>", </xsl:text>
     <xsl:value-of select="@actual"/>
-    <xsl:text>);
+    <xsl:text>)
       </xsl:text>
 </xsl:template>
 
@@ -974,7 +974,7 @@ require 'helper'
     <xsl:value-of select="@expected"/>
     <xsl:text>, </xsl:text>
     <xsl:value-of select="@actual"/>
-    <xsl:text>);
+    <xsl:text>)
 </xsl:text>
     <xsl:if test="count(*) &gt; 0">
         <xsl:text>if (same(</xsl:text>
@@ -1000,7 +1000,7 @@ require 'helper'
     </xsl:call-template>
     <xsl:text>.class, </xsl:text>
     <xsl:value-of select="@obj"/>
-    <xsl:text>);
+    <xsl:text>)
 </xsl:text>
     <xsl:if test="*">
         <xsl:text>if (</xsl:text>
@@ -1026,7 +1026,7 @@ require 'helper'
     <xsl:value-of select="@size"/>
     <xsl:text>, </xsl:text>
     <xsl:value-of select="@collection"/>
-    <xsl:text>);
+    <xsl:text>)
       </xsl:text>
     <xsl:if test="*">
    if (size(<xsl:value-of select="@collection"/>) == <xsl:value-of select="@size"/>) {
@@ -1079,7 +1079,7 @@ require 'helper'
         <xsl:otherwise>null, </xsl:otherwise>
     </xsl:choose>
     <xsl:value-of select="@actual"/>
-    <xsl:text>);
+    <xsl:text>)
 </xsl:text>
 </xsl:template>
 
@@ -1088,7 +1088,7 @@ require 'helper'
     <xsl:param name="vardefs"/>
     <xsl:text>fail("</xsl:text>
     <xsl:value-of select="@id"/>
-    <xsl:text>");
+    <xsl:text>")
      </xsl:text>
 </xsl:template>
 
@@ -1104,7 +1104,7 @@ require 'helper'
             <xsl:value-of select="@expected"/>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
-            <xsl:text>);
+            <xsl:text>)
 </xsl:text>
         </xsl:when>
         <xsl:when test="@ignoreCase = 'auto'">
@@ -1123,7 +1123,7 @@ require 'helper'
             <xsl:value-of select="@expected"/>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
-            <xsl:text>);
+            <xsl:text>)
         </xsl:text>
         </xsl:when>
         <xsl:otherwise>
@@ -1135,7 +1135,7 @@ require 'helper'
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
             <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
-            <xsl:text>);
+            <xsl:text>)
       </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
@@ -1151,7 +1151,7 @@ require 'helper'
             <xsl:text>", </xsl:text>
             <xsl:value-of select="@expected"/>,
             <xsl:value-of select="@actual"/>
-            <xsl:text>);
+            <xsl:text>)
 </xsl:text>
         </xsl:when>
         <xsl:when test="@ignoreCase = 'auto'">
@@ -1165,11 +1165,11 @@ require 'helper'
             	<xsl:when test="@context">
             		<xsl:text>, "</xsl:text>
             		<xsl:value-of select="@context"/>
-            		<xsl:text>");
+            		<xsl:text>")
 </xsl:text>
 				</xsl:when>
 				<xsl:otherwise>
-            		<xsl:text>, "element");
+            		<xsl:text>, "element")
 </xsl:text>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -1183,7 +1183,7 @@ require 'helper'
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
             <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
-            <xsl:text>);
+            <xsl:text>)
 </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
@@ -1199,7 +1199,7 @@ require 'helper'
         <xsl:value-of select="@monitor"/>
         <xsl:text>.getAtCount() == </xsl:text>
         <xsl:value-of select="@atCount"/>
-        <xsl:text>);
+        <xsl:text>)
 </xsl:text>
     </xsl:if>
     <xsl:if test="@captureCount">
@@ -1207,7 +1207,7 @@ require 'helper'
         <xsl:value-of select="@monitor"/>
         <xsl:text>.getCaptureCount() == </xsl:text>
         <xsl:value-of select="@captureCount"/>
-        <xsl:text>);
+        <xsl:text>)
 </xsl:text>
     </xsl:if>
     <xsl:if test="@bubbleCount">
@@ -1215,7 +1215,7 @@ require 'helper'
         <xsl:value-of select="@monitor"/>
         <xsl:text>.getBubbleCount() == </xsl:text>
         <xsl:value-of select="@BubbleCount"/>
-        <xsl:text>);
+        <xsl:text>)
 </xsl:text>
     </xsl:if>
     <xsl:if test="@totalCount">
@@ -1223,12 +1223,12 @@ require 'helper'
         <xsl:value-of select="@monitor"/>
         <xsl:text>.getTotalCount() == </xsl:text>
         <xsl:value-of select="@totalCount"/>
-        <xsl:text>);
+        <xsl:text>)
 </xsl:text>
     </xsl:if>
     <xsl:text>assertTrue("</xsl:text>
     <xsl:value-of select="@id"/>
-    <xsl:text>", _tmpBool);
+    <xsl:text>", _tmpBool)
 </xsl:text>
     <xsl:if test="*">
         <xsl:text>if (_tmpBool) {
@@ -1359,10 +1359,10 @@ require 'helper'
     <xsl:variable name="member" select="@member"/>
     <xsl:choose>
         <xsl:when test="$vartype = 'Collection' or $vartype = 'List'">
-            <xsl:text>.size(); </xsl:text>
+            <xsl:text>.size()</xsl:text>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:text>.getLength(); </xsl:text>
+            <xsl:text>.getLength()</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
     <xsl:value-of select="$indexvar"/>
@@ -1378,7 +1378,7 @@ require 'helper'
     			<xsl:with-param name="indexvar" select="$indexvar"/>
     			<xsl:with-param name="vartype" select="$vartype"/>
     		</xsl:call-template>
-    		<xsl:text>).booleanValue();
+    		<xsl:text>).booleanValue()
      </xsl:text>    		
     	</xsl:when>
 
@@ -1390,7 +1390,7 @@ require 'helper'
     		</xsl:call-template>
     		<xsl:text>).</xsl:text>
     		<xsl:value-of select="$memberType"/>
-    		<xsl:text>Value();
+    		<xsl:text>Value()
      </xsl:text>    		
     	</xsl:when>
 
@@ -1433,45 +1433,45 @@ require 'helper'
 </xsl:template>
 
 <xsl:template match="*[local-name()='atEvents']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAtEvents();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAtEvents()
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='capturedEvents']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getCapturedEvents();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getCapturedEvents()
 </xsl:template>
 
 <xsl:template match="*[local-name()='bubbledEvents']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getBubbledEvents();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getBubbledEvents()
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='allEvents']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllEvents();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllEvents()
 </xsl:template>
 
 <xsl:template match="*[local-name()='allNotifications']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllNotifications();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllNotifications()
 </xsl:template>
 
 <xsl:template match="*[local-name()='operation']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getOperation();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getOperation()
 </xsl:template>
 
 <xsl:template match="*[local-name()='key']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getKey();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getKey()
 </xsl:template>
 
 <xsl:template match="*[local-name()='src' and @interface='UserDataNotification']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getSrc();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getSrc()
 </xsl:template>
 
 <xsl:template match="*[local-name()='dst']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getDst();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getDst()
 </xsl:template>
 
 <xsl:template match="*[local-name()='allErrors']" mode="body">
-    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllErrors();
+    <xsl:value-of select="@var"/> = <xsl:value-of select="@obj"/>.getAllErrors()
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertLowerSeverity']" mode="body">
@@ -1483,7 +1483,7 @@ require 'helper'
     	<xsl:when test="@severity = 'SEVERITY_FATAL_ERROR'">", 3</xsl:when>
     	<xsl:otherwise>", 2</xsl:otherwise>
     </xsl:choose>
-    <xsl:text>);
+    <xsl:text>)
      </xsl:text>
 </xsl:template>
 
@@ -1497,7 +1497,7 @@ require 'helper'
         <xsl:with-param name="vartype" select="$vardefs[@name = current()/@var]/@type"/>
         <xsl:with-param name="rettype" select="'DOMUserData'"/>
     </xsl:call-template>
-    <xsl:value-of select="@obj"/>.getData();
+    <xsl:value-of select="@obj"/>.getData()
 </xsl:template>
 
 
@@ -1580,7 +1580,7 @@ require 'helper'
     		<xsl:text>null</xsl:text>
     	</xsl:otherwise>
     </xsl:choose>
-    <xsl:text>);
+    <xsl:text>)
       </xsl:text>
 </xsl:template>
 
@@ -1595,7 +1595,7 @@ require 'helper'
     		<xsl:text>file</xsl:text>
     	</xsl:otherwise>
     </xsl:choose>
-    <xsl:text>");
+    <xsl:text>")
       </xsl:text>
 </xsl:template>
 
@@ -1614,7 +1614,7 @@ require 'helper'
          } catch (Throwable ex) {
             success = true;
          }
-         assertTrue("<xsl:value-of select="@id"/><xsl:text>", success);
+         assertTrue("<xsl:value-of select="@id"/><xsl:text>", success)
       }
       </xsl:text>
 </xsl:template>
@@ -1628,9 +1628,9 @@ require 'helper'
             <xsl:apply-templates select="*/*" mode="body">
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:apply-templates>    } catch (DOMException ex) {
-            success = (ex.code == DOMException.<xsl:value-of select="name(*)"/>);
+            success = (ex.code == DOMException.<xsl:value-of select="name(*)"/>)
          }
-         assertTrue("<xsl:value-of select="@id"/>", success);
+         assertTrue("<xsl:value-of select="@id"/>", success)
       }
 </xsl:template>
 
@@ -1642,9 +1642,9 @@ require 'helper'
             <xsl:apply-templates select="*/*" mode="body">
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:apply-templates>    } catch (LSException ex) {
-            success = (ex.code == LSException.<xsl:value-of select="name(*)"/>);
+            success = (ex.code == LSException.<xsl:value-of select="name(*)"/>)
          }
-         assertTrue("<xsl:value-of select="@id"/>", success);
+         assertTrue("<xsl:value-of select="@id"/>", success)
       }
 </xsl:template>
 
@@ -1657,9 +1657,9 @@ require 'helper'
             <xsl:apply-templates select="*/*" mode="body">
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:apply-templates>    } catch (EventException ex) {
-            success = (ex.code == EventException.<xsl:value-of select="name(*)"/>);
+            success = (ex.code == EventException.<xsl:value-of select="name(*)"/>)
          }
-         assertTrue("<xsl:value-of select="@id"/>", success);
+         assertTrue("<xsl:value-of select="@id"/>", success)
       }
 </xsl:template>
 
@@ -1671,9 +1671,9 @@ require 'helper'
             <xsl:apply-templates select="*/*" mode="body">
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:apply-templates>    } catch (XPathException ex) {
-            success = (ex.code == XPathException.<xsl:value-of select="name(*)"/>);
+            success = (ex.code == XPathException.<xsl:value-of select="name(*)"/>)
          }
-         assertTrue("<xsl:value-of select="@id"/>", success);
+         assertTrue("<xsl:value-of select="@id"/>", success)
       }
 </xsl:template>
 
@@ -1689,7 +1689,7 @@ require 'helper'
     		<xsl:value-of select="@obj"/>
     		<xsl:text>.getParameter(</xsl:text>
     		<xsl:value-of select="@name"/>
-    		<xsl:text>)).booleanValue();
+    		<xsl:text>)).booleanValue()
       </xsl:text>
       	</xsl:when>
       	
@@ -1704,7 +1704,7 @@ require 'helper'
       		<xsl:value-of select="@obj"/>
       		<xsl:text>.getParameter(</xsl:text>
       		<xsl:value-of select="@name"/>
-      		<xsl:text>);
+      		<xsl:text>)
       </xsl:text>
         </xsl:otherwise>
       </xsl:choose>      	
@@ -1898,7 +1898,7 @@ require 'helper'
                 <xsl:with-param name="reqtype" select="$attribute/@type"/>
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:call-template>
-        <xsl:text>);</xsl:text>
+        <xsl:text>)</xsl:text>
     </xsl:if>
     <xsl:if test="@var">
         <xsl:value-of select="@var"/>
@@ -1923,7 +1923,7 @@ require 'helper'
         	</xsl:call-template>
 	     </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>();</xsl:text>
+        <xsl:text>()</xsl:text>
     </xsl:if>
 </xsl:template>
 
@@ -1960,7 +1960,7 @@ require 'helper'
             <xsl:with-param name="reqtype" select="$paramDef/@type"/>
         </xsl:call-template>
     </xsl:for-each>
-    <xsl:text>);</xsl:text>
+    <xsl:text>)</xsl:text>
 </xsl:template>
 
 
