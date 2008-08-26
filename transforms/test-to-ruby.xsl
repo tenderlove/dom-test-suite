@@ -983,11 +983,11 @@ require 'helper'
         <xsl:value-of select="@expected"/>
         <xsl:text>, </xsl:text>
         <xsl:value-of select="@actual"/>
-        <xsl:text>)) {</xsl:text>
+        <xsl:text>))</xsl:text>
         <xsl:apply-templates mode="body">
             <xsl:with-param name="vardefs" select="$vardefs"/>
         </xsl:apply-templates>
-        <xsl:text>}
+        <xsl:text>end
 </xsl:text>
     </xsl:if>
 </xsl:template>
@@ -1251,14 +1251,14 @@ require 'helper'
     <xsl:text>
       if (</xsl:text>
       <xsl:apply-templates select="*[1]" mode="condition"/>
-      <xsl:text>) {
-          </xsl:text>
+      <xsl:text>)
+        </xsl:text>
         <xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body">
             <xsl:with-param name="vardefs" select="$vardefs"/>
         </xsl:apply-templates>
-        <xsl:text>}</xsl:text>
+        <xsl:text>end</xsl:text>
         <xsl:for-each select="*[local-name()='else']">
-            <xsl:text> else {
+            <xsl:text> FUCK else {
           </xsl:text>
             <xsl:apply-templates mode="body">
                <xsl:with-param name="vardefs" select="$vardefs"/>
