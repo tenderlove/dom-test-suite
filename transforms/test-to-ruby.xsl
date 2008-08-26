@@ -1546,20 +1546,15 @@ require 'helper'
     <xsl:variable name="var" select="@var"/>
     <xsl:value-of select="@var"/>
     <xsl:text> = </xsl:text>
-    <xsl:call-template name="retval-cast">
-        <xsl:with-param name="variable" select="@var"/>
-        <xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
-        <xsl:with-param name="rettype" select="Document"/>
-    </xsl:call-template>
-    <xsl:text>load("</xsl:text>
+    <xsl:text>load_document("</xsl:text>
     <xsl:value-of select="@href"/>
     <xsl:choose>
     	<xsl:when test="@willBeModified = 'true'">
-    		<xsl:text>", true);
+    		<xsl:text>", true)
       </xsl:text>
       	</xsl:when>
       	<xsl:otherwise> 
-    		<xsl:text>", false);
+    		<xsl:text>", false)
       </xsl:text>
          </xsl:otherwise>
      </xsl:choose>
