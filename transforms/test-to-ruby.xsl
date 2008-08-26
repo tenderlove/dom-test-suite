@@ -1908,11 +1908,6 @@ require 'helper'
         <xsl:value-of select="@var"/>
         <xsl:variable name="var" select="@var"/>
         <xsl:text> = </xsl:text>
-        <xsl:call-template name="retval-cast">
-            <xsl:with-param name="variable" select="$var"/>
-            <xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
-            <xsl:with-param name="rettype" select="$attribute/@type"/>
-        </xsl:call-template>
         <xsl:call-template name="cast">
             <xsl:with-param name="var" select="$obj"/>
             <xsl:with-param name="vartype" select="$vardefs[@name = $obj]/@type"/>
@@ -1948,11 +1943,6 @@ require 'helper'
     <xsl:if test="@var">
         <xsl:value-of select="@var"/>
         <xsl:text> = </xsl:text>
-        <xsl:call-template name="retval-cast">
-            <xsl:with-param name="variable" select="$var"/>
-            <xsl:with-param name="vartype" select="$vardefs[@name = $var]/@type"/>
-            <xsl:with-param name="rettype" select="$method/returns/@type"/>
-        </xsl:call-template>
     </xsl:if>
     <xsl:call-template name="cast">
         <xsl:with-param name="var" select="$obj"/>
