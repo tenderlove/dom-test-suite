@@ -1630,7 +1630,7 @@ require 'helper'
         <xsl:apply-templates select="*/*" mode="body">
         <xsl:with-param name="vardefs" select="$vardefs"/>
         </xsl:apply-templates>rescue DOMException => ex
-        success = (ex.code == DOMException.<xsl:value-of select="name(*)"/>)
+        success = (ex.code == DOMException::<xsl:value-of select="name(*)"/>)
       end 
       assert(success, "<xsl:value-of select="@id"/>")
     end
@@ -1638,45 +1638,45 @@ require 'helper'
 
 <xsl:template match="*[local-name()='assertLSException']" mode="body">
     <xsl:param name="vardefs"/>
-      {
-         boolean success = false;
-         try {
-            <xsl:apply-templates select="*/*" mode="body">
-                <xsl:with-param name="vardefs" select="$vardefs"/>
-            </xsl:apply-templates>    } catch (LSException ex) {
-            success = (ex.code == LSException.<xsl:value-of select="name(*)"/>)
-         }
-         assertTrue("<xsl:value-of select="@id"/>", success)
-      }
+    begin
+      success = false;
+      begin
+        <xsl:apply-templates select="*/*" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>rescue LSException => ex
+        success = (ex.code == LSException::<xsl:value-of select="name(*)"/>)
+      end
+      assert(success, "<xsl:value-of select="@id"/>")
+    end 
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='assertEventException']" mode="body">
     <xsl:param name="vardefs"/>
-      {
-         boolean success = false;
-         try {
-            <xsl:apply-templates select="*/*" mode="body">
-                <xsl:with-param name="vardefs" select="$vardefs"/>
-            </xsl:apply-templates>    } catch (EventException ex) {
-            success = (ex.code == EventException.<xsl:value-of select="name(*)"/>)
-         }
-         assertTrue("<xsl:value-of select="@id"/>", success)
-      }
+    begin
+      success = false;
+      begin
+        <xsl:apply-templates select="*/*" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>rescue EventException => ex
+        success = (ex.code == EventException::<xsl:value-of select="name(*)"/>)
+      end 
+      assert(success, "<xsl:value-of select="@id"/>")
+    end 
 </xsl:template>
 
 <xsl:template match="*[local-name()='assertXPathException']" mode="body">
     <xsl:param name="vardefs"/>
-      {
-         boolean success = false;
-         try {
-            <xsl:apply-templates select="*/*" mode="body">
-                <xsl:with-param name="vardefs" select="$vardefs"/>
-            </xsl:apply-templates>    } catch (XPathException ex) {
-            success = (ex.code == XPathException.<xsl:value-of select="name(*)"/>)
-         }
-         assertTrue("<xsl:value-of select="@id"/>", success)
-      }
+    begin
+    success = false;
+      begin
+        <xsl:apply-templates select="*/*" mode="body">
+        <xsl:with-param name="vardefs" select="$vardefs"/>
+        </xsl:apply-templates>rescue XPathException => ex
+        success = (ex.code == XPathException::<xsl:value-of select="name(*)"/>)
+      end
+      assert(success, "<xsl:value-of select="@id"/>")
+    end
 </xsl:template>
 
 <xsl:template match="*[local-name()='getParameter']" mode="body">
