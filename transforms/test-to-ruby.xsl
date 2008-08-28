@@ -159,7 +159,8 @@
 
 <xsl:if test="$featureConditions">
     <xsl:for-each select="$featureConditions">
-        <xsl:text>      if (factory.hasFeature(</xsl:text>
+      <xsl:text>
+        if (factory.hasFeature(</xsl:text>
         <xsl:value-of select="@feature"/>
         <xsl:text>, </xsl:text>
         <xsl:choose>
@@ -175,8 +176,8 @@
             <xsl:when test="@value='false'">false</xsl:when>
             <xsl:otherwise>true</xsl:otherwise>
         </xsl:choose>
-        <xsl:text>) {
-         throw org.w3c.domts.DOMTestIncompatibleException.incompatibleFeature(</xsl:text>
+        <xsl:text>)
+         raise "org.w3c.domts.DOMTestIncompatibleException.incompatibleFeature(</xsl:text>
         <xsl:value-of select="@feature"/>
         <xsl:choose>
             <xsl:when test="@version">
@@ -187,8 +188,8 @@
                 <xsl:text>, null</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>)
-      }
+        <xsl:text>)"
+      end
 </xsl:text>
     </xsl:for-each>
 </xsl:if>
@@ -1262,17 +1263,15 @@ require 'helper'
         <xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body">
             <xsl:with-param name="vardefs" select="$vardefs"/>
         </xsl:apply-templates>
-        <xsl:text>
-          end</xsl:text>
         <xsl:for-each select="*[local-name()='else']">
-            <xsl:text> FUCK else {
-          </xsl:text>
+          else
             <xsl:apply-templates mode="body">
                <xsl:with-param name="vardefs" select="$vardefs"/>
-            </xsl:apply-templates>}
+            </xsl:apply-templates>
         </xsl:for-each>
-    <xsl:text>
-    </xsl:text>
+       <xsl:text>
+         end
+       </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='try']" mode="body">
@@ -1404,16 +1403,11 @@ require 'helper'
 
 
     	<xsl:otherwise>
-    		<xsl:text>(</xsl:text>
-    		<xsl:call-template name="produce-type">
-        		<xsl:with-param name="type" select="$memberType"/>
-    		</xsl:call-template>
-    		<xsl:text>) </xsl:text>
     		<xsl:call-template name="produce-indexer">
     			<xsl:with-param name="indexvar" select="$indexvar"/>
     			<xsl:with-param name="vartype" select="$vartype"/>
     		</xsl:call-template>
-    		<xsl:text>;
+    		<xsl:text>
     </xsl:text>
     	</xsl:otherwise>
     </xsl:choose>

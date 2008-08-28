@@ -36,7 +36,7 @@ task :get_dom1 => DOM_ZIP
 #    [unzip] Expanding: /Users/aaron/git/DOM-Test-Suite/lib/specs/DOM.zip into /Users/aaron/git/DOM-Test-Suite/lib/specs/Level-1
 #    [unzip] Expanding: /Users/aaron/git/DOM-Test-Suite/lib/specs/Level-1/xml-source.zip into /Users/aaron/git/DOM-Test-Suite/lib/specs/Level-1
 #
-task :dom1_init => [:get_dom1] do
+file File.join(SPECS_DIR, "Level-1") => [:get_dom1] do
   chdir(SPECS_DIR)
   FileUtils.rm_rf("Level-1")
   sh("unzip DOM.zip -d Level-1")
@@ -46,6 +46,8 @@ task :dom1_init => [:get_dom1] do
     f.write wd_dom.gsub(/<spec>/, "<spec xmlns:xlink='http://www.w3.org/1999/xlink'>")
   }
 end
+
+task :dom1_init => File.join(SPECS_DIR, "Level-1")
 
 #dom1-interfaces-init:
 #
