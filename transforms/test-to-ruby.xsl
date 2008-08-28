@@ -177,7 +177,7 @@
             <xsl:otherwise>true</xsl:otherwise>
         </xsl:choose>
         <xsl:text>)
-         raise "org.w3c.domts.DOMTestIncompatibleException.incompatibleFeature(</xsl:text>
+         raise 'org.w3c.domts.DOMTestIncompatibleException.incompatibleFeature(</xsl:text>
         <xsl:value-of select="@feature"/>
         <xsl:choose>
             <xsl:when test="@version">
@@ -188,7 +188,7 @@
                 <xsl:text>, null</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>)"
+        <xsl:text>)'
       end
 </xsl:text>
     </xsl:for-each>
@@ -223,10 +223,10 @@ require 'helper'
     ##
     ##   check if loaded documents are supported for content type
     ##
-    contentType = getContentType()
-    </xsl:text>
+    contentType = getContentType()</xsl:text>
 	<xsl:for-each select="*[local-name() = 'load' and @href]">
-		<xsl:text>preload(contentType, "</xsl:text>
+    <xsl:text>
+    preload(contentType, "</xsl:text>
 		<xsl:value-of select="@href"/>
 		<xsl:text>", </xsl:text>
 		<xsl:value-of select="@willBeModified"/>
