@@ -1359,7 +1359,7 @@ require 'helper'
     <xsl:variable name="indexvar" select="concat('index', generate-id(.))"/>
   <xsl:value-of select="$indexvar"/>
     <xsl:text> = 0
-    while </xsl:text>
+    while (</xsl:text>
     <xsl:value-of select="$indexvar"/>
     <xsl:text> &lt; </xsl:text>
     <xsl:variable name="varname" select="@collection"/>
@@ -1374,7 +1374,7 @@ require 'helper'
             <xsl:text>.getLength()</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
-    <xsl:text>
+    <xsl:text>)
       </xsl:text>
     <xsl:value-of select="$member"/>
     <xsl:text> = </xsl:text>
