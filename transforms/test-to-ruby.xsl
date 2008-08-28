@@ -805,6 +805,8 @@ require 'helper'
     <xsl:value-of select="@var"/>
     <xsl:text> += </xsl:text>
     <xsl:value-of select="@value"/>
+    <xsl:text>
+    </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='decrement']" mode="body">
