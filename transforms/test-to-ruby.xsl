@@ -1262,7 +1262,8 @@ require 'helper'
         <xsl:apply-templates select="*[position() &gt; 1 and local-name() != 'else']" mode="body">
             <xsl:with-param name="vardefs" select="$vardefs"/>
         </xsl:apply-templates>
-        <xsl:text>end</xsl:text>
+        <xsl:text>
+          end</xsl:text>
         <xsl:for-each select="*[local-name()='else']">
             <xsl:text> FUCK else {
           </xsl:text>
@@ -1375,9 +1376,6 @@ require 'helper'
     </xsl:choose>
     <xsl:text>
       </xsl:text>
-    <xsl:value-of select="$indexvar"/>
-    <xsl:text> += 1
-          </xsl:text>
     <xsl:value-of select="$member"/>
     <xsl:text> = </xsl:text>
     <xsl:variable name="memberType" select="$vardefs[@name = $member]/@type"/>
@@ -1422,6 +1420,9 @@ require 'helper'
     <xsl:apply-templates select="*" mode="body">
         <xsl:with-param name="vardefs" select="$vardefs"/>
     </xsl:apply-templates>
+    <xsl:value-of select="$indexvar"/>
+    <xsl:text> += 1
+          </xsl:text>
     <xsl:text>  end
       </xsl:text>
 </xsl:template>
