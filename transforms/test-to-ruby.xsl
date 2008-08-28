@@ -1348,11 +1348,11 @@ require 'helper'
 
 <xsl:template match="*[local-name()='while']" mode="body">
     <xsl:param name="vardefs"/>
-    while (<xsl:apply-templates select="*[1]" mode="condition"/>) {
+    while (<xsl:apply-templates select="*[1]" mode="condition"/>)
     <xsl:apply-templates select="*[position() &gt; 1]" mode="body">
         <xsl:with-param name="vardefs" select="$vardefs"/>
     </xsl:apply-templates>
-    }
+    end
 </xsl:template>
 
 <xsl:template match="*[local-name()='for-each']" mode="body">
