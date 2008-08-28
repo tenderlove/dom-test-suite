@@ -1283,27 +1283,25 @@ require 'helper'
     <xsl:variable name="implException" select="$catches[local-name() = 'ImplementationException']"/>
     
     <xsl:text>
-      try {
+      begin
       </xsl:text>
       <xsl:apply-templates select="*[local-name() != 'catch']" mode="body">
       	<xsl:with-param name="vardefs" select="$vardefs"/>
       </xsl:apply-templates>
-      <xsl:text>
-      } </xsl:text>
       <!--  for each type of defined exception   -->
       <xsl:for-each select="$exceptions">
       	  <!--  if there is an ImplementationException or 
       	  		at least one element for the current exception  -->
       	  <xsl:if test="$implException or $catches[local-name() = current()/@name]">
-      	  <xsl:text>catch (</xsl:text><xsl:value-of select="@name"/><xsl:text> ex) {
-           switch (ex.code) {
+            <xsl:text>rescue </xsl:text><xsl:value-of select="@name"/><xsl:text> => ex
+           case ex.code
       </xsl:text>
       			<xsl:variable name="exception" select="."/>
       			<xsl:for-each select="$catches[local-name() = $exception/@name]">
       				<xsl:variable name="catchCode" select="@code"/>
       				<!--  set the context to the one exception definition  -->
       				<xsl:for-each select="$exception">
-      					<xsl:text>case </xsl:text>
+      					<xsl:text>when </xsl:text>
       					<xsl:value-of select="following-sibling::group[1]/constant[@name = $catchCode]/@value"/>
       				</xsl:for-each>
       					<xsl:text> : 
@@ -1313,22 +1311,23 @@ require 'helper'
       					</xsl:apply-templates>
 						<!--  if there are no children, add a break -->
       					<xsl:if test="count(*) = 0">
-      							<xsl:text>break;
+      							<xsl:text># break;
       </xsl:text>
       					</xsl:if>
       					<!--  if the last child is not a return, add a break  -->
       					<xsl:for-each select="*">
       						<xsl:if test="not(following-sibling::*) and local-name() != 'return'">
-      							<xsl:text>break;
+      							<xsl:text># break;
       </xsl:text>
       						</xsl:if>
       					</xsl:for-each>
       			</xsl:for-each>
-      			<xsl:text>    default:
-          throw ex;
-          }
-      } </xsl:text>
+      			<xsl:text>    else
+          raise ex
+          end
+        </xsl:text>
       		</xsl:if>
+      end # end begin
       </xsl:for-each>
       <!--  for any implementation exception  -->
       <xsl:for-each select="$implException">
