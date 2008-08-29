@@ -1146,16 +1146,16 @@ require 'helper'
         </xsl:text>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:text>assertEquals("</xsl:text>
-            <xsl:value-of select="@id"/>
-            <xsl:text>", </xsl:text>
+          <xsl:text>assert_equal(</xsl:text>
             <xsl:value-of select="@expected"/>
             <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="@actual"/>
             <xsl:if test="@bitmask"> &amp; <xsl:value-of select="@bitmask"/></xsl:if>
-            <xsl:text>)
-      </xsl:text>
+            <xsl:text>, "</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text>")
+            </xsl:text>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
