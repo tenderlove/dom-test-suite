@@ -957,10 +957,10 @@ require 'helper'
 
 <xsl:template match="*[local-name()='assertNull']" mode="body">
     <xsl:param name="vardefs"/>
-    <xsl:text>assert_nil("</xsl:text>
+    <xsl:text>assert_nil(</xsl:text><xsl:value-of select="@actual"/>
+    <xsl:text>, "</xsl:text>
     <xsl:value-of select="@id"/>
-    <xsl:text>", </xsl:text>
-    <xsl:value-of select="@actual"/>
+    <xsl:text>"</xsl:text>
     <xsl:text>)
       </xsl:text>
 </xsl:template>
