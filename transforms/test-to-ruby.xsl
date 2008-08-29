@@ -168,7 +168,7 @@
                 <xsl:value-of select="@version"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>null</xsl:text>
+                <xsl:text>nil</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:text>) != </xsl:text>
@@ -185,7 +185,7 @@
                 <xsl:value-of select="@version"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>, null</xsl:text>
+                <xsl:text>, nil</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:text>)'
@@ -544,7 +544,7 @@ require 'helper'
                 <xsl:value-of select="@version"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>null</xsl:text>
+                <xsl:text>nil</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:text>)
@@ -582,7 +582,7 @@ require 'helper'
   <xsl:value-of select="$varname"/>
   <xsl:choose>
         <xsl:when test="@isNull='true'">
-            <xsl:text> = null;
+            <xsl:text> = nil;
 </xsl:text>
         </xsl:when>
 
@@ -631,10 +631,10 @@ require 'helper'
 
         <!--  member, allocate collection or list and populate it  -->
         <xsl:when test="@type='List' or @type='Collection'">
-            <xsl:text> = new java.util.ArrayList()
+            <xsl:text> = []
       </xsl:text>
             <xsl:for-each select="*[local-name()='member']">
-                <xsl:value-of select="$varname"/><xsl:text>.add(</xsl:text>
+              <xsl:value-of select="$varname"/><xsl:text> &lt;&lt; </xsl:text>
                 <xsl:choose>
                 	<!-- if explicitly declared a short -->
                     <xsl:when test="@type = 'short'">
@@ -678,7 +678,7 @@ require 'helper'
                         <xsl:value-of select="text()"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:text>)
+                <xsl:text>
       </xsl:text>
             </xsl:for-each>
         </xsl:when>
@@ -727,7 +727,7 @@ require 'helper'
 <xsl:template match="*[local-name()='append']" mode="body">
     <xsl:param name="vardefs"/>
     <xsl:value-of select="@collection"/>
-    <xsl:text>.add(</xsl:text>
+    <xsl:text> &lt;&lt; </xsl:text>
     <xsl:variable name="item" select="@item"/>
     <xsl:variable name="type" select="$vardefs[@name=$item]/@type"/>
     <xsl:choose>
@@ -743,7 +743,6 @@ require 'helper'
         </xsl:when>
         <xsl:otherwise>
             <xsl:value-of select="@item"/>
-            <xsl:text>)</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
     <xsl:text>
@@ -976,7 +975,7 @@ require 'helper'
     <xsl:if test="*">
         <xsl:text>if (</xsl:text>
         <xsl:value-of select="@actual"/>
-        <xsl:text> != null)</xsl:text>
+        <xsl:text> != nil)</xsl:text>
         <xsl:apply-templates mode="body">
             <xsl:with-param name="vardefs" select="$vardefs"/>
         </xsl:apply-templates>
@@ -1065,37 +1064,37 @@ require 'helper'
     <xsl:text>", </xsl:text>
     <xsl:choose>
         <xsl:when test="@scheme"><xsl:value-of select="@scheme"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@path"><xsl:value-of select="@path"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@host"><xsl:value-of select="@host"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@file"><xsl:value-of select="@file"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@name"><xsl:value-of select="@name"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@query"><xsl:value-of select="@query"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@fragment"><xsl:value-of select="@fragment"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
         <xsl:when test="@isAbsolute='true'">Boolean.TRUE, </xsl:when>
         <xsl:when test="@isAbsolute='false'">Boolean.FALSE, </xsl:when>
         <xsl:when test="@isAbsolute"><xsl:value-of select="@isAbsolute"/>, </xsl:when>
-        <xsl:otherwise>null, </xsl:otherwise>
+        <xsl:otherwise>nil, </xsl:otherwise>
     </xsl:choose>
     <xsl:value-of select="@actual"/>
     <xsl:text>)
@@ -1591,7 +1590,7 @@ require 'helper'
     		<xsl:text>"</xsl:text>
     	</xsl:when>
     	<xsl:otherwise>
-    		<xsl:text>null</xsl:text>
+    		<xsl:text>nil</xsl:text>
     	</xsl:otherwise>
     </xsl:choose>
     <xsl:text>)
@@ -2161,12 +2160,12 @@ require 'helper'
 </xsl:template>
 
 <xsl:template match="*[local-name()='isNull']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/><xsl:text> == null)</xsl:text>
+    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/><xsl:text> == nil)</xsl:text>
 </xsl:template>
 
 
 <xsl:template match="*[local-name()='notNull']" mode="condition">
-    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/><xsl:text> != null)</xsl:text>
+    <xsl:text>(</xsl:text><xsl:value-of select="@obj"/><xsl:text> != nil)</xsl:text>
 </xsl:template>
 
 <xsl:template match="*[local-name()='instanceOf']" mode="condition">
@@ -2209,7 +2208,7 @@ require 'helper'
             <xsl:value-of select="@version"/>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:text>null</xsl:text>
+            <xsl:text>nil</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
     <xsl:text>)</xsl:text>
