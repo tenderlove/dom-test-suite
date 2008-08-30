@@ -2178,7 +2178,7 @@ require 'helper'
 </xsl:template>
 
 <xsl:template match="*[local-name()='contentType']" mode="condition">
-    <xsl:text>("</xsl:text><xsl:value-of select="@type"/><xsl:text>".equals(getContentType()))</xsl:text>
+    <xsl:text>("</xsl:text><xsl:value-of select="@type"/><xsl:text>" == getContentType())</xsl:text>
 </xsl:template>
 
 
