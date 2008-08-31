@@ -71,7 +71,8 @@ task :dom1_interfaces => [:dom_interfaces_copy]
 #     [copy] Copying 1 file to /Users/aaron/git/DOM-Test-Suite/tests/level1/html
 task :dom1_dtd => :dom1_interfaces do
   doc = Nokogiri::XML.parse(
-    File.read(File.join(BUILD_DIR, 'dom1-interfaces.xml'))
+    File.read(File.join(BUILD_DIR, 'dom1-interfaces.xml')),
+    File.join(BUILD_DIR, 'dom1-interfaces.xml')
   )
   xslt = Nokogiri::XSLT.parse(
     File.read(File.join(TRANSFORMS_DIR, 'dom-to-dtd.xsl'))
@@ -96,7 +97,8 @@ end
 task :dom1_schema => [:dom_interfaces_gen] do
   xsd_file = File.join(BUILD_DIR, 'dom1.xsd')
   doc = Nokogiri::XML.parse(
-    File.read(File.join(BUILD_DIR, 'dom1-interfaces.xml'))
+    File.read(File.join(BUILD_DIR, 'dom1-interfaces.xml')),
+    File.join(BUILD_DIR, 'dom1-interfaces.xml')
   )
   xslt = Nokogiri::XSLT.parse(
     File.read(File.join(TRANSFORMS_DIR, 'dom-to-xsd.xsl'))
@@ -117,7 +119,7 @@ task :to_ruby => :dom1_dtd do
   )
   chdir(File.join(TEST_DIR, 'level1', 'core'))
   Dir['**/*.xml'].each do |f|
-    doc = Nokogiri::XML.parse(File.read(f))
+    doc = Nokogiri::XML.parse(File.read(f), f)
     filename = File.basename(f, '.xml')
     File.open(File.join(RUBY_DIR, "test_#{filename}.rb"), 'wb') do |test_file|
       test_file.write(

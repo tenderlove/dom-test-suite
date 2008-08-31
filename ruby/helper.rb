@@ -26,7 +26,7 @@ module DOM
 
     def load_document(doc_uri, will_be_modified)
       file = File.join(BASE,'tests','level1','core','files',"#{doc_uri}.xml")
-      Nokogiri::XML.parse(File.read(file))
+      Nokogiri::XML.parse(File.read(file), file)
     end
   end
 end

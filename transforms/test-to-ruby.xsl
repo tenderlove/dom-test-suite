@@ -1827,8 +1827,7 @@ require 'helper'
     <xsl:param name="prefix"/>
     <xsl:param name="attribute"/>
     <xsl:value-of select="$prefix"/>
-    <xsl:value-of select="translate(substring($attribute, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
-    <xsl:value-of select="substring($attribute, 2)"/>
+  	<xsl:value-of select="$attribute"/>
 </xsl:template>
 
 <xsl:template name="produce-param">
@@ -1886,25 +1885,24 @@ require 'helper'
 	<xsl:choose>
 	   <xsl:when test="$startsWithIs">ls ls /.
         	<xsl:call-template name="build-accessor">
-            		<xsl:with-param name="prefix">.set</xsl:with-param>
+            		<xsl:with-param name="prefix">.</xsl:with-param>
             		<xsl:with-param name="attribute" select="substring($attribute/@name, 3)"/>
         	</xsl:call-template>
            </xsl:when>
 	   <xsl:otherwise>
         	<xsl:call-template name="build-accessor">
-            		<xsl:with-param name="prefix">.set</xsl:with-param>
+            		<xsl:with-param name="prefix">.</xsl:with-param>
             		<xsl:with-param name="attribute" select="$attribute/@name"/>
         	</xsl:call-template>
            </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>(</xsl:text>
+        <xsl:text> = </xsl:text>
             <xsl:call-template name="produce-param">
                 <xsl:with-param name="value" select="@value"/>
                 <xsl:with-param name="vartype" select="$vardefs[@name = $value]/@type"/>
                 <xsl:with-param name="reqtype" select="$attribute/@type"/>
                 <xsl:with-param name="vardefs" select="$vardefs"/>
             </xsl:call-template>
-        <xsl:text>)</xsl:text>
     </xsl:if>
     <xsl:if test="@var">
         <xsl:value-of select="@var"/>
@@ -1924,7 +1922,7 @@ require 'helper'
              </xsl:when>
 	     <xsl:otherwise>
         	<xsl:call-template name="build-accessor">
-            		<xsl:with-param name="prefix">.get</xsl:with-param>
+            		<xsl:with-param name="prefix">.</xsl:with-param>
             		<xsl:with-param name="attribute" select="$attribute/@name"/>
         	</xsl:call-template>
 	     </xsl:otherwise>
