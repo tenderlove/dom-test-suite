@@ -25,9 +25,10 @@ module DOM
     end
 
     def load_document(doc_uri, will_be_modified)
-      options = self.class.name =~ /attrdefaultvalue/i ? 13 : 5 
+      options = self.class.name =~ /attrdefaultvalue/i ? 15 : 3
+      options |= (1 << 5 | 1 << 6)
       file = File.join(BASE,'tests','level1','core','files',"#{doc_uri}.xml")
-      Nokogiri::XML.parse(File.read(file), file, nil, options)
+      Nokogiri.parse(File.read(file), file, nil, options)
     end
   end
 end

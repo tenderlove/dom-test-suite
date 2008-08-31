@@ -1378,7 +1378,7 @@ require 'helper'
             <xsl:text>.size()</xsl:text>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:text>.getLength()</xsl:text>
+            <xsl:text>.length</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
     <xsl:text>)
@@ -1620,7 +1620,7 @@ require 'helper'
       begin
          <xsl:apply-templates mode="body">
              <xsl:with-param name="vardefs" select="$vardefs"/>
-           </xsl:apply-templates>   rescue DOMException => ex
+           </xsl:apply-templates>   rescue Nokogiri::XML::DOMException => ex
         # allow to fall through and fail test
       rescue EventException => ex
         # allow to fall through and fail test
@@ -1640,8 +1640,8 @@ require 'helper'
       begin
         <xsl:apply-templates select="*/*" mode="body">
         <xsl:with-param name="vardefs" select="$vardefs"/>
-        </xsl:apply-templates>rescue DOMException => ex
-        success = (ex.code == DOMException::<xsl:value-of select="name(*)"/>)
+        </xsl:apply-templates>rescue Nokogiri::XML::DOMException => ex
+        success = (ex.code == Nokogiri::XML::DOMException::<xsl:value-of select="name(*)"/>)
       end 
       assert(success, "<xsl:value-of select="@id"/>")
     end
